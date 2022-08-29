@@ -1,4 +1,4 @@
-# Click to view the test reports for Main 👩‍🔬🧪
+# Click to view the test reports for Main 👩‍🔬 🧪
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/next-template/main/coverage/e2e-report)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/Lint%20and%20Test?label=Lint%20and%20Unit)](https://dts-stn.github.io/next-template/main/coverage/lcov-report)
