@@ -25,17 +25,17 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2022.4"
 
 project {
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+    vcsRoot(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubMain)
+    vcsRoot(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubDynamic)
     buildType(Build_Main)
     buildType(Build_Performance)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_release"
-    url = "git@github.com:DTS-STN/next-template.git"
+object Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubMain : GitVcsRoot({
+    name = "https://github.com/DTS-STN/secure-client-hub/tree/main"
+    url = "git@github.com:DTS-STN/secure-client-hub.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -44,9 +44,9 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
     }
 })
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_dynamic"
-    url = "git@github.com:DTS-STN/next-template.git"
+object Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubDynamic : GitVcsRoot({
+    name = "https://github.com/DTS-STN/secure-client-hub/tree/_dynamic"
+    url = "git@github.com:DTS-STN/secure-client-hub.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
