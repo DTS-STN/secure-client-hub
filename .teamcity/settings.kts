@@ -74,7 +74,7 @@ object Build_Main: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubMain)
     }
    
     steps {
@@ -136,7 +136,7 @@ object Build_Performance: BuildType({
     }
     paused = true
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubMain)
     }
    
     steps {
@@ -197,7 +197,7 @@ object Build_Dynamic: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+        root(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubDynamic)
     }
    
     steps {
@@ -261,7 +261,7 @@ object CleanUpWeekly: BuildType({
         param("env.BRANCH", "%teamcity.build.branch%")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+        root(Dev_SecureClientHub_HttpsGithubComDtsStnSecureClientHubDynamic)
     }
     steps {
         script {
