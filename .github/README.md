@@ -29,18 +29,6 @@ This project uses
 - [Jest](https://jestjs.io/) for unit testing
 - [Cypress](https://www.cypress.io/) for end-to-end testing.
 
-## How to Implement/Get Started
-
-### Values that need to be configured:
-
-#### Configuring Helm
-
-In the helm template, the application name is next-template. this will need to be changed by the current application name.
-
-For every Kubernetes cluster, a context.sh file needs to be defined. For example, one might be called context-dev.sh and the other context-prod.sh.
-
-For more information, please visit the [DTS SRE deployment templates](https://github.com/DTS-STN/dts-sre-deployment-templates/tree/main/kubernetes-helm-template).
-
 ## PR Procedures/Definition of done
 
 Have at least one person reviewing each PR before it can be merged. Each branch should be prefixed with the ID of the relevant ADO task. Eg. "379-update-readme"
