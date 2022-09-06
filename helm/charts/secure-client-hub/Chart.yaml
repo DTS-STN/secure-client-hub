@@ -1,7 +1,7 @@
 apiVersion: v1
 appVersion: "1.0"
 description: Generic Helm Chart for deploying a single tier Nextjs application
-name: next-template
+name: secure-client-hub
 version: 0.0.1
 maintainers:
   - name: Digital Technology Solutions, Site Reliability Engineering
