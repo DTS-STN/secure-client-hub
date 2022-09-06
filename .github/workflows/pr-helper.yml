@@ -25,6 +25,6 @@ jobs:
           edit-mode: replace
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            [Integration Deployment :rocket: ](https://${{ github.event.pull_request.base.repo.name }}-dyna-${{ github.head_ref }}.bdm-dev.dts-stn.com) - [Check build status](https://teamcity.dts-stn.com/buildConfiguration/Dev_SCH_Build_Dynamic?branch=${{ github.head_ref }}&buildTypeTab=overview&mode=builds)
+            [Integration Deployment :rocket: ](https://${{ github.event.pull_request.base.repo.name }}-dyna-${{ github.head_ref }}.dev.dts-stn.com) - [Check build status](https://teamcity.dev.admin.dts-stn.com/buildConfiguration/Dev_SCH_Build_Dynamic?branch=${{ github.head_ref }}&buildTypeTab=overview&mode=builds)
             [Jest Coverage Report ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/${{ github.event.pull_request.base.repo.name }}/Unit%20Tests/${{ github.head_ref }}?label=Jest%20Test)](https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ github.ref }}/coverage/lcov-report/) 
             [Cypress Coverage Report ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/${{ github.event.pull_request.base.repo.name }}/End-To-End%20Tests/${{ github.head_ref }}?label=E2E)](https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ github.ref }}/e2e-report/) 
