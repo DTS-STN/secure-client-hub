@@ -19,12 +19,12 @@ jobs:
           CI: true
 
       - name: Docker Build
-        run: docker build -t next-template .
+        run: docker build -t secure-client-hub .
         env:
           CI: true
 
       - name: Docker run
-        run: docker run -d -p 3000:3000 next-template
+        run: docker run -d -p 3000:3000 secure-client-hub
         env:
           CI: true
 
