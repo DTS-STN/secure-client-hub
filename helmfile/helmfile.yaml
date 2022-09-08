@@ -1,10 +1,9 @@
 environments:
   dev:
-  int:
-  main:
-  sprint:
-  prod-blue:
-  prod-green:
+  staging:
+  perf:
+  pre-prod:
+  prod:
 
 releases:
 # Single Tier Website
