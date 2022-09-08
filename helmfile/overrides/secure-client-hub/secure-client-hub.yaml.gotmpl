@@ -33,14 +33,6 @@ deployment:
     project-id: "{{ requiredEnv "APP_LABEL_PROJECT_ID" | replace " " "-" }}"
     project-name: "{{ requiredEnv "PROJECT" | replace " " "-" }}"
     section: "{{ requiredEnv "APP_LABEL_SECTION" | replace " " "-" }}"
-secrets:
-  ingress-tls-{{ requiredEnv "BRANCH" | lower }}:
-    type: kubernetes.io/tls
-    data:
-        tls.crt: |
-          {{ requiredEnv "INGRESS_TLS_CERT" }}
-        tls.key: |
-          {{ requiredEnv "INGRESS_TLS_KEY" }}
 image:
   repository: {{ requiredEnv "CLOUD_ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}
   tag: "{{ env "DOCKER_TAG" | default "latest" }}" 
