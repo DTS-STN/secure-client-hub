@@ -24,13 +24,13 @@ expect.extend(toHaveNoViolations)
 describe('Layout with default text', () => {
   const meta = {
     data_en: {
-      title: 'Next Template - Canada.ca',
+      title: 'My Service Canada Account - Canada.ca',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - Canada.ca',
+      title: 'Mon dossier Service Canada - Canada.ca',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
