@@ -1,21 +1,12 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import logger from '../lib/logger'
-import { useEffect } from 'react'
 
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  logger.info('Home page')
-  logger.error('test')
-  logger.warn('test')
-  useEffect(() => {
-    logger.debug('Home mounted')
-  }, [])
 
   return (
     <div
