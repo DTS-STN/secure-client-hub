@@ -29,13 +29,13 @@ describe('404', () => {
         locale: 'en',
         meta: {
           data_en: {
-            title: 'Next Template - 404',
+            title: 'My Service Canada Account - 404',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
           },
           data_fr: {
-            title: 'Next Template - 404',
+            title: 'Mon dossier Service Canada - 404',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',
