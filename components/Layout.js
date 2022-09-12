@@ -99,7 +99,7 @@ export default function Layout(props) {
  */
 
 Layout.defaultProps = {
-  title: 'Next Template - Canada.ca',
+  title: 'Service.Canada.ca',
 }
 
 Layout.propTypes = {

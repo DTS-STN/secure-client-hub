@@ -28,13 +28,13 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Next Template - Home',
+      title: 'My Service Canada Account - Home',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - Accueil',
+      title: 'Mon dossier Service Canada - Accueil',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
