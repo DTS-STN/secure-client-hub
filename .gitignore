@@ -1,0 +1,5 @@
+# added for switching to this branch from main/dev
+.husky
+.next
+cypress
+node_modules
