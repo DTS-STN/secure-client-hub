@@ -1,0 +1,3 @@
+# Default Nrds as a reviewer on all branches
+# When more teams onboard DC we should review this rule
+* @DTS-STN/nrds

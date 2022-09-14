@@ -5,7 +5,10 @@ name: End-To-End Tests
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - dev
+      - development
   push:
     branches: [main]
 
