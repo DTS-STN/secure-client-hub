@@ -1,8 +1,10 @@
 name: Dynamic Application Security Tests
 
 on:
+  pull_request:
+    branches: [release*]
   push:
-    branches: [main]
+    branches: [main, release*]
 
 jobs:
   zap-proxy-scan:
