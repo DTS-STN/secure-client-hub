@@ -1,0 +1,26 @@
+name: Deploy Test Results
+
+on: 
+  workflow_run:
+    workflows: [Unit Tests]
+    types:
+      - completed
+
+jobs:
+  get+deploy:
+    name: Get and Deploy Artifacts
+    runs-on: ubuntu-latest
+    #dependabot doesn't get write access
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: unit-test-results
+
+  - name: Deploy Report 🚀
+    uses: JamesIves/github-pages-deploy-action@v4
+    with:
+      target-folder: ${{ github.ref }}/coverage
+      folder: coverage
