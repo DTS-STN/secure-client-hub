@@ -19,8 +19,8 @@ jobs:
       with:
         name: unit-test-results
 
-  - name: Deploy Report 🚀
-    uses: JamesIves/github-pages-deploy-action@v4
-    with:
-      target-folder: ${{ github.ref }}/coverage
-      folder: coverage
+    - name: Deploy Report 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        target-folder: ${{ github.ref }}/coverage
+        folder: coverage
