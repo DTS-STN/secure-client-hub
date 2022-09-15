@@ -2,7 +2,7 @@ name: Static Application Security Tests
 
 on:
   pull_request:
-    branches: [main]
+  branches: [main]
 
 jobs:
   lint:
