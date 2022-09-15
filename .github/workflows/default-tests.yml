@@ -3,6 +3,7 @@ name: Default Testing
 on: 
   pull_request:
   push:
+    branches: [dev, main, release*]
 
 jobs:
   lint:
@@ -83,7 +84,6 @@ jobs:
         with:
           install: false
           start: npm run start
-          continue-on-error: true
 
       - name: Merge test results into one
         run: npm run report:merge
@@ -142,6 +142,5 @@ jobs:
     - name: Deploy Report 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        target-folder: ${{ github.ref }}/coverage
+        target-folder: ${{ github.ref }}
         folder: test_results
-        
