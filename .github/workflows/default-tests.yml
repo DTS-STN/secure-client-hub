@@ -100,7 +100,6 @@ jobs:
 
   codeql:
     name: Code QL Analysis
-    if: github.ref.name != 'dev'
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -127,6 +126,7 @@ jobs:
 
   deploy_test_results:
     name: Get and Deploy Artifacts
+    if: ${{ github.actor != 'dependabot[bot]' }}
     needs: [unit, e2e]
     runs-on: ubuntu-latest
     #dependabot doesn't get write access
