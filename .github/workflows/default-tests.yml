@@ -8,10 +8,6 @@ jobs:
   lint:
     name: Lint Check
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - name: Checkout 🔔
       uses: actions/checkout@v3
@@ -19,7 +15,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18.x
       
     - name: Install
       run: npm install
@@ -32,10 +28,6 @@ jobs:
   unit:  
     name: Jest Unit Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v3
@@ -43,7 +35,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18.x
 
       - name: Install
         run: npm install
@@ -64,10 +56,6 @@ jobs:
   e2e:
     name: Cypress E2E Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v3
@@ -75,7 +63,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18.x
 
       - name: Install
         run: npm install
@@ -120,8 +108,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        language: [ 'javascript' ]
 
     steps:
     - name: Checkout repository
@@ -130,7 +116,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        languages: ${{ matrix.language }}
+        languages: 'javascript'
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
@@ -149,10 +135,13 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:
-        name: unit-test-results
+        path: test_results
+      env:
+        CI: true
 
     - name: Deploy Report 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         target-folder: ${{ github.ref }}/coverage
-        folder: unit-test-results
+        folder: test_results
+        
