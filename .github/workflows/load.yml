@@ -1,6 +1,6 @@
 name: Load Test
 
-on: workflow_distbatch
+on: workflow_dispatch
   # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
 
 jobs:
