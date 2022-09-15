@@ -2,7 +2,7 @@ name: Deploy Test Results
 
 on: 
   workflow_run:
-    workflows: [Jest Unit Test]
+    workflows: [unit]
     types:
       - completed
 
