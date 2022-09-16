@@ -1,8 +1,6 @@
 name: Dynamic Application Security Tests
 
 on:  
-  pull_request:
-    branches: [release*]
   push:
     branches: [main, release*]
 
