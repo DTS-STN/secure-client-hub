@@ -16,7 +16,7 @@ export const options = {
 export default function main() {
   let response
 
-  group('Next_Template', function () {
+  group('Secure-Client-Hub', function () {
     response = http.get(
       'https://secure-client-hub-main.bdm-dev-rhp.dts-stn.com/',
       {
