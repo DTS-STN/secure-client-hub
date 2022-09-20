@@ -52,25 +52,20 @@ describe('Layout with default text', () => {
     expect(screen.getByText('Passer au contenu principal')).toBeInTheDocument()
   })
 
-  it('Layout contains Language link', () => {
-    render(<Layout locale="en" meta={meta} />)
-    expect(screen.getByText('Français')).toBeInTheDocument()
-  })
-
   it('Layout contains a Main tag', () => {
     render(<Layout locale="en" meta={meta} />)
     expect(screen.getByRole('main')).toBeInTheDocument()
   })
 
-  it('Layout contains footer with Prime Minister link', () => {
-    render(<Layout locale="en" meta={meta} />)
-    expect(screen.getByText('Prime Minister')).toBeInTheDocument()
-  })
+  // it('Layout renders header', () => {
+  //   render(<Layout locale="en" meta={meta} />)
+  //   expect(screen.getByTestId('design-system-header')).toBeInTheDocument()
+  // })
 
-  it('Layout contains Canada Wordmark', () => {
-    render(<Layout locale="en" meta={meta} />)
-    expect(screen.getByAltText('symbol2')).toBeInTheDocument()
-  })
+  // it('Layout renders footer', () => {
+  //   render(<Layout locale="en" meta={meta} />)
+  //   expect(screen.getByTestId('design-system-footer')).toBeInTheDocument()
+  // })
 
   it('Layout contains no a11y violations', async () => {
     const { container } = render(<Layout locale="en" meta={meta} />)
