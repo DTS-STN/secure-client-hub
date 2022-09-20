@@ -86,4 +86,10 @@ export default {
 
   //footer logo alt text
   footerCanadaCaAltText: 'Symbole du gouvernement du Canada',
+
+  canada_ca: 'Canada.ca',
+  serviceCanada: 'Service Canada',
+  url_canada_ca: 'https://www.canada.ca/home.html',
+  url_serviceCanada:
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
 }
