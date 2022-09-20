@@ -52,6 +52,9 @@ module.exports = {
           dark: '#881515',
         },
         'yellow': {
+          light: '#F9F4DA',
+        },
+        'orange': {
           light: '#EE710027',
           medium: '#EE710080',
           dark: '#EE7100',
@@ -60,11 +63,6 @@ module.exports = {
           light: '#A3D88180',
           medium: '#A3D881',
           dark: '#65B234',
-        },
-        'purple': {
-          light: '#9E81CB',
-          medium: '#6D29D5',
-          dark: '#40216E',
         },
       },
       backgroundImage: () => ({
