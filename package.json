@@ -21,6 +21,7 @@
     "husky-pre-commit": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && git add -A ."
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@dts-stn/service-canada-design-system": "^1.50.0",
     "@opentelemetry/api": "^1.1.0",
     "@opentelemetry/auto-instrumentations-node": "^0.31.2",
