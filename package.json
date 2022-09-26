@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@dts-stn/service-canada-design-system": "^1.50.0",
+    "@dts-stn/service-canada-design-system": "^1.51.1",
     "@opentelemetry/api": "^1.1.0",
     "@opentelemetry/auto-instrumentations-node": "^0.31.2",
     "@opentelemetry/sdk-node": "^0.31.0",
