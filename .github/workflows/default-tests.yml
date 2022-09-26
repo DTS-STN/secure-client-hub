@@ -77,6 +77,15 @@ jobs:
         env:
           CI: true
 
+      - name: Smoke Tests 💨
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          env: grepTags=smoke
+          record: false
+          tag: smoke
+
+      # if smoke tests passed, run all the tests
       - name: Cypress end-to-end 🧪
         uses: cypress-io/github-action@v4
         env:

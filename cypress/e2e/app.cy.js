@@ -6,7 +6,7 @@ describe('app page loads', () => {
     cy.injectAxe();
   })
 
-  it('displays the index page', () => {
+  it('displays the index page', { tags:'smoke' }, () => {
     cy.url().should("contains", "/");
   })
 
