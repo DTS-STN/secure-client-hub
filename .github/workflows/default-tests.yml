@@ -80,10 +80,6 @@ jobs:
       - name: Smoke Tests 💨
         uses: cypress-io/github-action@v4
         with:
-          env:
-          CI: true
-          NODE_ENV: production
-        with:
           install: false
           start: npm run start
         env: grepTags=smoke
@@ -93,6 +89,11 @@ jobs:
       # if smoke tests passed, run all the tests
       - name: Cypress end-to-end 🧪
         uses: cypress-io/github-action@v4
+        env:
+          CI: true
+          NODE_ENV: production
+        with:
+          install: false
         
       - name: Merge test results into one
         run: npm run report:merge
