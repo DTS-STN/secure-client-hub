@@ -83,7 +83,7 @@ jobs:
           install: false
           start: npm run start
           env: grepTags=smoke
-          record: false
+          record: true
           tag: smoke
 
       # if smoke tests passed, run all the tests
