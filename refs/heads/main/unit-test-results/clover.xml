@@ -1,38 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1663175664412" clover="3.2.0">
-  <project timestamp="1663175664412" name="All files">
-    <metrics statements="37" coveredstatements="29" conditionals="40" coveredconditionals="30" methods="21" coveredmethods="16" elements="98" coveredelements="75" complexity="0" loc="37" ncloc="37" packages="3" files="13" classes="13"/>
+<coverage generated="1664375566935" clover="3.2.0">
+  <project timestamp="1664375566935" name="All files">
+    <metrics statements="33" coveredstatements="24" conditionals="20" coveredconditionals="9" methods="20" coveredmethods="12" elements="73" coveredelements="45" complexity="0" loc="33" ncloc="33" packages="3" files="11" classes="11"/>
     <package name="components">
-      <metrics statements="15" coveredstatements="15" conditionals="26" coveredconditionals="26" methods="7" coveredmethods="7"/>
+      <metrics statements="11" coveredstatements="10" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="3"/>
       <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="11" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-      </file>
-      <file name="Footer.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Footer.js">
-        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="9" count="9" type="stmt"/>
-        <line num="27" count="66" type="stmt"/>
-        <line num="53" count="40" type="stmt"/>
-        <line num="88" count="3" type="stmt"/>
-      </file>
-      <file name="Header.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Header.js">
-        <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="20" methods="1" coveredmethods="1"/>
-        <line num="5" count="10" type="stmt"/>
-        <line num="118" count="3" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
-        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="12" count="7" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
-        <line num="105" count="2" type="stmt"/>
+        <metrics statements="6" coveredstatements="5" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="1"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="5" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="9" type="stmt"/>
+        <line num="5" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="6" type="stmt"/>
       </file>
     </package>
     <package name="pages">
