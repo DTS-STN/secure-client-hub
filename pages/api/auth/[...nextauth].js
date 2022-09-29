@@ -1,4 +1,4 @@
-import NextAuth from '@dts-stn/next-auth'
+import NextAuth from 'next-auth'
 import logger from '../../../lib/logger'
 
 // For more information on each option (and a full list of options) go to
