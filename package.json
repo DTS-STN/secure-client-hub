@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run proxyconfig & next dev",
     "build": "next build",
     "start": "node -r ./tracing.js node_modules/next/dist/bin/next start",
     "test": "npm run lint && npm run test:e2e && npm run test:unit",
@@ -18,7 +18,9 @@
     "test:unit": "jest",
     "test:coverage": "jest --coverage --forceExit",
     "prepare": "husky install",
-    "husky-pre-commit": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && git add -A ."
+    "husky-pre-commit": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && git add -A .",
+    "proxyconfig": "cp -R ./proxyconfig/client.js ./node_modules/next-auth/core/lib/oauth/client.js",
+    "proxystart": "kubectl port-forward $(kubectl get pods -n squidproxy-int | awk '{print $1}' | grep squidproxy) 3128:3128 -n squidproxy-int"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -27,6 +29,7 @@
     "@opentelemetry/auto-instrumentations-node": "^0.31.2",
     "@opentelemetry/sdk-node": "^0.31.0",
     "next": "^12.2.5",
+    "next-auth": "^4.12.2",
     "prom-client": "^12.0.0",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
