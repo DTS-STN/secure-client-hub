@@ -10,6 +10,7 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 
 export default function Layout(props) {
+  const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
 
   const defaultBreadcrumbs = [
@@ -60,8 +61,12 @@ export default function Layout(props) {
         }}
       />
 
-      <main>
-        <div>{props.children}</div>
+      <main id="mainContent">
+        {display.fullscreen ? (
+          props.children
+        ) : (
+          <LayoutContainer>{props.children}</LayoutContainer>
+        )}
       </main>
 
       <Footer
@@ -99,4 +104,23 @@ Layout.propTypes = {
    * Link of the page in opposite language
    */
   langToggleLink: PropTypes.string,
+  display: PropTypes.shape({
+    /*
+     * Toggle use of Phase (default false)
+     */
+    showPhase: PropTypes.bool,
+    /*
+     * Toggle use of DS header (default false)
+     */
+    hideHeader: PropTypes.bool,
+    /*
+     * Toggle use of DS footer (default false)
+     */
+    hideFooter: PropTypes.bool,
+    /*
+     * Toggle the LayoutContainer from Design System (default on/true)
+     */
+    fullscreen: PropTypes.bool,
+  }),
+  breadCrumbItems: PropTypes.array,
 }
