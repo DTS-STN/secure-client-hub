@@ -2,9 +2,6 @@ import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
-
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
@@ -16,8 +13,6 @@ export default function Home(props) {
       id="homeContent"
       className="container mx-auto px-6 mt-5 bg-slate-300 p-8"
     >
-      <FontAwesomeIcon icon={solid('calculator')} className="text-3xl pr-4 " />
-
       <h1>{props.content.header}</h1>
       <p>{props.content.paragraph}</p>
     </div>
