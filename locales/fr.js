@@ -11,6 +11,11 @@ export default {
   // Header
   title: 'accueil',
   //
+  //Heading
+  pageHeading: {
+    title: 'Mon tableau de bord',
+  },
+  //
 
   // Nav
   skipToMainContent: 'Passer au contenu principal',
