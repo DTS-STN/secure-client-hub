@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 
 import { fetchContent } from '../lib/cms'
 
@@ -19,7 +20,8 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale, req }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await fetchContent()
 
   /* istanbul ignore next */
