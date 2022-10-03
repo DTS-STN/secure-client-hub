@@ -11,6 +11,10 @@ export default {
   // Header
   title: 'home',
   //
+  //Heading
+  pageHeading: {
+    title: 'My dashboard',
+  },
 
   // Nav
   skipToMainContent: 'Skip to main content',
