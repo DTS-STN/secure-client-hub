@@ -57,6 +57,10 @@ module.exports = {
     defaultLocale: 'en',
     localeDetection: true,
   },
+  // Image configured host
+  images: {
+    domains: ['www.canada.ca'],
+  },
   //
   // rewrites setup
   //
