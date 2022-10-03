@@ -31,7 +31,6 @@ RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& np
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 
-
 # ECAS/next-auth env start
 ARG NEXTAUTH_SECRET
 ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
