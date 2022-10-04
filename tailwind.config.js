@@ -45,6 +45,7 @@ module.exports = {
           light: '#5E8EBD',
           medium: '#173451',
           dark: '#21303F',
+          button: '#295376',
         },
         'red': {
           light: '#B76565',
