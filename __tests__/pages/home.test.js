@@ -5,7 +5,6 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/home'
 import { getStaticProps } from '../../pages/home'
-import en from '../../locales/en'
 
 import { useRouter } from 'next/router'
 
@@ -36,8 +35,8 @@ describe('Home page', () => {
 
   it('should render the page', () => {
     render(<Home locale="en" content={content} />)
-    const heading = screen.getByText(en.pageHeading.title)
-    expect(heading).toBeInTheDocument()
+    const homeDiv = screen.getByTestId('homeContent-test')
+    expect(homeDiv).toBeInTheDocument()
   })
 
   it('Test getStaticProps', async () => {

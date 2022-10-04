@@ -7,7 +7,7 @@ export default function Card(props) {
   return (
     <div className="border rounded border-gray-300 shadow">
       <h2 className="py-5 px-3 text-3xl font-medium sm:pl-12 ">
-        {props.t.cardTitle}
+        {props.cardTitle}
       </h2>
       <ViewMoreLessButton
         id={'test-card-button'}
@@ -18,7 +18,7 @@ export default function Card(props) {
         }}
         ariaExpanded={isOpen.toString()}
         icon={isOpen}
-        caption={props.t.viewMoreLessButtonCaption}
+        caption={props.viewMoreLessCaption}
         className="py-5 px-2 sm:pl-12"
       />
       {!isOpen ? null : <p>Task list here</p>}
@@ -27,6 +27,6 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
-  // Translations
-  t: propTypes.object.isRequired,
+  cardTitle: propTypes.string.isRequired,
+  viewMoreLessCaption: propTypes.string.isRequired,
 }
