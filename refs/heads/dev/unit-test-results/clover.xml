@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664821147977" clover="3.2.0">
-  <project timestamp="1664821147977" name="All files">
+<coverage generated="1664895062942" clover="3.2.0">
+  <project timestamp="1664895062942" name="All files">
     <metrics statements="34" coveredstatements="25" conditionals="24" coveredconditionals="12" methods="20" coveredmethods="12" elements="78" coveredelements="49" complexity="0" loc="34" ncloc="34" packages="3" files="11" classes="11"/>
     <package name="components">
       <metrics statements="12" coveredstatements="11" conditionals="10" coveredconditionals="8" methods="6" coveredmethods="3"/>
@@ -43,11 +43,11 @@
       </file>
       <file name="home.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/home.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/index.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
