@@ -16,6 +16,11 @@ export default {
     title: 'My dashboard',
   },
 
+  // Card
+  cardTitle: 'Employment Insurance',
+  // ViewMoreLessButton
+  viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
+
   // Nav
   skipToMainContent: 'Skip to main content',
   aboutGovernment: "Skip to 'About government'",

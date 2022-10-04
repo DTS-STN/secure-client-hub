@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Card from '../components/Card'
 
 import { fetchContent } from '../lib/cms'
 
@@ -10,9 +11,13 @@ export default function Home(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
-    <div id="homeContent">
+    <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
       <p className="py-8">{props.content.paragraph}</p>
+      <Card
+        cardTitle={t.cardTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+      />
     </div>
   )
 }
