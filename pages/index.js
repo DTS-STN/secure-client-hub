@@ -42,7 +42,7 @@ export default function Index(props) {
                   lang="fr"
                   id="french-button"
                 >
-                  Français
+                  français
                 </a>
               </Link>
             </div>
