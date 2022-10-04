@@ -12,11 +12,7 @@ export default function Home(props) {
 
   return (
     <div id="homeContent">
-      <Heading
-        id="my-dashboard-heading"
-        data-testid="my-dashboard-heading-test"
-        title={t.pageHeading.title}
-      />
+      <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
       <p className="py-8">{props.content.paragraph}</p>
       <Card t={t} />
     </div>
