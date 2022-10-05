@@ -4,14 +4,13 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 
-import BenefitTasks from '../components/BenefitTasks'
-
+import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
+  const tasksGroups = TASK_GROUPS[value.programCode][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
@@ -19,6 +18,7 @@ export default function Home(props) {
       <Card
         cardTitle={t.cardTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskGroups={tasksGroups.tasksGroups}
       />
     </div>
   )

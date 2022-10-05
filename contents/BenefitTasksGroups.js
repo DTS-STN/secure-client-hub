@@ -391,385 +391,53 @@ const SUBMITTED_EI_TASKS_FR = [
   BenefitTasks_FR.UpdateAccountInfoTask,
 ]
 
-// const TASK_GROUPS = {
-//   [ProgramCodes.CPP]: {
-//     [StatusCodes.inactive]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPP_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPP_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.applicationReceived]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPP_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPP_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.decisionSent]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPP_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPP_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.paymentHold]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [ACTIVE_CPP_PAYMENT_TASKS_EN, ACTIVE_CPP_CHANGE_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [ACTIVE_CPP_PAYMENT_TASKS_FR, ACTIVE_CPP_CHANGE_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.inPayment]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [ACTIVE_CPP_PAYMENT_TASKS_EN, ACTIVE_CPP_CHANGE_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [ACTIVE_CPP_PAYMENT_TASKS_FR, ACTIVE_CPP_CHANGE_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.paid]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [PAID_CPP_PAYMENT_TASKS_EN, PAID_CPP_CHANGE_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [PAID_CPP_PAYMENT_TASKS_FR, PAID_CPP_CHANGE_TASKS_FR],
-//       },
-//     },
-//   },
-//   [ProgramCodes.CPPD]: {
-//     [StatusCodes.inactive]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.applicationReceived]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.decisionSent]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_CPPD_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.paymentHold]: {
-//       en: {
-//         taskHeadingKey: 'Payments and taxes',
-//         tasksGroups: [
-//           ACTIVE_CPPD_PAYMENT_TASKS_EN,
-//           ACTIVE_CPPD_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements et impôts',
-//         tasksGroups: [
-//           ACTIVE_CPPD_PAYMENT_TASKS_FR,
-//           ACTIVE_CPPD_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.inPayment]: {
-//       en: {
-//         taskHeadingKey: 'Payments and taxes',
-//         tasksGroups: [
-//           ACTIVE_CPPD_PAYMENT_TASKS_EN,
-//           ACTIVE_CPPD_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements et impôts',
-//         tasksGroups: [
-//           ACTIVE_CPPD_PAYMENT_TASKS_FR,
-//           ACTIVE_CPPD_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//   },
-//   [ProgramCodes.OAS]: {
-//     [StatusCodes.inactive]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.applicationReceived]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.decisionSent]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.paymentHold]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_EN,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_FR,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.inPayment]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_EN,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_FR,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//   },
-//   [ProgramCodes.GIS]: {
-//     [StatusCodes.inactive]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.applicationReceived]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.decisionSent]: {
-//       en: {
-//         taskHeadingKey: 'Common actions',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Actions courantes',
-//         tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
-//       },
-//     },
-//     [StatusCodes.paymentHold]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_EN,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_FR,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.inPayment]: {
-//       en: {
-//         taskHeadingKey: 'Payments, taxes, and make a change',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_EN,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Paiements, impôts, et faire un changement',
-//         tasksGroups: [
-//           ACTIVE_OAS_GIS_PAYMENT_TASKS_FR,
-//           ACTIVE_OAS_GIS_CHANGE_TASKS_FR,
-//         ],
-//       },
-//     },
-//   },
-//   [ProgramCodes.EI]: {
-//     [StatusCodes.inPayment]: {
-//       en: {
-//         taskHeadingKey:
-//           'Common actions, payments, taxes, reports, and account information',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_EN,
-//           ACTIVE_EI_DOCS_TASKS_EN,
-//           ACTIVE_EI_PAYMENT_TASKS_EN,
-//           ACCOUNT_INFORMATION_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey:
-//           'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_FR,
-//           ACTIVE_EI_DOCS_TASKS_FR,
-//           ACTIVE_EI_PAYMENT_TASKS_FR,
-//           ACCOUNT_INFORMATION_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.benefitUpdate]: {
-//       en: {
-//         taskHeadingKey:
-//           'Common actions, payments, taxes, reports, and account information',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_EN,
-//           ACTIVE_EI_DOCS_TASKS_EN,
-//           ACTIVE_EI_PAYMENT_TASKS_EN,
-//           ACCOUNT_INFORMATION_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey:
-//           'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_FR,
-//           ACTIVE_EI_DOCS_TASKS_FR,
-//           ACTIVE_EI_PAYMENT_TASKS_FR,
-//           ACCOUNT_INFORMATION_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.applicationReceived]: {
-//       en: {
-//         taskHeadingKey:
-//           'Common actions, payments, taxes, reports, and account information',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_EN,
-//           ACTIVE_EI_DOCS_TASKS_EN,
-//           ACTIVE_EI_PAYMENT_TASKS_EN,
-//           ACCOUNT_INFORMATION_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey:
-//           'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_FR,
-//           ACTIVE_EI_DOCS_TASKS_FR,
-//           ACTIVE_EI_PAYMENT_TASKS_FR,
-//           ACCOUNT_INFORMATION_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.exhausted]: {
-//       en: {
-//         taskHeadingKey:
-//           'Common actions, payments, taxes, reports, and account information',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_EN,
-//           ACTIVE_EI_DOCS_TASKS_EN,
-//           ACTIVE_EI_PAYMENT_TASKS_EN,
-//           ACCOUNT_INFORMATION_EN,
-//         ],
-//       },
-//       fr: {
-//         taskHeadingKey:
-//           'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-//         tasksGroups: [
-//           ACTIVE_EI_COMMON_TASKS_FR,
-//           ACTIVE_EI_DOCS_TASKS_FR,
-//           ACTIVE_EI_PAYMENT_TASKS_FR,
-//           ACCOUNT_INFORMATION_FR,
-//         ],
-//       },
-//     },
-//     [StatusCodes.inactive]: {
-//       en: {
-//         taskHeadingKey:
-//           'Common actions, payments, taxes, reports, and account information',
-//         tasksGroups: [INACTIVE_EI_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey:
-//           'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-//         tasksGroups: [INACTIVE_EI_TASKS_FR],
-//       },
-//     },
-//   },
-//   [ProgramCodes.SEB]: {
-//     [StatusCodes.activeAgreement]: {
-//       en: {
-//         taskHeadingKey: 'Explore common actions',
-//         tasksGroups: [ACTIVE_SEB_TASKS_EN],
-//       },
-//       fr: {
-//         taskHeadingKey: 'Explorer les actions courantes',
-//         tasksGroups: [ACTIVE_SEB_TASKS_FR],
-//       },
-//     },
-//   },
-// }
+const TASK_GROUPS = {
+  [ProgramCodes.CPP]: {
+    en: {
+      taskHeadingKey: 'Common actions',
+      tasksGroups: [INACTIVE_CPP_TASKS_EN],
+    },
+    fr: {
+      taskHeadingKey: 'Actions courantes',
+      tasksGroups: [INACTIVE_CPP_TASKS_FR],
+    },
+  },
 
-// module.exports = {
-//   TASK_GROUPS,
-//   NO_BENEFIT_CPP_TASKS_EN,
-//   NO_BENEFIT_EI_TASKS_EN,
-//   NO_BENEFIT_GIS_TASKS_EN,
-//   NO_BENEFIT_OAS_TASKS_EN,
-//   NO_BENEFIT_CPP_TASKS_FR,
-//   NO_BENEFIT_EI_TASKS_FR,
-//   NO_BENEFIT_GIS_TASKS_FR,
-//   NO_BENEFIT_OAS_TASKS_FR,
-// }
+  [ProgramCodes.OAS]: {
+    en: {
+      taskHeadingKey: 'Common actions',
+      tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
+    },
+    fr: {
+      taskHeadingKey: 'Actions courantes',
+      tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
+    },
+  },
+
+  [ProgramCodes.EI]: {
+    en: {
+      taskHeadingKey:
+        'Common actions, payments, taxes, reports, and account information',
+      tasksGroups: [
+        ACTIVE_EI_COMMON_TASKS_EN,
+        ACTIVE_EI_DOCS_TASKS_EN,
+        ACTIVE_EI_PAYMENT_TASKS_EN,
+        ACCOUNT_INFORMATION_EN,
+      ],
+    },
+    fr: {
+      taskHeadingKey:
+        'Actions courantes, paiements, impôts, rapports et renseignements personnels',
+      tasksGroups: [
+        ACTIVE_EI_COMMON_TASKS_FR,
+        ACTIVE_EI_DOCS_TASKS_FR,
+        ACTIVE_EI_PAYMENT_TASKS_FR,
+        ACCOUNT_INFORMATION_FR,
+      ],
+    },
+  },
+}
+
+module.exports = {
+  TASK_GROUPS,
+}
