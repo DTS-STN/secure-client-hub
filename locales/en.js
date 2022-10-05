@@ -11,6 +11,15 @@ export default {
   // Header
   title: 'home',
   //
+  //Heading
+  pageHeading: {
+    title: 'My dashboard',
+  },
+
+  // Card
+  cardTitle: 'Employment Insurance',
+  // ViewMoreLessButton
+  viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
 
   // Nav
   skipToMainContent: 'Skip to main content',
