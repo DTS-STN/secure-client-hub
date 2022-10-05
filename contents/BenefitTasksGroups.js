@@ -1,5 +1,5 @@
 import { ProgramCodes } from '../contents/ProgramCodes'
-import { StatusCodes } from '../contents/StatusCodes'
+
 import { BenefitTasks_EN, BenefitTasks_FR } from './BenefitTasks'
 
 const ACTIVE_CPP_REQ_TASKS_EN = {
@@ -126,7 +126,7 @@ const ACTIVE_EI_APPLICATIONS_TASKS_EN = {
   tasks: [BenefitTasks_EN.RetirementIncomeTask],
 }
 
-const ACTIVE_CPP_PAYMENT_CLAIM_TASKS_EN = {
+const ACTIVE_EI_PAYMENT_CLAIM_TASKS_EN = {
   header: 'Payments and claims',
   tasks: [
     BenefitTasks_EN.AllPaymentsTask,
@@ -165,7 +165,7 @@ const ACTIVE_EI_PERSONAL_TASKS_EN = {
   ],
 }
 // end of EI
-// French start
+// CPP FR start
 
 const ACTIVE_CPP_REQ_TASKS_FR = {
   header: 'Most Requested',
@@ -231,7 +231,7 @@ const ACTIVE_CPP_PERSONAL_TASKS_FR = {
 
 // end of CPP tasks
 
-// beginning of OAS
+// beginning of FR OAS
 const ACTIVE_OAS_REQ_TASKS_FR = {
   header: 'Most Requested',
   tasks: [
@@ -276,7 +276,7 @@ const ACTIVE_OAS_PERSONAL_TASKS_FR = {
 
 // end of OAS
 
-//beginning of EI
+//beginning of FR EI
 const ACTIVE_EI_REQ_TASKS_FR = {
   header: 'Most Requested',
   tasks: [
@@ -291,7 +291,7 @@ const ACTIVE_EI_APPLICATIONS_TASKS_FR = {
   tasks: [BenefitTasks_FR.RetirementIncomeTask],
 }
 
-const ACTIVE_CPP_PAYMENT_CLAIM_TASKS_FR = {
+const ACTIVE_EI_PAYMENT_CLAIM_TASKS_FR = {
   header: 'Payments and claims',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -395,22 +395,50 @@ const TASK_GROUPS = {
   [ProgramCodes.CPP]: {
     en: {
       taskHeadingKey: 'Common actions',
-      tasksGroups: [INACTIVE_CPP_TASKS_EN],
+      tasksGroups: [
+        ACTIVE_CPP_REQ_TASKS_EN,
+        ACTIVE_CPP_APPLICATIONS_TASKS_EN,
+        ACTIVE_CPP_PAYMENT_TASKS_EN,
+        ACTIVE_CPP_TAXES_TASKS_EN,
+        ACTIVE_CPP_DOCS_TASKS_EN,
+        ACTIVE_CPP_PROVISIONS_TASKS_EN,
+        ACTIVE_CPP_PERSONAL_TASKS_EN,
+      ],
     },
     fr: {
       taskHeadingKey: 'Actions courantes',
-      tasksGroups: [INACTIVE_CPP_TASKS_FR],
+      tasksGroups: [
+        ACTIVE_CPP_REQ_TASKS_FR,
+        ACTIVE_CPP_APPLICATIONS_TASKS_FR,
+        ACTIVE_CPP_PAYMENT_TASKS_FR,
+        ACTIVE_CPP_TAXES_TASKS_FR,
+        ACTIVE_CPP_DOCS_TASKS_FR,
+        ACTIVE_CPP_PROVISIONS_TASKS_FR,
+        ACTIVE_CPP_PERSONAL_TASKS_FR,
+      ],
     },
   },
 
   [ProgramCodes.OAS]: {
     en: {
       taskHeadingKey: 'Common actions',
-      tasksGroups: [INACTIVE_OAS_GIS_TASKS_EN],
+      tasksGroups: [
+        ACTIVE_OAS_REQ_TASKS_EN,
+        ACTIVE_OAS_APPLICATIONS_TASKS_EN,
+        ACTIVE_OAS_PAYMENT_TASKS_EN,
+        ACTIVE_OAS_TAXES_TASKS_EN,
+        ACTIVE_OAS_PERSONAL_TASKS_EN,
+      ],
     },
     fr: {
       taskHeadingKey: 'Actions courantes',
-      tasksGroups: [INACTIVE_OAS_GIS_TASKS_FR],
+      tasksGroups: [
+        ACTIVE_OAS_REQ_TASKS_FR,
+        ACTIVE_OAS_APPLICATIONS_TASKS_FR,
+        ACTIVE_OAS_PAYMENT_TASKS_FR,
+        ACTIVE_OAS_TAXES_TASKS_FR,
+        ACTIVE_OAS_PERSONAL_TASKS_FR,
+      ],
     },
   },
 
@@ -419,20 +447,24 @@ const TASK_GROUPS = {
       taskHeadingKey:
         'Common actions, payments, taxes, reports, and account information',
       tasksGroups: [
-        ACTIVE_EI_COMMON_TASKS_EN,
+        ACTIVE_EI_REQ_TASKS_EN,
+        ACTIVE_EI_APPLICATIONS_TASKS_EN,
+        ACTIVE_EI_PAYMENT_CLAIM_TASKS_EN,
+        ACTIVE_EI_TAXES_TASKS_EN,
         ACTIVE_EI_DOCS_TASKS_EN,
-        ACTIVE_EI_PAYMENT_TASKS_EN,
-        ACCOUNT_INFORMATION_EN,
+        ACTIVE_EI_PERSONAL_TASKS_EN,
       ],
     },
     fr: {
       taskHeadingKey:
         'Actions courantes, paiements, impôts, rapports et renseignements personnels',
       tasksGroups: [
-        ACTIVE_EI_COMMON_TASKS_FR,
+        ACTIVE_EI_REQ_TASKS_FR,
+        ACTIVE_EI_APPLICATIONS_TASKS_FR,
+        ACTIVE_EI_PAYMENT_CLAIM_TASKS_FR,
+        ACTIVE_EI_TAXES_TASKS_FR,
         ACTIVE_EI_DOCS_TASKS_FR,
-        ACTIVE_EI_PAYMENT_TASKS_FR,
-        ACCOUNT_INFORMATION_FR,
+        ACTIVE_EI_PERSONAL_TASKS_FR,
       ],
     },
   },

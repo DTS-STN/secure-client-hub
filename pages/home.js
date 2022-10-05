@@ -18,6 +18,7 @@ export default function Home(props) {
       <Card
         cardTitle={t.cardTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={tasksGroups.taskHeadingKey}
         taskGroups={tasksGroups.tasksGroups}
       />
     </div>

@@ -45,4 +45,6 @@ export default function Card(props) {
 Card.propTypes = {
   cardTitle: propTypes.string.isRequired,
   viewMoreLessCaption: propTypes.string.isRequired,
+  taskHeading: propTypes.string,
+  taskGroups: propTypes.array,
 }
