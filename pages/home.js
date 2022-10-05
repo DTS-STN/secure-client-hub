@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
+import BenefitTasks from '../components/BenefitTasks'
+
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
@@ -15,6 +17,7 @@ export default function Home(props) {
     >
       <h1>{props.content.header}</h1>
       <p>{props.content.paragraph}</p>
+      {/* <BenefitTasks taskList={taskList} /> */}
     </div>
   )
 }
