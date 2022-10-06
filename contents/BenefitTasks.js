@@ -2,8 +2,8 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export const BenefitTasks_EN = {
   // general tasks
-  UpdateAccountInfoTask: {
-    task: 'Update my account information',
+  UpdateProfileTask: {
+    task: 'Update my profile',
     icon: solid('circle-user'),
     link: '/profile',
   },
@@ -49,8 +49,8 @@ export const BenefitTasks_EN = {
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/socv-vecc/socv/earnings-contributions',
   },
   TaxDeductionsTask: {
-    task: 'Change my tax deductions',
-    icon: solid('file-lines'),
+    task: 'Change my tax slip delivery options',
+    icon: solid('envelope-open-text'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/vupi-vupi/view-tax-deduction.action',
   },
   GiveConsentTask: {
@@ -115,19 +115,24 @@ export const BenefitTasks_EN = {
   },
   // ei tasks
   EiStatusUpdateTask: {
-    task: 'View my status and messages',
-    icon: solid('envelope-open-text'),
+    task: 'View my status updates',
+    icon: solid('list-check'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil/ei-correspondence',
   },
   CompleteInsuranceReportTask: {
     task: 'Complete my report',
-    icon: solid('pen-square'),
+    icon: solid('pen-to-square'),
     link: 'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html#Internet-Reporting-Service',
   },
   ViewPaymentInfo: {
-    task: 'View my past payments',
-    icon: solid('dollar-sign'),
+    task: 'View my payments',
+    icon: solid('file-invoice-dollar'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPayments.aspx?prov=6',
+  },
+  ApplyEI: {
+    task: 'Apply for Employment Insurance',
+    icon: solid('stamp'),
+    link: '/',
   },
   AccessCode: {
     task: 'Get my access code',
@@ -144,14 +149,19 @@ export const BenefitTasks_EN = {
     icon: solid('folder-open'),
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
   },
+  ViewLetters: {
+    task: 'View my letters',
+    icon: solid('envelopes-bulk'),
+    link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
+  },
   ViewLatestClaimTask: {
     task: 'View my latest claim',
     icon: solid('file-signature'),
-    link: '',
+    link: '/',
   },
   ViewPastClaimsTask: {
     task: 'View my past claims',
-    icon: solid('file-invoice-dollar'),
+    icon: solid('suitcase'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPastClaims.aspx?prov=6',
   },
   SubmitEformsTask: {
@@ -160,8 +170,8 @@ export const BenefitTasks_EN = {
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/256',
   },
   RegisterForAlerts: {
-    task: 'Register for alert me',
-    icon: solid('person-circle-exclamation'),
+    task: 'Manage email notifications (Alert me)',
+    icon: solid('bell'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil/alert-me/confirm?action=confirm&return=ei-landing',
   },
   RecordOfEmployment: {
@@ -185,17 +195,17 @@ export const BenefitTasks_EN = {
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPayments.aspx?prov=6',
   },
   //Seb tasks
-  ViewAgreementStatusDetails: {
-    task: 'View my agreement status details',
-    icon: solid('file-contract'),
+  ViewAgreementStatus: {
+    task: 'View my agreement status (self-employed)',
+    icon: solid('person-walking-luggage'),
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
   },
 }
 
 export const BenefitTasks_FR = {
   // general tasks
-  UpdateAccountInfoTask: {
-    task: 'Mettre à jour les informations de mon compte',
+  UpdateProfileTask: {
+    task: 'Mettre à jour mon profil',
     icon: solid('circle-user'),
     link: '/fr/profile',
   },
@@ -241,8 +251,8 @@ export const BenefitTasks_FR = {
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/socv-vecc/socv/earnings-contributions',
   },
   TaxDeductionsTask: {
-    task: "Modifier ma retenue d'impôt",
-    icon: solid('file-lines'),
+    task: "Modifier mes options d’expédition des feuillets d'impôt",
+    icon: solid('envelope-open-text'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/vupi-vupi/view-tax-deduction.action',
   },
   GiveConsentTask: {
@@ -307,19 +317,24 @@ export const BenefitTasks_FR = {
   },
   // ei tasks
   EiStatusUpdateTask: {
-    task: '(FR)View my status and messages',
-    icon: solid('envelope-open-text'),
+    task: '(FR)View my status updates',
+    icon: solid('list-check'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil/ei-correspondence',
   },
   CompleteInsuranceReportTask: {
     task: "Soumettre une déclarations de l'assurance-emploi",
-    icon: solid('pen-square'),
+    icon: solid('pen-to-square'),
     link: 'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html#Internet-Reporting-Service',
   },
   ViewPaymentInfo: {
     task: 'Consulter mes paiements',
-    icon: solid('dollar-sign'),
+    icon: solid('file-invoice-dollar'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPayments.aspx?prov=6',
+  },
+  ApplyEI: {
+    task: 'Présenter une demande d’assurance-emploi',
+    icon: solid('stamp'),
+    link: '/',
   },
   AccessCode: {
     task: "Consulter mon code d'accès",
@@ -336,14 +351,19 @@ export const BenefitTasks_FR = {
     icon: solid('folder-open'),
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
   },
+  ViewLetters: {
+    task: 'Consulter mes lettres',
+    icon: solid('envelopes-bulk'),
+    link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
+  },
   ViewLatestClaimTask: {
     task: 'Consulter ma dernière demande',
     icon: solid('file-signature'),
-    link: '',
+    link: '/',
   },
   ViewPastClaimsTask: {
     task: 'Consulter mes demandes antérieures',
-    icon: solid('file-invoice-dollar'),
+    icon: solid('suitcase'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPastClaims.aspx?prov=6',
   },
   SubmitEformsTask: {
@@ -352,8 +372,8 @@ export const BenefitTasks_FR = {
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/256',
   },
   RegisterForAlerts: {
-    task: "S'inscrire aux alertes",
-    icon: solid('person-circle-exclamation'),
+    task: 'Gérer mes avis par courriel (Alertez-moi)',
+    icon: solid('bell'),
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil/alert-me/confirm?action=confirm&return=ei-landing',
   },
   RecordOfEmployment: {
@@ -377,9 +397,9 @@ export const BenefitTasks_FR = {
     link: 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/ei-ae/meiio-mraed/Pages/MyPayments.aspx?prov=6',
   },
   //Seb tasks
-  ViewAgreementStatusDetails: {
-    task: '(FR)View my agreement status details',
-    icon: solid('file-contract'),
+  ViewAgreementStatus: {
+    task: "Consulter l'état de mon entente (travailleurs autonomes)",
+    icon: solid('person-walking-luggage'),
     link: 'https://srv136.services.gc.ca/msca-mdsc/eq-qe/proxy/index/321',
   },
 }

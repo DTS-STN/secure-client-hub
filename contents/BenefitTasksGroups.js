@@ -2,7 +2,108 @@ import { ProgramCodes } from '../contents/ProgramCodes'
 
 import { BenefitTasks_EN, BenefitTasks_FR } from './BenefitTasks'
 
-const ACTIVE_CPP_REQ_TASKS_EN = {
+// Employment Insurance
+
+// EN
+const EI_REQ_TASKS_EN = {
+  header: 'Most Requested',
+  tasks: [BenefitTasks_EN.EiStatusUpdateTask, BenefitTasks_EN.ViewPaymentInfo],
+}
+
+const EI_APPLICATIONS_TASKS_EN = {
+  header: 'Applications',
+  tasks: [BenefitTasks_EN.EiStatusUpdateTask, BenefitTasks_EN.ApplyEI],
+}
+
+const EI_PAYMENT_CLAIM_TASKS_EN = {
+  header: 'Payments and claims',
+  tasks: [
+    BenefitTasks_EN.ViewPaymentInfo,
+    BenefitTasks_EN.ViewLatestClaimTask,
+    BenefitTasks_EN.ViewPastClaimsTask,
+  ],
+}
+
+const EI_TAXES_TASKS_EN = {
+  header: 'Taxes',
+  tasks: [BenefitTasks_EN.TaxSlipTask, BenefitTasks_EN.TaxDeductionsTask],
+}
+
+const EI_DOCS_TASKS_EN = {
+  header: 'Reports and documents',
+  tasks: [
+    BenefitTasks_EN.CompleteInsuranceReportTask,
+    BenefitTasks_EN.RecordOfEmployment,
+    BenefitTasks_EN.ViewDocuments,
+    BenefitTasks_EN.ViewLetters,
+    BenefitTasks_EN.SubmitDocuments,
+    BenefitTasks_EN.SubmitEformsTask,
+    BenefitTasks_EN.ReportMistake,
+  ],
+}
+
+const EI_PERSONAL_TASKS_EN = {
+  header: 'Personal Information',
+  tasks: [
+    BenefitTasks_EN.UpdateProfileTask,
+    BenefitTasks_EN.RegisterForAlerts,
+    BenefitTasks_EN.AccessCode,
+    BenefitTasks_EN.ViewAgreementStatus,
+  ],
+}
+
+// FR
+const EI_REQ_TASKS_FR = {
+  header: 'Demandes de prestations',
+  tasks: [BenefitTasks_FR.EiStatusUpdateTask, BenefitTasks_FR.ViewPaymentInfo],
+}
+
+const EI_APPLICATIONS_TASKS_FR = {
+  header: 'Applications',
+  tasks: [BenefitTasks_FR.EiStatusUpdateTask, BenefitTasks_FR.ApplyEI],
+}
+
+const EI_PAYMENT_CLAIM_TASKS_FR = {
+  header: 'Paiements et demandes',
+  tasks: [
+    BenefitTasks_FR.ViewPaymentInfo,
+    BenefitTasks_FR.ViewLatestClaimTask,
+    BenefitTasks_FR.ViewPastClaimsTask,
+  ],
+}
+
+const EI_TAXES_TASKS_FR = {
+  header: 'Impôt',
+  tasks: [BenefitTasks_FR.TaxSlipTask, BenefitTasks_FR.TaxDeductionsTask],
+}
+
+const EI_DOCS_TASKS_FR = {
+  header: 'Rapports et documents',
+  tasks: [
+    BenefitTasks_FR.CompleteInsuranceReportTask,
+    BenefitTasks_FR.RecordOfEmployment,
+    BenefitTasks_FR.ViewDocuments,
+    BenefitTasks_FR.ViewLetters,
+    BenefitTasks_FR.SubmitDocuments,
+    BenefitTasks_FR.SubmitEformsTask,
+    BenefitTasks_FR.ReportMistake,
+  ],
+}
+
+const EI_PERSONAL_TASKS_FR = {
+  header: 'Renseignements personnels',
+  tasks: [
+    BenefitTasks_FR.UpdateProfileTask,
+    BenefitTasks_FR.RegisterForAlerts,
+    BenefitTasks_FR.AccessCode,
+    BenefitTasks_FR.ViewAgreementStatus,
+  ],
+}
+
+// CPP
+
+// EN
+const CPP_REQ_TASKS_EN = {
   header: 'Most Requested',
   tasks: [
     BenefitTasks_EN.DelayOasPensionTask,
@@ -11,12 +112,12 @@ const ACTIVE_CPP_REQ_TASKS_EN = {
   ],
 }
 
-const ACTIVE_CPP_APPLICATIONS_TASKS_EN = {
+const CPP_APPLICATIONS_TASKS_EN = {
   header: 'Applications',
   tasks: [BenefitTasks_EN.RetirementIncomeTask],
 }
 
-const ACTIVE_CPP_PAYMENT_TASKS_EN = {
+const CPP_PAYMENT_TASKS_EN = {
   header: 'Payments',
   tasks: [
     BenefitTasks_EN.AllPaymentsTask,
@@ -26,7 +127,7 @@ const ACTIVE_CPP_PAYMENT_TASKS_EN = {
   ],
 }
 
-const ACTIVE_CPP_TAXES_TASKS_EN = {
+const CPP_TAXES_TASKS_EN = {
   header: 'Taxes',
   tasks: [
     BenefitTasks_EN.AllPaymentsTask,
@@ -36,7 +137,7 @@ const ACTIVE_CPP_TAXES_TASKS_EN = {
   ],
 }
 
-const ACTIVE_CPP_DOCS_TASKS_EN = {
+const CPP_DOCS_TASKS_EN = {
   header: 'Documents',
   tasks: [
     BenefitTasks_EN.DelayOasPensionTask,
@@ -47,7 +148,7 @@ const ACTIVE_CPP_DOCS_TASKS_EN = {
   ],
 }
 
-const ACTIVE_CPP_PROVISIONS_TASKS_EN = {
+const CPP_PROVISIONS_TASKS_EN = {
   header: 'Provisions',
   tasks: [
     BenefitTasks_EN.AllPaymentsTask,
@@ -56,7 +157,7 @@ const ACTIVE_CPP_PROVISIONS_TASKS_EN = {
   ],
 }
 
-const ACTIVE_CPP_PERSONAL_TASKS_EN = {
+const CPP_PERSONAL_TASKS_EN = {
   header: 'Personal Information',
   tasks: [
     BenefitTasks_EN.UpdateAccountInfoTask,
@@ -64,124 +165,18 @@ const ACTIVE_CPP_PERSONAL_TASKS_EN = {
   ],
 }
 
-// end of CPP EN tasks
-
-// beginning of OAS
-const ACTIVE_OAS_REQ_TASKS_EN = {
+// FR
+const CPP_REQ_TASKS_FR = {
   header: 'Most Requested',
-  tasks: [
-    BenefitTasks_EN.DelayOasPensionTask,
-    BenefitTasks_EN.GiveConsentTask,
-    BenefitTasks_EN.UpdateAccountInfoTask,
-  ],
+  tasks: [BenefitTasks_FR.DelayOasPensionTask, BenefitTasks_FR.ViewPaymentInfo],
 }
 
-const ACTIVE_OAS_APPLICATIONS_TASKS_EN = {
-  header: 'Applications',
-  tasks: [BenefitTasks_EN.RetirementIncomeTask],
-}
-
-const ACTIVE_OAS_PAYMENT_TASKS_EN = {
-  header: 'Payments',
-  tasks: [
-    BenefitTasks_EN.AllPaymentsTask,
-    BenefitTasks_EN.CppContributionTask,
-    BenefitTasks_EN.RetirementIncomeTask,
-    BenefitTasks_EN.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_OAS_TAXES_TASKS_EN = {
-  header: 'Taxes',
-  tasks: [
-    BenefitTasks_EN.AllPaymentsTask,
-    BenefitTasks_EN.CppContributionTask,
-    BenefitTasks_EN.RetirementIncomeTask,
-    BenefitTasks_EN.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_OAS_PERSONAL_TASKS_EN = {
-  header: 'Personal Information',
-  tasks: [
-    BenefitTasks_EN.UpdateAccountInfoTask,
-    BenefitTasks_EN.RequestAReview,
-  ],
-}
-
-// end of OAS
-
-//beginning of EI
-const ACTIVE_EI_REQ_TASKS_EN = {
-  header: 'Most Requested',
-  tasks: [
-    BenefitTasks_EN.DelayOasPensionTask,
-    BenefitTasks_EN.GiveConsentTask,
-    BenefitTasks_EN.UpdateAccountInfoTask,
-  ],
-}
-
-const ACTIVE_EI_APPLICATIONS_TASKS_EN = {
-  header: 'Applications',
-  tasks: [BenefitTasks_EN.RetirementIncomeTask],
-}
-
-const ACTIVE_EI_PAYMENT_CLAIM_TASKS_EN = {
-  header: 'Payments and claims',
-  tasks: [
-    BenefitTasks_EN.AllPaymentsTask,
-    BenefitTasks_EN.CppContributionTask,
-    BenefitTasks_EN.RetirementIncomeTask,
-    BenefitTasks_EN.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_EI_TAXES_TASKS_EN = {
-  header: 'Taxes',
-  tasks: [
-    BenefitTasks_EN.AllPaymentsTask,
-    BenefitTasks_EN.CppContributionTask,
-    BenefitTasks_EN.RetirementIncomeTask,
-    BenefitTasks_EN.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_EI_DOCS_TASKS_EN = {
-  header: 'Reports and documents',
-  tasks: [
-    BenefitTasks_EN.DelayOasPensionTask,
-    BenefitTasks_EN.TaxDeductionsTask,
-    BenefitTasks_EN.UpdateAccountInfoTask,
-    BenefitTasks_EN.GiveConsentTask,
-    BenefitTasks_EN.ReconsiderationTask,
-  ],
-}
-
-const ACTIVE_EI_PERSONAL_TASKS_EN = {
-  header: 'Personal Information',
-  tasks: [
-    BenefitTasks_EN.UpdateAccountInfoTask,
-    BenefitTasks_EN.RequestAReview,
-  ],
-}
-// end of EI
-// CPP FR start
-
-const ACTIVE_CPP_REQ_TASKS_FR = {
-  header: 'Most Requested',
-  tasks: [
-    BenefitTasks_FR.DelayOasPensionTask,
-    BenefitTasks_FR.GiveConsentTask,
-    BenefitTasks_FR.UpdateAccountInfoTask,
-  ],
-}
-
-const ACTIVE_CPP_APPLICATIONS_TASKS_FR = {
+const CPP_APPLICATIONS_TASKS_FR = {
   header: 'Applications',
   tasks: [BenefitTasks_FR.RetirementIncomeTask],
 }
 
-const ACTIVE_CPP_PAYMENT_TASKS_FR = {
+const CPP_PAYMENT_TASKS_FR = {
   header: 'Payments',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -191,7 +186,7 @@ const ACTIVE_CPP_PAYMENT_TASKS_FR = {
   ],
 }
 
-const ACTIVE_CPP_TAXES_TASKS_FR = {
+const CPP_TAXES_TASKS_FR = {
   header: 'Taxes',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -201,7 +196,7 @@ const ACTIVE_CPP_TAXES_TASKS_FR = {
   ],
 }
 
-const ACTIVE_CPP_DOCS_TASKS_FR = {
+const CPP_DOCS_TASKS_FR = {
   header: 'Documents',
   tasks: [
     BenefitTasks_FR.DelayOasPensionTask,
@@ -212,7 +207,7 @@ const ACTIVE_CPP_DOCS_TASKS_FR = {
   ],
 }
 
-const ACTIVE_CPP_PROVISIONS_TASKS_FR = {
+const CPP_PROVISIONS_TASKS_FR = {
   header: 'Provisions',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -221,7 +216,7 @@ const ACTIVE_CPP_PROVISIONS_TASKS_FR = {
   ],
 }
 
-const ACTIVE_CPP_PERSONAL_TASKS_FR = {
+const CPP_PERSONAL_TASKS_FR = {
   header: 'Personal Information',
   tasks: [
     BenefitTasks_FR.UpdateAccountInfoTask,
@@ -229,10 +224,53 @@ const ACTIVE_CPP_PERSONAL_TASKS_FR = {
   ],
 }
 
-// end of CPP tasks
+// OAS
 
-// beginning of FR OAS
-const ACTIVE_OAS_REQ_TASKS_FR = {
+// EN
+const OAS_REQ_TASKS_EN = {
+  header: 'Most Requested',
+  tasks: [
+    BenefitTasks_EN.DelayOasPensionTask,
+    BenefitTasks_EN.GiveConsentTask,
+    BenefitTasks_EN.UpdateAccountInfoTask,
+  ],
+}
+
+const OAS_APPLICATIONS_TASKS_EN = {
+  header: 'Applications',
+  tasks: [BenefitTasks_EN.RetirementIncomeTask],
+}
+
+const OAS_PAYMENT_TASKS_EN = {
+  header: 'Payments',
+  tasks: [
+    BenefitTasks_EN.AllPaymentsTask,
+    BenefitTasks_EN.CppContributionTask,
+    BenefitTasks_EN.RetirementIncomeTask,
+    BenefitTasks_EN.TaxSlipTask,
+  ],
+}
+
+const OAS_TAXES_TASKS_EN = {
+  header: 'Taxes',
+  tasks: [
+    BenefitTasks_EN.AllPaymentsTask,
+    BenefitTasks_EN.CppContributionTask,
+    BenefitTasks_EN.RetirementIncomeTask,
+    BenefitTasks_EN.TaxSlipTask,
+  ],
+}
+
+const OAS_PERSONAL_TASKS_EN = {
+  header: 'Personal Information',
+  tasks: [
+    BenefitTasks_EN.UpdateAccountInfoTask,
+    BenefitTasks_EN.RequestAReview,
+  ],
+}
+
+// FR
+const OAS_REQ_TASKS_FR = {
   header: 'Most Requested',
   tasks: [
     BenefitTasks_FR.DelayOasPensionTask,
@@ -241,12 +279,12 @@ const ACTIVE_OAS_REQ_TASKS_FR = {
   ],
 }
 
-const ACTIVE_OAS_APPLICATIONS_TASKS_FR = {
+const OAS_APPLICATIONS_TASKS_FR = {
   header: 'Applications',
   tasks: [BenefitTasks_FR.RetirementIncomeTask],
 }
 
-const ACTIVE_OAS_PAYMENT_TASKS_FR = {
+const OAS_PAYMENT_TASKS_FR = {
   header: 'Payments',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -256,7 +294,7 @@ const ACTIVE_OAS_PAYMENT_TASKS_FR = {
   ],
 }
 
-const ACTIVE_OAS_TAXES_TASKS_FR = {
+const OAS_TAXES_TASKS_FR = {
   header: 'Taxes',
   tasks: [
     BenefitTasks_FR.AllPaymentsTask,
@@ -266,7 +304,7 @@ const ACTIVE_OAS_TAXES_TASKS_FR = {
   ],
 }
 
-const ACTIVE_OAS_PERSONAL_TASKS_FR = {
+const OAS_PERSONAL_TASKS_FR = {
   header: 'Personal Information',
   tasks: [
     BenefitTasks_FR.UpdateAccountInfoTask,
@@ -274,147 +312,61 @@ const ACTIVE_OAS_PERSONAL_TASKS_FR = {
   ],
 }
 
-// end of OAS
-
-//beginning of FR EI
-const ACTIVE_EI_REQ_TASKS_FR = {
-  header: 'Most Requested',
-  tasks: [
-    BenefitTasks_FR.DelayOasPensionTask,
-    BenefitTasks_FR.GiveConsentTask,
-    BenefitTasks_FR.UpdateAccountInfoTask,
-  ],
-}
-
-const ACTIVE_EI_APPLICATIONS_TASKS_FR = {
-  header: 'Applications',
-  tasks: [BenefitTasks_FR.RetirementIncomeTask],
-}
-
-const ACTIVE_EI_PAYMENT_CLAIM_TASKS_FR = {
-  header: 'Payments and claims',
-  tasks: [
-    BenefitTasks_FR.AllPaymentsTask,
-    BenefitTasks_FR.CppContributionTask,
-    BenefitTasks_FR.RetirementIncomeTask,
-    BenefitTasks_FR.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_EI_TAXES_TASKS_FR = {
-  header: 'Taxes',
-  tasks: [
-    BenefitTasks_FR.AllPaymentsTask,
-    BenefitTasks_FR.CppContributionTask,
-    BenefitTasks_FR.RetirementIncomeTask,
-    BenefitTasks_FR.TaxSlipTask,
-  ],
-}
-
-const ACTIVE_EI_DOCS_TASKS_FR = {
-  header: 'Reports and documents',
-  tasks: [
-    BenefitTasks_FR.DelayOasPensionTask,
-    BenefitTasks_FR.TaxDeductionsTask,
-    BenefitTasks_FR.UpdateAccountInfoTask,
-    BenefitTasks_FR.GiveConsentTask,
-    BenefitTasks_FR.ReconsiderationTask,
-  ],
-}
-
-const ACTIVE_EI_PERSONAL_TASKS_FR = {
-  header: 'Personal Information',
-  tasks: [
-    BenefitTasks_FR.UpdateAccountInfoTask,
-    BenefitTasks_FR.RequestAReview,
-  ],
-}
-// end of EI
-
-// French end
-
-const SUBMITTED_OAS_TASKS_EN = [
-  BenefitTasks_EN.AllPaymentsTask,
-  BenefitTasks_EN.StatusUpdateTask,
-  BenefitTasks_EN.RetirementIncomeTask,
-  BenefitTasks_EN.CppContributionTask,
-  BenefitTasks_EN.TaxDeductionsTask,
-  BenefitTasks_EN.DelayOasPensionTask,
-  BenefitTasks_EN.GiveConsentTask,
-  BenefitTasks_EN.TaxSlipTask,
-  BenefitTasks_EN.TaxSlipMailingTask,
-  BenefitTasks_EN.ReconsiderationTask,
-  BenefitTasks_EN.UpdateAccountInfoTask,
-]
-
-const SUBMITTED_EI_TASKS_EN = [
-  BenefitTasks_EN.EiStatusUpdateTask,
-  BenefitTasks_EN.CompleteInsuranceReportTask,
-  BenefitTasks_EN.ViewPaymentInfo,
-  BenefitTasks_EN.AccessCode,
-  BenefitTasks_EN.SubmitDocuments,
-  BenefitTasks_EN.ViewDocuments,
-  BenefitTasks_EN.ViewPastClaimsTask,
-  BenefitTasks_EN.SubmitEformsTask,
-  BenefitTasks_EN.TaxSlipTask,
-  BenefitTasks_EN.TaxSlipMailingTask,
-  BenefitTasks_EN.RegisterForAlerts,
-  BenefitTasks_EN.UpdateAccountInfoTask,
-]
-
-const SUBMITTED_OAS_TASKS_FR = [
-  BenefitTasks_FR.AllPaymentsTask,
-  BenefitTasks_FR.StatusUpdateTask,
-  BenefitTasks_FR.RetirementIncomeTask,
-  BenefitTasks_FR.CppContributionTask,
-  BenefitTasks_FR.TaxDeductionsTask,
-  BenefitTasks_FR.DelayOasPensionTask,
-  BenefitTasks_FR.GiveConsentTask,
-  BenefitTasks_FR.TaxSlipTask,
-  BenefitTasks_FR.TaxSlipMailingTask,
-  BenefitTasks_FR.ReconsiderationTask,
-  BenefitTasks_FR.UpdateAccountInfoTask,
-]
-
-const SUBMITTED_EI_TASKS_FR = [
-  BenefitTasks_FR.EiStatusUpdateTask,
-  BenefitTasks_FR.CompleteInsuranceReportTask,
-  BenefitTasks_FR.ViewPaymentInfo,
-  BenefitTasks_FR.AccessCode,
-  BenefitTasks_FR.SubmitDocuments,
-  BenefitTasks_FR.ViewDocuments,
-  BenefitTasks_FR.ViewPastClaimsTask,
-  BenefitTasks_FR.SubmitEformsTask,
-  BenefitTasks_FR.TaxSlipTask,
-  BenefitTasks_FR.TaxSlipMailingTask,
-  BenefitTasks_FR.RegisterForAlerts,
-  BenefitTasks_FR.UpdateAccountInfoTask,
-]
+// Task Groups
 
 const TASK_GROUPS = {
-  [ProgramCodes.CPP]: {
+  [ProgramCodes.EI]: {
     en: {
-      taskHeadingKey: 'Common actions',
+      taskHeadingKey:
+        'Applications, payments and claims, taxes, reports and documents, personal information',
       tasksGroups: [
-        ACTIVE_CPP_REQ_TASKS_EN,
-        ACTIVE_CPP_APPLICATIONS_TASKS_EN,
-        ACTIVE_CPP_PAYMENT_TASKS_EN,
-        ACTIVE_CPP_TAXES_TASKS_EN,
-        ACTIVE_CPP_DOCS_TASKS_EN,
-        ACTIVE_CPP_PROVISIONS_TASKS_EN,
-        ACTIVE_CPP_PERSONAL_TASKS_EN,
+        EI_REQ_TASKS_EN,
+        EI_APPLICATIONS_TASKS_EN,
+        EI_PAYMENT_CLAIM_TASKS_EN,
+        EI_TAXES_TASKS_EN,
+        EI_DOCS_TASKS_EN,
+        EI_PERSONAL_TASKS_EN,
       ],
     },
     fr: {
-      taskHeadingKey: 'Actions courantes',
+      taskHeadingKey:
+        'Demandes de prestations, paiements et demandes, impôts, rapports et documents, renseignements personnels',
       tasksGroups: [
-        ACTIVE_CPP_REQ_TASKS_FR,
-        ACTIVE_CPP_APPLICATIONS_TASKS_FR,
-        ACTIVE_CPP_PAYMENT_TASKS_FR,
-        ACTIVE_CPP_TAXES_TASKS_FR,
-        ACTIVE_CPP_DOCS_TASKS_FR,
-        ACTIVE_CPP_PROVISIONS_TASKS_FR,
-        ACTIVE_CPP_PERSONAL_TASKS_FR,
+        EI_REQ_TASKS_FR,
+        EI_APPLICATIONS_TASKS_FR,
+        EI_PAYMENT_CLAIM_TASKS_FR,
+        EI_TAXES_TASKS_FR,
+        EI_DOCS_TASKS_FR,
+        EI_PERSONAL_TASKS_FR,
+      ],
+    },
+  },
+
+  [ProgramCodes.CPP]: {
+    en: {
+      taskHeadingKey:
+        'Applications, payments, taxes, documents, provisions, personal information',
+      tasksGroups: [
+        CPP_REQ_TASKS_EN,
+        CPP_APPLICATIONS_TASKS_EN,
+        CPP_PAYMENT_TASKS_EN,
+        CPP_TAXES_TASKS_EN,
+        CPP_DOCS_TASKS_EN,
+        CPP_PROVISIONS_TASKS_EN,
+        CPP_PERSONAL_TASKS_EN,
+      ],
+    },
+    fr: {
+      taskHeadingKey:
+        'Demandes de prestations, paiements, impôts, documents, clauses, renseignements personnels',
+      tasksGroups: [
+        CPP_REQ_TASKS_FR,
+        CPP_APPLICATIONS_TASKS_FR,
+        CPP_PAYMENT_TASKS_FR,
+        CPP_TAXES_TASKS_FR,
+        CPP_DOCS_TASKS_FR,
+        CPP_PROVISIONS_TASKS_FR,
+        CPP_PERSONAL_TASKS_FR,
       ],
     },
   },
@@ -423,48 +375,21 @@ const TASK_GROUPS = {
     en: {
       taskHeadingKey: 'Common actions',
       tasksGroups: [
-        ACTIVE_OAS_REQ_TASKS_EN,
-        ACTIVE_OAS_APPLICATIONS_TASKS_EN,
-        ACTIVE_OAS_PAYMENT_TASKS_EN,
-        ACTIVE_OAS_TAXES_TASKS_EN,
-        ACTIVE_OAS_PERSONAL_TASKS_EN,
+        OAS_REQ_TASKS_EN,
+        OAS_APPLICATIONS_TASKS_EN,
+        OAS_PAYMENT_TASKS_EN,
+        OAS_TAXES_TASKS_EN,
+        OAS_PERSONAL_TASKS_EN,
       ],
     },
     fr: {
       taskHeadingKey: 'Actions courantes',
       tasksGroups: [
-        ACTIVE_OAS_REQ_TASKS_FR,
-        ACTIVE_OAS_APPLICATIONS_TASKS_FR,
-        ACTIVE_OAS_PAYMENT_TASKS_FR,
-        ACTIVE_OAS_TAXES_TASKS_FR,
-        ACTIVE_OAS_PERSONAL_TASKS_FR,
-      ],
-    },
-  },
-
-  [ProgramCodes.EI]: {
-    en: {
-      taskHeadingKey:
-        'Common actions, payments, taxes, reports, and account information',
-      tasksGroups: [
-        ACTIVE_EI_REQ_TASKS_EN,
-        ACTIVE_EI_APPLICATIONS_TASKS_EN,
-        ACTIVE_EI_PAYMENT_CLAIM_TASKS_EN,
-        ACTIVE_EI_TAXES_TASKS_EN,
-        ACTIVE_EI_DOCS_TASKS_EN,
-        ACTIVE_EI_PERSONAL_TASKS_EN,
-      ],
-    },
-    fr: {
-      taskHeadingKey:
-        'Actions courantes, paiements, impôts, rapports et renseignements personnels',
-      tasksGroups: [
-        ACTIVE_EI_REQ_TASKS_FR,
-        ACTIVE_EI_APPLICATIONS_TASKS_FR,
-        ACTIVE_EI_PAYMENT_CLAIM_TASKS_FR,
-        ACTIVE_EI_TAXES_TASKS_FR,
-        ACTIVE_EI_DOCS_TASKS_FR,
-        ACTIVE_EI_PERSONAL_TASKS_FR,
+        OAS_REQ_TASKS_FR,
+        OAS_APPLICATIONS_TASKS_FR,
+        OAS_PAYMENT_TASKS_FR,
+        OAS_TAXES_TASKS_FR,
+        OAS_PERSONAL_TASKS_FR,
       ],
     },
   },

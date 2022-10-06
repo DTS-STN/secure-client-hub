@@ -1,6 +1,6 @@
 import propTypes from 'prop-types'
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
-import BenefitTasks from '../Contents/BenefitTasks'
+import BenefitTasks from './BenefitTasks'
 import { useState } from 'react'
 
 export default function Card(props) {
@@ -43,6 +43,7 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
+  locale: propTypes.string.isRequired,
   cardTitle: propTypes.string.isRequired,
   viewMoreLessCaption: propTypes.string.isRequired,
   taskHeading: propTypes.string,

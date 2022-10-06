@@ -11,12 +11,22 @@ export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  const tasksGroups = TASK_GROUPS['ei'][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
       <p className="py-8">{props.content.paragraph}</p>
 
-      {allBenefits.map((benefits) => {
+      <Card
+        locale={props.locale}
+        cardTitle={t.cardTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={tasksGroups.taskHeadingKey}
+        taskGroups={tasksGroups.tasksGroups}
+        // callout={MapCallout(value.statusCode, value.typeCode, t)}
+      />
+
+      {/* {allBenefits.map((benefits) => {
         return benefits.map((value, index) => {
           //if we don't have these, things break
           if (value.programCode) {
@@ -34,7 +44,7 @@ export default function Home(props) {
             )
           }
         })
-      })}
+      })} */}
     </div>
   )
 }
