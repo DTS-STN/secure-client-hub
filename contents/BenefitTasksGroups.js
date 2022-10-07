@@ -309,6 +309,7 @@ const OAS_PERSONAL_TASKS_FR = {
 const TASK_GROUPS = {
   [ProgramCodes.EI]: {
     en: {
+      programTitle: 'Employment Insurance',
       taskHeadingKey:
         'Applications, payments and claims, taxes, reports and documents, personal information',
       tasksGroups: [
@@ -321,6 +322,7 @@ const TASK_GROUPS = {
       ],
     },
     fr: {
+      programTitle: 'Assurance-emploi',
       taskHeadingKey:
         'Demandes de prestations, paiements et demandes, impôts, rapports et documents, renseignements personnels',
       tasksGroups: [
@@ -336,6 +338,7 @@ const TASK_GROUPS = {
 
   [ProgramCodes.CPP]: {
     en: {
+      programTitle: 'Canada Pension Plan',
       taskHeadingKey:
         'Applications, payments, taxes, documents, provisions, personal information',
       tasksGroups: [
@@ -349,6 +352,7 @@ const TASK_GROUPS = {
       ],
     },
     fr: {
+      programTitle: 'Régime de pensions du Canada',
       taskHeadingKey:
         'Demandes de prestations, paiements, impôts, documents, clauses, renseignements personnels',
       tasksGroups: [
@@ -365,6 +369,7 @@ const TASK_GROUPS = {
 
   [ProgramCodes.OAS]: {
     en: {
+      programTitle: 'Old Age Security',
       taskHeadingKey: 'Applications, payments, taxes, personal information',
       tasksGroups: [
         OAS_REQ_TASKS_EN,
@@ -375,6 +380,7 @@ const TASK_GROUPS = {
       ],
     },
     fr: {
+      programTitle: 'Sécurité de la vieillesse',
       taskHeadingKey:
         'Demandes de prestations, paiements, impôts, renseignements personnels ',
       tasksGroups: [

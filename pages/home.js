@@ -11,7 +11,9 @@ export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  const tasksGroups = TASK_GROUPS['ei'][props.locale]
+  const ei = TASK_GROUPS['ei'][props.locale]
+  const cpp = TASK_GROUPS['cpp'][props.locale]
+  const oas = TASK_GROUPS['oas'][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
@@ -19,10 +21,26 @@ export default function Home(props) {
 
       <Card
         locale={props.locale}
-        cardTitle={t.cardTitle}
+        cardTitle={ei.programTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={tasksGroups.taskHeadingKey}
-        taskGroups={tasksGroups.tasksGroups}
+        taskHeading={ei.taskHeadingKey}
+        taskGroups={ei.tasksGroups}
+        // callout={MapCallout(value.statusCode, value.typeCode, t)}
+      />
+      <Card
+        locale={props.locale}
+        cardTitle={cpp.programTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={cpp.taskHeadingKey}
+        taskGroups={cpp.tasksGroups}
+        // callout={MapCallout(value.statusCode, value.typeCode, t)}
+      />
+      <Card
+        locale={props.locale}
+        cardTitle={oas.programTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={oas.taskHeadingKey}
+        taskGroups={oas.tasksGroups}
         // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
 
