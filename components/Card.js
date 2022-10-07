@@ -5,14 +5,8 @@ import { useState, useEffect } from 'react'
 
 export default function Card(props) {
   const [isOpen, setIsOpen] = useState(false)
-  const [mostReq, setMostReq] = useState({})
-  const [tasks, setTasks] = useState([])
-
-  useEffect(() => {
-    const test = props.taskGroups.shift()
-    setMostReq(test)
-    setTasks(props.taskGroups)
-  }, [props.taskGroups])
+  const mostReq = props.taskGroups[0]
+  const tasks = props.taskGroups.slice(1, props.taskGroups.length)
 
   return (
     <div className="border rounded border-gray-300 shadow">
@@ -34,9 +28,9 @@ export default function Card(props) {
 
       {!isOpen ? null : (
         <div className="pb-12">
+          {/*Most Requested here*/}
+          <p>{mostReq.header}</p>
           <div className="bg-gray-lighter grid grid-rows-1 md:grid-cols-2">
-            {/*Most Requested here*/}
-            <p>{mostReq.header}</p>
             {tasks.map((taskList, index) => {
               return (
                 <div
