@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664910439437" clover="3.2.0">
-  <project timestamp="1664910439437" name="All files">
-    <metrics statements="41" coveredstatements="30" conditionals="30" coveredconditionals="15" methods="23" coveredmethods="14" elements="94" coveredelements="59" complexity="0" loc="41" ncloc="41" packages="3" files="13" classes="13"/>
+<coverage generated="1665167576833" clover="3.2.0">
+  <project timestamp="1665167576833" name="All files">
+    <metrics statements="41" coveredstatements="30" conditionals="30" coveredconditionals="17" methods="23" coveredmethods="14" elements="94" coveredelements="61" complexity="0" loc="41" ncloc="41" packages="3" files="13" classes="13"/>
     <package name="components">
-      <metrics statements="19" coveredstatements="16" conditionals="16" coveredconditionals="11" methods="9" coveredmethods="5"/>
+      <metrics statements="19" coveredstatements="16" conditionals="16" coveredconditionals="13" methods="9" coveredmethods="5"/>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
       </file>
       <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -34,9 +34,9 @@
         <line num="7" count="6" type="stmt"/>
       </file>
       <file name="ViewMoreLessButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ViewMoreLessButton.js">
-        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
       </file>
     </package>
     <package name="pages">
