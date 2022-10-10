@@ -17,7 +17,6 @@ export default function Home(props) {
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
-      <p className="py-8">{props.content.paragraph}</p>
 
       <Card
         locale={props.locale}
@@ -43,26 +42,6 @@ export default function Home(props) {
         taskGroups={oas.tasksGroups}
         // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
-
-      {/* {allBenefits.map((benefits) => {
-        return benefits.map((value, index) => {
-          //if we don't have these, things break
-          if (value.programCode) {
-            const tasksGroups = TASK_GROUPS[value.programCode][props.locale]
-            return (
-              <Card
-                key={index}
-                locale={props.locale}
-                cardTitle={t.cardTitle}
-                viewMoreLessCaption={t.viewMoreLessButtonCaption}
-                taskHeading={tasksGroups.taskHeadingKey}
-                taskGroups={tasksGroups.tasksGroups}
-                // callout={MapCallout(value.statusCode, value.typeCode, t)}
-              />
-            )
-          }
-        })
-      })} */}
     </div>
   )
 }

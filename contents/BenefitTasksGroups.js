@@ -29,6 +29,16 @@ const EI_TAXES_TASKS_EN = {
   tasks: [BenefitTasks_EN.TaxSlipTask, BenefitTasks_EN.TaxDeductionsTask],
 }
 
+const EI_PERSONAL_TASKS_EN = {
+  header: 'Personal Information',
+  tasks: [
+    BenefitTasks_EN.UpdateProfileTask,
+    BenefitTasks_EN.RegisterForAlerts,
+    BenefitTasks_EN.AccessCode,
+    BenefitTasks_EN.ViewAgreementStatus,
+  ],
+}
+
 const EI_DOCS_TASKS_EN = {
   header: 'Reports and documents',
   tasks: [
@@ -39,16 +49,6 @@ const EI_DOCS_TASKS_EN = {
     BenefitTasks_EN.SubmitDocuments,
     BenefitTasks_EN.SubmitEformsTask,
     BenefitTasks_EN.ReportMistake,
-  ],
-}
-
-const EI_PERSONAL_TASKS_EN = {
-  header: 'Personal Information',
-  tasks: [
-    BenefitTasks_EN.UpdateProfileTask,
-    BenefitTasks_EN.RegisterForAlerts,
-    BenefitTasks_EN.AccessCode,
-    BenefitTasks_EN.ViewAgreementStatus,
   ],
 }
 
@@ -315,10 +315,10 @@ const TASK_GROUPS = {
       tasksGroups: [
         EI_REQ_TASKS_EN,
         EI_APPLICATIONS_TASKS_EN,
-        EI_PAYMENT_CLAIM_TASKS_EN,
         EI_TAXES_TASKS_EN,
-        EI_DOCS_TASKS_EN,
+        EI_PAYMENT_CLAIM_TASKS_EN,
         EI_PERSONAL_TASKS_EN,
+        EI_DOCS_TASKS_EN,
       ],
     },
     fr: {
@@ -330,8 +330,8 @@ const TASK_GROUPS = {
         EI_APPLICATIONS_TASKS_FR,
         EI_PAYMENT_CLAIM_TASKS_FR,
         EI_TAXES_TASKS_FR,
-        EI_DOCS_TASKS_FR,
         EI_PERSONAL_TASKS_FR,
+        EI_DOCS_TASKS_FR,
       ],
     },
   },

@@ -2,6 +2,7 @@ import propTypes from 'prop-types'
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
 import BenefitTasks from './BenefitTasks'
 import { useState, useEffect } from 'react'
+import MostReqTasks from './MostReqTasks'
 
 export default function Card(props) {
   const [isOpen, setIsOpen] = useState(false)
@@ -9,8 +10,8 @@ export default function Card(props) {
   const tasks = props.taskGroups.slice(1, props.taskGroups.length)
 
   return (
-    <div className="border rounded border-gray-300 shadow">
-      <h2 className="py-5 px-3 text-3xl font-medium sm:pl-12 ">
+    <div className="border rounded border-gray-300 shadow my-6">
+      <h2 className="py-5 px-3 text-3xl font-display font-bold sm:pl-10">
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton
@@ -23,20 +24,18 @@ export default function Card(props) {
         ariaExpanded={isOpen.toString()}
         icon={isOpen}
         caption={props.viewMoreLessCaption}
-        className="py-5 px-2 sm:pl-12"
+        className="py-5 px-2 sm:pl-10"
       />
 
       {!isOpen ? null : (
-        <div className="pb-12">
-          {/*Most Requested here*/}
-          <p>{mostReq.header}</p>
-          <div className="bg-gray-lighter grid grid-rows-1 md:grid-cols-2">
+        <div className="pb-12 ">
+          <div className="bg-deep-blue-60d mt-4 pl-2">
+            <MostReqTasks taskListMR={mostReq} />
+          </div>
+          <div className="grid md:grid-cols-2">
             {tasks.map((taskList, index) => {
               return (
-                <div
-                  className="border-b-2 last:border-b-0 md:border-b-0 md:odd:border-r-2  my-4 pl-2 sm:pl-8"
-                  key={index}
-                >
+                <div className="my-2 pl-2 sm:pl-2" key={index}>
                   <BenefitTasks taskList={taskList} />
                 </div>
               )
