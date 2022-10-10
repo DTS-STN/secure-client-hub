@@ -5,9 +5,9 @@ import Link from 'next/link'
 export default function MostReqTasks(props) {
   return (
     <div className=" px-2 sm:px-8 h-full">
-      <h4 className="font-display font-bold text-xl text-white pt-2 ">
+      <h3 className="font-display font-bold text-xl text-white pt-2 ">
         {props.taskListMR.header}
-      </h4>
+      </h3>
       <ul className="w-full gap-x-14 grid md:grid-cols-2">
         {props.taskListMR.tasks.map((task, index) => {
           return (
