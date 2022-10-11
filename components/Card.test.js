@@ -8,7 +8,13 @@ expect.extend(toHaveNoViolations)
 describe('Card', () => {
   it('renders Card', () => {
     render(
-      <Card cardTitle={`Card Title`} viewMoreLessCaption={`Card Caption`} />
+      <Card
+        cardTitle={`Card Title`}
+        viewMoreLessCaption={`Card Caption`}
+        locale="en"
+        taskGroups={[]}
+        programUniqueId={'test'}
+      />
     )
     const title = screen.getByText('Card Title')
     const caption = screen.getByText('Card Caption')
@@ -18,7 +24,13 @@ describe('Card', () => {
 
   it('has no a11y viollations', async () => {
     const { container } = render(
-      <Card cardTitle={`Card Title`} viewMoreLessCaption={`Card Caption`} />
+      <Card
+        cardTitle={`Card Title`}
+        viewMoreLessCaption={`Card Caption`}
+        locale="en"
+        taskGroups={[]}
+        programUniqueId={'test'}
+      />
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
