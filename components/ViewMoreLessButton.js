@@ -5,7 +5,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 export default function ViewMoreLessButton(props) {
   return (
     <button
-      className={'text-xl leading-8 text-deep-blue-button  ' + props.className}
+      className={'text-xl leading-8 text-deep-blue-60d  ' + props.className}
       onClick={props.onClick}
       id={props.id}
       data-testid={props.dataTestid}

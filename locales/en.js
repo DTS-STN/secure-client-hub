@@ -16,8 +16,6 @@ export default {
     title: 'My dashboard',
   },
 
-  // Card
-  cardTitle: 'Employment Insurance',
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
 

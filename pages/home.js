@@ -4,19 +4,43 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 
+import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  const ei = TASK_GROUPS['ei'][props.locale]
+  const cpp = TASK_GROUPS['cpp'][props.locale]
+  const oas = TASK_GROUPS['oas'][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
-      <p className="py-8">{props.content.paragraph}</p>
+
       <Card
-        cardTitle={t.cardTitle}
+        programUniqueId={'ei'}
+        locale={props.locale}
+        cardTitle={ei.programTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={ei.taskHeadingKey}
+        taskGroups={ei.tasksGroups}
+      />
+      <Card
+        programUniqueId={'cpp'}
+        locale={props.locale}
+        cardTitle={cpp.programTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={cpp.taskHeadingKey}
+        taskGroups={cpp.tasksGroups}
+      />
+      <Card
+        programUniqueId={'oas'}
+        locale={props.locale}
+        cardTitle={oas.programTitle}
+        viewMoreLessCaption={t.viewMoreLessButtonCaption}
+        taskHeading={oas.taskHeadingKey}
+        taskGroups={oas.tasksGroups}
       />
     </div>
   )
