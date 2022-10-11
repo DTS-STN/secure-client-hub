@@ -1,7 +1,7 @@
 import propTypes from 'prop-types'
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
 import BenefitTasks from './BenefitTasks'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import MostReqTasks from './MostReqTasks'
 
 export default function Card(props) {

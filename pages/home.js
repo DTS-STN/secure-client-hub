@@ -25,7 +25,6 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={ei.taskHeadingKey}
         taskGroups={ei.tasksGroups}
-        // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
       <Card
         programUniqueId={'cpp'}
@@ -34,7 +33,6 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={cpp.taskHeadingKey}
         taskGroups={cpp.tasksGroups}
-        // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
       <Card
         programUniqueId={'oas'}
@@ -43,7 +41,6 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={oas.taskHeadingKey}
         taskGroups={oas.tasksGroups}
-        // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
     </div>
   )
