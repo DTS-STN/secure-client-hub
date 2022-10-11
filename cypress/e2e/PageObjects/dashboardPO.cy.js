@@ -27,9 +27,14 @@ function CardButton() {
           return cy.get('#test-card-button')
 }
 
-function TaskList()  {
+function ExpandedCard()  {
 
           return cy.get('#homeContent:nth-child(1) >div>p')
+}
+
+function TaskList()  {
+
+  return cy.get('#homeContent:nth-child(1) >div>p')
 }
 
 module.exports = {dashboardHeader,
@@ -37,6 +42,8 @@ module.exports = {dashboardHeader,
                    FirstCard,
                    CardHeading,
                    CardButton,
+                   ExpandedCard,
                    TaskList
+
 
 }

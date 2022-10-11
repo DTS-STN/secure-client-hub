@@ -51,11 +51,17 @@ describe('Validate dashboard page',() =>{
             
         dashboardPo.CardButton().should('be.visible')
         dashboardPo.CardButton().click()
-        dashboardPo.TaskList().should('be.visible')
+        dashboardPo.ExpandedCard().should('be.visible')
 
 
       })     
+      
+      it.skip('Validate that the Task List is Present on dashboard page',() =>{
+        //As task list is hardcoded for now, so more test cases and details will be added in next sprint
+        dashboardPo.TaskList().should('be.visible')
 
+
+      })  
 
 })
 
