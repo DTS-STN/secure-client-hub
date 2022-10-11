@@ -24,12 +24,12 @@ function CardHeading() {
 
 function CardButton() {
 
-          return cy.get('#test-card-button')
+          return cy.get('#eitest-card-button-')
 }
 
 function TaskList()  {
 
-          return cy.get('#homeContent:nth-child(1) >div>p')
+          return cy.get('.pb-12 ')
 }
 
 module.exports = {dashboardHeader,
