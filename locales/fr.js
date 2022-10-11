@@ -16,8 +16,6 @@ export default {
     title: 'Mon tableau de bord',
   },
 
-  // Card
-  cardTitle: 'Assurance Emploi',
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Demandes, paiements et réclamations, impôts, rapports et documents, informations personnelles`,
 
