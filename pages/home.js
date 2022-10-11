@@ -19,6 +19,7 @@ export default function Home(props) {
       <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
 
       <Card
+        programUniqueId={'ei'}
         locale={props.locale}
         cardTitle={ei.programTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
@@ -27,6 +28,7 @@ export default function Home(props) {
         // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
       <Card
+        programUniqueId={'cpp'}
         locale={props.locale}
         cardTitle={cpp.programTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
@@ -35,6 +37,7 @@ export default function Home(props) {
         // callout={MapCallout(value.statusCode, value.typeCode, t)}
       />
       <Card
+        programUniqueId={'oas'}
         locale={props.locale}
         cardTitle={oas.programTitle}
         viewMoreLessCaption={t.viewMoreLessButtonCaption}

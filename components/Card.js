@@ -15,8 +15,8 @@ export default function Card(props) {
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton
-        id={'test-card-button'}
-        dataTestid={`test-data-id`}
+        id={props.programUniqueId + 'test-card-button-'}
+        dataTestId={props.programUniqueId + 'dataTestId'}
         onClick={() => {
           const newOpenState = !isOpen
           setIsOpen(newOpenState)
@@ -53,4 +53,5 @@ Card.propTypes = {
   viewMoreLessCaption: propTypes.string.isRequired,
   taskHeading: propTypes.string,
   taskGroups: propTypes.array,
+  programUniqueId: propTypes.string,
 }
