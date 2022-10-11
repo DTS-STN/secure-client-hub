@@ -49,21 +49,37 @@ describe('Validate dashboard page',() =>{
       })
 
 
-      it('Validate that the Test card button expands on clicking',() =>{
+      it('Validate that the Test card button expands and collapses on clicking',() =>{
             
         dashboardPo.CardButton().should('be.visible')
         dashboardPo.CardButton().click()
         dashboardPo.ExpandedCard().should('be.visible')
+        dashboardPo.CardButton().click(({force:true}))
+        dashboardPo.ExpandedCard().should('not.exist')
 
 
       })     
       
-      it.skip('Validate that the Task List is Present on dashboard page',() =>{
-        //As task list is hardcoded for now, so more test cases and details will be added in next sprint
-        dashboardPo.TaskList().should('be.visible')
+      it('Validate that the Task List is Present for each card on dashboard page',() =>{
 
+        dashboardPo.Cards().each(($el, index, $list) => {
+        cy.wrap($el).click()
+        dashboardPo.ExpandedCard().should('be.visible')
+        })
 
-      })  
+      })
+
+      it('Validate that each card has a "Most Requested" section',() =>{
+          dashboardPo.Cards().each(($el, index, $list) => {
+          cy.wrap($el).click()
+          cy.wait(1000)
+          dashboardPo.MostRequestedSectionHeading().should('contain.text','Most Requested')
+          dashboardPo.MostRequestedSection().should('be.visible')
+          dashboardPo.MostRequestedSectionLinks().should('be.visible')
+
+          })
+
+        })
 
 })
 
