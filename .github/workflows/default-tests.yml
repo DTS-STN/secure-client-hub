@@ -79,6 +79,9 @@ jobs:
           
       - name: Smoke Tests 💨
         uses: cypress-io/github-action@v4
+        with:
+          install: true
+          start: npm run start
         env: grepTags=smoke
         record: false
         tag: smoke
