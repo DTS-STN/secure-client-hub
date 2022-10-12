@@ -31,7 +31,7 @@ module.exports = {
           dark: '#245C81',
         },
         'brighter-blue': {
-          light: '#BDE9EF27',
+          light: '#DBE5F2',
           medium: '#269ABC66',
           dark: '#269ABC',
         },
@@ -42,10 +42,10 @@ module.exports = {
           primary: '#26374A',
         },
         'deep-blue': {
-          light: '#5E8EBD',
-          medium: '#173451',
-          dark: '#21303F',
-          button: '#295376',
+          'light': '#5E8EBD',
+          'medium': '#173451',
+          'dark': '#284162',
+          '60d': '#295376',
         },
         'red': {
           light: '#B76565',
