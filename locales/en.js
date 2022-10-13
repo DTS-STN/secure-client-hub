@@ -21,7 +21,7 @@ export default {
   accessYourSecurityText: 'Access your ',
 
   pageLinkProfile: 'Looking for profile settings?',
-  profileLinkText: 'profile',
+  profileLinkText: 'profile.',
 
   accessYourProfileText: 'Access your ',
   backToDashboard: 'Back to my Dashboard',

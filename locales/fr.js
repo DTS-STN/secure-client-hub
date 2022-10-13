@@ -20,7 +20,7 @@ export default {
   accessYourSecurityText: 'Accéder à vos ',
 
   pageLinkProfile: 'Vous recherchez les paramètres de votre profil?',
-  profileLinkText: 'profile',
+  profileLinkText: 'profile.',
   accessYourProfileText: 'Accéder à votre ',
   backToDashboard: 'Retour à mon tableau de bord',
 
