@@ -12,6 +12,7 @@ function FrenchButton(){
           return cy.get('#lang1')
             }
 
+
 function FirstCard() {
 
           return cy.get('#homeContent:nth-child(1) > div')

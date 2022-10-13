@@ -27,13 +27,10 @@ describe('Validate dashboard page',() =>{
 
         it('Validate dashboard header in French',() =>{
             dashboardPo.FrenchButton().click()
-
             cy.wait(3000)
-     
             dashboardPo.dashboardHeader().should('be.visible').and('have.text','Mon tableau de bord');
 
       })
-
 
       it('Validate that the Card placeholder is present',() =>{
             
