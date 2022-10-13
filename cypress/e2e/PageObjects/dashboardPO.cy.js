@@ -25,19 +25,48 @@ function CardHeading() {
 
 function CardButton() {
 
-          return cy.get('#eitest-card-button-')
+          return cy.get('#homeContent > div:nth-child(2)>button')
 }
 
-function TaskList()  {
+function ExpandedCard()  {
 
           return cy.get('.pb-12 ')
 }
+
+function Cards()  {
+
+  return cy.get("#homeContent").find("div>button")
+}
+
+function MostRequestedSection() {
+
+  return cy.get("[class ='pb-12 ']>div:nth-child(1)")
+
+}
+
+function MostRequestedSectionHeading() {
+
+  return cy.get("[class ='pb-12 '] >div:nth-child(1)>div>h3")
+
+}
+
+function MostRequestedSectionLinks() {
+
+  return cy.get("[class ='pb-12 '] >div:nth-child(1)>div>ul")
+
+}
+
 
 module.exports = {dashboardHeader,
                    FrenchButton,
                    FirstCard,
                    CardHeading,
                    CardButton,
-                   TaskList
+                   ExpandedCard,
+                   Cards,
+                   MostRequestedSection,
+                   MostRequestedSectionLinks,
+                   MostRequestedSectionHeading
+
 
 }
