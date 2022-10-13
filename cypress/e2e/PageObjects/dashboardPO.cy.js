@@ -56,6 +56,18 @@ function MostRequestedSectionLinks() {
 
 }
 
+function Menu() {
+
+  return cy.get("#dropdownNavbarLink")
+
+}
+
+function SecuritySettingsMenu() {
+
+  return cy.get("[href = '/security']")
+
+}
+
 
 module.exports = {dashboardHeader,
                    FrenchButton,
@@ -66,7 +78,10 @@ module.exports = {dashboardHeader,
                    Cards,
                    MostRequestedSection,
                    MostRequestedSectionLinks,
-                   MostRequestedSectionHeading
+                   MostRequestedSectionHeading,
+                   Menu,
+                   SecuritySettingsMenu
+
 
 
 }
