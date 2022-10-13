@@ -47,12 +47,12 @@ export default function Layout(props) {
         menuProps={{
           craPath:
             '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: '/dashboard',
+          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/home`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
-          profilePath: '/profile',
-          securityPath: '/security-settings',
+          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+          securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
           signOutPath: '/',
         }}
         searchProps={{
