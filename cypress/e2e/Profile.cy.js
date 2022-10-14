@@ -19,7 +19,7 @@ beforeEach(() => {
             })
 
             it('Validate Profile Page header in French', () =>{
-                
+
                 dashboardPo.FrenchButton().click()
                 securityPo.pageHeader().should('be.visible')
                                           .and('have.text','Profil');
@@ -55,16 +55,6 @@ beforeEach(() => {
                 
                
              })
-    
-             
-             it('validate the "My dashboard" click from profile page goes to dashboard page', () =>{
-                
-                securityPo.breadcrumbs().click()
-                cy.url().should("contains", "/home");
-                dashboardPo.dashboardHeader().should('be.visible')
-                .and('have.text','My dashboard');
-       
-             })
                 
              it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () =>{
                 
@@ -75,9 +65,24 @@ beforeEach(() => {
                 .and('have.text','Mon tableau de bord');
        
              })
+
+             it('Validate French button click goes to fr/profile page', () =>{
+
+                dashboardPo.FrenchButton().click()
+                cy.url().should("contains", "/fr/profile");
+             
+             })
+
+             it('Validate that user can select "Profile" from Menu dropdown options', () =>{
+                cy.visit('/home')
+                dashboardPo.Menu().click()
+                dashboardPo.ProfileMenu().click()
+                cy.url().should("contains", "/profile");
+                securityPo.pageHeader().should('be.visible')
+                                         .and('have.text','Profile');
     
 
-
+             })
 
 
         })
