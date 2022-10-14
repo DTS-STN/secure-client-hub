@@ -11,17 +11,18 @@ beforeEach(() => {
     describe('Validate Profile page',() =>{
     
     
-           it('Validate Security Settings Page header in English', () =>{
+           it('Validate Profile Page header in English', () =>{
     
                securityPo.pageHeader().should('be.visible')
                                          .and('have.text','Profile');
             
             })
 
-            it('Validate Security Settings Page header in English', () =>{
-    
+            it('Validate Profile Page header in French', () =>{
+                
+                dashboardPo.FrenchButton().click()
                 securityPo.pageHeader().should('be.visible')
-                                          .and('have.text','Profile');
+                                          .and('have.text','Profil');
              
              })
 
@@ -56,7 +57,7 @@ beforeEach(() => {
              })
     
              
-             it('validate the "My dashboard" click goes to dashboard page', () =>{
+             it('validate the "My dashboard" click from profile page goes to dashboard page', () =>{
                 
                 securityPo.breadcrumbs().click()
                 cy.url().should("contains", "/home");
