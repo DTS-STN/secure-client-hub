@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
       locale={pageProps.locale}
       meta={pageProps.meta}
       langToggleLink={pageProps.langToggleLink}
+      breadCrumbItems={pageProps.breadCrumbItems}
     >
       <Component {...pageProps} />
     </Layout>
