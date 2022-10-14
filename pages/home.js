@@ -16,32 +16,20 @@ export default function Home(props) {
   const oas = TASK_GROUPS['oas'][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
+      <Heading id="my-dashboard-heading" title={props.content.heading} />
 
-      <Card
-        programUniqueId={'ei'}
-        locale={props.locale}
-        cardTitle={ei.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={ei.taskHeadingKey}
-        taskGroups={ei.tasksGroups}
-      />
-      <Card
-        programUniqueId={'cpp'}
-        locale={props.locale}
-        cardTitle={cpp.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={cpp.taskHeadingKey}
-        taskGroups={cpp.tasksGroups}
-      />
-      <Card
-        programUniqueId={'oas'}
-        locale={props.locale}
-        cardTitle={oas.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={oas.taskHeadingKey}
-        taskGroups={oas.tasksGroups}
-      />
+      {props.content.cards.map((card) => {
+        return (
+          <Card
+            key={card.id}
+            programUniqueId={card.id}
+            locale={props.locale}
+            cardTitle={card.title}
+            viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            taskGroups={card.lists}
+          />
+        )
+      })}
     </div>
   )
 }
@@ -69,7 +57,12 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, content, meta },
+    props: {
+      locale,
+      langToggleLink,
+      content: locale === 'en' ? content.en : content.fr,
+      meta,
+    },
   }
 }
 
