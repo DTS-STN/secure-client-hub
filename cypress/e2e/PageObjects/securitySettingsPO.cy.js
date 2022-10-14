@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
 
-function securitySettingsHeader(){
+function pageHeader(){
 
     return cy.get('#my-dashboard-heading')
       }
 
 function breadcrumbs() {
 
-    return cy.get("[class='ds-container'] >nav>ul")
+    return cy.get("[class='ds-container'] >nav>ul>li>a")
 }
 
 function breadcrumbsLink1() {
@@ -21,7 +21,7 @@ function breadcrumbsLink2() {
     return cy.get("[class='ds-container'] >nav>ul>li:nth-child(2)>a")
 }
 
-      module.exports = {securitySettingsHeader,
+      module.exports = {pageHeader,
                         breadcrumbs,
                         breadcrumbsLink1,
                         breadcrumbsLink2
