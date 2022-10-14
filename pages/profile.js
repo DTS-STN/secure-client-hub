@@ -3,19 +3,23 @@ import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
-export default function Home(props) {
-  const t = props.locale === 'en' ? en : fr
+import { fetchContent } from '../lib/cms'
 
+export default function Home(props) {
+  /* istanbul ignore next */
+  const t = props.locale === 'en' ? en : fr
   return (
-    <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.security} />
+    <div id="homeContent" data-testid="homeContent-test">
+      <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
     </div>
   )
 }
 
 export async function getStaticProps({ locale }) {
+  const content = await fetchContent()
+
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/security' : '/security'
+  const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
 
   const t = locale === 'en' ? en : fr
 
@@ -29,13 +33,13 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Security',
+      title: 'My Service Canada Account - Profile',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Sécurité',
+      title: 'Mon dossier Service Canada - Profil',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -43,7 +47,7 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, meta, breadCrumbItems },
+    props: { locale, langToggleLink, content, meta, breadCrumbItems },
   }
 }
 
@@ -54,18 +58,7 @@ Home.propTypes = {
   locale: PropTypes.string,
 
   /*
-   * Language link toggle text
-   */
-  langToggleLink: PropTypes.string,
-
-  /*
    * Meta Tags
    */
-
   meta: PropTypes.object,
-
-  /*
-   * BreadCrumb Items
-   */
-  breadCrumbItems: PropTypes.object,
 }
