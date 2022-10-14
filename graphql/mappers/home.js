@@ -6,6 +6,7 @@ export default async function () {
   const response = await clientQuery(query)
   const mappedHome = {
     en: {
+      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       cards: response.data.schPagev1ByPath.item.scFragments
         .map((fragment) => {
@@ -39,6 +40,7 @@ export default async function () {
         .filter((e) => e),
     },
     fr: {
+      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       cards: response.data.schPagev1ByPath.item.scFragments
         .map((fragment) => {
