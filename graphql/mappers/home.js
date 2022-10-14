@@ -4,11 +4,6 @@ import clientQuery from '../client'
 export async function getHomeContent() {
   const query = require('../queries/home.graphql')
   const response = await clientQuery(query)
-  console.log(
-    response.data.schPagev1ByPath.item.scFragments.find(
-      (element) => element.scId === 'dashboard-cards'
-    ).scItems
-  )
   const mappedHome = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
