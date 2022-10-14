@@ -44,8 +44,6 @@ describe('Validate Security Settings page',() =>{
          it('validate the breadcrumbs are present on Security settings page', () =>{
             
             securityPo.breadcrumbs().should('be.visible')
-            securityPo.breadcrumbsLink1().should('have.attr','href','https://www.canada.ca/home.html')
-            securityPo.breadcrumbsLink2().should('have.attr','href','https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html')
 
            
          })
