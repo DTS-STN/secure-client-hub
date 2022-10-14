@@ -17,11 +17,6 @@ export default {
     profile: 'Profil',
   },
 
-  pageSubHeading: {
-    profile:
-      'Renseignements de votre profil pour chaque programme de prestations.',
-  },
-
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Demandes, paiements et réclamations, impôts, rapports et documents, informations personnelles`,
 

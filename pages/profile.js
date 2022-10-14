@@ -11,7 +11,6 @@ export default function Home(props) {
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
-      <p className="ds-body pt-2">{t.pageSubHeading.profile}</p>
     </div>
   )
 }

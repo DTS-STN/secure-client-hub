@@ -17,10 +17,6 @@ export default {
     profile: 'Profile',
   },
 
-  pageSubHeading: {
-    profile: 'Profile information for each benefit program.',
-  },
-
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
 
