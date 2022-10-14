@@ -13,16 +13,7 @@ export default function Layout(props) {
   const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
 
-  const defaultBreadcrumbs = [
-    {
-      link: t.url_canada_ca,
-      text: t.canada_ca,
-    },
-    {
-      link: t.url_serviceCanada,
-      text: t.serviceCanada,
-    },
-  ]
+  const defaultBreadcrumbs = []
 
   return (
     <>
