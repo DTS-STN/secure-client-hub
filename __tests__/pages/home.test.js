@@ -14,8 +14,8 @@ jest.mock('next/router', () => ({
 }))
 
 //
-jest.mock('../../lib/cms', () => ({
-  fetchContent: () => {
+jest.mock('../../graphql/mappers/home', () => ({
+  getHomeContent: () => {
     return {}
   },
 }))
