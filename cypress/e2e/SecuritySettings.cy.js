@@ -49,5 +49,18 @@ describe('Validate Security Settings page',() =>{
 
            
          })
+
+         it('validate that user is navigated to /fr/security page from /fr/dashboard', () =>{
+            
+            cy.visit('/home')
+            dashboardPo.FrenchButton().click()
+            dashboardPo.Menu().click()
+            dashboardPo.SecuritySettingsMenu().click()
+            cy.url().should("contains", "/fr/security")
+            securityPo.securitySettingsHeader().should('be.visible')
+                                     .and('have.text','Paramètres de sécurité');
+            
+           
+         })
             
     })

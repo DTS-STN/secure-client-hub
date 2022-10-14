@@ -64,7 +64,7 @@ function Menu() {
 
 function SecuritySettingsMenu() {
 
-  return cy.get("[href = '/security']")
+  return cy.get("#dropdownNavbar > li:nth-child(2) > a")
 
 }
 
