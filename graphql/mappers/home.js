@@ -17,13 +17,26 @@ export default async function () {
               return {
                 title: list.scTitleEn,
                 tasks: list.scItems.map((item) => {
-                  item.scTitleEn, item.scDestinationURLEn, item.scIconCSS
+                  return {
+                    title: item.scTitleEn,
+                    link: item.scDestinationURLEn,
+                    icon: item.scIconCSS,
+                  }
                 }),
               }
             }),
           }
         })
         .filter((e) => e),
+      exitBeta: response.data.schPagev1ByPath.item.scFragments.map(
+        (fragment) => {
+          if (fragment.scId) return
+          return {
+            title: fragment.scTitleEn,
+            link: fragment.scDestinationURLEn,
+          }
+        }
+      ),
     },
     fr: {
       heading: response.data.schPagev1ByPath.item.scTitleFr,
@@ -37,13 +50,26 @@ export default async function () {
               return {
                 title: list.scTitleFr,
                 tasks: list.scItems.map((item) => {
-                  item.scTitleFr, item.scDestinationURLFr, item.scIconCSS
+                  return {
+                    title: item.scTitleFr,
+                    link: item.scDestinationURLFr,
+                    icon: item.scIconCSS,
+                  }
                 }),
               }
             }),
           }
         })
         .filter((e) => e),
+      exitBeta: response.data.schPagev1ByPath.item.scFragments.map(
+        (fragment) => {
+          if (fragment.scId) return
+          return {
+            title: fragment.scTitleFr,
+            link: fragment.scDestinationURLFr,
+          }
+        }
+      ),
     },
   }
   console.log(mappedHome.en.cards)
