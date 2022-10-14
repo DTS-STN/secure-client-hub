@@ -28,15 +28,15 @@ export default async function () {
           }
         })
         .filter((e) => e),
-      exitBeta: response.data.schPagev1ByPath.item.scFragments.map(
-        (fragment) => {
+      exitBeta: response.data.schPagev1ByPath.item.scFragments
+        .map((fragment) => {
           if (fragment.scId) return
           return {
             title: fragment.scTitleEn,
             link: fragment.scDestinationURLEn,
           }
-        }
-      ),
+        })
+        .filter((e) => e),
     },
     fr: {
       heading: response.data.schPagev1ByPath.item.scTitleFr,
@@ -61,17 +61,16 @@ export default async function () {
           }
         })
         .filter((e) => e),
-      exitBeta: response.data.schPagev1ByPath.item.scFragments.map(
-        (fragment) => {
+      exitBeta: response.data.schPagev1ByPath.item.scFragments
+        .map((fragment) => {
           if (fragment.scId) return
           return {
             title: fragment.scTitleFr,
             link: fragment.scDestinationURLFr,
           }
-        }
-      ),
+        })
+        .filter((e) => e),
     },
   }
-  console.log(mappedHome.en.cards)
-  return { test: 'Test' }
+  return mappedHome
 }
