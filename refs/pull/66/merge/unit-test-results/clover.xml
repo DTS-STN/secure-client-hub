@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665758012787" clover="3.2.0">
-  <project timestamp="1665758012787" name="All files">
-    <metrics statements="58" coveredstatements="37" conditionals="38" coveredconditionals="23" methods="30" coveredmethods="14" elements="126" coveredelements="74" complexity="0" loc="58" ncloc="58" packages="3" files="16" classes="16"/>
+<coverage generated="1665759832191" clover="3.2.0">
+  <project timestamp="1665759832191" name="All files">
+    <metrics statements="65" coveredstatements="37" conditionals="40" coveredconditionals="23" methods="32" coveredmethods="14" elements="137" coveredelements="74" complexity="0" loc="65" ncloc="65" packages="3" files="17" classes="17"/>
     <package name="components">
       <metrics statements="28" coveredstatements="20" conditionals="22" coveredconditionals="19" methods="14" coveredmethods="5"/>
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
@@ -33,9 +33,9 @@
         <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="16" count="4" type="stmt"/>
         <line num="27" count="4" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="86" count="2" type="stmt"/>
-        <line num="90" count="2" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="88" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -55,7 +55,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="30" coveredstatements="17" conditionals="16" coveredconditionals="4" methods="16" coveredmethods="9"/>
+      <metrics statements="37" coveredstatements="17" conditionals="18" coveredconditionals="4" methods="18" coveredmethods="9"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
@@ -87,6 +87,16 @@
         <line num="82" count="1" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
+      </file>
+      <file name="profile.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/profile.js">
+        <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
       </file>
       <file name="security.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/security.js">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
