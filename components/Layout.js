@@ -33,9 +33,7 @@ export default function Layout(props) {
         lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
-          props.breadCrumbItems
-            ? defaultBreadcrumbs.concat(props.breadCrumbItems)
-            : defaultBreadcrumbs
+          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
         topnavProps={{
           skipToMainPath: '#mainContent',
