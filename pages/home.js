@@ -5,7 +5,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 
 import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
-import homeContent from '../graphql/mappers/home'
+import { getHomeContent } from '../graphql/mappers/home'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -47,7 +47,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps({ locale }) {
-  const content = await homeContent()
+  const content = await getHomeContent()
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
