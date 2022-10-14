@@ -56,6 +56,26 @@ function MostRequestedSectionLinks() {
 
 }
 
+function Menu() {
+
+  return cy.get("#dropdownNavbarLink")
+
+}
+
+function SecuritySettingsMenu() {
+
+  return cy.get("#dropdownNavbar > li:nth-child(2) > a")
+
+}
+
+function ProfileMenu() {
+
+  return cy.get("#dropdownNavbar > li:nth-child(3) > a")
+
+}
+
+
+
 
 module.exports = {dashboardHeader,
                    FrenchButton,
@@ -66,7 +86,11 @@ module.exports = {dashboardHeader,
                    Cards,
                    MostRequestedSection,
                    MostRequestedSectionLinks,
-                   MostRequestedSectionHeading
+                   MostRequestedSectionHeading,
+                   Menu,
+                   SecuritySettingsMenu,
+                   ProfileMenu
+
 
 
 }
