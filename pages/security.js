@@ -17,6 +17,15 @@ export async function getStaticProps({ locale }) {
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/security' : '/security'
 
+  const t = locale === 'en' ? en : fr
+
+  const breadCrumbItems = [
+    {
+      link: t.url_dashboard,
+      text: t.pageHeading.title,
+    },
+  ]
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -34,7 +43,7 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, meta },
+    props: { locale, langToggleLink, meta, breadCrumbItems },
   }
 }
 
@@ -52,5 +61,11 @@ Home.propTypes = {
   /*
    * Meta Tags
    */
+
   meta: PropTypes.object,
+
+  /*
+   * BreadCrumb Items
+   */
+  breadCrumbItems: PropTypes.object,
 }
