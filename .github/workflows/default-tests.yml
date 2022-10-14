@@ -76,12 +76,14 @@ jobs:
         run: npm run build
         env:
           CI: true
+          AEM_GRAPHQL_ENDPOINT: ${{env.AEM_GRAPHQL_ENDPOINT}}
 
       - name: Cypress end-to-end 🧪
         uses: cypress-io/github-action@v4
         env:
           CI: true
           NODE_ENV: production
+          AEM_GRAPHQL_ENDPOINT: ${{env.AEM_GRAPHQL_ENDPOINT}}
         with:
           install: false
           start: npm run start
