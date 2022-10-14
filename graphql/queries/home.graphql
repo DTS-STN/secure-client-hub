@@ -19,24 +19,34 @@
             scAudience
             scFragments {
                 ... on SCHTaskv1Model{
+                    scId
                     scTitleEn
                     scTitleFr
                     scDestinationURLEn
                     scDestinationURLFr
                 }
-                ... on SCHCardv1Model{
+                ... on SCHListv1Model {
                     scId
-                    scTitleEn
-                    scTitleFr
-                    schLists{
-                        scTitleEn
-                        scTitleFr
-                        scItems{
+                    scItems {
+                        ... on SCHCardv1Model {
+                            scId
                             scTitleEn
                             scTitleFr
-                            scDestinationURLEn
-                            scDestinationURLFr
-                            scIconCSS
+                            schLists{
+                                ... on SCHListv1Model {
+                                    scTitleEn
+                                    scTitleFr
+                                    scItems {
+                                        ... on SCHTaskv1Model{
+                                            scTitleEn
+                                            scTitleFr
+                                            scDestinationURLEn
+                                            scDestinationURLFr
+                                            scIconCSS
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

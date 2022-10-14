@@ -1,16 +1,21 @@
 import { getFragmentQueryDocument } from '@apollo/client/utilities'
 import clientQuery from '../client'
 
-export default async function getHomeContent() {
+export async function getHomeContent() {
   const query = require('../queries/home.graphql')
   const response = await clientQuery(query)
+  console.log(
+    response.data.schPagev1ByPath.item.scFragments.find(
+      (element) => element.scId === 'dashboard-cards'
+    ).scItems
+  )
   const mappedHome = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       cards: response.data.schPagev1ByPath.item.scFragments
-        .map((fragment) => {
-          if (!fragment.scId) return
+        .find((element) => element.scId === 'dashboard-cards')
+        .scItems.map((fragment) => {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
@@ -29,21 +34,21 @@ export default async function getHomeContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: response.data.schPagev1ByPath.item.scFragments
-        .map((fragment) => {
-          if (fragment.scId) return
-          return {
-            title: fragment.scTitleEn,
-            link: fragment.scDestinationURLEn,
-          }
-        })
-        .filter((e) => e),
+      exitBeta: {
+        title: response.data.schPagev1ByPath.item.scFragments.find(
+          (element) => element.scId === 'EXIT-BETA-VERSION'
+        ).scTitleEn,
+        link: response.data.schPagev1ByPath.item.scFragments.find(
+          (element) => element.scId === 'EXIT-BETA-VERSION'
+        ).scDestinationURLEn,
+      },
     },
     fr: {
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       cards: response.data.schPagev1ByPath.item.scFragments
-        .map((fragment) => {
+        .find((element) => element.scId === 'dashboard-cards')
+        .scItems.map((fragment) => {
           if (!fragment.scId) return
           return {
             id: fragment.scId,
@@ -63,15 +68,14 @@ export default async function getHomeContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: response.data.schPagev1ByPath.item.scFragments
-        .map((fragment) => {
-          if (fragment.scId) return
-          return {
-            title: fragment.scTitleFr,
-            link: fragment.scDestinationURLFr,
-          }
-        })
-        .filter((e) => e),
+      exitBeta: {
+        title: response.data.schPagev1ByPath.item.scFragments.find(
+          (element) => element.scId === 'EXIT-BETA-VERSION'
+        ).scTitleFr,
+        link: response.data.schPagev1ByPath.item.scFragments.find(
+          (element) => element.scId === 'EXIT-BETA-VERSION'
+        ).scDestinationURLFr,
+      },
     },
   }
   return mappedHome
