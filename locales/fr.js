@@ -14,6 +14,7 @@ export default {
   //Heading
   pageHeading: {
     title: 'Mon tableau de bord',
+    security: 'Paramètres de sécurité',
     profile: 'Profil',
   },
 

@@ -14,6 +14,7 @@ export default {
   //Heading
   pageHeading: {
     title: 'My dashboard',
+    security: 'Security Settings',
     profile: 'Profile',
   },
 
