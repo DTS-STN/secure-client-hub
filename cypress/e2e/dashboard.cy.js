@@ -71,7 +71,7 @@ describe('Validate dashboard page',() =>{
           dashboardPo.Cards().each(($el, index, $list) => {
           cy.wrap($el).click()
           cy.wait(1000)
-          dashboardPo.MostRequestedSectionHeading().should('contain.text','Most Requested')
+          dashboardPo.MostRequestedSectionHeading().should('contain.text','Most requested')
           dashboardPo.MostRequestedSection().should('be.visible')
           dashboardPo.MostRequestedSectionLinks().should('be.visible')
 
