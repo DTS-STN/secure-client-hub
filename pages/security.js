@@ -17,7 +17,7 @@ export default function Home(props) {
         linkText={t.profileLinkText}
         href="/profile"
         linkID="link-id"
-        buttonHref="/home"
+        buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
       ></PageLink>

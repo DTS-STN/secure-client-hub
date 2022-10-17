@@ -5,7 +5,8 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 
 import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
-import { fetchContent } from '../lib/cms'
+import { getHomeContent } from '../graphql/mappers/home'
+import logger from '../lib/logger'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -25,6 +26,7 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={ei.taskHeadingKey}
         taskGroups={ei.tasksGroups}
+        mostReq={true}
       />
       <Card
         programUniqueId={'cpp'}
@@ -33,6 +35,7 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={cpp.taskHeadingKey}
         taskGroups={cpp.tasksGroups}
+        mostReq={true}
       />
       <Card
         programUniqueId={'oas'}
@@ -41,13 +44,18 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={oas.taskHeadingKey}
         taskGroups={oas.tasksGroups}
+        mostReq={true}
       />
     </div>
   )
 }
 
-export async function getStaticProps({ locale }) {
-  const content = await fetchContent()
+export async function getServerSideProps({ res, locale }) {
+  const content = await getHomeContent().catch((error) => {
+    logger.error(error)
+    res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
