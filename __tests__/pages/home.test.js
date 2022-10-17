@@ -4,7 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/home'
-import { getStaticProps } from '../../pages/home'
+import { getServerSideProps } from '../../pages/home'
 
 import { useRouter } from 'next/router'
 
@@ -39,8 +39,8 @@ describe('Home page', () => {
     expect(homeDiv).toBeInTheDocument()
   })
 
-  it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {
