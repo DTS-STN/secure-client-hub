@@ -13,16 +13,7 @@ export default function Layout(props) {
   const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
 
-  const defaultBreadcrumbs = [
-    {
-      link: t.url_canada_ca,
-      text: t.canada_ca,
-    },
-    {
-      link: t.url_serviceCanada,
-      text: t.serviceCanada,
-    },
-  ]
+  const defaultBreadcrumbs = []
 
   return (
     <>
@@ -33,9 +24,7 @@ export default function Layout(props) {
         lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
-          props.breadCrumbItems
-            ? defaultBreadcrumbs.concat(props.breadCrumbItems)
-            : defaultBreadcrumbs
+          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
         topnavProps={{
           skipToMainPath: '#mainContent',
@@ -47,12 +36,12 @@ export default function Layout(props) {
         menuProps={{
           craPath:
             '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: '/dashboard',
+          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/home`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
-          profilePath: '/profile',
-          securityPath: '/security-settings',
+          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+          securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
           signOutPath: '/',
         }}
         searchProps={{
