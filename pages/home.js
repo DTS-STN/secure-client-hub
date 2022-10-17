@@ -47,10 +47,11 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getHomeContent().catch((error) => {
     logger.error(error)
-    return res.status(500).end()
+    res.statusCode = 500
+    throw error
   })
 
   /* istanbul ignore next */
