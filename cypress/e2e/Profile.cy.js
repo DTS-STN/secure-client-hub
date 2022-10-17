@@ -19,7 +19,7 @@ beforeEach(() => {
             })
 
             it('Validate Profile Page header in French', () =>{
-
+                
                 dashboardPo.FrenchButton().click()
                 securityPo.pageHeader().should('be.visible')
                                           .and('have.text','Profil');
@@ -55,6 +55,16 @@ beforeEach(() => {
                 
                
              })
+    
+             
+             it('validate the "My dashboard" click from profile page goes to dashboard page', () =>{
+                
+                securityPo.breadcrumbs().click()
+                cy.url().should("contains", "/home");
+                dashboardPo.dashboardHeader().should('be.visible')
+                .and('have.text','My dashboard');
+       
+             })
                 
              it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () =>{
                 
@@ -66,23 +76,29 @@ beforeEach(() => {
        
              })
 
-             it('Validate French button click goes to fr/profile page', () =>{
+             it('Validate that the Card placeholder is present on Profile Page',() =>{
+            
+               dashboardPo.FirstCard().should('be.visible')
+  
+        })
 
-                dashboardPo.FrenchButton().click()
-                cy.url().should("contains", "/fr/profile");
-             
-             })
+             it('Validate that the Card Header is visible on profile page',() =>{
+            
+               dashboardPo.CardHeading().should('be.visible')
+ 
+       })  
 
-             it('Validate that user can select "Profile" from Menu dropdown options', () =>{
-                cy.visit('/home')
-                dashboardPo.Menu().click()
-                dashboardPo.ProfileMenu().click()
-                cy.url().should("contains", "/profile");
-                securityPo.pageHeader().should('be.visible')
-                                         .and('have.text','Profile');
+             it('Validate that the Test card button on profile page expands and collapses on clicking',() =>{
+            
+               dashboardPo.CardButton().should('be.visible')
+               dashboardPo.CardButton().click()
+               dashboardPo.ExpandedCard().should('be.visible')
+               dashboardPo.CardButton().click(({force:true}))
+               dashboardPo.ExpandedCard().should('not.exist')
+ 
+ 
+       }) 
+
     
-
-             })
-
 
         })
