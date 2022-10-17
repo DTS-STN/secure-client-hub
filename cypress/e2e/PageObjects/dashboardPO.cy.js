@@ -86,7 +86,7 @@ module.exports = {dashboardHeader,
                    MostRequestedSectionHeading,
                    Menu,
                    SecuritySettingsMenu,
-                   ProfileMenu
+                   ProfileMenu,
                    SecuritySettingsMenu
 
 
