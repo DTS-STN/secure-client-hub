@@ -74,9 +74,6 @@ function ProfileMenu() {
 
 }
 
-
-
-
 module.exports = {dashboardHeader,
                    FrenchButton,
                    FirstCard,
@@ -90,6 +87,7 @@ module.exports = {dashboardHeader,
                    Menu,
                    SecuritySettingsMenu,
                    ProfileMenu
+                   SecuritySettingsMenu
 
 
 

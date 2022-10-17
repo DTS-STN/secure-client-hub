@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 
+
 function pageHeader(){
 
     return cy.get('#my-dashboard-heading')
