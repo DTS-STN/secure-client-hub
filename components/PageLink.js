@@ -4,7 +4,6 @@ import Link from 'next/link'
 export default function PageLink(props) {
   const linkText = undefined
   let linkID = props.linkText?.replace(/\s+/g, '')
-  console.log(linkText)
 
   return (
     <>

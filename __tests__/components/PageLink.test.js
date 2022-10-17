@@ -12,55 +12,28 @@ jest.mock('next/link', () => {
 })
 
 describe('PageLink', () => {
-  // let linkID = linkText.replace(/\s+/g, '')
-  // it('renders PageLink with href', () => {
-  //     render(<PageLink id="testID" data-cy="testId" href="#" />)
-  //     const btn = screen.getByTestId('testId')
-  //     expect(btn).toBeInTheDocument()
-  //   })
-
-  it('renders PageLink with links for security page', () => {
-    render(<PageLink items={[{ text: 'Security', link: '/security' }]} />)
-    const pageLink = screen.getByText('newPage')
-    expect(pageLink).toBeInTheDocument()
+  const { container } = render(
+    <PageLink
+      lookingForText="title"
+      accessText="accessText"
+      linkText="Link text"
+      buttonLinkText="buttonLinkText"
+    />
+  )
+  it('renders PageLink', () => {
+    const lookingForText = screen.getByText('title')
+    const accessText = screen.getByText('accessText')
+    const linkText = screen.getByText('Link text')
+    const buttonLinkText = screen.getByText('buttonLinkText')
+    expect(lookingForText).toBeInTheDocument()
+    expect(accessText).toBeInTheDocument()
+    expect(linkText).toBeInTheDocument()
+    expect(buttonLinkText).toBeInTheDocument()
   })
 
-  //   it('renders PageLink', () => {
-  //     render(
-  //       <PageLink
-  //       lookingForText="pageLinkSecurity"
-  //       accessText="accessYourSecurityText"
-  //       linkText="securityLinkText"
-  //       href="/security"
-
-  //       buttonHref="/security"
-  //       buttonId="back-to-dashboard-button"
-  //       buttonLinkText="backToDashboard"
-  //       />
-  //     )
-  //     const btn = screen.getByTestId('testID')
-  //     expect(btn).toBeInTheDocument()
-  //     const link = screen.getByTestId('testID')
-  //     expect(link).toBeInTheDocument()
-  //   })
-
-  //   it('renders the page linker', () => {
-  //     const primary = render(<PageLink {...PageLink.args} />)
-  //     expect(primary).toBeTruthy()
-  //   })
-
-  //   it('has no a11y viollations', async () => {
-  //     const { container } = render(
-  //       <PageLink
-  //         id="testid"
-
-  //         caption="test button"
-  //         onClick={() => {
-  //           return true
-  //         }}
-  //       />
-  //     )
-  //     const results = await axe(container)
-  //     expect(results).toHaveNoViolations()
-  //   })
+  it('has no a11y violations', async () => {
+    render(<PageLink />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
 })
