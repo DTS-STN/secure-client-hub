@@ -89,6 +89,4 @@ module.exports = {dashboardHeader,
                    ProfileMenu,
                    SecuritySettingsMenu
 
-
-
 }
