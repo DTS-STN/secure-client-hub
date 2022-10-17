@@ -25,6 +25,7 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={ei.taskHeadingKey}
         taskGroups={ei.tasksGroups}
+        mostReq={true}
       />
       <Card
         programUniqueId={'cpp'}
@@ -33,6 +34,7 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={cpp.taskHeadingKey}
         taskGroups={cpp.tasksGroups}
+        mostReq={true}
       />
       <Card
         programUniqueId={'oas'}
@@ -41,6 +43,7 @@ export default function Home(props) {
         viewMoreLessCaption={t.viewMoreLessButtonCaption}
         taskHeading={oas.taskHeadingKey}
         taskGroups={oas.tasksGroups}
+        mostReq={true}
       />
     </div>
   )
