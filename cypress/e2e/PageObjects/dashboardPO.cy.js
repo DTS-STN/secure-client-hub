@@ -68,6 +68,11 @@ function SecuritySettingsMenu() {
 
 }
 
+function ProfileMenu() {
+
+  return cy.get("#dropdownNavbar > li:nth-child(3) > a")
+
+}
 
 module.exports = {dashboardHeader,
                    FrenchButton,
@@ -80,8 +85,8 @@ module.exports = {dashboardHeader,
                    MostRequestedSectionLinks,
                    MostRequestedSectionHeading,
                    Menu,
+                   SecuritySettingsMenu,
+                   ProfileMenu,
                    SecuritySettingsMenu
-
-
 
 }
