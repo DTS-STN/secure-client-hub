@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const dashboardPo = require("../e2e/PageObjects/dashboardPO.cy")
+const securityPo = require("../e2e/PageObjects/securitySettingsPO.cy")
 
 
 beforeEach(() => {
@@ -77,6 +78,12 @@ describe('Validate dashboard page',() =>{
           })
 
         })
+
+        it('validate the "My dashboard" page doesnt have breadcrumbs', () =>{
+            
+          securityPo.breadcrumbs().should('not.exist')
+ 
+       })
 
 })
 
