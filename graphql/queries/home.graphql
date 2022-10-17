@@ -1,0 +1,56 @@
+{
+	schPagev1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard") {
+	    item {
+            _path
+            scPageNameEn
+            scPageNameFr
+            scTitleEn
+            scTitleFr
+            scShortTitleEn
+            scShortTitleFr
+            scBreadcrumbParentPages {
+                ... on SCHPagev1Model{
+                    scTitleEn
+                }
+            }
+            scContentType
+            scOwner
+            scDateModifiedOverwrite
+            scAudience
+            scFragments {
+                ... on SCHTaskv1Model{
+                    scId
+                    scTitleEn
+                    scTitleFr
+                    scDestinationURLEn
+                    scDestinationURLFr
+                }
+                ... on SCHListv1Model {
+                    scId
+                    scItems {
+                        ... on SCHCardv1Model {
+                            scId
+                            scTitleEn
+                            scTitleFr
+                            schLists{
+                                ... on SCHListv1Model {
+                                    scTitleEn
+                                    scTitleFr
+                                    scItems {
+                                        ... on SCHTaskv1Model{
+                                            scTitleEn
+                                            scTitleFr
+                                            scDestinationURLEn
+                                            scDestinationURLFr
+                                            scIconCSS
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+	}
+}

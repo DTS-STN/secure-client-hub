@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
+import { gql, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 
 const link = new HttpLink({
   uri: process.env.AEM_GRAPHQL_ENDPOINT,
@@ -13,11 +13,9 @@ const client = new ApolloClient({
 })
 
 export default async function (AEMQuery) {
-  return client
-    .query({
-      query: AEMQuery,
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  return client.query({
+    query: gql`
+      ${AEMQuery}
+    `,
+  })
 }
