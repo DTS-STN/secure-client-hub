@@ -14,6 +14,8 @@ export default {
   //Heading
   pageHeading: {
     title: 'My dashboard',
+    security: 'Security Settings',
+    profile: 'Profile',
   },
 
   // ViewMoreLessButton
@@ -103,4 +105,5 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  url_dashboard: '/home',
 }
