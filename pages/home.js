@@ -6,6 +6,7 @@ import Card from '../components/Card'
 
 import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
 import { getHomeContent } from '../graphql/mappers/home'
+import logger from '../lib/logger'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -27,6 +28,7 @@ export default function Home(props) {
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
             taskGroups={card.lists}
+            mostReq={true}
           />
         )
       })}
@@ -34,8 +36,12 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps({ locale }) {
-  const content = await getHomeContent()
+export async function getServerSideProps({ res, locale }) {
+  const content = await getHomeContent().catch((error) => {
+    logger.error(error)
+    res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'

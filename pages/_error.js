@@ -63,7 +63,7 @@ function CustomError({ statusCode }) {
 }
 
 /* istanbul ignore next */
-export async function getServerSideProps({ res, err, locale }) {
+export async function getServerSideProps({ res, err }) {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
 
   /* Place-holder Meta Data Props */
@@ -81,11 +81,11 @@ export async function getServerSideProps({ res, err, locale }) {
       keywords: '',
     },
   }
-
   return {
-    statusCode,
-    locale,
-    meta,
+    props: {
+      statusCode,
+      meta,
+    },
   }
 }
 

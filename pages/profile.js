@@ -2,15 +2,48 @@ import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Card from '../components/Card'
+import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
 
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const ei = TASK_GROUPS['ei'][props.locale]
+  const cpp = TASK_GROUPS['cpp'][props.locale]
+  const oas = TASK_GROUPS['oas'][props.locale]
+
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+      <Card
+        programUniqueId={'ei'}
+        locale={props.locale}
+        cardTitle={ei.programTitle}
+        viewMoreLessCaption={t.viewMoreViewLessEI}
+        taskHeading={ei.taskHeadingKey}
+        taskGroups={ei.tasksGroups}
+        mostReq={false}
+      />
+      <Card
+        programUniqueId={'cpp'}
+        locale={props.locale}
+        cardTitle={cpp.programTitle}
+        viewMoreLessCaption={t.viewMoreViewLessCPP}
+        taskHeading={cpp.taskHeadingKey}
+        taskGroups={cpp.tasksGroups}
+        mostReq={false}
+      />
+      <Card
+        programUniqueId={'oas'}
+        locale={props.locale}
+        cardTitle={oas.programTitle}
+        viewMoreLessCaption={t.viewMoreViewLessOAS}
+        taskHeading={oas.taskHeadingKey}
+        taskGroups={oas.tasksGroups}
+        mostReq={false}
+      />
     </div>
   )
 }
