@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
+import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -11,6 +12,17 @@ export default function Home(props) {
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+
+      <PageLink
+        lookingForText={t.pageLinkSecurity}
+        accessText={t.accessYourSecurityText}
+        linkText={t.securityLinkText}
+        href="/security"
+        linkID="link-id"
+        buttonHref="/security"
+        buttonId="back-to-dashboard-button"
+        buttonLinkText={t.backToDashboard}
+      ></PageLink>
     </div>
   )
 }

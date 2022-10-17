@@ -18,6 +18,14 @@ export default {
     profile: 'Profil',
   },
 
+  pageLinkSecurity: 'Vous recherchez les paramètres de sécurité?',
+  securityLinkText: 'paramètres de sécurité.',
+  accessYourSecurityText: 'Accéder à vos ',
+  pageLinkProfile: 'Vous recherchez les paramètres de votre profil?',
+  profileLinkText: 'profile.',
+  accessYourProfileText: 'Accéder à votre ',
+  backToDashboard: 'Retour à mon tableau de bord',
+
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Demandes, paiements et réclamations, impôts, rapports et documents, informations personnelles`,
 
