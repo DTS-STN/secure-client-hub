@@ -31,6 +31,11 @@ export default {
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
 
+  // ViewMoreLessButtonProfile
+  viewMoreViewLessEI: `View and change my profile information for Employment Insurance`,
+  viewMoreViewLessCPP: `View and change my profile information for Canada Pension Plan`,
+  viewMoreViewLessOAS: `View and change my profile information for Old Age Security and Guaranteed Income Supplement`,
+
   // Nav
   skipToMainContent: 'Skip to main content',
   aboutGovernment: "Skip to 'About government'",

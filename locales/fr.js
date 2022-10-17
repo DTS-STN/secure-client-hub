@@ -29,6 +29,11 @@ export default {
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Demandes, paiements et réclamations, impôts, rapports et documents, informations personnelles`,
 
+  // ViewMoreLessButtonProfile
+  viewMoreViewLessEI: `Consulter et modifier mes renseignements personnels pour l’assurance-emploi`,
+  viewMoreViewLessCPP: `Consulter et modifier mes renseignements personnels pour le Régime de pensions du Canada`,
+  viewMoreViewLessOAS: `Consulter et modifier mes renseignements personnels pour la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti`,
+
   // Nav
   skipToMainContent: 'Passer au contenu principal',
   aboutGovernment: 'Passer à « Au sujet du gouvernement »',
