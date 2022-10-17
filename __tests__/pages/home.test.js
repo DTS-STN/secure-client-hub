@@ -16,7 +16,9 @@ jest.mock('next/router', () => ({
 //
 jest.mock('../../graphql/mappers/home', () => ({
   getHomeContent: () => {
-    return {}
+    return new Promise(function (resolve, reject) {
+      resolve({})
+    })
   },
 }))
 
