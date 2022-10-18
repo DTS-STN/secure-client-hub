@@ -57,7 +57,6 @@ Card.propTypes = {
   locale: propTypes.string.isRequired,
   cardTitle: propTypes.string.isRequired,
   viewMoreLessCaption: propTypes.string.isRequired,
-  taskHeading: propTypes.string,
   taskGroups: propTypes.array,
   programUniqueId: propTypes.string,
   mostReq: propTypes.bool,
