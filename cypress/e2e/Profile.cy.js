@@ -101,7 +101,7 @@ beforeEach(() => {
              it('Validate that the "Looking for" section is present on Profile Page',() =>{
 
                profilePo.LookingFor().should('be.visible')
-               profilePo.LookingForProfileLink().should('be.visible')
+               profilePo.LookingForSecurityLink().should('be.visible')
                profilePo.BackToDashboardButton().should('be.visible')
     
 
@@ -116,8 +116,8 @@ beforeEach(() => {
        }) 
 
             it('Validate the "Security Settings" click navigates to Security Settings Page',() =>{
-        
-               profilePo.LookingForProfileLink().click()
+               cy.wait(2000)
+               profilePo.LookingForSecurityLink().click()
                cy.url().should("contains", "/security");
                dashboardPo.dashboardHeader().should('have.text','Security Settings')       
 
@@ -136,7 +136,26 @@ beforeEach(() => {
                profilePo.LookingFor().should('have.text','Vous recherchez les paramètres de sécurité?') 
                profilePo.BackToDashboardButton().should('have.text','Retour à mon tableau de bord')
 
- })
+       })
+
+            it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page',() =>{
+            
+               dashboardPo.FrenchButton().click()
+               cy.wait(2000)
+               profilePo.LookingForSecurityLinkFrench().click()
+               cy.url().should("contains", "/fr/security");
+               dashboardPo.dashboardHeader().should('have.text','Paramètres de sécurité')       
+
+       }) 
+
+            it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page',() =>{
+            
+               dashboardPo.FrenchButton().click()
+               profilePo.BackToDashboardButton().click()
+               cy.url().should("contains", "/fr/home");
+               dashboardPo.dashboardHeader().should('have.text','Mon tableau de bord')       
+
+       }) 
         
         
         

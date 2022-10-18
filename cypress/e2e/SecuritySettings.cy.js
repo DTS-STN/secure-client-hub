@@ -119,5 +119,23 @@ it('validate that user is navigated to /fr/security page from /fr/dashboard', ()
 
     })
 
+         it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page',() =>{
+            
+            dashboardPo.FrenchButton().click()
+            securityPo.LookingForProfileLink().click()
+            cy.url().should("contains", "/fr/security");
+            dashboardPo.dashboardHeader().should('have.text','Paramètres de sécurité')       
+
+     }) 
+
+         it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page',() =>{
+   
+            dashboardPo.FrenchButton().click()
+            profilePo.BackToDashboardButton().click()
+            cy.url().should("contains", "/fr/home");
+            dashboardPo.dashboardHeader().should('have.text','Mon tableau de bord')       
+
+}) 
+
         
 })

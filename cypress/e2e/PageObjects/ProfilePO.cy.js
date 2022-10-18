@@ -6,20 +6,26 @@ function LookingFor() {
     
     }
 
-function LookingForProfileLink() {
+function LookingForSecurityLink() {
 
-    return cy.get("[id ='link-for-securitysettings']")
+    return cy.get("#link-for-securitysettings")
+}
+
+function LookingForSecurityLinkFrench() {
+
+    return cy.get("#link-for-paramètresdesécurité")
 }
     
 function BackToDashboardButton() {
 
-    return cy.get("[id ='back-to-dashboard-button']")
+    return cy.get("#back-to-dashboard-button")
 }
     
     
     
     module.exports = {LookingFor,
-                      LookingForProfileLink,
+                      LookingForSecurityLink,
+                      LookingForSecurityLinkFrench,
                       BackToDashboardButton
 
          
