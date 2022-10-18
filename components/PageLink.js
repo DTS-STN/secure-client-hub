@@ -24,6 +24,7 @@ export default function PageLink(props) {
               {props.linkText}
             </a>
           </Link>
+          <span className=" text-gray-darker">.</span>
         </div>
 
         <Link href={props.buttonHref}>
