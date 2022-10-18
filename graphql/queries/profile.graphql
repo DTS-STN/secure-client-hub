@@ -1,0 +1,42 @@
+{
+	schPagev1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/profile") {
+	    item {
+            _path
+            scTitleEn
+            scTitleFr
+            scFragments {
+                ... on SCHListv1Model {
+                    scId
+                    scItems{
+                        ... on SCHCardv1Model {
+                            scId
+                            scTitleEn
+                            scTitleFr
+                            schTasks {
+                                scId
+                                scTitleEn
+                                scTitleFr
+                                scIconCSS
+                                scDestinationURLEn
+                                scDestinationURLFr
+                            }
+                        }
+                    }
+                }
+                ... on SCHContentv1Model{
+                    scId
+                    scContentEn{
+                        plaintext
+                    }
+                }
+                ... on SCHTaskv1Model {
+                    scId
+                    scTitleEn
+                    scTitleFr
+                    scDestinationURLEn
+                    scDestinationURLFr
+                }
+            }
+        }
+    }
+}
