@@ -27,3 +27,4 @@ module.exports = {
   breadcrumbsLink2,
   LookingForProfileLink,
 }
+
