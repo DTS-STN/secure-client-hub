@@ -3,11 +3,11 @@
 describe('home page loads', () => {
   beforeEach(() => {
     cy.visit('/home')
-    cy.injectAxe();
+    cy.injectAxe()
   })
 
   it('displays the index page', () => {
-    cy.url().should("contains", "/home");
+    cy.url().should('contains', '/home')
   })
 
   // it('displays the language link to change to French', () => {
@@ -22,7 +22,6 @@ describe('home page loads', () => {
   //   cy.get('[data-cy=toggle-language-link]').should('contain.text', 'English');
 
   // })
-
 
   it('Home page has no detectable a11y violations on load', () => {
     cy.checkA11y()

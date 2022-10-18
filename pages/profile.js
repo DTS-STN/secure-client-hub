@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
+import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
@@ -26,6 +27,16 @@ export default function Home(props) {
           />
         )
       })}
+      <PageLink
+        lookingForText={t.pageLinkSecurity}
+        accessText={t.accessYourSecurityText}
+        linkText={t.securityLinkText}
+        href="/security"
+        linkID="link-id"
+        buttonHref={t.url_dashboard}
+        buttonId="back-to-dashboard-button"
+        buttonLinkText={t.backToDashboard}
+      ></PageLink>
     </div>
   )
 }
