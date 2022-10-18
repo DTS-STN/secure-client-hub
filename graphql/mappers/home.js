@@ -31,10 +31,10 @@ export async function getHomeContent() {
         .filter((e) => e),
       exitBeta: {
         title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'EXIT-BETA-VERSION'
+          (element) => element.scId === 'exit-beta-version'
         ).scTitleEn,
         link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'EXIT-BETA-VERSION'
+          (element) => element.scId === 'exit-beta-version'
         ).scDestinationURLEn,
       },
     },
@@ -65,10 +65,10 @@ export async function getHomeContent() {
         .filter((e) => e),
       exitBeta: {
         title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'EXIT-BETA-VERSION'
+          (element) => element.scId === 'exit-beta-version'
         ).scTitleFr,
         link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'EXIT-BETA-VERSION'
+          (element) => element.scId === 'exit-beta-version'
         ).scDestinationURLFr,
       },
     },
