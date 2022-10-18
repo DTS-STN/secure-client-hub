@@ -97,8 +97,49 @@ beforeEach(() => {
                dashboardPo.ExpandedCard().should('not.exist')
  
  
-       }) 
+       })    
+             it('Validate that the "Looking for" section is present on Profile Page',() =>{
 
+               profilePo.LookingFor().should('be.visible')
+               profilePo.LookingForProfileLink().should('be.visible')
+               profilePo.BackToDashboardButton().should('be.visible')
     
 
-        })
+       }) 
+
+            it('Validate the "Back to Dashboard" click navigates to dashboard page',() =>{
+        
+               profilePo.BackToDashboardButton().click()
+               cy.url().should("contains", "/home");
+               dashboardPo.dashboardHeader().should('have.text','My dashboard')       
+
+       }) 
+
+            it('Validate the "Security Settings" click navigates to Security Settings Page',() =>{
+        
+               profilePo.LookingForProfileLink().click()
+               cy.url().should("contains", "/security");
+               dashboardPo.dashboardHeader().should('have.text','Security Settings')       
+
+       }) 
+
+            it('Validate the "Looking for Security Settings" and button text text in English',() =>{
+        
+               profilePo.LookingFor().should('have.text','Looking for security settings?') 
+               profilePo.BackToDashboardButton().should('have.text','Back to my Dashboard')
+
+       })
+
+            it('Validate the "Looking for security Settings text" and button text in French',() =>{
+
+               dashboardPo.FrenchButton().click()
+               profilePo.LookingFor().should('have.text','Vous recherchez les paramètres de sécurité?') 
+               profilePo.BackToDashboardButton().should('have.text','Retour à mon tableau de bord')
+
+ })
+        
+        
+        
+       
+      
+   })
