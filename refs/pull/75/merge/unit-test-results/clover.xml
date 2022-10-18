@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666036932712" clover="3.2.0">
-  <project timestamp="1666036932712" name="All files">
+<coverage generated="1666096538632" clover="3.2.0">
+  <project timestamp="1666096538632" name="All files">
     <metrics statements="79" coveredstatements="43" conditionals="46" coveredconditionals="25" methods="34" coveredmethods="15" elements="159" coveredelements="83" complexity="0" loc="79" ncloc="79" packages="3" files="18" classes="18"/>
     <package name="components">
       <metrics statements="34" coveredstatements="26" conditionals="26" coveredconditionals="21" methods="15" coveredmethods="6"/>
@@ -55,7 +55,7 @@
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
       </file>
       <file name="ViewMoreLessButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ViewMoreLessButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
