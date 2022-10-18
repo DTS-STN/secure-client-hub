@@ -3,7 +3,8 @@ const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 
 beforeEach(() => {
-cy.visit('/home') })
+  cy.visit('/home')
+})
 
 describe('Validate dashboard page', () => {
   it('Validate dashboard header', () => {
@@ -57,7 +58,7 @@ describe('Validate dashboard page', () => {
       cy.wait(1000)
       dashboardPo
         .MostRequestedSectionHeading()
-        .should('contain.text', 'Most Requested')
+        .should('contain.text', 'Most requested')
       dashboardPo.MostRequestedSection().should('be.visible')
       dashboardPo.MostRequestedSectionLinks().should('be.visible')
     })
