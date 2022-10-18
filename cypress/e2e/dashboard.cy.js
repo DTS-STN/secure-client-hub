@@ -58,7 +58,7 @@ describe('Validate dashboard page', () => {
       cy.wait(1000)
       dashboardPo
         .MostRequestedSectionHeading()
-        .should('contain.text', 'Most Requested')
+        .should('contain.text', 'Most requested')
       dashboardPo.MostRequestedSection().should('be.visible')
       dashboardPo.MostRequestedSectionLinks().should('be.visible')
     })
