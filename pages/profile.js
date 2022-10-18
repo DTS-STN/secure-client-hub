@@ -4,47 +4,29 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
-import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
-
-import { fetchContent } from '../lib/cms'
+import { getHomeContent } from '../graphql/mappers/home'
+import logger from '../lib/logger'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const ei = TASK_GROUPS['ei'][props.locale]
-  const cpp = TASK_GROUPS['cpp'][props.locale]
-  const oas = TASK_GROUPS['oas'][props.locale]
 
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
-      <Card
-        programUniqueId={'ei'}
-        locale={props.locale}
-        cardTitle={ei.programTitle}
-        viewMoreLessCaption={t.viewMoreViewLessEI}
-        taskHeading={ei.taskHeadingKey}
-        taskGroups={ei.tasksGroups}
-        mostReq={false}
-      />
-      <Card
-        programUniqueId={'cpp'}
-        locale={props.locale}
-        cardTitle={cpp.programTitle}
-        viewMoreLessCaption={t.viewMoreViewLessCPP}
-        taskHeading={cpp.taskHeadingKey}
-        taskGroups={cpp.tasksGroups}
-        mostReq={false}
-      />
-      <Card
-        programUniqueId={'oas'}
-        locale={props.locale}
-        cardTitle={oas.programTitle}
-        viewMoreLessCaption={t.viewMoreViewLessOAS}
-        taskHeading={oas.taskHeadingKey}
-        taskGroups={oas.tasksGroups}
-        mostReq={false}
-      />
+      {props.content.cards.map((card) => {
+        return (
+          <Card
+            key={card.id}
+            programUniqueId={card.id}
+            locale={props.locale}
+            cardTitle={card.title}
+            viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            taskGroups={card.lists}
+            mostReq={false}
+          />
+        )
+      })}
       <PageLink
         lookingForText={t.pageLinkSecurity}
         accessText={t.accessYourSecurityText}
@@ -60,7 +42,11 @@ export default function Home(props) {
 }
 
 export async function getStaticProps({ locale }) {
-  const content = await fetchContent()
+  const content = await getHomeContent().catch((error) => {
+    logger.error(error)
+    res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
@@ -91,7 +77,13 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, content, meta, breadCrumbItems },
+    props: {
+      locale,
+      langToggleLink,
+      content: locale === 'en' ? content.en : content.fr,
+      meta,
+      breadCrumbItems,
+    },
   }
 }
 

@@ -13,19 +13,24 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-//
+// mocks home mapper
 jest.mock('../../graphql/mappers/home', () => ({
   getHomeContent: () => {
     return new Promise(function (resolve, reject) {
-      resolve({})
+      resolve({ en: {}, fr: {} })
     })
   },
 }))
 
+jest.mock('../../components/Card', () => () => {
+  return <mock-card data-testid="mock-card" />
+})
+
 describe('Home page', () => {
   const content = {
-    header: 'header',
+    heading: 'heading',
     paragraph: 'paragraph',
+    cards: [{ id: 'test', title: 'title', lists: 'lists' }],
   }
 
   beforeEach(() => {
@@ -39,6 +44,12 @@ describe('Home page', () => {
     render(<Home locale="en" content={content} />)
     const homeDiv = screen.getByTestId('homeContent-test')
     expect(homeDiv).toBeInTheDocument()
+  })
+
+  it('should contain a card', () => {
+    render(<Home locale="en" content={content} />)
+    const testCard = screen.getByTestId('mock-card')
+    expect(testCard).toBeInTheDocument()
   })
 
   it('Test getServerSideProps', async () => {
