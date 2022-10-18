@@ -38,6 +38,7 @@ describe('Validate Security Settings page', () => {
       .should('be.visible')
       .and('have.text', 'Security Settings')
   })
+
   it('validate that user is navigated to /fr/security page from /fr/dashboard', () => {
     cy.visit('/home')
     dashboardPo.FrenchButton().click()
@@ -68,6 +69,7 @@ describe('Validate Security Settings page', () => {
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
   })
+
   it('validate the breadcrumbs are present on Security settings page', () => {
     securityPo
       .breadcrumbs()
@@ -115,7 +117,7 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
+  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.LookingForProfileLink().click()
     cy.url().should('contains', '/fr/security')
