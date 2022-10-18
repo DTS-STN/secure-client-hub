@@ -17,6 +17,14 @@ export default {
     security: 'Security Settings',
     profile: 'Profile',
   },
+  // PageLink
+  pageLinkSecurity: 'Looking for security settings?',
+  securityLinkText: 'security settings',
+  accessYourSecurityText: 'Access your ',
+  pageLinkProfile: 'Looking for profile settings?',
+  profileLinkText: 'profile',
+  accessYourProfileText: 'Access your ',
+  backToDashboard: 'Back to my Dashboard',
 
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
