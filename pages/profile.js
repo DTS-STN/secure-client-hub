@@ -51,6 +51,7 @@ export default function Home(props) {
         linkText={t.securityLinkText}
         href="/security"
         linkID="link-id"
+        dataCy="access-security-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
