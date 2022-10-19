@@ -3,8 +3,6 @@ import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
-
-import { TASK_GROUPS } from '../contents/BenefitTasksGroups'
 import { getHomeContent } from '../graphql/mappers/home'
 import logger from '../lib/logger'
 
@@ -12,40 +10,23 @@ export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  const ei = TASK_GROUPS['ei'][props.locale]
-  const cpp = TASK_GROUPS['cpp'][props.locale]
-  const oas = TASK_GROUPS['oas'][props.locale]
   return (
     <div id="homeContent" data-testid="homeContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.title} />
+      <Heading id="my-dashboard-heading" title={props.content.heading} />
 
-      <Card
-        programUniqueId={'ei'}
-        locale={props.locale}
-        cardTitle={ei.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={ei.taskHeadingKey}
-        taskGroups={ei.tasksGroups}
-        mostReq={true}
-      />
-      <Card
-        programUniqueId={'cpp'}
-        locale={props.locale}
-        cardTitle={cpp.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={cpp.taskHeadingKey}
-        taskGroups={cpp.tasksGroups}
-        mostReq={true}
-      />
-      <Card
-        programUniqueId={'oas'}
-        locale={props.locale}
-        cardTitle={oas.programTitle}
-        viewMoreLessCaption={t.viewMoreLessButtonCaption}
-        taskHeading={oas.taskHeadingKey}
-        taskGroups={oas.tasksGroups}
-        mostReq={true}
-      />
+      {props.content.cards.map((card) => {
+        return (
+          <Card
+            key={card.id}
+            programUniqueId={card.id}
+            locale={props.locale}
+            cardTitle={card.title}
+            viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            taskGroups={card.lists}
+            mostReq={true}
+          />
+        )
+      })}
     </div>
   )
 }
@@ -77,7 +58,12 @@ export async function getServerSideProps({ res, locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, content, meta },
+    props: {
+      locale,
+      langToggleLink,
+      content: locale === 'en' ? content.en : content.fr,
+      meta,
+    },
   }
 }
 
