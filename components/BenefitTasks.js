@@ -13,7 +13,7 @@ export default function BenefitTasks(props) {
       <ul className="w-full py-6 pl-2 space-y-8">
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-display font-bold ">
+            <li key={index} className="font-display font-bold">
               <Link href={task.link} passHref>
                 <a className="flex items-center underline text-deep-blue-dark hover:text-blue-hover">
                   <FontAwesomeIcon

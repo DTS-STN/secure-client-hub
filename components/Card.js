@@ -32,16 +32,16 @@ export default function Card(props) {
       />
 
       {!isOpen ? null : (
-        <div className="pb-12 ">
+        <div className="pb-9 ">
           {!props.mostReq ? null : (
             <div className="bg-deep-blue-60d mt-4 pl-2">
               <MostReqTasks taskListMR={mostReq} />
             </div>
           )}
-          <div className="md:columns-2 gap-8">
+          <div className=" md:columns-2 gap-8 pt-8">
             {tasks.map((taskList, index) => {
               return (
-                <div className="mb-4 md:mb-8" key={index}>
+                <div className="mb-4 md:mb-6 md:last:pb-40" key={index}>
                   <BenefitTasks taskList={taskList} />
                 </div>
               )
