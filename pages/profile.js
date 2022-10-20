@@ -4,10 +4,10 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
-import { getHomeContent } from '../graphql/mappers/home'
+import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
 
-export default function Home(props) {
+export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -15,6 +15,7 @@ export default function Home(props) {
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
+        console.log(card.lists)
         return (
           <Card
             key={card.id}
@@ -22,7 +23,7 @@ export default function Home(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={card.lists}
+            taskGroups={[card.lists]}
             mostReq={false}
           />
         )
@@ -41,10 +42,10 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps({ locale }) {
-  const content = await getHomeContent().catch((error) => {
+export async function getStaticProps({ res, locale }) {
+  const content = await getProfileContent().catch((error) => {
     logger.error(error)
-    res.statusCode = 500
+    //res.statusCode = 500
     throw error
   })
 
@@ -87,7 +88,7 @@ export async function getStaticProps({ locale }) {
   }
 }
 
-Home.propTypes = {
+Profile.propTypes = {
   /**
    * current locale in the address
    */
