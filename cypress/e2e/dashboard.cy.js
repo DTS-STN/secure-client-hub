@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
+const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
 
 beforeEach(() => {
   cy.visit('/home')
@@ -66,5 +67,141 @@ describe('Validate dashboard page', () => {
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
     securityPo.breadcrumbs().should('not.exist')
+  })
+
+  it('Validate the EI card "Application" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Employment Insurance',
+      'Applications',
+      '2'
+    )
+  })
+
+  it('Validate the EI card "Payments and claims" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Employment Insurance',
+      'Payments and claims',
+      '3'
+    )
+  })
+
+  it('Validate the EI card "Taxes" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Employment Insurance',
+      'Taxes',
+      '2'
+    )
+  })
+
+  it('Validate the EI card "Reports and documents" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Employment Insurance',
+      'Reports and documents',
+      '7'
+    )
+  })
+
+  it('Validate the EI card "Reports and documents" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Employment Insurance',
+      'Personal information',
+      '4'
+    )
+  })
+
+  it('Validate the CPP card "Applications" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Applications',
+      '6'
+    )
+  })
+
+  it('Validate the CPP card "Payments" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Payments',
+      '4'
+    )
+  })
+
+  it('Validate the CPP card "Taxes" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Taxes',
+      '3'
+    )
+  })
+
+  it('Validate the CPP card "Documents" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Documents',
+      '2'
+    )
+  })
+
+  it('Validate the CPP card "Provisions" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Provisions',
+      '4'
+    )
+  })
+
+  it('Validate the CPP card "Personal information" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Canada Pension Plan',
+      'Personal information',
+      '2'
+    )
+  })
+
+  it('Validate the OAS card "Applications" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Old Age Security',
+      'Applications',
+      '4'
+    )
+  })
+
+  it('Validate the OAS card "Payments" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Old Age Security',
+      'Payments',
+      '4'
+    )
+  })
+
+  it('Validate the OAS card "Taxes" section', () => {
+    profilePo.ValidateCardTaskListAndSection('Old Age Security', 'Taxes', '3')
+  })
+
+  it('Validate the OAS card "Personal information" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Old Age Security',
+      'Personal information',
+      '2'
+    )
+  })
+
+  it('Validate the OAS card "Personal information" section', () => {
+    profilePo.ValidateCardTaskListAndSection(
+      'Old Age Security',
+      'Personal information',
+      '2'
+    )
+  })
+
+  it('Validate the "Most requested"section on EI card', () => {
+    profilePo.ValidateMostRequestedsection('Employment Insurance', '2')
+  })
+
+  it('Validate the "Most requested"section on CPP card', () => {
+    profilePo.ValidateMostRequestedsection('Canada Pension Plan', '2')
+  })
+
+  it('Validate the "Most requested"section on OAS card', () => {
+    profilePo.ValidateMostRequestedsection('Old Age Security', '2')
   })
 })
