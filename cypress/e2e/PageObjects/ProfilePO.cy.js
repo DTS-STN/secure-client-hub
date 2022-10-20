@@ -63,7 +63,7 @@ function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
   })
 }
 
-function ValidateMostRequestedsection(CardName, NumberOfLinks) {
+function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2')
     if (cardHeader.text() === CardName) {
@@ -73,7 +73,7 @@ function ValidateMostRequestedsection(CardName, NumberOfLinks) {
   })
   MostReqheading().each(($el1, index, $list) => {
     const header = $el1.find('h3')
-    if (header.text() === 'Most requested') {
+    if (header.text() === SectionName) {
       cy.wrap($el1).find('ul').should('be.visible')
       cy.wrap($el1)
         .find('ul>li>a')
