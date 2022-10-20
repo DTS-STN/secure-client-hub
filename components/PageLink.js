@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import BackToButton from './BackToButton'
 
 export default function PageLink(props) {
   const linkText = undefined
@@ -19,6 +20,7 @@ export default function PageLink(props) {
           <Link href={props.href}>
             <a
               id={`link-for-${linkID}`}
+              data-cy={props.dataCy}
               className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
             >
               {props.linkText}
@@ -27,14 +29,11 @@ export default function PageLink(props) {
           <span className=" text-gray-darker">.</span>
         </div>
 
-        <Link href={props.buttonHref}>
-          <a
-            id={props.buttonId}
-            className="inline-block my-4 py-2.5 px-3.5 font-display text-xl rounded bg-gray-30a text-deep-blue-60b hover:bg-gray-50a hover:cursor-pointer focus:ring focus:ring-offset-4 ring-deep-blue-60f"
-          >
-            {props.buttonLinkText}
-          </a>
-        </Link>
+        <BackToButton
+          buttonHref={props.buttonHref}
+          buttonId={props.buttonId}
+          buttonLinkText={props.buttonLinkText}
+        />
       </div>
     </>
   )
@@ -48,8 +47,10 @@ PageLink.propTypes = {
   href: PropTypes.string,
   id: PropTypes.string,
   linkID: PropTypes.string,
+  dataCy: PropTypes.string,
+
   // Props for the Button
-  ButtonHref: PropTypes.string,
+  buttonHref: PropTypes.string,
   buttonId: PropTypes.string,
   buttonLinkText: PropTypes.string,
 }

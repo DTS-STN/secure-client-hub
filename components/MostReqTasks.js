@@ -17,7 +17,7 @@ export default function MostReqTasks(props) {
               className="font-display font-bold justify-center py-4 md:py-6 pl-2"
             >
               <Link href={task.link} passHref>
-                <a className="flex items-center underline text-white hover:text-brighter-blue-light">
+                <a className="flex items-center underline text-white hover:text-gray-50">
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
