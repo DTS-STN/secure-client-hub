@@ -6,7 +6,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function BenefitTasks(props) {
   return (
-    <div className="px-4 sm:pl-8">
+    <div className="px-4 sm:pl-8 inline-block w-full">
       <h3 className="font-display font-bold text-xl ">
         {props.taskList.title}
       </h3>

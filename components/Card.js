@@ -38,10 +38,10 @@ export default function Card(props) {
               <MostReqTasks taskListMR={mostReq} />
             </div>
           )}
-          <div className="grid md:grid-cols-2">
+          <div className="md:columns-2 gap-8">
             {tasks.map((taskList, index) => {
               return (
-                <div className="my-2 pl-2 sm:pl-2" key={index}>
+                <div className="mb-4 md:mb-8" key={index}>
                   <BenefitTasks taskList={taskList} />
                 </div>
               )
