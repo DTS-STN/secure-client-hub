@@ -92,8 +92,8 @@ describe('Validate Profile page', () => {
   it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
     cy.wait(2000)
     profilePo.LookingForSecurityLink().click()
-    cy.url().should('contains', '/security')
-    dashboardPo.dashboardHeader().should('have.text', 'Security Settings')
+    securityPo.SecurityUrlEN()
+    securityPo.SecurityHeaderEN()
   })
 
   it('Validate the "Looking for Security Settings" and button text text in English', () => {
@@ -117,15 +117,15 @@ describe('Validate Profile page', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(2000)
     profilePo.LookingForSecurityLinkFrench().click()
-    cy.url().should('contains', '/fr/security')
-    dashboardPo.dashboardHeader().should('have.text', 'Paramètres de sécurité')
+    securityPo.SecurityUrlFR()
+    securityPo.SecurityHeaderFR()
   })
 
   it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
     profilePo.BackToDashboardButton().click()
-    cy.url().should('contains', '/fr/home')
-    dashboardPo.dashboardHeader().should('have.text', 'Mon tableau de bord')
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 
   it('Validate that the Task List is Present for each card on profile page', () => {
