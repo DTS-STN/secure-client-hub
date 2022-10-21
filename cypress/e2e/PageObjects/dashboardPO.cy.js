@@ -20,11 +20,11 @@ function CardButton() {
   return cy.get('#homeContent > div:nth-child(2)>button')
 }
 
-function ExpandedCard() {
-  return cy
-    .get('[data-cy="viewMoreLessButton"]')
-    .should('have.attr', 'aria-expanded', 'true')
-}
+// function ExpandedCard() {
+//   return cy
+//     .get('[data-cy="viewMoreLessButton"]')
+//     .should('have.attr', 'aria-expanded', 'true')
+// }
 
 function Cards() {
   return cy.get('#homeContent').find('div>button')
@@ -60,7 +60,7 @@ module.exports = {
   FirstCard,
   CardHeading,
   CardButton,
-  ExpandedCard,
+  // ExpandedCard,
   Cards,
   MostRequestedSection,
   MostRequestedSectionLinks,
