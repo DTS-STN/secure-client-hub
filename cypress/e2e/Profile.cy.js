@@ -67,4 +67,20 @@ describe('Validate Profile page', () => {
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
   })
+
+  it('Validate that the Card placeholder is present on Profile Page', () => {
+    dashboardPo.FirstCard().should('be.visible')
+  })
+
+  it('Validate that the Card Header is visible on profile page', () => {
+    dashboardPo.CardHeading().should('be.visible')
+  })
+
+  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
+    dashboardPo.CardButton().should('be.visible')
+    dashboardPo.CardButton().click()
+    dashboardPo.ExpandedCard().should('be.visible')
+    dashboardPo.CardButton().click({ force: true })
+    dashboardPo.ExpandedCard().should('not.exist')
+  })
 })

@@ -66,5 +66,4 @@ module.exports = {
   Menu,
   SecuritySettingsMenu,
   ProfileMenu,
-  SecuritySettingsMenu,
 }
