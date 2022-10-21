@@ -42,7 +42,11 @@ describe('Validate dashboard page', () => {
     dashboardPo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')
     dashboardPo.CardButton().click({ force: true })
-    dashboardPo.MostRequestedSectionHeading().should('not.exist')
+    cy.get('[data-cy="viewMoreLessButton"]').should(
+      'have.attr',
+      'aria-expanded',
+      'false'
+    )
   })
 
   it('Validate that the Task List is Present for each card on dashboard page', () => {
