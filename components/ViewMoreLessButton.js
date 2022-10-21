@@ -6,6 +6,7 @@ export default function ViewMoreLessButton(props) {
   return (
     <button
       className={'text-xl leading-8 text-deep-blue-60d  ' + props.className}
+      data-cy={props.dataCy}
       onClick={props.onClick}
       id={props.id}
       data-testid={props.dataTestid}
@@ -37,4 +38,5 @@ ViewMoreLessButton.propTypes = {
   dataTestid: propTypes.string,
   ariaExpanded: propTypes.string,
   className: propTypes.string,
+  dataCy: propTypes.string,
 }

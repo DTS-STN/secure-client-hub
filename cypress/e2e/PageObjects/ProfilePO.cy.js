@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="cypress" />
 const dashboardPo = require('../PageObjects/dashboardPO.cy')
 
 function LookingFor() {

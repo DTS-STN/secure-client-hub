@@ -69,7 +69,7 @@ describe('Validate Profile page', () => {
     dashboardPo.CardHeading().should('be.visible')
   })
 
-  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
+  it.skip('Validate that the Test card button on profile page expands and collapses on clicking', () => {
     dashboardPo.CardButton().should('be.visible')
     dashboardPo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')

@@ -15,12 +15,13 @@ export default function Card(props) {
 
   return (
     <div className="border rounded border-gray-300 shadow my-6">
-      <h2 className="py-5 px-3 text-3xl font-display font-bold sm:pl-10">
+      <h2 className="py-5 px-3 text-4xl font-display font-bold sm:pl-10">
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton
         id={props.programUniqueId + 'test-card-button-'}
         dataTestId={props.programUniqueId + 'dataTestId'}
+        dataCy="viewMoreLessButton"
         onClick={() => {
           const newOpenState = !isOpen
           setIsOpen(newOpenState)
@@ -32,17 +33,17 @@ export default function Card(props) {
       />
 
       {!isOpen ? null : (
-        <div className="pb-12 ">
+        <div className="pb-9 ">
           {!props.mostReq ? null : (
             <div className="bg-deep-blue-60d mt-4 pl-2">
-              <MostReqTasks taskListMR={mostReq} />
+              <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
             </div>
           )}
-          <div className="grid md:grid-cols-2">
+          <div className=" md:columns-2 gap-8 pt-8">
             {tasks.map((taskList, index) => {
               return (
-                <div className="my-2 pl-2 sm:pl-2" key={index}>
-                  <BenefitTasks taskList={taskList} />
+                <div className="mb-4 md:mb-6 md:last:pb-40" key={index}>
+                  <BenefitTasks taskList={taskList} dataCy="task-group-list" />
                 </div>
               )
             })}
