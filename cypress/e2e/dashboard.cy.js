@@ -3,7 +3,7 @@ const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 
 beforeEach(() => {
-  cy.visit('/home')
+  cy.visit('/my-dashboard')
 })
 
 describe('Validate dashboard page', () => {
@@ -17,7 +17,7 @@ describe('Validate dashboard page', () => {
   it('French button click goes to fr/dashboard page', () => {
     dashboardPo.FrenchButton().click()
     //cy.wait(2000)
-    cy.url().should('contains', '/fr/home')
+    cy.url().should('contains', '/fr/my-dashboard')
   })
 
   it('Validate dashboard header in French', () => {

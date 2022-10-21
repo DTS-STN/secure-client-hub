@@ -33,7 +33,7 @@ describe('Validate Profile page', () => {
 
   it('validate the "My dashboard" click on Profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
+    cy.url().should('contains', '/my-dashboard')
     dashboardPo
       .dashboardHeader()
       .should('be.visible')
@@ -41,7 +41,7 @@ describe('Validate Profile page', () => {
   })
 
   it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.ProfileMenu().click()
@@ -51,17 +51,17 @@ describe('Validate Profile page', () => {
 
   it('validate the "My dashboard" click from profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
+    cy.url().should('contains', '/my-dashboard')
     dashboardPo
       .dashboardHeader()
       .should('be.visible')
       .and('have.text', 'My dashboard')
   })
 
-  it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () => {
+  it('validate the "Mon tableau de bord" click goes from Profile to "/fr/my-dashboard"page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/fr/home')
+    cy.url().should('contains', '/fr/my-dashboard')
     dashboardPo
       .dashboardHeader()
       .should('be.visible')

@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Home from '../../pages/home'
-import { getServerSideProps } from '../../pages/home'
+import MyDashboard from '../../pages/my-dashboard'
+import { getServerSideProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
 
@@ -14,8 +14,8 @@ jest.mock('next/router', () => ({
 }))
 
 // mocks home mapper
-jest.mock('../../graphql/mappers/home', () => ({
-  getHomeContent: () => {
+jest.mock('../../graphql/mappers/my-dashboard', () => ({
+  getMyDashboardContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
     })
@@ -26,7 +26,7 @@ jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
 
-describe('Home page', () => {
+describe('My Dashboard page', () => {
   const content = {
     heading: 'heading',
     paragraph: 'paragraph',
@@ -41,13 +41,13 @@ describe('Home page', () => {
   })
 
   it('should render the page', () => {
-    render(<Home locale="en" content={content} />)
-    const homeDiv = screen.getByTestId('homeContent-test')
-    expect(homeDiv).toBeInTheDocument()
+    render(<MyDashboard locale="en" content={content} />)
+    const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
+    expect(myDashboardDiv).toBeInTheDocument()
   })
 
   it('should contain a card', () => {
-    render(<Home locale="en" content={content} />)
+    render(<MyDashboard locale="en" content={content} />)
     const testCard = screen.getByTestId('mock-card')
     expect(testCard).toBeInTheDocument()
   })
@@ -58,7 +58,7 @@ describe('Home page', () => {
     expect(props).toEqual({
       props: {
         content: {},
-        langToggleLink: '/fr/home',
+        langToggleLink: '/fr/my-dashboard',
         locale: 'en',
         meta: {
           data_en: {

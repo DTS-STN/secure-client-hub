@@ -28,7 +28,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate that user can select "Security settings" from Menu dropdown options', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
     cy.url().should('contains', '/security')
@@ -43,7 +43,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('validate that user is navigated to /fr/security page from /fr/dashboard', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
@@ -56,17 +56,17 @@ describe('Validate Security Settings page', () => {
 
   it('validate the "My dashboard" click goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
+    cy.url().should('contains', '/my-dashboard')
     dashboardPo
       .dashboardHeader()
       .should('be.visible')
       .and('have.text', 'My dashboard')
   })
 
-  it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
+  it('validate the "Mon tableau de bord" click goes from Security to "/fr/my-dashboard"page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/fr/home')
+    cy.url().should('contains', '/fr/my-dashboard')
     dashboardPo
       .dashboardHeader()
       .should('be.visible')

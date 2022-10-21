@@ -3,7 +3,7 @@ import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
-import { getHomeContent } from '../graphql/mappers/home'
+import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
 
 export default function Home(props) {
@@ -11,7 +11,7 @@ export default function Home(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
-    <div id="homeContent" data-testid="homeContent-test">
+    <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
       {props.content.cards.map((card) => {
@@ -32,14 +32,14 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
-  const content = await getHomeContent().catch((error) => {
+  const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500
     throw error
   })
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
+  const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
 
   /* Place-holder Meta Data Props */
   const meta = {

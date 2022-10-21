@@ -4,7 +4,7 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
-import { getHomeContent } from '../graphql/mappers/home'
+import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
 
 export default function Home(props) {
@@ -43,7 +43,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps({ locale }) {
-  const content = await getHomeContent().catch((error) => {
+  const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500
     throw error
