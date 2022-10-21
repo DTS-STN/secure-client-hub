@@ -100,7 +100,7 @@ describe('Validate Profile page', () => {
     cy.wait(2000)
     profilePo.LookingForSecurityLink().click()
     cy.url().should('contains', '/security')
-    dashboardPo.dashboardHeader().should('have.text', 'Security Settings')
+    dashboardPo.dashboardHeader().should('have.text', 'Security settings')
   })
 
   it('Validate the "Looking for Security Settings" and button text text in English', () => {
