@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const dashboardPo = require('../PageObjects/dashboardPO.cy')
 
 function LookingFor() {
   return cy.get("[data-cy ='looking-for']")
@@ -84,6 +85,20 @@ function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
   })
 }
 
+function ProfileHeaderEN() {
+  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profile')
+}
+
+function ProfileUrlFR() {
+  cy.url().should('contains', '/fr/profile')
+}
+function ProfileUrlEN() {
+  cy.url().should('contains', '/profile')
+}
+function ProfileHeaderFR() {
+  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profil')
+}
+
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
@@ -95,4 +110,8 @@ module.exports = {
   ValidateCardTaskListAndSection,
   MostReqheading,
   ValidateMostRequestedsection,
+  ProfileHeaderEN,
+  ProfileHeaderFR,
+  ProfileUrlFR,
+  ProfileUrlEN,
 }

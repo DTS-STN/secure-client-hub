@@ -11,12 +11,14 @@ beforeEach(() => {
 
 describe('Validate Profile page', () => {
   it('Validate Profile Page header in English', () => {
-    securityPo.pageHeader().should('be.visible').and('have.text', 'Profile')
+    profilePo.ProfileUrlEN()
+    profilePo.ProfileHeaderEN()
   })
 
   it('Validate Profile Page header in French', () => {
     dashboardPo.FrenchButton().click()
-    securityPo.pageHeader().should('be.visible').and('have.text', 'Profil')
+    profilePo.ProfileHeaderFR()
+    profilePo.ProfileUrlFR()
   })
 
   it('validate the breadcrumbs are present on Profile page', () => {
@@ -33,11 +35,8 @@ describe('Validate Profile page', () => {
 
   it('validate the "My dashboard" click on Profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
@@ -45,27 +44,21 @@ describe('Validate Profile page', () => {
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.ProfileMenu().click()
-    cy.url().should('contains', '/fr/profile')
-    securityPo.pageHeader().should('be.visible').and('have.text', 'Profil')
+    profilePo.ProfileUrlFR()
+    profilePo.ProfileHeaderFR()
   })
 
   it('validate the "My dashboard" click from profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/fr/home')
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'Mon tableau de bord')
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 
   it('Validate that the Card placeholder is present on Profile Page', () => {
@@ -92,8 +85,8 @@ describe('Validate Profile page', () => {
 
   it('Validate the "Back to Dashboard" click navigates to dashboard page', () => {
     profilePo.BackToDashboardButton().click()
-    cy.url().should('contains', '/home')
-    dashboardPo.dashboardHeader().should('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('Validate the "Security Settings" click navigates to Security Settings Page', () => {

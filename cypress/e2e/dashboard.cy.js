@@ -9,25 +9,20 @@ beforeEach(() => {
 
 describe('Validate dashboard page', () => {
   it('Validate dashboard header', () => {
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('French button click goes to fr/dashboard page', () => {
     dashboardPo.FrenchButton().click()
     //cy.wait(2000)
-    cy.url().should('contains', '/fr/home')
+    dashboardPo.ValidateDashboardUrlFR()
   })
 
   it('Validate dashboard header in French', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(3000)
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'Mon tableau de bord')
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 
   it('Validate that the Card placeholder is present', () => {

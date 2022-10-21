@@ -52,6 +52,22 @@ function ProfileMenu() {
   return cy.get('#dropdownNavbar > li:nth-child(3) > a')
 }
 
+function ValidateDashboardUrl() {
+  cy.url().should('contains', '/home')
+}
+
+function ValidateDashboardHeaderEN() {
+  dashboardHeader().should('be.visible').and('have.text', 'My dashboard')
+}
+
+function ValidateDashboardUrlFR() {
+  cy.url().should('contains', '/fr/home')
+}
+
+function ValidateDashboardHeaderFR() {
+  dashboardHeader().should('be.visible').and('have.text', 'Mon tableau de bord')
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -66,4 +82,8 @@ module.exports = {
   Menu,
   SecuritySettingsMenu,
   ProfileMenu,
+  ValidateDashboardUrl,
+  ValidateDashboardUrlFR,
+  ValidateDashboardHeaderFR,
+  ValidateDashboardHeaderEN,
 }
