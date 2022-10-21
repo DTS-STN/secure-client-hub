@@ -42,7 +42,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')
     dashboardPo.CardButton().click({ force: true })
-    dashboardPo.ExpandedCard().should('not.exist')
+    dashboardPo.MostRequestedSectionHeading().should('not.exist')
   })
 
   it('Validate that the Task List is Present for each card on dashboard page', () => {

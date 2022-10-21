@@ -7,7 +7,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 export default function BenefitTasks(props) {
   return (
     <div className="px-4 sm:pl-8 inline-block w-full">
-      <h3 className="font-display font-bold text-xl ">
+      <h3 className="font-display font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
       <ul className="w-full py-6 pl-2 space-y-8">
@@ -38,6 +38,7 @@ export default function BenefitTasks(props) {
 BenefitTasks.propTypes = {
   taskList: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    dataCy: PropTypes.string,
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,

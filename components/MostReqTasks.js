@@ -6,7 +6,10 @@ import { icon } from '../lib/loadIcons'
 export default function MostReqTasks(props) {
   return (
     <div className=" px-2 sm:px-8 h-full">
-      <h3 className="font-display font-bold text-xl text-white pt-6 ">
+      <h3
+        className="font-display font-bold text-xl text-white pt-6 "
+        data-cy={props.dataCy}
+      >
         {props.taskListMR.title}
       </h3>
       <ul className="w-full gap-x-14 grid md:grid-cols-2">
@@ -38,8 +41,10 @@ export default function MostReqTasks(props) {
 }
 
 MostReqTasks.propTypes = {
+  dataCy: PropTypes.string,
   taskListMR: PropTypes.shape({
     title: PropTypes.string.isRequired,
+
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
