@@ -28,6 +28,7 @@ export async function getSecurityContent() {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
+      subHeading: enContentFragment.json[0].content[0].value,
       lookingFor: {
         title: enLookingForFragment.json[0].content[0].value,
         subText: enLookingForFragment.json[1].content.map((element) => {
@@ -38,22 +39,19 @@ export async function getSecurityContent() {
         }),
         link: '/profile',
       },
-      content: {
-        subHeading: enContentFragment.json[0].content[0].value,
-        securityQuestions: {
-          linkTitle: {
-            text: enContentFragment.json[1].content[0].value,
-            link: enContentFragment.json[1].content[0].data.href,
-          },
-          subTitle: enContentFragment.json[1].content[2].value,
+      securityQuestions: {
+        linkTitle: {
+          text: enContentFragment.json[1].content[0].value,
+          link: enContentFragment.json[1].content[0].data.href,
         },
-        eiAccessCode: {
-          linkTitle: {
-            text: enContentFragment.json[2].content[0].value,
-            link: enContentFragment.json[2].content[0].data.href,
-          },
-          subTitle: enContentFragment.json[2].content[2].value,
+        subTitle: enContentFragment.json[1].content[2].value,
+      },
+      eiAccessCode: {
+        linkTitle: {
+          text: enContentFragment.json[2].content[0].value,
+          link: enContentFragment.json[2].content[0].data.href,
         },
+        subTitle: enContentFragment.json[2].content[2].value,
       },
     },
     fr: {
