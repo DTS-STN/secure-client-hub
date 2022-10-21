@@ -83,6 +83,7 @@ describe('Validate Profile page', () => {
     dashboardPo.CardButton().click({ force: true })
     dashboardPo.ExpandedCard().should('not.exist')
   })
+
   it('Validate that the "Looking for" section is present on Profile Page', () => {
     profilePo.LookingFor().should('be.visible')
     profilePo.LookingForSecurityLink().should('be.visible')

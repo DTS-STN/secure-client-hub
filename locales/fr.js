@@ -22,7 +22,7 @@ export default {
   securityLinkText: 'paramètres de sécurité',
   accessYourSecurityText: 'Accéder à vos ',
   pageLinkProfile: 'Vous recherchez les paramètres de votre profil?',
-  profileLinkText: 'profile',
+  profileLinkText: 'profil',
   accessYourProfileText: 'Accéder à votre ',
   backToDashboard: 'Retour à mon tableau de bord',
 
