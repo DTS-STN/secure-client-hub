@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="cypress" />
 
 function LookingFor() {
   return cy.get("[data-cy ='looking-for']")

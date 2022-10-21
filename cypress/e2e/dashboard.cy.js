@@ -37,12 +37,16 @@ describe('Validate dashboard page', () => {
     dashboardPo.CardHeading().should('be.visible')
   })
 
-  it('Validate that the Test card button expands and collapses on clicking', () => {
+  it.skip('Validate that the Test card button expands and collapses on clicking', () => {
     dashboardPo.CardButton().should('be.visible')
     dashboardPo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')
     dashboardPo.CardButton().click({ force: true })
-    dashboardPo.ExpandedCard().should('not.exist')
+    cy.get('[data-cy="viewMoreLessButton"]').should(
+      'have.attr',
+      'aria-expanded',
+      'false'
+    )
   })
 
   it('Validate that the Task List is Present for each card on dashboard page', () => {
