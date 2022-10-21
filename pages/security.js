@@ -14,12 +14,14 @@ export default function Security(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mb-10 text-lg">{props.content.subHeading}</p>
       <Link
+        id="securityQuestionsLink"
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
       />
       <p className="mb-8 text-lg">{props.content.securityQuestions.subTitle}</p>
       <Link
+        id="eiAccessCodeLink"
         dataTestId="eiAccessCodeLink"
         text={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
