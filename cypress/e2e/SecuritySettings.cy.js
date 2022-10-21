@@ -11,7 +11,7 @@ describe('Validate Security Settings page', () => {
     securityPo
       .pageHeader()
       .should('be.visible')
-      .and('have.text', 'Security Settings')
+      .and('have.text', 'Security settings')
   })
 
   it('Validate French button click goes to fr/Security page', () => {
@@ -35,7 +35,7 @@ describe('Validate Security Settings page', () => {
     securityPo
       .pageHeader()
       .should('be.visible')
-      .and('have.text', 'Security Settings')
+      .and('have.text', 'Security settings')
   })
 
   it('validate the breadcrumbs are present on Security settings page', () => {
