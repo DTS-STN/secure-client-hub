@@ -19,11 +19,11 @@ function BackToDashboardButton() {
 }
 
 function Eachsectionheading() {
-  return cy.get('.pb-12 >div>div')
+  return cy.get('[data-cy ="task-group-list"]')
 }
 
 function MostReqheading() {
-  return cy.get('.pb-12 >div')
+  return cy.get('[data-cy ="most-requested"]')
 }
 
 function Cards() {
