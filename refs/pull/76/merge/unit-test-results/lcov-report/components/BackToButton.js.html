@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/DateModified.js</title>
+    <title>Code coverage report for components/BackToButton.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> DateModified.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> BackToButton.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -93,8 +93,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -103,43 +101,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import propTypes from 'prop-types'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
+import Link from 'next/link'
 &nbsp;
-/**
- * Contains build time stamp
- */
-export default function DateModified(props) {
+export default function BackToButton(props) {
   return (
-    &lt;dl id={props.id} className="container mx-auto pl-6"&gt;
-      &lt;dt className="inline"&gt;{props.text}&lt;/dt&gt;
-      &lt;dd className="inline"&gt;{process.env.NEXT_PUBLIC_BUILD_DATE}&lt;/dd&gt;
-    &lt;/dl&gt;
+    &lt;&gt;
+      &lt;div className=" "&gt;
+        &lt;Link href={props.buttonHref}&gt;
+          &lt;a
+            id={props.buttonId}
+            className="inline-block my-4 py-2.5 px-3.5 font-display text-xl rounded bg-gray-30a text-deep-blue-60b hover:bg-gray-50a hover:cursor-pointer focus:ring focus:ring-offset-4 ring-deep-blue-60f"
+          &gt;
+            {props.buttonLinkText}
+          &lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
   )
 }
 &nbsp;
-DateModified.defaultProps = {
-  id: 'date-modified',
-  text: 'Date Modified:',
-}
-&nbsp;
-DateModified.propTypes = {
-  // text to be displayed
-  text: propTypes.string,
-&nbsp;
-  // id of the element for testing if needed
-  id: propTypes.string,
+BackToButton.propTypes = {
+  // Props for the Button
+  ButtonHref: PropTypes.string,
+  buttonId: PropTypes.string,
+  buttonLinkText: PropTypes.string,
 }
 &nbsp;</pre></td></tr></table></pre>
 
