@@ -21,7 +21,9 @@ function CardButton() {
 }
 
 function ExpandedCard() {
-  return cy.get('.pb-12 ')
+  return cy
+    .get('[data-cy="viewMoreLessButton"]')
+    .should('have.attr', 'aria-expanded', 'true')
 }
 
 function Cards() {
@@ -29,15 +31,15 @@ function Cards() {
 }
 
 function MostRequestedSection() {
-  return cy.get("[class ='pb-12 ']>div:nth-child(1)")
+  return cy.get('[data-cy="most-requested"]')
 }
 
 function MostRequestedSectionHeading() {
-  return cy.get("[class ='pb-12 '] >div:nth-child(1)>div>h3")
+  return cy.get('[data-cy="most-requested"]')
 }
 
 function MostRequestedSectionLinks() {
-  return cy.get("[class ='pb-12 '] >div:nth-child(1)>div>ul")
+  return cy.get('div:nth-child(1)>div>ul')
 }
 
 function Menu() {
@@ -50,6 +52,22 @@ function SecuritySettingsMenu() {
 
 function ProfileMenu() {
   return cy.get('#dropdownNavbar > li:nth-child(3) > a')
+}
+
+function ValidateDashboardUrl() {
+  cy.url().should('contains', '/home')
+}
+
+function ValidateDashboardHeaderEN() {
+  dashboardHeader().should('be.visible').and('have.text', 'My dashboard')
+}
+
+function ValidateDashboardUrlFR() {
+  cy.url().should('contains', '/fr/home')
+}
+
+function ValidateDashboardHeaderFR() {
+  dashboardHeader().should('be.visible').and('have.text', 'Mon tableau de bord')
 }
 
 module.exports = {
@@ -66,5 +84,8 @@ module.exports = {
   Menu,
   SecuritySettingsMenu,
   ProfileMenu,
-  SecuritySettingsMenu,
+  ValidateDashboardUrl,
+  ValidateDashboardUrlFR,
+  ValidateDashboardHeaderFR,
+  ValidateDashboardHeaderEN,
 }

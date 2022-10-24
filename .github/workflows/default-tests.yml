@@ -86,7 +86,7 @@ jobs:
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
         with:
           install: false
-          start: npm run start
+          start: npm run start:next
 
       - name: Merge test results into one
         run: npm run report:merge

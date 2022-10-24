@@ -1,0 +1,38 @@
+{
+  schPagev1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/security-settings"
+  ) {
+    item {
+      _path
+      scPageNameEn
+      scPageNameFr
+      scTitleEn
+      scTitleFr
+      scBreadcrumbParentPages {
+        ... on SCHPagev1Model {
+          scTitleEn
+          scId
+        }
+      }
+      scFragments {
+        ... on SCHTaskv1Model {
+          scId
+          scDestinationURLEn
+          scDestinationURLFr
+          scButtonType
+          scTitleEn
+          scTitleFr
+        }
+        ... on SCHContentv1Model {
+          scId
+          scContentFr {
+            json
+          }
+          scContentEn {
+            json
+          }
+        }
+      }
+    }
+  }
+}
