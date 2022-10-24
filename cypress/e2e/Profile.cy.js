@@ -40,7 +40,7 @@ describe('Validate Profile page', () => {
   })
 
   it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.ProfileMenu().click()
@@ -62,19 +62,19 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate that the Card placeholder is present on Profile Page', () => {
-    dashboardPo.FirstCard().should('be.visible')
+    profilePo.FirstCard().should('be.visible')
   })
 
-  it('Validate that the Card Header is visible on profile page', () => {
-    dashboardPo.CardHeading().should('be.visible')
+  it.skip('Validate that the Card Header is visible on profile page', () => {
+    profilePo.CardHeading().should('be.visible')
   })
 
   it.skip('Validate that the Test card button on profile page expands and collapses on clicking', () => {
-    dashboardPo.CardButton().should('be.visible')
-    dashboardPo.CardButton().click()
+    profilePo.CardButton().should('be.visible')
+    profilePo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')
-    dashboardPo.CardButton().click({ force: true })
-    dashboardPo.ExpandedCard().should('not.exist')
+    profilePo.CardButton().click({ force: true })
+    dashboardPo.FirstCard().should('be.visible')
   })
 
   it('Validate that the "Looking for" section is present on Profile Page', () => {
@@ -129,7 +129,7 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate that the Task List is Present for each card on profile page', () => {
-    dashboardPo.Cards().each(($el, index, $list) => {
+    profilePo.Cards().each(($el, index, $list) => {
       cy.wrap($el).click()
       dashboardPo.ExpandedCard().should('be.visible')
     })

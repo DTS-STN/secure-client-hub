@@ -1,31 +1,29 @@
 import { getFragmentQueryDocument } from '@apollo/client/utilities'
 import clientQuery from '../client'
 
-export async function getHomeContent() {
-  const query = require('../queries/home.graphql')
+export async function getProfileContent() {
+  const query = require('../queries/profile.graphql')
   const response = await clientQuery(query)
-  const mappedHome = {
+  const mappedProfile = {
     en: {
-      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
+      pageName: response.data.schPagev1ByPath.item.scTitleEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       cards: response.data.schPagev1ByPath.item.scFragments
-        .find((element) => element.scId === 'dashboard-cards')
+        .find((element) => element.scId === 'profile-cards')
         .scItems.map((fragment) => {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
-            lists: fragment.schLists.map((list) => {
-              return {
-                title: list.scTitleEn,
-                tasks: list.scItems.map((item) => {
-                  return {
-                    title: item.scTitleEn,
-                    link: item.scDestinationURLEn,
-                    icon: item.scIconCSS,
-                  }
-                }),
-              }
-            }),
+            lists: {
+              title: '',
+              tasks: fragment.schTasks.map((list) => {
+                return {
+                  title: list.scTitleEn,
+                  link: list.scDestinationURLEn,
+                  icon: list.scIconCSS,
+                }
+              }),
+            },
           }
         })
         .filter((e) => e),
@@ -39,27 +37,24 @@ export async function getHomeContent() {
       },
     },
     fr: {
-      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
+      pageName: response.data.schPagev1ByPath.item.scTitleFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       cards: response.data.schPagev1ByPath.item.scFragments
-        .find((element) => element.scId === 'dashboard-cards')
+        .find((element) => element.scId === 'profile-cards')
         .scItems.map((fragment) => {
-          if (!fragment.scId) return
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
-            lists: fragment.schLists.map((list) => {
-              return {
-                title: list.scTitleFr,
-                tasks: list.scItems.map((item) => {
-                  return {
-                    title: item.scTitleFr,
-                    link: item.scDestinationURLFr,
-                    icon: item.scIconCSS,
-                  }
-                }),
-              }
-            }),
+            lists: {
+              title: '',
+              tasks: fragment.schTasks.map((list) => {
+                return {
+                  title: list.scTitleFr,
+                  link: list.scDestinationURLFr,
+                  icon: list.scIconCSS,
+                }
+              }),
+            },
           }
         })
         .filter((e) => e),
@@ -73,5 +68,5 @@ export async function getHomeContent() {
       },
     },
   }
-  return mappedHome
+  return mappedProfile
 }
