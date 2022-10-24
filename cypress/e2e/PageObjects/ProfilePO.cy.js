@@ -100,6 +100,16 @@ function ProfileHeaderFR() {
   dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profil')
 }
 
+function FirstCard() {
+  return cy.get('#homeContent > div')
+}
+function CardHeading() {
+  return cy.get('#homeContent:nth-child(1)>div>h2')
+}
+function CardButton() {
+  return cy.get('#homeContent > div:nth-child(2)>button')
+}
+
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
@@ -115,4 +125,7 @@ module.exports = {
   ProfileHeaderFR,
   ProfileUrlFR,
   ProfileUrlEN,
+  FirstCard,
+  CardHeading,
+  CardButton,
 }
