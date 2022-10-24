@@ -242,13 +242,13 @@ BRH:0
 end_of_record
 TN:
 SF:pages/my-dashboard.js
-FN:9,Home
+FN:9,MyDashboard
 FN:17,(anonymous_1)
 FN:34,getServerSideProps
 FN:35,(anonymous_3)
 FNF:4
 FNH:3
-FNDA:2,Home
+FNDA:2,MyDashboard
 FNDA:2,(anonymous_1)
 FNDA:1,getServerSideProps
 FNDA:0,(anonymous_3)
