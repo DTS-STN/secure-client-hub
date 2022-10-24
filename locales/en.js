@@ -14,16 +14,12 @@ export default {
   //Heading
   pageHeading: {
     title: 'My dashboard',
-    security: 'Security Settings',
     profile: 'Profile',
   },
   // PageLink
   pageLinkSecurity: 'Looking for security settings?',
   securityLinkText: 'security settings',
   accessYourSecurityText: 'Access your ',
-  pageLinkProfile: 'Looking for profile settings?',
-  profileLinkText: 'profile',
-  accessYourProfileText: 'Access your ',
   backToDashboard: 'Back to my Dashboard',
 
   // ViewMoreLessButton
@@ -118,5 +114,5 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
-  url_dashboard: '/home',
+  url_dashboard: '/my-dashboard',
 }

@@ -9,15 +9,15 @@ function FrenchButton() {
 }
 
 function FirstCard() {
-  return cy.get('#homeContent:nth-child(1) > div')
+  return cy.get('#myDashboardContent:nth-child(1) > div')
 }
 
 function CardHeading() {
-  return cy.get('#homeContent:nth-child(1)>div>h2')
+  return cy.get('#myDashboardContent:nth-child(1)>div>h2')
 }
 
 function CardButton() {
-  return cy.get('#homeContent > div:nth-child(2)>button')
+  return cy.get('#myDashboardContent > div:nth-child(2)>button')
 }
 
 function ExpandedCard() {
@@ -27,7 +27,7 @@ function ExpandedCard() {
 }
 
 function Cards() {
-  return cy.get('#homeContent').find('div>button')
+  return cy.get('#myDashboardContent').find('div>button')
 }
 
 function MostRequestedSection() {
@@ -54,6 +54,22 @@ function ProfileMenu() {
   return cy.get('#dropdownNavbar > li:nth-child(3) > a')
 }
 
+function ValidateDashboardUrl() {
+  cy.url().should('contains', '/my-dashboard')
+}
+
+function ValidateDashboardHeaderEN() {
+  dashboardHeader().should('be.visible').and('have.text', 'My dashboard')
+}
+
+function ValidateDashboardUrlFR() {
+  cy.url().should('contains', '/fr/my-dashboard')
+}
+
+function ValidateDashboardHeaderFR() {
+  dashboardHeader().should('be.visible').and('have.text', 'Mon tableau de bord')
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -68,4 +84,8 @@ module.exports = {
   Menu,
   SecuritySettingsMenu,
   ProfileMenu,
+  ValidateDashboardUrl,
+  ValidateDashboardUrlFR,
+  ValidateDashboardHeaderFR,
+  ValidateDashboardHeaderEN,
 }
