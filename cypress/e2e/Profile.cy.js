@@ -65,7 +65,7 @@ describe('Validate Profile page', () => {
     profilePo.FirstCard().should('be.visible')
   })
 
-  it('Validate that the Card Header is visible on profile page', () => {
+  it.skip('Validate that the Card Header is visible on profile page', () => {
     profilePo.CardHeading().should('be.visible')
   })
 
