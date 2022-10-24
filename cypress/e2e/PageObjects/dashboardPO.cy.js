@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const profilePo = require('../PageObjects/profilePO.cy')
 
 function dashboardHeader() {
   return cy.get('#my-dashboard-heading')
@@ -21,12 +22,10 @@ function CardButton() {
 }
 
 function ExpandedCard() {
-  return cy
-    .get('[data-cy="viewMoreLessButton"]')
-    .should('have.attr', 'aria-expanded', 'true')
+  return cy.get('[data-cy="viewMoreLessButton"]')
 }
 
-function Cards() {
+function CardsButton() {
   return cy.get('#myDashboardContent').find('div>button')
 }
 
@@ -70,6 +69,74 @@ function ValidateDashboardHeaderFR() {
   dashboardHeader().should('be.visible').and('have.text', 'Mon tableau de bord')
 }
 
+function AllCardTaskSection(sectionName) {
+  CardsButton().each(($el, index, $list) => {
+    cy.wrap($el).click()
+    cy.wait(1000)
+  })
+  Eachsectionheading().each(($el1, index, $list) => {
+    const header = $el1.find('div>h3')
+    if (header.text() === sectionName) {
+      cy.wrap($el1).find('ul').should('be.visible')
+    }
+  })
+}
+
+function Cards() {
+  return cy.get('#myDashboardContent >div')
+}
+
+function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
+  Cards().each(($el, index, $list) => {
+    const cardHeader = $el.find('h2')
+    if (cardHeader.text() === CardName) {
+      cy.wrap($el).find('button').click()
+      cy.wait(1000)
+    }
+  })
+
+  Section().each(($el1, index, $list) => {
+    const header = $el1.find('h3')
+    if (header.text() === SectionName) {
+      cy.wrap($el1).find('ul').should('be.visible')
+      cy.wrap($el1)
+        .find('ul>li>a')
+        .should('have.length', NumberOfLinks)
+        .and('not.have.length', 0)
+        .and('not.have.attr', 'href', '#undefined')
+    }
+  })
+}
+
+function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
+  Cards().each(($el, index, $list) => {
+    const cardHeader = $el.find('h2')
+    if (cardHeader.text() === CardName) {
+      cy.wrap($el).find('button').click()
+      cy.wait(1000)
+    }
+  })
+  profilePo.MostReq().each(($el1, index, $list) => {
+    const header = $el1.find('h3')
+    if (header.text() === SectionName) {
+      cy.wrap($el1).find('ul').should('be.visible')
+      cy.wrap($el1)
+        .find('ul>li>a')
+        .should('have.length', NumberOfLinks)
+        .and('not.have.length', 0)
+        .and('not.have.attr', 'href', '#undefined')
+    }
+  })
+}
+
+function Eachsectionheading() {
+  return cy.get('[data-cy ="task-group-list"]')
+}
+
+function Section() {
+  return cy.get('[data-cy ="Task"]>div')
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -78,6 +145,7 @@ module.exports = {
   CardButton,
   ExpandedCard,
   Cards,
+  CardsButton,
   MostRequestedSection,
   MostRequestedSectionLinks,
   MostRequestedSectionHeading,
@@ -88,4 +156,9 @@ module.exports = {
   ValidateDashboardUrlFR,
   ValidateDashboardHeaderFR,
   ValidateDashboardHeaderEN,
+  ValidateMostRequestedsection,
+  ValidateCardTaskListAndSection,
+  AllCardTaskSection,
+  Eachsectionheading,
+  Section,
 }

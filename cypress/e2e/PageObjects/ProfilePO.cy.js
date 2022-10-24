@@ -26,6 +26,10 @@ function MostReqheading() {
   return cy.get('[data-cy ="most-requested"]')
 }
 
+function MostReq() {
+  return cy.get('[data-cy ="most-requested-section"]>div')
+}
+
 function Cards() {
   return cy.get('#homeContent>div')
 }
@@ -52,28 +56,7 @@ function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
     }
   })
 
-  Eachsectionheading().each(($el1, index, $list) => {
-    const header = $el1.find('h3')
-    if (header.text() === SectionName) {
-      cy.wrap($el1).find('ul').should('be.visible')
-      cy.wrap($el1)
-        .find('ul>li>a')
-        .should('have.length', NumberOfLinks)
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-    }
-  })
-}
-
-function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
-  Cards().each(($el, index, $list) => {
-    const cardHeader = $el.find('h2')
-    if (cardHeader.text() === CardName) {
-      cy.wrap($el).find('button').click()
-      cy.wait(1000)
-    }
-  })
-  MostReqheading().each(($el1, index, $list) => {
+  dashboardPo.Section().each(($el1, index, $list) => {
     const header = $el1.find('h3')
     if (header.text() === SectionName) {
       cy.wrap($el1).find('ul').should('be.visible')
@@ -104,10 +87,10 @@ function FirstCard() {
   return cy.get('#homeContent > div')
 }
 function CardHeading() {
-  return cy.get('#homeContent:nth-child(1)>div>h2')
+  return cy.get('[data-cy="Cards"]>h2')
 }
 function CardButton() {
-  return cy.get('#homeContent > div:nth-child(2)>button')
+  return cy.get('[data-cy="viewMoreLessButton"]')
 }
 
 module.exports = {
@@ -120,7 +103,6 @@ module.exports = {
   AllCardTaskSection,
   ValidateCardTaskListAndSection,
   MostReqheading,
-  ValidateMostRequestedsection,
   ProfileHeaderEN,
   ProfileHeaderFR,
   ProfileUrlFR,
@@ -128,4 +110,5 @@ module.exports = {
   FirstCard,
   CardHeading,
   CardButton,
+  MostReq,
 }
