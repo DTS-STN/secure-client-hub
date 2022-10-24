@@ -1,21 +1,38 @@
 import PropTypes from 'prop-types'
-import { Heading } from '@dts-stn/service-canada-design-system'
+import { Heading, Link } from '@dts-stn/service-canada-design-system'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import { getSecurityContent } from '../graphql/mappers/security'
+import logger from '../lib/logger'
 
-export default function Home(props) {
+export default function Security(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.security} />
+      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <p className="mb-10 text-lg">{props.content.subHeading}</p>
+      <Link
+        id="securityQuestionsLink"
+        dataTestId="securityQuestionsLink"
+        text={props.content.securityQuestions.linkTitle.text}
+        href={props.content.securityQuestions.linkTitle.link}
+      />
+      <p className="mb-8 text-lg">{props.content.securityQuestions.subTitle}</p>
 
+      <Link
+        id="eiAccessCodeLink"
+        dataTestId="eiAccessCodeLink"
+        text={props.content.eiAccessCode.linkTitle.text}
+        href={props.content.eiAccessCode.linkTitle.link}
+      />
+      <p className="mb-8 text-lg">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
-        lookingForText={t.pageLinkProfile}
-        accessText={t.accessYourProfileText}
-        linkText={t.profileLinkText}
-        href="/profile"
+        lookingForText={props.content.lookingFor.title}
+        accessText={props.content.lookingFor.subText[0]}
+        linkText={props.content.lookingFor.subText[1]}
+        href={props.content.lookingFor.link}
         linkID="link-id"
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
@@ -26,7 +43,12 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps({ locale }) {
+export async function getStaticProps({ res, locale }) {
+  const content = await getSecurityContent().catch((error) => {
+    logger.error(error)
+    //res.statusCode = 500
+    throw error
+  })
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/security' : '/security'
 
@@ -56,11 +78,17 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, meta, breadCrumbItems },
+    props: {
+      locale,
+      langToggleLink,
+      content: locale === 'en' ? content.en : content.fr,
+      meta,
+      breadCrumbItems,
+    },
   }
 }
 
-Home.propTypes = {
+Security.propTypes = {
   /**
    * current locale in the address
    */
@@ -72,6 +100,12 @@ Home.propTypes = {
   langToggleLink: PropTypes.string,
 
   /*
+   * Content Tags
+   */
+
+  content: PropTypes.object,
+
+  /*
    * Meta Tags
    */
 
@@ -80,5 +114,10 @@ Home.propTypes = {
   /*
    * BreadCrumb Items
    */
-  breadCrumbItems: PropTypes.object,
+  breadCrumbItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+    })
+  ),
 }

@@ -7,11 +7,7 @@ function LookingFor() {
 }
 
 function LookingForSecurityLink() {
-  return cy.get('#link-for-securitysettings')
-}
-
-function LookingForSecurityLinkFrench() {
-  return cy.get('#link-for-paramètresdesécurité')
+  return cy.get("[data-cy ='access-security-page-link']")
 }
 
 function BackToDashboardButton() {
@@ -96,7 +92,6 @@ function CardButton() {
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
-  LookingForSecurityLinkFrench,
   BackToDashboardButton,
   Eachsectionheading,
   Cards,
