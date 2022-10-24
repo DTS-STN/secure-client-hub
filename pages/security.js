@@ -46,7 +46,7 @@ export default function Security(props) {
 export async function getStaticProps({ res, locale }) {
   const content = await getSecurityContent().catch((error) => {
     logger.error(error)
-    res.statusCode = 500
+    //res.statusCode = 500
     throw error
   })
   /* istanbul ignore next */
