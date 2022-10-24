@@ -15,7 +15,6 @@ export default function Profile(props) {
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
-        console.log(card.lists)
         return (
           <Card
             key={card.id}
