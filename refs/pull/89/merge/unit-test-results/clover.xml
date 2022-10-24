@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666633209144" clover="3.2.0">
-  <project timestamp="1666633209144" name="All files">
-    <metrics statements="75" coveredstatements="42" conditionals="46" coveredconditionals="25" methods="34" coveredmethods="17" elements="155" coveredelements="84" complexity="0" loc="75" ncloc="75" packages="3" files="17" classes="17"/>
+<coverage generated="1666634137269" clover="3.2.0">
+  <project timestamp="1666634137269" name="All files">
+    <metrics statements="74" coveredstatements="42" conditionals="46" coveredconditionals="25" methods="34" coveredmethods="17" elements="154" coveredelements="84" complexity="0" loc="74" ncloc="74" packages="3" files="17" classes="17"/>
     <package name="components">
       <metrics statements="36" coveredstatements="27" conditionals="30" coveredconditionals="20" methods="16" coveredmethods="7"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -69,7 +69,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="39" coveredstatements="15" conditionals="16" coveredconditionals="5" methods="18" coveredmethods="10"/>
+      <metrics statements="38" coveredstatements="15" conditionals="16" coveredconditionals="5" methods="18" coveredmethods="10"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
@@ -117,12 +117,11 @@
         <line num="91" count="0" type="stmt"/>
       </file>
       <file name="security.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/security.js">
-        <metrics statements="11" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="12" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="57" count="0" type="stmt"/>
