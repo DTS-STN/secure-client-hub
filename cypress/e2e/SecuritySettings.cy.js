@@ -23,7 +23,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate that user can select "Security settings" from Menu dropdown options', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
     securityPo.SecurityUrlEN()
@@ -31,7 +31,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('validate that user is navigated to /fr/security page from /fr/dashboard', () => {
-    cy.visit('/home')
+    cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
