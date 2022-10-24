@@ -9,34 +9,25 @@ beforeEach(() => {
 
 describe('Validate Security Settings page', () => {
   it('Validate Security Settings Page header in English', () => {
-    securityPo
-      .pageHeader()
-      .should('be.visible')
-      .and('have.text', 'Security settings')
+    securityPo.SecurityHeaderEN()
   })
 
   it('Validate French button click goes to fr/Security page', () => {
     dashboardPo.FrenchButton().click()
-    cy.url().should('contains', '/fr/security')
+    securityPo.SecurityUrlFR()
   })
 
   it('Validate Security Settings Page header in French', () => {
     dashboardPo.FrenchButton().click()
-    securityPo
-      .pageHeader()
-      .should('be.visible')
-      .and('have.text', 'Paramètres de sécurité')
+    securityPo.SecurityHeaderFR()
   })
 
   it('Validate that user can select "Security settings" from Menu dropdown options', () => {
     cy.visit('/home')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
-    cy.url().should('contains', '/security')
-    securityPo
-      .pageHeader()
-      .should('be.visible')
-      .and('have.text', 'Security settings')
+    securityPo.SecurityUrlEN()
+    securityPo.SecurityHeaderEN()
   })
 
   it('validate that user is navigated to /fr/security page from /fr/dashboard', () => {
@@ -44,30 +35,21 @@ describe('Validate Security Settings page', () => {
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
-    cy.url().should('contains', '/fr/security')
-    securityPo
-      .pageHeader()
-      .should('be.visible')
-      .and('have.text', 'Paramètres de sécurité')
+    securityPo.SecurityUrlFR()
+    securityPo.SecurityHeaderFR()
   })
 
   it('validate the "My dashboard" click goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/home')
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.breadcrumbs().click()
-    cy.url().should('contains', '/fr/home')
-    dashboardPo
-      .dashboardHeader()
-      .should('be.visible')
-      .and('have.text', 'Mon tableau de bord')
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 
   it('validate the breadcrumbs are present on Security settings page', () => {
@@ -90,14 +72,14 @@ describe('Validate Security Settings page', () => {
 
   it('Validate the "Back to Dashboard" click navigates to dashboard page', () => {
     profilePo.BackToDashboardButton().click()
-    cy.url().should('contains', '/home')
-    dashboardPo.dashboardHeader().should('have.text', 'My dashboard')
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
   })
 
   it('Validate the "Profile" click navigates to Profile Page', () => {
     securityPo.LookingForProfileLink().click()
-    cy.url().should('contains', '/profile')
-    dashboardPo.dashboardHeader().should('have.text', 'Profile')
+    profilePo.ProfileUrlEN()
+    profilePo.ProfileHeaderEN()
   })
 
   it('Validate the "Looking for Profile Settings" and button text text in English', () => {
@@ -120,14 +102,14 @@ describe('Validate Security Settings page', () => {
   it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.LookingForProfileLink().click()
-    cy.url().should('contains', '/fr/security')
-    dashboardPo.dashboardHeader().should('have.text', 'Paramètres de sécurité')
+    profilePo.ProfileUrlFR()
+    profilePo.ProfileHeaderFR()
   })
 
   it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
     profilePo.BackToDashboardButton().click()
-    cy.url().should('contains', '/fr/home')
-    dashboardPo.dashboardHeader().should('have.text', 'Mon tableau de bord')
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 })
