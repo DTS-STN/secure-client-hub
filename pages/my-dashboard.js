@@ -6,7 +6,7 @@ import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
 
-export default function Home(props) {
+export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -67,7 +67,7 @@ export async function getServerSideProps({ res, locale }) {
   }
 }
 
-Home.propTypes = {
+MyDashboard.propTypes = {
   /**
    * current locale in the address
    */
