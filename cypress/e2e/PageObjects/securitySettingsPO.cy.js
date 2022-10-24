@@ -25,7 +25,7 @@ function SecurityHeaderEN() {
   dashboardPo
     .dashboardHeader()
     .should('be.visible')
-    .and('have.text', 'Security Settings')
+    .and('have.text', 'Security settings')
 }
 
 function SecurityUrlFR() {
