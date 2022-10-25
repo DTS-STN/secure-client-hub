@@ -41,6 +41,14 @@ function SecurityHeader() {
   return cy.get('[data-testid ="securityContent-test"]>h1')
 }
 
+function SecurityQuestionsLink() {
+  return cy.get('[data-cy ="securityQuestionsLink"]')
+}
+
+function EmploymentInsuranceCode() {
+  return cy.get('[data-cy ="eiAccessCodeLink"]')
+}
+
 module.exports = {
   pageHeader,
   breadcrumbs,
@@ -52,4 +60,6 @@ module.exports = {
   SecurityUrlEN,
   SecurityHeaderFR,
   SecurityHeader,
+  SecurityQuestionsLink,
+  EmploymentInsuranceCode,
 }

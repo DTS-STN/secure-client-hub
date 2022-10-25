@@ -55,7 +55,7 @@ function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {
     }
   })
   Section()
-    .find('ul>li>a')
+    .find('a')
     .should('have.length', NumberOfLinks)
     .and('not.have.length', 0)
     .and('not.have.attr', 'href', '#undefined')
