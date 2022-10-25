@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666709612924" clover="3.2.0">
-  <project timestamp="1666709612924" name="All files">
+<coverage generated="1666712391712" clover="3.2.0">
+  <project timestamp="1666712391712" name="All files">
     <metrics statements="74" coveredstatements="42" conditionals="46" coveredconditionals="25" methods="34" coveredmethods="17" elements="154" coveredelements="84" complexity="0" loc="74" ncloc="74" packages="3" files="17" classes="17"/>
     <package name="components">
       <metrics statements="36" coveredstatements="27" conditionals="30" coveredconditionals="20" methods="16" coveredmethods="7"/>
@@ -26,7 +26,7 @@
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
       </file>
       <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
