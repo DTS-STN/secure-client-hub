@@ -112,4 +112,28 @@ describe('Validate Security Settings page', () => {
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
   })
+
+  it('Validate the "Security Questions" Link in English and French', () => {
+    securityPo
+      .SecurityQuestionsLink()
+      .should('be.visible')
+      .and('not.have.attr', 'href', '#undefined')
+    dashboardPo.FrenchButton().click()
+    securityPo
+      .SecurityQuestionsLink()
+      .should('be.visible')
+      .and('not.have.attr', 'href', '#undefined')
+  })
+
+  it('Validate the "Employment Insurance access code" Link in English and French', () => {
+    securityPo
+      .EmploymentInsuranceCode()
+      .should('be.visible')
+      .and('not.have.attr', 'href', '#undefined')
+    dashboardPo.FrenchButton().click()
+    securityPo
+      .EmploymentInsuranceCode()
+      .should('be.visible')
+      .and('not.have.attr', 'href', '#undefined')
+  })
 })

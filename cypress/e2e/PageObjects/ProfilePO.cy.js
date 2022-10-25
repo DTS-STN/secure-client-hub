@@ -79,7 +79,7 @@ function FirstCard() {
   return cy.get('#homeContent > div')
 }
 function CardHeading() {
-  return cy.get('[data-cy="Cards"]>h2')
+  return cy.get('[data-cy="cards"]>h2')
 }
 function CardButton() {
   return cy.get('[data-cy="viewMoreLessButton"]')
