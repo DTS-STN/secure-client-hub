@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-const profilePo = require('../PageObjects/profilePO.cy')
+const profilePo = require('../PageObjects/ProfilePO.cy')
 
 function dashboardHeader() {
   return cy.get('#my-dashboard-heading')

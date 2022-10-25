@@ -42,8 +42,11 @@ function AllCardTaskSection(sectionName) {
     }
   })
 }
+function ProfileHeader() {
+  return cy.get('[data-testid ="homeContent-test"]>h1')
+}
 
-function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
+function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2')
     if (cardHeader.text() === CardName) {
@@ -51,22 +54,15 @@ function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
       cy.wait(1000)
     }
   })
-
-  dashboardPo.Section().each(($el1, index, $list) => {
-    const header = $el1.find('h3')
-    if (header.text() === SectionName) {
-      cy.wrap($el1).find('ul').should('be.visible')
-      cy.wrap($el1)
-        .find('ul>li>a')
-        .should('have.length', NumberOfLinks)
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-    }
-  })
+  Section()
+    .find('ul>li>a')
+    .should('have.length', NumberOfLinks)
+    .and('not.have.length', 0)
+    .and('not.have.attr', 'href', '#undefined')
 }
 
 function ProfileHeaderEN() {
-  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profile')
+  ProfileHeader().should('be.visible').and('have.text', 'Profile')
 }
 
 function ProfileUrlFR() {
@@ -76,7 +72,7 @@ function ProfileUrlEN() {
   cy.url().should('contains', '/profile')
 }
 function ProfileHeaderFR() {
-  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profil')
+  ProfileHeader().should('be.visible').and('have.text', 'Profil')
 }
 
 function FirstCard() {
@@ -87,6 +83,9 @@ function CardHeading() {
 }
 function CardButton() {
   return cy.get('[data-cy="viewMoreLessButton"]')
+}
+function Section() {
+  return cy.get('[data-cy ="Task"]>div')
 }
 
 module.exports = {
@@ -106,4 +105,6 @@ module.exports = {
   CardHeading,
   CardButton,
   MostReq,
+  ProfileHeader,
+  Section,
 }
