@@ -5,6 +5,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -31,7 +32,8 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ req, res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500
