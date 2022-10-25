@@ -10,18 +10,10 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 
 export default function Layout(props) {
+  const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
 
-  const defaultBreadcrumbs = [
-    {
-      link: t.url_canada_ca,
-      text: t.canada_ca,
-    },
-    {
-      link: t.url_serviceCanada,
-      text: t.serviceCanada,
-    },
-  ]
+  const defaultBreadcrumbs = []
 
   return (
     <>
@@ -32,9 +24,7 @@ export default function Layout(props) {
         lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
-          props.breadCrumbItems
-            ? defaultBreadcrumbs.concat(props.breadCrumbItems)
-            : defaultBreadcrumbs
+          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
         topnavProps={{
           skipToMainPath: '#mainContent',
@@ -46,12 +36,12 @@ export default function Layout(props) {
         menuProps={{
           craPath:
             '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: '/dashboard',
+          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
-          profilePath: '/profile',
-          securityPath: '/security-settings',
+          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+          securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
           signOutPath: '/',
         }}
         searchProps={{
@@ -60,8 +50,12 @@ export default function Layout(props) {
         }}
       />
 
-      <main>
-        <div>{props.children}</div>
+      <main id="mainContent">
+        {display.fullscreen ? (
+          props.children
+        ) : (
+          <LayoutContainer>{props.children}</LayoutContainer>
+        )}
       </main>
 
       <Footer
@@ -99,4 +93,23 @@ Layout.propTypes = {
    * Link of the page in opposite language
    */
   langToggleLink: PropTypes.string,
+  display: PropTypes.shape({
+    /*
+     * Toggle use of Phase (default false)
+     */
+    showPhase: PropTypes.bool,
+    /*
+     * Toggle use of DS header (default false)
+     */
+    hideHeader: PropTypes.bool,
+    /*
+     * Toggle use of DS footer (default false)
+     */
+    hideFooter: PropTypes.bool,
+    /*
+     * Toggle the LayoutContainer from Design System (default on/true)
+     */
+    fullscreen: PropTypes.bool,
+  }),
+  breadCrumbItems: PropTypes.array,
 }

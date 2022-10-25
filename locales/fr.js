@@ -11,6 +11,24 @@ export default {
   // Header
   title: 'accueil',
   //
+  //Heading
+  pageHeading: {
+    title: 'Mon tableau de bord',
+    profile: 'Profil',
+  },
+  // PageLink
+  pageLinkSecurity: 'Vous recherchez les paramètres de sécurité?',
+  securityLinkText: 'paramètres de sécurité',
+  accessYourSecurityText: 'Accéder à vos ',
+  backToDashboard: 'Retour à mon tableau de bord',
+
+  // ViewMoreLessButton
+  viewMoreLessButtonCaption: `Demandes, paiements et réclamations, impôts, rapports et documents, informations personnelles`,
+
+  // ViewMoreLessButtonProfile
+  viewMoreViewLessEI: `Consulter et modifier mes renseignements personnels pour l’assurance-emploi`,
+  viewMoreViewLessCPP: `Consulter et modifier mes renseignements personnels pour le Régime de pensions du Canada`,
+  viewMoreViewLessOAS: `Consulter et modifier mes renseignements personnels pour la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti`,
 
   // Nav
   skipToMainContent: 'Passer au contenu principal',
@@ -92,4 +110,5 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  url_dashboard: '/fr/my-dashboard',
 }
