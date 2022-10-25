@@ -7,11 +7,7 @@ function LookingFor() {
 }
 
 function LookingForSecurityLink() {
-  return cy.get('#link-for-securitysettings')
-}
-
-function LookingForSecurityLinkFrench() {
-  return cy.get('#link-for-paramètresdesécurité')
+  return cy.get("[data-cy ='access-security-page-link']")
 }
 
 function BackToDashboardButton() {
@@ -24,6 +20,10 @@ function Eachsectionheading() {
 
 function MostReqheading() {
   return cy.get('[data-cy ="most-requested"]')
+}
+
+function MostReq() {
+  return cy.get('[data-cy ="most-requested-section"]>div')
 }
 
 function Cards() {
@@ -42,30 +42,11 @@ function AllCardTaskSection(sectionName) {
     }
   })
 }
-
-function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
-  Cards().each(($el, index, $list) => {
-    const cardHeader = $el.find('h2')
-    if (cardHeader.text() === CardName) {
-      cy.wrap($el).find('button').click()
-      cy.wait(1000)
-    }
-  })
-
-  Eachsectionheading().each(($el1, index, $list) => {
-    const header = $el1.find('h3')
-    if (header.text() === SectionName) {
-      cy.wrap($el1).find('ul').should('be.visible')
-      cy.wrap($el1)
-        .find('ul>li>a')
-        .should('have.length', NumberOfLinks)
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-    }
-  })
+function ProfileHeader() {
+  return cy.get('[data-testid ="homeContent-test"]>h1')
 }
 
-function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
+function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2')
     if (cardHeader.text() === CardName) {
@@ -73,21 +54,15 @@ function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
       cy.wait(1000)
     }
   })
-  MostReqheading().each(($el1, index, $list) => {
-    const header = $el1.find('h3')
-    if (header.text() === SectionName) {
-      cy.wrap($el1).find('ul').should('be.visible')
-      cy.wrap($el1)
-        .find('ul>li>a')
-        .should('have.length', NumberOfLinks)
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-    }
-  })
+  Section()
+    .find('a')
+    .should('have.length', NumberOfLinks)
+    .and('not.have.length', 0)
+    .and('not.have.attr', 'href', '#undefined')
 }
 
 function ProfileHeaderEN() {
-  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profile')
+  ProfileHeader().should('be.visible').and('have.text', 'Profile')
 }
 
 function ProfileUrlFR() {
@@ -97,30 +72,31 @@ function ProfileUrlEN() {
   cy.url().should('contains', '/profile')
 }
 function ProfileHeaderFR() {
-  dashboardPo.dashboardHeader().should('be.visible').and('have.text', 'Profil')
+  ProfileHeader().should('be.visible').and('have.text', 'Profil')
 }
 
 function FirstCard() {
   return cy.get('#homeContent > div')
 }
 function CardHeading() {
-  return cy.get('#homeContent:nth-child(1)>div>h2')
+  return cy.get('[data-cy="cards"]>h2')
 }
 function CardButton() {
-  return cy.get('#homeContent > div:nth-child(2)>button')
+  return cy.get('[data-cy="viewMoreLessButton"]')
+}
+function Section() {
+  return cy.get('[data-cy ="Task"]>div')
 }
 
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
-  LookingForSecurityLinkFrench,
   BackToDashboardButton,
   Eachsectionheading,
   Cards,
   AllCardTaskSection,
   ValidateCardTaskListAndSection,
   MostReqheading,
-  ValidateMostRequestedsection,
   ProfileHeaderEN,
   ProfileHeaderFR,
   ProfileUrlFR,
@@ -128,4 +104,7 @@ module.exports = {
   FirstCard,
   CardHeading,
   CardButton,
+  MostReq,
+  ProfileHeader,
+  Section,
 }

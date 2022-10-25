@@ -14,7 +14,7 @@ export default function Card(props) {
   }
 
   return (
-    <div className="border rounded border-gray-300 shadow my-6">
+    <div className="border rounded border-gray-300 shadow my-6" data-cy="cards">
       <h2 className="py-5 px-3 text-4xl font-display font-bold sm:pl-10">
         {props.cardTitle}
       </h2>
@@ -35,14 +35,17 @@ export default function Card(props) {
       {!isOpen ? null : (
         <div className="pb-6">
           {!props.mostReq ? null : (
-            <div className="bg-deep-blue-60d mt-4 pl-2">
+            <div
+              className="bg-deep-blue-60d mt-4 pl-2"
+              data-cy="most-requested-section"
+            >
               <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
             </div>
           )}
-          <div className=" md:columns-2 gap-8 pt-8">
+          <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
             {tasks.map((taskList, index) => {
               return (
-                <div className="mb-4 md:mb-6" key={index}>
+                <div className="mb-4 md:mb-6" key={index} data-cy="Task">
                   <BenefitTasks taskList={taskList} dataCy="task-group-list" />
                 </div>
               )

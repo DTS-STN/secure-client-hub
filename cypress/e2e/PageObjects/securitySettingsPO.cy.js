@@ -22,10 +22,7 @@ function LookingForProfileLink() {
 }
 
 function SecurityHeaderEN() {
-  dashboardPo
-    .dashboardHeader()
-    .should('be.visible')
-    .and('have.text', 'Security settings')
+  SecurityHeader().should('be.visible').and('have.text', 'Security settings')
 }
 
 function SecurityUrlFR() {
@@ -35,10 +32,21 @@ function SecurityUrlEN() {
   cy.url().should('contains', '/security')
 }
 function SecurityHeaderFR() {
-  dashboardPo
-    .dashboardHeader()
+  SecurityHeader()
     .should('be.visible')
     .and('have.text', 'Paramètres de sécurité')
+}
+
+function SecurityHeader() {
+  return cy.get('[data-testid ="securityContent-test"]>h1')
+}
+
+function SecurityQuestionsLink() {
+  return cy.get('[data-cy ="securityQuestionsLink"]')
+}
+
+function EmploymentInsuranceCode() {
+  return cy.get('[data-cy ="eiAccessCodeLink"]')
 }
 
 module.exports = {
@@ -51,4 +59,7 @@ module.exports = {
   SecurityUrlFR,
   SecurityUrlEN,
   SecurityHeaderFR,
+  SecurityHeader,
+  SecurityQuestionsLink,
+  EmploymentInsuranceCode,
 }

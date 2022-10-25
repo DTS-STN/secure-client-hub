@@ -65,7 +65,7 @@ describe('Validate Profile page', () => {
     profilePo.FirstCard().should('be.visible')
   })
 
-  it.skip('Validate that the Card Header is visible on profile page', () => {
+  it('Validate that the Card Header is visible on profile page', () => {
     profilePo.CardHeading().should('be.visible')
   })
 
@@ -74,7 +74,7 @@ describe('Validate Profile page', () => {
     profilePo.CardButton().click()
     dashboardPo.ExpandedCard().should('be.visible')
     profilePo.CardButton().click({ force: true })
-    dashboardPo.FirstCard().should('be.visible')
+    profilePo.FirstCard().should('be.visible')
   })
 
   it('Validate that the "Looking for" section is present on Profile Page', () => {
@@ -116,7 +116,7 @@ describe('Validate Profile page', () => {
   it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(2000)
-    profilePo.LookingForSecurityLinkFrench().click()
+    profilePo.LookingForSecurityLink().click()
     securityPo.SecurityUrlFR()
     securityPo.SecurityHeaderFR()
   })
@@ -135,11 +135,24 @@ describe('Validate Profile page', () => {
     })
   })
 
-  it('Validate that each card has a "Most Requested" section', () => {
-    profilePo.AllCardTaskSection('Most requested')
+  it('Validate the EI card in EN and FR', () => {
+    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '6')
+    dashboardPo.FrenchButton().click()
+    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '6')
   })
 
-  it('Validate that each card has a "Application" section', () => {
-    profilePo.AllCardTaskSection('Applications')
+  it('Validate the CPP card in EN and FR', () => {
+    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '5')
+    dashboardPo.FrenchButton().click()
+    profilePo.ValidateCardTaskListAndSection(
+      'Régime de pensions du Canada',
+      '5'
+    )
+  })
+
+  it('Validate the OAS card in EN and FR', () => {
+    profilePo.ValidateCardTaskListAndSection('Old Age Security', '5')
+    dashboardPo.FrenchButton().click()
+    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '5')
   })
 })
