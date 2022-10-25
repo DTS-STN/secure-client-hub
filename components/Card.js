@@ -33,7 +33,7 @@ export default function Card(props) {
       />
 
       {!isOpen ? null : (
-        <div className="pb-9 ">
+        <div className="pb-6">
           {!props.mostReq ? null : (
             <div
               className="bg-deep-blue-60d mt-4 pl-2"
@@ -45,11 +45,7 @@ export default function Card(props) {
           <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
             {tasks.map((taskList, index) => {
               return (
-                <div
-                  className="mb-4 md:mb-6 md:last:pb-40"
-                  data-cy="Task"
-                  key={index}
-                >
+                <div className="mb-4 md:mb-6" key={index} data-cy="Task">
                   <BenefitTasks taskList={taskList} dataCy="task-group-list" />
                 </div>
               )

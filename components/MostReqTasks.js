@@ -5,7 +5,7 @@ import { icon } from '../lib/loadIcons'
 
 export default function MostReqTasks(props) {
   return (
-    <div className=" px-2 sm:px-8 h-full">
+    <div className=" px-3 h-full">
       <h3
         className="font-display font-bold text-xl text-white pt-6 "
         data-cy={props.dataCy}

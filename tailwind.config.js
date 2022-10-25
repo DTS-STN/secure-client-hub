@@ -20,6 +20,9 @@ module.exports = {
         '32px': ['32px', '35px'],
         '36px': ['36px', '40px'],
       },
+      padding: {
+        15: '60px',
+      },
       colors: {
         'gray': {
           'lighter': '#F3F3F3',
