@@ -3,10 +3,10 @@ import { Heading, Link } from '@dts-stn/service-canada-design-system'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import { getSecurityContent } from '../graphql/mappers/security'
+import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
 import logger from '../lib/logger'
 
-export default function Security(props) {
+export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
@@ -44,13 +44,14 @@ export default function Security(props) {
 }
 
 export async function getStaticProps({ res, locale }) {
-  const content = await getSecurityContent().catch((error) => {
+  const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
     throw error
   })
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/security' : '/security'
+  const langToggleLink =
+    locale === 'en' ? '/fr/security-settings' : '/security-settings'
 
   const t = locale === 'en' ? en : fr
 
@@ -88,7 +89,7 @@ export async function getStaticProps({ res, locale }) {
   }
 }
 
-Security.propTypes = {
+SecuritySettings.propTypes = {
   /**
    * current locale in the address
    */
