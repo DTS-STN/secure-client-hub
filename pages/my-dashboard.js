@@ -28,15 +28,6 @@ export default function MyDashboard(props) {
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <button onClick={openModal}>Open Modal</button>
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-      >
-        <ExitBeta closeModal={closeModal}></ExitBeta>
-      </Modal>
       {props.content.cards.map((card) => {
         return (
           <Card
@@ -47,9 +38,18 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
             taskGroups={card.lists}
             mostReq={true}
+            openModal={openModal}
           />
         )
       })}
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <ExitBeta closeModal={closeModal}></ExitBeta>
+      </Modal>
     </div>
   )
 }

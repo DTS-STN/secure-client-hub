@@ -39,14 +39,22 @@ export default function Card(props) {
               className="bg-deep-blue-60d mt-4 pl-2"
               data-cy="most-requested-section"
             >
-              <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
+              <MostReqTasks
+                openModal={props.openModal}
+                taskListMR={mostReq}
+                dataCy="most-requested"
+              />
             </div>
           )}
           <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
             {tasks.map((taskList, index) => {
               return (
                 <div className="mb-4 md:mb-6" key={index} data-cy="Task">
-                  <BenefitTasks taskList={taskList} dataCy="task-group-list" />
+                  <BenefitTasks
+                    openModal={props.openModal}
+                    taskList={taskList}
+                    dataCy="task-group-list"
+                  />
                 </div>
               )
             })}

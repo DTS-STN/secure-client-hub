@@ -19,19 +19,22 @@ export default function MostReqTasks(props) {
               key={index}
               className="font-display font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
             >
-              <Link href={task.link} passHref>
-                <a className="flex items-center underline text-white hover:text-gray-50">
-                  <FontAwesomeIcon
-                    icon={
-                      icon[task.icon]
-                        ? icon[task.icon]
-                        : icon['question-circle']
-                    }
-                    className="pr-4 text-2xl w-8"
-                  />
-                  <span className="font-normal text-xl">{task.title}</span>
-                </a>
-              </Link>
+              {/* 
+              Ignore link for now to open modal
+              <Link href={task.link} passHref> */}
+              <a
+                onClick={props.openModal}
+                className="flex items-center underline text-white hover:text-gray-50"
+              >
+                <FontAwesomeIcon
+                  icon={
+                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
+                  }
+                  className="pr-4 text-2xl w-8"
+                />
+                <span className="font-normal text-xl">{task.title}</span>
+              </a>
+              {/* </Link> */}
             </li>
           )
         })}

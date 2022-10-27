@@ -6,10 +6,25 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from '../components/ExitBeta'
+
+Modal.setAppElement('#modal-root')
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
 
   return (
     <div id="homeContent" data-testid="homeContent-test">
@@ -24,6 +39,7 @@ export default function Profile(props) {
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
             taskGroups={[card.lists]}
             mostReq={false}
+            openModal={openModal}
           />
         )
       })}
@@ -38,6 +54,14 @@ export default function Profile(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
       ></PageLink>
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <ExitBeta closeModal={closeModal}></ExitBeta>
+      </Modal>
     </div>
   )
 }
