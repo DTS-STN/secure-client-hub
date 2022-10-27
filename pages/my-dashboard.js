@@ -30,7 +30,7 @@ export default function MyDashboard(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <button onClick={openModal}>Open Modal</button>
       <Modal
-        className="flex justify-center bg-black/50 h-full"
+        className="flex justify-center bg-black/75 h-full"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"

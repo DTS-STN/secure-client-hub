@@ -2,7 +2,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function ExitBeta(props) {
   return (
-    <div className="m-8 sm:mx-24 sm:mt-24 p-8 bg-white sm:h-1/3">
+    <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white sm:h-1/3 rounded">
       <p className="text-3xl font-display font-bold">Exit Beta version</p>
       <FontAwesomeIcon onClick={props.closeModal} icon={solid('x')} />
       <p>
