@@ -72,4 +72,5 @@ Card.propTypes = {
   taskGroups: propTypes.array,
   programUniqueId: propTypes.string,
   mostReq: propTypes.bool,
+  openModal: propTypes.func,
 }

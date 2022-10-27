@@ -56,4 +56,5 @@ MostReqTasks.propTypes = {
       })
     ),
   }),
+  openModal: PropTypes.func,
 }

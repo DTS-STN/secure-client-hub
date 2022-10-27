@@ -50,4 +50,5 @@ BenefitTasks.propTypes = {
       })
     ),
   }),
+  openModal: PropTypes.func,
 }
