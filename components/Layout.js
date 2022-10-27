@@ -57,7 +57,7 @@ export default function Layout(props) {
           <LayoutContainer>{props.children}</LayoutContainer>
         )}
       </main>
-
+      <div id="modal-root"></div>
       <Footer
         id="page-footer"
         lang={props.locale}

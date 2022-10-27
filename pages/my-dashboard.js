@@ -5,15 +5,38 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from '../components/ExitBeta'
+
+Modal.setAppElement('#modal-root')
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-
+      <button onClick={openModal}>Open Modal</button>
+      <Modal
+        className="flex justify-center bg-black/50"
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <ExitBeta closeModal={closeModal}></ExitBeta>
+      </Modal>
       {props.content.cards.map((card) => {
         return (
           <Card
