@@ -41,7 +41,9 @@ export default function Layout(props) {
             console.log('todo: implement logout')
           },
           profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-          securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
+          securityPath: `${
+            props.locale === 'en' ? '' : '/fr'
+          }/security-settings`,
           signOutPath: '/',
         }}
         searchProps={{
