@@ -6,14 +6,14 @@ export default function ExitBeta(props) {
   return (
     <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white rounded h-fit">
       <div className="flex justify-between">
-        <p className="text-3xl font-display font-bold">Exit Beta version</p>
+        <p className="text-3xl font-display font-bold">Exit beta version</p>
         <FontAwesomeIcon
           onClick={props.closeModal}
           icon={solid('xmark')}
           size="xl"
         />
       </div>
-      <p className="text-xl font-display py-4">
+      <p className="text-xl font-display py-4 mr-10">
         This page is not yet available in the beta version. You will be
         transferred to the current My Service Canada Account to view this page.
       </p>
