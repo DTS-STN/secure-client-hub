@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666971295111" clover="3.2.0">
-  <project timestamp="1666971295112" name="All files">
-    <metrics statements="85" coveredstatements="47" conditionals="46" coveredconditionals="25" methods="40" coveredmethods="19" elements="171" coveredelements="91" complexity="0" loc="85" ncloc="85" packages="3" files="18" classes="18"/>
+<coverage generated="1666971927747" clover="3.2.0">
+  <project timestamp="1666971927747" name="All files">
+    <metrics statements="89" coveredstatements="47" conditionals="46" coveredconditionals="25" methods="42" coveredmethods="19" elements="177" coveredelements="91" complexity="0" loc="89" ncloc="89" packages="3" files="18" classes="18"/>
     <package name="components">
-      <metrics statements="40" coveredstatements="31" conditionals="30" coveredconditionals="20" methods="18" coveredmethods="9"/>
+      <metrics statements="44" coveredstatements="31" conditionals="30" coveredconditionals="20" methods="20" coveredmethods="9"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="2" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
-        <metrics statements="3" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="5" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="10" coveredstatements="6" conditionals="6" coveredconditionals="2" methods="3" coveredmethods="1"/>
@@ -57,10 +59,12 @@
         <line num="7" count="6" type="stmt"/>
       </file>
       <file name="MostReqTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MostReqTasks.js">
-        <metrics statements="3" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="5" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
       </file>
       <file name="PageLink.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
