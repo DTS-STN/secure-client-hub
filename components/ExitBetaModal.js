@@ -37,7 +37,7 @@ export default function ExitBetaModal(props) {
   )
 }
 
-PrExitBetaModalofile.propTypes = {
+ExitBetaModal.propTypes = {
   /**
    * Function used to control closing the modal for X icon and secondary button
    */
