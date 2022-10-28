@@ -8,9 +8,9 @@ expect.extend(toHaveNoViolations)
 describe('Exit Beta Modal', () => {
   it('renders Exit Beta Modal', () => {
     render(<ExitBetaModal closeModal={() => {}} closeModalAria={'close'} />)
-    const title = screen.getByText('Exit beta version')
+    const title = screen.getByText('Exiting beta version')
     const caption = screen.getByText(
-      'This page is not yet available in the beta version. You will be transferred to the current My Service Canada Account to view this page.'
+      'Thank you for trying the beta version. You are now returning to My Service Canada Account home page.'
     )
     expect(title).toBeInTheDocument()
     expect(caption).toBeInTheDocument()

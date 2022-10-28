@@ -12,7 +12,7 @@ export default function ExitBetaModal(props) {
           role="heading"
           aria-level="1"
         >
-          Exit beta version
+          Exiting beta version
         </div>
         <button
           type="button"
