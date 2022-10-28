@@ -1,6 +1,7 @@
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
+import PropTypes from 'prop-types'
 
 export default function ExitBeta(props) {
   return (
@@ -34,4 +35,16 @@ export default function ExitBeta(props) {
       </div>
     </div>
   )
+}
+
+Profile.propTypes = {
+  /**
+   * Function used to control closing the modal for X icon and secondary button
+   */
+  closeModal: PropTypes.func,
+
+  /*
+   * Area label for X icon in top right of modal
+   */
+  closeModalAria: PropTypes.string,
 }
