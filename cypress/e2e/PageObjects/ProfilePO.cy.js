@@ -23,7 +23,7 @@ function MostReqheading() {
 }
 
 function MostReq() {
-  return cy.get('[data-cy ="most-requested-section"]>div')
+  return cy.get('[data-cy ="viewMoreLessButton"]')
 }
 
 function Cards() {
@@ -51,7 +51,7 @@ function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {
     const cardHeader = $el.find('h2')
     if (cardHeader.text() === CardName) {
       cy.wrap($el).find('button').click()
-      cy.wait(1000)
+      cy.wait(500)
     }
   })
   Section()
@@ -88,6 +88,13 @@ function Section() {
   return cy.get('[data-cy ="Task"]>div')
 }
 
+function ClickAllCardButtons() {
+  CardButton().each(($el, index, $list) => {
+    cy.wrap($el).click()
+    cy.wait(1000)
+  })
+}
+
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
@@ -107,4 +114,5 @@ module.exports = {
   MostReq,
   ProfileHeader,
   Section,
+  ClickAllCardButtons,
 }
