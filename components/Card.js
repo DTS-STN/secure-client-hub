@@ -15,7 +15,7 @@ export default function Card(props) {
 
   return (
     <div className="border rounded border-gray-300 shadow my-6" data-cy="cards">
-      <h2 className="py-5 px-3 text-4xl font-display font-bold sm:pl-10">
+      <h2 className="py-5 px-2 sm:px-8 md:px-15 text-4xl font-display font-bold ">
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton
@@ -29,20 +29,23 @@ export default function Card(props) {
         ariaExpanded={isOpen.toString()}
         icon={isOpen}
         caption={props.viewMoreLessCaption}
-        className="py-5 px-2 sm:px-10"
+        className="pb-6 pt-1 md:pb-12 md:pt-5 px-2 sm:px-8 md:px-15"
       />
 
       {!isOpen ? null : (
         <div className="pb-6">
           {!props.mostReq ? null : (
             <div
-              className="bg-deep-blue-60d mt-4 pl-2"
+              className="bg-deep-blue-60d mt-4"
               data-cy="most-requested-section"
             >
               <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
             </div>
           )}
-          <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+          <div
+            className=" md:columns-2 gap-5 md:gap-6 pt-8"
+            data-cy="task-list"
+          >
             {tasks.map((taskList, index) => {
               return (
                 <div className="mb-4 md:mb-6" key={index} data-cy="Task">

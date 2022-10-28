@@ -5,14 +5,14 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 export default function ViewMoreLessButton(props) {
   return (
     <button
-      className={'text-xl leading-8 text-deep-blue-60d  ' + props.className}
+      className={'text-xl leading-8 text-deep-blue-60d ' + props.className}
       data-cy={props.dataCy}
       onClick={props.onClick}
       id={props.id}
       data-testid={props.dataTestid}
       aria-expanded={props.ariaExpanded ?? undefined}
     >
-      <div className="flex sm:items-center">
+      <div className="flex sm:items-center font-body">
         {props.icon ? (
           <FontAwesomeIcon
             icon={solid('circle-minus')}
