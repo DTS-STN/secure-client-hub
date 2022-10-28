@@ -26,7 +26,7 @@ export default function ExitBetaModal(props) {
         Thank you for trying the beta version. You are now returning to My
         Service Canada Account home page.
       </p>
-      <div className="md:flex mt-8 md:space-x-12 space-y-4 md:space-y-0">
+      <div className="md:flex mt-8 md:space-x-12 space-y-6 md:space-y-0">
         <Button
           className="w-full block md:w-fit"
           id={'modal-btn-close'}
