@@ -17,11 +17,9 @@ export default function Layout(props) {
 
   const defaultBreadcrumbs = []
 
-  useEffect[
-    () => {
-      Modal.setAppElement('#modal-root')
-    }
-  ]
+  useEffect(() => {
+    Modal.setAppElement('#modal-root')
+  }, [])
 
   return (
     <>
