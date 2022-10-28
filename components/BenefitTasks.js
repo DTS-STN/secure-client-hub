@@ -19,6 +19,7 @@ export default function BenefitTasks(props) {
               <Link href={task.link} passHref> */}
               <a
                 onClick={props.openModal}
+                href={'/'}
                 className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
               >
                 <FontAwesomeIcon

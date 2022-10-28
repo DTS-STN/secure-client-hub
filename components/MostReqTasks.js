@@ -24,6 +24,7 @@ export default function MostReqTasks(props) {
               <Link href={task.link} passHref> */}
               <a
                 onClick={props.openModal}
+                href={'/'}
                 className="flex items-center underline text-white hover:text-gray-50"
               >
                 <FontAwesomeIcon
