@@ -1,7 +1,7 @@
 import clientQuery from '../client'
 
-export async function getSecurityContent() {
-  const query = require('../queries/security.graphql')
+export async function getSecuritySettingsContent() {
+  const query = require('../queries/security-settings.graphql')
   const response = await clientQuery(query)
 
   const enLookingForFragment = findFragmentByScId(

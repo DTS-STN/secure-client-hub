@@ -26,10 +26,10 @@ function SecurityHeaderEN() {
 }
 
 function SecurityUrlFR() {
-  cy.url().should('contains', '/fr/security')
+  cy.url().should('contains', '/fr/security-settings')
 }
 function SecurityUrlEN() {
-  cy.url().should('contains', '/security')
+  cy.url().should('contains', '/security-settings')
 }
 function SecurityHeaderFR() {
   SecurityHeader()
