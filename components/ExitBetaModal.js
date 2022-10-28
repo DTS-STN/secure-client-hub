@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 export default function ExitBetaModal(props) {
   return (
-    <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white rounded h-fit">
+    <div className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit">
       <div className="flex justify-between">
         <div
           className="text-3xl font-display font-bold"
@@ -26,14 +26,16 @@ export default function ExitBetaModal(props) {
         This page is not yet available in the beta version. You will be
         transferred to the current My Service Canada Account to view this page.
       </p>
-      <div className="flex mt-8 space-x-12">
+      <div className="md:flex mt-8 md:space-x-12 space-y-4 md:space-y-0">
         <Button
+          className="w-full block md:w-fit"
           id={'modal-btn-close'}
           styling="secondary"
           onClick={props.closeModal}
           text="Stay on beta version"
         />
         <Button
+          className="w-full block md:w-fit"
           id={'modal-btn-continue'}
           styling="primary"
           text="Continue to page"
