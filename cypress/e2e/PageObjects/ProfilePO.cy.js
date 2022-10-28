@@ -91,7 +91,7 @@ function Section() {
 function ClickAllCardButtons() {
   CardButton().each(($el, index, $list) => {
     cy.wrap($el).click()
-    cy.wait(1000)
+    //cy.wait(200)
   })
 }
 
