@@ -8,7 +8,7 @@ import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from '../components/ExitBeta'
+import ExitBeta from '../components/ExitBetaModal'
 
 Modal.setAppElement('#modal-root')
 

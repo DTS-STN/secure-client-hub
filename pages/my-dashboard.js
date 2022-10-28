@@ -7,7 +7,7 @@ import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from '../components/ExitBeta'
+import ExitBeta from '../components/ExitBetaModal'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
