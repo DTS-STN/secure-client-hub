@@ -23,8 +23,8 @@ export default function ExitBetaModal(props) {
         </button>
       </div>
       <p className="text-xl font-display py-4 mr-10">
-        This page is not yet available in the beta version. You will be
-        transferred to the current My Service Canada Account to view this page.
+        Thank you for trying the beta version. You are now returning to My
+        Service Canada Account home page.
       </p>
       <div className="md:flex mt-8 md:space-x-12 space-y-4 md:space-y-0">
         <Button
