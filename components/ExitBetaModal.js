@@ -38,7 +38,7 @@ export default function ExitBetaModal(props) {
           className="w-full block md:w-fit"
           id={'modal-btn-continue'}
           styling="primary"
-          text="Continue to page"
+          text="Exit beta version"
         />
       </div>
     </div>
