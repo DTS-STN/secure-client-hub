@@ -47,7 +47,7 @@ export default function Profile(props) {
         lookingForText={t.pageLinkSecurity}
         accessText={t.accessYourSecurityText}
         linkText={t.securityLinkText}
-        href="/security"
+        href="/security-settings"
         linkID="link-id"
         dataCy="access-security-page-link"
         buttonHref={t.url_dashboard}
