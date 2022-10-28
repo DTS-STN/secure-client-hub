@@ -6,6 +6,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
+import BenefitTasks from './../components/BenefitTasks'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -15,6 +16,7 @@ export default function Profile(props) {
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
+        const tasks = [card.lists]
         return (
           <Card
             key={card.id}
@@ -22,9 +24,20 @@ export default function Profile(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={[card.lists]}
-            mostReq={false}
-          />
+          >
+            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+              {tasks.map((taskList, index) => {
+                return (
+                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                    <BenefitTasks
+                      taskList={taskList}
+                      dataCy="task-group-list"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </Card>
         )
       })}
       <PageLink
