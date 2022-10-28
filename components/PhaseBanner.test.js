@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import PhaseBanner from './PhaseBanner'
 
-expecextend(toHaveNoViolations)
+expect.extend(toHaveNoViolations)
 
 describe('PhaseBanner', () => {
   it('renders PhaseBanner', () => {
