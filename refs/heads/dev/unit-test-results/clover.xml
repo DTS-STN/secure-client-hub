@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666978578862" clover="3.2.0">
-  <project timestamp="1666978578863" name="All files">
+<coverage generated="1666985318540" clover="3.2.0">
+  <project timestamp="1666985318540" name="All files">
     <metrics statements="74" coveredstatements="42" conditionals="46" coveredconditionals="25" methods="34" coveredmethods="17" elements="154" coveredelements="84" complexity="0" loc="74" ncloc="74" packages="3" files="17" classes="17"/>
     <package name="components">
       <metrics statements="36" coveredstatements="27" conditionals="30" coveredconditionals="20" methods="16" coveredmethods="7"/>
@@ -13,7 +13,7 @@
         <metrics statements="3" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="10" coveredstatements="6" conditionals="6" coveredconditionals="2" methods="3" coveredmethods="1"/>
@@ -53,7 +53,7 @@
         <metrics statements="3" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
       </file>
       <file name="PageLink.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
