@@ -115,4 +115,5 @@ export default {
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   url_dashboard: '/my-dashboard',
+  close_modal: 'Close modal',
 }

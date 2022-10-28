@@ -7,11 +7,13 @@ export default function ExitBeta(props) {
     <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white rounded h-fit">
       <div className="flex justify-between">
         <p className="text-3xl font-display font-bold">Exit beta version</p>
-        <FontAwesomeIcon
+        <button
+          type="button"
+          aria-label={props.closeModalAria}
           onClick={props.closeModal}
-          icon={solid('xmark')}
-          size="xl"
-        />
+        >
+          <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
+        </button>
       </div>
       <p className="text-xl font-display py-4 mr-10">
         This page is not yet available in the beta version. You will be

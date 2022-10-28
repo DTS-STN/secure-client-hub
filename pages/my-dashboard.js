@@ -46,7 +46,7 @@ export default function MyDashboard(props) {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
-        <ExitBeta closeModal={closeModal}></ExitBeta>
+        <ExitBeta closeModal={closeModal} closeModalAria={t.close_modal} />
       </Modal>
     </div>
   )
