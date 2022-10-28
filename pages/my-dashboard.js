@@ -9,8 +9,6 @@ import Modal from 'react-modal'
 import React from 'react'
 import ExitBeta from '../components/ExitBeta'
 
-Modal.setAppElement('#modal-root')
-
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr

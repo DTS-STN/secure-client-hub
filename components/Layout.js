@@ -5,6 +5,8 @@ import {
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
+import Modal from 'react-modal'
+import { useEffect } from 'react'
 
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -14,6 +16,12 @@ export default function Layout(props) {
   const t = props.locale === 'en' ? en : fr
 
   const defaultBreadcrumbs = []
+
+  useEffect[
+    () => {
+      Modal.setAppElement('#modal-root')
+    }
+  ]
 
   return (
     <>
