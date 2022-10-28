@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
 
-export default function ExitBeta(props) {
+export default function ExitBetaModal(props) {
   return (
     <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white rounded h-fit">
       <div className="flex justify-between">
@@ -37,7 +37,7 @@ export default function ExitBeta(props) {
   )
 }
 
-Profile.propTypes = {
+PrExitBetaModalofile.propTypes = {
   /**
    * Function used to control closing the modal for X icon and secondary button
    */
