@@ -7,7 +7,13 @@ export default function ExitBetaModal(props) {
   return (
     <div className="m-8 sm:mx-24 sm:mt-24 p-16 bg-white rounded h-fit">
       <div className="flex justify-between">
-        <p className="text-3xl font-display font-bold">Exit beta version</p>
+        <div
+          className="text-3xl font-display font-bold"
+          role="heading"
+          aria-level="1"
+        >
+          Exit beta version
+        </div>
         <button
           type="button"
           aria-label={props.closeModalAria}

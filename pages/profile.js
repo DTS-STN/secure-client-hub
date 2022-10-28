@@ -58,7 +58,7 @@ export default function Profile(props) {
         className="flex justify-center bg-black/75 h-full"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
+        contentLabel={t.aria_exit_beta_modal}
       >
         <ExitBeta closeModal={closeModal} closeModalAria={t.close_modal} />
       </Modal>
