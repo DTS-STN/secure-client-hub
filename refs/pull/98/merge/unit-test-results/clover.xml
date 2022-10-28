@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666971927747" clover="3.2.0">
-  <project timestamp="1666971927747" name="All files">
+<coverage generated="1666972642731" clover="3.2.0">
+  <project timestamp="1666972642732" name="All files">
     <metrics statements="89" coveredstatements="47" conditionals="46" coveredconditionals="25" methods="42" coveredmethods="19" elements="177" coveredelements="91" complexity="0" loc="89" ncloc="89" packages="3" files="18" classes="18"/>
     <package name="components">
       <metrics statements="44" coveredstatements="31" conditionals="30" coveredconditionals="20" methods="20" coveredmethods="9"/>
@@ -39,7 +39,7 @@
       <file name="ExitBetaModal.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBetaModal.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
         <metrics statements="9" coveredstatements="8" conditionals="14" coveredconditionals="12" methods="5" coveredmethods="2"/>
