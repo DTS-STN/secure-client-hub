@@ -5,7 +5,7 @@ import {
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
-
+import { signOut } from 'next-auth/react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -37,9 +37,7 @@ export default function Layout(props) {
           craPath:
             '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
           dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
-          onSignOut: () => {
-            console.log('todo: implement logout')
-          },
+          onSignOut: () => signOut({ callbackUrl: '/' }),
           profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
           securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
           signOutPath: '/',
