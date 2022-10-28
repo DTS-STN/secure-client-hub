@@ -2,20 +2,22 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-export default function BenefitTasks(props) {
+export default function ProfileTasks(props) {
   return (
-    <div className="pl-2 sm:pl-8 md:pl-15 inline-block w-full">
-      <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
-        {props.taskList.title}
-      </h3>
-      <ul className="w-full py-6 pl-2 space-y-5 md:space-y-6">
+    <>
+      <ul className="w-full gap-x-8 grid md:grid-cols-2 items-center">
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-body font-bold">
+            <li
+              key={index}
+              className="font-body font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
+            >
               <Link href={task.link} passHref>
-                <a className="flex items-center underline text-deep-blue-dark hover:text-blue-hover">
+                <a
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                  data-cy="task-link"
+                >
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
@@ -27,6 +29,7 @@ export default function BenefitTasks(props) {
                   <span
                     aria-label={task.areaLabel}
                     className="font-normal text-xl"
+                    data-cy="task-item"
                   >
                     {task.title}
                   </span>
@@ -36,14 +39,15 @@ export default function BenefitTasks(props) {
           )
         })}
       </ul>
-    </div>
+    </>
   )
 }
 
-BenefitTasks.propTypes = {
-  taskList: PropTypes.shape({
+ProfileTasks.propTypes = {
+  dataCy: PropTypes.string,
+  taskListMR: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    dataCy: PropTypes.string,
+
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,

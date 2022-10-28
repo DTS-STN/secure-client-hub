@@ -31,12 +31,15 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
           >
             <div
-              className="bg-deep-blue-60d mt-4 pl-2"
+              className="bg-deep-blue-60d mt-4"
               data-cy="most-requested-section"
             >
               <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
             </div>
-            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+            <div
+              className=" md:columns-2 gap-5 md:gap-6 pt-8"
+              data-cy="task-list"
+            >
               {tasks.map((taskList, index) => {
                 return (
                   <div className="mb-4 md:mb-6" key={index} data-cy="Task">

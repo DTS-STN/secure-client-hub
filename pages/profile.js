@@ -6,7 +6,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
-import BenefitTasks from './../components/BenefitTasks'
+import ProfileTasks from './../components/ProfileTasks'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -25,15 +25,17 @@ export default function Profile(props) {
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
           >
-            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+            <div
+              className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
+              data-cy="task-list"
+            >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
-                    <BenefitTasks
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                    />
-                  </div>
+                  <ProfileTasks
+                    key={index}
+                    taskList={taskList}
+                    dataCy="profile-task-group-list"
+                  />
                 )
               })}
             </div>
