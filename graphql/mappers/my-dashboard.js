@@ -19,7 +19,8 @@ export async function getMyDashboardContent() {
                 title: list.scTitleEn,
                 tasks: list.scItems.map((item) => {
                   return {
-                    title: item.scTitleEn,
+                    title: item.scLinkTextEn,
+                    areaLabel: item.scLinkTextAssistiveEn,
                     link: item.scDestinationURLEn,
                     icon: item.scIconCSS,
                   }
@@ -53,7 +54,8 @@ export async function getMyDashboardContent() {
                 title: list.scTitleFr,
                 tasks: list.scItems.map((item) => {
                   return {
-                    title: item.scTitleFr,
+                    title: item.scLinkTextFr,
+                    areaLabel: item.scLinkTextAssistiveFr,
                     link: item.scDestinationURLFr,
                     icon: item.scIconCSS,
                   }

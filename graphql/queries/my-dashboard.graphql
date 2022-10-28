@@ -38,8 +38,10 @@
                                     scTitleFr
                                     scItems {
                                         ... on SCHTaskv1Model{
-                                            scTitleEn
-                                            scTitleFr
+                                            scLinkTextEn
+                                            scLinkTextFr
+                                            scLinkTextAssistiveEn
+                                            scLinkTextAssistiveFr
                                             scDestinationURLEn
                                             scDestinationURLFr
                                             scIconCSS
