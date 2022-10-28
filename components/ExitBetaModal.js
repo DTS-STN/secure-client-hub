@@ -21,11 +21,16 @@ export default function ExitBeta(props) {
       </p>
       <div className="flex mt-8 space-x-12">
         <Button
+          id={'modal-btn-close'}
           styling="secondary"
           onClick={props.closeModal}
-          text="Stay on bet version"
+          text="Stay on beta version"
         />
-        <Button styling="primary" text="Continue to page" />
+        <Button
+          id={'modal-btn-continue'}
+          styling="primary"
+          text="Continue to page"
+        />
       </div>
     </div>
   )

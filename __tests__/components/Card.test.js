@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import Card from './Card'
+import Card from '../../components/Card'
 
 expect.extend(toHaveNoViolations)
 
