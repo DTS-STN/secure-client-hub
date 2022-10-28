@@ -14,23 +14,25 @@ export default function BenefitTasks(props) {
         {props.taskList.tasks.map((task, index) => {
           return (
             <li key={index} className="font-display font-bold">
-              {/* 
-              Ignore link for now to open modal
-              <Link href={task.link} passHref> */}
-              <a
-                onClick={props.openModal}
-                href={'/'}
-                className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
-              >
-                <FontAwesomeIcon
-                  icon={
-                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
-                  }
-                  className="pr-4 text-2xl w-8"
-                />
-                <span className="font-normal text-xl">{task.title}</span>
-              </a>
-              {/* </Link> */}
+              <Link href={task.link} passHref>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal()
+                  }}
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                >
+                  <FontAwesomeIcon
+                    icon={
+                      icon[task.icon]
+                        ? icon[task.icon]
+                        : icon['question-circle']
+                    }
+                    className="pr-4 text-2xl w-8"
+                  />
+                  <span className="font-normal text-xl">{task.title}</span>
+                </a>
+              </Link>
             </li>
           )
         })}
