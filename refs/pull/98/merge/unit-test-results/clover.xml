@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1666972988620" clover="3.2.0">
-  <project timestamp="1666972988620" name="All files">
+<coverage generated="1666978630224" clover="3.2.0">
+  <project timestamp="1666978630224" name="All files">
     <metrics statements="89" coveredstatements="47" conditionals="46" coveredconditionals="25" methods="42" coveredmethods="19" elements="177" coveredelements="91" complexity="0" loc="89" ncloc="89" packages="3" files="18" classes="18"/>
     <package name="components">
       <metrics statements="44" coveredstatements="31" conditionals="30" coveredconditionals="20" methods="20" coveredmethods="9"/>
@@ -50,8 +50,8 @@
         <line num="21" count="4" type="stmt"/>
         <line num="24" count="4" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
-        <line num="85" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -134,18 +134,18 @@
         <line num="104" count="0" type="stmt"/>
         <line num="115" count="0" type="stmt"/>
       </file>
-      <file name="security.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/security.js">
+      <file name="security-settings.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/security-settings.js">
         <metrics statements="10" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="12" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages.api">
