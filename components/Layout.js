@@ -18,7 +18,6 @@ export default function Layout(props) {
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
-
       <Header
         id="header"
         lang={props.locale}
@@ -37,7 +36,9 @@ export default function Layout(props) {
           craPath:
             '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
           dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
-          onSignOut: () => signOut({ callbackUrl: '/' }),
+          onSignOut: () => {
+            signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
+          },
           profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
           securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
           signOutPath: '/',
