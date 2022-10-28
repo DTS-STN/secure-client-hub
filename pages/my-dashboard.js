@@ -5,6 +5,8 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
+import BenefitTasks from './../components/BenefitTasks'
+import MostReqTasks from './../components/MostReqTasks'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -15,6 +17,11 @@ export default function MyDashboard(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
       {props.content.cards.map((card) => {
+        var tasks = card.lists
+        const mostReq = card.lists[0]
+        if (props.mostReq) {
+          tasks = props.taskGroups.slice(1, card.lists.length)
+        }
         return (
           <Card
             key={card.id}
@@ -22,9 +29,26 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={card.lists}
-            mostReq={true}
-          />
+          >
+            <div
+              className="bg-deep-blue-60d mt-4 pl-2"
+              data-cy="most-requested-section"
+            >
+              <MostReqTasks taskListMR={mostReq} dataCy="most-requested" />
+            </div>
+            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+              {tasks.map((taskList, index) => {
+                return (
+                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                    <BenefitTasks
+                      taskList={taskList}
+                      dataCy="task-group-list"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </Card>
         )
       })}
     </div>
