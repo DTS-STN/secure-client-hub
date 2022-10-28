@@ -5,6 +5,7 @@ import {
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
+import PhaseBanner from './PhaseBanner'
 
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -18,7 +19,13 @@ export default function Layout(props) {
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
-
+      <PhaseBanner
+        bannerBoldText={t.bannerBoldText}
+        bannerText={t.bannerText}
+        bannerLink={t.bannerLink}
+        bannerLinkHref={t.bannerLinkHref}
+        bannerButtonText={t.bannerButtonText}
+      ></PhaseBanner>
       <Header
         id="header"
         lang={props.locale}
