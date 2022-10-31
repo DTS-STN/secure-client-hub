@@ -15,10 +15,10 @@ export async function getProfileContent() {
             id: fragment.scId,
             title: fragment.scTitleEn,
             lists: {
-              title: '',
               tasks: fragment.schTasks.map((list) => {
                 return {
-                  title: list.scTitleEn,
+                  title: list.scLinkTextEn,
+                  areaLabel: list.scLinkTextAssistiveEn,
                   link: list.scDestinationURLEn,
                   icon: list.scIconCSS,
                 }
@@ -46,10 +46,10 @@ export async function getProfileContent() {
             id: fragment.scId,
             title: fragment.scTitleFr,
             lists: {
-              title: '',
               tasks: fragment.schTasks.map((list) => {
                 return {
-                  title: list.scTitleFr,
+                  title: list.scLinkTextFr,
+                  areaLabel: list.scLinkTextAssistiveFr,
                   link: list.scDestinationURLFr,
                   icon: list.scIconCSS,
                 }

@@ -14,8 +14,10 @@
                             scTitleFr
                             schTasks {
                                 scId
-                                scTitleEn
-                                scTitleFr
+                                scLinkTextEn
+                                scLinkTextFr
+                                scLinkTextAssistiveEn
+                                scLinkTextAssistiveFr
                                 scIconCSS
                                 scDestinationURLEn
                                 scDestinationURLFr

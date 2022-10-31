@@ -30,7 +30,7 @@ describe('My Dashboard page', () => {
   const content = {
     heading: 'heading',
     paragraph: 'paragraph',
-    cards: [{ id: 'test', title: 'title', lists: 'lists' }],
+    cards: [{ id: 'test', title: 'title', lists: [] }],
   }
 
   beforeEach(() => {
