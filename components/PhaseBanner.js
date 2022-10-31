@@ -29,7 +29,7 @@ export default function PhaseBanner(props) {
         <Button
           styling="primary"
           text={props.bannerButtonText}
-          className="max-h-11 my-auto text-sm"
+          className="max-h-11 my-auto text-sm w-full justify-center px-auto sm:w-auto"
         ></Button>
       </div>
     </div>
