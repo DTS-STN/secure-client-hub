@@ -15,7 +15,13 @@ export default function BenefitTasks(props) {
           return (
             <li key={index} className="font-display font-bold">
               <Link href={task.link} passHref>
-                <a className="flex items-center underline text-deep-blue-dark hover:text-blue-hover">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal()
+                  }}
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                >
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
@@ -24,7 +30,12 @@ export default function BenefitTasks(props) {
                     }
                     className="pr-4 text-2xl w-8"
                   />
-                  <span className="font-normal text-xl">{task.title}</span>
+                  <span
+                    aria-label={task.areaLabel}
+                    className="font-normal text-xl"
+                  >
+                    {task.title}
+                  </span>
                 </a>
               </Link>
             </li>
@@ -42,9 +53,11 @@ BenefitTasks.propTypes = {
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
+        areaLabel: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         icon: PropTypes.string.isRequired,
       })
     ),
   }),
+  openModal: PropTypes.func,
 }

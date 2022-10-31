@@ -20,7 +20,13 @@ export default function MostReqTasks(props) {
               className="font-display font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
             >
               <Link href={task.link} passHref>
-                <a className="flex items-center underline text-white hover:text-gray-50">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal()
+                  }}
+                  className="flex items-center underline text-white hover:text-gray-50"
+                >
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
@@ -29,7 +35,12 @@ export default function MostReqTasks(props) {
                     }
                     className="pr-4 text-2xl w-8"
                   />
-                  <span className="font-normal text-xl">{task.title}</span>
+                  <span
+                    aria-label={task.areaLabel}
+                    className="font-normal text-xl"
+                  >
+                    {task.title}
+                  </span>
                 </a>
               </Link>
             </li>
@@ -48,9 +59,11 @@ MostReqTasks.propTypes = {
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
+        areaLabel: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         icon: PropTypes.string.isRequired,
       })
     ),
   }),
+  openModal: PropTypes.func,
 }
