@@ -15,7 +15,13 @@ export default function BenefitTasks(props) {
           return (
             <li key={index} className="font-display font-bold">
               <Link href={task.link} passHref>
-                <a className="flex items-center underline text-deep-blue-dark hover:text-blue-hover">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal()
+                  }}
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                >
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
@@ -53,4 +59,5 @@ BenefitTasks.propTypes = {
       })
     ),
   }),
+  openModal: PropTypes.func,
 }
