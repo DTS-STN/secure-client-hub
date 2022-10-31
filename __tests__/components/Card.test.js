@@ -12,7 +12,6 @@ describe('Card', () => {
         cardTitle={`Card Title`}
         viewMoreLessCaption={`Card Caption`}
         locale="en"
-        taskGroups={[]}
         programUniqueId={'test'}
       />
     )
@@ -28,7 +27,6 @@ describe('Card', () => {
         cardTitle={`Card Title`}
         viewMoreLessCaption={`Card Caption`}
         locale="en"
-        taskGroups={[]}
         programUniqueId={'test'}
       />
     )

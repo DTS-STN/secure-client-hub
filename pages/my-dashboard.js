@@ -5,6 +5,8 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import logger from '../lib/logger'
+import BenefitTasks from './../components/BenefitTasks'
+import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
@@ -27,6 +29,11 @@ export default function MyDashboard(props) {
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       {props.content.cards.map((card) => {
+        var tasks = card.lists
+        const mostReq = card.lists[0]
+        if (props.mostReq) {
+          tasks = props.taskGroups.slice(1, card.lists.length)
+        }
         return (
           <Card
             key={card.id}
@@ -36,8 +43,31 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
             taskGroups={card.lists}
             mostReq={true}
-            openModal={openModal}
-          />
+          >
+            <div
+              className="bg-deep-blue-60d mt-4 pl-2"
+              data-cy="most-requested-section"
+            >
+              <MostReqTasks
+                taskListMR={mostReq}
+                dataCy="most-requested"
+                openModal={openModal}
+              />
+            </div>
+            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+              {tasks.map((taskList, index) => {
+                return (
+                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                    <BenefitTasks
+                      taskList={taskList}
+                      dataCy="task-group-list"
+                      openModal={openModal}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </Card>
         )
       })}
       <Modal

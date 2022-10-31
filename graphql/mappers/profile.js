@@ -15,7 +15,6 @@ export async function getProfileContent() {
             id: fragment.scId,
             title: fragment.scTitleEn,
             lists: {
-              title: '',
               tasks: fragment.schTasks.map((list) => {
                 return {
                   title: list.scLinkTextEn,
@@ -47,7 +46,6 @@ export async function getProfileContent() {
             id: fragment.scId,
             title: fragment.scTitleFr,
             lists: {
-              title: '',
               tasks: fragment.schTasks.map((list) => {
                 return {
                   title: list.scLinkTextFr,
