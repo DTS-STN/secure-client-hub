@@ -71,7 +71,7 @@ describe('My Dashboard page', () => {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
-            title: 'Mon dossier Service Canada - Tableau de Bord',
+            title: 'Mon dossier Service Canada - Tableau de Bordz',
           },
         },
       },
