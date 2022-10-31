@@ -85,7 +85,7 @@ function CardButton() {
   return cy.get('[data-cy="viewMoreLessButton"]')
 }
 function Section() {
-  return cy.get('[data-cy ="Task"]>div')
+  return cy.get('[data-cy ="Task"]')
 }
 
 module.exports = {
