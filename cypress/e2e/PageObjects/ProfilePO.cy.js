@@ -93,6 +93,7 @@ function ClickAllCardButtons() {
     cy.wrap($el).click()
     //cy.wait(200)
   })
+  return cy.get('[data-cy ="task"]')
 }
 
 module.exports = {

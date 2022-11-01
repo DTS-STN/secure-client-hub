@@ -6,7 +6,10 @@ import { icon } from '../lib/loadIcons'
 export default function ProfileTasks(props) {
   return (
     <>
-      <ul className="w-full gap-x-8 grid md:grid-cols-2 items-center">
+      <ul
+        className="w-full gap-x-8 grid md:grid-cols-2 items-center"
+        data-cy="task"
+      >
         {props.taskList.tasks.map((task, index) => {
           return (
             <li
