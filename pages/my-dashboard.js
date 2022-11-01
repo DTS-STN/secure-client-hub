@@ -29,11 +29,8 @@ export default function MyDashboard(props) {
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       {props.content.cards.map((card) => {
-        var tasks = card.lists
         const mostReq = card.lists[0]
-        if (props.mostReq) {
-          tasks = props.taskGroups.slice(1, card.lists.length)
-        }
+        var tasks = card.lists.slice(1, card.lists.length)
         return (
           <Card
             key={card.id}
@@ -41,8 +38,6 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={card.lists}
-            mostReq={true}
           >
             <div
               className="bg-deep-blue-60d mt-4"
