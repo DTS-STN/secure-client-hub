@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/404.js</title>
+    <title>Code coverage report for components/ProfileTasks.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> 404.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> ProfileTasks.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -124,46 +124,20 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,88 +185,66 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Link from 'next/link'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
+import { icon } from '../lib/loadIcons'
 &nbsp;
-export default function Custom404() {
+export default function ProfileTasks(props) {
   return (
-    &lt;div className="grid md:grid-cols-2 sm:grid-cols-1 items-center justify-center overflow-visible md:h-96 sm:h-screen mx-2 my-2 px-20"&gt;
-      &lt;div className="error-404"&gt;
-        &lt;h1 className="text-2xl"&gt;{"We couldn't find that Web page"}&lt;/h1&gt;
-        &lt;h2&gt;An error 404 occured on server&lt;/h2&gt;
-        &lt;p&gt;
-          {
-            "We're sorry you ended up here. Sometimes a page gets moved or deleted, but hopefully we can help you find what you're looking for. What next?"
-          }
-        &lt;/p&gt;
-        &lt;ul&gt;
-          &lt;li&gt;
-            Return to the{' '}
-            &lt;Link href="/"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;home page&lt;/a&gt;
-            &lt;/Link&gt;
-            ;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link href="https://www.canada.ca/en/contact.html"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;Contact us&lt;/a&gt;
-            &lt;/Link&gt;
-            {" and we'll help you out."}
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-      &lt;div className="error-404"&gt;
-        &lt;h1 className="text-2xl"&gt;Nous ne pouvons trouver cette page Web&lt;/h1&gt;
-        &lt;h2&gt;Erreur 404&lt;/h2&gt;
-        &lt;p&gt;
-          {
-            "Nous sommes désolés que vous ayez abouti ici. Il arrive parfois qu'une page ait été déplacée ou supprimée. Heureusement, nous pouvons vous aider à trouver ce que vous cherchez. Que faire?"
-          }
-        &lt;/p&gt;
-        &lt;ul&gt;
-          &lt;li&gt;
-            Retournez à la{' '}
-            &lt;Link href="/"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;page {"d'accueil;"}&lt;/a&gt;
-            &lt;/Link&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link href="https://www.canada.ca/en/contact.html"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;Communiquez avec nous&lt;/a&gt;
-            &lt;/Link&gt;
-            {" pour obtenir de l'aide."}
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;&gt;
+      &lt;ul
+        className="w-full gap-x-8 grid md:grid-cols-2 items-center"
+        data-cy="task"
+      &gt;
+        {props.taskList.tasks.map((task, index) =&gt; {
+          return (
+            &lt;li
+              key={index}
+              className="font-body font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
+            &gt;
+              &lt;Link href={task.link} passHref&gt;
+                &lt;a
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                  data-cy="task-link"
+                &gt;
+                  &lt;FontAwesomeIcon
+                    icon={
+                      icon[task.icon]
+                        ? <span class="branch-0 cbranch-no" title="branch not covered" >icon[task.icon]</span>
+                        : icon['question-circle']
+                    }
+                    className="pr-4 text-2xl w-8"
+                  /&gt;
+                  &lt;span
+                    aria-label={task.areaLabel}
+                    className="font-normal text-xl"
+                    data-cy="task-item"
+                  &gt;
+                    {task.title}
+                  &lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/Link&gt;
+            &lt;/li&gt;
+          )
+        })}
+      &lt;/ul&gt;
+    &lt;/&gt;
   )
 }
 &nbsp;
-export async function getStaticProps({ locale }) {
-  /* Place-holder Meta Data Props */
-  const meta = {
-    data_en: {
-      title: 'My Service Canada Account - 404',
-      desc: 'English',
-      author: 'Service Canada',
-      keywords: '',
-    },
-    data_fr: {
-      title: 'Mon dossier Service Canada - 404',
-      desc: 'Français',
-      author: 'Service Canada',
-      keywords: '',
-    },
-  }
-&nbsp;
-  return {
-    props: { locale, meta },
-  }
+ProfileTasks.propTypes = {
+  dataCy: PropTypes.string,
+  taskList: PropTypes.shape({
+    tasks: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        areaLabel: PropTypes.string,
+        link: PropTypes.string.isRequired,
+        icon: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 }
 &nbsp;</pre></td></tr></table></pre>
 
