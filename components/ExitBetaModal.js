@@ -35,14 +35,14 @@ export default function ExitBetaModal(props) {
           onClick={props.closeModal}
           text="Stay on beta version"
         />
-        <Link href={props.continueLink}>
+        <a href={props.continueLink}>
           <Button
             className="w-full block md:w-fit"
             id={'modal-btn-continue'}
             styling="primary"
             text="Exit beta version"
           />
-        </Link>
+        </a>
       </div>
     </div>
   )
