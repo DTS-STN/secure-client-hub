@@ -98,13 +98,13 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Home',
+      title: 'My Service Canada Account - Dashboard',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Accueil',
+      title: 'Mon dossier Service Canada - Tableau de Bord',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
