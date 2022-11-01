@@ -10,7 +10,7 @@ export default function ProfileTasks(props) {
         className="w-full gap-x-8 grid md:grid-cols-2 items-center"
         data-cy="task"
       >
-        {props.taskList.tasks.map((task, index) => {
+        {props.tasks.map((task, index) => {
           return (
             <li
               key={index}
@@ -48,14 +48,12 @@ export default function ProfileTasks(props) {
 
 ProfileTasks.propTypes = {
   dataCy: PropTypes.string,
-  taskList: PropTypes.shape({
-    tasks: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        areaLabel: PropTypes.string,
-        link: PropTypes.string.isRequired,
-        icon: PropTypes.string.isRequired,
-      })
-    ),
-  }),
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      areaLabel: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+    })
+  ),
 }

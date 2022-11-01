@@ -10,20 +10,18 @@ describe('ProfileTasks', () => {
   const { container } = render(
     <ProfileTasks
       locale="en"
-      taskList={{
-        tasks: [
-          {
-            title: 'Province of residence',
-            icon: faCircle,
-            link: '/dashboard',
-          },
-          {
-            title: 'Language of correspondence',
-            icon: faStamp,
-            link: '/dashboard',
-          },
-        ],
-      }}
+      tasks={[
+        {
+          title: 'Province of residence',
+          icon: faCircle,
+          link: '/dashboard',
+        },
+        {
+          title: 'Language of correspondence',
+          icon: faStamp,
+          link: '/dashboard',
+        },
+      ]}
     />
   )
 
