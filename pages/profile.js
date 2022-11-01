@@ -6,7 +6,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
-import BenefitTasks from './../components/BenefitTasks'
+import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
@@ -42,16 +42,19 @@ export default function Profile(props) {
             taskGroups={[card.lists]}
             mostReq={false}
           >
-            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+            <div
+              className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
+              data-cy="task-list"
+            >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
-                    <BenefitTasks
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                      openModal={openModal}
-                    />
-                  </div>
+                  <ProfileTasks
+                    key={index}
+                    taskList={taskList}
+                    data-testID="profile-task-group-list"
+                    openModal={openModal}
+                    data-cy="task"
+                  />
                 )
               })}
             </div>

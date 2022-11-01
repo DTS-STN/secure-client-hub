@@ -85,7 +85,7 @@ function CardButton() {
   return cy.get('[data-cy="viewMoreLessButton"]')
 }
 function Section() {
-  return cy.get('[data-cy ="Task"]>div')
+  return cy.get('[data-cy ="task"]>div')
 }
 
 function ClickAllCardButtons() {
@@ -93,6 +93,7 @@ function ClickAllCardButtons() {
     cy.wrap($el).click()
     //cy.wait(200)
   })
+  return cy.get('[data-cy ="task"]')
 }
 
 module.exports = {

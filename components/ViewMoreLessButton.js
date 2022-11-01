@@ -24,7 +24,7 @@ export default function ViewMoreLessButton(props) {
             className={`text-5xl pt-1 pr-3`}
           />
         )}
-        <span className="text-left underline">{props.caption}</span>
+        <span className="text-left underline font-body">{props.caption}</span>
       </div>
     </button>
   )
