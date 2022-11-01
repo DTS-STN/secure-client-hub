@@ -14,12 +14,12 @@ describe('ProfileTasks', () => {
         tasks: [
           {
             title: 'Province of residence',
-            icon: faCircle,
+            icon: 'circle',
             link: '/dashboard',
           },
           {
             title: 'Language of correspondence',
-            icon: faStamp,
+            icon: 'stamp',
             link: '/dashboard',
           },
         ],

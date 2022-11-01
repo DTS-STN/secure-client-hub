@@ -20,6 +20,10 @@ export default function ProfileTasks(props) {
                 <a
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                   data-cy="task-link"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal(task.link)
+                  }}
                 >
                   <FontAwesomeIcon
                     icon={
@@ -48,6 +52,7 @@ export default function ProfileTasks(props) {
 
 ProfileTasks.propTypes = {
   dataCy: PropTypes.string,
+  openModal: PropTypes.func,
   taskList: PropTypes.shape({
     tasks: PropTypes.arrayOf(
       PropTypes.shape({

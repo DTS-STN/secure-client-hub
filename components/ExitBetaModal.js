@@ -2,6 +2,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 export default function ExitBetaModal(props) {
   return (
@@ -34,12 +35,14 @@ export default function ExitBetaModal(props) {
           onClick={props.closeModal}
           text="Stay on beta version"
         />
-        <Button
-          className="w-full block md:w-fit"
-          id={'modal-btn-continue'}
-          styling="primary"
-          text="Exit beta version"
-        />
+        <Link href={props.continueLink}>
+          <Button
+            className="w-full block md:w-fit"
+            id={'modal-btn-continue'}
+            styling="primary"
+            text="Exit beta version"
+          />
+        </Link>
       </div>
     </div>
   )
@@ -55,4 +58,9 @@ ExitBetaModal.propTypes = {
    * Area label for X icon in top right of modal
    */
   closeModalAria: PropTypes.string,
+
+  /*
+   * Link for page to continue on with after modal confirmation
+   */
+  continueLink: PropTypes.string,
 }
