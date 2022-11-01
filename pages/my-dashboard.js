@@ -12,6 +12,7 @@ import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
 
 export default function MyDashboard(props) {
+  //
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
