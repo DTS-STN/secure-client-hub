@@ -45,13 +45,11 @@ export default function ProfileTasks(props) {
 
 ProfileTasks.propTypes = {
   dataCy: PropTypes.string,
-  taskListMR: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-
+  taskList: PropTypes.shape({
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        areaLabel: PropTypes.string.isRequired,
+        areaLabel: PropTypes.string,
         link: PropTypes.string.isRequired,
         icon: PropTypes.string.isRequired,
       })

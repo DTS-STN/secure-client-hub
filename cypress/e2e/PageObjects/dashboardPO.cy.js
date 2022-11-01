@@ -129,7 +129,7 @@ function Eachsectionheading() {
 }
 
 function Section() {
-  return cy.get('[data-cy ="Task"]>div')
+  return cy.get('[data-cy ="task-list"]>div')
 }
 
 module.exports = {

@@ -51,17 +51,10 @@ export default function Profile(props) {
                   <ProfileTasks
                     key={index}
                     taskList={taskList}
-                    dataCy="profile-task-group-list"
+                    data-testID="profile-task-group-list"
                     openModal={openModal}
-                    data-cy="Task"
+                    data-cy="task"
                   />
-                  // <div className="mb-4 md:mb-6" key={index} data-cy="Task">
-                  //   <BenefitTasks
-                  //     taskList={taskList}
-                  //     dataCy="task-group-list"
-                  //     openModal={openModal}
-                  //   />
-                  // </div>
                 )
               })}
             </div>
