@@ -10,10 +10,13 @@ export default function BenefitTasks(props) {
       <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
-      <ul className="w-full py-6 pl-2 space-y-5 md:space-y-6">
+      <ul
+        className="w-full py-6 pl-2 space-y-5 md:space-y-6"
+        data-cy="taskList"
+      >
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-body font-bold">
+            <li key={index} className="font-body font-bold" data-cy="task-link">
               <Link href={task.link} passHref>
                 <a
                   onClick={(e) => {

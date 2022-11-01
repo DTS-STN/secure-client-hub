@@ -5,7 +5,10 @@ import PropTypes from 'prop-types'
 
 export default function ExitBetaModal(props) {
   return (
-    <div className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit">
+    <div
+      className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
+      data-cy="exitBetaModal"
+    >
       <div className="flex justify-between">
         <div
           className="text-3xl font-display font-bold"
@@ -15,6 +18,7 @@ export default function ExitBetaModal(props) {
           Exiting beta version
         </div>
         <button
+          data-cy="x-button"
           type="button"
           aria-label={props.closeModalAria}
           onClick={props.closeModal}
