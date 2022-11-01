@@ -10,6 +10,12 @@ export default {
   //
   // Header
   title: 'home',
+  // Banner
+  bannerBoldText: 'Beta version:',
+  bannerText: 'You are now using the My Service Canada Account beta version.',
+  bannerLink: 'Learn more about the beta version',
+  bannerLinkHref: '#',
+  bannerButtonText: 'Exit beta version',
   //
   //Heading
   pageHeading: {
@@ -115,4 +121,6 @@ export default {
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   url_dashboard: '/my-dashboard',
+  aria_exit_beta_modal: 'Exiting beta warning modal',
+  close_modal: 'Close modal',
 }

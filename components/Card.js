@@ -23,7 +23,6 @@ export default function Card(props) {
         caption={props.viewMoreLessCaption}
         className="pb-6 pt-1 md:pb-12 md:pt-5 px-2 sm:px-8 md:px-15"
       />
-
       {!isOpen ? null : <div className="pb-6">{props.children}</div>}
     </div>
   )
@@ -34,6 +33,7 @@ Card.propTypes = {
   cardTitle: propTypes.string.isRequired,
   viewMoreLessCaption: propTypes.string.isRequired,
   programUniqueId: propTypes.string,
+  openModal: propTypes.func,
   children: propTypes.oneOfType([
     propTypes.element,
     propTypes.arrayOf(propTypes.element),

@@ -20,7 +20,13 @@ export default function MostReqTasks(props) {
               className="font-body font-bold justify-center py-4 pl-2 sm:pl-8 md:pt-5 md:pb-6 md:pl-15"
             >
               <Link href={task.link} passHref>
-                <a className="flex items-center underline pl-2 text-white hover:text-gray-50">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault()
+                    props.openModal()
+                  }}
+                  className="flex items-center underline pl-2 text-white hover:text-gray-50"
+                >
                   <FontAwesomeIcon
                     icon={
                       icon[task.icon]
@@ -59,4 +65,5 @@ MostReqTasks.propTypes = {
       })
     ),
   }),
+  openModal: PropTypes.func,
 }

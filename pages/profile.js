@@ -7,10 +7,25 @@ import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import logger from '../lib/logger'
 import ProfileTasks from './../components/ProfileTasks'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from '../components/ExitBetaModal'
+
+Modal.setAppElement('#modal-root')
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
 
   return (
     <div id="homeContent" data-testid="homeContent-test">
@@ -24,6 +39,8 @@ export default function Profile(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            taskGroups={[card.lists]}
+            mostReq={false}
           >
             <div
               className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
@@ -35,7 +52,16 @@ export default function Profile(props) {
                     key={index}
                     taskList={taskList}
                     dataCy="profile-task-group-list"
+                    openModal={openModal}
+                    data-cy="Task"
                   />
+                  // <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                  //   <BenefitTasks
+                  //     taskList={taskList}
+                  //     dataCy="task-group-list"
+                  //     openModal={openModal}
+                  //   />
+                  // </div>
                 )
               })}
             </div>
@@ -53,6 +79,14 @@ export default function Profile(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
       ></PageLink>
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel={t.aria_exit_beta_modal}
+      >
+        <ExitBeta closeModal={closeModal} closeModalAria={t.close_modal} />
+      </Modal>
     </div>
   )
 }
