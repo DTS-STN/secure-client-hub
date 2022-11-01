@@ -13,7 +13,6 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-//
 // mocks home mapper
 jest.mock('../../graphql/mappers/my-dashboard', () => ({
   getMyDashboardContent: () => {
