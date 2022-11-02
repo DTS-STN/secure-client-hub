@@ -23,6 +23,7 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveEn,
                     link: item.scDestinationURLEn,
                     icon: item.scIconCSS,
+                    showExitBetaPopup: item.schBetaPopUp,
                   }
                 }),
               }

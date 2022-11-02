@@ -19,10 +19,14 @@ export default function BenefitTasks(props) {
             <li key={index} className="font-body font-bold" data-cy="task-link">
               <Link href={task.link} passHref>
                 <a
-                  onClick={(e) => {
-                    e.preventDefault()
-                    props.openModal(task.link)
-                  }}
+                  onClick={
+                    task.showExitBetaPopup
+                      ? (e) => {
+                          e.preventDefault()
+                          props.openModal(task.link)
+                        }
+                      : null
+                  }
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                 >
                   <FontAwesomeIcon
