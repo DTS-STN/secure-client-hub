@@ -132,6 +132,40 @@ function Section() {
   return cy.get('[data-cy ="task-list"]>div')
 }
 
+function BetaBanner() {
+  return cy.get('[data-cy ="topBanner"]')
+}
+
+function LearnMoreABtBetaLink() {
+  return cy.get('[data-cy ="learnMoreAbtBeta"]')
+}
+
+function ExitBetaButton() {
+  return cy.get("[data-cy ='topBanner']>button")
+}
+
+function FirstTaskLink() {
+  return cy
+    .get("[data-cy ='task-list']>div:nth-child(1)")
+    .find('li:nth-child(1)>a:nth-child(1)')
+}
+
+function ExitBetaModal() {
+  return cy.get("[data-cy ='exitBetaModal']")
+}
+
+function StayOnBetabutton() {
+  return cy.get("[id ='modal-btn-close']")
+}
+
+function ExitBetaModalButton() {
+  return cy.get("[id ='modal-btn-continue']")
+}
+
+function CloseModalButton() {
+  return cy.get("[data-cy ='x-button']")
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -157,4 +191,12 @@ module.exports = {
   Eachsectionheading,
   Section,
   ExpandCard,
+  BetaBanner,
+  LearnMoreABtBetaLink,
+  ExitBetaButton,
+  FirstTaskLink,
+  ExitBetaModal,
+  StayOnBetabutton,
+  ExitBetaModalButton,
+  CloseModalButton,
 }
