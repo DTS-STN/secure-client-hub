@@ -137,23 +137,23 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate the EI card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '6')
+    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '5')
     dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '6')
+    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '5')
   })
 
   it('Validate the CPP card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '5')
+    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '4')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection(
       'Régime de pensions du Canada',
-      '5'
+      '4'
     )
   })
 
   it('Validate the OAS card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Old Age Security', '5')
+    profilePo.ValidateCardTaskListAndSection('Old Age Security', '4')
     dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '5')
+    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '4')
   })
 })

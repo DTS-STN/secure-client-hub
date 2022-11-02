@@ -12,20 +12,21 @@ import Modal from 'react-modal'
 import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
 
-Modal.setAppElement('#modal-root')
-
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [openModalWithLink, setOpenModalWithLink] = React.useState({
+    isOpen: false,
+    activeLink: '/',
+  })
 
-  function openModal() {
-    setIsOpen(true)
+  function openModal(link) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link })
   }
 
   function closeModal() {
-    setIsOpen(false)
+    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
   return (
@@ -69,11 +70,15 @@ export default function Profile(props) {
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
-        isOpen={modalIsOpen}
+        isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
       >
-        <ExitBeta closeModal={closeModal} closeModalAria={t.close_modal} />
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={t.close_modal}
+          continueLink={openModalWithLink.activeLink}
+        />
       </Modal>
     </div>
   )

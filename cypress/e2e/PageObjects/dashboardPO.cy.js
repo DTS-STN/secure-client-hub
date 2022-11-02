@@ -141,7 +141,7 @@ function LearnMoreABtBetaLink() {
 }
 
 function ExitBetaButton() {
-  return cy.get("[data-cy ='topBanner']>button")
+  return cy.get("[data-cy ='topBanner']>a>button")
 }
 
 function FirstTaskLink() {
