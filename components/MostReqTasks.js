@@ -22,8 +22,10 @@ export default function MostReqTasks(props) {
               <Link href={task.link} passHref>
                 <a
                   onClick={(e) => {
-                    e.preventDefault()
-                    props.openModal(task.link)
+                    if (!task.internalLink) {
+                      e.preventDefault()
+                      props.openModal(task.link)
+                    }
                   }}
                   className="flex items-center underline pl-2 text-white hover:text-gray-50"
                 >

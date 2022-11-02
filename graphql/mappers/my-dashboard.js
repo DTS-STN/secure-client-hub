@@ -4,6 +4,12 @@ import clientQuery from '../client'
 export async function getMyDashboardContent() {
   const query = require('../queries/my-dashboard.graphql')
   const response = await clientQuery(query)
+
+  const internals = [
+    'https://sc-digital-centre-dev.bdm-dev.dts-stn.com/',
+    'https://esdc.prv/',
+  ]
+
   const mappedHome = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
@@ -23,6 +29,10 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveEn,
                     link: item.scDestinationURLEn,
                     icon: item.scIconCSS,
+                    internalLink:
+                      internals.filter((s) =>
+                        item.scDestinationURLEn.startsWith(s)
+                      ).length > 0,
                   }
                 }),
               }
@@ -58,6 +68,10 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveFr,
                     link: item.scDestinationURLFr,
                     icon: item.scIconCSS,
+                    internal:
+                      internals.filter((s) =>
+                        item.scDestinationURLFr.startsWith(s)
+                      ).length > 0,
                   }
                 }),
               }
