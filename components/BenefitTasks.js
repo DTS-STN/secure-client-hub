@@ -6,14 +6,17 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function BenefitTasks(props) {
   return (
-    <div className="px-4 sm:pl-8 inline-block w-full">
-      <h3 className="font-display font-bold text-xl " data-cy={props.dataCy}>
+    <div className="pl-2 sm:pl-8 md:pl-15 inline-block w-full">
+      <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
-      <ul className="w-full py-6 pl-2 space-y-8">
+      <ul
+        className="w-full py-6 pl-2 space-y-5 md:space-y-6"
+        data-cy="taskList"
+      >
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-display font-bold">
+            <li key={index} className="font-body font-bold" data-cy="task-link">
               <Link href={task.link} passHref>
                 <a
                   onClick={(e) => {

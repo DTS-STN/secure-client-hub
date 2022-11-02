@@ -5,19 +5,19 @@ import { icon } from '../lib/loadIcons'
 
 export default function MostReqTasks(props) {
   return (
-    <div className=" px-3 h-full">
+    <div className="h-full">
       <h3
-        className="font-display font-bold text-xl text-white pt-6 "
+        className="font-body font-bold text-xl text-white pt-6 pl-3 sm:pl-8 md:pl-15 "
         data-cy={props.dataCy}
       >
         {props.taskListMR.title}
       </h3>
-      <ul className="w-full gap-x-14 grid md:grid-cols-2">
+      <ul className="w-full gap-x-8 grid md:grid-cols-2">
         {props.taskListMR.tasks.map((task, index) => {
           return (
             <li
               key={index}
-              className="font-display font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
+              className="font-body font-bold justify-center py-4 pl-2 sm:pl-8 md:pt-5 md:pb-6 md:pl-15"
             >
               <Link href={task.link} passHref>
                 <a
@@ -25,7 +25,7 @@ export default function MostReqTasks(props) {
                     e.preventDefault()
                     props.openModal()
                   }}
-                  className="flex items-center underline text-white hover:text-gray-50"
+                  className="flex items-center underline pl-2 text-white hover:text-gray-50"
                 >
                   <FontAwesomeIcon
                     icon={

@@ -30,11 +30,8 @@ export default function MyDashboard(props) {
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       {props.content.cards.map((card) => {
-        var tasks = card.lists
         const mostReq = card.lists[0]
-        if (props.mostReq) {
-          tasks = props.taskGroups.slice(1, card.lists.length)
-        }
+        var tasks = card.lists.slice(1, card.lists.length)
         return (
           <Card
             key={card.id}
@@ -42,11 +39,9 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={card.lists}
-            mostReq={true}
           >
             <div
-              className="bg-deep-blue-60d mt-4 pl-2"
+              className="bg-deep-blue-60d mt-4"
               data-cy="most-requested-section"
             >
               <MostReqTasks
@@ -55,7 +50,10 @@ export default function MyDashboard(props) {
                 openModal={openModal}
               />
             </div>
-            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
+            <div
+              className=" md:columns-2 gap-5 md:gap-6 pt-8"
+              data-cy="task-list"
+            >
               {tasks.map((taskList, index) => {
                 return (
                   <div className="mb-4 md:mb-6" key={index} data-cy="Task">
@@ -101,13 +99,13 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Home',
+      title: 'My Service Canada Account - Dashboard',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Accueil',
+      title: 'Mon dossier Service Canada - Tableau de Bord',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

@@ -69,12 +69,13 @@ describe('Validate Profile page', () => {
     profilePo.CardHeading().should('be.visible')
   })
 
-  it.skip('Validate that the Test card button on profile page expands and collapses on clicking', () => {
+  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
     profilePo.CardButton().should('be.visible')
-    profilePo.CardButton().click()
-    dashboardPo.ExpandedCard().should('be.visible')
-    profilePo.CardButton().click({ force: true })
+    profilePo.ClickAllCardButtons()
     profilePo.FirstCard().should('be.visible')
+    profilePo.Section().should('be.visible')
+    profilePo.ClickAllCardButtons()
+    profilePo.Section().should('not.exist')
   })
 
   it('Validate that the "Looking for" section is present on Profile Page', () => {
@@ -90,8 +91,8 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
-    cy.wait(2000)
-    profilePo.LookingForSecurityLink().click()
+    cy.wait(3000)
+    profilePo.LookingForSecurityLink().click({ froce: true })
     securityPo.SecurityUrlEN()
     securityPo.SecurityHeaderEN()
   })

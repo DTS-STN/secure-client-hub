@@ -10,9 +10,12 @@ import { icon } from '../lib/loadIcons'
 export default function PhaseBanner(props) {
   return (
     <div className="bg-brighter-blue-medium">
-      <div className=" ds-container py-4 md:flex md:justify-between">
+      <div
+        className=" ds-container py-4 md:flex md:justify-between"
+        data-cy="topBanner"
+      >
         <div className="pb-4 md:pb-0">
-          <p role="alert" className="pb-2 md:pb-7">
+          <p role="alert" className="pb-2 md:pb-7" data-cy="learnMoreAbtBeta">
             <span className="font-medium">{props.bannerBoldText} </span>
             {props.bannerText}
           </p>

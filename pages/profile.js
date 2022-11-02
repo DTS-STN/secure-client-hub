@@ -7,7 +7,7 @@ import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import logger from '../lib/logger'
-import BenefitTasks from './../components/BenefitTasks'
+import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
@@ -32,29 +32,26 @@ export default function Profile(props) {
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
-        const tasks = [card.lists]
+        const moreLessButtonText = card.lists.tasks[0].title
+        const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
         return (
           <Card
             key={card.id}
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={[card.lists]}
-            mostReq={false}
+            viewMoreLessCaption={moreLessButtonText}
           >
-            <div className=" md:columns-2 gap-8 pt-8" data-cy="task-list">
-              {tasks.map((taskList, index) => {
-                return (
-                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
-                    <BenefitTasks
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                      openModal={openModal}
-                    />
-                  </div>
-                )
-              })}
+            <div
+              className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
+              data-cy="task-list"
+            >
+              <ProfileTasks
+                tasks={tasks}
+                data-testID="profile-task-group-list"
+                openModal={openModal}
+                data-cy="task"
+              />
             </div>
           </Card>
         )
