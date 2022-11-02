@@ -15,14 +15,17 @@ export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [openModalWithLink, setOpenModalWithLink] = React.useState({
+    isOpen: false,
+    activeLink: '/',
+  })
 
-  function openModal() {
-    setIsOpen(true)
+  function openModal(link) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link })
   }
 
   function closeModal() {
-    setIsOpen(false)
+    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
   return (
@@ -70,11 +73,15 @@ export default function MyDashboard(props) {
       })}
       <Modal
         className="flex justify-center bg-black/75 h-full"
-        isOpen={modalIsOpen}
+        isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
       >
-        <ExitBeta closeModal={closeModal} closeModalAria={t.close_modal} />
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={t.close_modal}
+          continueLink={openModalWithLink.activeLink}
+        />
       </Modal>
     </div>
   )

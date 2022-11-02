@@ -7,7 +7,13 @@ expect.extend(toHaveNoViolations)
 
 describe('Exit Beta Modal', () => {
   it('renders Exit Beta Modal', () => {
-    render(<ExitBetaModal closeModal={() => {}} closeModalAria={'close'} />)
+    render(
+      <ExitBetaModal
+        closeModal={() => {}}
+        closeModalAria={'close'}
+        continueLink="/"
+      />
+    )
     const title = screen.getByText('Exiting beta version')
     const caption = screen.getByText(
       'Thank you for trying the beta version. You are now returning to My Service Canada Account home page.'
@@ -18,7 +24,11 @@ describe('Exit Beta Modal', () => {
 
   it('has no a11y viollations', async () => {
     const { container } = render(
-      <ExitBetaModal closeModal={() => {}} closeModalAria={'close'} />
+      <ExitBetaModal
+        closeModal={() => {}}
+        closeModalAria={'close'}
+        continueLink="/"
+      />
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
