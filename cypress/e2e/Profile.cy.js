@@ -69,7 +69,7 @@ describe('Validate Profile page', () => {
     profilePo.CardHeading().should('be.visible')
   })
 
-  it.skip('Validate that the Test card button on profile page expands and collapses on clicking', () => {
+  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
     profilePo.CardButton().should('be.visible')
     profilePo.ClickAllCardButtons()
     profilePo.FirstCard().should('be.visible')
@@ -136,13 +136,13 @@ describe('Validate Profile page', () => {
     })
   })
 
-  it.skip('Validate the EI card in EN and FR', () => {
+  it('Validate the EI card in EN and FR', () => {
     profilePo.ValidateCardTaskListAndSection('Employment Insurance', '6')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '6')
   })
 
-  it.skip('Validate the CPP card in EN and FR', () => {
+  it('Validate the CPP card in EN and FR', () => {
     profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '5')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection(
@@ -151,7 +151,7 @@ describe('Validate Profile page', () => {
     )
   })
 
-  it.skip('Validate the OAS card in EN and FR', () => {
+  it('Validate the OAS card in EN and FR', () => {
     profilePo.ValidateCardTaskListAndSection('Old Age Security', '5')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '5')

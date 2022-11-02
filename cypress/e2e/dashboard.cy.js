@@ -117,4 +117,25 @@ describe('Validate dashboard page', () => {
       dashboardPo.ExpandCard(CardName)
     }
   })
+
+  it('Validate Beta Version Banner is present on Dashboard', () => {
+    dashboardPo.BetaBanner().should('be.visible')
+    dashboardPo.LearnMoreABtBetaLink().should('be.visible')
+    dashboardPo.ExitBetaButton().should('be.visible')
+  })
+
+  it('Validate Beta Version Banner is present on Dashboard', () => {
+    dashboardPo.BetaBanner().should('be.visible')
+    dashboardPo.LearnMoreABtBetaLink().should('be.visible')
+    dashboardPo.ExitBetaButton().should('be.visible')
+  })
+
+  it('Validate Exit Beta Version Popup UI', () => {
+    dashboardPo.ExpandCard('Employment Insurance')
+    dashboardPo.FirstTaskLink().click()
+    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.StayOnBetabutton().should('be.visible')
+    dashboardPo.ExitBetaModalButton().should('be.visible')
+    dashboardPo.CloseModalButton().should('be.visible')
+  })
 })
