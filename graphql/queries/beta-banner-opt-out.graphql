@@ -1,0 +1,28 @@
+{
+  schContentv1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/content/beta-banner-opt-out"
+  ) {
+    item {
+      _path
+      scId
+      scContentEn {
+        json
+      }
+      scContentFr {
+        json
+      }
+      scFragments {
+        ... on SCHTaskv1Model {
+          scId
+          scDestinationURLEn
+          scDestinationURLFr
+          scIconCSS
+          scLinkTextEn
+          scLinkTextFr
+          scLinkTextAssistiveEn
+          scLinkTextAssistiveFr
+        }
+      }
+    }
+  }
+}

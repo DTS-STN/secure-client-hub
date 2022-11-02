@@ -4,6 +4,7 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import logger from '../lib/logger'
 
 export default function SecuritySettings(props) {
@@ -49,6 +50,11 @@ export async function getStaticProps({ res, locale }) {
     //res.statusCode = 500
     throw error
   })
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/security-settings' : '/security-settings'
@@ -85,6 +91,7 @@ export async function getStaticProps({ res, locale }) {
       content: locale === 'en' ? content.en : content.fr,
       meta,
       breadCrumbItems,
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
     },
   }
 }

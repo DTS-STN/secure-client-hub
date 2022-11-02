@@ -14,6 +14,8 @@ describe('PhaseBanner', () => {
         bannerLink={'bannerLink'}
         bannerLinkHref={'bannerLinkHref'}
         bannerButtonText={'bannerButtonText'}
+        bannerButtonLink={'bannerButtonLink'}
+        icon={'bell'}
       ></PhaseBanner>
     )
     const bannerBoldText = screen.getByText('bannerBoldText')
@@ -34,6 +36,8 @@ describe('PhaseBanner', () => {
         bannerLink={'bannerLink'}
         bannerLinkHref={'bannerLinkHref'}
         bannerButtonText={'bannerButtonText'}
+        bannerButtonLink={'bannerButtonLink'}
+        icon={'bell'}
       ></PhaseBanner>
     )
     const results = await axe(container)

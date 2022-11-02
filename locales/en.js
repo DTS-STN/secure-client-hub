@@ -10,12 +10,6 @@ export default {
   //
   // Header
   title: 'home',
-  // Banner
-  bannerBoldText: 'Beta version:',
-  bannerText: 'You are now using the My Service Canada Account beta version.',
-  bannerLink: 'Learn more about the beta version',
-  bannerLinkHref: '#',
-  bannerButtonText: 'Exit beta version',
   //
   //Heading
   pageHeading: {

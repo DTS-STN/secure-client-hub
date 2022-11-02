@@ -72,6 +72,6 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, meta },
+    props: { locale, meta, hideBanner: true },
   }
 }
