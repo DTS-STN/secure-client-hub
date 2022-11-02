@@ -2,7 +2,6 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
 
 export default function ExitBetaModal(props) {
   return (
