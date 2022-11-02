@@ -21,7 +21,7 @@ export default function BenefitTasks(props) {
                 <a
                   onClick={(e) => {
                     e.preventDefault()
-                    props.openModal()
+                    props.openModal(task.link)
                   }}
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                 >
