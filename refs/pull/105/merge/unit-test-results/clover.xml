@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1667393081775" clover="3.2.0">
-  <project timestamp="1667393081775" name="All files">
+<coverage generated="1667399897299" clover="3.2.0">
+  <project timestamp="1667399897300" name="All files">
     <metrics statements="95" coveredstatements="51" conditionals="44" coveredconditionals="26" methods="46" coveredmethods="22" elements="185" coveredelements="99" complexity="0" loc="95" ncloc="95" packages="3" files="20" classes="20"/>
     <package name="components">
       <metrics statements="46" coveredstatements="33" conditionals="28" coveredconditionals="21" methods="23" coveredmethods="12"/>
@@ -12,10 +12,10 @@
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
         <metrics statements="5" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
@@ -33,8 +33,8 @@
       </file>
       <file name="ExitBetaModal.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBetaModal.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
         <metrics statements="9" coveredstatements="8" conditionals="14" coveredconditionals="12" methods="5" coveredmethods="2"/>
@@ -71,7 +71,7 @@
       <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="11" count="6" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
       </file>
       <file name="ProfileTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ProfileTasks.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
