@@ -32,32 +32,26 @@ export default function Profile(props) {
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
-        const tasks = [card.lists]
+        const moreLessButtonText = card.lists.tasks[0].title
+        const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
         return (
           <Card
             key={card.id}
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={[card.lists]}
-            mostReq={false}
+            viewMoreLessCaption={moreLessButtonText}
           >
             <div
               className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
               data-cy="task-list"
             >
-              {tasks.map((taskList, index) => {
-                return (
-                  <ProfileTasks
-                    key={index}
-                    taskList={taskList}
-                    data-testID="profile-task-group-list"
-                    openModal={openModal}
-                    data-cy="task"
-                  />
-                )
-              })}
+              <ProfileTasks
+                tasks={tasks}
+                data-testID="profile-task-group-list"
+                openModal={openModal}
+                data-cy="task"
+              />
             </div>
           </Card>
         )
