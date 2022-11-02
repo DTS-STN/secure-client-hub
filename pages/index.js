@@ -83,8 +83,6 @@ Index.getLayout = function PageLayout(page) {
 }
 
 export async function getStaticProps({ locale }) {
-  // const content = await fetchContent()
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {

@@ -22,6 +22,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -58,6 +66,7 @@ describe('My Dashboard page', () => {
     expect(props).toEqual({
       props: {
         content: {},
+        bannerContent: {},
         langToggleLink: '/fr/my-dashboard',
         locale: 'en',
         meta: {
