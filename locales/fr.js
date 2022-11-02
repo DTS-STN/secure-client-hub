@@ -10,13 +10,6 @@ export default {
   //
   // Header
   title: 'accueil',
-  // Banner
-  bannerBoldText: 'Version bêta:',
-  bannerText:
-    'Vous utilisez maintenant la version bêta de Mon Dossier Service Canada.',
-  bannerLink: 'En savoir plus sur la version bêta',
-  bannerLinkHref: '#',
-  bannerButtonText: 'Quitter la version bêta',
   //Heading
   pageHeading: {
     title: 'Mon tableau de bord',

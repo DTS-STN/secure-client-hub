@@ -25,13 +25,19 @@ export default function Layout(props) {
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
-      <PhaseBanner
-        bannerBoldText={t.bannerBoldText}
-        bannerText={t.bannerText}
-        bannerLink={t.bannerLink}
-        bannerLinkHref={t.bannerLinkHref}
-        bannerButtonText={t.bannerButtonText}
-      ></PhaseBanner>
+      {props.display.hideBanner ? (
+        ''
+      ) : (
+        <PhaseBanner
+          bannerBoldText={props.bannerContent.bannerBoldText}
+          bannerText={props.bannerContent.bannerText}
+          bannerLink={props.bannerContent.bannerLink}
+          bannerLinkHref={props.bannerContent.bannerLinkHref}
+          bannerButtonText={props.bannerContent.bannerButtonText}
+          bannerButtonLink={props.bannerContent.bannerButtonLink}
+          icon={props.bannerContent.icon}
+        ></PhaseBanner>
+      )}
       <Header
         id="header"
         lang={props.locale}
@@ -105,6 +111,18 @@ Layout.propTypes = {
    */
   title: PropTypes.string,
   /*
+   * bannerContent
+   */
+  bannerContent: PropTypes.shape({
+    bannerBoldText: PropTypes.string.isRequired,
+    bannerText: PropTypes.string.isRequired,
+    bannerLink: PropTypes.string.isRequired,
+    bannerLinkHref: PropTypes.string.isRequired,
+    bannerButtonText: PropTypes.string.isRequired,
+    bannerButtonLink: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+  }),
+  /*
    * Link of the page in opposite language
    */
   langToggleLink: PropTypes.string,
@@ -112,7 +130,7 @@ Layout.propTypes = {
     /*
      * Toggle use of Phase (default false)
      */
-    showPhase: PropTypes.bool,
+    hideBanner: PropTypes.bool,
     /*
      * Toggle use of DS header (default false)
      */

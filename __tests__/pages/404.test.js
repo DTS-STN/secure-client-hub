@@ -41,6 +41,7 @@ describe('404', () => {
             keywords: '',
           },
         },
+        hideBanner: true,
       },
     })
   })

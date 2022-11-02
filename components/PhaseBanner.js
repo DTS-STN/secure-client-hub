@@ -21,16 +21,20 @@ export default function PhaseBanner(props) {
             className="text-deep-blue-dark hover:text-blue-hover"
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
-            <FontAwesomeIcon
-              icon={icon['arrow-up-right-from-square']}
-            ></FontAwesomeIcon>
+            <FontAwesomeIcon icon={icon[props.icon]}></FontAwesomeIcon>
           </a>
         </div>
-        <Button
-          styling="primary"
-          text={props.bannerButtonText}
-          className="max-h-11 my-auto text-sm w-full justify-center px-auto sm:w-auto"
-        ></Button>
+        <a
+          href={props.bannerButtonLink}
+          className="max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
+        >
+          <Button
+            id="bannerButton"
+            styling="primary"
+            text={props.bannerButtonText}
+            className="text-sm"
+          ></Button>
+        </a>
       </div>
     </div>
   )
@@ -57,4 +61,12 @@ PhaseBanner.propTypes = {
    * Phasebanner Button Text
    */
   bannerButtonText: propTypes.string,
+  /**
+   * Phasebanner Button Href
+   */
+  bannerButtonHref: propTypes.string,
+  /**
+   * Icon Text
+   */
+  icon: propTypes.string,
 }
