@@ -36,6 +36,7 @@ describe('Layout with default text', () => {
       keywords: '',
     },
   }
+  const display = { hideBanner: true }
 
   useRouter.mockImplementation(() => ({
     pathname: '/',
@@ -43,17 +44,17 @@ describe('Layout with default text', () => {
   }))
 
   it('Layout contains Symbol of GoC', () => {
-    render(<Layout locale="en" meta={meta} />)
+    render(<Layout locale="en" meta={meta} display={display} />)
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
   })
 
   it('Layout contains "Skip to content" link', () => {
-    render(<Layout locale="fr" meta={meta} />)
+    render(<Layout locale="fr" meta={meta} display={display} />)
     expect(screen.getByText('Passer au contenu principal')).toBeInTheDocument()
   })
 
   it('Layout contains a Main tag', () => {
-    render(<Layout locale="en" meta={meta} />)
+    render(<Layout locale="en" meta={meta} display={display} />)
     expect(screen.getByRole('main')).toBeInTheDocument()
   })
 
@@ -68,7 +69,9 @@ describe('Layout with default text', () => {
   // })
 
   it('Layout contains no a11y violations', async () => {
-    const { container } = render(<Layout locale="en" meta={meta} />)
+    const { container } = render(
+      <Layout locale="en" meta={meta} display={display} />
+    )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })

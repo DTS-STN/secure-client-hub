@@ -11,6 +11,24 @@ export default {
   // Header
   title: 'home',
   //
+  //Heading
+  pageHeading: {
+    title: 'My dashboard',
+    profile: 'Profile',
+  },
+  // PageLink
+  pageLinkSecurity: 'Looking for security settings?',
+  securityLinkText: 'security settings',
+  accessYourSecurityText: 'Access your ',
+  backToDashboard: 'Back to my Dashboard',
+
+  // ViewMoreLessButton
+  viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
+
+  // ViewMoreLessButtonProfile
+  viewMoreViewLessEI: `View and change my profile information for Employment Insurance`,
+  viewMoreViewLessCPP: `View and change my profile information for Canada Pension Plan`,
+  viewMoreViewLessOAS: `View and change my profile information for Old Age Security and Guaranteed Income Supplement`,
 
   // Nav
   skipToMainContent: 'Skip to main content',
@@ -96,4 +114,7 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  url_dashboard: '/my-dashboard',
+  aria_exit_beta_modal: 'Exiting beta warning modal',
+  close_modal: 'Close modal',
 }
