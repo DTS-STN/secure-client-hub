@@ -19,7 +19,7 @@ jobs:
           CI: true
 
       - name: Docker Build
-        run: docker build -t secure-client-hub .
+        run: docker build --build-arg ${{secrets.AEM_GRAPHQL_ENDPOINT}} -t secure-client-hub .
         env:
           CI: true
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
