@@ -2,7 +2,7 @@ name: Dynamic Application Security Tests
 
 on:  
   push:
-    branches: [main, release*]
+    branches: [main, release* , dev]
 
 jobs:
   zap-proxy-scan:
