@@ -138,4 +138,25 @@ describe('Validate dashboard page', () => {
     dashboardPo.ExitBetaModalButton().should('be.visible')
     dashboardPo.CloseModalButton().should('be.visible')
   })
+
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+    dashboardPo.ExpandCard('Employment Insurance')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
+  })
+
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+    dashboardPo.ExpandCard('Canada Pension Plan')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
+  })
+
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+    dashboardPo.ExpandCard('Old Age Security')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
+  })
 })

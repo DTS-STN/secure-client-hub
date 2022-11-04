@@ -136,4 +136,13 @@ describe('Validate Security Settings page', () => {
       .should('be.visible')
       .and('not.have.attr', 'href', '#undefined')
   })
+
+  it.skip('Validate the modal is displayed on clicking links on security settings page', () => {
+    SecurityQuestionsLink().click()
+    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.CloseModalButton().click()
+    EmploymentInsuranceCode().click()
+    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.CloseModalButton().click()
+  })
 })
