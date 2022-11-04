@@ -47,18 +47,6 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  it.skip('Validate that each card has a "Most Requested" section', () => {
-    dashboardPo.Cards().each(($el, index, $list) => {
-      cy.wrap($el).click()
-      cy.wait(1000)
-      dashboardPo
-        .MostRequestedSection()
-        .should('contain.text', 'Most requested')
-      dashboardPo.MostRequestedSection().should('be.visible')
-      dashboardPo.MostRequestedSectionLinks().should('be.visible')
-    })
-  })
-
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
     securityPo.breadcrumbs().should('not.exist')
   })
@@ -153,7 +141,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.validateExitBetaModalbuttonLink()
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     dashboardPo.ExpandCard('Old Age Security')
     //This test step logic will change once we have code to show modal only for specific links
     //its only valid till exit beta modal is displayed for all authenicated links

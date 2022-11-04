@@ -165,14 +165,14 @@ describe('Validate Profile page', () => {
     dashboardPo.validateExitBetaModalbuttonLink()
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
     profilePo.ExpandCard('Canada Pension Plan')
     //This test step logic will change once we have code to show modal only for specific links
     //its only valid till exit beta modal is displayed for all authenicated links
     dashboardPo.validateExitBetaModalbuttonLink()
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     profilePo.ExpandCard('Old Age Security')
     //This test step logic will change once we have code to show modal only for specific links
     //its only valid till exit beta modal is displayed for all authenicated links
