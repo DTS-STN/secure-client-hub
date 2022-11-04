@@ -44,7 +44,7 @@ export default function Profile(props) {
             viewMoreLessCaption={moreLessButtonText}
           >
             <div
-              className="pl-3 sm:pl-8 lg:pl-15 border-t-2"
+              className="px-3 sm:px-8 md:px-15 border-t-2"
               data-cy="task-list"
             >
               <ProfileTasks

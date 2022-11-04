@@ -11,11 +11,11 @@ export default function PageLink(props) {
       <div className="pt-2 md:pt-4 my-8 border-t border-gray-light ">
         <h2
           data-cy="looking-for"
-          className="font-display font-bold text-32px md:text-36px"
+          className="font-display font-bold text-32px md:text-36px pb-2"
         >
           {props.lookingForText}
         </h2>
-        <div className="font-body mb-6  text-xl">
+        <div className="font-body pb-8  text-xl">
           <span className=" text-gray-darker">{props.accessText}</span>
           <Link href={props.href}>
             <a

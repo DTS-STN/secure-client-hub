@@ -43,10 +43,7 @@ export default function MyDashboard(props) {
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
           >
-            <div
-              className="bg-deep-blue-60d mt-4"
-              data-cy="most-requested-section"
-            >
+            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
@@ -54,12 +51,12 @@ export default function MyDashboard(props) {
               />
             </div>
             <div
-              className=" md:columns-2 gap-5 md:gap-6 pt-8"
+              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
               data-cy="task-list"
             >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                  <div className="" key={index} data-cy="Task">
                     <BenefitTasks
                       taskList={taskList}
                       dataCy="task-group-list"

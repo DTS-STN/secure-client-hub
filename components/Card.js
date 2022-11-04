@@ -7,7 +7,7 @@ export default function Card(props) {
 
   return (
     <div className="border rounded border-gray-300 shadow my-6" data-cy="cards">
-      <h2 className="py-5 px-2 sm:px-8 md:px-15 text-4xl font-display font-bold">
+      <h2 className="py-4 md:py-9 md:mt-2 px-3 sm:px-8 md:px-15 text-4xl font-display font-bold">
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton
@@ -21,7 +21,7 @@ export default function Card(props) {
         ariaExpanded={isOpen.toString()}
         icon={isOpen}
         caption={props.viewMoreLessCaption}
-        className="pb-6 pt-1 md:pb-12 md:pt-5 px-2 sm:px-8 md:px-15"
+        className="pb-6 md:pb-12 md:pt-0.5 px-3 sm:px-8 md:px-15"
       />
       {!isOpen ? null : <div className="pb-6">{props.children}</div>}
     </div>

@@ -19,8 +19,10 @@ module.exports = {
       fontSize: {
         '32px': ['32px', '35px'],
         '36px': ['36px', '40px'],
+        '46px': ['46px'],
       },
       padding: {
+        10.5: '42px',
         15: '60px',
       },
       colors: {
