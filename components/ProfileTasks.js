@@ -7,18 +7,18 @@ export default function ProfileTasks(props) {
   return (
     <>
       <ul
-        className="w-full gap-x-8 grid md:grid-cols-2 items-center"
+        className="w-full gap-x-4 grid md:grid-cols-2 items-center pt-3"
         data-cy="task"
       >
         {props.tasks.map((task, index) => {
           return (
             <li
               key={index}
-              className="font-body font-bold justify-center py-4 md:pt-5 md:pb-6 pl-2"
+              className="font-body font-bold justify-center py-3  pl-2"
             >
               <Link href={task.link} passHref>
                 <a
-                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover "
                   data-cy="task-link"
                   onClick={(e) => {
                     e.preventDefault()
