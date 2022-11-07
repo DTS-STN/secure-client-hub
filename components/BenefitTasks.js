@@ -20,7 +20,7 @@ export default function BenefitTasks(props) {
               <Link href={task.link} passHref>
                 <a
                   onClick={(e) => {
-                    if (!task.internalLink) {
+                    if (task.betaPopUp) {
                       e.preventDefault()
                       props.openModal(task.link)
                     }

@@ -29,10 +29,7 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveEn,
                     link: item.scDestinationURLEn,
                     icon: item.scIconCSS,
-                    internalLink:
-                      internals.filter((s) =>
-                        item.scDestinationURLEn.startsWith(s)
-                      ).length > 0,
+                    betaPopUp: item.schBetaPopUp,
                   }
                 }),
               }

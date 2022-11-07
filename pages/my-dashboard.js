@@ -16,6 +16,8 @@ export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  console.log(props)
+
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,
     activeLink: '/',

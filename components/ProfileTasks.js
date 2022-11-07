@@ -21,8 +21,10 @@ export default function ProfileTasks(props) {
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                   data-cy="task-link"
                   onClick={(e) => {
-                    e.preventDefault()
-                    props.openModal(task.link)
+                    if (task.betaPopUp) {
+                      e.preventDefault()
+                      props.openModal(task.link)
+                    }
                   }}
                 >
                   <FontAwesomeIcon
