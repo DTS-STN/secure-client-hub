@@ -47,10 +47,6 @@ export default function BenefitTasks(props) {
                       }
                       className="pr-4 text-2xl w-8"
                     />
-                    <span
-                      aria-label={task.areaLabel}
-                      className="font-normal text-xl"
-                    >
                       {task.title}
                     </span>
                   </a>
