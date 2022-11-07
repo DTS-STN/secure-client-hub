@@ -61,7 +61,7 @@ ProfileTasks.propTypes = {
       areaLabel: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
-      betaPopUp: PropTypes.string,
+      betaPopUp: PropTypes.string, 
     })
   ),
 }
