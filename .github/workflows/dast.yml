@@ -17,16 +17,18 @@ jobs:
         run: npm ci
         env:
           CI: true
-
+          
       - name: Docker Build
-        run: docker build -t secure-client-hub .
+        run: docker build --build-arg AEM_GRAPHQL_ENDPOINT=${{secrets.AEM_GRAPHQL_ENDPOINT}} -t secure-client-hub .
         env:
           CI: true
+          AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
 
       - name: Docker run
         run: docker run -d -p 3000:3000 secure-client-hub
         env:
           CI: true
+          AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
 
       - name: OWASP ZAP FULL Scan
         uses: zaproxy/action-full-scan@v0.4.0

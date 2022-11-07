@@ -39,15 +39,28 @@ export default function BenefitTasks(props) {
                     aria-label={task.areaLabel}
                     className="font-normal text-xl"
                   >
-                    {task.title}
-                  </span>
-                </a>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+                    <FontAwesomeIcon
+                      icon={
+                        icon[task.icon]
+                          ? icon[task.icon]
+                          : icon['question-circle']
+                      }
+                      className="pr-4 text-2xl w-8"
+                    />
+                    <span
+                      aria-label={task.areaLabel}
+                      className="font-normal text-xl"
+                    >
+                      {task.title}
+                    </span>
+                  </a>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </>
   )
 }
 

@@ -47,7 +47,7 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  it('Validate that each card has a "Most Requested" section', () => {
+  it.skip('Validate that each card has a "Most Requested" section', () => {
     dashboardPo.Cards().each(($el, index, $list) => {
       cy.wrap($el).click()
       cy.wait(1000)
