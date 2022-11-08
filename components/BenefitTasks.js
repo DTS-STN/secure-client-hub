@@ -53,7 +53,7 @@ export default function BenefitTasks(props) {
 
 BenefitTasks.propTypes = {
   taskList: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     dataCy: PropTypes.string,
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
