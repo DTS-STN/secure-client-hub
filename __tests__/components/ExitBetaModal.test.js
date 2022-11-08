@@ -21,7 +21,6 @@ describe('Exit Beta Modal', () => {
     expect(title).toBeInTheDocument()
     expect(caption).toBeInTheDocument()
   })
-
   it('has no a11y viollations', async () => {
     const { container } = render(
       <ExitBetaModal
@@ -33,4 +32,5 @@ describe('Exit Beta Modal', () => {
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
+  it('placeholder', () => {})
 })

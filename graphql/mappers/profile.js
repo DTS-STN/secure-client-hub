@@ -21,6 +21,7 @@ export async function getProfileContent() {
                   areaLabel: list.scLinkTextAssistiveEn,
                   link: list.scDestinationURLEn,
                   icon: list.scIconCSS,
+                  betaPopUp: list.schBetaPopUp,
                 }
               }),
             },

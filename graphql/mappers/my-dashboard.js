@@ -4,6 +4,7 @@ import clientQuery from '../client'
 export async function getMyDashboardContent() {
   const query = require('../queries/my-dashboard.graphql')
   const response = await clientQuery(query)
+
   const mappedHome = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
@@ -23,6 +24,7 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveEn,
                     link: item.scDestinationURLEn,
                     icon: item.scIconCSS,
+                    betaPopUp: item.schBetaPopUp,
                   }
                 }),
               }
@@ -58,6 +60,7 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveFr,
                     link: item.scDestinationURLFr,
                     icon: item.scIconCSS,
+                    betaPopUp: list.schBetaPopUp,
                   }
                 }),
               }
