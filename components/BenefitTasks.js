@@ -27,14 +27,6 @@ export default function BenefitTasks(props) {
                   }}
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                 >
-                  <FontAwesomeIcon
-                    icon={
-                      icon[task.icon]
-                        ? icon[task.icon]
-                        : icon['question-circle']
-                    }
-                    className="pr-4 text-2xl w-8"
-                  />
                   <span
                     aria-label={task.areaLabel}
                     className="font-normal text-xl"
@@ -47,20 +39,15 @@ export default function BenefitTasks(props) {
                       }
                       className="pr-4 text-2xl w-8"
                     />
-                    <span
-                      aria-label={task.areaLabel}
-                      className="font-normal text-xl"
-                    >
-                      {task.title}
-                    </span>
-                  </a>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    </>
+                    {task.title}
+                  </span>
+                </a>
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
   )
 }
 
