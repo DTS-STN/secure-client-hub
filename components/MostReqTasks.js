@@ -19,7 +19,7 @@ export default function MostReqTasks(props) {
               <Link href={task.link} passHref>
                 <a
                   onClick={(e) => {
-                    if (!task.internalLink) {
+                    if (task.betaPopUp) {
                       e.preventDefault()
                       props.openModal(task.link)
                     }
@@ -61,6 +61,7 @@ MostReqTasks.propTypes = {
         areaLabel: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         icon: PropTypes.string.isRequired,
+        betaPopUp: PropTypes.bool,
       })
     ),
   }),

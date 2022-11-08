@@ -21,6 +21,8 @@ export default function Profile(props) {
     activeLink: '/',
   })
 
+  console.log(props, 'ssssss')
+
   function openModal(link) {
     setOpenModalWithLink({ isOpen: true, activeLink: link })
   }
