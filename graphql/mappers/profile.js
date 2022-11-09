@@ -53,6 +53,7 @@ export async function getProfileContent() {
                   areaLabel: list.scLinkTextAssistiveFr,
                   link: list.scDestinationURLFr,
                   icon: list.scIconCSS,
+                  betaPopUp: list.schBetaPopUp,
                 }
               }),
             },
