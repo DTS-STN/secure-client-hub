@@ -60,7 +60,7 @@ export async function getMyDashboardContent() {
                     areaLabel: item.scLinkTextAssistiveFr,
                     link: item.scDestinationURLFr,
                     icon: item.scIconCSS,
-                    betaPopUp: list.schBetaPopUp,
+                    betaPopUp: item.schBetaPopUp,
                   }
                 }),
               }
