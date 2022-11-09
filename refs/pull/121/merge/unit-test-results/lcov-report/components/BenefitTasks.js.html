@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
@@ -132,10 +132,7 @@
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,16 +149,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,6 +200,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -215,29 +209,30 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 &nbsp;
 export default function <span class="fstat-no" title="function not covered" >BenefitTasks(</span>props) {
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;&gt;
-      &lt;div className="inline-block w-full"&gt;
-        &lt;h3 className="font-body font-bold text-xl" data-cy={props.dataCy}&gt;
-          {props.taskList.title}
-        &lt;/h3&gt;
-        &lt;ul
-          className="w-full pb-8 md:pb-12 pt-3 pl-2 space-y-6"
-          data-cy="taskList"
-        &gt;
-          {props.taskList.tasks.map(<span class="fstat-no" title="function not covered" >(t</span>ask, index) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return (</span>
-              &lt;li
-                key={index}
-                className="font-body font-bold"
-                data-cy="task-link"
-              &gt;
-                &lt;Link href={task.link} passHref&gt;
-                  &lt;a
-                    onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+    &lt;div className="inline-block w-full"&gt;
+      &lt;h3 className="font-body font-bold text-xl " data-cy={props.dataCy}&gt;
+        {props.taskList.title}
+      &lt;/h3&gt;
+      &lt;ul
+        className="w-full py-6 pl-2 space-y-5 md:space-y-6"
+        data-cy="taskList"
+      &gt;
+        {props.taskList.tasks.map(<span class="fstat-no" title="function not covered" >(t</span>ask, index) =&gt; {
+<span class="cstat-no" title="statement not covered" >          return (</span>
+            &lt;li key={index} className="font-body font-bold" data-cy="task-link"&gt;
+              &lt;Link href={task.link} passHref&gt;
+                &lt;a
+                  onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >                    if (task.betaPopUp) {</span>
 <span class="cstat-no" title="statement not covered" >                      e.preventDefault()</span>
 <span class="cstat-no" title="statement not covered" >                      props.openModal(task.link)</span>
-                    }}
-                    className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                    }
+                  }}
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                &gt;
+                  &lt;span
+                    aria-label={task.areaLabel}
+                    className="font-normal text-xl"
                   &gt;
                     &lt;FontAwesomeIcon
                       icon={
@@ -247,20 +242,15 @@ export default function <span class="fstat-no" title="function not covered" >Ben
                       }
                       className="pr-4 text-2xl w-8"
                     /&gt;
-                    &lt;span
-                      aria-label={task.areaLabel}
-                      className="font-normal text-xl"
-                    &gt;
-                      {task.title}
-                    &lt;/span&gt;
-                  &lt;/a&gt;
-                &lt;/Link&gt;
-              &lt;/li&gt;
-            )
-          })}
-        &lt;/ul&gt;
-      &lt;/div&gt;
-    &lt;/&gt;
+                    {task.title}
+                  &lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/Link&gt;
+            &lt;/li&gt;
+          )
+        })}
+      &lt;/ul&gt;
+    &lt;/div&gt;
   )
 }
 &nbsp;
@@ -274,6 +264,7 @@ BenefitTasks.propTypes = {
         areaLabel: PropTypes.string.isRequired,
         link: PropTypes.string.isRequired,
         icon: PropTypes.string.isRequired,
+        betaPopUp: PropTypes.bool,
       })
     ),
   }),
@@ -286,7 +277,7 @@ BenefitTasks.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Nov 08 2022 17:54:45 GMT+0000 (Coordinated Universal Time)
+                at Wed Nov 09 2022 19:20:39 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
