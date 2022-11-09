@@ -3,23 +3,26 @@ import { Heading, Link } from '@dts-stn/service-canada-design-system'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import { getSecurityContent } from '../graphql/mappers/security'
+import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import logger from '../lib/logger'
 
-export default function Security(props) {
+export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mb-10 text-lg">{props.content.subHeading}</p>
+      <p className="mb-8 text-xl font-body">{props.content.subHeading}</p>
       <Link
         id="securityQuestionsLink"
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
       />
-      <p className="mb-8 text-lg">{props.content.securityQuestions.subTitle}</p>
+      <p className="mb-8 text-xl font-body">
+        {props.content.securityQuestions.subTitle}
+      </p>
 
       <Link
         id="eiAccessCodeLink"
@@ -27,7 +30,9 @@ export default function Security(props) {
         text={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
       />
-      <p className="mb-8 text-lg">{props.content.eiAccessCode.subTitle}</p>
+      <p className="pb-7 text-xl font-body">
+        {props.content.eiAccessCode.subTitle}
+      </p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
@@ -44,13 +49,19 @@ export default function Security(props) {
 }
 
 export async function getStaticProps({ res, locale }) {
-  const content = await getSecurityContent().catch((error) => {
+  const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
     throw error
   })
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/security' : '/security'
+  const langToggleLink =
+    locale === 'en' ? '/fr/security-settings' : '/security-settings'
 
   const t = locale === 'en' ? en : fr
 
@@ -84,11 +95,12 @@ export async function getStaticProps({ res, locale }) {
       content: locale === 'en' ? content.en : content.fr,
       meta,
       breadCrumbItems,
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
     },
   }
 }
 
-Security.propTypes = {
+SecuritySettings.propTypes = {
   /**
    * current locale in the address
    */

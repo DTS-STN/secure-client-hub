@@ -4,7 +4,7 @@ const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
 
 beforeEach(() => {
-  cy.visit('/security')
+  cy.visit('/security-settings')
 })
 
 describe('Validate Security Settings page', () => {
@@ -12,7 +12,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  it('Validate French button click goes to fr/Security page', () => {
+  it('Validate French button click goes to fr/Security-settings page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.SecurityUrlFR()
   })
@@ -30,7 +30,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  it('validate that user is navigated to /fr/security page from /fr/dashboard', () => {
+  it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
@@ -99,7 +99,7 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
+  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.LookingForProfileLink().click()
     profilePo.ProfileUrlFR()
@@ -135,5 +135,14 @@ describe('Validate Security Settings page', () => {
       .EmploymentInsuranceCode()
       .should('be.visible')
       .and('not.have.attr', 'href', '#undefined')
+  })
+
+  it.skip('Validate the modal is displayed on clicking links on security settings page', () => {
+    SecurityQuestionsLink().click()
+    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.CloseModalButton().click()
+    EmploymentInsuranceCode().click()
+    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.CloseModalButton().click()
   })
 })

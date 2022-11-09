@@ -33,8 +33,8 @@ function MostRequestedSection() {
   return cy.get('[data-cy="most-requested"]')
 }
 
-function MostRequestedSectionHeading() {
-  return cy.get('[data-cy="most-requested"]')
+function MostRequestedBlueSection() {
+  return cy.get('[data-cy="most-requested-section"]')
 }
 
 function MostRequestedSectionLinks() {
@@ -86,15 +86,17 @@ function Cards() {
   return cy.get('#myDashboardContent >div')
 }
 
-function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
+function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2')
     if (cardHeader.text() === CardName) {
       cy.wrap($el).find('button').click()
-      cy.wait(1000)
+      cy.wait(500)
     }
   })
+}
 
+function ValidateCardTaskListAndSection(SectionName, NumberOfLinks) {
   Section().each(($el1, index, $list) => {
     const header = $el1.find('h3')
     if (header.text() === SectionName) {
@@ -108,15 +110,8 @@ function ValidateCardTaskListAndSection(CardName, SectionName, NumberOfLinks) {
   })
 }
 
-function ValidateMostRequestedsection(CardName, SectionName, NumberOfLinks) {
-  Cards().each(($el, index, $list) => {
-    const cardHeader = $el.find('h2')
-    if (cardHeader.text() === CardName) {
-      cy.wrap($el).find('button').click()
-      cy.wait(1000)
-    }
-  })
-  profilePo.MostReq().each(($el1, index, $list) => {
+function ValidateMostRequestedsection(SectionName, NumberOfLinks) {
+  MostRequestedBlueSection().each(($el1, index, $list) => {
     const header = $el1.find('h3')
     if (header.text() === SectionName) {
       cy.wrap($el1).find('ul').should('be.visible')
@@ -134,7 +129,59 @@ function Eachsectionheading() {
 }
 
 function Section() {
-  return cy.get('[data-cy ="Task"]>div')
+  return cy.get('[data-cy ="task-list"]>div')
+}
+
+function BetaBanner() {
+  return cy.get('[data-cy ="topBanner"]')
+}
+
+function LearnMoreABtBetaLink() {
+  return cy.get('[data-cy ="learnMoreAbtBeta"]')
+}
+
+function ExitBetaButton() {
+  return cy.get("[data-cy ='topBanner']>a>button")
+}
+
+function FirstTaskLink() {
+  return cy
+    .get("[data-cy ='task-list']>div:nth-child(1)")
+    .find('li:nth-child(1)>a:nth-child(1)')
+}
+
+function ExitBetaModal() {
+  return cy.get("[data-cy ='exitBetaModal']")
+}
+
+function StayOnBetabutton() {
+  return cy.get("[id ='modal-btn-close']")
+}
+
+function ExitBetaModalButton() {
+  return cy.get("[id ='modal-btn-continue']")
+}
+
+function CloseModalButton() {
+  return cy.get("[data-cy ='x-button']")
+}
+
+function validateExitBetaModalbuttonLink() {
+  return cy
+    .get("[data-cy ='cards']")
+    .find('li>a')
+    .each(($el1, index, $list) => {
+      cy.wrap($el1).click()
+      ExitBetaModal().should('be.visible')
+      StayOnBetabutton().click()
+      cy.wrap($el1).click()
+      ExitBetaModal()
+        .find('a')
+        .should('have.length', '1')
+        .and('not.have.length', 0)
+        .and('not.have.attr', 'href', '#undefined')
+      CloseModalButton().click()
+    })
 }
 
 module.exports = {
@@ -148,7 +195,7 @@ module.exports = {
   CardsButton,
   MostRequestedSection,
   MostRequestedSectionLinks,
-  MostRequestedSectionHeading,
+  MostRequestedBlueSection,
   Menu,
   SecuritySettingsMenu,
   ProfileMenu,
@@ -161,4 +208,14 @@ module.exports = {
   AllCardTaskSection,
   Eachsectionheading,
   Section,
+  ExpandCard,
+  BetaBanner,
+  LearnMoreABtBetaLink,
+  ExitBetaButton,
+  FirstTaskLink,
+  ExitBetaModal,
+  StayOnBetabutton,
+  ExitBetaModalButton,
+  CloseModalButton,
+  validateExitBetaModalbuttonLink,
 }

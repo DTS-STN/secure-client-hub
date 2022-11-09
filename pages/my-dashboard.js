@@ -4,18 +4,38 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import logger from '../lib/logger'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import BenefitTasks from './../components/BenefitTasks'
+import MostReqTasks from './../components/MostReqTasks'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from '../components/ExitBetaModal'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  const [openModalWithLink, setOpenModalWithLink] = React.useState({
+    isOpen: false,
+    activeLink: '/',
+  })
+
+  function openModal(link) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link })
+  }
+
+  function closeModal() {
+    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
+  }
+
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-
       {props.content.cards.map((card) => {
+        const mostReq = card.lists[0]
+        var tasks = card.lists.slice(1, card.lists.length)
         return (
           <Card
             key={card.id}
@@ -23,11 +43,45 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={t.viewMoreLessButtonCaption}
-            taskGroups={card.lists}
-            mostReq={true}
-          />
+          >
+            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
+              <MostReqTasks
+                taskListMR={mostReq}
+                dataCy="most-requested"
+                openModal={openModal}
+              />
+            </div>
+            <div
+              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
+              data-cy="task-list"
+            >
+              {tasks.map((taskList, index) => {
+                return (
+                  <div className="" key={index} data-cy="Task">
+                    <BenefitTasks
+                      taskList={taskList}
+                      dataCy="task-group-list"
+                      openModal={openModal}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </Card>
         )
       })}
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={openModalWithLink.isOpen}
+        onRequestClose={closeModal}
+        contentLabel={t.aria_exit_beta_modal}
+      >
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={t.close_modal}
+          continueLink={openModalWithLink.activeLink}
+        />
+      </Modal>
     </div>
   )
 }
@@ -39,6 +93,11 @@ export async function getServerSideProps({ req, res, locale }) {
     res.statusCode = 500
     throw error
   })
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
@@ -46,13 +105,13 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Home',
+      title: 'My Service Canada Account - Dashboard',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Accueil',
+      title: 'Mon dossier Service Canada - Tableau de Bord',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -65,6 +124,7 @@ export async function getServerSideProps({ req, res, locale }) {
       langToggleLink,
       content: locale === 'en' ? content.en : content.fr,
       meta,
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
     },
   }
 }

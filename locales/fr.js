@@ -10,7 +10,6 @@ export default {
   //
   // Header
   title: 'accueil',
-  //
   //Heading
   pageHeading: {
     title: 'Mon tableau de bord',
@@ -111,4 +110,6 @@ export default {
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   url_dashboard: '/fr/my-dashboard',
+  aria_exit_beta_modal: 'Exiting beta warning modal',
+  close_modal: 'Fermer modal',
 }

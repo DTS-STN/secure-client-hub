@@ -22,6 +22,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -30,7 +38,7 @@ describe('My Dashboard page', () => {
   const content = {
     heading: 'heading',
     paragraph: 'paragraph',
-    cards: [{ id: 'test', title: 'title', lists: 'lists' }],
+    cards: [{ id: 'test', title: 'title', lists: [] }],
   }
 
   beforeEach(() => {
@@ -58,6 +66,7 @@ describe('My Dashboard page', () => {
     expect(props).toEqual({
       props: {
         content: {},
+        bannerContent: {},
         langToggleLink: '/fr/my-dashboard',
         locale: 'en',
         meta: {
@@ -65,13 +74,13 @@ describe('My Dashboard page', () => {
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Home',
+            title: 'My Service Canada Account - Dashboard',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
-            title: 'Mon dossier Service Canada - Accueil',
+            title: 'Mon dossier Service Canada - Tableau de Bord',
           },
         },
       },

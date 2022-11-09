@@ -4,6 +4,7 @@
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
+import dashboardData from '../../cypress/fixtures/dashboardData.json'
 
 beforeEach(() => {
   cy.visit('/profile')
@@ -69,12 +70,13 @@ describe('Validate Profile page', () => {
     profilePo.CardHeading().should('be.visible')
   })
 
-  it.skip('Validate that the Test card button on profile page expands and collapses on clicking', () => {
+  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
     profilePo.CardButton().should('be.visible')
-    profilePo.CardButton().click()
-    dashboardPo.ExpandedCard().should('be.visible')
-    profilePo.CardButton().click({ force: true })
+    profilePo.ClickAllCardButtons()
     profilePo.FirstCard().should('be.visible')
+    profilePo.Section().should('be.visible')
+    profilePo.ClickAllCardButtons()
+    profilePo.Section().should('not.exist')
   })
 
   it('Validate that the "Looking for" section is present on Profile Page', () => {
@@ -90,8 +92,8 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
-    cy.wait(2000)
-    profilePo.LookingForSecurityLink().click()
+    cy.wait(3000)
+    profilePo.LookingForSecurityLink().click({ froce: true })
     securityPo.SecurityUrlEN()
     securityPo.SecurityHeaderEN()
   })
@@ -113,7 +115,7 @@ describe('Validate Profile page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security Page', () => {
+  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(2000)
     profilePo.LookingForSecurityLink().click()
@@ -136,23 +138,44 @@ describe('Validate Profile page', () => {
   })
 
   it('Validate the EI card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '6')
+    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '5')
     dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '6')
+    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '5')
   })
 
   it('Validate the CPP card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '5')
+    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '4')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection(
       'Régime de pensions du Canada',
-      '5'
+      '4'
     )
   })
 
   it('Validate the OAS card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Old Age Security', '5')
+    profilePo.ValidateCardTaskListAndSection('Old Age Security', '4')
     dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '5')
+    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '4')
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+    profilePo.ExpandCard('Employment Insurance')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
+    profilePo.ExpandCard('Canada Pension Plan')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
+    profilePo.ExpandCard('Old Age Security')
+    //This test step logic will change once we have code to show modal only for specific links
+    //its just a template and only valid till exit beta modal is displayed for all authenicated links
+    dashboardPo.validateExitBetaModalbuttonLink()
   })
 })

@@ -5,7 +5,10 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 export default function ViewMoreLessButton(props) {
   return (
     <button
-      className={'text-xl leading-8 text-deep-blue-60d  ' + props.className}
+      className={
+        'text-xl leading-8 text-deep-blue-60d hover:text-blue-hover ' +
+        props.className
+      }
       data-cy={props.dataCy}
       onClick={props.onClick}
       id={props.id}
@@ -16,15 +19,15 @@ export default function ViewMoreLessButton(props) {
         {props.icon ? (
           <FontAwesomeIcon
             icon={solid('circle-minus')}
-            className={`text-5xl pt-1 pr-3`}
+            className={`text-46px pr-3`}
           />
         ) : (
           <FontAwesomeIcon
             icon={solid('circle-plus')}
-            className={`text-5xl pt-1 pr-3`}
+            className={`text-46px pr-3`}
           />
         )}
-        <span className="text-left underline">{props.caption}</span>
+        <span className="text-left underline font-body">{props.caption}</span>
       </div>
     </button>
   )

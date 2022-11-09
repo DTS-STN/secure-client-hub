@@ -6,6 +6,9 @@ import {
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
 import { signOut } from 'next-auth/react'
+import PhaseBanner from './PhaseBanner'
+import Modal from 'react-modal'
+import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -15,9 +18,26 @@ export default function Layout(props) {
 
   const defaultBreadcrumbs = []
 
+  useEffect(() => {
+    Modal.setAppElement('#modal-root')
+  }, [])
+
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
+      {props.display.hideBanner ? (
+        ''
+      ) : (
+        <PhaseBanner
+          bannerBoldText={props.bannerContent.bannerBoldText}
+          bannerText={props.bannerContent.bannerText}
+          bannerLink={props.bannerContent.bannerLink}
+          bannerLinkHref={props.bannerContent.bannerLinkHref}
+          bannerButtonText={props.bannerContent.bannerButtonText}
+          bannerButtonLink={props.bannerContent.bannerButtonLink}
+          icon={props.bannerContent.icon}
+        ></PhaseBanner>
+      )}
       <Header
         id="header"
         lang={props.locale}
@@ -40,7 +60,9 @@ export default function Layout(props) {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
           profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-          securityPath: `${props.locale === 'en' ? '' : '/fr'}/security`,
+          securityPath: `${
+            props.locale === 'en' ? '' : '/fr'
+          }/security-settings`,
           signOutPath: '/',
         }}
         searchProps={{
@@ -56,7 +78,7 @@ export default function Layout(props) {
           <LayoutContainer>{props.children}</LayoutContainer>
         )}
       </main>
-
+      <div id="modal-root"></div>
       <Footer
         id="page-footer"
         lang={props.locale}
@@ -89,6 +111,18 @@ Layout.propTypes = {
    */
   title: PropTypes.string,
   /*
+   * bannerContent
+   */
+  bannerContent: PropTypes.shape({
+    bannerBoldText: PropTypes.string.isRequired,
+    bannerText: PropTypes.string.isRequired,
+    bannerLink: PropTypes.string.isRequired,
+    bannerLinkHref: PropTypes.string.isRequired,
+    bannerButtonText: PropTypes.string.isRequired,
+    bannerButtonLink: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+  }),
+  /*
    * Link of the page in opposite language
    */
   langToggleLink: PropTypes.string,
@@ -96,7 +130,7 @@ Layout.propTypes = {
     /*
      * Toggle use of Phase (default false)
      */
-    showPhase: PropTypes.bool,
+    hideBanner: PropTypes.bool,
     /*
      * Toggle use of DS header (default false)
      */
