@@ -166,6 +166,24 @@ function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
 
+function validateExitBetaModalbuttonLink() {
+  return cy
+    .get("[data-cy ='cards']")
+    .find('li>a')
+    .each(($el1, index, $list) => {
+      cy.wrap($el1).click()
+      ExitBetaModal().should('be.visible')
+      StayOnBetabutton().click()
+      cy.wrap($el1).click()
+      ExitBetaModal()
+        .find('a')
+        .should('have.length', '1')
+        .and('not.have.length', 0)
+        .and('not.have.attr', 'href', '#undefined')
+      CloseModalButton().click()
+    })
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -199,4 +217,5 @@ module.exports = {
   StayOnBetabutton,
   ExitBetaModalButton,
   CloseModalButton,
+  validateExitBetaModalbuttonLink,
 }
