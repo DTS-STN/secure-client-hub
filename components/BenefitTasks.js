@@ -2,9 +2,13 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function BenefitTasks(props) {
+  const newTabTaskExceptions = [
+    'https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/apply.html#gc-document-nav',
+    'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
+  ]
+
   return (
     <div className="inline-block w-full">
       <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
@@ -19,8 +23,17 @@ export default function BenefitTasks(props) {
             <li key={index} className="font-body font-bold" data-cy="task-link">
               <Link href={task.link} passHref>
                 <a
+                  target={
+                    newTabTaskExceptions.includes(task.link)
+                      ? '_blank'
+                      : '_self'
+                  }
                   onClick={(e) => {
-                    if (task.betaPopUp) {
+                    //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
+                    if (
+                      task.betaPopUp &&
+                      !newTabTaskExceptions.includes(task.link)
+                    ) {
                       e.preventDefault()
                       props.openModal(task.link)
                     }
