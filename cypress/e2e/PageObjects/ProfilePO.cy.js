@@ -95,6 +95,16 @@ function ClickAllCardButtons() {
   })
 }
 
+function ExpandCard(CardName) {
+  Cards().each(($el, index, $list) => {
+    const cardHeader = $el.find('h2')
+    if (cardHeader.text() === CardName) {
+      cy.wrap($el).find('button').click()
+      cy.wait(500)
+    }
+  })
+}
+
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
@@ -115,4 +125,5 @@ module.exports = {
   ProfileHeader,
   Section,
   ClickAllCardButtons,
+  ExpandCard,
 }
