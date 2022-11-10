@@ -23,14 +23,17 @@ export default function BenefitTasks(props) {
             <li key={index} className="font-body font-bold" data-cy="task-link">
               <Link href={task.link} passHref>
                 <a
+                  target={
+                    newTabTaskExceptions.includes(task.link)
+                      ? '_blank'
+                      : '_self'
+                  }
                   onClick={(e) => {
-                    //check for new tab exceptions
-                    if (newTabTaskExceptions.includes(task.link)) {
-                      e.preventDefault()
-                      window.open(task.link)
-                    }
-                    //check for exit beta popup flag, else keep default anchor behavior
-                    else if (task.betaPopUp) {
+                    //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
+                    if (
+                      task.betaPopUp &&
+                      !newTabTaskExceptions.includes(task.link)
+                    ) {
                       e.preventDefault()
                       props.openModal(task.link)
                     }
