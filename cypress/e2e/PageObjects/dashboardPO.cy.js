@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const profilePo = require('../PageObjects/ProfilePO.cy')
+import dashboardData from '../../fixtures/dashboardData.json'
 
 function dashboardHeader() {
   return cy.get('#my-dashboard-heading')
@@ -166,21 +167,52 @@ function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
 
-function validateExitBetaModalbuttonLink() {
+function getcardNumber() {
+  var a = []
+  var NumberOfCards
+  dashboardData.forEach((card) => {
+    NumberOfCards = a.push(card)
+  })
+  return NumberOfCards
+}
+
+function validateExitBetaModalbuttonLink(SectionName, LinkName) {
   return cy
-    .get("[data-cy ='cards']")
-    .find('li>a')
+    .get('[data-cy="sectionList"]')
+    .find('div>div')
     .each(($el1, index, $list) => {
-      cy.wrap($el1).click()
-      ExitBetaModal().should('be.visible')
-      StayOnBetabutton().click()
-      cy.wrap($el1).click()
-      ExitBetaModal()
-        .find('a')
-        .should('have.length', '1')
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-      CloseModalButton().click()
+      const heading = $el1.find('h3')
+      cy.log(heading.text())
+      if (heading.text() == SectionName) {
+        cy.log('Heading found')
+        cy.wrap($el1)
+          .find('a')
+          .each(($el2, index, $list) => {
+            const linkText = $el2.find('span')
+            if (linkText.text() == LinkName) {
+              cy.log('Link found')
+              cy.wrap($el2).click()
+              ExitBetaModal().should('be.visible')
+              StayOnBetabutton().click()
+              cy.wrap($el2).click()
+              ExitBetaModal()
+                .find('a')
+                .should('have.length', '1')
+                .and('not.have.length', 0)
+                .and('not.have.attr', 'href', '#undefined')
+              CloseModalButton().click()
+            }
+          })
+      }
+      //ExitBetaModal().should('be.visible')
+      //StayOnBetabutton().click()
+      // cy.wrap($el1).click()
+      // ExitBetaModal()
+      //.find('a')
+      // .should('have.length', '1')
+      // .and('not.have.length', 0)
+      //  .and('not.have.attr', 'href', '#undefined')
+      // CloseModalButton().click()
     })
 }
 
@@ -218,4 +250,5 @@ module.exports = {
   ExitBetaModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
+  getcardNumber,
 }
