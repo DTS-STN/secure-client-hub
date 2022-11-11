@@ -2,12 +2,28 @@ import propTypes from 'prop-types'
 import { Button } from '@dts-stn/service-canada-design-system'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from './ExitBetaModal'
 
 /**
  * Displays the PhaseBanner on the page
  */
 
 export default function PhaseBanner(props) {
+  const [openModalWithLink, setOpenModalWithLink] = React.useState({
+    isOpen: false,
+    activeLink: '/',
+  })
+
+  function openModal(link) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link })
+  }
+
+  function closeModal() {
+    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
+  }
+
   return (
     <div className="bg-brighter-blue-medium">
       <div
@@ -28,7 +44,7 @@ export default function PhaseBanner(props) {
           </a>
         </div>
         <a
-          href={props.bannerButtonLink}
+          href={'#'}
           className="max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
         >
           <Button
@@ -36,9 +52,26 @@ export default function PhaseBanner(props) {
             styling="primary"
             text={props.bannerButtonText}
             className="text-sm"
+            onClick={(e) => {
+              e.preventDefault()
+              openModal(props.bannerButtonLink)
+            }}
           ></Button>
         </a>
       </div>
+
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={openModalWithLink.isOpen}
+        onRequestClose={closeModal}
+        contentLabel={'Lorem Upsum Text'}
+      >
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={'Lorem Upsum Text'}
+          continueLink={openModalWithLink.activeLink}
+        />
+      </Modal>
     </div>
   )
 }
