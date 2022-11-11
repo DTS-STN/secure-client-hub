@@ -67,7 +67,6 @@ describe('Validate dashboard page', () => {
 
   it.skip('Validate the EI,CPP and OAS card sections in FR', () => {
     dashboardPo.FrenchButton().click()
-    //dashboardPo.getcardNumber()
     cy.wait(1000)
     for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
       const CardName = dashboardData[i].CardNameFR
@@ -139,8 +138,6 @@ describe('Validate dashboard page', () => {
     for (let i = 0; i < NumberOfSections; i++) {
       var links = dashboardData[0].BetaTest[i].Links
       for (let j = 0; j < links.length; j++) {
-        //cy.log(dashboardData[0].BetaTest[i].Links[j])
-        //cy.log(links)
         dashboardPo.validateExitBetaModalbuttonLink(
           dashboardData[0].BetaTest[i].sectionName,
           dashboardData[0].BetaTest[i].Links[j]
