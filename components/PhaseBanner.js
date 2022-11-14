@@ -24,7 +24,10 @@ export default function PhaseBanner(props) {
             className="text-deep-blue-dark hover:text-blue-hover"
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
-            <FontAwesomeIcon icon={icon[props.icon]}></FontAwesomeIcon>
+            <FontAwesomeIcon
+              width="14"
+              icon={icon[props.icon]}
+            ></FontAwesomeIcon>
           </a>
         </div>
         <a
