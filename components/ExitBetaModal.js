@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 export default function ExitBetaModal(props) {
+  console.log(props, 'f')
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
@@ -28,8 +29,7 @@ export default function ExitBetaModal(props) {
         </button>
       </div>
       <p className="text-xl font-display py-4 mr-10">
-        Thank you for trying the beta version. You are now returning to My
-        Service Canada Account home page.
+        {props.content.bannerText}
       </p>
       <div className="md:flex mt-8 md:space-x-12 space-y-6 md:space-y-0">
         <Button
@@ -44,7 +44,7 @@ export default function ExitBetaModal(props) {
             className="w-full block md:w-fit"
             id={'modal-btn-continue'}
             styling="primary"
-            text="Exit beta version"
+            text={props.content.bannerButtonText}
           />
         </Link>
       </div>

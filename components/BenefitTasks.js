@@ -4,10 +4,7 @@ import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
 
 export default function BenefitTasks(props) {
-  const newTabTaskExceptions = [
-    'https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/apply.html#gc-document-nav',
-    'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
-  ]
+  const newTabTaskExceptions = []
 
   return (
     <div className="inline-block w-full">

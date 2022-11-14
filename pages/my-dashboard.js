@@ -13,6 +13,7 @@ import React from 'react'
 import ExitBeta from '../components/ExitBetaModal'
 
 export default function MyDashboard(props) {
+  console.log(props, 'aaaaaaa')
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -76,6 +77,7 @@ export default function MyDashboard(props) {
         contentLabel={t.aria_exit_beta_modal}
       >
         <ExitBeta
+          content={{ ...props.bannerContent }}
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}

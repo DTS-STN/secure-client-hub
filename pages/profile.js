@@ -76,6 +76,7 @@ export default function Profile(props) {
       >
         <ExitBeta
           closeModal={closeModal}
+          content={{ ...props.bannerContent }}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
         />
