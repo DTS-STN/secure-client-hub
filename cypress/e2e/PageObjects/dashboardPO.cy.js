@@ -194,23 +194,40 @@ function validateExitBetaModalbuttonLink(SectionName, LinkName) {
               StayOnBetabutton().click()
               cy.wrap($el2).click()
               ExitBetaModal().should('be.visible')
-              // .find('a')
-              //.should('have.length', '1')
-              //.and('not.have.length', 0)
-              //.and('not.have.attr', 'href', '#undefined')
               CloseModalButton().click()
             }
           })
       }
-      //ExitBetaModal().should('be.visible')
-      //StayOnBetabutton().click()
-      // cy.wrap($el1).click()
-      // ExitBetaModal()
-      //.find('a')
-      // .should('have.length', '1')
-      // .and('not.have.length', 0)
-      //  .and('not.have.attr', 'href', '#undefined')
-      // CloseModalButton().click()
+    })
+}
+
+function ClickUpdatemyProfileLink() {
+  return cy
+    .get("[data-cy='task-list']")
+    .find('a')
+    .each(($el1, index, $list) => {
+      const text = $el1.find('span')
+      if (text.text() == 'Update my profile') {
+        cy.wrap($el1).click()
+        profilePo.ProfileUrlEN()
+        profilePo.ProfileHeaderEN()
+        cy.go('back')
+      }
+    })
+}
+
+function ClickCompleteMyReportOrApplyEILink() {
+  return cy
+    .get("[data-cy='task-list']")
+    .find('a')
+    .each(($el1, index, $list) => {
+      const text = $el1.find('span')
+      if (text.text() == 'Complete my report') {
+        cy.wrap($el1).should('have.attr', 'target', '_blank')
+      }
+      //if(text.text() =='Apply for Employment Insurance'){
+      // cy.wrap($el1).should('have.attr','target','_blank')
+      // }
     })
 }
 
@@ -249,4 +266,6 @@ module.exports = {
   CloseModalButton,
   validateExitBetaModalbuttonLink,
   getcardNumber,
+  ClickUpdatemyProfileLink,
+  ClickCompleteMyReportOrApplyEILink,
 }

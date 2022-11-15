@@ -46,7 +46,7 @@
         "Links": [
           "View my payments",
           "View my latest claim",
-          "View my past claim"
+          "View my past claims"
         ]
       },
       {
@@ -121,8 +121,8 @@
         "sectionName": "Applications",
         "Links": [
           "View my status updates",
-          "Apply for Canada Pension Plan",
-          "Apply for Canada Pension Plan",
+
+          "Apply for Canada Pension Plan Disability",
           " Apply for Canada Pension Plan Death Benefits",
           "Apply for Canada Pension Plan Survivor's Pension and Children's Benefit",
           "Apply for Canada Pension Plan Survivor's Pension and Children's Benefit aged 18 to 25"
@@ -163,10 +163,7 @@
       },
       {
         "sectionName": "Personal information",
-        "Links": [
-          "Update my profile",
-          "Give consent to communicate on my behalf"
-        ]
+        "Links": ["Give consent to communicate on my behalf"]
       }
     ]
   },
@@ -231,10 +228,7 @@
       },
       {
         "sectionName": "Personal information",
-        "Links": [
-          "Update my profile",
-          "Give consent to communicate on my behalf"
-        ]
+        "Links": ["Give consent to communicate on my behalf"]
       }
     ]
   }
