@@ -31,6 +31,27 @@
           scContentEn {
             json
           }
+          scFragments{
+              ... on SCHTaskv1Model{
+                  scId
+                  scLinkTextEn
+                  scLinkTextFr
+                  scLinkTextAssistiveEn
+                  scLinkTextAssistiveFr
+                  scDestinationURLEn
+                  scDestinationURLFr
+                  scDescriptionEn{
+                      json
+                  }
+                  scDescriptionFr{
+                      json
+                  }
+                  scButtonType
+                  scIconCSS
+                  scShortTitleEn
+                  scShortTitleFr
+              }
+          }
         }
       }
     }
