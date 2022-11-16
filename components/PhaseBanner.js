@@ -50,32 +50,27 @@ export default function PhaseBanner(props) {
             ></FontAwesomeIcon>
           </a>
         </div>
-        <a
-          href={'#'}
-          className="max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
-        >
-          <Button
-            id="bannerButton"
-            styling="primary"
-            text={props.bannerButtonText}
-            className="font-body text-xl whitespace-nowrap"
-            onClick={(e) => {
-              e.preventDefault()
-              openModal(props.bannerButtonLink)
-            }}
-          ></Button>
-        </a>
+        <Button
+          id="bannerButton"
+          styling="primary"
+          text={props.bannerButtonText}
+          className="font-body text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
+          onClick={(e) => {
+            e.preventDefault()
+            openModal(props.bannerButtonLink)
+          }}
+        ></Button>
       </div>
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
-        contentLabel={'Lorem Upsum Text'}
+        contentLabel={'Modal'}
       >
         <ExitBeta
           closeModal={closeModal}
-          closeModalAria={'Lorem Upsum Text'}
+          closeModalAria={props.bannerButtonText}
           continueLink={openModalWithLink.activeLink}
         />
       </Modal>

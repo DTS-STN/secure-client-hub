@@ -14,8 +14,7 @@ export async function getBetaBannerContent() {
       bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLEn,
       bannerButtonText: resOptOutContent.scFragments[1].scLinkTextEn,
       bannerButtonLink:
-        resOptOutContent.scFragments[1].scDestinationURLEn ||
-        'https://en.wikipedia.org',
+        resOptOutContent.scFragments[1].scDestinationURLEn || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
     },
     fr: {
@@ -25,8 +24,7 @@ export async function getBetaBannerContent() {
       bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLFr,
       bannerButtonText: resOptOutContent.scFragments[1].scLinkTextFr,
       bannerButtonLink:
-        resOptOutContent.scFragments[1].scDestinationURLFr ||
-        'https://en.wikipedia.org',
+        resOptOutContent.scFragments[1].scDestinationURLFr || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
     },
   }
