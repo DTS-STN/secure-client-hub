@@ -15,16 +15,23 @@ export default function PhaseBanner(props) {
         data-cy="topBanner"
       >
         <div className="pb-4 md:pb-0">
-          <p role="alert" className="pb-2 md:pb-7" data-cy="learnMoreAbtBeta">
-            <span className="font-medium">{props.bannerBoldText} </span>
+          <p
+            role="alert"
+            className="pb-2 md:pb-7 font-body text-xl"
+            data-cy="learnMoreAbtBeta"
+          >
+            <span className="font-bold">{props.bannerBoldText} </span>
             {props.bannerText}
           </p>
           <a
             href={props.bannerLinkHref}
-            className="text-deep-blue-dark hover:text-blue-hover"
+            className="font-body text-xl text-deep-blue-dark hover:text-blue-hover"
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
-            <FontAwesomeIcon icon={icon[props.icon]}></FontAwesomeIcon>
+            <FontAwesomeIcon
+              width="14"
+              icon={icon[props.icon]}
+            ></FontAwesomeIcon>
           </a>
         </div>
         <a
@@ -35,7 +42,7 @@ export default function PhaseBanner(props) {
             id="bannerButton"
             styling="primary"
             text={props.bannerButtonText}
-            className="text-sm"
+            className="font-body text-xl whitespace-nowrap"
           ></Button>
         </a>
       </div>
