@@ -168,8 +168,8 @@ function CloseModalButton() {
 }
 
 function getcardNumber() {
-  var a = []
-  var NumberOfCards
+  const a = []
+  let NumberOfCards
   dashboardData.forEach((card) => {
     NumberOfCards = a.push(card)
   })
@@ -183,7 +183,7 @@ function validateExitBetaModalbuttonLink(SectionName, LinkName) {
     .each(($el1, index, $list) => {
       const heading = $el1.find('h3')
 
-      if (heading.text() == SectionName) {
+      if (heading.text() === SectionName) {
         cy.wrap($el1)
           .find('a')
           .each(($el2, index, $list) => {
@@ -207,7 +207,7 @@ function ClickUpdatemyProfileLink() {
     .find('a')
     .each(($el1, index, $list) => {
       const text = $el1.find('span')
-      if (text.text() == 'Update my profile') {
+      if (text.text() === 'Update my profile') {
         cy.wrap($el1).click()
         profilePo.ProfileUrlEN()
         profilePo.ProfileHeaderEN()
@@ -222,7 +222,7 @@ function ClickCompleteMyReportOrApplyEILink() {
     .find('a')
     .each(($el1, index, $list) => {
       const text = $el1.find('span')
-      if (text.text() == 'Complete my report') {
+      if (text.text() === 'Complete my report') {
         cy.wrap($el1).should('have.attr', 'target', '_blank')
       }
       //if(text.text() =='Apply for Employment Insurance'){
