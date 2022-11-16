@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668530725026" clover="3.2.0">
-  <project timestamp="1668530725026" name="All files">
+<coverage generated="1668632042632" clover="3.2.0">
+  <project timestamp="1668632042632" name="All files">
     <metrics statements="109" coveredstatements="52" conditionals="62" coveredconditionals="27" methods="49" coveredmethods="22" elements="220" coveredelements="101" complexity="0" loc="109" ncloc="109" packages="3" files="20" classes="20"/>
     <package name="components">
       <metrics statements="50" coveredstatements="33" conditionals="40" coveredconditionals="21" methods="23" coveredmethods="12"/>
@@ -14,10 +14,10 @@
         <line num="7" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
@@ -74,7 +74,7 @@
       <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="11" count="2" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
       </file>
       <file name="ProfileTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ProfileTasks.js">
         <metrics statements="6" coveredstatements="3" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
