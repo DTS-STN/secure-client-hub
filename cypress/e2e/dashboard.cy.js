@@ -126,13 +126,8 @@ describe('Validate dashboard page', () => {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Employment Insurance') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
-        let a = []
-        let NumberOfSections
-        dashboardData[k].BetaTest.forEach((section) => {
-          NumberOfSections = a.push(section)
-        })
 
-        for (let i = 0; i < NumberOfSections; i++) {
+        for (let i = 0; i <  dashboardData[k].BetaTest.length; i++) {
           let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
             dashboardPo.validateExitBetaModalbuttonLink(
