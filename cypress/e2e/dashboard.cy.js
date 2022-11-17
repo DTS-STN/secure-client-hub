@@ -52,7 +52,7 @@ describe('Validate dashboard page', () => {
   })
 
   it('Validate the EI,CPP and OAS card sections in EN', () => {
-    for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
+    for (let i = 0; i < dashboardPo.length; i++) {
       const CardName = dashboardData[i].CardNameEN
       dashboardPo.ExpandCard(CardName)
       dashboardData[i].Section.forEach((section) => {
@@ -68,7 +68,7 @@ describe('Validate dashboard page', () => {
   it('Validate the EI,CPP and OAS card sections in FR', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(1000)
-    for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
+    for (let i = 0; i < dashboardPo.length; i++) {
       const CardName = dashboardData[i].CardNameFR
       dashboardPo.ExpandCard(CardName)
       dashboardData[i].Section.forEach((section) => {
@@ -93,9 +93,9 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it.skip('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
+  it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
     dashboardPo.FrenchButton().click()
-    for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
+    for (let i = 0; i < dashboardPo.length; i++) {
       const CardName = dashboardData[i].CardNameFR
       dashboardPo.ExpandCard(CardName)
       dashboardPo.ValidateMostRequestedsection(
@@ -151,7 +151,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
     for (let k = 0; k < 3; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Canada Pension Plan') {

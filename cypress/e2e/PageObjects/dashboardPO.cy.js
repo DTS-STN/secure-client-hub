@@ -167,15 +167,6 @@ function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
 
-function getcardNumber() {
-  let a = []
-  let NumberOfCards
-  dashboardData.forEach((card) => {
-    NumberOfCards = a.push(card)
-  })
-  return NumberOfCards
-}
-
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {
   return cy
     .get('[data-cy="sectionList"]')
@@ -265,7 +256,6 @@ module.exports = {
   ExitBetaModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
-  getcardNumber,
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
 }
