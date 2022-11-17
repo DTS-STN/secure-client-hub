@@ -142,7 +142,7 @@ function LearnMoreABtBetaLink() {
 }
 
 function ExitBetaButton() {
-  return cy.get("[data-cy ='topBanner']>a>button")
+  return cy.get("[data-cy ='topBanner']>button")
 }
 
 function FirstTaskLink() {
@@ -168,9 +168,10 @@ function CloseModalButton() {
 }
 
 function getcardNumber() {
-  let NumberOfCards =[]
+  let a = []
+  let NumberOfCards
   dashboardData.forEach((card) => {
-    NumberOfCards.push(card)
+    NumberOfCards = a.push(card)
   })
   return NumberOfCards
 }
@@ -187,7 +188,7 @@ function validateExitBetaModalbuttonLink(SectionName, LinkName) {
           .find('a')
           .each(($el2, index, $list) => {
             const linkText = $el2.find('span')
-            if (linkText.text() == LinkName) {
+            if (linkText.text() === LinkName) {
               cy.wrap($el2).click()
               ExitBetaModal().should('be.visible')
               StayOnBetabutton().click()

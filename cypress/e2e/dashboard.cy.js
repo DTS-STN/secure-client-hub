@@ -82,7 +82,7 @@ describe('Validate dashboard page', () => {
   })
 
   it('Validate the "Most requested"section on EI,CPP and OAS cards in English', () => {
-    for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
+    for (let i = 0; i < dashboardPo.length; i++) {
       const CardName = dashboardData[i].CardNameEN
       dashboardPo.ExpandCard(CardName)
       dashboardPo.ValidateMostRequestedsection(
@@ -93,7 +93,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
+  it.skip('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
     dashboardPo.FrenchButton().click()
     for (let i = 0; i < dashboardPo.getcardNumber(); i++) {
       const CardName = dashboardData[i].CardNameFR
@@ -129,17 +129,17 @@ describe('Validate dashboard page', () => {
 
   it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
     for (let k = 0; k < 3; k++) {
-      var CardName = dashboardData[k].CardNameEN
-      if (CardName == 'Employment Insurance') {
+      let CardName = dashboardData[k].CardNameEN
+      if (CardName === 'Employment Insurance') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
-        var a = []
-        var NumberOfSections
+        let a = []
+        let NumberOfSections
         dashboardData[k].BetaTest.forEach((section) => {
           NumberOfSections = a.push(section)
         })
 
         for (let i = 0; i < NumberOfSections; i++) {
-          var links = dashboardData[k].BetaTest[i].Links
+          let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
             dashboardPo.validateExitBetaModalbuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
@@ -151,19 +151,19 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
     for (let k = 0; k < 3; k++) {
-      var CardName = dashboardData[k].CardNameEN
-      if (CardName == 'Canada Pension Plan') {
+      let CardName = dashboardData[k].CardNameEN
+      if (CardName === 'Canada Pension Plan') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
-        var a = []
-        var NumberOfSections
+        let a = []
+        let NumberOfSections = []
         dashboardData[k].BetaTest.forEach((section) => {
           NumberOfSections = a.push(section)
         })
 
         for (let i = 0; i < NumberOfSections; i++) {
-          var links = dashboardData[k].BetaTest[i].Links
+          let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
             dashboardPo.validateExitBetaModalbuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
@@ -177,17 +177,17 @@ describe('Validate dashboard page', () => {
 
   it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     for (let k = 0; k < 3; k++) {
-      var CardName = dashboardData[k].CardNameEN
-      if (CardName == 'Old Age Security') {
+      let CardName = dashboardData[k].CardNameEN
+      if (CardName === 'Old Age Security') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
-        var a = []
-        var NumberOfSections
+        let a = []
+        let NumberOfSections
         dashboardData[k].BetaTest.forEach((section) => {
           NumberOfSections = a.push(section)
         })
 
         for (let i = 0; i < NumberOfSections; i++) {
-          var links = dashboardData[k].BetaTest[i].Links
+          let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
             dashboardPo.validateExitBetaModalbuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
