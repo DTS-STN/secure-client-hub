@@ -112,12 +112,6 @@ describe('Validate dashboard page', () => {
     dashboardPo.ExitBetaButton().should('be.visible')
   })
 
-  it.skip('Validate Beta Version Banner is present on Dashboard', () => {
-    dashboardPo.BetaBanner().should('be.visible')
-    dashboardPo.LearnMoreABtBetaLink().should('be.visible')
-    dashboardPo.ExitBetaButton().should('be.visible')
-  })
-
   it.skip('Validate Exit Beta Version Popup UI', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.FirstTaskLink().click()
@@ -128,7 +122,7 @@ describe('Validate dashboard page', () => {
   })
 
   it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
-    for (let k = 0; k < 3; k++) {
+    for (let k = 0; k < dashboardPo.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Employment Insurance') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
@@ -152,7 +146,7 @@ describe('Validate dashboard page', () => {
   })
 
   it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
-    for (let k = 0; k < 3; k++) {
+    for (let k = 0; k < dashboardPo.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Canada Pension Plan') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
@@ -176,7 +170,7 @@ describe('Validate dashboard page', () => {
   })
 
   it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
-    for (let k = 0; k < 3; k++) {
+    for (let k = 0; k < dashboardPo.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Old Age Security') {
         dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
@@ -200,7 +194,7 @@ describe('Validate dashboard page', () => {
   })
 
   it.skip('Validate that the clicking Update my Profile link on EI,CPP,OAS card navigates to profile page', () => {
-    for (let k = 0; k < 3; k++) {
+    for (let k = 0; k < dashboardPo.length; k++) {
       dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
       dashboardPo.ClickUpdatemyProfileLink()
     }
