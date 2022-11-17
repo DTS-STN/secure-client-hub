@@ -2,12 +2,28 @@ import propTypes from 'prop-types'
 import { Button } from '@dts-stn/service-canada-design-system'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
+import Modal from 'react-modal'
+import React from 'react'
+import ExitBeta from './ExitBetaModal'
 
 /**
  * Displays the PhaseBanner on the page
  */
 
 export default function PhaseBanner(props) {
+  const [openModalWithLink, setOpenModalWithLink] = React.useState({
+    isOpen: false,
+    activeLink: '/',
+  })
+
+  function openModal(link) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link })
+  }
+
+  function closeModal() {
+    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
+  }
+
   return (
     <div className="bg-brighter-blue-medium">
       <div
@@ -34,18 +50,30 @@ export default function PhaseBanner(props) {
             ></FontAwesomeIcon>
           </a>
         </div>
-        <a
-          href={props.bannerButtonLink}
-          className="max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
-        >
-          <Button
-            id="bannerButton"
-            styling="primary"
-            text={props.bannerButtonText}
-            className="font-body text-xl whitespace-nowrap"
-          ></Button>
-        </a>
+        <Button
+          id="bannerButton"
+          styling="primary"
+          text={props.bannerButtonText}
+          className="font-body text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
+          onClick={(e) => {
+            e.preventDefault()
+            openModal(props.bannerButtonLink)
+          }}
+        ></Button>
       </div>
+
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={openModalWithLink.isOpen}
+        onRequestClose={closeModal}
+        contentLabel={'Modal'}
+      >
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={props.bannerButtonText}
+          continueLink={openModalWithLink.activeLink}
+        />
+      </Modal>
     </div>
   )
 }
