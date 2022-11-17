@@ -168,10 +168,9 @@ function CloseModalButton() {
 }
 
 function getcardNumber() {
-  const a = []
-  let NumberOfCards
+  let NumberOfCards =[]
   dashboardData.forEach((card) => {
-    NumberOfCards = a.push(card)
+    NumberOfCards.push(card)
   })
   return NumberOfCards
 }
