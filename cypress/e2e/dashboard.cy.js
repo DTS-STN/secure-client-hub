@@ -52,7 +52,7 @@ describe('Validate dashboard page', () => {
   })
 
   it('Validate the EI,CPP and OAS card sections in EN', () => {
-    for (let i = 0; i < dashboardPo.length; i++) {
+    for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameEN
       dashboardPo.ExpandCard(CardName)
       dashboardData[i].Section.forEach((section) => {
