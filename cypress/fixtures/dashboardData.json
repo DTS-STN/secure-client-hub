@@ -31,6 +31,47 @@
         "sectionNameFR": "Renseignements personnels",
         "NumberOfLinks": "4"
       }
+    ],
+    "BetaTest": [
+      {
+        "sectionName": "Most requested",
+        "Links": ["View my status updates", "View my payments"]
+      },
+      {
+        "sectionName": "Applications",
+        "Links": ["View my status updates"]
+      },
+      {
+        "sectionName": "Payments and claims",
+        "Links": [
+          "View my payments",
+          "View my latest claim",
+          "View my past claims"
+        ]
+      },
+      {
+        "sectionName": "Taxes",
+        "Links": ["View my tax slips", "Change my tax slip delivery options"]
+      },
+      {
+        "sectionName": "Reports and documents",
+        "Links": [
+          "View my records of employment",
+          "View my documents",
+          "View my letters",
+          "Submit documents",
+          "Submit eForms",
+          "Report a mistake"
+        ]
+      },
+      {
+        "sectionName": "Personal information",
+        "Links": [
+          "Manage email notifications (Alert me)",
+          "Get my access code",
+          "View my agreement status (self-employed)"
+        ]
+      }
     ]
   },
   {
@@ -70,6 +111,60 @@
         "sectionNameFR": "Renseignements personnels",
         "NumberOfLinks": "2"
       }
+    ],
+    "BetaTest": [
+      {
+        "sectionName": "Most requested",
+        "Links": ["View my status updates", "View my payments"]
+      },
+      {
+        "sectionName": "Applications",
+        "Links": [
+          "View my status updates",
+
+          "Apply for Canada Pension Plan Disability",
+          " Apply for Canada Pension Plan Death Benefits",
+          "Apply for Canada Pension Plan Survivor's Pension and Children's Benefit",
+          "Apply for Canada Pension Plan Survivor's Pension and Children's Benefit aged 18 to 25"
+        ]
+      },
+      {
+        "sectionName": "Payments",
+        "Links": [
+          "View my payments",
+          "View my contributions",
+          "Estimate my retirement income",
+          "Request a review of a decision"
+        ]
+      },
+      {
+        "sectionName": "Taxes",
+        "Links": [
+          "View my tax slips",
+          "Change my tax slip delivery options",
+          "Change my tax deductions"
+        ]
+      },
+      {
+        "sectionName": "Documents",
+        "Links": [
+          "Submit documents for Canada Pension Plan Disability",
+          "Submit a declaration of attendance at school or university"
+        ]
+      },
+      {
+        "sectionName": "Provisions",
+        "Links": [
+          "Request child-rearing provisions",
+          "View my child-rearing provisions",
+          "Apply for Canada Pension Plan credit split",
+          "Apply for Canada Pension Plan sharing "
+        ]
+      },
+      {
+        "sectionName": "Personal information",
+        "Links": ["Give consent to communicate on my behalf"]
+      }
     ]
   },
   {
@@ -98,6 +193,42 @@
         "sectionNameEN": "Personal information",
         "sectionNameFR": "Renseignements personnels",
         "NumberOfLinks": "2"
+      }
+    ],
+    "BetaTest": [
+      {
+        "sectionName": "Most requested",
+        "Links": ["View my status updates", "View my payments"]
+      },
+      {
+        "sectionName": "Applications",
+        "Links": [
+          "View my status updates",
+          "Apply for Old Age Security and Guaranteed Income Supplement",
+          "Apply for Guaranteed Income Supplement",
+          "Apply for Allowance or Allowance for the Survivor"
+        ]
+      },
+      {
+        "sectionName": "Payments",
+        "Links": [
+          "View my payments",
+          "Delay receiving Old Age Security",
+          "Estimate my retirement income",
+          "Request a review of a decision"
+        ]
+      },
+      {
+        "sectionName": "Taxes",
+        "Links": [
+          "View my tax slips",
+          "Change my tax slip delivery options",
+          "Change my tax deductions"
+        ]
+      },
+      {
+        "sectionName": "Personal information",
+        "Links": ["Give consent to communicate on my behalf"]
       }
     ]
   }

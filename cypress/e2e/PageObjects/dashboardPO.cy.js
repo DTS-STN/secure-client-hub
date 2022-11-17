@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const profilePo = require('../PageObjects/ProfilePO.cy')
+import dashboardData from '../../fixtures/dashboardData.json'
 
 function dashboardHeader() {
   return cy.get('#my-dashboard-heading')
@@ -166,21 +167,58 @@ function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
 
-function validateExitBetaModalbuttonLink() {
+function validateExitBetaModalbuttonLink(SectionName, LinkName) {
   return cy
-    .get("[data-cy ='cards']")
-    .find('li>a')
+    .get('[data-cy="sectionList"]')
+    .find('div>div')
     .each(($el1, index, $list) => {
-      cy.wrap($el1).click()
-      ExitBetaModal().should('be.visible')
-      StayOnBetabutton().click()
-      cy.wrap($el1).click()
-      ExitBetaModal()
-        .find('a')
-        .should('have.length', '1')
-        .and('not.have.length', 0)
-        .and('not.have.attr', 'href', '#undefined')
-      CloseModalButton().click()
+      const heading = $el1.find('h3')
+
+      if (heading.text() === SectionName) {
+        cy.wrap($el1)
+          .find('a')
+          .each(($el2, index, $list) => {
+            const linkText = $el2.find('span')
+            if (linkText.text() === LinkName) {
+              cy.wrap($el2).click()
+              ExitBetaModal().should('be.visible')
+              StayOnBetabutton().click()
+              cy.wrap($el2).click()
+              ExitBetaModal().should('be.visible')
+              CloseModalButton().click()
+            }
+          })
+      }
+    })
+}
+
+function ClickUpdatemyProfileLink() {
+  return cy
+    .get("[data-cy='task-list']")
+    .find('a')
+    .each(($el1, index, $list) => {
+      const text = $el1.find('span')
+      if (text.text() === 'Update my profile') {
+        cy.wrap($el1).click()
+        profilePo.ProfileUrlEN()
+        profilePo.ProfileHeaderEN()
+        cy.go('back')
+      }
+    })
+}
+
+function ClickCompleteMyReportOrApplyEILink() {
+  return cy
+    .get("[data-cy='task-list']")
+    .find('a')
+    .each(($el1, index, $list) => {
+      const text = $el1.find('span')
+      if (text.text() === 'Complete my report') {
+        cy.wrap($el1).should('have.attr', 'target', '_blank')
+      }
+      //if(text.text() =='Apply for Employment Insurance'){
+      // cy.wrap($el1).should('have.attr','target','_blank')
+      // }
     })
 }
 
@@ -218,4 +256,6 @@ module.exports = {
   ExitBetaModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
+  ClickUpdatemyProfileLink,
+  ClickCompleteMyReportOrApplyEILink,
 }
