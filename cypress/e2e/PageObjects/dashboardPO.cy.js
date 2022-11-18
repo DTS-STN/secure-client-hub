@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 const profilePo = require('../PageObjects/ProfilePO.cy')
-import dashboardData from '../../fixtures/dashboardData.json'
 
 function dashboardHeader() {
   return cy.get('#my-dashboard-heading')

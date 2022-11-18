@@ -72,6 +72,11 @@ export default function PhaseBanner(props) {
           closeModal={closeModal}
           closeModalAria={props.bannerButtonText}
           continueLink={openModalWithLink.activeLink}
+          popupId={props.popupContent.popupId}
+          popupTitle={props.popupContent.popupTitle}
+          popupDescription={props.popupContent.popupDescription}
+          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
         />
       </Modal>
     </div>
@@ -107,4 +112,20 @@ PhaseBanner.propTypes = {
    * Icon Text
    */
   icon: propTypes.string,
+  /**
+   * Popup content
+   */
+  popupContent: propTypes.shape({
+    popupId: propTypes.string.isRequired,
+    popupTitle: propTypes.string.isRequired,
+    popupDescription: propTypes.string.isRequired,
+    popupPrimaryBtn: propTypes.shape({
+      id: propTypes.string.isRequired,
+      text: propTypes.string.isRequired,
+    }),
+    popupSecondaryBtn: propTypes.shape({
+      id: propTypes.string.isRequired,
+      text: propTypes.string.isRequired,
+    }),
+  }),
 }
