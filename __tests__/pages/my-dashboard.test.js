@@ -73,7 +73,6 @@ describe('My Dashboard page', () => {
       ],
     },
   }
-  const popupContent = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
