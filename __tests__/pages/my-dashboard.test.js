@@ -30,6 +30,14 @@ jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -83,6 +91,7 @@ describe('My Dashboard page', () => {
             title: 'Mon dossier Service Canada - Tableau de Bord',
           },
         },
+        popupContent: {},
       },
     })
   })

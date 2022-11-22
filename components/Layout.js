@@ -36,6 +36,7 @@ export default function Layout(props) {
           bannerButtonText={props.bannerContent.bannerButtonText}
           bannerButtonLink={props.bannerContent.bannerButtonLink}
           icon={props.bannerContent.icon}
+          popupContent={props.popupContent}
         ></PhaseBanner>
       )}
       <Header
@@ -121,6 +122,22 @@ Layout.propTypes = {
     bannerButtonText: PropTypes.string.isRequired,
     bannerButtonLink: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
+  }),
+  /*
+   * popupContent
+   */
+  popupContent: PropTypes.shape({
+    popupId: PropTypes.string.isRequired,
+    popupTitle: PropTypes.string.isRequired,
+    popupDescription: PropTypes.string.isRequired,
+    popupPrimaryBtn: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+    popupSecondaryBtn: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
   }),
   /*
    * Link of the page in opposite language

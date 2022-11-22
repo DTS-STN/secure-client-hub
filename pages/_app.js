@@ -15,6 +15,7 @@ export default function MyApp({ Component, pageProps }) {
       langToggleLink={pageProps.langToggleLink}
       breadCrumbItems={pageProps.breadCrumbItems}
       bannerContent={pageProps.bannerContent}
+      popupContent={pageProps.popupContent}
       display={display}
     >
       <Component {...pageProps} />

@@ -6,6 +6,8 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
@@ -95,6 +97,22 @@ export async function getStaticProps({ res, locale }) {
     // res.statusCode = 500
     throw error
   })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  /* 
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+  
+    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    })
+  */
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
@@ -132,6 +150,7 @@ export async function getStaticProps({ res, locale }) {
       meta,
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
     },
   }
 }
