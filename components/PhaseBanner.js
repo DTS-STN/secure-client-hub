@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from './ExitBetaModal'
+import ExitBetaModal from './ExitBetaModal'
 
 /**
  * Displays the PhaseBanner on the page
@@ -68,7 +68,7 @@ export default function PhaseBanner(props) {
         onRequestClose={closeModal}
         contentLabel={'Modal'}
       >
-        <ExitBeta
+        <ExitBetaModal
           closeModal={closeModal}
           closeModalAria={props.bannerButtonText}
           continueLink={openModalWithLink.activeLink}

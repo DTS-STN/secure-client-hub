@@ -12,7 +12,7 @@ import logger from '../lib/logger'
 import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from '../components/ExitBetaModal'
+import ExitBetaModal from '../components/ExitBetaModal'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -76,10 +76,15 @@ export default function Profile(props) {
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
       >
-        <ExitBeta
+        <ExitBetaModal
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
+          popupId={props.popupContent.popupId}
+          popupTitle={props.popupContent.popupTitle}
+          popupDescription={props.popupContent.popupDescription}
+          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
         />
       </Modal>
     </div>
