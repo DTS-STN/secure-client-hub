@@ -48,6 +48,7 @@ describe('My Dashboard page', () => {
     paragraph: 'paragraph',
     cards: [{ id: 'test', title: 'title', lists: [] }],
   }
+  const popupContent = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
@@ -57,13 +58,17 @@ describe('My Dashboard page', () => {
   })
 
   it('should render the page', () => {
-    render(<MyDashboard locale="en" content={content} />)
+    render(
+      <MyDashboard locale="en" content={content} popupContent={popupContent} />
+    )
     const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
     expect(myDashboardDiv).toBeInTheDocument()
   })
 
   it('should contain a card', () => {
-    render(<MyDashboard locale="en" content={content} />)
+    render(
+      <MyDashboard locale="en" content={content} popupContent={popupContent} />
+    )
     const testCard = screen.getByTestId('mock-card')
     expect(testCard).toBeInTheDocument()
   })
