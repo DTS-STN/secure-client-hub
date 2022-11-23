@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669154409568" clover="3.2.0">
-  <project timestamp="1669154409569" name="All files">
+<coverage generated="1669214997918" clover="3.2.0">
+  <project timestamp="1669214997918" name="All files">
     <metrics statements="136" coveredstatements="55" conditionals="80" coveredconditionals="28" methods="61" coveredmethods="22" elements="277" coveredelements="105" complexity="0" loc="136" ncloc="136" packages="4" files="22" classes="22"/>
     <package name="components">
       <metrics statements="55" coveredstatements="34" conditionals="40" coveredconditionals="21" methods="26" coveredmethods="12"/>
@@ -12,12 +12,12 @@
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
         <metrics statements="7" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
