@@ -2,7 +2,6 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
 
 export default function ExitBetaModal(props) {
   return (
@@ -39,14 +38,16 @@ export default function ExitBetaModal(props) {
           onClick={props.closeModal}
           text={props.popupSecondaryBtn.text}
         />
-        <Link href={props.continueLink}>
+        {/* Using anchor tag due to ref errors
+        continueLink is always external so NextJS routing can be ignored */}
+        <a href={props.continueLink}>
           <Button
             className="w-full block md:w-fit"
             id={props.popupPrimaryBtn.id}
             styling="primary"
             text={props.popupPrimaryBtn.text}
           />
-        </Link>
+        </a>
       </div>
     </div>
   )
