@@ -34,7 +34,8 @@ export default NextAuth({
       checks: ['state', 'nonce'],
       profile(profile) {
         return {
-          id: profile.sub,
+          //id: profile.sub,
+          id: 'scrubbed',
         }
       },
     },
@@ -45,8 +46,6 @@ export default NextAuth({
   session: { jwt: true },
   callbacks: {
     async jwt({ token, user, account }) {
-      token.access_token = account?.access_token
-      token.userRole = 'admin'
       return token
     },
     async redirect({ url, baseUrl }) {
