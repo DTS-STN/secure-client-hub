@@ -20,9 +20,8 @@ export default function ContactLanding(props) {
       <ul className="list-disc">
         {props.content.links.map((link) => {
           return (
-            <li className="mb-6 ml-5">
+            <li className="mb-6 ml-5" key={link.linkId}>
               <Link
-                key={link.linkId}
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
