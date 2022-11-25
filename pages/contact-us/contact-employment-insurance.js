@@ -14,162 +14,80 @@ import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../../components/ExitBetaModal'
 
-const tmpPage = {
-  scTitleEn: 'Contact Employment Insurance',
-  scPageNameEn: 'contact-employment-insurance',
-  scPageNameFr: 'communiquer-assurance-emploi',
-  scTitleEn: 'Contact Employment Insurance',
-  scTitleFr: "Communiquer avec l'assurance-emploi",
-  scBreadcrumbParentPages: [
-    '/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard',
-    '/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/contact-us',
-  ],
-}
+// const tmpPage = {
+//   scTitleEn: 'Contact Employment Insurance',
+//   scPageNameEn: 'contact-employment-insurance',
+//   scPageNameFr: 'communiquer-assurance-emploi',
+//   scTitleEn: 'Contact Employment Insurance',
+//   scTitleFr: "Communiquer avec l'assurance-emploi",
+//   scBreadcrumbParentPages: [
+//     '/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard',
+//     '/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/contact-us',
+//   ],
+// }
 
 const tmpContactMethods = {
-  scTitleEn: 'On this page',
-  scTitleFr: 'Sur cette page',
-  contactMethods: [
-    {
-      scTitleEn: 'Telephone',
-      scTitleFr: 'Téléphone',
-      PathEn:
-        '/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone',
-      PathFr:
-        '/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone',
-      schIntroEn:
-        '<p><b>Sed ut perspiciatis unde omnis iste</b> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p><p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur <b>aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</b> voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>',
-      schIntroFr:
-        '<p><b>Sed ut perspiciatis unde omnis iste</b> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p><p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur <b>aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</b> voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>',
-      rows: [
-        {
-          schBeforeLabelEn: 'Before you call us',
-          schBeforeLabelFr: 'Avant de nous appeler',
-          schBeforeDetailsEn:
-            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
-          schBeforeDetailsFr:
-            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
-          schPhoneLabelEn: 'Telephone Number',
-          schPhoneLabelFr: 'Numero De Telephone',
-          schPhoneDetailsEn:
-            'Toll-Free: <b>1-800-206-7218<br>TTY: 1-800-529-3742',
-          schPhoneDetailsFr:
-            'Toll-Free: <b>1-800-206-7218<br>TTY: 1-800-529-3742',
-          schHoursLabelEn:
-            '8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays',
-          schHoursLabelFr:
-            '8:30 am a 4:30 pm, Lundi a Vendredi, sauf aux journees pedagogiques',
-          schWaitLabelEn: 'Wait times',
-          schWaitLabelFr: "Temps d'attente",
-          schWaitDetailsEn:
-            '11 minutes was the average wait time for the week of September 19, 2022',
-          schWaitDetailsFr:
-            "11 minutes etais la moyenne d'attente pour la semaine de September 19, 2022",
-          schHoursAutoLabelEn: 'Hours for automated service',
-          schHoursAutoLabelFr: 'Heures de service automatizee',
-          schHoursAutoDetailslEn: '24 hours a day, 7 days a week',
-          schHoursAutoDetailslFr: '24 heures par jour, 7 jours par semaine',
-        },
-      ],
-    },
-  ],
+  en: {
+    scTitle: 'Contact Employment Insurance',
+    scTitle2: 'On this page',
+    contactMethods: [
+      {
+        scTitle: 'Telephone',
+        Path: '/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone',
+        schIntro:
+          '<p><b>Sed ut perspiciatis unde omnis iste</b> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p><p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur <b>aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</b> voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>',
+        rows: [
+          {
+            schBeforeLabel: 'Before you call us',
+            schBeforeDetails:
+              'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+            schPhoneLabel: 'Telephone Number',
+            schPhoneDetails:
+              'Toll-Free: <b>1-800-206-7218<br>TTY: 1-800-529-3742',
+            schHoursLabel: 'Hours of Operations',
+            schHoursDetails:
+              '8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays',
+            schWaitLabel: 'Wait times',
+            schWaitDetails:
+              '11 minutes was the average wait time for the week of September 19, 2022',
+            schHoursAutoLabel: 'Hours for automated service',
+            schHoursAutoDetailsl: '24 hours a day, 7 days a week',
+          },
+        ],
+      },
+    ],
+  },
+  fr: {
+    scTitle: "Communiquer avec l'assurance-emploi",
+    scTitle2: 'Sur cette page',
+    contactMethods: [
+      {
+        scTitle: 'Téléphone',
+        Path: '/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone',
+        schIntro:
+          '<p><b>Sed ut perspiciatis unde omnis iste</b> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p><p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur <b>aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</b> voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>',
+        rows: [
+          {
+            schBeforeLabel: 'Avant de nous appeler',
+            schBeforeDetails:
+              'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+            schPhoneLabel: 'Numero De Telephone',
+            schPhoneDetails:
+              'Toll-Free: <b>1-800-206-7218<br>TTY: 1-800-529-3742',
+            schHoursLabel: "Heures D'ouverture",
+            schHoursDetails:
+              '8:30 am a 4:30 pm, Lundi a Vendredi, sauf aux journees pedagogiques',
+            schWaitLabel: "Temps d'attente",
+            schWaitDetails:
+              "11 minutes etais la moyenne d'attente pour la semaine de September 19, 2022",
+            schHoursAutoLabel: 'Heures de service automatizee',
+            schHoursAutoDetailsl: '24 heures par jour, 7 jours par semaine',
+          },
+        ],
+      },
+    ],
+  },
 }
-
-// Model: SCH-Contact-Method-v1
-// Path: /content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone
-// scId: ei-contact-telephone
-// scTitleEn: Telephone
-// scTitleFr: Téléphone
-// schIntroEn:
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schIntroFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schBeforeLabelEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schBeforeLabelFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schBeforeDetailsEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schBeforeDetailsFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursLabelEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursLabelFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursDetailsEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursDetailsFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursIconCSS: clock
-// schHoursAutoLabelEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursAutoLabelFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursAutoDetailsEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursAutoDetailsFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schHoursAutoIconCSS: clock
-// schWaitLabelEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schWaitLabelFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schWaitDetailsEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schWaitDetailsFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schPhoneLabelEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schPhoneLabelFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schPhoneDetailsEn": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
-// schPhoneDetailsFr": {
-// "html": ".....",
-// "markdown": "....",
-// "json": ..... },
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -190,7 +108,7 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="homeContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+      <Heading id="my-dashboard-heading" title={props.contactMethods.scTitle} />
       {props.content.cards.map((card) => {
         const moreLessButtonText = card.lists.tasks[0].title
         const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
@@ -313,6 +231,8 @@ export async function getStaticProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      contactMethods:
+        locale === 'en' ? tmpContactMethods.en : tmpContactMethods.fr,
     },
   }
 }
