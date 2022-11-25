@@ -166,6 +166,10 @@ function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
 
+function ContactUsFooterLink() {
+  return cy.get("[data-cy ='footerLink0']")
+}
+
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {
   return cy
     .get('[data-cy="sectionList"]')
@@ -257,4 +261,5 @@ module.exports = {
   validateExitBetaModalbuttonLink,
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
+  ContactUsFooterLink,
 }
