@@ -54,17 +54,40 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         menuProps={{
-          craPath:
-            '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+          //   craPath:
+          //     '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
+          //   dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
-          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-          securityPath: `${
-            props.locale === 'en' ? '' : '/fr'
-          }/security-settings`,
-          signOutPath: '/',
+          menuList: [
+            {
+              key: 'dashKey',
+              value: `${
+                props.locale === 'en' ? 'My Dashboard' : '(FR)My DashBoard'
+              }`,
+              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+            },
+            {
+              key: 'securityKey',
+              value: `${
+                props.locale === 'en'
+                  ? 'Security Settings'
+                  : '(FR)Security Settings'
+              }`,
+              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+            },
+            {
+              key: 'profileKey',
+              value: `${props.locale === 'en' ? 'Profile' : '(FR)Profile'}`,
+              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+            },
+            {
+              key: 'signOutKey',
+              value: `${props.locale === 'en' ? 'Sign Out' : '(FR)Sign Out'}`,
+              path: `/`,
+            },
+          ],
         }}
         searchProps={{
           onChange: function noRefCheck() {},
