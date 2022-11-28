@@ -54,9 +54,6 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         menuProps={{
-          //   craPath:
-          //     '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          //   dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
