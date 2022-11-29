@@ -42,7 +42,7 @@ function AllCardTaskSection(sectionName) {
   })
 }
 function ProfileHeader() {
-  return cy.get('[data-testid ="homeContent-test"]>h1')
+  return cy.get('[data-testid ="profileContent-test"]>h1')
 }
 
 function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {

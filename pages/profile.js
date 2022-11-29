@@ -32,7 +32,7 @@ export default function Profile(props) {
   }
 
   return (
-    <div id="homeContent" data-testid="homeContent-test">
+    <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
         const moreLessButtonText = card.lists.tasks[0].title
