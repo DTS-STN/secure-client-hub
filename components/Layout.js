@@ -61,7 +61,7 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: `${
-                props.locale === 'en' ? 'My Dashboard' : '(FR)My DashBoard'
+                props.locale === 'en' ? 'My Dashboard' : '(FR)My Dashboard'
               }`,
               path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
             },
