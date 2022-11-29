@@ -60,28 +60,22 @@ export default function Layout(props) {
           menuList: [
             {
               key: 'dashKey',
-              value: `${
-                props.locale === 'en' ? 'My Dashboard' : '(FR)My Dashboard'
-              }`,
+              value: t.menuItems.dashboard,
               path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
             },
             {
               key: 'securityKey',
-              value: `${
-                props.locale === 'en'
-                  ? 'Security Settings'
-                  : '(FR)Security Settings'
-              }`,
+              value: t.menuItems.security,
               path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
             },
             {
               key: 'profileKey',
-              value: `${props.locale === 'en' ? 'Profile' : '(FR)Profile'}`,
+              value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
             },
             {
               key: 'signOutKey',
-              value: `${props.locale === 'en' ? 'Sign Out' : '(FR)Sign Out'}`,
+              value: t.menuItems.signOut,
               path: `/`,
             },
           ],
