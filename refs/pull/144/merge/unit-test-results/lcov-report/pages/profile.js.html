@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -236,7 +236,9 @@
 <a name='L171'></a><a href='#L171'>171</a>
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -350,10 +352,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -386,6 +389,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -491,11 +495,11 @@ export default function <span class="fstat-no" title="function not covered" >Pro
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContent.popupId}
-          popupTitle={props.popupContent.popupTitle}
-          popupDescription={props.popupContent.popupDescription}
-          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
+          popupId={props.popupContentNA.popupId}
+          popupTitle={props.popupContentNA.popupTitle}
+          popupDescription={props.popupContentNA.popupDescription}
+          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
         /&gt;
       &lt;/Modal&gt;
     &lt;/div&gt;
@@ -519,16 +523,17 @@ export async function <span class="fstat-no" title="function not covered" >getSt
 <span class="cstat-no" title="statement not covered" >    throw error</span>
   })
 &nbsp;
-  /* 
+  /*
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
    * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) =&gt; {
-      logger.error(error)
+   */
+  const popupContentNA = <span class="cstat-no" title="statement not covered" >await getBetaPopupNotAvailableContent().catch(</span>
+<span class="fstat-no" title="function not covered" >    (e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >      logger.error(error)</span>
       // res.statusCode = 500
-      throw error
-    })
-  */
+<span class="cstat-no" title="statement not covered" >      throw error</span>
+    }
+  )
 &nbsp;
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
@@ -567,6 +572,7 @@ export async function <span class="fstat-no" title="function not covered" >getSt
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
     },
   }
 }
@@ -589,7 +595,7 @@ export async function <span class="fstat-no" title="function not covered" >getSt
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Nov 28 2022 19:49:42 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 29 2022 16:07:41 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

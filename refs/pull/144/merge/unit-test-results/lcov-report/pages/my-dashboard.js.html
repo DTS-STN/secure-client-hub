@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>12/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">30% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>3/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>12/24</span>
             </div>
         
             
@@ -227,7 +227,9 @@
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -342,10 +344,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -369,6 +372,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -474,11 +478,11 @@ export default function MyDashboard(props) {
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContent.popupId}
-          popupTitle={props.popupContent.popupTitle}
-          popupDescription={props.popupContent.popupDescription}
-          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
+          popupId={props.popupContentNA.popupId}
+          popupTitle={props.popupContentNA.popupTitle}
+          popupDescription={props.popupContentNA.popupDescription}
+          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
         /&gt;
       &lt;/Modal&gt;
     &lt;/div&gt;
@@ -502,16 +506,17 @@ export async function getServerSideProps({ res, locale }) {
 <span class="cstat-no" title="statement not covered" >    throw error</span>
   })
 &nbsp;
-  /* 
-  * Uncomment this block to make Banner Popup Content display "Page Not Available"
-  * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) =&gt; {
-      logger.error(error)
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+<span class="fstat-no" title="function not covered" >    (e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >      logger.error(error)</span>
       // res.statusCode = 500
-      throw error
-    })
-  */
+<span class="cstat-no" title="statement not covered" >      throw error</span>
+    }
+  )
 &nbsp;
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
@@ -540,6 +545,7 @@ export async function getServerSideProps({ res, locale }) {
       meta,
       bannerContent: locale === 'en' ? bannerContent.en : <span class="branch-1 cbranch-no" title="branch not covered" >bannerContent.fr,</span>
       popupContent: locale === 'en' ? popupContent.en : <span class="branch-1 cbranch-no" title="branch not covered" >popupContent.fr,</span>
+      popupContentNA: locale === 'en' ? popupContentNA.en : <span class="branch-1 cbranch-no" title="branch not covered" >popupContentNA.fr,</span>
     },
   }
 }
@@ -562,7 +568,7 @@ MyDashboard.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Nov 28 2022 19:49:42 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 29 2022 16:07:41 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
