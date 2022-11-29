@@ -14,7 +14,7 @@ export default {
   // Header Menu
   menuItems: {
     dashboard: 'My Dashboard',
-    security: 'Security Settings',
+    security: 'Security settings',
     profile: 'Profile',
     signOut: 'Sign Out',
   },
