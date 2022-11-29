@@ -106,13 +106,13 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it.skip('Validate Beta Version Banner is present on Dashboard', () => {
+  it('Validate Beta Version Banner is present on Dashboard', () => {
     dashboardPo.BetaBanner().should('be.visible')
     dashboardPo.LearnMoreABtBetaLink().should('be.visible')
     dashboardPo.ExitBetaButton().should('be.visible')
   })
 
-  it.skip('Validate Exit Beta Version Popup UI', () => {
+  it('Validate Exit Beta Version Popup UI', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.FirstTaskLink().click()
     dashboardPo.ExitBetaModal().should('be.visible')
@@ -188,14 +188,14 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it.skip('Validate that the clicking Update my Profile link on EI,CPP,OAS card navigates to profile page', () => {
+  it('Validate that the clicking Update my Profile link on EI,CPP,OAS card navigates to profile page', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       dashboardPo.ExpandCard(dashboardData[k].CardNameEN)
       dashboardPo.ClickUpdatemyProfileLink()
     }
   })
 
-  it.skip('Validate that the clicking Complete my report or Apply for EI link on EI opens a new tab', () => {
+  it('Validate that the clicking Complete my report or Apply for EI link on EI opens a new tab', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.ClickCompleteMyReportOrApplyEILink()
   })

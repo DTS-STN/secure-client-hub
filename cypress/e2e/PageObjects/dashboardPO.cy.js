@@ -155,11 +155,11 @@ function ExitBetaModal() {
 }
 
 function StayOnBetabutton() {
-  return cy.get("[id ='modal-btn-close']")
+  return cy.get("[id ='stay-on-beta-version']")
 }
 
 function ExitBetaModalButton() {
-  return cy.get("[id ='modal-btn-continue']")
+  return cy.get("[id ='exit-beta-version']")
 }
 
 function CloseModalButton() {

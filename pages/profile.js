@@ -32,7 +32,7 @@ export default function Profile(props) {
   }
 
   return (
-    <div id="homeContent" data-testid="homeContent-test">
+    <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       {props.content.cards.map((card) => {
         const moreLessButtonText = card.lists.tasks[0].title
@@ -80,11 +80,11 @@ export default function Profile(props) {
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContent.popupId}
-          popupTitle={props.popupContent.popupTitle}
-          popupDescription={props.popupContent.popupDescription}
-          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
+          popupId={props.popupContentNA.popupId}
+          popupTitle={props.popupContentNA.popupTitle}
+          popupDescription={props.popupContentNA.popupDescription}
+          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
         />
       </Modal>
     </div>
@@ -108,16 +108,17 @@ export async function getStaticProps({ res, locale }) {
     throw error
   })
 
-  /* 
+  /*
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
    * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
       logger.error(error)
       // res.statusCode = 500
       throw error
-    })
-  */
+    }
+  )
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
@@ -156,6 +157,7 @@ export async function getStaticProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
     },
   }
 }
