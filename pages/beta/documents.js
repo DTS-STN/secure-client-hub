@@ -2,7 +2,7 @@ import en from '../../locales/en'
 import fr from '../../locales/fr'
 import BackToButton from '../../components/BackToButton'
 import MetaData from '../../components/MetaData'
-export default function Index(props) {
+export default function Docs(props) {
   const t = props.locale === 'en' ? en : fr
 
   return (
@@ -11,7 +11,7 @@ export default function Index(props) {
       <div className="flex flex-col  items-center m-auto">
         <h1 className="sr-only">service.canada.ca-digital-center</h1>
         {/* <img src='/beta/Status_updates.svg' alt='next' /> */}
-        <div className="mx-auto bg-yellow-200 sm:hidden">
+        <div className="mx-auto sm:hidden">
           {props.locale === 'en' ? (
             <img src="/beta/Submit_documents_mobile.svg" alt="next" />
           ) : (
@@ -36,7 +36,7 @@ export default function Index(props) {
   )
 }
 
-Index.getLayout = function PageLayout(page) {
+Docs.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
