@@ -11,6 +11,14 @@ export default {
   // Header
   title: 'home',
   //
+  // Header Menu
+  menuItems: {
+    dashboard: 'My Dashboard',
+    security: 'Security settings',
+    profile: 'Profile',
+    signOut: 'Sign Out',
+  },
+  //
   //Heading
   pageHeading: {
     title: 'My dashboard',
