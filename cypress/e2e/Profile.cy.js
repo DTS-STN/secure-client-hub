@@ -4,6 +4,7 @@
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
+import dashboardData from '../../cypress/fixtures/dashboardData.json'
 
 beforeEach(() => {
   cy.visit('/profile')
@@ -155,5 +156,20 @@ describe('Validate Profile page', () => {
     profilePo.ValidateCardTaskListAndSection('Old Age Security', '4')
     dashboardPo.FrenchButton().click()
     profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '4')
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+    profilePo.ExpandCard('Employment Insurance')
+    profilePo.ClickonTaskLinks()
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
+    profilePo.ExpandCard('Canada Pension Plan')
+    profilePo.ClickonTaskLinks()
+  })
+
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
+    profilePo.ExpandCard('Old Age Security')
+    profilePo.ClickonTaskLinks()
   })
 })

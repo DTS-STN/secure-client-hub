@@ -8,6 +8,7 @@ export default function ExitBetaModal(props) {
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
       data-cy="exitBetaModal"
+      id={props.popupId}
     >
       <div className="flex justify-between">
         <div
@@ -15,7 +16,7 @@ export default function ExitBetaModal(props) {
           role="heading"
           aria-level="1"
         >
-          Exiting beta version
+          {props.popupTitle}
         </div>
         <button
           data-cy="x-button"
@@ -27,23 +28,24 @@ export default function ExitBetaModal(props) {
         </button>
       </div>
       <p className="text-xl font-display py-4 mr-10">
-        Thank you for trying the beta version. You are now returning to My
-        Service Canada Account home page.
+        {props.popupDescription}
       </p>
       <div className="md:flex mt-8 md:space-x-12 space-y-6 md:space-y-0">
         <Button
           className="w-full block md:w-fit"
-          id={'modal-btn-close'}
+          id={props.popupSecondaryBtn.id}
           styling="secondary"
           onClick={props.closeModal}
-          text="Stay on beta version"
+          text={props.popupSecondaryBtn.text}
         />
+        {/* Using anchor tag due to ref errors
+        continueLink is always external so NextJS routing can be ignored */}
         <a href={props.continueLink}>
           <Button
             className="w-full block md:w-fit"
-            id={'modal-btn-continue'}
+            id={props.popupPrimaryBtn.id}
             styling="primary"
-            text="Exit beta version"
+            text={props.popupPrimaryBtn.text}
           />
         </a>
       </div>
@@ -66,4 +68,35 @@ ExitBetaModal.propTypes = {
    * Link for page to continue on with after modal confirmation
    */
   continueLink: PropTypes.string,
+
+  /*
+   * Popup id
+   */
+  popupId: PropTypes.string,
+
+  /*
+   * Popup Title
+   */
+  popupTitle: PropTypes.string,
+
+  /*
+   * Popup Text
+   */
+  popupDescription: PropTypes.string,
+
+  /*
+   * Popup Primary Button
+   */
+  popupPrimaryBtn: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
+
+  /*
+   * Popup Secondary Button
+   */
+  popupSecondaryBtn: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
 }

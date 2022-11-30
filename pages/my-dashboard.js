@@ -5,12 +5,14 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from '../components/ExitBetaModal'
+import ExitBetaModal from '../components/ExitBetaModal'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -41,12 +43,9 @@ export default function MyDashboard(props) {
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            viewMoreLessCaption={card.dropdownText}
           >
-            <div
-              className="bg-deep-blue-60d mt-4"
-              data-cy="most-requested-section"
-            >
+            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
@@ -54,12 +53,12 @@ export default function MyDashboard(props) {
               />
             </div>
             <div
-              className=" md:columns-2 gap-5 md:gap-6 pt-8"
+              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
               data-cy="task-list"
             >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="mb-4 md:mb-6" key={index} data-cy="Task">
+                  <div className="" key={index} data-cy="Task">
                     <BenefitTasks
                       taskList={taskList}
                       dataCy="task-group-list"
@@ -78,10 +77,15 @@ export default function MyDashboard(props) {
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
       >
-        <ExitBeta
+        <ExitBetaModal
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
+          popupId={props.popupContentNA.popupId}
+          popupTitle={props.popupContentNA.popupTitle}
+          popupDescription={props.popupContentNA.popupDescription}
+          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
         />
       </Modal>
     </div>
@@ -99,6 +103,23 @@ export async function getServerSideProps({ res, locale }) {
     // res.statusCode = 500
     throw error
   })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
@@ -126,6 +147,8 @@ export async function getServerSideProps({ res, locale }) {
       content: locale === 'en' ? content.en : content.fr,
       meta,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
     },
   }
 }
