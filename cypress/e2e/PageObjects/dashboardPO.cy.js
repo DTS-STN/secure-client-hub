@@ -255,7 +255,6 @@ module.exports = {
   ExitBetaButton,
   FirstTaskLink,
   ExitBetaModal,
-  ContinueToPageModalButton,
   StayOnBetabutton,
   ExitBetaModalButton,
   ContinueToPageModalButton,
