@@ -38,6 +38,14 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
+  getBetaPopupNotAvailableContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -52,6 +60,7 @@ describe('My Profile page', () => {
     exitBeta: { title: 'title', link: '#' },
   }
   const popupContent = {}
+  const popupContentNA = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
@@ -67,6 +76,7 @@ describe('My Profile page', () => {
         content={content}
         meta={{}}
         popupContent={popupContent}
+        popupContentNA={popupContentNA}
         breadCrumbItems={[]}
         langToggleLink={''}
       />
@@ -82,6 +92,7 @@ describe('My Profile page', () => {
         meta={{}}
         content={content}
         popupContent={popupContent}
+        popupContentNA={popupContentNA}
         breadCrumbItems={[]}
         langToggleLink={''}
       />
