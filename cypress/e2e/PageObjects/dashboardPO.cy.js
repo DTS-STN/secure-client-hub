@@ -258,6 +258,7 @@ module.exports = {
   ContinueToPageModalButton,
   StayOnBetabutton,
   ExitBetaModalButton,
+  ContinueToPageModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
   ClickUpdatemyProfileLink,
