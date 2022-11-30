@@ -117,7 +117,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.FirstTaskLink().click()
     dashboardPo.ExitBetaModal().should('be.visible')
     dashboardPo.StayOnBetabutton().should('be.visible')
-    dashboardPo.ExitBetaModalButton().should('be.visible')
+    dashboardPo.ContinueToPageModalButton().should('be.visible')
     dashboardPo.CloseModalButton().should('be.visible')
   })
 
