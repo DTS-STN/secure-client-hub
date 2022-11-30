@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669824024784" clover="3.2.0">
-  <project timestamp="1669824024784" name="All files">
+<coverage generated="1669827667887" clover="3.2.0">
+  <project timestamp="1669827667887" name="All files">
     <metrics statements="166" coveredstatements="62" conditionals="102" coveredconditionals="29" methods="73" coveredmethods="24" elements="341" coveredelements="115" complexity="0" loc="166" ncloc="166" packages="4" files="24" classes="24"/>
     <package name="components">
       <metrics statements="55" coveredstatements="34" conditionals="40" coveredconditionals="21" methods="26" coveredmethods="12"/>
@@ -46,9 +46,9 @@
         <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="stmt"/>
         <line num="25" count="4" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="97" count="2" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="111" count="2" type="stmt"/>
+        <line num="115" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
