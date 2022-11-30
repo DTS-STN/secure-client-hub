@@ -43,7 +43,7 @@ export default function MyDashboard(props) {
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            viewMoreLessCaption={t.viewMoreLessButtonCaption}
+            viewMoreLessCaption={card.dropdownText}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
