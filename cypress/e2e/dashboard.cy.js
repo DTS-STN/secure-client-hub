@@ -112,12 +112,12 @@ describe('Validate dashboard page', () => {
     dashboardPo.ExitBetaButton().should('be.visible')
   })
 
-  it.skip('Validate Exit Beta Version Popup UI', () => {
+  it('Validate Exit Beta Version Popup UI', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.FirstTaskLink().click()
     dashboardPo.ExitBetaModal().should('be.visible')
     dashboardPo.StayOnBetabutton().should('be.visible')
-    dashboardPo.ExitBetaModalButton().should('be.visible')
+    dashboardPo.ContinueToPageModalButton().should('be.visible')
     dashboardPo.CloseModalButton().should('be.visible')
   })
 

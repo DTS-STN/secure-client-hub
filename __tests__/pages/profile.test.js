@@ -60,7 +60,6 @@ describe('My Profile page', () => {
     exitBeta: { title: 'title', link: '#' },
   }
   const popupContent = {}
-  const popupContentNA = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
@@ -76,7 +75,7 @@ describe('My Profile page', () => {
         content={content}
         meta={{}}
         popupContent={popupContent}
-        popupContentNA={popupContentNA}
+        popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
       />
@@ -92,7 +91,7 @@ describe('My Profile page', () => {
         meta={{}}
         content={content}
         popupContent={popupContent}
-        popupContentNA={popupContentNA}
+        popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
       />
