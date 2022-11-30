@@ -54,17 +54,31 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         menuProps={{
-          craPath:
-            '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
           onSignOut: () => {
             console.log('todo: implement logout')
           },
-          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-          securityPath: `${
-            props.locale === 'en' ? '' : '/fr'
-          }/security-settings`,
-          signOutPath: '/',
+          menuList: [
+            {
+              key: 'dashKey',
+              value: t.menuItems.dashboard,
+              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+            },
+            {
+              key: 'securityKey',
+              value: t.menuItems.security,
+              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+            },
+            {
+              key: 'profileKey',
+              value: t.menuItems.profile,
+              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+            },
+            {
+              key: 'signOutKey',
+              value: t.menuItems.signOut,
+              path: `/`,
+            },
+          ],
         }}
         searchProps={{
           onChange: function noRefCheck() {},

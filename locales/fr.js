@@ -10,6 +10,13 @@ export default {
   //
   // Header
   title: 'accueil',
+  // Header Menu
+  menuItems: {
+    dashboard: 'Mon tableau de bord',
+    security: 'Paramètres de sécurité',
+    profile: 'Profil',
+    signOut: 'Se déconnecter',
+  },
   //Heading
   pageHeading: {
     title: 'Mon tableau de bord',
