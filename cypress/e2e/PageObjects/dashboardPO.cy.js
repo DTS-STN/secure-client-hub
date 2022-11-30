@@ -161,7 +161,9 @@ function StayOnBetabutton() {
 function ExitBetaModalButton() {
   return cy.get("[id ='exit-beta-version']")
 }
-
+function ContinueToPageModalButton() {
+  return cy.get("[id ='continue-to-page']")
+}
 function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
@@ -253,6 +255,7 @@ module.exports = {
   ExitBetaModal,
   StayOnBetabutton,
   ExitBetaModalButton,
+  ContinueToPageModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
   ClickUpdatemyProfileLink,
