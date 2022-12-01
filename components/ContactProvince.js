@@ -1,20 +1,37 @@
 import Markdown from 'markdown-to-jsx'
 import { Collapse } from '@dts-stn/service-canada-design-system'
+const header = {
+  en: {
+    ei: 'For Employment Insurance',
+    documents: 'For Supporting Documents',
+  },
+  fr: {
+    ei: "Pour l'Assurance Emploi",
+    documents: 'Pour les Documents Justificatifs',
+  },
+}
 
-const ContactProvince = ({ province, contentDocuments, contentEi, id }) => {
+const ContactProvince = ({
+  province,
+  contentDocuments,
+  contentEi,
+  id,
+  locale,
+}) => {
+  const headers = locale === 'en' ? header.en : header.fr
   return (
     <div className="py-2" key={id}>
       <Collapse title={province}>
         <div className="grid text-base font-sans grid-cols-2">
           <div classname="col-span-1">
             <p>
-              <b>For Employment Insurance</b>
+              <b>{headers.ei}</b>
             </p>
             <Markdown>{contentEi}</Markdown>
           </div>
           <div classname="col-span-1">
             <p>
-              <b>For Supporting Documents</b>
+              <b>{headers.documents}</b>
             </p>
             <Markdown>{contentDocuments}</Markdown>
           </div>

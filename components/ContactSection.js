@@ -5,13 +5,13 @@ import { Button } from '@dts-stn/service-canada-design-system'
 function ContactSectionRow({ label, detail, highlight, button, index }) {
   return label && detail ? (
     <div
-      className={`grid grid-cols-4 gap-4 border-t-2 mt-4 ${
+      className={`grid grid-cols-5 gap-4 border-t-2 mt-4 ${
         highlight && 'bg-blue-100'
       }`}
       key={index}
     >
       <div className="col-span-1 font-bold text-xl">{label}</div>
-      <div className="col-span-3  markdown_div ">
+      <div className="col-span-4  markdown_div ">
         {button ? (
           <Button text={detail} styling={'primary'} />
         ) : (
@@ -24,9 +24,9 @@ function ContactSectionRow({ label, detail, highlight, button, index }) {
   )
 }
 
-export default function ContactSection({ title, intro, details }) {
+export default function ContactSection({ title, intro, id, details }) {
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl" name={id} id={id}>
       <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
         {title}
       </h2>
