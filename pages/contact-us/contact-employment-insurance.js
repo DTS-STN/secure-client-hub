@@ -27,7 +27,7 @@ const pareseContactMethods = (rawMethods) => {
           link: `/${x.scPageNameEn}`,
         }
       }),
-      title: rawMethods.scBreadcrumbParentPages,
+      title: rawMethods.scTitleEn,
       id: rawMethods.scId,
       methods: rawMethods.scFragments[0].scItems.map((x) => {
         return {
@@ -74,7 +74,8 @@ const pareseContactMethods = (rawMethods) => {
     return {
       province: x.label,
       id: x.detail,
-      contentEi: x.detail,
+      contentEi:
+        'Service Canada\n\nEmployment Insurance Program\n\nPO Box 2100\n\nVanvouver BC V6B 3T4',
       contentDocuments:
         'Service Canada Center\n\nPO Box 245\nEdmonton AB T5J 2J1',
     }
@@ -84,7 +85,8 @@ const pareseContactMethods = (rawMethods) => {
     return {
       province: x.label,
       id: x.detail,
-      contentEi: x.detail,
+      contentEi:
+        'Service Canada\n\nEmployment Insurance Program\n\nPO Box 2100\n\nVanvouver BC V6B 3T4',
       contentDocuments:
         'Service Canada Center\n\nPO Box 245\nEdmonton AB T5J 2J1',
     }
@@ -95,10 +97,9 @@ const pareseContactMethods = (rawMethods) => {
 }
 
 export default function ContactEmploymentInsurance(props) {
+  console.log(props, PageData)
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  console.log(props, tmpContactMethods, PageData)
 
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,
