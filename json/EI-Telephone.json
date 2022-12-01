@@ -1,0 +1,1028 @@
+{
+  "data": {
+    "schContactMethodv1ByPath": {
+      "items": [
+        {
+          "_path": "/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone",
+          "scId": "ei-contact-telephone",
+          "scTitleEn": "Telephone",
+          "scTitleFr": "Téléphone",
+          "schIntroEn": {
+            "markdown": "**Call us to speak to an Employment Insurance representative** for help during the hours of operation listed below.\n\n This phone number **also provides an automated service available 24 hours a day, 7 days a week**. You can use self-service options to:\n\n  * submit Employment Insurance reports\n * get information on benefits, including your specific claim\n"
+          },
+          "schIntroFr": {
+            "markdown": "**Appelez-nous pour parler à un représentant de l'assurance-emploi** et obtenir de l'aide pendant les heures d’ouverture indiquées ci-dessous.\n\n Ce numéro de téléphone offre aussi un **service automatisé disponible 24 heures sur 24, 7 jours sur 7**. Vous pouvez utiliser les options de libre-service pour :\n \n\n  * soumettre des déclarations électroniques;\n * obtenir des informations sur les prestations, y compris sur votre demande spécifique.\n  "
+          },
+          "schBeforeLabelEn": {
+            "html": "<p>Before you call us</p>\n",
+            "markdown": "Before you call us\n\n ",
+            "plaintext": "Before you call us",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Before you call us"
+                  }
+                ]
+              }
+            ]
+          },
+          "schBeforeLabelFr": {
+            "html": "<p>Avant de nous appeler</p>\n",
+            "markdown": "Avant de nous appeler\n\n ",
+            "plaintext": "Avant de nous appeler",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Avant de nous appeler"
+                  }
+                ]
+              }
+            ]
+          },
+          "schBeforeDetailsEn": {
+            "html": "<p>To access information about your claim, you will need to <strong>provide your Social Insurance Number and access code</strong>. You will find them on the benefit statement that is mailed to you after you apply for benefits.</p>\n",
+            "markdown": "To access information about your claim, you will need to **provide your Social Insurance Number and access code**. You will find them on the benefit statement that is mailed to you after you apply for benefits.\n\n ",
+            "plaintext": "To access information about your claim, you will need to provide your Social Insurance Number and access code. You will find them on the benefit statement that is mailed to you after you apply for benefits.",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "To access information about your claim, you will need to "
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "provide your Social Insurance Number and access code",
+                    "format": {
+                      "variants": ["strong"]
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ". You will find them on the benefit statement that is mailed to you after you apply for benefits."
+                  }
+                ]
+              }
+            ]
+          },
+          "schBeforeDetailsFr": {
+            "html": "<p>Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir <strong>votre numéro d'assurance sociale et votre code d'accès</strong>. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.</p>\n",
+            "markdown": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir **votre numéro d'assurance sociale et votre code d'accès**. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.\n\n ",
+            "plaintext": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre numéro d'assurance sociale et votre code d'accès. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir "
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "votre numéro d'assurance sociale et votre code d'accès",
+                    "format": {
+                      "variants": ["strong"]
+                    }
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": ". Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations."
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursLabelEn": {
+            "html": "<p>Hours of operation</p>\n",
+            "markdown": "Hours of operation\n\n ",
+            "plaintext": "Hours of operation",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Hours of operation"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursLabelFr": {
+            "html": "<p>Heures d’ouverture</p>\n",
+            "markdown": "Heures d’ouverture\n\n ",
+            "plaintext": "Heures d’ouverture",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Heures d’ouverture"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursDetailsEn": {
+            "html": "<p>8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays</p>\n",
+            "markdown": "8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays\n\n ",
+            "plaintext": "8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursDetailsFr": {
+            "html": "<p>8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.</p>\n",
+            "markdown": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.\n\n ",
+            "plaintext": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés."
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursIconCSS": "clock",
+          "schHoursAutoLabelEn": {
+            "html": "<p>Hours for automated service</p>\n",
+            "markdown": "Hours for automated service\n\n ",
+            "plaintext": "Hours for automated service",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Hours for automated service"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursAutoLabelFr": {
+            "html": "<p>Heures de disponibilité du service automatisé</p>\n",
+            "markdown": "Heures de disponibilité du service automatisé\n\n ",
+            "plaintext": "Heures de disponibilité du service automatisé",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Heures de disponibilité du service automatisé"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursAutoDetailsEn": {
+            "html": "<p>24 hours a day, 7 days a week</p>\n",
+            "markdown": "24 hours a day, 7 days a week\n\n ",
+            "plaintext": "24 hours a day, 7 days a week",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "24 hours a day, 7 days a week"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursAutoDetailsFr": {
+            "html": "<p>24 heures sur 24, 7 jours sur 7</p>\n",
+            "markdown": "24 heures sur 24, 7 jours sur 7\n\n ",
+            "plaintext": "24 heures sur 24, 7 jours sur 7",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "24 heures sur 24, 7 jours sur 7"
+                  }
+                ]
+              }
+            ]
+          },
+          "schHoursAutoIconCSS": "clock",
+          "schWaitLabelEn": {
+            "html": "<p>Wait times</p>\n",
+            "markdown": "Wait times\n\n ",
+            "plaintext": "Wait times",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Wait times"
+                  }
+                ]
+              }
+            ]
+          },
+          "schWaitLabelFr": {
+            "html": "<p>Temps d’attente</p>\n",
+            "markdown": "Temps d’attente\n\n ",
+            "plaintext": "Temps d’attente",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Temps d’attente"
+                  }
+                ]
+              }
+            ]
+          },
+          "schWaitDetailsEn": {
+            "html": "<p>11 minutes was the average wait time for the week of September 19, 2022.</p>\n",
+            "markdown": "11 minutes was the average wait time for the week of September 19, 2022.\n\n ",
+            "plaintext": "11 minutes was the average wait time for the week of September 19, 2022.",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "11 minutes was the average wait time for the week of September 19, 2022."
+                  }
+                ]
+              }
+            ]
+          },
+          "schWaitDetailsFr": {
+            "html": "<p>11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.</p>\n",
+            "markdown": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.\n\n ",
+            "plaintext": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022."
+                  }
+                ]
+              }
+            ]
+          },
+          "schWaitIconCSS": "clock",
+          "schPhoneLabelEn": {
+            "html": "<p>Telephone number</p>\n",
+            "markdown": "Telephone number\n\n ",
+            "plaintext": "Telephone number",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Telephone number"
+                  }
+                ]
+              }
+            ]
+          },
+          "schPhoneLabelFr": {
+            "html": "<p>Numéro de téléphone</p>\n",
+            "markdown": "Numéro de téléphone\n\n ",
+            "plaintext": "Numéro de téléphone",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Numéro de téléphone"
+                  }
+                ]
+              }
+            ]
+          },
+          "schPhoneDetailsEn": {
+            "html": "<p>Toll-Free: <strong>1-800-206-7218</strong></p>\n<p>TTY: 1-800-529-3742</p>\n",
+            "markdown": "Toll-Free: **1-800-206-7218**\n\n TTY: 1-800-529-3742\n\n ",
+            "plaintext": "Toll-Free: 1-800-206-7218\n\nTTY: 1-800-529-3742",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Toll-Free: "
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "1-800-206-7218",
+                    "format": {
+                      "variants": ["strong"]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "TTY: 1-800-529-3742"
+                  }
+                ]
+              }
+            ]
+          },
+          "schPhoneDetailsFr": {
+            "html": "<p>Sans frais : <strong>1-800-808-6352</strong></p>\n<p>ATS : 1-800-529-3742</p>\n",
+            "markdown": "Sans frais : **1-800-808-6352**\n\n ATS : 1-800-529-3742\n\n ",
+            "plaintext": "Sans frais : 1-800-808-6352\n\nATS : 1-800-529-3742",
+            "json": [
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Sans frais : "
+                  },
+                  {
+                    "nodeType": "text",
+                    "value": "1-800-808-6352",
+                    "format": {
+                      "variants": ["strong"]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "ATS : 1-800-529-3742"
+                  }
+                ]
+              }
+            ]
+          },
+          "schPhoneLabel2En": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schPhoneLabel2Fr": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schPhoneDetails2En": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schPhoneDetails2Fr": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schCallbackLabelEn": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schCallbackLabelFr": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schLocationLabelEn": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schLocationLabelFr": {
+            "html": null,
+            "markdown": null,
+            "plaintext": null,
+            "json": null
+          },
+          "schDetails": [
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-before-you-call-us",
+              "scId": "ei-telephone-before-you-call-us",
+              "scTitleEn": "Before you call us",
+              "scTitleFr": "Avant de nous appeler",
+              "scItems": [
+                {
+                  "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-before-you-call-us",
+                  "scId": "ei-telephone-before-you-call",
+                  "scHeadingEn": null,
+                  "scHeadingFr": null,
+                  "scContentEn": {
+                    "html": "<p>To access information about your claim, you will need to provide your <strong>Social Insurance Number and access code</strong>. You will find them on the benefit statement that is mailed to you after you apply for benefits.</p>\n",
+                    "markdown": "To access information about your claim, you will need to provide your **Social Insurance Number and access code**. You will find them on the benefit statement that is mailed to you after you apply for benefits.\n\n ",
+                    "plaintext": "To access information about your claim, you will need to provide your Social Insurance Number and access code. You will find them on the benefit statement that is mailed to you after you apply for benefits.",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "To access information about your claim, you will need to provide your "
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": "Social Insurance Number and access code",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": ". You will find them on the benefit statement that is mailed to you after you apply for benefits."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scContentFr": {
+                    "html": "<p>Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre <strong>numéro d'assurance sociale et votre code d'accès</strong>. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.</p>\n",
+                    "markdown": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre **numéro d'assurance sociale et votre code d'accès**. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.\n\n ",
+                    "plaintext": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre numéro d'assurance sociale et votre code d'accès. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre "
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": "numéro d'assurance sociale et votre code d'accès",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": ". Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scIconCSS": null,
+                  "_metadata": {
+                    "stringMetadata": [
+                      {
+                        "name": "title",
+                        "value": "EI-Telephone-Before you call us"
+                      },
+                      {
+                        "name": "description",
+                        "value": ""
+                      }
+                    ],
+                    "stringArrayMetadata": [],
+                    "intMetadata": [],
+                    "intArrayMetadata": [],
+                    "floatMetadata": [],
+                    "floatArrayMetadata": [],
+                    "booleanMetadata": [],
+                    "booleanArrayMetadata": [],
+                    "calendarMetadata": [],
+                    "calendarArrayMetadata": []
+                  },
+                  "_variations": [],
+                  "_model": {
+                    "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-content-v1",
+                    "title": "SCH-Content-v1"
+                  }
+                }
+              ],
+              "_metadata": {
+                "stringMetadata": [
+                  {
+                    "name": "title",
+                    "value": "EI-Telephone-Before you call us"
+                  },
+                  {
+                    "name": "description",
+                    "value": ""
+                  }
+                ],
+                "stringArrayMetadata": [],
+                "intMetadata": [],
+                "intArrayMetadata": [],
+                "floatMetadata": [],
+                "floatArrayMetadata": [],
+                "booleanMetadata": [],
+                "booleanArrayMetadata": [],
+                "calendarMetadata": [],
+                "calendarArrayMetadata": []
+              },
+              "_variations": [],
+              "_model": {
+                "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-list-v1",
+                "title": "SCH-List-v1"
+              }
+            },
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-number",
+              "scId": "ei-telephone-number",
+              "scTitleEn": "Telephone number",
+              "scTitleFr": "Numéro de téléphone",
+              "scItems": [
+                {
+                  "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-number",
+                  "scId": "ei-telephone-number",
+                  "scHeadingEn": null,
+                  "scHeadingFr": null,
+                  "scContentEn": {
+                    "html": "<p>Toll-Free: <strong>1-800-206-7218</strong></p>\n<p>TTY: 1-800-529-3742</p>\n",
+                    "markdown": "Toll-Free: **1-800-206-7218**\n\n TTY: 1-800-529-3742\n\n ",
+                    "plaintext": "Toll-Free: 1-800-206-7218\n\nTTY: 1-800-529-3742",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Toll-Free: "
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": "1-800-206-7218",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "TTY: 1-800-529-3742"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scContentFr": {
+                    "html": "<p>Sans frais : <strong>1-800-808-6352</strong></p>\n<p>ATS : 1-800-529-3742</p>\n",
+                    "markdown": "Sans frais : **1-800-808-6352**\n\n ATS : 1-800-529-3742\n\n ",
+                    "plaintext": "Sans frais : 1-800-808-6352\n\nATS : 1-800-529-3742",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Sans frais : "
+                          },
+                          {
+                            "nodeType": "text",
+                            "value": "1-800-808-6352",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "ATS : 1-800-529-3742"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scIconCSS": null,
+                  "_metadata": {
+                    "stringMetadata": [
+                      {
+                        "name": "title",
+                        "value": "EI-Telephone number"
+                      },
+                      {
+                        "name": "description",
+                        "value": ""
+                      }
+                    ],
+                    "stringArrayMetadata": [],
+                    "intMetadata": [],
+                    "intArrayMetadata": [],
+                    "floatMetadata": [],
+                    "floatArrayMetadata": [],
+                    "booleanMetadata": [],
+                    "booleanArrayMetadata": [],
+                    "calendarMetadata": [],
+                    "calendarArrayMetadata": []
+                  },
+                  "_variations": [],
+                  "_model": {
+                    "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-content-v1",
+                    "title": "SCH-Content-v1"
+                  }
+                }
+              ],
+              "_metadata": {
+                "stringMetadata": [
+                  {
+                    "name": "title",
+                    "value": "EI-Telephone number"
+                  },
+                  {
+                    "name": "description",
+                    "value": ""
+                  }
+                ],
+                "stringArrayMetadata": [],
+                "intMetadata": [],
+                "intArrayMetadata": [],
+                "floatMetadata": [],
+                "floatArrayMetadata": [],
+                "booleanMetadata": [],
+                "booleanArrayMetadata": [],
+                "calendarMetadata": [],
+                "calendarArrayMetadata": []
+              },
+              "_variations": [],
+              "_model": {
+                "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-list-v1",
+                "title": "SCH-List-v1"
+              }
+            },
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-hours-of-operation",
+              "scId": "ei-telephone-hours-of-operation",
+              "scTitleEn": "Hours of operation",
+              "scTitleFr": "Heures d’ouverture",
+              "scItems": [
+                {
+                  "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-hours-of-operation",
+                  "scId": "ei-telephone-hours-of-operation",
+                  "scHeadingEn": null,
+                  "scHeadingFr": null,
+                  "scContentEn": {
+                    "html": "<p><strong>8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays</strong></p>\n",
+                    "markdown": "**8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays**\n\n ",
+                    "plaintext": "8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scContentFr": {
+                    "html": "<p><strong>8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.</strong></p>\n",
+                    "markdown": "**8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.**\n\n ",
+                    "plaintext": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.",
+                            "format": {
+                              "variants": ["strong"]
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scIconCSS": "clock",
+                  "_metadata": {
+                    "stringMetadata": [
+                      {
+                        "name": "title",
+                        "value": "EI-Telephone-Hours of operation"
+                      },
+                      {
+                        "name": "description",
+                        "value": ""
+                      }
+                    ],
+                    "stringArrayMetadata": [],
+                    "intMetadata": [],
+                    "intArrayMetadata": [],
+                    "floatMetadata": [],
+                    "floatArrayMetadata": [],
+                    "booleanMetadata": [],
+                    "booleanArrayMetadata": [],
+                    "calendarMetadata": [],
+                    "calendarArrayMetadata": []
+                  },
+                  "_variations": [],
+                  "_model": {
+                    "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-content-v1",
+                    "title": "SCH-Content-v1"
+                  }
+                }
+              ],
+              "_metadata": {
+                "stringMetadata": [
+                  {
+                    "name": "title",
+                    "value": "EI-Telephone-Hours of operation"
+                  },
+                  {
+                    "name": "description",
+                    "value": ""
+                  }
+                ],
+                "stringArrayMetadata": [],
+                "intMetadata": [],
+                "intArrayMetadata": [],
+                "floatMetadata": [],
+                "floatArrayMetadata": [],
+                "booleanMetadata": [],
+                "booleanArrayMetadata": [],
+                "calendarMetadata": [],
+                "calendarArrayMetadata": []
+              },
+              "_variations": [],
+              "_model": {
+                "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-list-v1",
+                "title": "SCH-List-v1"
+              }
+            },
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-wait-times",
+              "scId": "ei-telephone-wait-times",
+              "scTitleEn": "Wait times",
+              "scTitleFr": "Temps d’attente",
+              "scItems": [
+                {
+                  "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-wait-times",
+                  "scId": "ei-telephone-wait-times",
+                  "scHeadingEn": null,
+                  "scHeadingFr": null,
+                  "scContentEn": {
+                    "html": "<p>11 minutes was the average wait time for the week of September 19, 2022.</p>\n",
+                    "markdown": "11 minutes was the average wait time for the week of September 19, 2022.\n\n ",
+                    "plaintext": "11 minutes was the average wait time for the week of September 19, 2022.",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "11 minutes was the average wait time for the week of September 19, 2022."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scContentFr": {
+                    "html": "<p>11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.</p>\n",
+                    "markdown": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.\n\n ",
+                    "plaintext": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scIconCSS": "clock",
+                  "_metadata": {
+                    "stringMetadata": [
+                      {
+                        "name": "title",
+                        "value": "EI-Telephone-Wait times"
+                      },
+                      {
+                        "name": "description",
+                        "value": ""
+                      }
+                    ],
+                    "stringArrayMetadata": [],
+                    "intMetadata": [],
+                    "intArrayMetadata": [],
+                    "floatMetadata": [],
+                    "floatArrayMetadata": [],
+                    "booleanMetadata": [],
+                    "booleanArrayMetadata": [],
+                    "calendarMetadata": [],
+                    "calendarArrayMetadata": []
+                  },
+                  "_variations": [],
+                  "_model": {
+                    "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-content-v1",
+                    "title": "SCH-Content-v1"
+                  }
+                }
+              ],
+              "_metadata": {
+                "stringMetadata": [
+                  {
+                    "name": "title",
+                    "value": "EI-Telephone-Wait times"
+                  },
+                  {
+                    "name": "description",
+                    "value": ""
+                  }
+                ],
+                "stringArrayMetadata": [],
+                "intMetadata": [],
+                "intArrayMetadata": [],
+                "floatMetadata": [],
+                "floatArrayMetadata": [],
+                "booleanMetadata": [],
+                "booleanArrayMetadata": [],
+                "calendarMetadata": [],
+                "calendarArrayMetadata": []
+              },
+              "_variations": [],
+              "_model": {
+                "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-list-v1",
+                "title": "SCH-List-v1"
+              }
+            },
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-hours-for-automated-service",
+              "scId": "ei-telephone-hours-for-automated-service",
+              "scTitleEn": "Hours for automated service",
+              "scTitleFr": "Heures de disponibilité du service automatisé",
+              "scItems": [
+                {
+                  "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-hours-for-automated-service",
+                  "scId": "ei-telephone-hours-for-automated-service",
+                  "scHeadingEn": null,
+                  "scHeadingFr": null,
+                  "scContentEn": {
+                    "html": "<p>24 hours a day, 7 days a week</p>\n",
+                    "markdown": "24 hours a day, 7 days a week\n\n ",
+                    "plaintext": "24 hours a day, 7 days a week",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "24 hours a day, 7 days a week"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scContentFr": {
+                    "html": "<p>24 heures sur 24, 7 jours sur 7</p>\n",
+                    "markdown": "24 heures sur 24, 7 jours sur 7\n\n ",
+                    "plaintext": "24 heures sur 24, 7 jours sur 7",
+                    "json": [
+                      {
+                        "nodeType": "paragraph",
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "24 heures sur 24, 7 jours sur 7"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "scIconCSS": "clock",
+                  "_metadata": {
+                    "stringMetadata": [
+                      {
+                        "name": "title",
+                        "value": "EI-Telephone-Hours for automated service"
+                      },
+                      {
+                        "name": "description",
+                        "value": ""
+                      }
+                    ],
+                    "stringArrayMetadata": [],
+                    "intMetadata": [],
+                    "intArrayMetadata": [],
+                    "floatMetadata": [],
+                    "floatArrayMetadata": [],
+                    "booleanMetadata": [],
+                    "booleanArrayMetadata": [],
+                    "calendarMetadata": [],
+                    "calendarArrayMetadata": []
+                  },
+                  "_variations": [],
+                  "_model": {
+                    "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-content-v1",
+                    "title": "SCH-Content-v1"
+                  }
+                }
+              ],
+              "_metadata": {
+                "stringMetadata": [
+                  {
+                    "name": "title",
+                    "value": "EI-Telephone-Hours for automated service"
+                  },
+                  {
+                    "name": "description",
+                    "value": ""
+                  }
+                ],
+                "stringArrayMetadata": [],
+                "intMetadata": [],
+                "intArrayMetadata": [],
+                "floatMetadata": [],
+                "floatArrayMetadata": [],
+                "booleanMetadata": [],
+                "booleanArrayMetadata": [],
+                "calendarMetadata": [],
+                "calendarArrayMetadata": []
+              },
+              "_variations": [],
+              "_model": {
+                "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-list-v1",
+                "title": "SCH-List-v1"
+              }
+            }
+          ],
+          "_metadata": {
+            "stringMetadata": [
+              {
+                "name": "title",
+                "value": "EI-Contact-Telephone"
+              },
+              {
+                "name": "description",
+                "value": ""
+              }
+            ],
+            "stringArrayMetadata": [],
+            "intMetadata": [],
+            "intArrayMetadata": [],
+            "floatMetadata": [],
+            "floatArrayMetadata": [],
+            "booleanMetadata": [],
+            "booleanArrayMetadata": [],
+            "calendarMetadata": [],
+            "calendarArrayMetadata": []
+          },
+          "_variations": [],
+          "_model": {
+            "_path": "/conf/decd-endc/settings/dam/cfm/models/sch-contact-method-v1",
+            "title": "SCH-Contact-Method-v1"
+          }
+        }
+      ]
+    }
+  }
+}
