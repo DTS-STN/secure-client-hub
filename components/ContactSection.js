@@ -3,14 +3,24 @@ import { Fragment } from 'react'
 import ViewMoreLessButton from './ViewMoreLessButton'
 import { useState } from 'react'
 import Markdown from 'markdown-to-jsx'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { Button } from '@dts-stn/service-canada-design-system'
 
-function ContactSectionRow(label, details) {
-  console.log('beep', label, details)
-  return label && details ? (
-    <div className="grid grid-cols-4 gap-4 border-t">
+function ContactSectionRow(label, detail, highlight, button) {
+  return label && detail ? (
+    <div
+      className={`grid grid-cols-4 gap-4 border-t mt-4 ${
+        highlight && 'bg-blue-100'
+      }`}
+    >
       <div className="col-span-1 border-t">{label}</div>
-      <div className="col-span-3 border-t">
-        <Markdown>{details}</Markdown>
+      <div className="col-span-3 border-t markdown_div ">
+        {button ? (
+          <Button text={detail} styling={'primary'} />
+        ) : (
+          <Markdown>{detail}</Markdown>
+        )}
       </div>
     </div>
   ) : (
@@ -19,32 +29,20 @@ function ContactSectionRow(label, details) {
 }
 
 export default function ContactSection(props) {
-  console.log(props, 'hhhhhhhhhh')
+  console.log(props, 'ffffffff')
   return (
     <div className="max-w-3xl">
       <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
-        {props.scTitle}
+        {props.title}
       </h2>
-      <p>
-        <Markdown>{props.schIntro}</Markdown>
+      <p className="list-disc list-inside list-disc markdown_div">
+        <Markdown>{props.intro}</Markdown>
       </p>
-      <p>
-        <br />
-        <br />
-      </p>
-
-      {ContactSectionRow(props.schBeforeLabel, props.schBeforeDetails)}
-      {ContactSectionRow(props.schPhoneLabel, props.schPhoneDetails)}
-      {/* This must link to a form */}
-      {ContactSectionRow(props.schLocationLabel, props.schLocationDetails)}
-      {ContactSectionRow(props.schHoursLabel, props.schHoursDetails)}
-      {ContactSectionRow(props.schWaitLabel, props.schWaitDetails)}
-      {ContactSectionRow(props.schHoursAutoLabel, props.schHoursAutoDetails)}
+      <div>
+        {props.details.map((x) => ContactSectionRow(x.label, x.detail))}
+      </div>
+      <p></p>
       <div className="grid grid-cols-4 gap-4 border-t"></div>
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   )
 }
