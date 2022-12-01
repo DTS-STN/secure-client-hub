@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
 import { Fragment } from 'react'
-import PageLink from '../../components/PageLink'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 import ContactSection from '../../components/ContactSection'
@@ -10,24 +9,31 @@ import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import logger from '../../lib/logger'
-import ProfileTasks from '../../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../../components/ExitBetaModal'
 import ContactProvince from '../../components/ContactProvince'
-const PageData = require('../../json/Nov30Data.json')
 import Markdown from 'markdown-to-jsx'
+const PageData = require('../../json/Nov30Data.json')
 
 const tmpContactMethods = PageData.data.schPagev1ByPath.item
 
 const pareseContactMethods = (rawMethods) => {
   let tmp = {
     en: {
-      title: rawMethods.scTitleEn,
+      breadCrumbs: rawMethods.scBreadcrumbParentPages.map((x) => {
+        return {
+          text: x.scTitleEn,
+          link: `/${x.scPageNameEn}`,
+        }
+      }),
+      title: rawMethods.scBreadcrumbParentPages,
+      id: rawMethods.scId,
       methods: rawMethods.scFragments[0].scItems.map((x) => {
         return {
           title: x.scTitleEn,
           intro: x.schIntroEn.markdown,
+          id: x.scId,
           details: x.schDetails.map((x) => {
             return {
               label: x.scTitleEn,
@@ -39,11 +45,19 @@ const pareseContactMethods = (rawMethods) => {
       }),
     },
     fr: {
+      breadCrumbs: rawMethods.scBreadcrumbParentPages.map((x) => {
+        return {
+          text: x.scTitleEn,
+          link: `/${x.scPageNameEn}`,
+        }
+      }),
       title: rawMethods.scTitleFr,
+      id: rawMethods.scId,
       methods: rawMethods.scFragments[0].scItems.map((x) => {
         return {
           title: x.scTitleFr,
           intro: x.schIntroFr.markdown,
+          id: x.scId,
           details: x.schDetails.map((x) => {
             return {
               label: x.scTitleFr,
@@ -80,11 +94,11 @@ const pareseContactMethods = (rawMethods) => {
   return tmp
 }
 
-export default function Profile(props) {
+export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  console.log(props, tmpContactMethods)
+  console.log(props, tmpContactMethods, PageData)
 
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,
@@ -102,10 +116,13 @@ export default function Profile(props) {
   return (
     <div id="homeContent" data-testid="homeContent-test">
       <Heading id="my-dashboard-heading" title={props.contactMethods.title} />
-
+      <div className="py-5" />
       <TableContent
-        sectionList={props.contactMethods.methods.map((item, i) => {
-          return { name: item.title, link: '#' }
+        sectionList={[
+          ...props.contactMethods.methods,
+          { title: 'Mail', id: 'mail' },
+        ].map((item, i) => {
+          return { name: item.title, link: `#${item.id}` }
         })}
       />
 
@@ -114,7 +131,7 @@ export default function Profile(props) {
           <ContactSection key={i} programUniqueId={i} {...item} />
         </Fragment>
       ))}
-      <div className="max-w-3xl">
+      <div className="max-w-3xl" id="mail">
         <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
           {props.contactMethods.mail.title}
         </h2>
@@ -124,7 +141,7 @@ export default function Profile(props) {
         {props.contactMethods.mail.details
           .filter((x) => x.province && x.contentEi && x.contentDocuments)
           .map((item) => (
-            <ContactProvince {...item} />
+            <ContactProvince {...item} locale={props.locale} />
           ))}
       </div>
 
@@ -182,14 +199,12 @@ export async function getStaticProps({ res, locale }) {
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
-
   const contactMethods = pareseContactMethods(tmpContactMethods)
+
+  const breadCrumbItems =
+    locale === 'en'
+      ? contactMethods.en.breadCrumbs
+      : contactMethods.en.breadCrumbs
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -221,7 +236,7 @@ export async function getStaticProps({ res, locale }) {
   }
 }
 
-Profile.propTypes = {
+ContactEmploymentInsurance.propTypes = {
   /**
    * current locale in the address
    */
@@ -232,68 +247,3 @@ Profile.propTypes = {
    */
   meta: PropTypes.object,
 }
-
-// {props.content.cards.map((card) => {
-//   const moreLessButtonText = card.lists.tasks[0].title
-//   const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
-//   return (
-//     <Card
-//       key={card.id}
-//       programUniqueId={card.id}
-//       locale={props.locale}
-//       cardTitle={card.title}
-//       viewMoreLessCaption={moreLessButtonText}
-//     >
-//       <div
-//         className="px-3 sm:px-8 md:px-15 border-t-2"
-//         data-cy="task-list"
-//       >
-//         <ProfileTasks
-//           tasks={tasks}
-//           data-testID="profile-task-group-list"
-//           openModal={openModal}
-//           data-cy="task"
-//         />
-//       </div>
-//     </Card>
-//   )
-// })}
-// <PageLink
-//   lookingForText={t.pageLinkSecurity}
-//   accessText={t.accessYourSecurityText}
-//   linkText={t.securityLinkText}
-//   href="/security-settings"
-//   linkID="link-id"
-//   dataCy="access-security-page-link"
-//   buttonHref={t.url_dashboard}
-//   buttonId="back-to-dashboard-button"
-//   buttonLinkText={t.backToDashboard}
-// ></PageLink>
-
-{
-  /* <p className="mb-8 text-xl font-body">
-{props.content.securityQuestions.subTitle}
-</p>
-
-<Link
-id="eiAccessCodeLink"
-dataTestId="eiAccessCodeLink"
-text={props.content.eiAccessCode.linkTitle.text}
-href={props.content.eiAccessCode.linkTitle.link}
-/>
-<p className="pb-7 text-xl font-body">
-{props.content.eiAccessCode.subTitle}
-</p> */
-}
-
-// <PageLink
-// lookingForText={props.content.lookingFor.title}
-// accessText={props.content.lookingFor.subText[0]}
-// linkText={props.content.lookingFor.subText[1]}
-// href={props.content.lookingFor.link}
-// linkID="link-id"
-// dataCy="access-profile-page-link"
-// buttonHref={t.url_dashboard}
-// buttonId="back-to-dashboard-button"
-// buttonLinkText={t.backToDashboard}
-// ></PageLink>
