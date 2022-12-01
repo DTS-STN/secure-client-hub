@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types'
-import {
-  Heading,
-  Link,
-  TableContent,
-  MoreInfo,
-  Collapse,
-} from '@dts-stn/service-canada-design-system'
+import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
+import { Fragment } from 'react'
 import PageLink from '../../components/PageLink'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
@@ -109,25 +104,27 @@ export default function Profile(props) {
       <Heading id="my-dashboard-heading" title={props.contactMethods.title} />
 
       <TableContent
-        sectionList={props.contactMethods.methods.map((item) => {
+        sectionList={props.contactMethods.methods.map((item, i) => {
           return { name: item.title, link: '#' }
         })}
       />
 
       {props.contactMethods.methods.map((item, i) => (
-        <ContactSection key={i} programUniqueId={i} {...item} />
+        <Fragment key={i}>
+          <ContactSection key={i} programUniqueId={i} {...item} />
+        </Fragment>
       ))}
       <div className="max-w-3xl">
-        <h2 class="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
+        <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
           {props.contactMethods.mail.title}
         </h2>
-        <p class="list-disc list-inside list-disc markdown_div pb-4">
+        <div className="list-disc list-inside list-disc markdown_div pb-4">
           <Markdown>{props.contactMethods.mail.intro}</Markdown>
-        </p>
+        </div>
         {props.contactMethods.mail.details
           .filter((x) => x.province && x.contentEi && x.contentDocuments)
           .map((item) => (
-            <ContactProvince item={item} />
+            <ContactProvince {...item} />
           ))}
       </div>
 

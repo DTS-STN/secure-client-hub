@@ -1,32 +1,22 @@
-import propTypes from 'prop-types'
-import { Fragment } from 'react'
-import ViewMoreLessButton from './ViewMoreLessButton'
-import { useState } from 'react'
 import Markdown from 'markdown-to-jsx'
-import {
-  Heading,
-  Link,
-  TableContent,
-  MoreInfo,
-  Collapse,
-} from '@dts-stn/service-canada-design-system'
+import { Collapse } from '@dts-stn/service-canada-design-system'
 
-const ContactProvince = ({ item }) => {
+const ContactProvince = ({ province, contentDocuments, contentEi, id }) => {
   return (
-    <div className="py-2">
-      <Collapse title={item.province}>
+    <div className="py-2" key={id}>
+      <Collapse title={province}>
         <div className="grid text-base font-sans grid-cols-2">
           <div classname="col-span-1">
             <p>
               <b>For Employment Insurance</b>
             </p>
-            <Markdown>{item.contentEi}</Markdown>
+            <Markdown>{contentEi}</Markdown>
           </div>
           <div classname="col-span-1">
             <p>
               <b>For Supporting Documents</b>
             </p>
-            <Markdown>{item.contentDocuments}</Markdown>
+            <Markdown>{contentDocuments}</Markdown>
           </div>
         </div>
       </Collapse>
