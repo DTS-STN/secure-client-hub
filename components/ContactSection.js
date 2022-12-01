@@ -1,18 +1,14 @@
-import propTypes from 'prop-types'
 import { Fragment } from 'react'
-import ViewMoreLessButton from './ViewMoreLessButton'
-import { useState } from 'react'
 import Markdown from 'markdown-to-jsx'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { Button } from '@dts-stn/service-canada-design-system'
 
-function ContactSectionRow(label, detail, highlight, button) {
+function ContactSectionRow({ label, detail, highlight, button, index }) {
   return label && detail ? (
     <div
       className={`grid grid-cols-4 gap-4 border-t-2 mt-4 ${
         highlight && 'bg-blue-100'
       }`}
+      key={index}
     >
       <div className="col-span-1 font-bold text-xl">{label}</div>
       <div className="col-span-3  markdown_div ">
@@ -24,36 +20,22 @@ function ContactSectionRow(label, detail, highlight, button) {
       </div>
     </div>
   ) : (
-    <Fragment />
+    <Fragment key={index} />
   )
 }
 
-export default function ContactSection(props) {
+export default function ContactSection({ title, intro, details }) {
   return (
     <div className="max-w-3xl">
       <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
-        {props.title}
+        {title}
       </h2>
-      <p className="list-disc list-inside list-disc markdown_div">
-        <Markdown>{props.intro}</Markdown>
-      </p>
-      <div>
-        {props.details.map((x) => ContactSectionRow(x.label, x.detail))}
+      <div className="list-disc list-inside list-disc markdown_div">
+        <Markdown>{intro}</Markdown>
       </div>
+      <div>{details.map((x, index) => ContactSectionRow({ ...x, index }))}</div>
       <p></p>
       <div className="grid grid-cols-4 gap-4 border-t-2 pb-6" />
     </div>
   )
-}
-
-ContactSection.propTypes = {
-  locale: propTypes.string.isRequired,
-  cardTitle: propTypes.string.isRequired,
-  viewMoreLessCaption: propTypes.string.isRequired,
-  programUniqueId: propTypes.string,
-  openModal: propTypes.func,
-  children: propTypes.oneOfType([
-    propTypes.element,
-    propTypes.arrayOf(propTypes.element),
-  ]),
 }
