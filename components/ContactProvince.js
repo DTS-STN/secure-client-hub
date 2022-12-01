@@ -1,15 +1,5 @@
 import Markdown from 'markdown-to-jsx'
 import { Collapse } from '@dts-stn/service-canada-design-system'
-const header = {
-  en: {
-    ei: 'For Employment Insurance',
-    documents: 'For Supporting Documents',
-  },
-  fr: {
-    ei: "Pour l'Assurance Emploi",
-    documents: 'Pour les Documents Justificatifs',
-  },
-}
 
 const ContactProvince = ({
   province,
@@ -18,6 +8,17 @@ const ContactProvince = ({
   id,
   locale,
 }) => {
+  const header = {
+    en: {
+      ei: 'For Employment Insurance',
+      documents: 'For Supporting Documents',
+    },
+    fr: {
+      ei: "Pour l'Assurance Emploi",
+      documents: 'Pour les Documents Justificatifs',
+    },
+  }
+
   const headers = locale === 'en' ? header.en : header.fr
   return (
     <div className="py-2" key={id}>
