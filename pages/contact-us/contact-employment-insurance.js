@@ -21,13 +21,13 @@ import React from 'react'
 import ExitBetaModal from '../../components/ExitBetaModal'
 import ContactProvince from '../../components/ContactProvince'
 const PageData = require('../../json/Nov30Data.json')
+import Markdown from 'markdown-to-jsx'
 
 const tmpContactMethods = PageData.data.schPagev1ByPath.item
 
 const pareseContactMethods = (rawMethods) => {
   let tmp = {
     en: {
-      moo: 'ddddd',
       title: rawMethods.scTitleEn,
       methods: rawMethods.scFragments[0].scItems.map((x) => {
         return {
@@ -46,10 +46,42 @@ const pareseContactMethods = (rawMethods) => {
     fr: {
       title: rawMethods.scTitleFr,
       methods: rawMethods.scFragments[0].scItems.map((x) => {
-        return { title: x.scTitleFr }
+        return {
+          title: x.scTitleFr,
+          intro: x.schIntroFr.markdown,
+          details: x.schDetails.map((x) => {
+            return {
+              label: x.scTitleFr,
+              id: x.scId,
+              detail: x.scItems[0] ? x.scItems[0].scContentFr.markdown : null,
+            }
+          }),
+        }
       }),
     },
   }
+  tmp.en.mail = tmp.en.methods[3]
+  tmp.en.mail.details = tmp.en.mail.details.map((x) => {
+    return {
+      province: x.label,
+      id: x.detail,
+      contentEi: x.detail,
+      contentDocuments:
+        'Service Canada Center\n\nPO Box 245\nEdmonton AB T5J 2J1',
+    }
+  })
+  tmp.fr.mail = tmp.fr.methods[3]
+  tmp.fr.mail.details = tmp.fr.mail.details.map((x) => {
+    return {
+      province: x.label,
+      id: x.detail,
+      contentEi: x.detail,
+      contentDocuments:
+        'Service Canada Center\n\nPO Box 245\nEdmonton AB T5J 2J1',
+    }
+  })
+  tmp.en.methods.pop()
+  tmp.fr.methods.pop()
   return tmp
 }
 
@@ -82,14 +114,22 @@ export default function Profile(props) {
         })}
       />
 
-      {props.contactMethods.methods.map((item) => (
-        <ContactSection key="ddddd" programUniqueId="ffffff" {...item} />
+      {props.contactMethods.methods.map((item, i) => (
+        <ContactSection key={i} programUniqueId={i} {...item} />
       ))}
-      {/* <div className="max-w-3xl">
-        {props.contactMethods.mailProvince.map((item) => (
-          <ContactProvince item={item} />
-        ))}
-      </div> */}
+      <div className="max-w-3xl">
+        <h2 class="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
+          {props.contactMethods.mail.title}
+        </h2>
+        <p class="list-disc list-inside list-disc markdown_div pb-4">
+          <Markdown>{props.contactMethods.mail.intro}</Markdown>
+        </p>
+        {props.contactMethods.mail.details
+          .filter((x) => x.province && x.contentEi && x.contentDocuments)
+          .map((item) => (
+            <ContactProvince item={item} />
+          ))}
+      </div>
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
