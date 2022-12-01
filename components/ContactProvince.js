@@ -13,22 +13,24 @@ import {
 
 const ContactProvince = ({ item }) => {
   return (
-    <Collapse title={item.province}>
-      <div className="grid text-base font-sans grid-cols-2">
-        <div classname="col-span-1">
-          <p>
-            <b>For Employment Insurance</b>
-          </p>
-          <Markdown>{item.forEI}</Markdown>
+    <div className="py-2">
+      <Collapse title={item.province}>
+        <div className="grid text-base font-sans grid-cols-2">
+          <div classname="col-span-1">
+            <p>
+              <b>For Employment Insurance</b>
+            </p>
+            <Markdown>{item.contentEi}</Markdown>
+          </div>
+          <div classname="col-span-1">
+            <p>
+              <b>For Supporting Documents</b>
+            </p>
+            <Markdown>{item.contentDocuments}</Markdown>
+          </div>
         </div>
-        <div classname="col-span-1">
-          <p>
-            <b>For Supporting Documents</b>
-          </p>
-          <Markdown>{item.forDocs}</Markdown>
-        </div>
-      </div>
-    </Collapse>
+      </Collapse>
+    </div>
   )
 }
 
