@@ -1,6 +1,6 @@
+import { Button } from '@dts-stn/service-canada-design-system'
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
-import { Button } from '@dts-stn/service-canada-design-system'
 
 function ContactSectionRow({ label, detail, highlight, button, index }) {
   return label && detail ? (
@@ -24,18 +24,4 @@ function ContactSectionRow({ label, detail, highlight, button, index }) {
   )
 }
 
-export default function ContactSection({ title, intro, id, details }) {
-  return (
-    <div className="max-w-3xl" name={id} id={id}>
-      <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
-        {title}
-      </h2>
-      <div className="list-disc list-inside list-disc markdown_div">
-        <Markdown>{intro}</Markdown>
-      </div>
-      <div>{details.map((x, index) => ContactSectionRow({ ...x, index }))}</div>
-      <p></p>
-      <div className="grid grid-cols-4 gap-4 border-t-2 pb-6" />
-    </div>
-  )
-}
+export default ContactSectionRow
