@@ -24,7 +24,7 @@ const ContactProvince = ({
     <div className="py-2" key={id}>
       <Collapse title={province}>
         <div className="grid text-base font-sans grid-cols-2">
-          <div classname="col-span-1">
+          <div className="col-span-1">
             <p>
               <b>{headers.ei}</b>
             </p>
