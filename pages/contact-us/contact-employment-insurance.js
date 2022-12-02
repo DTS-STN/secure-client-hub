@@ -97,7 +97,6 @@ const pareseContactMethods = (rawMethods) => {
 }
 
 export default function ContactEmploymentInsurance(props) {
-  console.log(props, PageData)
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -142,7 +141,7 @@ export default function ContactEmploymentInsurance(props) {
         {props.contactMethods.mail.details
           .filter((x) => x.province && x.contentEi && x.contentDocuments)
           .map((item) => (
-            <ContactProvince {...item} locale={props.locale} />
+            <ContactProvince {...item} locale={props.locale} key={item.id} />
           ))}
       </div>
 
