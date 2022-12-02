@@ -128,7 +128,7 @@ export default function ContactEmploymentInsurance(props) {
 
       {props.contactMethods.methods.map((item, i) => (
         <Fragment key={i}>
-          <ContactSection key={i} programUniqueId={i} {...item} />
+          <ContactSection programUniqueId={i} {...item} />
         </Fragment>
       ))}
       <div className="max-w-3xl" id="mail">
@@ -140,8 +140,8 @@ export default function ContactEmploymentInsurance(props) {
         </div>
         {props.contactMethods.mail.details
           .filter((x) => x.province && x.contentEi && x.contentDocuments)
-          .map((item) => (
-            <ContactProvince {...item} locale={props.locale} key={item.id} />
+          .map((item, i) => (
+            <ContactProvince {...item} locale={props.locale} key={i} />
           ))}
       </div>
 
