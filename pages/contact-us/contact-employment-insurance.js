@@ -135,7 +135,7 @@ export default function ContactEmploymentInsurance(props) {
         <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
           {props.contactMethods.mail.title}
         </h2>
-        <div className="list-disc list-inside list-disc markdown_div pb-4">
+        <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4">
           <Markdown>{props.contactMethods.mail.intro}</Markdown>
         </div>
         {props.contactMethods.mail.details
@@ -221,7 +221,6 @@ export async function getStaticProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.fr,
       meta,
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,

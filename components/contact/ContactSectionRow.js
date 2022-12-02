@@ -11,7 +11,7 @@ function ContactSectionRow({ label, detail, highlight, button, index }) {
       key={index}
     >
       <div className="col-span-1 font-bold text-xl">{label}</div>
-      <div className="col-span-4  markdown_div ">
+      <div className="col-span-4 [&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc">
         {button ? (
           <Button text={detail} styling={'primary'} />
         ) : (

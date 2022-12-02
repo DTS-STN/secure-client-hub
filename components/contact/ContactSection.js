@@ -8,7 +8,7 @@ export default function ContactSection({ title, intro, id, details }) {
       <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
         {title}
       </h2>
-      <div className="list-disc list-inside list-disc markdown_div">
+      <div className="list-disc [&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc">
         <Markdown>{intro}</Markdown>
       </div>
       <div>{details.map((x, index) => ContactSectionRow({ ...x, index }))}</div>
