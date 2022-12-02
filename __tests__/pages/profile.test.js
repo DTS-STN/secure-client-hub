@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import MyDashboard from '../../pages/my-dashboard'
-import { getServerSideProps } from '../../pages/my-dashboard'
+import Profile from '../../pages/profile'
+import { getServerSideProps } from '../../pages/profile'
 
 import { useRouter } from 'next/router'
 
@@ -13,8 +13,8 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-// mocks home mapper
-jest.mock('../../graphql/mappers/my-dashboard', () => ({
+// mocks profile mapper
+jest.mock('../../graphql/mappers/profile', () => ({
   getMyDashboardContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
@@ -37,6 +37,7 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
     })
   },
 }))
+
 jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   getBetaPopupNotAvailableContent: () => {
     return new Promise(function (resolve, reject) {
@@ -49,11 +50,14 @@ jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
 
-describe('My Dashboard page', () => {
+describe('My Profile page', () => {
   const content = {
     heading: 'heading',
     paragraph: 'paragraph',
-    cards: [{ id: 'test', title: 'title', lists: [] }],
+    cards: [
+      { id: 'test', title: 'title', lists: { tasks: [{ title: 'test' }] } },
+    ],
+    exitBeta: { title: 'title', link: '#' },
   }
   const popupContent = {}
 
@@ -66,54 +70,33 @@ describe('My Dashboard page', () => {
 
   it('should render the page', () => {
     render(
-      <MyDashboard
+      <Profile
         locale="en"
         content={content}
+        meta={{}}
+        popupContent={popupContent}
         popupContentNA={popupContent}
+        breadCrumbItems={[]}
+        langToggleLink={''}
       />
     )
-    const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
-    expect(myDashboardDiv).toBeInTheDocument()
+    const profileDiv = screen.getByTestId('profileContent-test')
+    expect(profileDiv).toBeInTheDocument()
   })
 
   it('should contain a card', () => {
     render(
-      <MyDashboard
+      <Profile
         locale="en"
+        meta={{}}
         content={content}
+        popupContent={popupContent}
         popupContentNA={popupContent}
+        breadCrumbItems={[]}
+        langToggleLink={''}
       />
     )
     const testCard = screen.getByTestId('mock-card')
     expect(testCard).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
-
-    expect(props).toEqual({
-      props: {
-        content: {},
-        bannerContent: {},
-        langToggleLink: '/fr/my-dashboard',
-        locale: 'en',
-        meta: {
-          data_en: {
-            desc: 'English',
-            author: 'Service Canada',
-            keywords: '',
-            title: 'My Service Canada Account - Dashboard',
-          },
-          data_fr: {
-            author: 'Service Canada',
-            desc: 'Français',
-            keywords: '',
-            title: 'Mon dossier Service Canada - Tableau de Bord',
-          },
-        },
-        popupContent: {},
-        popupContentNA: {},
-      },
-    })
   })
 })

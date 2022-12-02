@@ -1,0 +1,46 @@
+{
+  schPagev1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/contact-us"
+  ) {
+    item {
+      _path
+      scPageNameEn
+      scPageNameFr
+      scTitleEn
+      scTitleFr
+      scBreadcrumbParentPages {
+        ... on SCHPagev1Model {
+          scTitleEn
+          scId
+        }
+      }
+      scFragments {
+          ... on SCHContentv1Model {
+          scId
+          scContentEn {
+              json
+          }
+          scContentFr {
+            json
+          }
+      }
+      ... on SCHTaskv1Model {
+          scId
+          scLinkTextEn
+          scLinkTextFr
+          scDescriptionEn{
+              json
+          }
+          scDescriptionFr{
+              json
+          }
+          scLinkTextAssistiveEn
+          scLinkTextAssistiveFr
+          scDestinationURLEn
+          scDestinationURLFr
+          schBetaPopUp
+      }
+    }
+  }
+}
+}
