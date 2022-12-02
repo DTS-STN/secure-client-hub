@@ -30,7 +30,7 @@ const ContactProvince = ({
             </p>
             <Markdown>{contentEi}</Markdown>
           </div>
-          <div classname="col-span-1">
+          <div className="col-span-1">
             <p>
               <b>{headers.documents}</b>
             </p>
