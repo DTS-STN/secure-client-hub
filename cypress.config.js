@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
+  experimentalWebKitSupport: true,
   video: false,
   reporter: 'cypress-multi-reporters',
   reporterOptions: {
