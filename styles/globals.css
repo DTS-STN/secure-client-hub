@@ -21,3 +21,9 @@ ds-container{
   padding-left: 26px;
   padding-right: 26px
 }
+
+.markdown_div ul {
+  list-style-type: disc;
+  margin-left: 30px
+ }
+ 
