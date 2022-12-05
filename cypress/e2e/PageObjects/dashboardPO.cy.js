@@ -219,9 +219,9 @@ function ClickCompleteMyReportOrApplyEILink() {
       if (text.text() === 'Complete my report') {
         cy.wrap($el1).should('have.attr', 'target', '_blank')
       }
-      //if(text.text() =='Apply for Employment Insurance'){
-      // cy.wrap($el1).should('have.attr','target','_blank')
-      // }
+      if (text.text() == 'Apply for Employment Insurance') {
+        cy.wrap($el1).should('have.attr', 'target', '_blank')
+      }
     })
 }
 
