@@ -1,0 +1,403 @@
+{
+  "data": {
+    "schListv1ByPath": {
+      "item": {
+        "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-contact-methods",
+        "scId": "ei-contact-methods",
+        "scItems": [
+          {
+            "_path": "/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-telephone",
+            "scId": "ei-contact-telephone",
+            "scTitleEn": "Telephone",
+            "scTitleFr": "Téléphone",
+            "schIntroEn": {
+              "markdown": "**Call us to speak to an Employment Insurance representative** for help during the hours of operation listed below.\n\n This phone number **also provides an automated service available 24 hours a day, 7 days a week**. You can use self-service options to:\n\n  * submit Employment Insurance reports\n * get information on benefits, including your specific claim\n  "
+            },
+            "schIntroFr": {
+              "markdown": "**Appelez-nous pour parler à un représentant de l'assurance-emploi** et obtenir de l'aide pendant les heures d’ouverture indiquées ci-dessous.\n\n Ce numéro de téléphone offre aussi un **service automatisé disponible 24 heures sur 24, 7 jours sur 7**. Vous pouvez utiliser les options de libre-service pour :\n \n\n  * soumettre des déclarations électroniques;\n * obtenir des informations sur les prestations, y compris sur votre demande spécifique.\n  "
+            },
+            "schHoursDetailsFr": {
+              "markdown": "8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.\n\n "
+            },
+            "schLocationLabelEn": {
+              "markdown": null
+            },
+            "schDetails": [
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-before-you-call-us",
+                "scTitleEn": "Before you call us",
+                "scTitleFr": "Avant de nous appeler",
+                "scId": "ei-telephone-before-you-call-us",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-before-you-call-us",
+                    "scId": "ei-telephone-before-you-call",
+                    "scContentEn": {
+                      "markdown": "To access information about your claim, you will need to provide your **Social Insurance Number and access code**. You will find them on the benefit statement that is mailed to you after you apply for benefits.\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "Pour obtenir des renseignements au sujet de votre demande, vous devrez fournir votre **numéro d'assurance sociale et votre code d'accès**. Vous les trouverez sur le relevé de prestations qui vous est envoyé suite à votre demande de prestations.\n\n "
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-number",
+                "scTitleEn": "Telephone number",
+                "scTitleFr": "Numéro de téléphone",
+                "scId": "ei-telephone-number",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-number",
+                    "scId": "ei-telephone-number",
+                    "scContentEn": {
+                      "markdown": "Toll-Free: **1-800-206-7218**\n\n TTY: 1-800-529-3742\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "Sans frais : **1-800-808-6352**\n\n ATS : 1-800-529-3742\n\n "
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-hours-of-operation",
+                "scTitleEn": "Hours of operation",
+                "scTitleFr": "Heures d’ouverture",
+                "scId": "ei-telephone-hours-of-operation",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-hours-of-operation",
+                    "scId": "ei-telephone-hours-of-operation",
+                    "scContentEn": {
+                      "markdown": "**8:30 am to 4:30 pm local time, Monday to Friday, except statutory holidays**\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "**8 h 30 à 16 h 30 (heure locale), du lundi au vendredi, sauf les jours fériés.**\n\n "
+                    },
+                    "scIconCSS": "clock",
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-wait-times",
+                "scTitleEn": "Wait times",
+                "scTitleFr": "Temps d’attente",
+                "scId": "ei-telephone-wait-times",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-wait-times",
+                    "scId": "ei-telephone-wait-times",
+                    "scContentEn": {
+                      "markdown": "11 minutes was the average wait time for the week of September 19, 2022.\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "11 minutes a été le temps d'attente moyen pour la semaine du 19 septembre 2022.\n\n "
+                    },
+                    "scIconCSS": "clock",
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-telephone-hours-for-automated-service",
+                "scTitleEn": "Hours for automated service",
+                "scTitleFr": "Heures de disponibilité du service automatisé",
+                "scId": "ei-telephone-hours-for-automated-service",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-telephone-hours-for-automated-service",
+                    "scId": "ei-telephone-hours-for-automated-service",
+                    "scContentEn": {
+                      "markdown": "24 hours a day, 7 days a week\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "24 heures sur 24, 7 jours sur 7\n\n "
+                    },
+                    "scIconCSS": "clock",
+                    "scFragments": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_path": "/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-callback",
+            "scId": "ei-contact-callback",
+            "scTitleEn": "Callback",
+            "scTitleFr": "Demande de rappel",
+            "schIntroEn": {
+              "markdown": "You can ask us to call you. Fill out the form to let us know how we can help you. We will contact you by phone within 2 business days. \n\n The assistance you can obtain is limited to the following situations:\n\n  * obtain overpayment information on the CERB initial $2000 payment\n * obtain general information\n * apply for Employment Insurance\n * submit additional information and supporting documents (for example, medical notes, Records of Employment)\n * submit claimant reports\n * update direct deposit and address\n  "
+            },
+            "schIntroFr": {
+              "markdown": "Vous pouvez nous demander de vous téléphoner. Remplissez le formulaire pour nous dire comment nous pouvons vous aider. Nous communiquerons avec vous dans les 2 jours ouvrables.\n\n L’aide que vous pouvez obtenir se limite aux situations suivantes :\n \n\n  * obtenir de l’information sur un trop payé en lien avec le paiement initial de 2000 $ de la PCU;\n * obtenir des renseignements généraux;\n * présenter une demande d'assurance-emploi;\n * soumettre des renseignements supplémentaires et des documents justificatifs (notes médicales, relevés d’emploi);\n * soumettre des déclarations du prestataire;\n * mettre à jour les renseignements relatifs au dépôt direct et votre adresse.\n  "
+            },
+            "schHoursDetailsFr": {
+              "markdown": null
+            },
+            "schLocationLabelEn": {
+              "markdown": null
+            },
+            "schDetails": [
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-callback-before-you-contact-us",
+                "scTitleEn": "Before you contact us",
+                "scTitleFr": "Avant de communiquer avec nous",
+                "scId": "ei-callback-before-you-contact-us",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-callback-before-you-contact-us",
+                    "scId": "ei-callback-before-you-contact-us",
+                    "scContentEn": {
+                      "markdown": "You need to provide your **name, country, province or territory, and phone number** when filling out the form.\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "Vous devrez fournir votre **nom, pays, province ou territoire et numéro de téléphone** sur le formulaire de demande.\n\n "
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-callback-form",
+                "scTitleEn": "Callback form",
+                "scTitleFr": "Formulaire de rappel",
+                "scId": "ei-callback-form",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-callback-form",
+                    "scId": "ei-callback-form",
+                    "scContentEn": {
+                      "markdown": null
+                    },
+                    "scContentFr": {
+                      "markdown": null
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-callback-wait-times",
+                "scTitleEn": "Wait times for callback",
+                "scTitleFr": "Temps d’attente pour le rappel",
+                "scId": "ei-callback-wait-times",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-callback-wait-times",
+                    "scId": "ei-callback-wait-times",
+                    "scContentEn": {
+                      "markdown": "Within 2 business days\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "Dans les 2 jours ouvrables\n\n "
+                    },
+                    "scIconCSS": "clock",
+                    "scFragments": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_path": "/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-in-person",
+            "scId": "ei-contact-in-person",
+            "scTitleEn": "In person at a Service Canada Centre",
+            "scTitleFr": "En personne à un Centre Service Canada",
+            "schIntroEn": {
+              "markdown": "We ask you not to visit Service Canada Centres unless necessary, due to COVID-19 health guidelines.\n \n\n  \n\n  \n\n "
+            },
+            "schIntroFr": {
+              "markdown": "Nous vous demandons de ne pas vous rendre dans les Centres Service Canada, sauf si nécessaire, en raison des directives de santé relatives à la COVID-19.\n\n "
+            },
+            "schHoursDetailsFr": {
+              "markdown": "Varient selon les endroits\n\n **Trouver un Centre Service Canada pour en connaître les heures d’ouverture**\n \n\n "
+            },
+            "schLocationLabelEn": {
+              "markdown": "Find a location\n\n "
+            },
+            "schDetails": [
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-in-person-before-you-come-in",
+                "scTitleEn": "Before you come in",
+                "scTitleFr": "Avant de vous rendre à un bureau",
+                "scId": "ei-in-person-before-you-come-in",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-in-person-before-you-come-in",
+                    "scId": "ei-in-person-before-you-come-in",
+                    "scContentEn": {
+                      "markdown": "You need to show valid ID and answer verification questions at Service Canada Centres to access your file. No ID is required to ask about our services.\n\n **Examples of accepted ID include:**\n \n\n one of the following:\n\n  * a passport (Canadian or foreign) or permanent resident card\n * a Certificate of Indian Status issued by the Government of Canada\n * a provincial or territorial ID card or drivers license\n  or 2 of the following:\n\n  * a birth certificate (provincial or territorial)\n * a certificate of Canadian citizenship\n * a certificate of registration of birth abroad\n * any other government-issued ID\n  "
+                    },
+                    "scContentFr": {
+                      "markdown": "Pour avoir accès à votre dossier à un Centre Service Canada, vous devez présenter une pièce d’identité valide et répondre à des questions de vérification. Aucune pièce d'identité n'est requise pour poser des questions sur nos services.\n\n **Exemples de pièces d’identité acceptées :**\n \n\n l’une des suivantes :\n\n  * un passeport (canadien ou étranger) ou une carte de résident permanent;\n * un Certificate du statut d’Indien délivré par le gouvernement du Canada;\n * une carte d’identité ou un permis de conduire provincial ou territorial.\n  ou 2 des suivantes :\n\n  * un certificat de naissance (provincial ou territorial);\n * un certificat de citoyenneté canadienne;\n * un certificat d’enregistrement d’une naissance à l’étranger;\n * toute autre pièce d’identité délivrée par un gouvernement.\n  "
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-in-person-find-a-location",
+                "scTitleEn": "Find a location",
+                "scTitleFr": "Trouver un bureau",
+                "scId": "ei-in-person-find-a-location",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-in-person-find-a-location",
+                    "scId": "ei-in-person-find-a-location",
+                    "scContentEn": {
+                      "markdown": null
+                    },
+                    "scContentFr": {
+                      "markdown": null
+                    },
+                    "scIconCSS": null,
+                    "scFragments": []
+                  }
+                ]
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-in-person-hours-of-operation",
+                "scTitleEn": "Hours of operation",
+                "scTitleFr": "Heures d’ouverture",
+                "scId": "ei-in-person-hours-of-operation",
+                "scItems": [
+                  {
+                    "_path": "/content/dam/decd-endc/content-fragments/sch/content/contact-us/ei-in-person-hours-of-operation",
+                    "scId": "ei-in-person-hours-of-operation",
+                    "scContentEn": {
+                      "markdown": "Vary by location\n\n **Find a Service Canada Centre to see their hours of operation**\n\n "
+                    },
+                    "scContentFr": {
+                      "markdown": "Varient selon les endroits\n\n **Trouver un Centre Service Canada pour en connaître les heures d’ouverture**\n \n\n "
+                    },
+                    "scIconCSS": "clock",
+                    "scFragments": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "_path": "/content/dam/decd-endc/content-fragments/sch/contact-methods/ei-contact-mail",
+            "scId": "ei-contact-mail",
+            "scTitleEn": "Mail",
+            "scTitleFr": "Poste",
+            "schIntroEn": {
+              "markdown": "You can submit your Employment Insurance claimant reports and supporting documentation by mail.\n\n Select your province or territory to find out where to send your reports and documents.\n\n "
+            },
+            "schIntroFr": {
+              "markdown": "Vous pouvez transmettre vos déclarations de l'assurance-emploi et vos documents à l’appui par la poste.\n \n\n Sélectionnez votre province ou territoire pour connaître l’adresse postale où envoyer vos déclarations et vos documents.\n \n\n "
+            },
+            "schHoursDetailsFr": {
+              "markdown": null
+            },
+            "schLocationLabelEn": {
+              "markdown": null
+            },
+            "schDetails": [
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-ab-addresses",
+                "scTitleEn": "Alberta",
+                "scTitleFr": "Alberta",
+                "scId": "ei-ab-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-bc-addresses",
+                "scTitleEn": "British Columbia",
+                "scTitleFr": "Colombie Britannique ",
+                "scId": "ei-bc-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-mb-addresses",
+                "scTitleEn": "Manitoba",
+                "scTitleFr": "Manitoba",
+                "scId": "ei-mb-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-nb-addresses",
+                "scTitleEn": null,
+                "scTitleFr": null,
+                "scId": null,
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-nl-addresses",
+                "scTitleEn": "Newfoundland and Labrador",
+                "scTitleFr": "Terre-Neuve-et-Labrador",
+                "scId": "ei-nl-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-ns-addresses",
+                "scTitleEn": "Nova Scotia",
+                "scTitleFr": "Nouvelle-Écosse",
+                "scId": "ei-ns-addresse",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-nwt-addresses",
+                "scTitleEn": "Northwest Territories ",
+                "scTitleFr": "Territoires du Nord-Ouest",
+                "scId": "ei-nwt-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-nu-addresses",
+                "scTitleEn": "Nunavut",
+                "scTitleFr": "Nunavut",
+                "scId": "ei-nu-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-on-addresses",
+                "scTitleEn": "Ontario",
+                "scTitleFr": "Ontario",
+                "scId": "ei-on-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-pei-addresses",
+                "scTitleEn": "Prince Edward Island",
+                "scTitleFr": "Île-du-Prince-Édouard",
+                "scId": "ei-pei-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-qc-addresses",
+                "scTitleEn": "Quebec",
+                "scTitleFr": "Québec",
+                "scId": "ei-qc-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-sk-addresses",
+                "scTitleEn": "Saskatchewan",
+                "scTitleFr": "Saskatchewan",
+                "scId": "ei-sk-addresses",
+                "scItems": []
+              },
+              {
+                "_path": "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-yk-addresses",
+                "scTitleEn": "Yukon",
+                "scTitleFr": "Yukon",
+                "scId": "ei-yt-addresses",
+                "scItems": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
