@@ -46,7 +46,7 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('#dropdownNavbar > a:nth-child(2)')
+  return cy.get('#dropdownNavbar').find('li:nth-child(2)>a')
 }
 
 function ProfileMenu() {
@@ -88,8 +88,8 @@ function Cards() {
 
 function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
-    const cardHeader = $el.find('h2')
-    if (cardHeader.text() === CardName) {
+    const cardHeader = $el.find('h2').text()
+    if (cardHeader.includes(CardName)) {
       cy.wrap($el).find('button').click()
       cy.wait(500)
     }
@@ -158,16 +158,16 @@ function StayOnBetabutton() {
   return cy.get("[id ='stay-on-beta-version']")
 }
 
-function ExitBetaModalButton() {
-  return cy.get("[id ='exit-beta-version']")
-}
-
 function ContinueToPageModalButton() {
   return cy.get("[id ='continue-to-page']")
 }
 
 function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
+}
+
+function ContactUsFooterLink() {
+  return cy.get("[data-cy ='footerLink0']")
 }
 
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {
@@ -219,9 +219,9 @@ function ClickCompleteMyReportOrApplyEILink() {
       if (text.text() === 'Complete my report') {
         cy.wrap($el1).should('have.attr', 'target', '_blank')
       }
-      //if(text.text() =='Apply for Employment Insurance'){
-      // cy.wrap($el1).should('have.attr','target','_blank')
-      // }
+      if (text.text() == 'Apply for Employment Insurance') {
+        cy.wrap($el1).should('have.attr', 'target', '_blank')
+      }
     })
 }
 
@@ -256,10 +256,10 @@ module.exports = {
   FirstTaskLink,
   ExitBetaModal,
   StayOnBetabutton,
-  ExitBetaModalButton,
   ContinueToPageModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
+  ContactUsFooterLink,
 }
