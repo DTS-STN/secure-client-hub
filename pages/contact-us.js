@@ -17,7 +17,7 @@ export default function ContactLanding(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
 
-      <ul className="list-disc">
+      <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
