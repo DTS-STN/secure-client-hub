@@ -46,7 +46,7 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('#dropdownNavbar > a:nth-child(2)')
+  return cy.get('#dropdownNavbar').find('li:nth-child(2)>a')
 }
 
 function ProfileMenu() {
@@ -88,8 +88,8 @@ function Cards() {
 
 function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
-    const cardHeader = $el.find('h2')
-    if (cardHeader.text() === CardName) {
+    const cardHeader = $el.find('h2').text()
+    if (cardHeader.includes(CardName)) {
       cy.wrap($el).find('button').click()
       cy.wait(500)
     }
@@ -156,10 +156,6 @@ function ExitBetaModal() {
 
 function StayOnBetabutton() {
   return cy.get("[id ='stay-on-beta-version']")
-}
-
-function ExitBetaModalButton() {
-  return cy.get("[id ='exit-beta-version']")
 }
 
 function ContinueToPageModalButton() {
@@ -260,7 +256,6 @@ module.exports = {
   FirstTaskLink,
   ExitBetaModal,
   StayOnBetabutton,
-  ExitBetaModalButton,
   ContinueToPageModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
