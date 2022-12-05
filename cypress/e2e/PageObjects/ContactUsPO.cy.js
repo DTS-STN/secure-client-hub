@@ -5,11 +5,25 @@ function ContactUsHeader() {
 }
 
 function ValidateContactUsUrl() {
-  //Will add details
   cy.url().should('contains', '/')
+}
+
+function ValidateContactUsHeaderEN() {
+  ContactUsHeader().should('be.visible').and('have.text', 'Contact us')
+}
+
+function ValidateContactUsUrlFR() {
+  cy.url().should('contains', '/fr/')
+}
+
+function ValidateContactUsHeaderFR() {
+  ContactUsHeader().should('be.visible').and('have.text', '')
 }
 
 module.exports = {
   ContactUsHeader,
   ValidateContactUsUrl,
+  ValidateContactUsHeaderEN,
+  ValidateContactUsUrlFR,
+  ValidateContactUsHeaderFR,
 }

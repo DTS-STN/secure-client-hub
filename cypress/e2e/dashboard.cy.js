@@ -9,28 +9,16 @@ beforeEach(() => {
 })
 
 describe('Validate dashboard page', () => {
-  it('Validate dashboard header', () => {
+  it('Validate dashboard URL and Header in EN and FR', () => {
     dashboardPo.ValidateDashboardUrl()
     dashboardPo.ValidateDashboardHeaderEN()
-  })
-
-  it('French button click goes to fr/dashboard page', () => {
     dashboardPo.FrenchButton().click()
-    //cy.wait(2000)
     dashboardPo.ValidateDashboardUrlFR()
-  })
-
-  it('Validate dashboard header in French', () => {
-    dashboardPo.FrenchButton().click()
-    cy.wait(3000)
     dashboardPo.ValidateDashboardHeaderFR()
   })
 
-  it('Validate that the Card placeholder is present', () => {
+  it('Validate that the Card placeholder is present and Car Header is Visible', () => {
     dashboardPo.FirstCard().should('be.visible')
-  })
-
-  it('Validate that the Card Header is visible', () => {
     dashboardPo.CardHeading().should('be.visible')
   })
 
@@ -122,7 +110,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.CloseModalButton().should('be.visible')
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Employment Insurance') {
@@ -141,7 +129,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Canada Pension Plan') {
@@ -165,7 +153,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Old Age Security') {
