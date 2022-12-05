@@ -46,11 +46,11 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('[href="/security-settings"]')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
 }
 
 function ProfileMenu() {
-  return cy.get('[href="/profile"]')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
 }
 
 function ValidateDashboardUrl() {
