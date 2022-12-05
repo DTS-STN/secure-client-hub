@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670271652545" clover="3.2.0">
-  <project timestamp="1670271652545" name="All files">
-    <metrics statements="212" coveredstatements="62" conditionals="129" coveredconditionals="29" methods="96" coveredmethods="24" elements="437" coveredelements="115" complexity="0" loc="212" ncloc="212" packages="6" files="28" classes="28"/>
+<coverage generated="1670272895715" clover="3.2.0">
+  <project timestamp="1670272895715" name="All files">
+    <metrics statements="212" coveredstatements="62" conditionals="129" coveredconditionals="29" methods="96" coveredmethods="24" elements="437" coveredelements="115" complexity="0" loc="212" ncloc="212" packages="5" files="28" classes="28"/>
     <package name="components">
       <metrics statements="55" coveredstatements="34" conditionals="40" coveredconditionals="21" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -116,7 +116,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="92" coveredstatements="28" conditionals="42" coveredconditionals="8" methods="37" coveredmethods="12"/>
+      <metrics statements="131" coveredstatements="28" conditionals="59" coveredconditionals="8" methods="56" coveredmethods="12"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
@@ -131,6 +131,48 @@
       <file name="_error.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_error.js">
         <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="4" count="2" type="stmt"/>
+      </file>
+      <file name="contact-employment-insurance.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-employment-insurance.js">
+        <metrics statements="39" coveredstatements="0" conditionals="17" coveredconditionals="0" methods="19" coveredmethods="0"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="142" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="195" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="197" count="0" type="stmt"/>
+        <line num="200" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="220" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
       </file>
       <file name="contact-us.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-us.js">
         <metrics statements="17" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
@@ -269,51 +311,6 @@
         <line num="40" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="pages.contact-us">
-      <metrics statements="39" coveredstatements="0" conditionals="17" coveredconditionals="0" methods="19" coveredmethods="0"/>
-      <file name="contact-employment-insurance.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-us/contact-employment-insurance.js">
-        <metrics statements="39" coveredstatements="0" conditionals="17" coveredconditionals="0" methods="19" coveredmethods="0"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="116" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="142" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="144" count="0" type="stmt"/>
-        <line num="170" count="0" type="stmt"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="173" count="0" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
-        <line num="195" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="197" count="0" type="stmt"/>
-        <line num="200" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="205" count="0" type="stmt"/>
-        <line num="220" count="0" type="stmt"/>
-        <line num="233" count="0" type="stmt"/>
       </file>
     </package>
   </project>
