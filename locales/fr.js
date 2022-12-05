@@ -10,11 +10,30 @@ export default {
   //
   // Header
   title: 'accueil',
+  // Header Menu
+  menuItems: {
+    dashboard: 'Mon tableau de bord',
+    security: 'Paramètres de sécurité',
+    profile: 'Profil',
+    signOut: 'Se déconnecter',
+  },
   //Heading
   pageHeading: {
     title: 'Mon tableau de bord',
     profile: 'Profil',
   },
+  //User testing with beta banner this is to be deleted after UT
+  betaBanner: {
+    bannerBoldText: 'Version bêta :',
+    bannerText:
+      'Nous avons fait des changements pour améliorer votre expérience avec Mon dossier Service Canada.',
+    bannerLink: 'En savoir plus sur la version bêta',
+    bannerLinkHref:
+      'https://www.canada.ca/fr/experience-numerique-donnees-client/sch/nouvelle-version-beta.html',
+    bannerButtonText: 'Essayer la version bêta',
+    bannerButtonLink: 'fr/my-dashboard',
+  },
+
   // PageLink
   pageLinkSecurity: 'Vous recherchez les paramètres de sécurité?',
   securityLinkText: 'paramètres de sécurité',

@@ -46,11 +46,11 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('#dropdownNavbar > li:nth-child(2) > a')
+  return cy.get('#dropdownNavbar > a:nth-child(2)')
 }
 
 function ProfileMenu() {
-  return cy.get('#dropdownNavbar > li:nth-child(3) > a')
+  return cy.get('#dropdownNavbar > a:nth-child(3)')
 }
 
 function ValidateDashboardUrl() {
@@ -162,6 +162,10 @@ function ExitBetaModalButton() {
   return cy.get("[id ='exit-beta-version']")
 }
 
+function ContinueToPageModalButton() {
+  return cy.get("[id ='continue-to-page']")
+}
+
 function CloseModalButton() {
   return cy.get("[data-cy ='x-button']")
 }
@@ -257,6 +261,7 @@ module.exports = {
   ExitBetaModal,
   StayOnBetabutton,
   ExitBetaModalButton,
+  ContinueToPageModalButton,
   CloseModalButton,
   validateExitBetaModalbuttonLink,
   ClickUpdatemyProfileLink,

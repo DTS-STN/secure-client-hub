@@ -15,6 +15,7 @@ export async function getMyDashboardContent() {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
+            dropdownText: fragment.schTasks[0].scLinkTextEn,
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
@@ -51,6 +52,7 @@ export async function getMyDashboardContent() {
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
+            dropdownText: fragment.schTasks[0].scLinkTextFr,
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,
