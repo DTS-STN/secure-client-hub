@@ -1,0 +1,76 @@
+{
+  schListv1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-contact-methods"
+  ) {
+    item {
+      _path
+      scId
+      scItems {
+          ... on SCHContactMethodv1Model {
+              _path
+              scId
+              scTitleEn
+              scTitleFr
+              schContactMethodLayout
+              schIntroEn {
+                  markdown
+              }
+              schIntroFr {
+                  markdown
+              }
+             schHoursDetailsFr {
+                 markdown
+             }
+             schLocationLabelEn {
+                 markdown
+             }
+             schDetails 
+                 {
+                     ... on SCHListv1Model {
+                         _path
+                         scTitleEn
+                         scTitleFr
+
+                         scId
+                         scItems {
+                             ... on SCHContentv1Model {
+                             _path
+                             scId
+                             scContentEn {
+                                 markdown
+                             }
+                            scContentFr {
+                                 markdown
+                            }
+                            scIconCSS
+                            scFragments {
+                                ... on SCHAddressv1Model {
+                                    _path
+                                    scId
+                                    scRecipientEn
+                                    scRecipientFr
+                                    scProgramEn
+                                    scProgramFr
+                                    scPostalBoxEn
+                                    scPostalBoxFr
+                                    scPostalStationEn
+                                    scPostalStationFr
+                                    scCityEn
+                                    scCityFr
+                                    scProvTerrAbbr
+                                    scPostalCode
+                                    scCountry
+                                    scProvTerrAbbrEnum
+                                    scCountryEn
+                                    scCountryFr
+                                }
+                            }
+                          }
+                        }
+                     }
+                 }
+          }
+      }
+    }
+  }
+}

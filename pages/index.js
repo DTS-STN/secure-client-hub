@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+import { getContactEmploymentInsuranceContent } from '../graphql/mappers/contact-employment-insurance'
+
 export default function Index(props) {
+  console.log(props.eiContact, 'ffffffff')
   return (
     <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">
       <MetaData language={props.locale} data={props.meta}></MetaData>
@@ -99,7 +102,15 @@ export async function getStaticProps({ locale }) {
     },
   }
 
+  const eiContact = await getContactEmploymentInsuranceContent().catch(
+    (error) => {
+      logger.error(error)
+      res.statusCode = 500
+      throw error
+    }
+  )
+
   return {
-    props: { locale, meta },
+    props: { locale, meta, eiContact },
   }
 }
