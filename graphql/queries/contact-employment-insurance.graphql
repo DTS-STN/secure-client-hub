@@ -5,6 +5,8 @@
     item {
       _path
       scId
+      scTitleEn
+      scTitleFr
       scItems {
           ... on SCHContactMethodv1Model {
               _path

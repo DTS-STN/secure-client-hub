@@ -9,7 +9,7 @@ export async function getContactEmploymentInsuranceContent() {
   const mappedContactEI = {
     en: {
       scId: queryData.item.scId,
-
+      title: queryData.item.scTitleEn,
       items: queryData.item.scItems.map((x) => {
         return {
           scId: x.scId,
@@ -17,19 +17,18 @@ export async function getContactEmploymentInsuranceContent() {
           details: x.schDetails.map((y) => {
             return {
               scId: y.scId,
-              items: y.scItems.map((z) => {
+              ...y.scItems.map((z) => {
                 return {
                   content: z.scContentEn.markdown,
                   fragments: z.scFragments,
                   icon: z.scIconCSS,
                   scId: z.scId,
-                  title: z.scContentEn.markdown,
                 }
-              }),
+              })[0],
               title: y.scTitleEn,
             }
           }),
-          intro: x.schIntroEn,
+          intro: x.schIntroEn.markdown,
         }
       }),
     },
