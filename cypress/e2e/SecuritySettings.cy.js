@@ -22,7 +22,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderFR()
   })
 
-  it.skip('Validate that user can select "Security settings" from Menu dropdown options', () => {
+  it('Validate that user can select "Security settings" from Menu dropdown options', () => {
     cy.visit('/my-dashboard')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
@@ -30,7 +30,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  it.skip('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
+  it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()

@@ -2,6 +2,7 @@
 const contactUsPo = require('../e2e/PageObjects/ContactUsPO.cy')
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
+const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
 
 beforeEach(() => {
   cy.visit('/contact-us')
@@ -30,5 +31,10 @@ describe('Validate Contact Us Landing page', () => {
       .breadcrumbs()
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
+  })
+
+  it.skip('Validate the EI link navigates to EI Contact us page', () => {
+    contactUsPo.EmploymentInsuranceLink().click()
+    EIcontactUs.ValidateEIContactUsUrl()
   })
 })
