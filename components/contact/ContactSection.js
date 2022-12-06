@@ -4,7 +4,7 @@ import ContactSectionRow from './ContactSectionRow'
 
 export default function ContactSection({ title, intro, id, details }) {
   return (
-    <div className="max-w-3xl" name={id} id={id}>
+    <div data-cy="sections" className="max-w-3xl" name={id} id={id}>
       <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
         {title}
       </h2>

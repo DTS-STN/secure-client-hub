@@ -114,7 +114,11 @@ export default function ContactEmploymentInsurance(props) {
   }
 
   return (
-    <div id="homeContent" data-testid="homeContent-test">
+    <div
+      id="homeContent"
+      data-testid="homeContent-test"
+      data-cy="eIContactUsContent"
+    >
       <Heading id="my-dashboard-heading" title={props.contactMethods.title} />
       <div className="py-5" />
       <TableContent
