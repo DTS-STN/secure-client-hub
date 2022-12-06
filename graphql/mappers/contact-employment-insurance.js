@@ -4,7 +4,36 @@ export async function getContactEmploymentInsuranceContent() {
   const query = require('../queries/contact-employment-insurance.graphql')
   const response = await clientQuery(query)
 
-  const queryData = response.data.schListv1ByPath.item
+  const queryData = response.data.schListv1ByPath
+
+  const mappedContactEI = {
+    en: {
+      scId: queryData.item.scId,
+
+      items: queryData.item.scItems.map((x) => {
+        return {
+          scId: x.scId,
+          title: x.scTitleEn,
+          details: x.schDetails.map((y) => {
+            return {
+              scId: y.scId,
+              items: y.scItems.map((z) => {
+                return {
+                  content: z.scContentEn.markdown,
+                  fragments: z.scFragments,
+                  icon: z.scIconCSS,
+                  scId: z.scId,
+                  title: z.scContentEn.markdown,
+                }
+              }),
+              title: y.scTitleEn,
+            }
+          }),
+          intro: x.schIntroEn,
+        }
+      }),
+    },
+  }
 
   // const eiContactFragment = findFragmentByScId(response, 'ei-contact-us')
 
@@ -74,7 +103,7 @@ export async function getContactEmploymentInsuranceContent() {
   //     ],
   //   },
   // }
-  return queryData
+  return { queryData, mappedContactEI }
 }
 
 const findFragmentByScId = (res, id) => {
