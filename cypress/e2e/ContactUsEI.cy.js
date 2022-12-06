@@ -5,11 +5,11 @@ const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
 
 beforeEach(() => {
-  cy.visit('/contact-us/contact-employment-insurance')
+  cy.visit('/contact-employment-insurance')
 })
 
 describe('Validate EI Contact Us Landing page', () => {
-  it.skip('Validate EI Contact us URL and header in EN', () => {
+  it('Validate EI Contact us URL and header in EN', () => {
     EIcontactUs.ValidateEIContactUsUrl()
     EIcontactUs.ValidateEIContactUsHeaderEN()
   })
@@ -20,7 +20,7 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEIContactUsHeaderFR()
   })
 
-  it.skip('Validate the breadcrumbs on EI contact us Page', () => {
+  it('Validate the breadcrumbs on EI contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')
     securityPo.breadcrumbsLink1().should('be.visible')
     securityPo.breadcrumbsLink1().click()
@@ -30,19 +30,19 @@ describe('Validate EI Contact Us Landing page', () => {
     contactUsPo.ValidateContactUsUrl()
   })
 
-  it.skip('Validate the "On this Page" section', () => {
+  it('Validate the "On this Page" section', () => {
     EIcontactUs.ValidateOnthisPageLinks()
   })
 
-  it.skip('Validate Table of Content Links on EI contact Us page', () => {
+  it('Validate Table of Content Links on EI contact Us page', () => {
     EIcontactUs.ValidateEachtableOfContentLink()
   })
 
-  it.skip('Validate each section on EI contact Us page', () => {
+  it('Validate each section on EI contact Us page', () => {
     EIcontactUs.ValidateEachSectionEIContactUs()
   })
 
-  it.skip('Validate Mail section on EI contact Us page', () => {
+  it('Validate Mail section on EI contact Us page', () => {
     EIcontactUs.ValidateMailCardsEIContactUs()
   })
 })
