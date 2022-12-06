@@ -46,11 +46,11 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('#dropdownNavbar').find('li:nth-child(2)>a')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
 }
 
 function ProfileMenu() {
-  return cy.get('#dropdownNavbar > a:nth-child(3)')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
 }
 
 function ValidateDashboardUrl() {

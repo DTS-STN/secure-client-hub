@@ -1,0 +1,18 @@
+[
+  {
+    "Link": "Telephone",
+    "URL": "ei-contact-telephone"
+  },
+  {
+    "Link": "Callback",
+    "URL": "ei-contact-callback"
+  },
+  {
+    "Link": "In person at a Service Canada Centre",
+    "URL": "ei-contact-in-person"
+  },
+  {
+    "Link": "Mail",
+    "URL": "mail"
+  }
+]
