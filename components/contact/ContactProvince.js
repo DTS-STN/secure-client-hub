@@ -21,9 +21,12 @@ const ContactProvince = ({
 
   const headers = locale === 'en' ? header.en : header.fr
   return (
-    <div className="py-2" key={id}>
+    <div className="py-2" key={id} data-cy="provinceCards">
       <Collapse title={province}>
-        <div className="grid text-base font-sans grid-cols-2">
+        <div
+          className="grid text-base font-sans grid-cols-2"
+          data-cy="mailContactDetails"
+        >
           <div className="col-span-1">
             <p>
               <b>{headers.ei}</b>
