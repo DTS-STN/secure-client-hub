@@ -60,7 +60,6 @@ function ValidateCallbackSectionContent() {
 
 function ValidateEachtableOfContentLink() {
   for (let i = 0; i < ContactUsEIdata.length; i++) {
-    const LinkName = ContactUsEIdata[i].Link
     cy.get('[data-cy ="eIContactUsContent"]>section')
       .find('a')
       .each(($el1, index, $list) => {
@@ -89,7 +88,7 @@ function ProvinceCard() {
 }
 
 function ValidateMailCardsEIContactUs() {
-  cy.get('[data-cy="provinceCards"]').each(($el1, index, $list) => {
+  ProvinceCard().each(($el1, index, $list) => {
     cy.wrap($el1).click()
     cy.wrap($el1).find('[data-cy="mailContactDetails"]').should('be.visible')
   })
