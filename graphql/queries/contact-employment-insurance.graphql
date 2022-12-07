@@ -1,6 +1,6 @@
 {
   schListv1ByPath(
-    _path: "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-contact-methods"
+      _path: "/content/dam/decd-endc/content-fragments/sch/lists/contact-us/ei-contact-methods"
   ) {
     item {
       _path
