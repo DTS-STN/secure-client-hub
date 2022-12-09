@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import ContactSectionRow from './ContactSectionRow'
 

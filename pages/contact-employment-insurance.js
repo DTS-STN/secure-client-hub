@@ -4,9 +4,7 @@ import { Fragment } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import ContactSection from '../components/contact/ContactSection'
-import ContactProvinceRow from '../components/contact/ContactProvinceRow'
 import ContactProvince from '../components/contact/ContactProvince'
-import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
@@ -15,7 +13,6 @@ import logger from '../lib/logger'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
-import Markdown from 'markdown-to-jsx'
 
 export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */

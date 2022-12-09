@@ -1,5 +1,4 @@
 import Markdown from 'markdown-to-jsx'
-import { Fragment } from 'react'
 import ContactProvinceRow from './ContactProvinceRow'
 
 const ContactProvince = ({ title, intro, id, i, details }) => {
