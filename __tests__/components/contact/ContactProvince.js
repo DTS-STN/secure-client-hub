@@ -7,13 +7,7 @@ expect.extend(toHaveNoViolations)
 
 describe('ContactProvince', () => {
   it('renders contactProvince', () => {
-    const primary = render(
-      <ContactProvince
-        {...ContactProvince.args}
-        contentEi=""
-        contentDocuments=""
-      />
-    )
+    const primary = render(<ContactProvince title="" intro="" details={[]} />)
     expect(primary).toBeTruthy()
   })
 })
