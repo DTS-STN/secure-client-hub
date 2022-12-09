@@ -31,8 +31,6 @@ export default function MyDashboard(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
-  console.log(props.xxxxx)
-
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
@@ -151,7 +149,6 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      xxxxx,
     },
   }
 }
