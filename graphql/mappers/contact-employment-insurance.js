@@ -16,13 +16,12 @@ export async function getContactEmploymentInsuranceContent() {
         }
       }),
       title: queryData.scTitleEn,
-      fragments: queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((w) => {
         return {
           id: w.scId,
           items: w.scItems.map((x) => {
             return {
               id: x.scId,
-              title: x.scTitleEn,
               title: x.scTitleEn,
               details: x.schDetails.map((y) => {
                 return {
@@ -45,17 +44,17 @@ export async function getContactEmploymentInsuranceContent() {
                       })[0],
                     }
                   }),
-                  title: y.scTitleEn,
+                  label: y.scTitleEn,
                 }
               }),
-
+              detail: 'ddddddd',
               intro: x.schIntroEn.markdown,
               layout: x.schContactMethodLayout,
             }
           }),
-          title: w.scTitleEn,
+          subHeader: w.scTitleEn,
         }
-      }),
+      })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameEn,
     },
@@ -68,7 +67,7 @@ export async function getContactEmploymentInsuranceContent() {
         }
       }),
       title: queryData.scTitleFr,
-      fragments: queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((w) => {
         return {
           id: w.scId,
           items: w.scItems.map((x) => {
@@ -105,9 +104,9 @@ export async function getContactEmploymentInsuranceContent() {
               layout: x.schContactMethodLayout,
             }
           }),
-          title: w.scTitleFr,
+          subHeader: w.scTitleFr,
         }
-      }),
+      })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameFr,
     },

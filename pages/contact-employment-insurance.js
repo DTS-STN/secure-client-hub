@@ -9,6 +9,7 @@ import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getContactEmploymentInsuranceContent } from '../graphql/mappers/contact-employment-insurance'
 import logger from '../lib/logger'
 import Modal from 'react-modal'
 import React from 'react'
@@ -113,41 +114,43 @@ export default function ContactEmploymentInsurance(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
+  console.log(props.pageContent, props.pageContent)
+
   return (
     <div
       id="homeContent"
       data-testid="homeContent-test"
       data-cy="eIContactUsContent"
     >
-      <Heading id="my-dashboard-heading" title={props.contactMethods.title} />
+      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
       <div className="py-5" />
       <TableContent
-        sectionList={[
-          ...props.contactMethods.methods,
-          { title: 'Mail', id: 'mail' },
-        ].map((item, i) => {
+        sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
       />
 
-      {props.contactMethods.methods.map((item, i) => (
+      {props.pageContent.items.map((item, i) => (
         <Fragment key={i}>
-          <ContactSection programUniqueId={i} {...item} />
+          {item.layout === 'provinces' ? (
+            <div className="max-w-3xl" id="mail">
+              <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
+                {props.contactMethods.mail.title}
+              </h2>
+              <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4">
+                <Markdown>{props.contactMethods.mail.intro}</Markdown>
+              </div>
+              {props.contactMethods.mail.details
+                .filter((x) => x.province && x.contentEi && x.contentDocuments)
+                .map((item, i) => (
+                  <ContactProvince {...item} locale={props.locale} key={i} />
+                ))}
+            </div>
+          ) : (
+            <ContactSection programUniqueId={i} {...item} />
+          )}
         </Fragment>
       ))}
-      <div className="max-w-3xl" id="mail">
-        <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
-          {props.contactMethods.mail.title}
-        </h2>
-        <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4">
-          <Markdown>{props.contactMethods.mail.intro}</Markdown>
-        </div>
-        {props.contactMethods.mail.details
-          .filter((x) => x.province && x.contentEi && x.contentDocuments)
-          .map((item, i) => (
-            <ContactProvince {...item} locale={props.locale} key={i} />
-          ))}
-      </div>
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -200,6 +203,14 @@ export async function getStaticProps({ res, locale }) {
 
   const contactMethods = pareseContactMethods(tmpContactMethods)
 
+  const pageContent = await getContactEmploymentInsuranceContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
+
   const breadCrumbItems =
     locale === 'en'
       ? contactMethods.en.breadCrumbs
@@ -230,6 +241,7 @@ export async function getStaticProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       contactMethods: locale === 'en' ? contactMethods.en : contactMethods.fr,
+      pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
     },
   }
 }

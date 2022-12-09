@@ -11,7 +11,11 @@ export default function ContactSection({ title, intro, id, details }) {
       <div className="list-disc [&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc">
         <Markdown>{intro}</Markdown>
       </div>
-      <div>{details.map((x, index) => ContactSectionRow({ ...x, index }))}</div>
+      <div>
+        {details.map((x, index) =>
+          ContactSectionRow({ ...x, index, detail: x.items[0].content })
+        )}
+      </div>
       <p></p>
       <div className="grid grid-cols-4 gap-4 border-t-2 pb-6" />
     </div>
