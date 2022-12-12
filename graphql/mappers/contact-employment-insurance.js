@@ -59,9 +59,8 @@ export async function getContactEmploymentInsuranceContent() {
     fr: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
         return {
-          id: w.scId,
-          pageName: w.scPageNameFr,
-          shortTitle: w.scTitleFr,
+          link: w.scPageNameFr,
+          text: w.scTitleFr,
         }
       }),
       title: queryData.scTitleFr,
@@ -105,8 +104,8 @@ export async function getContactEmploymentInsuranceContent() {
           subHeader: w.scTitleFr,
         }
       })[0],
-      link: queryData.scId,
-      text: queryData.scPageNameFr,
+      id: queryData.scId,
+      pageName: queryData.scPageNameFr,
     },
   }
 

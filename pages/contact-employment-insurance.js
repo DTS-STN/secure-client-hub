@@ -31,8 +31,6 @@ export default function ContactEmploymentInsurance(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
-  console.log(props)
-
   return (
     <div
       id="homeContent"
@@ -122,7 +120,7 @@ export async function getStaticProps({ res, locale }) {
       ? pageContent.en.breadcrumb.map(({ link, text }) => {
           return { text, link }
         })
-      : pageContent.fr.breadcrumb.map((x) => {
+      : pageContent.fr.breadcrumb.map(({ link, text }) => {
           return { text, link }
         })
 
