@@ -1,12 +1,12 @@
 import clientQuery from '../client'
 
-export async function getContactEmploymentInsuranceContent() {
-  const query = require('../queries/contact-employment-insurance.graphql')
+export async function getContactCanadaPensionPlan() {
+  const query = require('../queries/contact-canada-pension-plan.graphql')
   const response = await clientQuery(query)
 
   const queryData = response.data.schPagev1ByPath.item
 
-  const mappedContactEI = {
+  const mappedContactCPP = {
     en: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
         return {
@@ -109,5 +109,5 @@ export async function getContactEmploymentInsuranceContent() {
     },
   }
 
-  return mappedContactEI
+  return mappedContactCPP
 }

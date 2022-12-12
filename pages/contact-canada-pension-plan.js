@@ -8,11 +8,12 @@ import ContactProvince from '../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getContactEmploymentInsuranceContent } from '../graphql/mappers/contact-employment-insurance'
+import { getContactCanadaPensionPlan } from '../graphql/mappers/contact-canada-pension-plan'
 import logger from '../lib/logger'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import Fr from '../locales/fr'
 
 export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
@@ -54,6 +55,10 @@ export default function ContactEmploymentInsurance(props) {
           )}
         </Fragment>
       ))}
+
+      {/*  */}
+
+      {/*  */}
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -102,18 +107,16 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-employment-insurance'
-      : '/contact-employment-insurance'
+      ? '/fr/contact-canada-pension-plan'
+      : '/contact-canada-pension-plan'
 
   const t = locale === 'en' ? en : fr
 
-  const pageContent = await getContactEmploymentInsuranceContent().catch(
-    (error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    }
-  )
+  const pageContent = await getContactCanadaPensionPlan().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   const breadCrumbItems =
     locale === 'en'

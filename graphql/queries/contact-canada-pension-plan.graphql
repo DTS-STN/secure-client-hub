@@ -1,6 +1,6 @@
 {
     schPagev1ByPath(
-    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/ei-contacts"
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/cpp-contacts"
   ) {
     item {
       _path
