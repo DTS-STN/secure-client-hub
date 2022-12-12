@@ -16,6 +16,8 @@
           scId
           scPageNameEn
           scPageNameFr
+          scTitleEn
+          scTitleFr
           scShortTitleFr
           scShortTitleEn
           scOwner

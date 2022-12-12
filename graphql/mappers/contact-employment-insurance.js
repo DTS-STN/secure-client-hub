@@ -10,9 +10,8 @@ export async function getContactEmploymentInsuranceContent() {
     en: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
         return {
-          id: w.scId,
-          pageName: w.scPageNameEn,
-          shortTitle: w.scShortTitleEn,
+          link: w.scPageNameEn,
+          text: w.scTitleEn,
         }
       }),
       title: queryData.scTitleEn,
@@ -47,7 +46,6 @@ export async function getContactEmploymentInsuranceContent() {
                   label: y.scTitleEn,
                 }
               }),
-              detail: 'ddddddd',
               intro: x.schIntroEn.markdown,
               layout: x.schContactMethodLayout,
             }
@@ -63,7 +61,7 @@ export async function getContactEmploymentInsuranceContent() {
         return {
           id: w.scId,
           pageName: w.scPageNameFr,
-          shortTitle: w.scShortTitleFr,
+          shortTitle: w.scTitleFr,
         }
       }),
       title: queryData.scTitleFr,
@@ -107,17 +105,10 @@ export async function getContactEmploymentInsuranceContent() {
           subHeader: w.scTitleFr,
         }
       })[0],
-      id: queryData.scId,
-      pageName: queryData.scPageNameFr,
+      link: queryData.scId,
+      text: queryData.scPageNameFr,
     },
   }
 
   return mappedContactEI
 }
-
-const showData = async () => {
-  let x = await getContactEmploymentInsuranceContent()
-  console.log(x)
-}
-
-showData()

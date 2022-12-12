@@ -31,6 +31,8 @@ export default function ContactEmploymentInsurance(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
+  console.log(props)
+
   return (
     <div
       id="homeContent"
@@ -100,7 +102,10 @@ export async function getStaticProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
+  const langToggleLink =
+    locale === 'en'
+      ? '/fr/contact-employment-insurance'
+      : '/contact-employment-insurance'
 
   const t = locale === 'en' ? en : fr
 
@@ -112,7 +117,25 @@ export async function getStaticProps({ res, locale }) {
     }
   )
 
-  const breadCrumbItems = locale === 'en' ? [] : []
+  const breadCrumbItems =
+    locale === 'en'
+      ? pageContent.en.breadcrumb.map(({ link, text }) => {
+          return { text, link }
+        })
+      : pageContent.fr.breadcrumb.map((x) => {
+          return { text, link }
+        })
+
+  // const breadCrumbItems = [
+  //   {
+  //     link: 't.url_dashboard',
+  //     text: 't.pageHeading.title',
+  //   },
+  //   {
+  //     link: 't.pageHeading.title',
+  //     text: 't.pageHeading.title',
+  //   },
+  // ]
 
   /* Place-holder Meta Data Props */
   const meta = {
