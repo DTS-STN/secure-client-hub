@@ -1,46 +1,18 @@
 import Markdown from 'markdown-to-jsx'
-import { Collapse } from '@dts-stn/service-canada-design-system'
+import ContactProvinceRow from './ContactProvinceRow'
 
-const ContactProvince = ({
-  province,
-  contentDocuments,
-  contentEi,
-  id,
-  locale,
-}) => {
-  const header = {
-    en: {
-      ei: 'For Employment Insurance',
-      documents: 'For Supporting Documents',
-    },
-    fr: {
-      ei: "Pour l'Assurance Emploi",
-      documents: 'Pour les Documents Justificatifs',
-    },
-  }
-
-  const headers = locale === 'en' ? header.en : header.fr
+const ContactProvince = ({ title, intro, id, i, details }) => {
   return (
-    <div className="py-2" key={id} data-cy="provinceCards">
-      <Collapse title={province}>
-        <div
-          className="grid text-base font-sans grid-cols-2"
-          data-cy="mailContactDetails"
-        >
-          <div className="col-span-1">
-            <p>
-              <b>{headers.ei}</b>
-            </p>
-            <Markdown>{contentEi}</Markdown>
-          </div>
-          <div className="col-span-1">
-            <p>
-              <b>{headers.documents}</b>
-            </p>
-            <Markdown>{contentDocuments}</Markdown>
-          </div>
-        </div>
-      </Collapse>
+    <div className="max-w-3xl" id={id}>
+      <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
+        {title}
+      </h2>
+      <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4">
+        <Markdown>{intro}</Markdown>
+      </div>
+      {details.map((item, i) => (
+        <ContactProvinceRow {...item} key={i} />
+      ))}
     </div>
   )
 }

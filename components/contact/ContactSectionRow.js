@@ -2,7 +2,8 @@ import { Button } from '@dts-stn/service-canada-design-system'
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 
-function ContactSectionRow({ label, detail, highlight, button, index }) {
+function ContactSectionRow(props) {
+  const { label, detail, index, highlight, button } = props
   return label && detail ? (
     <div
       className={`grid grid-cols-5 gap-4 border-t-2 mt-4 ${
