@@ -9,9 +9,9 @@ describe('Page', () => {
   it('renders title without crashing', () => {
     render(
       <h1 className="ds-heading1" id="my-dashboard-heading">
-        Contact Employment Insurance
+        Contact Canada Pension Plan
       </h1>
     )
-    expect(screen.getByText('Contact Employment Insurance')).toBeInTheDocument()
+    expect(screen.getByText('Contact Canada Pension Plan')).toBeInTheDocument()
   })
 })
