@@ -3,10 +3,10 @@ import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Card from '../../components/Card'
 import { useRouter } from 'next/router'
-import ContactEmploymentInsurance, {
+import ContactCanadaPensionPlan, {
   getServerSideProps,
   getStaticProps,
-} from '../../pages/contact-employment-insurance'
+} from '../../pages/contact-canada-pension-plan'
 
 expect.extend(toHaveNoViolations)
 
@@ -45,8 +45,8 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
-jest.mock('../../graphql/mappers/contact-employment-insurance', () => ({
-  getContactEmploymentInsuranceContent: () => {
+jest.mock('../../graphql/mappers/contact-canada-pension-plan', () => ({
+  getContactCanadaPensionPlan: () => {
     return new Promise(function (resolve, reject) {
       resolve({
         en: {},
@@ -60,7 +60,7 @@ jest.mock('../../components/contact/ContactProvince', () => () => {
   return <mock-province data-testid="mock-province" />
 })
 
-describe('EI Contact Us Page', () => {
+describe('CPP Contact Us Page', () => {
   const content = {
     title: 'test',
     items: [
@@ -73,13 +73,13 @@ describe('EI Contact Us Page', () => {
 
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Ensurance',
+      title: 'My Service Canada Account - Contact Canada Pension Plan',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+      title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -95,20 +95,20 @@ describe('EI Contact Us Page', () => {
 
   it('should render the page', () => {
     render(
-      <ContactEmploymentInsurance
+      <ContactCanadaPensionPlan
         locale="en"
         pageContent={content}
         popupContent={popupContent}
         meta={meta}
       />
     )
-    const contactEIDiv = screen.getByTestId('contactEI-test')
-    expect(contactEIDiv).toBeInTheDocument()
+    const contactCPPDiv = screen.getByTestId('contactCPP-test')
+    expect(contactCPPDiv).toBeInTheDocument
   })
 
   it('should contain a table of contents', () => {
     render(
-      <ContactEmploymentInsurance
+      <ContactCanadaPensionPlan
         locale="en"
         pageContent={content}
         popupContent={popupContent}
@@ -121,7 +121,7 @@ describe('EI Contact Us Page', () => {
 
   it('should contain a contact section listing', () => {
     render(
-      <ContactEmploymentInsurance
+      <ContactCanadaPensionPlan
         locale="en"
         pageContent={content}
         popupContent={popupContent}
@@ -139,20 +139,20 @@ describe('EI Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-employment-insurance',
+        langToggleLink: '/fr/contact-canada-pension-plan',
         locale: 'en',
         meta: {
           data_en: {
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Contact Employment Ensurance',
+            title: 'My Service Canada Account - Contact Canada Pension Plan',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
-            title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+            title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
           },
         },
         breadCrumbItems: undefined,
