@@ -116,7 +116,6 @@ export async function getContactOldAgeSecurityContent() {
                         id: z.scId,
                         poBox: z.scPostalBoxFr,
                         postal: z.scPostalCode,
-                        program: z.scProgramFr,
                         province: z.scProvTerrAbbrEnum,
                         recipient: z.scRecipientFr,
                         station: z.scPostalStationFr,
