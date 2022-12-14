@@ -9,13 +9,13 @@ const ContactProvinceRow = ({ label, items, id }) => {
           className="grid text-base font-sans grid-cols-2"
           data-cy="mailContactDetails"
         >
-          <div className="col-span-1">
+          <div className="col-span-1" data-cy="column1">
             <p>
               <b>{items[0].content}</b>
             </p>
             <Markdown>{`${items[0].recipient}\n\n${items[0].program}\n\n${items[0].poBox}\n\n${items[0].city} ${items[0].province} ${items[0].country}`}</Markdown>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1" data-cy="column1">
             <p>
               <b>{items[1].content}</b>
             </p>
