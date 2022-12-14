@@ -2,7 +2,6 @@ import Markdown from 'markdown-to-jsx'
 import ContactSectionRow from './ContactSectionRow'
 
 export default function ContactSection({ title, intro, id, details }) {
-  console.log('boop')
   return (
     <div
       data-cy="sections"
