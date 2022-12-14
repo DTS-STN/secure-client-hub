@@ -9,18 +9,14 @@ const ContactProvinceRow = ({ label, items, id }) => {
           className="grid text-base font-sans grid-cols-2"
           data-cy="mailContactDetails"
         >
-          <div className="col-span-1">
-            <p>
-              <b>{items[0].content}</b>
-            </p>
-            <Markdown>{`${items[0].recipient}\n\n${items[0].program}\n\n${items[0].poBox}\n\n${items[0].city} ${items[0].province} ${items[0].country}`}</Markdown>
-          </div>
-          <div className="col-span-1">
-            <p>
-              <b>{items[1].content}</b>
-            </p>
-            <Markdown>{`${items[1].recipient}\n\n${items[1].program}\n\n${items[1].poBox}\n\n${items[1].city} ${items[1].province} ${items[1].country}`}</Markdown>
-          </div>
+          {items.map((item, i) => (
+            <div className="col-span-1" key={i}>
+              <p>
+                <b>{item.content}</b>
+              </p>
+              <Markdown>{`${item.recipient}\n\n${item.program}\n\n${item.poBox}\n\n${item.city} ${item.province} ${item.country}`}</Markdown>
+            </div>
+          ))}
         </div>
       </Collapse>
     </div>
