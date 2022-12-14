@@ -34,11 +34,17 @@ export default function ContactEmploymentInsurance(props) {
   return (
     <div
       id="homeContent"
-      data-testid="homeContent-test"
+      data-testid="contactEI-test"
       data-cy="eIContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
-      <div className="py-5" />
+      <div
+        className="py-5"
+        data-testid={`${
+          props.pageContent.items.length > 0 && 'tableOfContents-test'
+        }`}
+      />
+
       <TableContent
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
@@ -117,10 +123,10 @@ export async function getStaticProps({ res, locale }) {
 
   const breadCrumbItems =
     locale === 'en'
-      ? pageContent.en.breadcrumb.map(({ link, text }) => {
+      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
           return { text, link }
         })
-      : pageContent.fr.breadcrumb.map(({ link, text }) => {
+      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
           return { text, link }
         })
 
