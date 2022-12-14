@@ -1,25 +1,41 @@
 import Markdown from 'markdown-to-jsx'
 import { Collapse } from '@dts-stn/service-canada-design-system'
+import { Fragment } from 'react'
+
+const ap = (x, append) => {
+  return x ? x + append : ''
+}
 
 const ContactProvinceRow = ({ label, items, id }) => {
-  return (
+  return items.length > 0 ? (
     <div className="py-2" key={id} data-cy="provinceCards">
       <Collapse title={label}>
         <div
           className="grid text-base font-sans grid-cols-2"
           data-cy="mailContactDetails"
         >
-          {items.map((item, i) => (
-            <div className="col-span-1" key={i}>
-              <p>
-                <b>{item.content}</b>
-              </p>
-              <Markdown>{`${item.recipient}\n\n${item.program}\n\n${item.poBox}\n\n${item.city} ${item.province} ${item.country}`}</Markdown>
+          {items.map((x, i) => (
+            <div className="col-span-1 py-3" key={i}>
+              <p className="font-bold">{x && x.content}</p>
+              {x && (
+                <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
+                  x.program,
+                  '\n\n'
+                )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
+                  ' ',
+                  '\n\n'
+                )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
+                  x.postal,
+                  ' \n\n'
+                )} ${ap(x.country, ' ')}`}</Markdown>
+              )}
             </div>
           ))}
         </div>
       </Collapse>
     </div>
+  ) : (
+    <Fragment />
   )
 }
 
