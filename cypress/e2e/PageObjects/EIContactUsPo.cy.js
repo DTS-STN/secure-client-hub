@@ -87,10 +87,38 @@ function ProvinceCard() {
   return cy.get('[data-cy="provinceCards"]')
 }
 
+function EIContactUsSections() {
+  return cy.get('[data-cy="sections"]')
+}
+
+function ValidateEachSectionContent() {
+  EIContactUsSections().each(($el1, index, $list) => {
+    const sectionHeader = $el1.find('[data-cy="sectionHeader"]').text()
+    for (let j = 0; j < ContactUsEIdata.length; j++) {
+      if (sectionHeader.includes(ContactUsEIdata[j].Link)) {
+        cy.wrap($el1).find('[data-cy="section1"]').should('be.visible')
+        cy.wrap($el1).find('[data-cy="section2"]').should('be.visible')
+        for (let i = 0; i < ContactUsEIdata[j].RowName.length; i++) {
+          cy.wrap($el1)
+            .find('[data-cy="section2"]')
+            .should('include.text', ContactUsEIdata[j].RowName[i])
+        }
+      }
+    }
+  })
+}
+
 function ValidateMailCardsEIContactUs() {
+  ProvinceCard().should('have.length', '13')
   ProvinceCard().each(($el1, index, $list) => {
     cy.wrap($el1).click()
-    cy.wrap($el1).find('[data-cy="mailContactDetails"]').should('be.visible')
+    const ContactDetails = cy.wrap($el1).find('[data-cy="mailContactDetails"]')
+    ContactDetails.should('be.visible')
+    ContactDetails.find('[data-cy="column1"]').each(($el2, index, $list) => {
+      cy.wrap($el2)
+        .should('be.visible')
+        .and('include.text', 'Employment Insurance Program')
+    })
   })
 }
 
@@ -111,4 +139,6 @@ module.exports = {
   ValidateMailCardsEIContactUs,
   EachContactSection,
   ProvinceCard,
+  EIContactUsSections,
+  ValidateEachSectionContent,
 }
