@@ -21,7 +21,7 @@ export default function ContactSection({ title, intro, id, details }) {
           ContactSectionRow({ ...x, index, detail: x.items[0].content })
         )}
       </div>
-      <div className="grid grid-cols-4 gap-4 mt-4 border-t-2 pb-6" />
+      <div className="mt-4 border-t-2 pb-6" />
     </div>
   )
 }

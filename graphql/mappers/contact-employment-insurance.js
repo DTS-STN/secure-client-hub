@@ -25,6 +25,7 @@ export async function getContactEmploymentInsuranceContent() {
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  label: y.scTitleEn,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentEn.markdown,
@@ -43,7 +44,6 @@ export async function getContactEmploymentInsuranceContent() {
                       })[0],
                     }
                   }),
-                  label: y.scTitleEn,
                 }
               }),
               intro: x.schIntroEn.markdown,
@@ -71,14 +71,16 @@ export async function getContactEmploymentInsuranceContent() {
             return {
               id: x.scId,
               title: x.scTitleFr,
-              title: x.scTitleFr,
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  title: y.scTitleFr,
+                  label: y.scTitleFr,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentFr.markdown,
                       icon: z.scIconCSS,
+
                       ...z.scFragments.map((a) => {
                         return {
                           city: a.scCityFr,
@@ -93,7 +95,7 @@ export async function getContactEmploymentInsuranceContent() {
                       })[0],
                     }
                   }),
-                  title: y.scTitleFr,
+                  title: 'y.scTitleFr',
                 }
               }),
 
