@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1671044538930" clover="3.2.0">
-  <project timestamp="1671044538930" name="All files">
+<coverage generated="1671138346005" clover="3.2.0">
+  <project timestamp="1671138346005" name="All files">
     <metrics statements="222" coveredstatements="93" conditionals="146" coveredconditionals="47" methods="103" coveredmethods="35" elements="471" coveredelements="175" complexity="0" loc="222" ncloc="222" packages="5" files="30" classes="30"/>
     <package name="components">
       <metrics statements="55" coveredstatements="34" conditionals="40" coveredconditionals="21" methods="26" coveredmethods="12"/>
@@ -115,7 +115,7 @@
       <file name="ContactSection.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSection.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="5" count="7" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
       <file name="ContactSectionRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSectionRow.js">
         <metrics statements="2" coveredstatements="2" conditionals="8" coveredconditionals="2" methods="1" coveredmethods="1"/>
