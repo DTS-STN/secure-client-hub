@@ -1,6 +1,6 @@
 # Secure Client Hub
 
-Secure Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
+Secure Client Hub for Service Canada users accessing benefit details in a unified and consistent experience
 
 This application is not released yet.
 
