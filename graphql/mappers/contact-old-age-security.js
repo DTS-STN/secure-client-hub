@@ -34,13 +34,14 @@ export async function getContactOldAgeSecurityContent() {
                         ...z.scFragments.map((a) => {
                           return {
                             city: a.scCityEn,
-                            country: a.scCountryEn,
+                            country: a.scCountryEn.toUpperCase(),
                             id: a.scId,
                             poBox: a.scPostalBoxEn,
                             postal: a.scPostalCode,
                             program: a.scProgramEn,
                             province: a.scProvTerrAbbrEnum,
                             recipient: a.scRecipientEn,
+                            station: a.scPostalStationEn,
                           }
                         })[0],
                       }
@@ -48,7 +49,7 @@ export async function getContactOldAgeSecurityContent() {
                       //Return address unnested
                       return {
                         city: z.scCityEn,
-                        country: z.scCountryEn,
+                        country: z.scCountryEn.toUpperCase(),
                         id: z.scId,
                         poBox: z.scPostalBoxEn,
                         postal: z.scPostalCode,
@@ -99,12 +100,13 @@ export async function getContactOldAgeSecurityContent() {
                         ...z.scFragments.map((a) => {
                           return {
                             city: a.scCityFr,
-                            country: a.scCountryFr,
+                            country: a.scCountryFr.toUpperCase(),
                             id: a.scId,
                             poBox: a.scPostalBoxFr,
                             postal: a.scPostalCode,
                             province: a.scProvTerrAbbrEnum,
                             recipient: a.scRecipientFr,
+                            station: a.scPostalStationFr,
                           }
                         })[0],
                       }
@@ -112,7 +114,7 @@ export async function getContactOldAgeSecurityContent() {
                       //Return address unnested
                       return {
                         city: z.scCityFr,
-                        country: z.scCountryFr,
+                        country: z.scCountryFr.toUpperCase(),
                         id: z.scId,
                         poBox: z.scPostalBoxFr,
                         postal: z.scPostalCode,
