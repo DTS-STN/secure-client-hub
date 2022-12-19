@@ -25,10 +25,12 @@ export async function getContactCanadaPensionPlan() {
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentEn.markdown,
                       icon: z.scIconCSS,
+                      // button: z.scButtonType,
                       ...z.scFragments.map((a) => {
                         return {
                           city: a.scCityEn,
@@ -76,10 +78,12 @@ export async function getContactCanadaPensionPlan() {
                   id: y.scId,
                   title: y.scTitleFr,
                   label: y.scTitleFr,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentFr.markdown,
                       icon: z.scIconCSS,
+
                       ...z.scFragments.map((a) => {
                         return {
                           city: a.scCityFr,

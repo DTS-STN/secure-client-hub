@@ -21,7 +21,13 @@ export default function ContactSection({ title, intro, id, details }) {
       </div>
       <div data-cy="section2">
         {details.map((x, index) =>
-          ContactSectionRow({ ...x, index, detail: x.items[0].content })
+          ContactSectionRow({
+            ...x,
+            index,
+            detail: x.items[0].content,
+            icon: x.items[0].icon,
+            highlight: x.color,
+          })
         )}
       </div>
       <div className="mt-4 border-t-2 pb-6" />

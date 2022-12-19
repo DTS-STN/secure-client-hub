@@ -26,6 +26,7 @@ export async function getContactEmploymentInsuranceContent() {
                 return {
                   id: y.scId,
                   label: y.scTitleEn,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentEn.markdown,
@@ -76,11 +77,11 @@ export async function getContactEmploymentInsuranceContent() {
                   id: y.scId,
                   title: y.scTitleFr,
                   label: y.scTitleFr,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentFr.markdown,
                       icon: z.scIconCSS,
-
                       ...z.scFragments.map((a) => {
                         return {
                           city: a.scCityFr,
