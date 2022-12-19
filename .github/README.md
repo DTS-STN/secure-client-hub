@@ -15,7 +15,8 @@ This project uses
 
 ## Test reports for Main 👩‍🔬 🧪
 
-![Default Tests Workflow Status](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=main)
+[![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/)
+[![Jest Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/Lint%20and%20Test?label=Jest)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/unit-test-results/lcov-report/)
 
 ![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
 ![Statements Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Statement%20Coverage&query=%24.total.statements.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
