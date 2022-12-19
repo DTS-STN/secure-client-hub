@@ -43,9 +43,9 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEachSectionEIContactUs()
   })
 
-  it('Validate Mail section on EI contact Us page', () => {
-    EIcontactUs.ValidateMailCardsEIContactUs()
-  })
+  // it('Validate Mail section on EI contact Us page', () => {
+  //   EIcontactUs.ValidateMailCardsEIContactUs()
+  // })
 
   it('Validate Telephone section on EI contact Us page', () => {
     EIcontactUs.ValidateEachSectionContent()

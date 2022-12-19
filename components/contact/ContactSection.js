@@ -3,11 +3,14 @@ import ContactSectionRow from './ContactSectionRow'
 
 export default function ContactSection({ title, intro, id, details }) {
   return (
-    <div data-cy="sections" className="max-w-3xl" name={id} id={id}>
-      <h2
-        className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold"
-        data-cy="sectionHeader"
-      >
+    <div
+      data-cy="sections"
+      className="max-w-3xl"
+      name={id}
+      id={id}
+      data-testid="contactSection-test"
+    >
+      <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
         {title}
       </h2>
       <div
@@ -21,8 +24,7 @@ export default function ContactSection({ title, intro, id, details }) {
           ContactSectionRow({ ...x, index, detail: x.items[0].content })
         )}
       </div>
-      <p></p>
-      <div className="grid grid-cols-4 gap-4 border-t-2 pb-6" />
+      <div className="mt-4 border-t-2 pb-6" />
     </div>
   )
 }

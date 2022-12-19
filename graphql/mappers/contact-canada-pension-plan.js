@@ -1,12 +1,12 @@
 import clientQuery from '../client'
 
-export async function getContactEmploymentInsuranceContent() {
-  const query = require('../queries/contact-employment-insurance.graphql')
+export async function getContactCanadaPensionPlan() {
+  const query = require('../queries/contact-canada-pension-plan.graphql')
   const response = await clientQuery(query)
 
   const queryData = response.data.schPagev1ByPath.item
 
-  const mappedContactEI = {
+  const mappedContactCPP = {
     en: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
         return {
@@ -25,7 +25,6 @@ export async function getContactEmploymentInsuranceContent() {
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
-                  label: y.scTitleEn,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentEn.markdown,
@@ -44,6 +43,7 @@ export async function getContactEmploymentInsuranceContent() {
                       })[0],
                     }
                   }),
+                  label: y.scTitleEn,
                 }
               }),
               intro: x.schIntroEn.markdown,
@@ -80,7 +80,6 @@ export async function getContactEmploymentInsuranceContent() {
                     return {
                       content: z.scContentFr.markdown,
                       icon: z.scIconCSS,
-
                       ...z.scFragments.map((a) => {
                         return {
                           city: a.scCityFr,
@@ -95,7 +94,7 @@ export async function getContactEmploymentInsuranceContent() {
                       })[0],
                     }
                   }),
-                  title: 'y.scTitleFr',
+                  title: y.scTitleFr,
                 }
               }),
 
@@ -111,5 +110,5 @@ export async function getContactEmploymentInsuranceContent() {
     },
   }
 
-  return mappedContactEI
+  return mappedContactCPP
 }
