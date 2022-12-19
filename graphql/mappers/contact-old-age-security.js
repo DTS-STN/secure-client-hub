@@ -124,7 +124,7 @@ export async function getContactOldAgeSecurityContent() {
                       }
                     }
                   }),
-                  title: y.scTitleFr,
+                  label: y.scTitleFr,
                 }
               }),
 
