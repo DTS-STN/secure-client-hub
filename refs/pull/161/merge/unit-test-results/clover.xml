@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1671028891803" clover="3.2.0">
-  <project timestamp="1671028891803" name="All files">
-    <metrics statements="220" coveredstatements="68" conditionals="134" coveredconditionals="31" methods="102" coveredmethods="27" elements="456" coveredelements="126" complexity="0" loc="220" ncloc="220" packages="5" files="30" classes="30"/>
+<coverage generated="1671472271924" clover="3.2.0">
+  <project timestamp="1671472271924" name="All files">
+    <metrics statements="244" coveredstatements="93" conditionals="158" coveredconditionals="47" methods="114" coveredmethods="35" elements="516" coveredelements="175" complexity="0" loc="244" ncloc="244" packages="5" files="31" classes="31"/>
     <package name="components">
       <metrics statements="55" coveredstatements="34" conditionals="40" coveredconditionals="21" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -25,7 +25,7 @@
         <line num="8" count="2" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
       </file>
       <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -36,7 +36,7 @@
       <file name="ExitBetaModal.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBetaModal.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
-        <line num="56" count="6" type="stmt"/>
+        <line num="56" count="8" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
         <metrics statements="9" coveredstatements="8" conditionals="16" coveredconditionals="12" methods="5" coveredmethods="2"/>
@@ -93,11 +93,11 @@
       <file name="ViewMoreLessButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ViewMoreLessButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="6" count="5" type="stmt"/>
-        <line num="36" count="3" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.contact">
-      <metrics statements="10" coveredstatements="6" conditionals="8" coveredconditionals="2" methods="7" coveredmethods="3"/>
+      <metrics statements="12" coveredstatements="7" conditionals="16" coveredconditionals="2" methods="8" coveredmethods="3"/>
       <file name="ContactProvince.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvince.js">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
@@ -105,15 +105,17 @@
         <line num="14" count="0" type="stmt"/>
       </file>
       <file name="ContactProvinceRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvinceRow.js">
-        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="18" count="0" type="stmt"/>
       </file>
       <file name="ContactSection.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSection.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
       <file name="ContactSectionRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSectionRow.js">
         <metrics statements="2" coveredstatements="2" conditionals="8" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -122,7 +124,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="136" coveredstatements="28" conditionals="66" coveredconditionals="8" methods="59" coveredmethods="12"/>
+      <metrics statements="158" coveredstatements="52" conditionals="82" coveredconditionals="24" methods="70" coveredmethods="20"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
@@ -138,30 +140,55 @@
         <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="4" count="2" type="stmt"/>
       </file>
+      <file name="contact-canada-pension-plan.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-canada-pension-plan.js">
+        <metrics statements="22" coveredstatements="12" conditionals="14" coveredconditionals="8" methods="11" coveredmethods="4"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="118" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+        <line num="127" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="162" count="1" type="stmt"/>
+        <line num="175" count="1" type="stmt"/>
+      </file>
       <file name="contact-employment-insurance.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-employment-insurance.js">
-        <metrics statements="22" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="11" coveredmethods="0"/>
-        <line num="21" count="0" type="stmt"/>
+        <metrics statements="22" coveredstatements="12" conditionals="14" coveredconditionals="8" methods="11" coveredmethods="4"/>
+        <line num="21" count="3" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="108" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="119" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="114" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="116" count="1" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="125" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="160" count="1" type="stmt"/>
+        <line num="173" count="1" type="stmt"/>
       </file>
       <file name="contact-old-age-security.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/contact-old-age-security.js">
         <metrics statements="22" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="11" coveredmethods="0"/>
