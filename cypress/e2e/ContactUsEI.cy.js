@@ -3,6 +3,7 @@ const contactUsPo = require('../e2e/PageObjects/ContactUsPO.cy')
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
+import ContactUsEIdata from '../fixtures/ContactUsEIdata.json'
 
 beforeEach(() => {
   cy.visit('/contact-employment-insurance')
@@ -14,7 +15,7 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEIContactUsHeaderEN()
   })
 
-  it.skip('Validate EI Contact us URL and header in FR', () => {
+  it('Validate EI Contact us URL and header in FR', () => {
     dashboardPo.FrenchButton().click()
     EIcontactUs.ValidateEIContactUsUrlFR()
     EIcontactUs.ValidateEIContactUsHeaderFR()
@@ -42,7 +43,11 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEachSectionEIContactUs()
   })
 
-  it('Validate Mail section on EI contact Us page', () => {
-    EIcontactUs.ValidateMailCardsEIContactUs()
+  // it('Validate Mail section on EI contact Us page', () => {
+  //   EIcontactUs.ValidateMailCardsEIContactUs()
+  // })
+
+  it('Validate Telephone section on EI contact Us page', () => {
+    EIcontactUs.ValidateEachSectionContent()
   })
 })

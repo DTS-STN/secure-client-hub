@@ -9,7 +9,7 @@ const ap = (x, append) => {
 const ContactProvinceRow = ({ label, items, id }) => {
   return items.length > 0 ? (
     <div className="py-2" key={id} data-cy="provinceCards">
-      <Collapse title={label}>
+      <Collapse title={label} id={id} dataTestId={`dataTest`}>
         <div
           className="grid text-base font-sans grid-cols-2"
           data-cy="mailContactDetails"
