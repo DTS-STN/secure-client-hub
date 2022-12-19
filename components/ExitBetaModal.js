@@ -30,7 +30,7 @@ export default function ExitBetaModal(props) {
       <p className="text-xl font-display py-4 mr-10">
         {props.popupDescription}
       </p>
-      <div className="md:flex mt-8 md:space-x-12 space-y-6 md:space-y-0">
+      <div className="md:flex mt-8 md:space-x-12">
         <Button
           className="w-full block md:w-fit"
           id={props.popupSecondaryBtn.id}
@@ -42,7 +42,7 @@ export default function ExitBetaModal(props) {
         continueLink is always external so NextJS routing can be ignored */}
         <a href={props.continueLink}>
           <Button
-            className="w-full block md:w-fit"
+            className="w-full block mt-6 md:mt-0 md:w-fit"
             id={props.popupPrimaryBtn.id}
             styling="primary"
             text={props.popupPrimaryBtn.text}
