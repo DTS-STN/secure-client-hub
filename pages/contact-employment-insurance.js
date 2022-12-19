@@ -10,9 +10,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getContactEmploymentInsuranceContent } from '../graphql/mappers/contact-employment-insurance'
 import logger from '../lib/logger'
-import Modal from 'react-modal'
 import React from 'react'
-import ExitBetaModal from '../components/ExitBetaModal'
 
 export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
@@ -22,14 +20,6 @@ export default function ContactEmploymentInsurance(props) {
     isOpen: false,
     activeLink: '/',
   })
-
-  function openModal(link) {
-    setOpenModalWithLink({ isOpen: true, activeLink: link })
-  }
-
-  function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  }
 
   return (
     <div
@@ -60,24 +50,6 @@ export default function ContactEmploymentInsurance(props) {
           )}
         </Fragment>
       ))}
-
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={openModalWithLink.isOpen}
-        onRequestClose={closeModal}
-        contentLabel={t.aria_exit_beta_modal}
-      >
-        <ExitBetaModal
-          closeModal={closeModal}
-          closeModalAria={t.close_modal}
-          continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContent.popupId}
-          popupTitle={props.popupContent.popupTitle}
-          popupDescription={props.popupContent.popupDescription}
-          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
-        />
-      </Modal>
     </div>
   )
 }
