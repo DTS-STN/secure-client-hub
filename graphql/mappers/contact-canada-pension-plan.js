@@ -71,10 +71,11 @@ export async function getContactCanadaPensionPlan() {
             return {
               id: x.scId,
               title: x.scTitleFr,
-              title: x.scTitleFr,
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  title: y.scTitleFr,
+                  label: y.scTitleFr,
                   items: y.scItems.map((z) => {
                     return {
                       content: z.scContentFr.markdown,
