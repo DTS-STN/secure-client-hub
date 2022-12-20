@@ -25,7 +25,7 @@ export default function ContactSection({ title, intro, id, details }) {
             ...x,
             index,
             detail: x.items[0].content,
-            icon: x.items[0].icon,
+            iconFeature: x.items[0].icon,
             highlight: x.color,
           })
         )}
