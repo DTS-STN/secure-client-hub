@@ -83,8 +83,8 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-canada-pension-plan'
-      : '/contact-canada-pension-plan'
+      ? '/fr/contact-us/contact-canada-pension-plan'
+      : '/contact-us/contact-canada-pension-plan'
 
   const t = locale === 'en' ? en : fr
 

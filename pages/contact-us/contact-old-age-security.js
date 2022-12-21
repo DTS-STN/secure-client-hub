@@ -69,8 +69,8 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-old-age-security'
-      : '/contact-old-age-security'
+      ? '/fr/contact-us/contact-old-age-security'
+      : '/contact-us/contact-old-age-security'
 
   const t = locale === 'en' ? en : fr
 

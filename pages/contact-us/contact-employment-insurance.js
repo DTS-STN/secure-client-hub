@@ -80,8 +80,8 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-employment-insurance'
-      : '/contact-employment-insurance'
+      ? '/fr/contact-us/contact-employment-insurance'
+      : '/contact-us/contact-employment-insurance'
 
   const t = locale === 'en' ? en : fr
 
