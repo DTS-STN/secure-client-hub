@@ -21,10 +21,13 @@ const ContactProvinceRow = ({ label, items, id }) => {
                 <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
                   x.program,
                   '\n\n'
-                )}${ap(x.poBox, '\n\n')}${ap(x.city, ' ')} ${ap(
-                  x.province,
-                  ' '
-                )} ${ap(x.country, ' ')} ${ap(x.postal, ' ')}`}</Markdown>
+                )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
+                  ' ',
+                  '\n\n'
+                )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
+                  x.postal,
+                  ' \n\n'
+                )} ${ap(x.country, ' ')}`}</Markdown>
               )}
             </div>
           ))}
