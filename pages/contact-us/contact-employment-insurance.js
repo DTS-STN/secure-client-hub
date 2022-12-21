@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types'
 import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
 import { Fragment } from 'react'
-import en from '../locales/en'
-import fr from '../locales/fr'
-import ContactSection from '../components/contact/ContactSection'
-import ContactProvince from '../components/contact/ContactProvince'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getContactCanadaPensionPlan } from '../graphql/mappers/contact-canada-pension-plan'
-import logger from '../lib/logger'
+import en from '../../locales/en'
+import fr from '../../locales/fr'
+import ContactSection from '../../components/contact/ContactSection'
+import ContactProvince from '../../components/contact/ContactProvince'
+import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
+import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
+import { getContactEmploymentInsuranceContent } from '../../graphql/mappers/contact-employment-insurance'
+import logger from '../../lib/logger'
 import React from 'react'
 
-export default function ContactCanadaPensionPlan(props) {
+export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -24,7 +24,7 @@ export default function ContactCanadaPensionPlan(props) {
   return (
     <div
       id="homeContent"
-      data-testid="contactCPP-test"
+      data-testid="contactEI-test"
       data-cy="eIContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
@@ -34,6 +34,7 @@ export default function ContactCanadaPensionPlan(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
+
       <TableContent
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
@@ -49,10 +50,6 @@ export default function ContactCanadaPensionPlan(props) {
           )}
         </Fragment>
       ))}
-
-      {/*  */}
-
-      {/*  */}
     </div>
   )
 }
@@ -83,24 +80,26 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-canada-pension-plan'
-      : '/contact-canada-pension-plan'
+      ? '/fr/contact-employment-insurance'
+      : '/contact-employment-insurance'
 
   const t = locale === 'en' ? en : fr
 
-  const pageContent = await getContactCanadaPensionPlan().catch((error) => {
-    logger.error(error)
-    // res.statusCode = 500
-    throw error
-  })
+  const pageContent = await getContactEmploymentInsuranceContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
 
   const breadCrumbItems =
     locale === 'en'
       ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-          return { text, link }
+          return { text, link: '/' + link }
         })
       : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-          return { text, link }
+          return { text, link: '/' + link }
         })
 
   // const breadCrumbItems = [
@@ -117,13 +116,13 @@ export async function getStaticProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Canada Pension Plan',
+      title: 'My Service Canada Account - Contact Employment Ensurance',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
+      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -143,7 +142,7 @@ export async function getStaticProps({ res, locale }) {
   }
 }
 
-ContactCanadaPensionPlan.propTypes = {
+ContactEmploymentInsurance.propTypes = {
   /**
    * current locale in the address
    */
