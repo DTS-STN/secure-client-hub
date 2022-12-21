@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactEmploymentInsurance, {
   getStaticProps,
-} from '../../pages/contact-employment-insurance'
+} from '../../pages/contact-us/contact-employment-insurance'
 
 expect.extend(toHaveNoViolations)
 

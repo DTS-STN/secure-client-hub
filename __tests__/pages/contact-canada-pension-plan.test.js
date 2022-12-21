@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactCanadaPensionPlan, {
   getStaticProps,
-} from '../../pages/contact-canada-pension-plan'
+} from '../../pages/contact-us/contact-canada-pension-plan'
 
 expect.extend(toHaveNoViolations)
 
