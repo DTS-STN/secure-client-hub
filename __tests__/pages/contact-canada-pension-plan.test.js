@@ -137,7 +137,7 @@ describe('CPP Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-canada-pension-plan',
+        langToggleLink: '/fr/contact-us/contact-canada-pension-plan',
         locale: 'en',
         meta: {
           data_en: {

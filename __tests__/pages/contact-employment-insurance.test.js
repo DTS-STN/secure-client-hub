@@ -137,7 +137,7 @@ describe('EI Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-employment-insurance',
+        langToggleLink: '/fr/contact-us/contact-employment-insurance',
         locale: 'en',
         meta: {
           data_en: {
