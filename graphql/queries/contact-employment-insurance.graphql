@@ -58,6 +58,7 @@
                                   _path
                                   scTitleEn
                                   scTitleFr
+                                  scBackgroundColour
                                    scId
                                    scItems {
                                       ... on SCHContentv1Model {
