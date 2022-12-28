@@ -50,7 +50,7 @@ export async function getContactCanadaPensionPlan() {
               layout: item.schContactMethodLayout,
             }
           }),
-          subHeader: w.scTitleEn,
+          subHeader: fragment.scTitleEn,
         }
       })[0],
       id: queryData.scId,

@@ -8,108 +8,104 @@ export async function getContactEmploymentInsuranceContent() {
 
   const mappedContactEI = {
     en: {
-      breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
+      breadcrumb: queryData.scBreadcrumbParentPages.map((breadcrumb) => {
         return {
-          link: w.scPageNameEn,
-          text: w.scTitleEn,
+          link: breadcrumb.scPageNameEn,
+          text: breadcrumb.scTitleEn,
         }
       }),
       title: queryData.scTitleEn,
-      ...queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((fragment) => {
         return {
-          id: w.scId,
-          items: w.scItems.map((x) => {
+          id: fragment.scId,
+          subHeader: fragment.scTitleEn,
+          subHeader: fragment.scTitleFr,
+          items: fragment.scItems.map((item) => {
             return {
-              id: x.scId,
-              title: x.scTitleEn,
-              details: x.schDetails.map((y) => {
+              id: item.scId,
+              title: item.scTitleEn,
+              intro: item.schIntroEn.markdown,
+              layout: item.schContactMethodLayout,
+              details: item.schDetails.map((detail) => {
                 return {
-                  id: y.scId,
-                  label: y.scTitleEn,
-                  items: y.scItems.map((z) => {
+                  id: detail.scId,
+                  label: detail.scTitleEn,
+                  items: detail.scItems.map((detailItem) => {
                     return {
-                      content: z.scContentEn.markdown,
-                      icon: z.scIconCSS,
-                      ...z.scFragments.map((a) => {
+                      content: detailItem.scContentEn.markdown,
+                      icon: detailItem.scIconCSS,
+                      ...detailItem.scFragments.map((detailItemFragment) => {
                         return {
-                          city: a.scCityEn,
-                          country: a.scCountryEn,
-                          id: a.scId,
-                          poBox: a.scPostalBoxEn,
-                          postal: a.scPostalCode,
-                          program: a.scProgramEn,
-                          province: a.scProvTerrAbbrEnum,
-                          recipient: a.scRecipientEn,
+                          city: detailItemFragment.scCityEn,
+                          country: detailItemFragment.scCountryEn,
+                          id: detailItemFragment.scId,
+                          poBox: detailItemFragment.scPostalBoxEn,
+                          postal: detailItemFragment.scPostalCode,
+                          program: detailItemFragment.scProgramEn,
+                          province: detailItemFragment.scProvTerrAbbrEnum,
+                          recipient: detailItemFragment.scRecipientEn,
                         }
                       })[0],
                     }
                   }),
                 }
               }),
-              intro: x.schIntroEn.markdown,
-              layout: x.schContactMethodLayout,
             }
           }),
-          subHeader: w.scTitleEn,
         }
       })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameEn,
     },
     fr: {
-      breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
+      breadcrumb: queryData.scBreadcrumbParentPages.map((breadcrumb) => {
         return {
-          link: w.scPageNameFr,
-          text: w.scTitleFr,
+          link: breadcrumb.scPageNameFr,
+          text: breadcrumb.scTitleFr,
         }
       }),
       title: queryData.scTitleFr,
-      ...queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((fragment) => {
         return {
-          id: w.scId,
-          items: w.scItems.map((x) => {
+          id: fragment.scId,
+          items: fragment.scItems.map((item) => {
             return {
-              id: x.scId,
-              title: x.scTitleFr,
-              details: x.schDetails.map((y) => {
+              id: item.scId,
+              title: item.scTitleFr,
+              intro: item.schIntroFr.markdown,
+              layout: item.schContactMethodLayout,
+              details: item.schDetails.map((detail) => {
                 return {
-                  id: y.scId,
-                  title: y.scTitleFr,
-                  label: y.scTitleFr,
-                  items: y.scItems.map((z) => {
+                  id: detail.scId,
+                  title: detail.scTitleFr,
+                  label: detail.scTitleFr,
+                  items: detail.scItems.map((detailItem) => {
                     return {
-                      content: z.scContentFr.markdown,
-                      icon: z.scIconCSS,
-
-                      ...z.scFragments.map((a) => {
+                      content: detailItem.scContentFr.markdown,
+                      icon: detailItem.scIconCSS,
+                      ...detailItem.scFragments.map((detailItemFragment) => {
                         return {
-                          city: a.scCityFr,
-                          country: a.scCountryFr,
-                          id: a.scId,
-                          poBox: a.scPostalBoxFr,
-                          postal: a.scPostalCode,
-                          program: a.scProgramFr,
-                          province: a.scProvTerrAbbrEnum,
-                          recipient: a.scRecipientFr,
+                          city: detailItemFragment.scCityFr,
+                          country: detailItemFragment.scCountryFr,
+                          id: detailItemFragment.scId,
+                          poBox: detailItemFragment.scPostalBoxFr,
+                          postal: detailItemFragment.scPostalCode,
+                          program: detailItemFragment.scProgramFr,
+                          province: detailItemFragment.scProvTerrAbbrEnum,
+                          recipient: detailItemFragment.scRecipientFr,
                         }
                       })[0],
                     }
                   }),
-                  title: 'y.scTitleFr',
                 }
               }),
-
-              intro: x.schIntroFr.markdown,
-              layout: x.schContactMethodLayout,
             }
           }),
-          subHeader: w.scTitleFr,
         }
       })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameFr,
     },
   }
-
   return mappedContactEI
 }
