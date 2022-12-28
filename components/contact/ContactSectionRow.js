@@ -6,7 +6,7 @@ function ContactSectionRow(props) {
   const { label, detail, index, highlight, button } = props
   return label && detail ? (
     <div
-      className={`grid grid-cols-5 gap-4 border-t-2 mt-4 ${
+      className={`grid grid-cols-5 py-3 px-2 gap-4 border-t-2 mt-2 ${
         highlight && 'bg-blue-100'
       }`}
       key={index}
