@@ -10,7 +10,7 @@ export default function ContactSection({ title, intro, id, details }) {
       id={id}
       data-testid="contactSection-test"
     >
-      <h2 className="py-4 md:py-9 md:mt-2 text-4xl font-display font-bold">
+      <h2 className="py-4 md:pt-9 md:mt-2 text-4xl font-display font-bold">
         {title}
       </h2>
       <div
@@ -21,7 +21,13 @@ export default function ContactSection({ title, intro, id, details }) {
       </div>
       <div data-cy="section2">
         {details.map((x, index) =>
-          ContactSectionRow({ ...x, index, detail: x.items[0].content })
+          ContactSectionRow({
+            ...x,
+            index,
+            detail: x.items[0].content,
+            iconFeature: x.items[0].icon,
+            highlight: x.color,
+          })
         )}
       </div>
       <div className="mt-4 border-t-2 pb-6" />

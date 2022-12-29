@@ -30,6 +30,7 @@ export async function getContactEmploymentInsuranceContent() {
                 return {
                   id: detail.scId,
                   label: detail.scTitleEn,
+                  color: detail.scBackgroundColour,
                   items: detail.scItems.map((detailItem) => {
                     return {
                       content: detailItem.scContentEn.markdown,
@@ -79,6 +80,7 @@ export async function getContactEmploymentInsuranceContent() {
                   id: detail.scId,
                   title: detail.scTitleFr,
                   label: detail.scTitleFr,
+                  color: detail.scBackgroundColour,
                   items: detail.scItems.map((detailItem) => {
                     return {
                       content: detailItem.scContentFr.markdown,

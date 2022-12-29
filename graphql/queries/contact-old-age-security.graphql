@@ -1,6 +1,6 @@
 {
     schPagev1ByPath(
-    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/ei-contacts"
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/oas-contacts"
   ) {
     item {
       _path
@@ -58,9 +58,26 @@
                                   _path
                                   scTitleEn
                                   scTitleFr
-                                  scBackgroundColour
                                    scId
                                    scItems {
+                                       ... on SCHAddressv1Model {
+                                              _path
+                                              scId
+                                              scRecipientEn
+                                              scRecipientFr
+                                              scPostalBoxEn
+                                              scPostalBoxFr
+                                              scPostalStationEn
+                                              scPostalStationFr
+                                              scCityEn
+                                              scCityFr
+                                              scProvTerrAbbr
+                                              scPostalCode
+                                              scCountry
+                                              scProvTerrAbbrEnum
+                                              scCountryEn
+                                              scCountryFr
+                                          }
                                       ... on SCHContentv1Model {
                                       _path
                                       scId

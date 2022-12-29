@@ -25,6 +25,7 @@ export async function getContactCanadaPensionPlan() {
               details: item.schDetails.map((detail) => {
                 return {
                   id: detail.scId,
+                  color: detail.scBackgroundColour,
                   items: detail.scItems.map((detailItem) => {
                     return {
                       content: detailItem.scContentEn.markdown,
@@ -79,6 +80,7 @@ export async function getContactCanadaPensionPlan() {
                   id: detail.scId,
                   title: detail.scTitleFr,
                   label: detail.scTitleFr,
+                  color: detail.scBackgroundColour,
                   items: detail.scItems.map((detailItem) => {
                     return {
                       content: detailItem.scContentFr.markdown,

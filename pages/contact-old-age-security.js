@@ -8,33 +8,22 @@ import ContactProvince from '../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getContactEmploymentInsuranceContent } from '../graphql/mappers/contact-employment-insurance'
+import { getContactOldAgeSecurityContent } from '../graphql/mappers/contact-old-age-security'
 import logger from '../lib/logger'
 import React from 'react'
 
-export default function ContactEmploymentInsurance(props) {
+export default function ContactOldAgeSecurity(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
 
   return (
     <div
       id="homeContent"
-      data-testid="contactEI-test"
-      data-cy="eIContactUsContent"
+      data-testid="homeContent-test"
+      data-cy="oasContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
-      <div
-        className="py-5"
-        data-testid={`${
-          props.pageContent.items.length > 0 && 'tableOfContents-test'
-        }`}
-      />
-
+      <div className="py-5" />
       <TableContent
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
@@ -80,25 +69,23 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-employment-insurance'
-      : '/contact-employment-insurance'
+      ? '/fr/contact-old-age-security'
+      : '/contact-old-age-security'
 
   const t = locale === 'en' ? en : fr
 
-  const pageContent = await getContactEmploymentInsuranceContent().catch(
-    (error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    }
-  )
+  const pageContent = await getContactOldAgeSecurityContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   const breadCrumbItems =
     locale === 'en'
-      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
+      ? pageContent.en.breadcrumb.map(({ link, text }) => {
           return { text, link }
         })
-      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+      : pageContent.fr.breadcrumb.map(({ link, text }) => {
           return { text, link }
         })
 
@@ -116,13 +103,13 @@ export async function getStaticProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Ensurance',
+      title: 'My Service Canada Account - Contact Old Age Security',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+      title: 'Mon dossier Service Canada - Contactez Old Age Security',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -142,7 +129,7 @@ export async function getStaticProps({ res, locale }) {
   }
 }
 
-ContactEmploymentInsurance.propTypes = {
+ContactOldAgeSecurity.propTypes = {
   /**
    * current locale in the address
    */
