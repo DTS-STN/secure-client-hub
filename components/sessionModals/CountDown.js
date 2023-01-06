@@ -10,8 +10,9 @@ const Countdown = (props) => {
     hours: 0,
     minutes: 0,
     seconds: 0,
+    ready: false,
   })
-  const { days, hours, minutes, seconds } = clock
+  const { days, hours, minutes, seconds, ready } = clock
 
   const getTime = () => {
     const time = Date.parse(props.deadline) - Date.now()
@@ -23,6 +24,7 @@ const Countdown = (props) => {
         hours: Math.floor((time / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((time / 1000 / 60) % 60),
         seconds: Math.floor((time / 1000) % 60),
+        ready: true,
       }
     })
   }
@@ -36,7 +38,7 @@ const Countdown = (props) => {
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
-      data-cy="exitBetaModal"
+      data-cy="countDownModal"
       id={props.id}
     >
       <div className="flex justify-between pb-5">
@@ -71,8 +73,9 @@ const Countdown = (props) => {
             your information secure.
           </p>
           <p className="font-bold mr-6">
-            You will be signed out in {minutes} minutes and {seconds}
-            seconds.
+            {ready &&
+              `You will be signed out in ${minutes} minutes and ${seconds}
+            seconds.`}
           </p>
         </div>
       </div>

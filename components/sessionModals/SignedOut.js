@@ -8,7 +8,7 @@ const SignedOut = (props) => {
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
-      data-cy="exitBetaModal"
+      data-cy="signedOutModal"
       id={props.id}
     >
       <div className="flex justify-between pb-5">
