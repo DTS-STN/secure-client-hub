@@ -32,51 +32,45 @@ export default function DeleteMe(props) {
 
   return (
     <div>
-      <SignedOut />
-      <Button text="Countdown" styling="primary" className="mr-3" />
+      <Button
+        text="Countdown"
+        styling="primary"
+        className="mr-3  m-5"
+        onClick={() =>
+          content(
+            <CountDown
+              closeModal={closeModal}
+              onSignOut={() => console.log('Sign Out Clicked')}
+              onStay={() => console.log('Stay Signed In Clicked')}
+              id="CountDown"
+              deadline="January, 31, 2023"
+            />
+          )
+        }
+      />
+
       <Button
         text="Signed Out"
         styling="primary"
-        className="mr-3"
-        onClick={() => content('mooo')}
+        className="mr-3 m-5"
+        onClick={() =>
+          content(
+            <SignedOut
+              closeModal={closeModal}
+              onContinue={() => console.log('Continue Clicked')}
+              id="SignedOut"
+            />
+          )
+        }
       />
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={modalBody === null ? false : true}
         onRequestClose={closeModal}
-        contentLabel={'ddddD'}
+        contentLabel={'Demo Modal'}
       >
-        <div
-          className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
-          data-cy="exitBetaModal"
-          id={'dd'}
-        >
-          <div className="flex justify-between">
-            <div
-              className="text-3xl font-display font-bold"
-              role="heading"
-              aria-level="1"
-            >
-              Hello World
-            </div>
-            <button
-              data-cy="x-button"
-              type="button"
-              aria-label={'sssssss'}
-              onClick={closeModal}
-            >
-              <FontAwesomeIcon
-                aria-hidden="true"
-                icon={solid('xmark')}
-                size="xl"
-              />
-            </button>
-          </div>
-          <p className="text-xl font-display py-4 mr-10">
-            <SignedOut />
-          </p>
-        </div>
+        {modalBody}
       </Modal>
     </div>
   )

@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
 import { Button } from '@dts-stn/service-canada-design-system'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const Countdown = () => {
+const Countdown = (props) => {
   const [clock, setClock] = useState({
     days: 0,
     hours: 0,
@@ -12,10 +13,8 @@ const Countdown = () => {
   })
   const { days, hours, minutes, seconds } = clock
 
-  const deadline = 'January, 31, 2023'
-
   const getTime = () => {
-    const time = Date.parse(deadline) - Date.now()
+    const time = Date.parse(props.deadline) - Date.now()
 
     setClock((prev) => {
       return {
@@ -29,43 +28,68 @@ const Countdown = () => {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => getTime(deadline), 1000)
+    const interval = setInterval(() => getTime(props.deadline), 1000)
 
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div>
-      <div className="p-9">
-        <div className="flex ">
-          <div className="flex-auto">
-            <h1 className="text-3xl font-medium pb-4">Stay signed in?</h1>
-          </div>
+    <div
+      className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
+      data-cy="exitBetaModal"
+      id={props.id}
+    >
+      <div className="flex justify-between pb-5">
+        <div
+          className="text-3xl font-display font-bold"
+          role="heading"
+          aria-level="1"
+        >
+          Stay signed in?
         </div>
-        <div className="flex">
-          <div className="flex-none flex items-top justify-center pr-3">
-            <FontAwesomeIcon
-              icon={icon['triangle-exclamation']}
-              size="lg"
-              color="orange"
-            />
-          </div>
-          <div className="flex-auto">
-            <p>
-              You have been active for a while so we will sign you out to keep
-              your information secure.
-            </p>
-            <p className="font-bold">
-              You will be signed out in {minutes} minutes and {seconds}
-              seconds.
-            </p>
-          </div>
+        <button
+          data-cy="x-button"
+          type="button"
+          aria-label={'Close Modal'}
+          onClick={props.closeModal}
+        >
+          <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
+        </button>
+      </div>
+
+      <div className="flex">
+        <div className="flex-none flex items-top justify-center pr-3">
+          <FontAwesomeIcon
+            icon={icon['triangle-exclamation']}
+            size="lg"
+            color="orange"
+          />
+        </div>
+        <div className="flex-auto">
+          <p className="mr-6">
+            You have been active for a while so we will sign you out to keep
+            your information secure.
+          </p>
+          <p className="font-bold mr-6">
+            You will be signed out in {minutes} minutes and {seconds}
+            seconds.
+          </p>
         </div>
       </div>
 
-      <div className="flex py-5">
-        <Button text="Sign Out" styling="secondary" className="mr-3" />{' '}
-        <Button text="Stay Signed In" styling="primary" className="mr-3" />
+      <div className="flex pt-10">
+        <Button
+          text="Sign Out"
+          onClick={props.onSignOut}
+          styling="secondary"
+          className="mr-3"
+        />
+        <Button
+          text="Stay Signed In"
+          onClick={props.onStay}
+          styling="primary"
+          className="mr-3"
+        />
       </div>
     </div>
   )
