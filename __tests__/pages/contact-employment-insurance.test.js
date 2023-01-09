@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactEmploymentInsurance, {
   getStaticProps,
-} from '../../pages/contact-employment-insurance'
+} from '../../pages/contact-us/contact-employment-insurance'
 
 expect.extend(toHaveNoViolations)
 
@@ -137,7 +137,7 @@ describe('EI Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-employment-insurance',
+        langToggleLink: '/fr/contact-us/contact-employment-insurance',
         locale: 'en',
         meta: {
           data_en: {

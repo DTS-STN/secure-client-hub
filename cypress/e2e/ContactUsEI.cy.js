@@ -6,7 +6,7 @@ const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
 import ContactUsEIdata from '../fixtures/ContactUsEIdata.json'
 
 beforeEach(() => {
-  cy.visit('/contact-employment-insurance')
+  cy.visit('/contact-us/contact-employment-insurance')
 })
 
 describe('Validate EI Contact Us Landing page', () => {
