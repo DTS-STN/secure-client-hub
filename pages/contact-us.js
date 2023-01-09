@@ -25,7 +25,7 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={link.linkDestination}
+                href={'contact-us' + link.linkDestination}
               />
               <p className="text-xl">{link.linkDescription}</p>
             </li>

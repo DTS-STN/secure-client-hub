@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactCanadaPensionPlan, {
   getStaticProps,
-} from '../../pages/contact-canada-pension-plan'
+} from '../../pages/contact-us/contact-canada-pension-plan'
 
 expect.extend(toHaveNoViolations)
 
@@ -137,7 +137,7 @@ describe('CPP Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-canada-pension-plan',
+        langToggleLink: '/fr/contact-us/contact-canada-pension-plan',
         locale: 'en',
         meta: {
           data_en: {

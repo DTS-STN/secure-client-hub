@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
 import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
 import { Fragment } from 'react'
-import en from '../locales/en'
-import fr from '../locales/fr'
-import ContactSection from '../components/contact/ContactSection'
-import ContactProvince from '../components/contact/ContactProvince'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getContactCanadaPensionPlan } from '../graphql/mappers/contact-canada-pension-plan'
-import logger from '../lib/logger'
+import en from '../../locales/en'
+import fr from '../../locales/fr'
+import ContactSection from '../../components/contact/ContactSection'
+import ContactProvince from '../../components/contact/ContactProvince'
+import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
+import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
+import { getContactCanadaPensionPlan } from '../../graphql/mappers/contact-canada-pension-plan'
+import logger from '../../lib/logger'
 import React from 'react'
 
 export default function ContactCanadaPensionPlan(props) {
@@ -83,8 +83,8 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-canada-pension-plan'
-      : '/contact-canada-pension-plan'
+      ? '/fr/contact-us/contact-canada-pension-plan'
+      : '/contact-us/contact-canada-pension-plan'
 
   const t = locale === 'en' ? en : fr
 
@@ -97,10 +97,10 @@ export async function getStaticProps({ res, locale }) {
   const breadCrumbItems =
     locale === 'en'
       ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-          return { text, link }
+          return { text, link: '/' + link }
         })
       : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-          return { text, link }
+          return { text, link: '/' + link }
         })
 
   // const breadCrumbItems = [
