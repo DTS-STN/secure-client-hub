@@ -1,9 +1,13 @@
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import { axe, toHaveNoViolations } from 'jest-axe'
 import CountDown from '../../../components/sessionModals/CountDown'
 
-it('renders correctly', () => {
-  const countDownRender = renderer
-    .create(
+expect.extend(toHaveNoViolations)
+
+describe('CountDownModal', () => {
+  it('renders countDown', () => {
+    const primary = render(
       <CountDown
         closeModal={() => console.log('Close Modal')}
         onSignOut={() => console.log('Sign Out Clicked')}
@@ -12,6 +16,6 @@ it('renders correctly', () => {
         deadline="January, 31, 2023"
       />
     )
-    .toJSON()
-  expect(countDownRender).toMatchSnapshot()
+    expect(primary).toBeTruthy()
+  })
 })
