@@ -158,24 +158,18 @@ describe('Validate Profile page', () => {
     profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '4')
   })
 
-  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
     profilePo.ExpandCard('Employment Insurance')
-    //This test step logic will change once we have code to show modal only for specific links
-    //its only valid till exit beta modal is displayed for all authenicated links
-    dashboardPo.validateExitBetaModalbuttonLink()
+    profilePo.ClickonTaskLinks()
   })
 
-  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
     profilePo.ExpandCard('Canada Pension Plan')
-    //This test step logic will change once we have code to show modal only for specific links
-    //its only valid till exit beta modal is displayed for all authenicated links
-    dashboardPo.validateExitBetaModalbuttonLink()
+    profilePo.ClickonTaskLinks()
   })
 
-  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
+  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     profilePo.ExpandCard('Old Age Security')
-    //This test step logic will change once we have code to show modal only for specific links
-    //its just a template and only valid till exit beta modal is displayed for all authenicated links
-    dashboardPo.validateExitBetaModalbuttonLink()
+    profilePo.ClickonTaskLinks()
   })
 })

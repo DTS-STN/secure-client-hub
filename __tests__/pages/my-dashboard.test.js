@@ -30,6 +30,21 @@ jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
+  getBetaPopupNotAvailableContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -40,6 +55,7 @@ describe('My Dashboard page', () => {
     paragraph: 'paragraph',
     cards: [{ id: 'test', title: 'title', lists: [] }],
   }
+  const popupContent = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
@@ -49,13 +65,25 @@ describe('My Dashboard page', () => {
   })
 
   it('should render the page', () => {
-    render(<MyDashboard locale="en" content={content} />)
+    render(
+      <MyDashboard
+        locale="en"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
     const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
     expect(myDashboardDiv).toBeInTheDocument()
   })
 
   it('should contain a card', () => {
-    render(<MyDashboard locale="en" content={content} />)
+    render(
+      <MyDashboard
+        locale="en"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
     const testCard = screen.getByTestId('mock-card')
     expect(testCard).toBeInTheDocument()
   })
@@ -83,6 +111,8 @@ describe('My Dashboard page', () => {
             title: 'Mon dossier Service Canada - Tableau de Bord',
           },
         },
+        popupContent: {},
+        popupContentNA: {},
       },
     })
   })

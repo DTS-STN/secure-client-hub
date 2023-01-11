@@ -11,11 +11,32 @@ export default {
   // Header
   title: 'home',
   //
+  // Header Menu
+  menuItems: {
+    dashboard: 'My Dashboard',
+    security: 'Security settings',
+    profile: 'Profile',
+    signOut: 'Sign Out',
+  },
+  //
   //Heading
   pageHeading: {
     title: 'My dashboard',
     profile: 'Profile',
   },
+
+  //User testing with beta banner this is to be deleted after UT
+  betaBanner: {
+    bannerBoldText: 'Beta version:',
+    bannerText:
+      'We’ve made some changes to improve your experience with My Service Canada Account.',
+    bannerLink: 'Learn more about the beta version',
+    bannerLinkHref:
+      'https://www.canada.ca/en/digital-experience-client-data/sch/new-beta-version.html',
+    bannerButtonText: 'Try beta version',
+    bannerButtonLink: '/my-dashboard',
+  },
+
   // PageLink
   pageLinkSecurity: 'Looking for security settings?',
   securityLinkText: 'security settings',
