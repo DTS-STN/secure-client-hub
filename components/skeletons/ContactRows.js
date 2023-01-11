@@ -3,9 +3,12 @@ import { icon } from '../../lib/loadIcons'
 
 const ContactRows = ({ rows }) => {
   let rowArr = []
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= rows; i++) {
     rowArr.push(
-      <div className="animate-pulse grid grid-cols-12 gap-4 border-t-2 my-4 p-2">
+      <div
+        className="animate-pulse grid grid-cols-12 gap-4 border-t-2 my-4 p-2"
+        key={rowArr.length}
+      >
         <div className=" grid grid-cols-12 gap-2 lg:col-span-3 sm:col-span-4">
           <div className="h-3 bg-slate-300 rounded w-full mx-2 lg:col-span-5 xs:col-span-12" />
           <div className="h-3 bg-slate-300 rounded w-full mx-2 lg:col-span-7 xs:col-span-12" />

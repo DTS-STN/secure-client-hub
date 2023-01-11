@@ -1,4 +1,4 @@
-const ContactIntro = ({ links }) => {
+const ContactIntro = () => {
   return (
     <div className="animate-pulse flex space-x-4">
       <div className="flex-1 space-y-6 py-1 pt-12">

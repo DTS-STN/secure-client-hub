@@ -5,16 +5,17 @@ const Dashboard = ({ sections }) => {
       <div
         className="animate-pulse border rounded border-gray-300 shadow my-6"
         data-testid="dashboard-skeleton"
+        key={sectionsArr.length}
       >
-        <h2 class="py-4 md:py-9 md:mt-2 px-3 sm:px-8 md:px-15 sm:px-6 text-4xl font-display font-bold">
+        <h2 className="py-4 md:py-9 md:mt-2 px-3 sm:px-8 md:px-15 sm:px-6 text-4xl font-display font-bold">
           <div className="grid grid-cols-12 gap-2">
-            <div className="sm:col-span-12 md:col-span-6 lg:col-spa-3 xs:col-span-12 flex flex-row">
+            <div className="sm:col-span-12 md:col-span-6 lg:col-spa-3 flex flex-row">
               <div className="h-12 bg-slate-300 rounded w-full" />
             </div>
           </div>
         </h2>
 
-        <div class="flex flex-row sm:items-center pb-6 lg:px-15 md:px-15 sm:px-6 xs:px-6">
+        <div className="flex flex-row sm:items-center pb-6 lg:px-15 md:px-15 sm:px-6">
           <div className="flex-none">
             <div className="rounded-full bg-slate-200 h-12 w-12" />
           </div>
