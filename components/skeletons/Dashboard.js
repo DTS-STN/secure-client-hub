@@ -1,8 +1,11 @@
 const Dashboard = ({ sections }) => {
   let sectionsArr = []
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= sections; i++) {
     sectionsArr.push(
-      <div class="animate-pulse border rounded border-gray-300 shadow my-6">
+      <div
+        className="animate-pulse border rounded border-gray-300 shadow my-6"
+        data-testid="dashboard-skeleton"
+      >
         <h2 class="py-4 md:py-9 md:mt-2 px-3 sm:px-8 md:px-15 sm:px-6 text-4xl font-display font-bold">
           <div className="grid grid-cols-12 gap-2">
             <div className="sm:col-span-12 md:col-span-6 lg:col-spa-3 xs:col-span-12 flex flex-row">

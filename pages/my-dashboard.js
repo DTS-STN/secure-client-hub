@@ -11,8 +11,9 @@ import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
-import React from 'react'
+import React, { useState } from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import Dashboard from '../components/skeletons/Dashboard'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -23,6 +24,8 @@ export default function MyDashboard(props) {
     activeLink: '/',
   })
 
+  const [skeleton, setSkeleton] = useState(true)
+
   function openModal(link) {
     setOpenModalWithLink({ isOpen: true, activeLink: link })
   }
@@ -31,46 +34,60 @@ export default function MyDashboard(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
+  setTimeout(() => {
+    setSkeleton(false)
+  }, '2000')
+
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      {props.content.cards.map((card) => {
-        const mostReq = card.lists[0]
-        var tasks = card.lists.slice(1, card.lists.length)
-        return (
-          <Card
-            key={card.id}
-            programUniqueId={card.id}
-            locale={props.locale}
-            cardTitle={card.title}
-            viewMoreLessCaption={card.dropdownText}
-          >
-            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
-              <MostReqTasks
-                taskListMR={mostReq}
-                dataCy="most-requested"
-                openModal={openModal}
-              />
-            </div>
-            <div
-              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
-              data-cy="task-list"
-            >
-              {tasks.map((taskList, index) => {
-                return (
-                  <div className="" key={index} data-cy="Task">
-                    <BenefitTasks
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                      openModal={openModal}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </Card>
-        )
-      })}
+      {skeleton ? (
+        <Dashboard sections={3} />
+      ) : (
+        <>
+          {props.content.cards.map((card) => {
+            const mostReq = card.lists[0]
+            var tasks = card.lists.slice(1, card.lists.length)
+            return (
+              <Card
+                key={card.id}
+                programUniqueId={card.id}
+                locale={props.locale}
+                cardTitle={card.title}
+                viewMoreLessCaption={card.dropdownText}
+              >
+                <div
+                  className="bg-deep-blue-60d"
+                  data-cy="most-requested-section"
+                >
+                  <MostReqTasks
+                    taskListMR={mostReq}
+                    dataCy="most-requested"
+                    openModal={openModal}
+                  />
+                </div>
+                <div
+                  className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
+                  data-cy="task-list"
+                >
+                  {tasks.map((taskList, index) => {
+                    return (
+                      <div className="" key={index} data-cy="Task">
+                        <BenefitTasks
+                          taskList={taskList}
+                          dataCy="task-group-list"
+                          openModal={openModal}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+              </Card>
+            )
+          })}
+        </>
+      )}
+
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.isOpen}
