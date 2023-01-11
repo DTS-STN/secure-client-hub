@@ -29,7 +29,7 @@ const Dashboard = ({ sections }) => {
       </div>
     )
   }
-  return sectionsArr.map((x) => x)
+  return sectionsArr
 }
 
 export default Dashboard

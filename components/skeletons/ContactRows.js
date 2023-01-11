@@ -32,7 +32,7 @@ const ContactRows = ({ rows }) => {
   }
   return (
     <>
-      {rowArr.map((x) => x)}
+      {rowArr}
       <div className="mt-4 border-t-2 pb-6" />
     </>
   )

@@ -13,7 +13,7 @@ import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React, { useState } from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
-import Dashboard from '../components/skeletons/Dashboard'
+import Skeleton from '../components/skeletons/Dashboard'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -42,7 +42,7 @@ export default function MyDashboard(props) {
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       {skeleton ? (
-        <Dashboard sections={3} />
+        <Skeleton sections={3} />
       ) : (
         <>
           {props.content.cards.map((card) => {

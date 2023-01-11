@@ -16,7 +16,7 @@ const ContactRows = ({ rows }) => {
       </div>
     )
   }
-  return <>{rowArr.map((x) => x)}</>
+  return <>{rowArr}</>
 }
 
 export default ContactRows

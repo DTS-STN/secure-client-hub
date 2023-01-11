@@ -22,7 +22,7 @@ const LinkList = ({ links }) => {
         <div className="grid lg:grid-cols-12 md:grid-cols-6 sm:grid-cols-4 gap-2">
           <div className="h-6 bg-slate-300 col-span-3 rounded w-full mx-2" />
         </div>
-        <div className="space-y-3">{linksArr.map((x) => x)}</div>
+        <div className="space-y-3">{linksArr}</div>
       </div>
     </div>
   )
