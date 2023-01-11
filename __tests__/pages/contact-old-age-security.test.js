@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactOldAgeSecurity, {
   getStaticProps,
-} from '../../pages/contact-old-age-security'
+} from '../../pages/contact-us/contact-old-age-security'
 
 expect.extend(toHaveNoViolations)
 
@@ -138,7 +138,7 @@ describe('OAS Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-old-age-security',
+        langToggleLink: '/fr/contact-us/contact-old-age-security',
         locale: 'en',
         meta: {
           data_en: {
