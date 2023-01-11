@@ -6,7 +6,7 @@ function EIContactUsHeader() {
 }
 
 function ValidateEIContactUsUrl() {
-  cy.url().should('contains', '/contact-employment-insurance')
+  cy.url().should('contains', '/contact-us/contact-employment-insurance')
 }
 
 function ValidateEIContactUsHeaderEN() {
@@ -16,7 +16,7 @@ function ValidateEIContactUsHeaderEN() {
 }
 
 function ValidateEIContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contact-employment-insurance')
+  cy.url().should('contains', '/fr/contact-us/contact-employment-insurance')
 }
 
 function ValidateEIContactUsHeaderFR() {
