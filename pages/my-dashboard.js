@@ -14,9 +14,8 @@ import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
-import React, { useState } from 'react'
+import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
-import Skeleton from '../components/skeletons/Dashboard'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
