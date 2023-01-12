@@ -83,6 +83,16 @@ jobs:
           CI: true
           NODE_ENV: production
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
+          NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+          NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
+          CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
+          CLIENT_ID: ${{secrets.CLIENT_ID}}
+          AUTH_ECAS_BASE_URL: ${{secrets.AUTH_ECAS_BASE_URL}}
+          AUTH_ECAS_WELL_KNOWN: ${{secrets.AUTH_ECAS_WELL_KNOWN}}
+          AUTH_ECAS_AUTHORIZATION: ${{secrets.AUTH_ECAS_AUTHORIZATION}}
+          AUTH_ECAS_USERINFO: ${{secrets.AUTH_ECAS_USERINFO}}
+          AUTH_PRIVATE: ${{secrets.AUTH_PRIVATE}}
+          AUTH_ECAS_GLOBAL_LOGOUT_URL: ${{secrets.AUTH_ECAS_GLOBAL_LOGOUT_URL}}
           AUTH_DISABLED: true
         with:
           install: false
