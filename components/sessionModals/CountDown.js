@@ -69,7 +69,7 @@ const Countdown = (props) => {
         </div>
         <div className="flex-auto">
           <p className="mr-6">
-            You have been active for a while so we will sign you out to keep
+            You have been inactive for a while so we will sign you out to keep
             your information secure.
           </p>
           <p className="font-bold mr-6">
