@@ -19,11 +19,16 @@ export default function ContactOldAgeSecurity(props) {
   return (
     <div
       id="homeContent"
-      data-testid="homeContent-test"
+      data-testid="contactOAS-test"
       data-cy="oasContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
-      <div className="py-5" />
+      <div
+        className="py-5"
+        data-testid={`${
+          props.pageContent.items.length > 0 && 'tableOfContents-test'
+        }`}
+      />
       <TableContent
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
@@ -82,11 +87,11 @@ export async function getStaticProps({ res, locale }) {
 
   const breadCrumbItems =
     locale === 'en'
-      ? pageContent.en.breadcrumb.map(({ link, text }) => {
+      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + link }
         })
-      : pageContent.fr.breadcrumb.map(({ link, text }) => {
-          return { text, link: '/' + link }
+      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link }
         })
 
   // const breadCrumbItems = [
@@ -109,7 +114,8 @@ export async function getStaticProps({ res, locale }) {
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Old Age Security',
+      title:
+        'Mon dossier Service Canada - Communiquer avec la Sécurité de la vieillesse',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
