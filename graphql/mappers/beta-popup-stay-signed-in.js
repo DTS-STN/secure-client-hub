@@ -1,7 +1,7 @@
 import clientQuery from '../client'
 
 export async function getBetaPopupStaySignedInContent() {
-  const query = require('../queries/beta-stay-signed-in.graphql')
+  const query = require('../queries/beta-popup-stay-signed-in.graphql')
   const res = await clientQuery(query)
 
   const content = res.data.schContentv1ByPath.item || {}
@@ -11,12 +11,16 @@ export async function getBetaPopupStaySignedInContent() {
       signOutLinkText: '',
       staySignedInLinktext: '',
       scContent: [],
+      scMinutesAnd: 'minutes and',
+      scSeconds: 'seconds',
     },
     fr: {
       scHeading: '',
       signOutLinkText: '',
       staySignedInLinktext: '',
       scContent: [],
+      scMinutesAnd: 'minutes et',
+      scSeconds: 'secondes',
     },
   }
 
@@ -32,6 +36,8 @@ export async function getBetaPopupStaySignedInContent() {
       scContent: content.scContentEn.json[0].content.map(
         (paragraph) => paragraph.value
       ),
+      scMinutesAnd: 'minutes and',
+      scSeconds: 'seconds',
     },
     fr: {
       scHeading: content.scHeadingFr,
@@ -44,6 +50,8 @@ export async function getBetaPopupStaySignedInContent() {
       scContent: content.scContentFr.json[0].content.map(
         (paragraph) => paragraph.value
       ),
+      scMinutesAnd: 'minutes et',
+      scSeconds: 'secondes',
     },
   }
   return mappedPopupStaySignedIn

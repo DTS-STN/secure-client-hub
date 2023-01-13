@@ -1,7 +1,7 @@
 import clientQuery from '../client'
 
 export async function getBetaPopupYouHaveBeenSignedOut() {
-  const query = require('../queries/beta-you-have-been-signed-out.graphql')
+  const query = require('../queries/beta-popup-you-have-been-signed-out.graphql')
   const res = await clientQuery(query)
 
   const content = res.data.schContentv1ByPath.item || {}

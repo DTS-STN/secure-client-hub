@@ -71,8 +71,7 @@ const Countdown = (props) => {
           <p className="mr-6">{props.scContent[0]}</p>
           <p className="font-bold mr-6">
             {ready &&
-              `${props.scContent[1]} ${minutes} minutes and ${seconds}
-            seconds.`}
+              `${props.scContent[1]} ${minutes} ${props.scMinutesAnd} ${seconds} ${props.scSeconds}.`}
           </p>
         </div>
       </div>
