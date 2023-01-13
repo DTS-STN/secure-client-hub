@@ -88,7 +88,7 @@ export default function MyDashboard(props) {
         )
       })}
 
-      <Button
+      {/* <Button
         text="Countdown"
         styling="primary"
         className="mr-3  m-5"
@@ -120,7 +120,7 @@ export default function MyDashboard(props) {
             />
           )
         }
-      />
+      /> */}
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
