@@ -9,7 +9,9 @@ import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaPopupStaySignedInContent } from '../graphql/mappers/beta-stay-signed-in'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getBetaPopupYouHaveBeenSignedOut } from '../graphql/mappers/beta-you-have-been-signed-out'
 import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
@@ -85,7 +87,6 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-
 
       {/* <Button
         text="Countdown"
@@ -164,6 +165,23 @@ export async function getServerSideProps({ res, locale }) {
     // res.statusCode = 500
     throw error
   })
+
+  const popupStaySignedIn = await getBetaPopupStaySignedInContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
+
+  const popupYouHaveBeenSignedout =
+    await getBetaPopupYouHaveBeenSignedOut().catch((error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    })
+
+  console.log(popupYouHaveBeenSignedout, 'popupYouHaveBeenSignedout')
 
   /*
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
