@@ -88,7 +88,7 @@ export default function MyDashboard(props) {
         )
       })}
 
-      {/* <Button
+      <Button
         text="Countdown"
         styling="primary"
         className="mr-3  m-5"
@@ -100,6 +100,7 @@ export default function MyDashboard(props) {
               onStay={() => console.log('Stay Signed In Clicked')}
               id="CountDown"
               deadline="January, 31, 2023"
+              {...props.popupStaySignedIn}
             />
           )
         }
@@ -115,10 +116,11 @@ export default function MyDashboard(props) {
               closeModal={closeDemoModal}
               onContinue={() => console.log('Continue Clicked')}
               id="SignedOut"
+              {...props.popupYouHaveBeenSignedout}
             />
           )
         }
-      /> */}
+      />
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -181,8 +183,6 @@ export async function getServerSideProps({ res, locale }) {
       throw error
     })
 
-  console.log(popupYouHaveBeenSignedout, 'popupYouHaveBeenSignedout')
-
   /*
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
    * Comment "getBetaPopupExitContent()" block of code above.
@@ -223,6 +223,12 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      popupStaySignedIn:
+        locale === 'en' ? popupStaySignedIn.en : popupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? popupYouHaveBeenSignedout.en
+          : popupYouHaveBeenSignedout.fr,
     },
   }
 }

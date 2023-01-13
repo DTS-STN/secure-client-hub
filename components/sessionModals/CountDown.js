@@ -47,7 +47,7 @@ const Countdown = (props) => {
           role="heading"
           aria-level="1"
         >
-          Stay signed in?
+          {props.scHeading}
         </div>
         <button
           data-cy="x-button"
@@ -68,13 +68,10 @@ const Countdown = (props) => {
           />
         </div>
         <div className="flex-auto">
-          <p className="mr-6">
-            You have been inactive for a while so we will sign you out to keep
-            your information secure.
-          </p>
+          <p className="mr-6">{props.scContent[0]}</p>
           <p className="font-bold mr-6">
             {ready &&
-              `You will be signed out in ${minutes} minutes and ${seconds}
+              `${props.scContent[1]} ${minutes} minutes and ${seconds}
             seconds.`}
           </p>
         </div>
@@ -82,13 +79,13 @@ const Countdown = (props) => {
 
       <div className="flex pt-10">
         <Button
-          text="Sign Out"
+          text={props.signOutLinkText}
           onClick={props.onSignOut}
           styling="secondary"
           className="mr-3"
         />
         <Button
-          text="Stay Signed In"
+          text={props.staySignedInLinktext}
           onClick={props.onStay}
           styling="primary"
           className="mr-3"
