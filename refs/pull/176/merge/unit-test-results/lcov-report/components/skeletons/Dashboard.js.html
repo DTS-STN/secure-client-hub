@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/MetaData.js</title>
+    <title>Code coverage report for components/skeletons/Dashboard.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> MetaData.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/skeletons</a> Dashboard.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -90,22 +90,18 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,33 +113,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
-import Head from 'next/head'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Dashboard = ({ sections }) =&gt; {
+  let sectionsArr = []
+  for (let i = 1; i &lt;= sections; i++) {
+    sectionsArr.push(
+      &lt;div
+        className="animate-pulse border rounded border-gray-300 shadow my-6"
+        data-testid="dashboard-skeleton"
+        key={sectionsArr.length}
+      &gt;
+        &lt;h2 className="py-4 md:py-9 md:mt-2 px-3 sm:px-8 md:px-15 sm:px-6 text-4xl font-display font-bold"&gt;
+          &lt;div className="grid grid-cols-12 gap-2"&gt;
+            &lt;div className="sm:col-span-12 md:col-span-6 lg:col-spa-3 flex flex-row"&gt;
+              &lt;div className="h-12 bg-slate-300 rounded w-full" /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/h2&gt;
 &nbsp;
-export default function MetaData(props) {
-  const d = props.language === 'en' ? props.data.data_en : props.data.data_fr
-&nbsp;
-  return (
-    &lt;&gt;
-      &lt;Head&gt;
-        &lt;title&gt;{d.title}&lt;/title&gt;
-        &lt;meta charSet="utf-8" /&gt;
-        &lt;meta name="description" content={d.desc} /&gt;
-        &lt;meta name="author" content={d.author} /&gt;
-        &lt;meta name="keywords" content={d.keywords} /&gt;
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
-        &lt;link rel="icon" href="/favicon.ico" /&gt;
-      &lt;/Head&gt;
-    &lt;/&gt;
-  )
-}
-&nbsp;
-/* istanbul ignore next */
-export async function getStaticProps({ locale }) {
-  return {
-    props: { locale },
+        &lt;div className="flex flex-row sm:items-center pb-6 lg:px-15 md:px-15 sm:px-6"&gt;
+          &lt;div className="flex-none"&gt;
+            &lt;div className="rounded-full bg-slate-200 h-12 w-12" /&gt;
+          &lt;/div&gt;
+          &lt;div className="grid lg:grid-cols-12 md:grid-cols-12 xs:grid-cols-6 gap-2 flex-auto"&gt;
+            &lt;div className="h-4 bg-slate-300 col-span-3 rounded w-full mx-2" /&gt;
+            &lt;div className="h-4 bg-slate-300 col-span-6 rounded w-full mx-2" /&gt;
+            &lt;div className="h-4 bg-slate-300 col-span-1 rounded w-full mx-2" /&gt;
+            &lt;div className="h-4 bg-slate-300 col-span-2 rounded w-full mx-2" /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
   }
+  return sectionsArr
 }
+&nbsp;
+export default Dashboard
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -153,14 +177,14 @@ export async function getStaticProps({ locale }) {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-01-13T13:30:44.327Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     
