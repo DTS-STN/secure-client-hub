@@ -1,0 +1,27 @@
+[
+  {
+    "Link": "Telephone",
+    "URL": "ei-contact-telephone",
+    "RowName": [
+      "Before you call us",
+      "Telephone number",
+      "Hours of operation",
+      "Wait times",
+      "Hours for automated service"
+    ]
+  },
+  {
+    "Link": "Callback",
+    "URL": "ei-contact-callback",
+    "RowName": ["Before you contact us", "Wait times for callback"]
+  },
+  {
+    "Link": "In person at a Service Canada Centre",
+    "URL": "ei-contact-in-person",
+    "RowName": ["Before you come in", "Hours of operation"]
+  },
+  {
+    "Link": "Mail",
+    "URL": "mail"
+  }
+]

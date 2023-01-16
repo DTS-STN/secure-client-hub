@@ -1,5 +1,8 @@
+import CountDown from '../components/sessionModals/CountDown'
+import SignedOut from '../components/sessionModals/SignedOut'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Heading } from '@dts-stn/service-canada-design-system'
+import { Heading, Button } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
@@ -23,6 +26,16 @@ export default function MyDashboard(props) {
     activeLink: '/',
   })
 
+  const [demoModalBody, setDemoModalBody] = useState(null)
+
+  function demoContent(content) {
+    setDemoModalBody(content)
+  }
+
+  function closeDemoModal() {
+    setDemoModalBody(null)
+  }
+
   function openModal(link) {
     setOpenModalWithLink({ isOpen: true, activeLink: link })
   }
@@ -34,6 +47,7 @@ export default function MyDashboard(props) {
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
+
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -71,6 +85,39 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
+
+      {/* <Button
+        text="Countdown"
+        styling="primary"
+        className="mr-3  m-5"
+        onClick={() =>
+          demoContent(
+            <CountDown
+              closeModal={closeDemoModal}
+              onSignOut={() => console.log('Sign Out Clicked')}
+              onStay={() => console.log('Stay Signed In Clicked')}
+              id="CountDown"
+              deadline="January, 31, 2023"
+            />
+          )
+        }
+      />
+
+      <Button
+        text="Signed Out"
+        styling="primary"
+        className="mr-3 m-5"
+        onClick={() =>
+          demoContent(
+            <SignedOut
+              closeModal={closeDemoModal}
+              onContinue={() => console.log('Continue Clicked')}
+              id="SignedOut"
+            />
+          )
+        }
+      /> */}
+
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.isOpen}
@@ -87,6 +134,14 @@ export default function MyDashboard(props) {
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
         />
+      </Modal>
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        isOpen={demoModalBody === null ? false : true}
+        onRequestClose={closeModal}
+        contentLabel={'Demo Modal'}
+      >
+        {demoModalBody}
       </Modal>
     </div>
   )

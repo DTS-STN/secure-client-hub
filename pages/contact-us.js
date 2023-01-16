@@ -16,8 +16,7 @@ export default function ContactLanding(props) {
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
-
-      <ul className="list-disc">
+      <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
@@ -25,7 +24,7 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={link.linkDestination}
+                href={'contact-us' + link.linkDestination}
               />
               <p className="text-xl">{link.linkDescription}</p>
             </li>
