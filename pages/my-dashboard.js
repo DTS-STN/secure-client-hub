@@ -45,7 +45,6 @@ export default function MyDashboard(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
-  console.log(props.authModals)
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
