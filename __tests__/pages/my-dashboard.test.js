@@ -45,6 +45,22 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/beta-popup-you-have-been-signed-out', () => ({
+  getBetaPopupYouHaveBeenSignedOut: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-stay-signed-in', () => ({
+  getBetaPopupStaySignedInContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })
@@ -113,6 +129,8 @@ describe('My Dashboard page', () => {
         },
         popupContent: {},
         popupContentNA: {},
+        popupYouHaveBeenSignedout: {},
+        popupStaySignedIn: {},
       },
     })
   })
