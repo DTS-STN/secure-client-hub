@@ -7,6 +7,37 @@ const builddate = process.env.BUILD_DATE
     process.env.BUILD_DATE.substring(6, 8)
   : 'DATE-NA'
 
+const REWRITES = [
+  {
+    source: '/contactez-nous',
+    destination: '/contact-us',
+  },
+  {
+    source: '/mon-tableau-de-bord',
+    destination: '/my-dashboard',
+  },
+  {
+    source: '/profil',
+    destination: '/profile',
+  },
+  {
+    source: '/parametres-securite',
+    destination: '/security-settings',
+  },
+  {
+    source: '/contactez-nous/communiquer-assurance-emploi',
+    destination: '/contact-us/contact-employment-insurance',
+  },
+  {
+    source: '/contactez-nous/communiquer-securite-vieillesse',
+    destination: '/contact-us/contact-old-age-security',
+  },
+  {
+    source: '/contactez-nous/communiquer-regime-pensions-canada',
+    destination: '/contact-us/contact-canada-pension-plan',
+  },
+]
+
 const securityHeaders = [
   {
     key: 'X-DNS-Prefetch-Control',
@@ -53,10 +84,11 @@ module.exports = {
   // i18n setup
   //
   i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'en',
-    localeDetection: true,
+    locales: ['default', 'en', 'fr'],
+    defaultLocale: 'default',
+    localeDetection: false,
   },
+  trailingSlash: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //GraphQL loader for .graphql files
     config.module.rules.push({
@@ -95,5 +127,9 @@ module.exports = {
         headers: securityHeaders,
       },
     ]
+  },
+  //Redirect French URLs
+  async rewrites() {
+    return REWRITES
   },
 }

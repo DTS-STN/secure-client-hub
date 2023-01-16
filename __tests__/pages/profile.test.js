@@ -57,6 +57,7 @@ describe('My Profile page', () => {
     cards: [
       { id: 'test', title: 'title', lists: { tasks: [{ title: 'test' }] } },
     ],
+    lookingFor: { title: 'title', subText: 'subText', link: 'link' },
     exitBeta: { title: 'title', link: '#' },
   }
   const popupContent = {}

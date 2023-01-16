@@ -8,9 +8,11 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
+import { useRouter } from 'next/router'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
+  const router = useRouter()
 
   return (
     <div id="contactContent" data-testid="contactContent-test">
@@ -25,7 +27,7 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={'contact-us' + link.linkDestination}
+                href={link.linkDestination.split('/').pop()}
               />
               <p className="text-xl">{link.linkDescription}</p>
             </li>
@@ -65,16 +67,18 @@ export async function getStaticProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/contact-us' : '/contact-us'
+  const langToggleLink = locale === 'en' ? '/fr/contactez-nous' : '/contact-us'
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   /* Place-holder Meta Data Props */
   const meta = {

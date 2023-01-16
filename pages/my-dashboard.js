@@ -177,7 +177,8 @@ export async function getServerSideProps({ res, locale }) {
   )
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
+  const langToggleLink =
+    locale === 'en' ? '/fr/mon-tableau-de-bord' : '/my-dashboard'
 
   /* Place-holder Meta Data Props */
   const meta = {

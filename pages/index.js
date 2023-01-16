@@ -4,7 +4,7 @@ import MetaData from '../components/MetaData'
 export default function Index(props) {
   return (
     <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">
-      <MetaData language={props.locale} data={props.meta}></MetaData>
+      <MetaData language="en" data={props.meta}></MetaData>
       <div className="flex flex-col justify-center items-center m-auto">
         <div className="z-10 bg-white h-auto w-[18.75rem] xl:w-[31.25rem]">
           <h1 className="sr-only">service.canada.ca-digital-center</h1>
@@ -21,7 +21,7 @@ export default function Index(props) {
           </div>
           <div className="flex w-max container py-11 mx-auto font-display">
             <div className="grid grid-cols-2 gap-2 xl:gap-6">
-              <Link href="/my-dashboard">
+              <Link href="/en/my-dashboard">
                 <a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
                   // onClick={props.onClick}
@@ -33,7 +33,7 @@ export default function Index(props) {
                   English
                 </a>
               </Link>
-              <Link href="/fr/my-dashboard">
+              <Link href="/fr/mon-tableau-de-bord">
                 <a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
                   // onClick={props.onClick}

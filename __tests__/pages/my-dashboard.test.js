@@ -96,7 +96,7 @@ describe('My Dashboard page', () => {
       props: {
         content: {},
         bannerContent: {},
-        langToggleLink: '/fr/my-dashboard',
+        langToggleLink: '/fr/mon-tableau-de-bord',
         locale: 'en',
         meta: {
           data_en: {

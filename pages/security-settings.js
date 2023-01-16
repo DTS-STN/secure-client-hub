@@ -80,16 +80,18 @@ export async function getStaticProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/security-settings' : '/security-settings'
+    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   /* Place-holder Meta Data Props */
   const meta = {
