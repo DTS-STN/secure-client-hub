@@ -63,31 +63,30 @@ describe('My Dashboard page', () => {
       asPath: '/',
     }))
   })
-  // Temporarily removed for loading skeleton demo
-  /////////////////////////////////////////////////
-  // it('should render the page', () => {
-  //   render(
-  //     <MyDashboard
-  //       locale="en"
-  //       content={content}
-  //       popupContentNA={popupContent}
-  //     />
-  //   )
-  //   const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
-  //   expect(myDashboardDiv).toBeInTheDocument()
-  // })
 
-  // it('should contain a card', () => {
-  //   render(
-  //     <MyDashboard
-  //       locale="en"
-  //       content={content}
-  //       popupContentNA={popupContent}
-  //     />
-  //   )
-  //   const testCard = screen.getByTestId('mock-card')
-  //   expect(testCard).toBeInTheDocument()
-  // })
+  it('should render the page', () => {
+    render(
+      <MyDashboard
+        locale="en"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
+    const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
+    expect(myDashboardDiv).toBeInTheDocument()
+  })
+
+  it('should contain a card', () => {
+    render(
+      <MyDashboard
+        locale="en"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
+    const testCard = screen.getByTestId('mock-card')
+    expect(testCard).toBeInTheDocument()
+  })
 
   it('Test getServerSideProps', async () => {
     const props = await getServerSideProps({ locale: 'en' })
