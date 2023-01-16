@@ -4,7 +4,6 @@ export async function getAuthModalsContent() {
   const queryAuthModals = require('../queries/auth-modals.graphql')
   const authModals = await clientQuery(queryAuthModals)
 
-  console.log(authModals)
   const resSignedOutContent = authModals.data.youHaveBeenSignedOut.item || {}
 
   const resStaySignedIn = authModals.data.staySignedIn.item || {}
@@ -34,7 +33,6 @@ export async function getAuthModalsContent() {
     },
   }
 
-  // const mappedPopupStaySignedIn = resStaySignedIn
   const mappedPopupStaySignedIn = {
     en: {
       bannerHeading: resStaySignedIn.scHeadingEn,
