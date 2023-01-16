@@ -45,18 +45,13 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
-jest.mock('../../graphql/mappers/beta-popup-you-have-been-signed-out', () => ({
-  getBetaPopupYouHaveBeenSignedOut: () => {
+jest.mock('../../graphql/mappers/auth-modals', () => ({
+  getAuthModalsContent: () => {
     return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-stay-signed-in', () => ({
-  getBetaPopupStaySignedInContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
+      resolve({
+        mappedPopupStaySignedIn: { en: {}, fr: {} },
+        mappedPopupSignedOut: { en: {}, fr: {} },
+      })
     })
   },
 }))

@@ -9,9 +9,8 @@ import Card from '../components/Card'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupStaySignedInContent } from '../graphql/mappers/beta-popup-stay-signed-in'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getBetaPopupYouHaveBeenSignedOut } from '../graphql/mappers/beta-popup-you-have-been-signed-out'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
@@ -46,6 +45,7 @@ export default function MyDashboard(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
+  console.log(props.authModals)
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
@@ -88,7 +88,7 @@ export default function MyDashboard(props) {
         )
       })}
 
-      {/* <Button
+      <Button
         text="Countdown"
         styling="primary"
         className="mr-3  m-5"
@@ -120,7 +120,7 @@ export default function MyDashboard(props) {
             />
           )
         }
-      /> */}
+      />
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -168,21 +168,6 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
 
-  const popupStaySignedIn = await getBetaPopupStaySignedInContent().catch(
-    (error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    }
-  )
-
-  const popupYouHaveBeenSignedout =
-    await getBetaPopupYouHaveBeenSignedOut().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    })
-
   /*
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
    * Comment "getBetaPopupExitContent()" block of code above.
@@ -194,6 +179,12 @@ export async function getServerSideProps({ res, locale }) {
       throw error
     }
   )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
@@ -224,11 +215,13 @@ export async function getServerSideProps({ res, locale }) {
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       popupStaySignedIn:
-        locale === 'en' ? popupStaySignedIn.en : popupStaySignedIn.fr,
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         locale === 'en'
-          ? popupYouHaveBeenSignedout.en
-          : popupYouHaveBeenSignedout.fr,
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

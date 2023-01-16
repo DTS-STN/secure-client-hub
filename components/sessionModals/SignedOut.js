@@ -17,7 +17,7 @@ const SignedOut = (props) => {
           role="heading"
           aria-level="1"
         >
-          {props.scHeading}
+          {props.bannerHeading}
         </div>
         <button
           data-cy="x-button"
@@ -39,7 +39,7 @@ const SignedOut = (props) => {
         </div>
 
         <div className="flex-auto">
-          <p className="mr-6">{props.scContent[0]}</p>
+          <p className="mr-6">{props.bannerText}</p>
         </div>
       </div>
 

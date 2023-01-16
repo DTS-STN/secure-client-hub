@@ -47,7 +47,7 @@ const Countdown = (props) => {
           role="heading"
           aria-level="1"
         >
-          {props.scHeading}
+          {props.bannerHeading}
         </div>
         <button
           data-cy="x-button"
@@ -68,10 +68,10 @@ const Countdown = (props) => {
           />
         </div>
         <div className="flex-auto">
-          <p className="mr-6">{props.scContent[0]}</p>
+          <p className="mr-6">{props.bannerContent[0]}</p>
           <p className="font-bold mr-6">
             {ready &&
-              `${props.scContent[1]} ${minutes} ${props.scMinutesAnd} ${seconds} ${props.scSeconds}.`}
+              `${props.bannerContent[1]} ${minutes} ${props.bannerMinutesAnd} ${seconds} ${props.bannerSeconds}.`}
           </p>
         </div>
       </div>

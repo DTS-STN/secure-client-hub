@@ -7,20 +7,20 @@ expect.extend(toHaveNoViolations)
 
 const fallbackContent = {
   en: {
-    scHeading: '',
+    bannerHeading: '',
     signOutLinkText: '',
     staySignedInLinktext: '',
-    scContent: [],
-    scMinutesAnd: 'minutes and',
-    scSeconds: 'seconds',
+    bannerContent: '',
+    bannerMinutesAnd: 'minutes and',
+    bannerSeconds: 'seconds',
   },
   fr: {
-    scHeading: '',
+    bannerHeading: '',
     signOutLinkText: '',
     staySignedInLinktext: '',
-    scContent: [],
-    scMinutesAnd: 'minutes et',
-    scSeconds: 'secondes',
+    bannerContent: '',
+    bannerMinutesAnd: 'minutes et',
+    bannerSeconds: 'secondes',
   },
 }
 
