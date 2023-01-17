@@ -1,4 +1,4 @@
-# Secure Client Hub
+# Secure Client Hub.
 
 Secure Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
 
