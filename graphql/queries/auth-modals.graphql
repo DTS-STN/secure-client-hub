@@ -1,0 +1,50 @@
+query {
+  staySignedIn: schContentv1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/content/stay-signed-in"
+  ) {
+    item {
+      _path
+      scId
+      scHeadingEn
+      scHeadingFr
+      
+      scContentEn{
+          json
+      }
+      scContentFr{
+          json
+      }
+            scFragments{
+          ... on SCHTaskv1Model{
+              scId
+              scLinkTextEn
+              scLinkTextFr
+          }
+      }
+    }
+  }
+  youHaveBeenSignedOut: schContentv1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/content/you-have-been-signed-out"
+  ) {
+    item {
+      _path
+      scId
+      scHeadingEn
+      scHeadingFr
+      
+      scContentEn{
+          json
+      }
+      scContentFr{
+          json
+      }
+            scFragments{
+          ... on SCHTaskv1Model{
+              scId
+              scLinkTextEn
+              scLinkTextFr
+          }
+      }
+    }
+  }
+}
