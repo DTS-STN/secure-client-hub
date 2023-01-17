@@ -96,6 +96,7 @@ export default function Layout(props) {
         )}
       </main>
       <div id="modal-root"></div>
+
       <Footer
         lang={props.locale}
         brandLinks={[
@@ -115,6 +116,7 @@ export default function Layout(props) {
         id="page-footer"
         isAuthenticated={true}
       />
+      <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
 }
