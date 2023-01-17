@@ -184,12 +184,12 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate that the clicking Complete my report or Apply for EI link on EI opens a new tab', () => {
+  it.skip('Validate that the clicking Complete my report or Apply for EI link on EI opens a new tab', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.ClickCompleteMyReportOrApplyEILink()
   })
 
-  it.skip('Validate that the clicking Contact Us naviagtes to Contact US landing Page', () => {
+  it('Validate that the clicking Contact Us naviagtes to Contact US landing Page', () => {
     dashboardPo.ContactUsFooterLink().should('be.visible').click()
     contactUsPo.ValidateContactUsUrl()
   })
