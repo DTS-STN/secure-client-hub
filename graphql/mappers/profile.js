@@ -1,5 +1,6 @@
 import { getFragmentQueryDocument } from '@apollo/client/utilities'
 import clientQuery from '../client'
+import { buildLink } from '../../lib/links'
 
 export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
@@ -46,7 +47,7 @@ export async function getProfileContent() {
                 return {
                   title: list.scLinkTextEn,
                   areaLabel: list.scLinkTextAssistiveEn,
-                  link: list.scDestinationURLEn,
+                  link: buildLink(list.schURLType, list.scDestinationURLEn),
                   icon: list.scIconCSS,
                   betaPopUp: list.schBetaPopUp,
                 }
@@ -95,7 +96,7 @@ export async function getProfileContent() {
                 return {
                   title: list.scLinkTextFr,
                   areaLabel: list.scLinkTextAssistiveFr,
-                  link: list.scDestinationURLFr,
+                  link: buildLink(list.schURLType, list.scDestinationURLFr),
                   icon: list.scIconCSS,
                   betaPopUp: list.schBetaPopUp,
                 }

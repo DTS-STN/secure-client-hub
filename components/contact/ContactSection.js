@@ -5,16 +5,16 @@ export default function ContactSection({ title, intro, id, details }) {
   return (
     <div
       data-cy="sections"
-      className="max-w-3xl"
+      className="max-w-3xl mt-4"
       name={id}
       id={id}
       data-testid="contactSection-test"
     >
-      <h2 className="py-4 md:pt-9 md:mt-2 text-4xl font-display font-bold">
+      <h2 className="py-2 text-32px md:py-6 md:text-4xl font-display font-bold">
         {title}
       </h2>
       <div
-        className="list-disc [&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc"
+        className="list-disc [&_ul]:list-outside [&_ul]:pl-4 [&_ul]:ml-4 [&_ul]:list-disc font-body text-xl"
         data-cy="section1"
       >
         <Markdown>{intro}</Markdown>

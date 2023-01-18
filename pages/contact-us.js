@@ -29,7 +29,7 @@ export default function ContactLanding(props) {
                 text={link.linkTitle}
                 href={link.linkDestination.split('/').pop()}
               />
-              <p className="text-xl">{link.linkDescription}</p>
+              <p className="text-xl font-body">{link.linkDescription}</p>
             </li>
           )
         })}

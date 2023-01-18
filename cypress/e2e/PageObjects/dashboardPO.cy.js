@@ -167,7 +167,7 @@ function CloseModalButton() {
 }
 
 function ContactUsFooterLink() {
-  return cy.get("[data-cy ='footerLink0']")
+  return cy.get('[data-cy="footerContactUsLink"]')
 }
 
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {

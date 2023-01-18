@@ -10,6 +10,7 @@ import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
@@ -86,7 +87,7 @@ export default function MyDashboard(props) {
         )
       })}
 
-      {/* <Button
+      <Button
         text="Countdown"
         styling="primary"
         className="mr-3  m-5"
@@ -98,6 +99,7 @@ export default function MyDashboard(props) {
               onStay={() => console.log('Stay Signed In Clicked')}
               id="CountDown"
               deadline="January, 31, 2023"
+              {...props.popupStaySignedIn}
             />
           )
         }
@@ -113,10 +115,11 @@ export default function MyDashboard(props) {
               closeModal={closeDemoModal}
               onContinue={() => console.log('Continue Clicked')}
               id="SignedOut"
+              {...props.popupYouHaveBeenSignedout}
             />
           )
         }
-      /> */}
+      />
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -176,6 +179,12 @@ export async function getServerSideProps({ res, locale }) {
     }
   )
 
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/mon-tableau-de-bord' : '/my-dashboard'
@@ -205,6 +214,14 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

@@ -17,7 +17,7 @@ const SignedOut = (props) => {
           role="heading"
           aria-level="1"
         >
-          You have been signed out
+          {props.bannerHeading}
         </div>
         <button
           data-cy="x-button"
@@ -39,10 +39,7 @@ const SignedOut = (props) => {
         </div>
 
         <div className="flex-auto">
-          <p className="mr-6">
-            You have not been active for a while, so we signed you out to keep
-            your information secure. You are now back on the sign in page.
-          </p>
+          <p className="mr-6">{props.bannerText}</p>
         </div>
       </div>
 
