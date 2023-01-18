@@ -1,6 +1,6 @@
 import CountDown from '../components/sessionModals/CountDown'
 import SignedOut from '../components/sessionModals/SignedOut'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Heading, Button } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -26,6 +26,11 @@ export default function MyDashboard(props) {
     isOpen: false,
     activeLink: '/',
   })
+  const currentDate = new Date()
+  const [expires, setExpires] = useState({
+    warning: new Date(currentDate.getTime() + 1 * 10 * 1000),
+    logout: new Date(currentDate.getTime() + 2 * 10 * 1000),
+  })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
 
@@ -44,6 +49,17 @@ export default function MyDashboard(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
+
+  useEffect(() => {
+    const id = setInterval(function () {
+      if (new Date() >= expires.warning) {
+        demoContent(
+          new Date() >= expires.logout ? <SignedOut /> : <CountDown />
+        )
+      } else return
+    }, 1000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
