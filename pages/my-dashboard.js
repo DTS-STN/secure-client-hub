@@ -82,7 +82,7 @@ export default function MyDashboard(props) {
       } else return
     }, 1000)
     return () => clearInterval(id)
-  }, [expires])
+  }, [])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
