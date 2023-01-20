@@ -70,4 +70,7 @@ export default NextAuth({
       logger.debug(metadata)
     },
   },
+  pages: {
+    signIn: '/signedout',
+  },
 })
