@@ -21,6 +21,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   },
 }))
 
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
+    })
+  },
+}))
+
 jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   getBetaBannerContent: () => {
     return new Promise(function (resolve, reject) {
