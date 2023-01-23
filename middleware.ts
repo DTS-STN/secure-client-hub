@@ -12,7 +12,7 @@ export async function middleware(req) {
     return
   }
 
-  if (req.nextUrl.pathname !== '/' && req.nextUrl.locale === 'default') {
+  if (req.nextUrl.pathname !== '/' && req.nextUrl.locale === 'und') {
     return NextResponse.redirect(new URL(`/en${req.nextUrl.pathname}`, req.url))
   }
 }

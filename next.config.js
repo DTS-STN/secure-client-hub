@@ -84,8 +84,8 @@ module.exports = {
   // i18n setup
   //
   i18n: {
-    locales: ['default', 'en', 'fr'],
-    defaultLocale: 'default',
+    locales: ['und', 'en', 'fr'],
+    defaultLocale: 'und',
     localeDetection: false,
   },
   trailingSlash: true,
