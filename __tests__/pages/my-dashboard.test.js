@@ -5,7 +5,6 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
 import { getServerSideProps } from '../../pages/my-dashboard'
-
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath
