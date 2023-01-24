@@ -18,7 +18,7 @@ export default function MetaData(props) {
           src="//assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
 dfa8abb35555-staging.min.js"
         ></script>
-        <meta name="dcterms.title" content="Lorem Ipsum Page" />
+        <meta name="dcterms.title" content="My Service Canada Account" />
         <meta name="dcterms.language" content="eng" />
         <meta name="dcterms.creator" content="Service Canada" />
         <meta name="dcterms.accessRights" content="2" />
