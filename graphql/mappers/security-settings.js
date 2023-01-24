@@ -1,5 +1,6 @@
 import en from '../../locales/en'
 import clientQuery from '../client'
+import { buildLink } from '../../lib/links'
 
 export async function getSecuritySettingsContent() {
   const query = require('../queries/security-settings.graphql')
@@ -50,14 +51,20 @@ export async function getSecuritySettingsContent() {
       securityQuestions: {
         linkTitle: {
           text: securityQuestions.scLinkTextEn,
-          link: securityQuestions.scDestinationURLEn,
+          link: buildLink(
+            securityQuestions.schURLType,
+            securityQuestions.scDestinationURLEn
+          ),
         },
         subTitle: securityQuestions.scDescriptionEn.json[0].content[0].value,
       },
       eiAccessCode: {
         linkTitle: {
           text: eiAccessCode.scLinkTextEn,
-          link: eiAccessCode.scDestinationURLEn,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            eiAccessCode.scDestinationURLEn
+          ),
         },
         subTitle: eiAccessCode.scDescriptionEn.json[0].content[0].value,
       },
@@ -79,14 +86,20 @@ export async function getSecuritySettingsContent() {
       securityQuestions: {
         linkTitle: {
           text: securityQuestions.scLinkTextFr,
-          link: securityQuestions.scDestinationURLFr,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            securityQuestions.scDestinationURLFr
+          ),
         },
         subTitle: securityQuestions.scDescriptionFr.json[0].content[0].value,
       },
       eiAccessCode: {
         linkTitle: {
           text: eiAccessCode.scLinkTextFr,
-          link: eiAccessCode.scDestinationURLFr,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            eiAccessCode.scDestinationURLFr
+          ),
         },
         subTitle: eiAccessCode.scDescriptionFr.json[0].content[0].value,
       },

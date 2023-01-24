@@ -40,6 +40,8 @@ export default function Layout(props) {
         ></PhaseBanner>
       )}
       <Header
+        // analyticsTracking
+        dataTestId="topnav"
         id="header"
         lang={props.locale}
         linkPath={props.langToggleLink}
@@ -95,9 +97,22 @@ export default function Layout(props) {
       </main>
       <div id="modal-root"></div>
       <Footer
-        id="page-footer"
         lang={props.locale}
+        brandLinks={[
+          {
+            href: t.footerTermsAndConditionURL,
+            id: 'linkTC',
+            text: t.footerTermsAndCondition,
+          },
+          {
+            href: t.footerPrivacyURL,
+            id: 'linkPR',
+            text: t.footerPrivacy,
+          },
+        ]}
+        contactLink="/contact-us"
         btnLink="/"
+        id="page-footer"
         isAuthenticated={true}
       />
     </>

@@ -1,6 +1,6 @@
 import CountDown from '../components/sessionModals/CountDown'
 import SignedOut from '../components/sessionModals/SignedOut'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Heading, Button } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -10,6 +10,7 @@ import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
@@ -17,6 +18,7 @@ import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import Router from 'next/router'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -25,6 +27,12 @@ export default function MyDashboard(props) {
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,
     activeLink: '/',
+  })
+  const currentDate = new Date()
+  const [expires, setExpires] = useState({
+    warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
+    logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
+    active: false,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
@@ -44,6 +52,38 @@ export default function MyDashboard(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
+
+  useEffect(() => {
+    const id = setInterval(function () {
+      if (new Date() >= expires.warning && expires.active) {
+        demoContent(
+          new Date() >= expires.logout ? (
+            <SignedOut
+              closeModal={closeDemoModal}
+              onContinue={() => Router.push('./')}
+              id="SignedOut"
+              {...props.popupYouHaveBeenSignedout}
+            />
+          ) : (
+            <CountDown
+              closeModal={closeDemoModal}
+              onSignOut={() => Router.push('./')}
+              onStay={() => {
+                setExpires((t) => {
+                  return { ...t, warning: t.logout }
+                })
+                setDemoModalBody(null)
+              }}
+              id="CountDown"
+              deadline={expires.logout}
+              {...props.popupStaySignedIn}
+            />
+          )
+        )
+      } else return
+    }, 1000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
@@ -86,38 +126,6 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-
-      {/* <Button
-        text="Countdown"
-        styling="primary"
-        className="mr-3  m-5"
-        onClick={() =>
-          demoContent(
-            <CountDown
-              closeModal={closeDemoModal}
-              onSignOut={() => console.log('Sign Out Clicked')}
-              onStay={() => console.log('Stay Signed In Clicked')}
-              id="CountDown"
-              deadline="January, 31, 2023"
-            />
-          )
-        }
-      />
-
-      <Button
-        text="Signed Out"
-        styling="primary"
-        className="mr-3 m-5"
-        onClick={() =>
-          demoContent(
-            <SignedOut
-              closeModal={closeDemoModal}
-              onContinue={() => console.log('Continue Clicked')}
-              id="SignedOut"
-            />
-          )
-        }
-      /> */}
 
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -178,6 +186,12 @@ export async function getServerSideProps({ req, res, locale }) {
     }
   )
 
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
 
@@ -206,6 +220,14 @@ export async function getServerSideProps({ req, res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
