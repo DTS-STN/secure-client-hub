@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+!/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem
 
 # debug
 npm-debug.log*
