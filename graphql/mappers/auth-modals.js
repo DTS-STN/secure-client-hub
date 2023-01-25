@@ -1,0 +1,68 @@
+import clientQuery from '../client'
+
+export async function getAuthModalsContent() {
+  const queryAuthModals = require('../queries/auth-modals.graphql')
+  const authModals = await clientQuery(queryAuthModals)
+
+  const resSignedOutContent = authModals.data.youHaveBeenSignedOut.item || {}
+
+  const resStaySignedIn = authModals.data.staySignedIn.item || {}
+
+  const mappedPopupSignedOut = {
+    en: {
+      bannerBoldText: resSignedOutContent.scContentEn.json[0].content[0].value,
+      bannerText: resSignedOutContent.scContentEn.json[0].content[0].value,
+      bannerLink: resSignedOutContent.scFragments[0].scLinkTextEn,
+      bannerLinkHref: resSignedOutContent.scFragments[0].scLinkTextEn,
+      bannerButtonText: resSignedOutContent.scFragments[0].scLinkTextEn,
+      bannerButtonLink:
+        resSignedOutContent.scFragments[0].scDestinationURLEn || '/',
+      icon: resSignedOutContent.scFragments[0].scLinkTextEn,
+      bannerHeading: resSignedOutContent.scHeadingEn,
+    },
+    fr: {
+      bannerBoldText: resSignedOutContent.scContentFr.json[0].content[0].value,
+      bannerText: resSignedOutContent.scContentFr.json[0].content[0].value,
+      bannerLink: resSignedOutContent.scFragments[0].scLinkTextFr,
+      bannerLinkHref: resSignedOutContent.scFragments[0].scLinkTextFr,
+      bannerButtonText: resSignedOutContent.scFragments[0].scLinkTextFr,
+      bannerButtonLink:
+        resSignedOutContent.scFragments[0].scDestinationURLFr || '/',
+      icon: resSignedOutContent.scFragments[0].scLinkTextFr,
+      bannerHeading: resSignedOutContent.scHeadingFr,
+    },
+  }
+
+  const mappedPopupStaySignedIn = {
+    en: {
+      bannerHeading: resStaySignedIn.scHeadingEn,
+      signOutLinkText: resStaySignedIn.scFragments.filter(
+        (fragment) => fragment.scId === 'sign-out'
+      )[0].scLinkTextEn,
+      staySignedInLinktext: resStaySignedIn.scFragments.filter(
+        (fragment) => fragment.scId === 'stay-signed-in'
+      )[0].scLinkTextEn,
+      bannerContent: resStaySignedIn.scContentEn.json[0].content.map(
+        (paragraph) => paragraph.value
+      ),
+      bannerMinutesAnd: 'minutes and',
+      bannerSeconds: 'seconds',
+    },
+    fr: {
+      bannerHeading: resStaySignedIn.scHeadingFr,
+      signOutLinkText: resStaySignedIn.scFragments.filter(
+        (fragment) => fragment.scId === 'sign-out'
+      )[0].scLinkTextFr,
+      staySignedInLinktext: resStaySignedIn.scFragments.filter(
+        (fragment) => fragment.scId === 'stay-signed-in'
+      )[0].scLinkTextFr,
+      bannerContent: resStaySignedIn.scContentFr.json[0].content.map(
+        (paragraph) => paragraph.value
+      ),
+      bannerMinutesAnd: 'minutes et',
+      bannerSeconds: 'secondes',
+    },
+  }
+
+  return { mappedPopupStaySignedIn, mappedPopupSignedOut }
+}

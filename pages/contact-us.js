@@ -27,7 +27,7 @@ export default function ContactLanding(props) {
                 text={link.linkTitle}
                 href={'contact-us' + link.linkDestination}
               />
-              <p className="text-xl">{link.linkDescription}</p>
+              <p className="text-xl font-body">{link.linkDescription}</p>
             </li>
           )
         })}

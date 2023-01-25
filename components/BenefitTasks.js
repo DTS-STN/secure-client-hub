@@ -8,7 +8,7 @@ export default function BenefitTasks(props) {
     'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
     'https://www.canada.ca/fr/services/prestations/ae/declarations-assurance-emploi.html',
     'https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/apply.html#gc-document-nav',
-    'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
+    'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/104e.html',
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=en-CA',
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=fr-CA',
     'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/107e.html',
