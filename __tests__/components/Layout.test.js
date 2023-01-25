@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-
+import { signOut } from 'next-auth/react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 
@@ -9,6 +9,18 @@ import { useRouter } from 'next/router'
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
+
+// Mock signOut function
+jest.mock('next-auth/react', () => {
+  return {
+    signOut: jest.fn(),
+  }
+})
+
+// // mocks signOut
+// jest.mock('next-auth/react', () => ({
+//   signOut: jest.fn(),
+// }))
 
 // the code below is to avoid the following error:
 //    "An update to Link inside a test was not wrapped in act(...)"
