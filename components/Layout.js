@@ -5,10 +5,10 @@ import {
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
+import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
-
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -58,7 +58,7 @@ export default function Layout(props) {
         isAuthenticated={props.isAuth}
         menuProps={{
           onSignOut: () => {
-            console.log('todo: implement logout')
+            signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
           menuList: [
             {
