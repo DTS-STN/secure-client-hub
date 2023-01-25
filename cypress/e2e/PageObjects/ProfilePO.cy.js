@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 /// <reference types="cypress" />
-const dashboardPo = require('../PageObjects/dashboardPO.cy')
 
 function LookingFor() {
   return cy.get("[data-cy ='looking-for']")
@@ -43,7 +42,7 @@ function AllCardTaskSection(sectionName) {
   })
 }
 function ProfileHeader() {
-  return cy.get('[data-testid ="homeContent-test"]>h1')
+  return cy.get('[data-testid ="profileContent-test"]>h1')
 }
 
 function ValidateCardTaskListAndSection(CardName, NumberOfLinks) {
@@ -105,6 +104,36 @@ function ExpandCard(CardName) {
   })
 }
 
+function ClickonTaskLinks() {
+  return cy
+    .get("[data-cy='task-list']")
+    .find('a')
+    .each(($el1, index, $list) => {
+      cy.wrap($el1).click()
+      ExitBetaModal().should('be.visible')
+      StayOnBetabutton().click()
+      cy.wrap($el1).click()
+      ExitBetaModal().should('be.visible')
+      CloseModalButton().click()
+    })
+}
+
+function ExitBetaModal() {
+  return cy.get("[data-cy ='exitBetaModal']")
+}
+
+function StayOnBetabutton() {
+  return cy.get("[id ='stay-on-beta-version']")
+}
+
+function ExitBetaModalButton() {
+  return cy.get("[id ='modal-btn-continue']")
+}
+
+function CloseModalButton() {
+  return cy.get("[data-cy ='x-button']")
+}
+
 module.exports = {
   LookingFor,
   LookingForSecurityLink,
@@ -126,4 +155,9 @@ module.exports = {
   Section,
   ClickAllCardButtons,
   ExpandCard,
+  ClickonTaskLinks,
+  ExitBetaModal,
+  StayOnBetabutton,
+  ExitBetaModalButton,
+  CloseModalButton,
 }

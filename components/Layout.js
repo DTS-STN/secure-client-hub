@@ -36,9 +36,12 @@ export default function Layout(props) {
           bannerButtonText={props.bannerContent.bannerButtonText}
           bannerButtonLink={props.bannerContent.bannerButtonLink}
           icon={props.bannerContent.icon}
+          popupContent={props.popupContent}
         ></PhaseBanner>
       )}
       <Header
+        // analyticsTracking
+        dataTestId="topnav"
         id="header"
         lang={props.locale}
         linkPath={props.langToggleLink}
@@ -53,17 +56,31 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         menuProps={{
-          craPath:
-            '/https://www.canada.ca/fr/agence-revenu/services/services-electroniques/services-electroniques-particuliers/dossier-particuliers.html',
-          dashboardPath: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
-          profilePath: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-          securityPath: `${
-            props.locale === 'en' ? '' : '/fr'
-          }/security-settings`,
-          signOutPath: '/',
+          menuList: [
+            {
+              key: 'dashKey',
+              value: t.menuItems.dashboard,
+              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+            },
+            {
+              key: 'securityKey',
+              value: t.menuItems.security,
+              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+            },
+            {
+              key: 'profileKey',
+              value: t.menuItems.profile,
+              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+            },
+            {
+              key: 'signOutKey',
+              value: t.menuItems.signOut,
+              path: `/`,
+            },
+          ],
         }}
         searchProps={{
           onChange: function noRefCheck() {},
@@ -80,9 +97,22 @@ export default function Layout(props) {
       </main>
       <div id="modal-root"></div>
       <Footer
-        id="page-footer"
         lang={props.locale}
+        brandLinks={[
+          {
+            href: t.footerTermsAndConditionURL,
+            id: 'linkTC',
+            text: t.footerTermsAndCondition,
+          },
+          {
+            href: t.footerPrivacyURL,
+            id: 'linkPR',
+            text: t.footerPrivacy,
+          },
+        ]}
+        contactLink="/contact-us"
         btnLink="/"
+        id="page-footer"
         isAuthenticated={true}
       />
     </>
@@ -121,6 +151,22 @@ Layout.propTypes = {
     bannerButtonText: PropTypes.string.isRequired,
     bannerButtonLink: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
+  }),
+  /*
+   * popupContent
+   */
+  popupContent: PropTypes.shape({
+    popupId: PropTypes.string.isRequired,
+    popupTitle: PropTypes.string.isRequired,
+    popupDescription: PropTypes.string.isRequired,
+    popupPrimaryBtn: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+    popupSecondaryBtn: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
   }),
   /*
    * Link of the page in opposite language

@@ -18,7 +18,7 @@ export default function ProfileTasks(props) {
             >
               <Link href={task.link} passHref>
                 <a
-                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover "
+                  className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                   data-cy="task-link"
                   onClick={(e) => {
                     if (task.betaPopUp) {

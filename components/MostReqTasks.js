@@ -24,7 +24,7 @@ export default function MostReqTasks(props) {
                       props.openModal(task.link)
                     }
                   }}
-                  className="flex items-center underline pl-2 text-white hover:text-gray-50"
+                  className="flex items-center underline pl-2 text-white hover:text-gray-50a"
                 >
                   <FontAwesomeIcon
                     icon={

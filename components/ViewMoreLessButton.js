@@ -18,12 +18,12 @@ export default function ViewMoreLessButton(props) {
       <div className="flex sm:items-center">
         {props.icon ? (
           <FontAwesomeIcon
-            icon={solid('circle-minus')}
+            icon={solid('circle-chevron-up')}
             className={`text-46px pr-3`}
           />
         ) : (
           <FontAwesomeIcon
-            icon={solid('circle-plus')}
+            icon={solid('circle-chevron-down')}
             className={`text-46px pr-3`}
           />
         )}

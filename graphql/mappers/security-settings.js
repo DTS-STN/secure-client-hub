@@ -1,4 +1,6 @@
+import en from '../../locales/en'
 import clientQuery from '../client'
+import { buildLink } from '../../lib/links'
 
 export async function getSecuritySettingsContent() {
   const query = require('../queries/security-settings.graphql')
@@ -6,24 +8,31 @@ export async function getSecuritySettingsContent() {
 
   const enLookingForFragment = findFragmentByScId(
     response,
-    'looking-for-profile-settings',
-    'en'
-  )
+    'looking-for-profile-settings'
+  ).scContentEn
   const enContentFragment = findFragmentByScId(
     response,
-    'security-settings-main-content',
-    'en'
-  )
+    'security-settings-main-content'
+  ).scContentEn
   const frLookingForFragment = findFragmentByScId(
     response,
-    'looking-for-profile-settings',
-    'fr'
-  )
+    'looking-for-profile-settings'
+  ).scContentFr
   const frContentFragment = findFragmentByScId(
     response,
-    'security-settings-main-content',
-    'fr'
-  )
+    'security-settings-main-content'
+  ).scContentFr
+
+  const securityQuestions = findFragmentByScId(
+    response,
+    'security-settings-main-content'
+  ).scFragments.find((element) => element.scId === 'security-questions')
+
+  const eiAccessCode = findFragmentByScId(
+    response,
+    'security-settings-main-content'
+  ).scFragments.find((element) => element.scId === 'ei-access-code')
+
   const mappedSecurity = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
@@ -41,17 +50,23 @@ export async function getSecuritySettingsContent() {
       },
       securityQuestions: {
         linkTitle: {
-          text: enContentFragment.json[1].content[0].value,
-          link: enContentFragment.json[1].content[0].data.href,
+          text: securityQuestions.scLinkTextEn,
+          link: buildLink(
+            securityQuestions.schURLType,
+            securityQuestions.scDestinationURLEn
+          ),
         },
-        subTitle: enContentFragment.json[1].content[2].value,
+        subTitle: securityQuestions.scDescriptionEn.json[0].content[0].value,
       },
       eiAccessCode: {
         linkTitle: {
-          text: enContentFragment.json[2].content[0].value,
-          link: enContentFragment.json[2].content[0].data.href,
+          text: eiAccessCode.scLinkTextEn,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            eiAccessCode.scDestinationURLEn
+          ),
         },
-        subTitle: enContentFragment.json[2].content[2].value,
+        subTitle: eiAccessCode.scDescriptionEn.json[0].content[0].value,
       },
     },
     fr: {
@@ -70,31 +85,31 @@ export async function getSecuritySettingsContent() {
       },
       securityQuestions: {
         linkTitle: {
-          text: frContentFragment.json[1].content[0].value,
-          link: frContentFragment.json[1].content[0].data.href,
+          text: securityQuestions.scLinkTextFr,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            securityQuestions.scDestinationURLFr
+          ),
         },
-        subTitle: frContentFragment.json[1].content[2].value,
+        subTitle: securityQuestions.scDescriptionFr.json[0].content[0].value,
       },
       eiAccessCode: {
         linkTitle: {
-          text: frContentFragment.json[2].content[0].value,
-          link: frContentFragment.json[2].content[0].data.href,
+          text: eiAccessCode.scLinkTextFr,
+          link: buildLink(
+            eiAccessCode.schURLType,
+            eiAccessCode.scDestinationURLFr
+          ),
         },
-        subTitle: frContentFragment.json[2].content[2].value,
+        subTitle: eiAccessCode.scDescriptionFr.json[0].content[0].value,
       },
     },
   }
   return mappedSecurity
 }
 
-const findFragmentByScId = (res, id, lang) => {
-  if (lang === 'fr') {
-    return res.data.schPagev1ByPath.item.scFragments.find(
-      (element) => element.scId === id
-    ).scContentFr
-  } else if (lang === 'en') {
-    return res.data.schPagev1ByPath.item.scFragments.find(
-      (element) => element.scId === id
-    ).scContentEn
-  }
+const findFragmentByScId = (res, id) => {
+  return res.data.schPagev1ByPath.item.scFragments.find(
+    (element) => element.scId === id
+  )
 }

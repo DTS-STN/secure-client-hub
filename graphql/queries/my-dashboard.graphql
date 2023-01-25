@@ -32,6 +32,15 @@
                             scId
                             scTitleEn
                             scTitleFr
+                            schTasks{
+                               ... on SCHTaskv1Model {
+                                    scId
+                                    scLinkTextEn
+                                    scLinkTextFr
+                                    scLinkTextAssistiveEn
+                                    scLinkTextAssistiveFr
+                                }
+                            }
                             schLists{
                                 ... on SCHListv1Model {
                                     scTitleEn
@@ -42,6 +51,7 @@
                                             scLinkTextFr
                                             scLinkTextAssistiveEn
                                             scLinkTextAssistiveFr
+                                            schURLType
                                             scDestinationURLEn
                                             scDestinationURLFr
                                             scIconCSS

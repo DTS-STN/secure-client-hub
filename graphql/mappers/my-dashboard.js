@@ -1,5 +1,6 @@
 import { getFragmentQueryDocument } from '@apollo/client/utilities'
 import clientQuery from '../client'
+import { buildLink } from '../../lib/links'
 
 export async function getMyDashboardContent() {
   const query = require('../queries/my-dashboard.graphql')
@@ -15,6 +16,7 @@ export async function getMyDashboardContent() {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
+            dropdownText: fragment.schTasks[0].scLinkTextEn,
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
@@ -22,7 +24,7 @@ export async function getMyDashboardContent() {
                   return {
                     title: item.scLinkTextEn,
                     areaLabel: item.scLinkTextAssistiveEn,
-                    link: item.scDestinationURLEn,
+                    link: buildLink(item.schURLType, item.scDestinationURLEn),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }
@@ -51,6 +53,7 @@ export async function getMyDashboardContent() {
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
+            dropdownText: fragment.schTasks[0].scLinkTextFr,
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,
@@ -58,7 +61,7 @@ export async function getMyDashboardContent() {
                   return {
                     title: item.scLinkTextFr,
                     areaLabel: item.scLinkTextAssistiveFr,
-                    link: item.scDestinationURLFr,
+                    link: buildLink(item.schURLType, item.scDestinationURLFr),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }

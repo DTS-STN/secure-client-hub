@@ -12,14 +12,24 @@ describe('Exit Beta Modal', () => {
         closeModal={() => {}}
         closeModalAria={'close'}
         continueLink="/"
+        popupId={'Test Id'}
+        popupTitle={'Test Title'}
+        popupDescription={'Test Description'}
+        popupPrimaryBtn={{ id: 'Test Primary Id', text: 'Test Primary Text' }}
+        popupSecondaryBtn={{
+          id: 'Test Secondary Id',
+          text: 'Test Secondary Text',
+        }}
       />
     )
-    const title = screen.getByText('Exiting beta version')
-    const caption = screen.getByText(
-      'Thank you for trying the beta version. You are now returning to My Service Canada Account home page.'
-    )
+    const title = screen.getByText('Test Title')
+    const description = screen.getByText('Test Description')
+    const primaryBtnText = screen.getByText('Test Primary Text')
+    const secondaryBtnText = screen.getByText('Test Secondary Text')
     expect(title).toBeInTheDocument()
-    expect(caption).toBeInTheDocument()
+    expect(description).toBeInTheDocument()
+    expect(primaryBtnText).toBeInTheDocument()
+    expect(secondaryBtnText).toBeInTheDocument()
   })
   it('has no a11y viollations', async () => {
     const { container } = render(
@@ -27,6 +37,14 @@ describe('Exit Beta Modal', () => {
         closeModal={() => {}}
         closeModalAria={'close'}
         continueLink="/"
+        popupId={'Test Id'}
+        popupTitle={'Test Title'}
+        popupDescription={'Test Description'}
+        popupPrimaryBtn={{ id: 'Test Primary Id', text: 'Test Primary Text' }}
+        popupSecondaryBtn={{
+          id: 'Test Secondary Id',
+          text: 'Test Secondary Text',
+        }}
       />
     )
     const results = await axe(container)
