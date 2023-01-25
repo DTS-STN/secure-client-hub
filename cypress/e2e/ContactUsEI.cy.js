@@ -23,7 +23,7 @@ describe('Validate EI Contact Us Landing page', () => {
 
   it('Validate the breadcrumbs on EI contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')
-    securityPo.breadcrumbsLink1().should('be.visible')
+    securityPo.breadcrumbsLink2().should('be.visible')
     securityPo.breadcrumbsLink1().click()
     dashboardPo.ValidateDashboardUrl()
     cy.go('back')
