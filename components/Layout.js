@@ -17,7 +17,7 @@ export default function Layout(props) {
   const t = props.locale === 'en' ? en : fr
   const defaultBreadcrumbs = []
   const contactLink =
-    props.locale === 'en' ? '/contact-us' : '/fr/contactez-nous'
+    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 
   useEffect(() => {
     Modal.setAppElement('#modal-root')

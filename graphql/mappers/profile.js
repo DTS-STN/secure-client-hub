@@ -29,10 +29,7 @@ export async function getProfileContent() {
       lookingFor: {
         title: enLookingForFragment.json[0].content[0].value,
         subText: enLookingForFragment.json[1].content.map((element) => {
-          if (element.value) {
-            return element.value
-          }
-          return null
+          return element.value || null
         }),
         link: '/security-settings',
       },
@@ -78,10 +75,7 @@ export async function getProfileContent() {
       lookingFor: {
         title: frLookingForFragment.json[0].content[0].value,
         subText: frLookingForFragment.json[1].content.map((element) => {
-          if (element.value) {
-            return element.value
-          }
-          return null
+          return element.value || null
         }),
         link: '/fr/parametres-securite',
       },

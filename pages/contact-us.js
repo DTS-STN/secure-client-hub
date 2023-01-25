@@ -8,11 +8,9 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
-import { useRouter } from 'next/router'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
-  const router = useRouter()
 
   return (
     <div id="contactContent" data-testid="contactContent-test">
