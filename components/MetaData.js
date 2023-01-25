@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Script from 'next/script'
 
 export default function MetaData(props) {
   const d = props.language === 'en' ? props.data.data_en : props.data.data_fr
@@ -15,10 +14,6 @@ export default function MetaData(props) {
         <meta name="keywords" content={d.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <Script
-          src="//assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
-dfa8abb35555-staging.min.js"
-        />
         <meta name="dcterms.title" content="My Service Canada Account" />
         <meta name="dcterms.language" content="eng" />
         <meta name="dcterms.creator" content="Service Canada" />
