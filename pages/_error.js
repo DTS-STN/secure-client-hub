@@ -63,7 +63,7 @@ function CustomError({ statusCode }) {
 }
 
 /* istanbul ignore next */
-export async function getServerSideProps({ res, err }) {
+export async function getStaticProps({ res, err }) {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
 
   /* Place-holder Meta Data Props */

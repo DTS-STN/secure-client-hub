@@ -27,7 +27,10 @@ export default function ContactEmploymentInsurance(props) {
       data-testid="contactEI-test"
       data-cy="eIContactUsContent"
     >
-      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
+      <Heading
+        id="my-dashboard-heading"
+        title={`${props.pageContent.title} XXX`}
+      />
       <div
         className="py-5"
         data-testid={`${
