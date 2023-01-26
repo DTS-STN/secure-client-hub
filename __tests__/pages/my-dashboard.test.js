@@ -4,7 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
-import { getServerSideProps } from '../../pages/my-dashboard'
+import { getStaticProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
 
@@ -99,8 +99,8 @@ describe('My Dashboard page', () => {
     expect(testCard).toBeInTheDocument()
   })
 
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
+  it('Test getStaticProps', async () => {
+    const props = await getStaticProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {

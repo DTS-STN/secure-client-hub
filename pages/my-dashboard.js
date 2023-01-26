@@ -155,7 +155,7 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getStaticProps({ res, locale }) {
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500

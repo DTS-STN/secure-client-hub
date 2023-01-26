@@ -25,6 +25,7 @@ export default function Layout(props) {
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
+
       {props.display.hideBanner ? (
         ''
       ) : (
@@ -39,82 +40,84 @@ export default function Layout(props) {
           popupContent={props.popupContent}
         ></PhaseBanner>
       )}
-      <Header
-        // analyticsTracking
-        dataTestId="topnav"
-        id="header"
-        lang={props.locale}
-        linkPath={props.langToggleLink}
-        breadCrumbItems={
-          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
-        }
-        topnavProps={{
-          skipToMainPath: '#mainContent',
-          skipToAboutPath: '#page-footer',
-          switchToBasicPath: '',
-          displayAlternateLink: false,
-        }}
-        isAuthenticated={props.isAuth}
-        menuProps={{
-          onSignOut: () => {
-            console.log('todo: implement logout')
-          },
-          menuList: [
-            {
-              key: 'dashKey',
-              value: t.menuItems.dashboard,
-              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+      <>
+        <Header
+          // analyticsTracking
+          dataTestId="topnav"
+          id="header"
+          lang={props.locale}
+          linkPath={props.langToggleLink}
+          breadCrumbItems={
+            props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
+          }
+          topnavProps={{
+            skipToMainPath: '#mainContent',
+            skipToAboutPath: '#page-footer',
+            switchToBasicPath: '',
+            displayAlternateLink: false,
+          }}
+          isAuthenticated={props.isAuth}
+          menuProps={{
+            onSignOut: () => {
+              console.log('todo: implement logout')
             },
-            {
-              key: 'securityKey',
-              value: t.menuItems.security,
-              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
-            },
-            {
-              key: 'profileKey',
-              value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
-            },
-            {
-              key: 'signOutKey',
-              value: t.menuItems.signOut,
-              path: `/`,
-            },
-          ],
-        }}
-        searchProps={{
-          onChange: function noRefCheck() {},
-          onSubmit: function noRefCheck() {},
-        }}
-      />
+            menuList: [
+              {
+                key: 'dashKey',
+                value: t.menuItems.dashboard,
+                path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+              },
+              {
+                key: 'securityKey',
+                value: t.menuItems.security,
+                path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              },
+              {
+                key: 'profileKey',
+                value: t.menuItems.profile,
+                path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              },
+              {
+                key: 'signOutKey',
+                value: t.menuItems.signOut,
+                path: `/`,
+              },
+            ],
+          }}
+          searchProps={{
+            onChange: function noRefCheck() {},
+            onSubmit: function noRefCheck() {},
+          }}
+        />
 
-      <main id="mainContent">
-        {display.fullscreen ? (
-          props.children
-        ) : (
-          <LayoutContainer>{props.children}</LayoutContainer>
-        )}
-      </main>
-      <div id="modal-root"></div>
-      <Footer
-        lang={props.locale}
-        brandLinks={[
-          {
-            href: t.footerTermsAndConditionURL,
-            id: 'linkTC',
-            text: t.footerTermsAndCondition,
-          },
-          {
-            href: t.footerPrivacyURL,
-            id: 'linkPR',
-            text: t.footerPrivacy,
-          },
-        ]}
-        contactLink="/contact-us"
-        btnLink="/"
-        id="page-footer"
-        isAuthenticated={true}
-      />
+        <main id="mainContent">
+          {display.fullscreen ? (
+            props.children
+          ) : (
+            <LayoutContainer>{props.children}</LayoutContainer>
+          )}
+        </main>
+        <div id="modal-root"></div>
+        <Footer
+          lang={props.locale}
+          brandLinks={[
+            {
+              href: t.footerTermsAndConditionURL,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
+            },
+            {
+              href: t.footerPrivacyURL,
+              id: 'linkPR',
+              text: t.footerPrivacy,
+            },
+          ]}
+          contactLink="/contact-us"
+          btnLink="/"
+          id="page-footer"
+          isAuthenticated={true}
+        />
+      </>
     </>
   )
 }
