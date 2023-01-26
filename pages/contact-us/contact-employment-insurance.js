@@ -29,7 +29,7 @@ export default function ContactEmploymentInsurance(props) {
     >
       <Heading
         id="my-dashboard-heading"
-        title={`${props.pageContent.title} XXX`}
+        title={`${props.pageContent.title} XXXX`}
       />
       <div
         className="py-5"
