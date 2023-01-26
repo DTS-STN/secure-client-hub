@@ -5,10 +5,10 @@ import {
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
 import MetaData from './MetaData'
+import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
-
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -40,26 +40,38 @@ export default function Layout(props) {
           popupContent={props.popupContent}
         ></PhaseBanner>
       )}
-      <>
-        <Header
-          // analyticsTracking
-          dataTestId="topnav"
-          id="header"
-          lang={props.locale}
-          linkPath={props.langToggleLink}
-          breadCrumbItems={
-            props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
-          }
-          topnavProps={{
-            skipToMainPath: '#mainContent',
-            skipToAboutPath: '#page-footer',
-            switchToBasicPath: '',
-            displayAlternateLink: false,
-          }}
-          isAuthenticated={props.isAuth}
-          menuProps={{
-            onSignOut: () => {
-              console.log('todo: implement logout')
+
+      <Header
+        // analyticsTracking
+        dataTestId="topnav"
+        id="header"
+        lang={props.locale}
+        linkPath={props.langToggleLink}
+        breadCrumbItems={
+          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
+        }
+        topnavProps={{
+          skipToMainPath: '#mainContent',
+          skipToAboutPath: '#page-footer',
+          switchToBasicPath: '',
+          displayAlternateLink: false,
+        }}
+        isAuthenticated={props.isAuth}
+        menuProps={{
+          onSignOut: () => {
+            signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
+          },
+          menuList: [
+            {
+              key: 'dashKey',
+              value: t.menuItems.dashboard,
+              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+            },
+            {
+              key: 'securityKey',
+              value: t.menuItems.security,
+              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+
             },
             menuList: [
               {

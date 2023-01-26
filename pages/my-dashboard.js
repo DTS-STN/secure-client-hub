@@ -12,6 +12,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
@@ -155,7 +156,9 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+
+export async function getStaticProps({ req, res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500
