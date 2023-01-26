@@ -156,7 +156,6 @@ export default function MyDashboard(props) {
   )
 }
 
-
 export async function getStaticProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
