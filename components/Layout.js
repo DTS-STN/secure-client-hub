@@ -87,7 +87,6 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-
       <main id="mainContent">
         {display.fullscreen ? (
           props.children
