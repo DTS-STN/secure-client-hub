@@ -80,7 +80,7 @@ describe('index page', () => {
     meta: meta,
   }
 
-  it('should render the page', () => {
+  it('should render the page ', () => {
     render(<App Component={component} pageProps={pageProps} />)
     const heading = screen.getByRole('heading', { level: 1 })
     expect(heading).toBeInTheDocument()
