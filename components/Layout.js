@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Link from 'next/link'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -65,21 +66,29 @@ export default function Layout(props) {
               key: 'dashKey',
               value: t.menuItems.dashboard,
               path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+              component: Link,
+              customLink: true,
             },
             {
               key: 'securityKey',
               value: t.menuItems.security,
               path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              component: Link,
+              customLink: true,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              component: Link,
+              customLink: true,
             },
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
               path: `/`,
+              component: Link,
+              customLink: true,
             },
           ],
         }}
