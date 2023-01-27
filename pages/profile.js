@@ -34,9 +34,10 @@ export default function Profile(props) {
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
       <p className="text-lg mt-2 font-body">{props.content.heading}</p>
-      {props.content.list.map((program) => {
+      {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
+            key={index}
             programTitle={program.title}
             tasks={program.tasks}
             data-testID="profile-task-group-list"
