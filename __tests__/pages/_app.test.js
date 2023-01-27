@@ -32,7 +32,7 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
   },
 }))
 
-jest.mock('../../../graphql/mappers/beta-banner-opt-out', () => ({
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   getBetaBannerContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({
