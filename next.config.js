@@ -39,7 +39,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'; script-src-elem 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:",
+      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:",
   },
 ]
 
@@ -47,6 +47,7 @@ module.exports = {
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
     LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+    AUTH_ECAS_GLOBAL_LOGOUT_URL: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL,
   },
   reactStrictMode: true,
   //
