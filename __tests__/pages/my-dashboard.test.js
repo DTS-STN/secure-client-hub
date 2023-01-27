@@ -48,6 +48,7 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
     })
   },
 }))
+
 jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   getBetaPopupNotAvailableContent: () => {
     return new Promise(function (resolve, reject) {

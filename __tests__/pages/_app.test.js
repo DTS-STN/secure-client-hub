@@ -4,13 +4,51 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from '../../pages/_app'
-import Index from '../../pages/index'
+import Index, { getStaticProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
+}))
+
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
 }))
 
 describe('index page', () => {

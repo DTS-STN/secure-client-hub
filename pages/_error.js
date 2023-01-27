@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 
 function CustomError({ statusCode }) {
   return (
@@ -66,6 +68,17 @@ function CustomError({ statusCode }) {
 export async function getStaticProps({ res, err }) {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
 
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -83,6 +96,8 @@ export async function getStaticProps({ res, err }) {
   }
   return {
     props: {
+      bannerContent: bannerContent.en,
+      popupContent: popupContent.en,
       statusCode,
       meta,
     },

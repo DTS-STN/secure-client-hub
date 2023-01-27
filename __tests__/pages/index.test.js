@@ -3,8 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Index from '../../pages/index'
-import { getStaticProps } from '../../pages/index'
+import Index, { getStaticProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
@@ -13,10 +12,54 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+const fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ data: 'mocked data' }),
+  })
+)
+
 // 'Mock' call to fetchContent
 jest.mock('../../lib/cms', () => ({
   fetchContent: () => {
     return {}
+  },
+}))
+
+jest.mock('../../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
   },
 }))
 
@@ -51,7 +94,9 @@ describe('index page', () => {
   })
 
   it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+    const props = await getStaticProps({
+      locale: 'en',
+    })
 
     expect(props).toEqual({
       props: {
@@ -70,6 +115,8 @@ describe('index page', () => {
             title: 'Mon dossier Service Canada - Canada.ca',
           },
         },
+        bannerContent: {},
+        popupContent: {},
       },
     })
   })
