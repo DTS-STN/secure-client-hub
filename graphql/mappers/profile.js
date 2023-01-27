@@ -5,6 +5,7 @@ import { buildLink } from '../../lib/links'
 export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
   const response = await clientQuery(query)
+
   const mappedProfile = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scTitleEn,
@@ -29,14 +30,6 @@ export async function getProfileContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scTitleEn,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scDestinationURLEn,
-      },
     },
     fr: {
       pageName: response.data.schPagev1ByPath.item.scTitleFr,
@@ -61,14 +54,6 @@ export async function getProfileContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scTitleFr,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scDestinationURLFr,
-      },
     },
   }
   return mappedProfile
