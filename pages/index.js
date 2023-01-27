@@ -83,6 +83,17 @@ Index.getLayout = function PageLayout(page) {
 }
 
 export async function getStaticProps({ locale }) {
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -100,6 +111,11 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, meta },
+    props: {
+      locale,
+      meta,
+      bannerContent: bannerContent.en,
+      popupContent: popupContent.en,
+    },
   }
 }
