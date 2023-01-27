@@ -88,7 +88,10 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-
+      <Script
+        src="https://assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
+dfa8abb35555-staging.min.js"
+      />
       <main id="mainContent">
         {display.fullscreen ? (
           props.children
