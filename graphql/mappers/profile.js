@@ -29,14 +29,6 @@ export async function getProfileContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scTitleEn,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scDestinationURLEn,
-      },
     },
     fr: {
       pageName: response.data.schPagev1ByPath.item.scTitleFr,
@@ -61,14 +53,6 @@ export async function getProfileContent() {
           }
         })
         .filter((e) => e),
-      exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scTitleFr,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'exit-beta-version'
-        ).scDestinationURLFr,
-      },
     },
   }
   return mappedProfile
