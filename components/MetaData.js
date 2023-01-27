@@ -24,7 +24,6 @@ export default function MetaData(props) {
 EDSC_MSCA-MSDC"
         />
         <script
-          async
           src="https://assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
 dfa8abb35555-staging.min.js"
         ></script>
