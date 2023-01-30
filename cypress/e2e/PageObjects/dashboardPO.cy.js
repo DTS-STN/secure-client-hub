@@ -62,7 +62,7 @@ function ValidateDashboardHeaderEN() {
 }
 
 function ValidateDashboardUrlFR() {
-  cy.url().should('contains', '/fr/my-dashboard')
+  cy.url().should('contains', '/fr/mon-tableau-de-bord')
 }
 
 function ValidateDashboardHeaderFR() {

@@ -115,7 +115,7 @@ describe('Validate Profile page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
+  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/parametres-securite Page', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(2000)
     profilePo.LookingForSecurityLink().click()
