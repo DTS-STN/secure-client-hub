@@ -50,7 +50,7 @@ export default function Profile(props) {
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
-        href="/security-settings"
+        href={props.content.lookingFor.link}
         linkID="link-id"
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}

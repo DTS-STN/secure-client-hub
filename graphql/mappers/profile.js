@@ -64,6 +64,7 @@ export async function getProfileContent() {
           enLookingForFragment.json[1].content[0].value,
           enLookingForFragment.json[1].content[1].value,
         ],
+        link: 'security-settings',
       },
       backToDashboard: {
         id: backToDashboardFragment.scId,
@@ -110,6 +111,7 @@ export async function getProfileContent() {
           frLookingForFragment.json[1].content[0].value,
           frLookingForFragment.json[1].content[1].value,
         ],
+        link: 'parametres-securite',
       },
       backToDashboard: {
         id: backToDashboardFragment.scId,
