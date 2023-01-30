@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>14/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
@@ -260,7 +260,16 @@
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -276,6 +285,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,6 +331,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -475,8 +493,9 @@ import fr from '../locales/fr'
 export default function Layout(props) {
   const display = props.display ?? <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
   const t = props.locale === 'en' ? en : fr
-&nbsp;
   const defaultBreadcrumbs = []
+  const contactLink =
+    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 &nbsp;
   useEffect(() =&gt; {
     Modal.setAppElement('#modal-root')
@@ -523,17 +542,25 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/my-dashboard'
+                  : '/fr/mon-tableau-de-bord'
+              }`,
             },
             {
               key: 'securityKey',
               value: t.menuItems.security,
-              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/security-settings'
+                  : '/fr/parametres-securite'
+              }`,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'signOutKey',
@@ -571,7 +598,7 @@ export default function Layout(props) {
             text: t.footerPrivacy,
           },
         ]}
-        contactLink="/contact-us"
+        contactLink={contactLink}
         btnLink="/"
         id="page-footer"
         isAuthenticated={true}
@@ -661,7 +688,7 @@ Layout.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-28T15:28:10.824Z
+                at 2023-01-30T14:47:23.659Z
             </div>
         <script src="../prettify.js"></script>
         <script>
