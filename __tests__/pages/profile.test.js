@@ -70,6 +70,7 @@ describe('My Profile page', () => {
     lookingFor: {
       title: 'title',
       subText: ['text', 'text'],
+      link: '/',
     },
     backToDashboard: {
       id: 'id',
