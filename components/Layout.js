@@ -9,14 +9,16 @@ import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
+import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
 export default function Layout(props) {
   const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
-
   const defaultBreadcrumbs = []
+  const contactLink =
+    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 
   useEffect(() => {
     Modal.setAppElement('#modal-root')
@@ -63,17 +65,25 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/my-dashboard'
+                  : '/fr/mon-tableau-de-bord'
+              }`,
             },
             {
               key: 'securityKey',
               value: t.menuItems.security,
-              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/security-settings'
+                  : '/fr/parametres-securite'
+              }`,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'signOutKey',
@@ -95,6 +105,7 @@ export default function Layout(props) {
         )}
       </main>
       <div id="modal-root"></div>
+
       <Footer
         lang={props.locale}
         brandLinks={[
@@ -109,11 +120,12 @@ export default function Layout(props) {
             text: t.footerPrivacy,
           },
         ]}
-        contactLink="/contact-us"
+        contactLink={contactLink}
         btnLink="/"
         id="page-footer"
         isAuthenticated={true}
       />
+      <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
 }
