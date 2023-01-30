@@ -60,10 +60,10 @@ export default function Profile(props) {
         )
       })}
       <PageLink
-        lookingForText={t.pageLinkSecurity}
-        accessText={t.accessYourSecurityText}
-        linkText={t.securityLinkText}
-        href="/security-settings"
+        lookingForText={props.content.lookingFor.title}
+        accessText={props.content.lookingFor.subText[0]}
+        linkText={props.content.lookingFor.subText[1]}
+        href={props.content.lookingFor.link}
         linkID="link-id"
         dataCy="access-security-page-link"
         buttonHref={t.url_dashboard}
@@ -121,16 +121,18 @@ export async function getStaticProps({ res, locale }) {
   )
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
+  const langToggleLink = locale === 'en' ? '/fr/profil' : '/profile'
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   /* Place-holder Meta Data Props */
   const meta = {
