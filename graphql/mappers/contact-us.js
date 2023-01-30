@@ -14,6 +14,13 @@ export async function getContactUsContent() {
 
   const mappedSecurity = {
     en: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameEn,
+            text: w.scTitleEn,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       subHeading: introFragment.scContentEn.json[0].content[0].value,
@@ -44,6 +51,13 @@ export async function getContactUsContent() {
       ],
     },
     fr: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameFr,
+            text: w.scTitleFr,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       subHeading: introFragment.scContentFr.json[0].content[0].value,

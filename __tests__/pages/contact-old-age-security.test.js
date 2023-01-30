@@ -138,7 +138,7 @@ describe('OAS Contact Us Page', () => {
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-us/contact-old-age-security',
+        langToggleLink: '/fr/contactez-nous/communiquer-securite-vieillesse',
         locale: 'en',
         meta: {
           data_en: {

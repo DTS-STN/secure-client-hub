@@ -34,7 +34,7 @@ function ProfileHeaderEN() {
 }
 
 function ProfileUrlFR() {
-  cy.url().should('contains', '/fr/profile')
+  cy.url().should('contains', '/fr/profil')
 }
 function ProfileUrlEN() {
   cy.url().should('contains', '/profile')

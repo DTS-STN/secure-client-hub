@@ -83,7 +83,7 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-us/contact-canada-pension-plan'
+      ? '/fr/contactez-nous/communiquer-regime-pensions-canada'
       : '/contact-us/contact-canada-pension-plan'
 
   const t = locale === 'en' ? en : fr
@@ -97,10 +97,10 @@ export async function getStaticProps({ res, locale }) {
   const breadCrumbItems =
     locale === 'en'
       ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + link }
+          return { text, link: '/' + locale + '/' + link }
         })
       : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + link }
+          return { text, link: '/' + locale + '/' + link }
         })
 
   // const breadCrumbItems = [

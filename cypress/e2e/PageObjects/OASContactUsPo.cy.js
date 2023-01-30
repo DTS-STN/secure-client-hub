@@ -16,7 +16,10 @@ function ValidateOASContactUsHeaderEN() {
 }
 
 function ValidateOASContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contact-us/contact-old-age-security')
+  cy.url().should(
+    'contains',
+    '/fr/contactez-nous/communiquer-securite-vieillesse'
+  )
 }
 
 function ValidateOASContactUsHeaderFR() {

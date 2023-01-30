@@ -4,6 +4,13 @@
             _path
             scTitleEn
             scTitleFr
+            scBreadcrumbParentPages {
+                scId
+                scTitleEn
+                scTitleFr
+                scPageNameEn
+                scPageNameFr
+            }
             scFragments {
                 ... on SCHListv1Model {
                     scId
@@ -28,7 +35,6 @@
                 ... on SCHContentv1Model{
                     scId
                     scContentEn{
-                        
                         json
                     }
                     scContentFr{

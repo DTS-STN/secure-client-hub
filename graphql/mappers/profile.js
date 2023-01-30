@@ -11,7 +11,6 @@ export async function getProfileContent() {
     response,
     'looking-for-security-settings'
   ).scContentEn
-
   const frLookingForFragment = findFragmentByScId(
     response,
     'looking-for-security-settings'
@@ -27,6 +26,13 @@ export async function getProfileContent() {
   const profileIntroFragment = findFragmentByScId(response, 'profile-intro')
   const mappedProfile = {
     en: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameEn,
+            text: w.scTitleEn,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scTitleEn,
       heading: profileIntroFragment.scContentEn.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments
@@ -66,6 +72,13 @@ export async function getProfileContent() {
       },
     },
     fr: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameFr,
+            text: w.scTitleFr,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scTitleFr,
       heading: profileIntroFragment.scContentFr.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments
