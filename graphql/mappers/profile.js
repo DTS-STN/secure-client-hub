@@ -4,7 +4,7 @@ import { buildLink } from '../../lib/links'
 export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
   const response = await clientQuery(query)
-  // console.log(response.data.schPagev1ByPath.item.scFragments)
+
   // LookingFor Fragment
   const enLookingForFragment = findFragmentByScId(
     response,

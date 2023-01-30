@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+
 export default function Index(props) {
   return (
     <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">
@@ -83,6 +86,17 @@ Index.getLayout = function PageLayout(page) {
 }
 
 export async function getStaticProps({ locale }) {
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -100,6 +114,11 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, meta },
+    props: {
+      locale,
+      meta,
+      bannerContent: bannerContent.en,
+      popupContent: popupContent.en,
+    },
   }
 }
