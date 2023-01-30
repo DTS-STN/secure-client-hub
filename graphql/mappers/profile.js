@@ -1,6 +1,5 @@
 import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
-import { Console } from 'console'
 
 export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
