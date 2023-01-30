@@ -1,23 +1,40 @@
 import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
+import { Console } from 'console'
 
 export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
   const response = await clientQuery(query)
+  // console.log(response.data.schPagev1ByPath.item.scFragments)
+  // LookingFor Fragment
+  const enLookingForFragment = findFragmentByScId(
+    response,
+    'looking-for-security-settings'
+  ).scContentEn
+
+  const frLookingForFragment = findFragmentByScId(
+    response,
+    'looking-for-security-settings'
+  ).scContentFr
+
+  // BackToDashboard Fragment
+  const backToDashboardFragment = findFragmentByScId(
+    response,
+    'back-to-my-dashboard'
+  )
+
+  // ProfileIntro Fragment
+  const profileIntroFragment = findFragmentByScId(response, 'profile-intro')
   const mappedProfile = {
     en: {
       pageName: response.data.schPagev1ByPath.item.scTitleEn,
-      heading: response.data.schPagev1ByPath.item.scFragments.find(
-        (element) => element.scId === 'profile-intro'
-      ).scContentEn.json[0].content[0].value,
+      heading: profileIntroFragment.scContentEn.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments
         .map((element) => {
           if (
-            element.scId !== 'profile-cards' &&
-            element.scId !== 'profile-intro' &&
-            element.scId !== 'looking-for-security-settings' &&
-            element.scId !== 'back-to-my-dashboard' &&
-            element.scId !== 'exit-beta-version'
+            element.scId === 'ei-profile-list' ||
+            element.scId === 'cpp-profile-list' ||
+            element.scId === 'oas-profile-list'
           ) {
             return {
               title: element.scTitleEn,
@@ -36,43 +53,27 @@ export async function getProfileContent() {
         })
         .filter((e) => e),
       lookingFor: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'looking-for-security-settings'
-        ).scContentEn.json[0].content[0].value,
+        title: enLookingForFragment.json[0].content[0].value,
         subText: [
-          response.data.schPagev1ByPath.item.scFragments.find(
-            (element) => element.scId === 'looking-for-security-settings'
-          ).scContentEn.json[1].content[0].value,
-          response.data.schPagev1ByPath.item.scFragments.find(
-            (element) => element.scId === 'looking-for-security-settings'
-          ).scContentEn.json[1].content[1].value,
+          enLookingForFragment.json[1].content[0].value,
+          enLookingForFragment.json[1].content[1].value,
         ],
       },
       backToDashboard: {
-        id: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scId,
-        btnText: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scTitleEn,
-        btnLink: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scDestinationURLEn,
+        id: backToDashboardFragment.scId,
+        btnText: backToDashboardFragment.scTitleEn,
+        btnLink: backToDashboardFragment.scDestinationURLEn,
       },
     },
     fr: {
       pageName: response.data.schPagev1ByPath.item.scTitleFr,
-      heading: response.data.schPagev1ByPath.item.scFragments.find(
-        (element) => element.scId === 'profile-intro'
-      ).scContentFr.json[0].content[0].value,
+      heading: profileIntroFragment.scContentFr.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments
         .map((element) => {
           if (
-            element.scId !== 'profile-cards' &&
-            element.scId !== 'profile-intro' &&
-            element.scId !== 'looking-for-security-settings' &&
-            element.scId !== 'back-to-my-dashboard' &&
-            element.scId !== 'exit-beta-version'
+            element.scId === 'ei-profile-list' ||
+            element.scId === 'cpp-profile-list' ||
+            element.scId === 'oas-profile-list'
           ) {
             return {
               title: element.scTitleFr,
@@ -91,30 +92,24 @@ export async function getProfileContent() {
         })
         .filter((e) => e),
       lookingFor: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'looking-for-security-settings'
-        ).scContentFr.json[0].content[0].value,
+        title: frLookingForFragment.json[0].content[0].value,
         subText: [
-          response.data.schPagev1ByPath.item.scFragments.find(
-            (element) => element.scId === 'looking-for-security-settings'
-          ).scContentFr.json[1].content[0].value,
-          response.data.schPagev1ByPath.item.scFragments.find(
-            (element) => element.scId === 'looking-for-security-settings'
-          ).scContentFr.json[1].content[1].value,
+          frLookingForFragment.json[1].content[0].value,
+          frLookingForFragment.json[1].content[1].value,
         ],
       },
       backToDashboard: {
-        id: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scId,
-        btnText: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scTitleFr,
-        btnLink: response.data.schPagev1ByPath.item.scFragments.find(
-          (element) => element.scId === 'back-to-my-dashboard'
-        ).scDestinationURLFr,
+        id: backToDashboardFragment.scId,
+        btnText: backToDashboardFragment.scTitleFr,
+        btnLink: backToDashboardFragment.scDestinationURLFr,
       },
     },
   }
   return mappedProfile
+}
+
+const findFragmentByScId = (res, id) => {
+  return res.data.schPagev1ByPath.item.scFragments.find(
+    (element) => element.scId === id
+  )
 }
