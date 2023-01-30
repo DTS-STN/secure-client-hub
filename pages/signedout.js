@@ -26,7 +26,7 @@ const Signedout = (props) => {
     >
       <svg
         aria-hidden="true"
-        className="w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
+        className="w-50 h-50 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +41,9 @@ const Signedout = (props) => {
         />
       </svg>
       <span className="sr-only">Loading / Chargement en cours ...</span>
+      <h1 className="text-xs w-max text-center">
+        Loading / Chargement en cours ...
+      </h1>
     </div>
   )
 }

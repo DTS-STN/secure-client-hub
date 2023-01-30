@@ -18,9 +18,9 @@ jest.mock('next-auth/react', () => {
 })
 
 // // mocks signOut
-// jest.mock('next-auth/react', () => ({
-//   signOut: jest.fn(),
-// }))
+jest.mock('next-auth/react', () => ({
+  signOut: jest.fn(),
+}))
 
 // the code below is to avoid the following error:
 //    "An update to Link inside a test was not wrapped in act(...)"

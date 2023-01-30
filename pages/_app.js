@@ -10,8 +10,6 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getLayout(<Component {...pageProps} />)
   }
 
-  console.log(Component)
-
   const display = { hideBanner: pageProps.hideBanner }
   /* istanbul ignore next */
   return (
