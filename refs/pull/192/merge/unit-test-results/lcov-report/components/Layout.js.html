@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">41.17% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>14/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
@@ -257,7 +257,18 @@
 <a name='L192'></a><a href='#L192'>192</a>
 <a name='L193'></a><a href='#L193'>193</a>
 <a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,6 +283,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -317,6 +330,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -462,14 +484,16 @@ import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
+import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
 &nbsp;
 export default function Layout(props) {
   const display = props.display ?? <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
   const t = props.locale === 'en' ? en : fr
-&nbsp;
   const defaultBreadcrumbs = []
+  const contactLink =
+    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 &nbsp;
   useEffect(() =&gt; {
     Modal.setAppElement('#modal-root')
@@ -482,14 +506,14 @@ export default function Layout(props) {
         ''
       ) : (
 <span class="branch-1 cbranch-no" title="branch not covered" >        &lt;PhaseBanner</span>
-          bannerBoldText={props.bannerContent.bannerBoldText}
-          bannerText={props.bannerContent.bannerText}
-          bannerLink={props.bannerContent.bannerLink}
-          bannerLinkHref={props.bannerContent.bannerLinkHref}
-          bannerButtonText={props.bannerContent.bannerButtonText}
-          bannerButtonLink={props.bannerContent.bannerButtonLink}
-          icon={props.bannerContent.icon}
-          popupContent={props.popupContent}
+          bannerBoldText={props.bannerContent.bannerBoldText || ''}
+          bannerText={props.bannerContent.bannerText || ''}
+          bannerLink={props.bannerContent.bannerLink || ''}
+          bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerButtonText={props.bannerContent.bannerButtonText || ''}
+          bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
+          icon={props.bannerContent.icon || ''}
+          popupContent={props.popupContent || ''}
         &gt;&lt;/PhaseBanner&gt;
       )}
       &lt;Header
@@ -516,17 +540,25 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/my-dashboard'
+                  : '/fr/mon-tableau-de-bord'
+              }`,
             },
             {
               key: 'securityKey',
               value: t.menuItems.security,
-              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/security-settings'
+                  : '/fr/parametres-securite'
+              }`,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'signOutKey',
@@ -540,7 +572,6 @@ export default function Layout(props) {
           onSubmit: function <span class="fstat-no" title="function not covered" >noRefCheck(</span>) {},
         }}
       /&gt;
-&nbsp;
       &lt;main id="mainContent"&gt;
         {display.fullscreen ? (
 <span class="branch-0 cbranch-no" title="branch not covered" >          props.children</span>
@@ -549,6 +580,7 @@ export default function Layout(props) {
         )}
       &lt;/main&gt;
       &lt;div id="modal-root"&gt;&lt;/div&gt;
+&nbsp;
       &lt;Footer
         lang={props.locale}
         brandLinks={[
@@ -563,11 +595,12 @@ export default function Layout(props) {
             text: t.footerPrivacy,
           },
         ]}
-        contactLink="/contact-us"
+        contactLink={contactLink}
         btnLink="/"
         id="page-footer"
         isAuthenticated={true}
       /&gt;
+      &lt;script type="text/javascript"&gt;_satellite.pageBottom();&lt;/script&gt;
     &lt;/&gt;
   )
 }
@@ -652,7 +685,7 @@ Layout.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-25T14:20:54.771Z
+                at 2023-01-31T14:10:43.525Z
             </div>
         <script src="../prettify.js"></script>
         <script>

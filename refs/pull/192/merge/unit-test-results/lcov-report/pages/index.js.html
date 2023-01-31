@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/11</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.63% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -168,7 +168,29 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,6 +275,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -270,16 +303,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Image from 'next/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+&nbsp;
 export default function Index(props) {
   return (
     &lt;div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12"&gt;
-      &lt;MetaData language={props.locale} data={props.meta}&gt;&lt;/MetaData&gt;
+      &lt;MetaData language="en" data={props.meta}&gt;&lt;/MetaData&gt;
       &lt;div className="flex flex-col justify-center items-center m-auto"&gt;
         &lt;div className="z-10 bg-white h-auto w-[18.75rem] xl:w-[31.25rem]"&gt;
           &lt;h1 className="sr-only"&gt;service.canada.ca-digital-center&lt;/h1&gt;
@@ -296,7 +337,7 @@ export default function Index(props) {
           &lt;/div&gt;
           &lt;div className="flex w-max container py-11 mx-auto font-display"&gt;
             &lt;div className="grid grid-cols-2 gap-2 xl:gap-6"&gt;
-              &lt;Link href="/my-dashboard"&gt;
+              &lt;Link href="/en/my-dashboard"&gt;
                 &lt;a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
                   // onClick={props.onClick}
@@ -308,7 +349,7 @@ export default function Index(props) {
                   English
                 &lt;/a&gt;
               &lt;/Link&gt;
-              &lt;Link href="/fr/my-dashboard"&gt;
+              &lt;Link href="/fr/mon-tableau-de-bord"&gt;
                 &lt;a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
                   // onClick={props.onClick}
@@ -358,6 +399,17 @@ Index.getLayout = function PageLayout(page) {
 }
 &nbsp;
 export async function getStaticProps({ locale }) {
+  const bannerContent = await getBetaBannerContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
+    // res.statusCode = 500
+<span class="cstat-no" title="statement not covered" >    throw error</span>
+  })
+  const popupContent = await getBetaPopupExitContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
+    // res.statusCode = 500
+<span class="cstat-no" title="statement not covered" >    throw error</span>
+  })
+&nbsp;
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -375,7 +427,12 @@ export async function getStaticProps({ locale }) {
   }
 &nbsp;
   return {
-    props: { locale, meta },
+    props: {
+      locale,
+      meta,
+      bannerContent: bannerContent.en,
+      popupContent: popupContent.en,
+    },
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -385,7 +442,7 @@ export async function getStaticProps({ locale }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-25T14:20:54.771Z
+                at 2023-01-31T14:10:43.525Z
             </div>
         <script src="../prettify.js"></script>
         <script>
