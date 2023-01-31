@@ -36,7 +36,7 @@ export default function ContactLanding(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getContactUsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

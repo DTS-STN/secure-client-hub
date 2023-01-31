@@ -91,7 +91,7 @@ export default function Profile(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getProfileContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
