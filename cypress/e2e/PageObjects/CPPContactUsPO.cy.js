@@ -16,7 +16,7 @@ function ValidateCPPContactUsHeaderEN() {
 }
 
 function ValidateCPPContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contact-us/contact-canada-pension-plan')
+  cy.url().should('contains', '/fr/contactez-nous/communiquer-regime-pensions-canada/')
 }
 
 function ValidateCPPContactUsHeaderFR() {
