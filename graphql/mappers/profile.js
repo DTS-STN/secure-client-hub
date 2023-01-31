@@ -6,7 +6,6 @@ export async function getProfileContent() {
   const query = require('../queries/profile.graphql')
   const response = await clientQuery(query)
 
-
   const enLookingForFragment = findFragmentByScId(
     response,
     'looking-for-security-settings'
