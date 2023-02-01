@@ -1,36 +1,36 @@
 /// <reference types="cypress" />
-import ContactUsOASdata from '../../fixtures/ContactUsOASdata.json'
+import ContactUsCPPdata from '../../fixtures/ContactUsCPPdata.json'
 
-function OASContactUsHeader() {
-  return cy.get('[data-cy ="oasContactUsContent"]>h1')
+function CPPContactUsHeader() {
+  return cy.get('[data-cy ="eIContactUsContent"]>h1')
 }
 
-function ValidateOASContactUsUrl() {
-  cy.url().should('contains', '/contact-us/contact-old-age-security')
+function ValidateCPPContactUsUrl() {
+  cy.url().should('contains', '/contact-us/contact-canada-pension-plan')
 }
 
-function ValidateOASContactUsHeaderEN() {
-  OASContactUsHeader()
+function ValidateCPPContactUsHeaderEN() {
+  CPPContactUsHeader()
     .should('be.visible')
-    .and('have.text', 'Contact Old Age Security')
+    .and('have.text', 'Contact Canada Pension Plan')
 }
 
-function ValidateOASContactUsUrlFR() {
+function ValidateCPPContactUsUrlFR() {
   cy.url().should(
     'contains',
-    '/fr/contactez-nous/communiquer-securite-vieillesse'
+    '/fr/contactez-nous/communiquer-regime-pensions-canada/'
   )
 }
 
-function ValidateOASContactUsHeaderFR() {
-  OASContactUsHeader()
+function ValidateCPPContactUsHeaderFR() {
+  CPPContactUsHeader()
     .should('be.visible')
-    .and('have.text', 'Communiquer avec la Sécurité de la vieillesse')
+    .and('have.text', 'Communiquer avec le Régime de pensions du Canada')
 }
 
 function ValidateOnthisPageLinks() {
   return cy
-    .get('[data-cy ="oasContactUsContent"]>section')
+    .get('[data-cy ="eIContactUsContent"]>section')
     .find('a')
     .should('be.visible')
     .and('have.length', '4')
@@ -42,7 +42,7 @@ function ValidateTelephoneLink() {
   cy.get('[data-cy="tableLink1"]')
     .should('have.attr', 'target', '_self')
     .click()
-  cy.url().should('contains', 'oas-contact-telephone')
+  cy.url().should('contains', 'cpp-contact-telephone')
 }
 
 function ValidateTelephoneHeading() {
@@ -50,69 +50,69 @@ function ValidateTelephoneHeading() {
 }
 
 function ValidateTelephoneSectionContent() {
-  return cy.get('[name ="oas-contact-telephone"]>div').should('be.visible')
+  return cy.get('[name ="cpp-contact-telephone"]>div').should('be.visible')
 }
 
 function ValidateCallBackHeading() {
-  cy.get('[name="oas-contact-callback"]>h2').should('have.text', 'Callback')
+  cy.get('[name="cpp-contact-callback"]>h2').should('have.text', 'Callback')
 }
 
 function ValidateCallbackSectionContent() {
-  return cy.get('[name ="oas-contact-callback"]>div').should('be.visible')
+  return cy.get('[name ="cpp-contact-callback"]>div').should('be.visible')
 }
 
 function ValidateEachtableOfContentLink() {
-  for (let i = 0; i < ContactUsOASdata.length; i++) {
-    cy.get('[data-cy ="oasContactUsContent"]>section')
+  for (let i = 0; i < ContactUsCPPdata.length; i++) {
+    cy.get('[data-cy ="eIContactUsContent"]>section')
       .find('a')
       .each(($el1, index, $list) => {
         const linkText = $el1.find('span').text()
 
-        if (linkText.includes(ContactUsOASdata[i].Link)) {
+        if (linkText.includes(ContactUsCPPdata[i].Link)) {
           cy.wrap($el1).should('have.attr', 'target', '_self').click()
-          cy.url().should('contains', ContactUsOASdata[i].URL)
+          cy.url().should('contains', ContactUsCPPdata[i].URL)
         }
       })
   }
 }
 
-function ValidateEachSectionOASContactUs() {
+function ValidateEachSectionCPPContactUs() {
   cy.get('[data-cy="sections"]>div').each(($el2, index, $list) => {
     cy.wrap($el2).should('be.visible')
   })
 }
 
 function EachContactSection() {
-  return cy.get('[data-cy="oasContactUsContent"]>div')
+  return cy.get('[data-cy="eIContactUsContent"]>div')
 }
 
 function ProvinceCard() {
   return cy.get('[data-cy="provinceCards"]')
 }
 
-function OASContactUsSections() {
+function CPPContactUsSections() {
   return cy.get('[data-cy="sections"]')
 }
 
 function ValidateEachSectionContent() {
-  OASContactUsSections().each(($el1, index, $list) => {
-    const sectionHeader = $el1.find('[data-cy="sectionHeader"]').text()
-    for (let j = 0; j < ContactUsOASdata.length; j++) {
-      if (sectionHeader.includes(ContactUsOASdata[j].Link)) {
+  CPPContactUsSections().each(($el1, index, $list) => {
+    const sectionHeader = $el1.find('h2').text()
+    for (let j = 0; j < ContactUsCPPdata.length; j++) {
+      if (sectionHeader.includes(ContactUsCPPdata[j].Link)) {
         cy.wrap($el1).find('[data-cy="section1"]').should('be.visible')
         cy.wrap($el1).find('[data-cy="section2"]').should('be.visible')
-        for (let i = 0; i < ContactUsOASdata[j].RowName.length; i++) {
+        for (let i = 0; i < ContactUsCPPdata[j].RowName.length; i++) {
           cy.wrap($el1)
             .find('[data-cy="section2"]')
-            .should('include.text', ContactUsOASdata[j].RowName[i])
+            .should('include.text', ContactUsCPPdata[j].RowName[i])
         }
       }
     }
   })
 }
 
-function ValidateMailCardsOASContactUs() {
-  ProvinceCard().should('have.length', '13')
+function ValidateMailCardsCPPContactUs() {
+  ProvinceCard().should('have.length', '6')
   ProvinceCard().each(($el1, index, $list) => {
     cy.wrap($el1).click()
     const ContactDetails = cy.wrap($el1).find('[data-cy="mailContactDetails"]')
@@ -124,11 +124,11 @@ function ValidateMailCardsOASContactUs() {
 }
 
 module.exports = {
-  OASContactUsHeader,
-  ValidateOASContactUsUrl,
-  ValidateOASContactUsHeaderEN,
-  ValidateOASContactUsUrlFR,
-  ValidateOASContactUsHeaderFR,
+  CPPContactUsHeader,
+  ValidateCPPContactUsUrl,
+  ValidateCPPContactUsHeaderEN,
+  ValidateCPPContactUsUrlFR,
+  ValidateCPPContactUsHeaderFR,
   ValidateOnthisPageLinks,
   ValidateTelephoneLink,
   ValidateTelephoneHeading,
@@ -136,10 +136,10 @@ module.exports = {
   ValidateCallBackHeading,
   ValidateCallbackSectionContent,
   ValidateEachtableOfContentLink,
-  ValidateEachSectionOASContactUs,
-  ValidateMailCardsOASContactUs,
+  ValidateEachSectionCPPContactUs,
+  ValidateMailCardsCPPContactUs,
   EachContactSection,
   ProvinceCard,
-  OASContactUsSections,
+  CPPContactUsSections,
   ValidateEachSectionContent,
 }

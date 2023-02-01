@@ -156,7 +156,7 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getStaticProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
@@ -193,7 +193,8 @@ export async function getServerSideProps({ req, res, locale }) {
   })
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/my-dashboard' : '/my-dashboard'
+  const langToggleLink =
+    locale === 'en' ? '/fr/mon-tableau-de-bord' : '/my-dashboard'
 
   /* Place-holder Meta Data Props */
   const meta = {

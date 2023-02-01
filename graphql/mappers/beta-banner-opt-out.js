@@ -28,5 +28,6 @@ export async function getBetaBannerContent() {
       icon: resOptOutContent.scFragments[0].scIconCSS,
     },
   }
+
   return mappedBanner
 }

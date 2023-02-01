@@ -35,16 +35,20 @@ export async function getSecuritySettingsContent() {
 
   const mappedSecurity = {
     en: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameEn,
+            text: w.scTitleEn,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       subHeading: enContentFragment.json[0].content[0].value,
       lookingFor: {
         title: enLookingForFragment.json[0].content[0].value,
         subText: enLookingForFragment.json[1].content.map((element) => {
-          if (element.value) {
-            return element.value
-          }
-          return null
+          return element.value || null
         }),
         link: '/profile',
       },
@@ -70,18 +74,22 @@ export async function getSecuritySettingsContent() {
       },
     },
     fr: {
+      breadcrumb:
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
+          return {
+            link: w.scPageNameFr,
+            text: w.scTitleFr,
+          }
+        }),
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       subHeading: frContentFragment.json[0].content[0].value,
       lookingFor: {
         title: frLookingForFragment.json[0].content[0].value,
         subText: frLookingForFragment.json[1].content.map((element) => {
-          if (element.value) {
-            return element.value
-          }
-          return null
+          return element.value || null
         }),
-        link: '/fr/profile',
+        link: '/fr/profil',
       },
       securityQuestions: {
         linkTitle: {

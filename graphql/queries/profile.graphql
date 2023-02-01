@@ -4,15 +4,20 @@
             _path
             scTitleEn
             scTitleFr
+            scBreadcrumbParentPages {
+                scId
+                scTitleEn
+                scTitleFr
+                scPageNameEn
+                scPageNameFr
+            }
             scFragments {
                 ... on SCHListv1Model {
                     scId
+                    scTitleEn
+                    scTitleFr
                     scItems{
-                        ... on SCHCardv1Model {
-                            scId
-                            scTitleEn
-                            scTitleFr
-                            schTasks {
+                        ... on SCHTaskv1Model {
                                 scId
                                 scLinkTextEn
                                 scLinkTextFr
@@ -26,11 +31,14 @@
                             }
                         }
                     }
-                }
+                
                 ... on SCHContentv1Model{
                     scId
                     scContentEn{
-                        plaintext
+                        json
+                    }
+                    scContentFr{
+                        json
                     }
                 }
                 ... on SCHTaskv1Model {
