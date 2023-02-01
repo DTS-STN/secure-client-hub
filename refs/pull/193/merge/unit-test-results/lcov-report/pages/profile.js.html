@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.07% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/26</span>
+                <span class='fraction'>4/24</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.07% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/26</span>
+                <span class='fraction'>4/24</span>
             </div>
         
             
@@ -226,21 +226,7 @@
 <a name='L161'></a><a href='#L161'>161</a>
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
-<a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a>
-<a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -259,8 +245,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,25 +257,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -422,7 +394,6 @@ import { Heading } from '@dts-stn/service-canada-design-system'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
@@ -449,33 +420,20 @@ export default function Profile(props) {
   function <span class="fstat-no" title="function not covered" >closeModal(</span>) {
 <span class="cstat-no" title="statement not covered" >    setOpenModalWithLink({ isOpen: false, activeLink: '/' })</span>
   }
-&nbsp;
   return (
     &lt;div id="homeContent" data-testid="profileContent-test"&gt;
       &lt;Heading id="my-dashboard-heading" title={t.pageHeading.profile} /&gt;
-      {props.content.cards.map((card) =&gt; {
-        const moreLessButtonText = card.lists.tasks[0].title
-        const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
+      &lt;p className="text-lg mt-2 font-body"&gt;{props.content.heading}&lt;/p&gt;
+      {props.content.list.map((program, index) =&gt; {
         return (
-          &lt;Card
-            key={card.id}
-            programUniqueId={card.id}
-            locale={props.locale}
-            cardTitle={card.title}
-            viewMoreLessCaption={moreLessButtonText}
-          &gt;
-            &lt;div
-              className="px-3 sm:px-8 md:px-15 border-t-2"
-              data-cy="task-list"
-            &gt;
-              &lt;ProfileTasks
-                tasks={tasks}
-                data-testID="profile-task-group-list"
-                openModal={openModal}
-                data-cy="task"
-              /&gt;
-            &lt;/div&gt;
-          &lt;/Card&gt;
+          &lt;ProfileTasks
+            key={index}
+            programTitle={program.title}
+            tasks={program.tasks}
+            data-testID="profile-task-group-list"
+            openModal={openModal}
+            data-cy="task"
+          /&gt;
         )
       })}
       &lt;PageLink
@@ -485,9 +443,9 @@ export default function Profile(props) {
         href={props.content.lookingFor.link}
         linkID="link-id"
         dataCy="access-security-page-link"
-        buttonHref={t.url_dashboard}
+        buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
-        buttonLinkText={t.backToDashboard}
+        buttonLinkText={props.content.backToDashboard.btnText}
       &gt;&lt;/PageLink&gt;
       &lt;Modal
         className="flex justify-center bg-black/75 h-full"
@@ -601,7 +559,7 @@ Profile.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-30T18:20:11.951Z
+                at 2023-02-01T16:01:54.816Z
             </div>
         <script src="../prettify.js"></script>
         <script>
