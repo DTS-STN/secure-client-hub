@@ -14,12 +14,10 @@
             scFragments {
                 ... on SCHListv1Model {
                     scId
+                    scTitleEn
+                    scTitleFr
                     scItems{
-                        ... on SCHCardv1Model {
-                            scId
-                            scTitleEn
-                            scTitleFr
-                            schTasks {
+                        ... on SCHTaskv1Model {
                                 scId
                                 scLinkTextEn
                                 scLinkTextFr
@@ -33,13 +31,13 @@
                             }
                         }
                     }
-                }
+                
                 ... on SCHContentv1Model{
                     scId
-                    scContentFr {
+                    scContentEn{
                         json
                     }
-                    scContentEn {
+                    scContentFr{
                         json
                     }
                 }

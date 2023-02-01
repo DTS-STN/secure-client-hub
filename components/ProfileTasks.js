@@ -5,17 +5,15 @@ import { icon } from '../lib/loadIcons'
 
 export default function ProfileTasks(props) {
   return (
-    <>
+    <div data-cy="task-list" className="mt-10 mb-12">
+      <h2 className="text-4xl font-bold font-body">{props.programTitle}</h2>
       <ul
-        className="w-full gap-x-4 grid md:grid-cols-2 items-center pt-3"
+        className="w-full grid md:grid-cols-1 items-center pt-3"
         data-cy="task"
       >
         {props.tasks.map((task, index) => {
           return (
-            <li
-              key={index}
-              className="font-body font-bold justify-center py-3  pl-2"
-            >
+            <li key={index} className="font-body font-bold justify-center py-3">
               <Link href={task.link} passHref>
                 <a
                   className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
@@ -48,13 +46,14 @@ export default function ProfileTasks(props) {
           )
         })}
       </ul>
-    </>
+    </div>
   )
 }
 
 ProfileTasks.propTypes = {
   dataCy: PropTypes.string,
   openModal: PropTypes.func,
+  programTitle: PropTypes.string,
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,

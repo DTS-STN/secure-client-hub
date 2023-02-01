@@ -31,14 +31,14 @@ export default function Layout(props) {
         ''
       ) : (
         <PhaseBanner
-          bannerBoldText={props.bannerContent.bannerBoldText}
-          bannerText={props.bannerContent.bannerText}
-          bannerLink={props.bannerContent.bannerLink}
-          bannerLinkHref={props.bannerContent.bannerLinkHref}
-          bannerButtonText={props.bannerContent.bannerButtonText}
-          bannerButtonLink={props.bannerContent.bannerButtonLink}
-          icon={props.bannerContent.icon}
-          popupContent={props.popupContent}
+          bannerBoldText={props.bannerContent.bannerBoldText || ''}
+          bannerText={props.bannerContent.bannerText || ''}
+          bannerLink={props.bannerContent.bannerLink || ''}
+          bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerButtonText={props.bannerContent.bannerButtonText || ''}
+          bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
+          icon={props.bannerContent.icon || ''}
+          popupContent={props.popupContent || ''}
         ></PhaseBanner>
       )}
       <Header
@@ -97,7 +97,6 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-
       <main id="mainContent">
         {display.fullscreen ? (
           props.children
