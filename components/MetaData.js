@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function MetaData(props) {
   const d = props.language === 'en' ? props.data.data_en : props.data.data_fr
-
+  console.log(d)
   return (
     <>
       <Head>
@@ -14,14 +14,7 @@ export default function MetaData(props) {
         <meta name="keywords" content={d.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="dcterms.title"
-          content={
-            props.language === 'en'
-              ? 'My Service Canada Account - My dashboard'
-              : 'Mon dossier Service Canada - Mon tableau de bord'
-          }
-        />
+        <meta name="dcterms.title" content={d.title} />
         <meta
           name="dcterms.language"
           content={props.language === 'en' ? 'eng' : 'fra'}
