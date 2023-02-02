@@ -548,7 +548,7 @@ TN:
 SF:pages/contact-us.js
 FN:12,ContactLanding
 FN:21,(anonymous_1)
-FN:39,getStaticProps
+FN:39,getServerSideProps
 FN:40,(anonymous_3)
 FN:45,(anonymous_4)
 FN:50,(anonymous_5)
@@ -558,7 +558,7 @@ FNF:8
 FNH:0
 FNDA:0,ContactLanding
 FNDA:0,(anonymous_1)
-FNDA:0,getStaticProps
+FNDA:0,getServerSideProps
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
@@ -604,14 +604,14 @@ TN:
 SF:pages/index.js
 FN:7,Index
 FN:84,PageLayout
-FN:88,getStaticProps
+FN:88,getServerSideProps
 FN:89,(anonymous_3)
 FN:94,(anonymous_4)
 FNF:5
 FNH:3
 FNDA:2,Index
 FNDA:1,PageLayout
-FNDA:1,getStaticProps
+FNDA:1,getServerSideProps
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
 DA:8,2
@@ -646,7 +646,7 @@ FN:72,(anonymous_10)
 FN:85,(anonymous_11)
 FN:92,(anonymous_12)
 FN:114,(anonymous_13)
-FN:159,getStaticProps
+FN:159,getServerSideProps
 FN:161,(anonymous_15)
 FN:166,(anonymous_16)
 FN:171,(anonymous_17)
@@ -668,7 +668,7 @@ FNDA:0,(anonymous_10)
 FNDA:2,(anonymous_11)
 FNDA:2,(anonymous_12)
 FNDA:0,(anonymous_13)
-FNDA:1,getStaticProps
+FNDA:1,getServerSideProps
 FNDA:0,(anonymous_15)
 FNDA:0,(anonymous_16)
 FNDA:0,(anonymous_17)
@@ -753,7 +753,7 @@ FN:16,Profile
 FN:25,openModal
 FN:29,closeModal
 FN:36,(anonymous_3)
-FN:80,getStaticProps
+FN:80,getServerSideProps
 FN:81,(anonymous_5)
 FN:86,(anonymous_6)
 FN:91,(anonymous_7)
@@ -766,7 +766,7 @@ FNDA:2,Profile
 FNDA:0,openModal
 FNDA:0,closeModal
 FNDA:1,(anonymous_3)
-FNDA:0,getStaticProps
+FNDA:0,getServerSideProps
 FNDA:0,(anonymous_5)
 FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
@@ -817,7 +817,7 @@ end_of_record
 TN:
 SF:pages/security-settings.js
 FN:12,SecuritySettings
-FN:53,getStaticProps
+FN:53,getServerSideProps
 FN:54,(anonymous_2)
 FN:59,(anonymous_3)
 FN:64,(anonymous_4)
@@ -826,7 +826,7 @@ FN:92,(anonymous_6)
 FNF:7
 FNH:0
 FNDA:0,SecuritySettings
-FNDA:0,getStaticProps
+FNDA:0,getServerSideProps
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
 FNDA:0,(anonymous_4)
@@ -1031,7 +1031,7 @@ SF:pages/contact-us/contact-canada-pension-plan.js
 FN:15,ContactCanadaPensionPlan
 FN:38,(anonymous_1)
 FN:43,(anonymous_2)
-FN:60,getStaticProps
+FN:60,getServerSideProps
 FN:61,(anonymous_4)
 FN:66,(anonymous_5)
 FN:91,(anonymous_6)
@@ -1042,7 +1042,7 @@ FNH:4
 FNDA:3,ContactCanadaPensionPlan
 FNDA:3,(anonymous_1)
 FNDA:3,(anonymous_2)
-FNDA:1,getStaticProps
+FNDA:1,getServerSideProps
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 FNDA:0,(anonymous_6)
@@ -1092,7 +1092,7 @@ SF:pages/contact-us/contact-employment-insurance.js
 FN:15,ContactEmploymentInsurance
 FN:39,(anonymous_1)
 FN:44,(anonymous_2)
-FN:57,getStaticProps
+FN:57,getServerSideProps
 FN:58,(anonymous_4)
 FN:63,(anonymous_5)
 FN:89,(anonymous_6)
@@ -1103,7 +1103,7 @@ FNH:4
 FNDA:3,ContactEmploymentInsurance
 FNDA:3,(anonymous_1)
 FNDA:3,(anonymous_2)
-FNDA:1,getStaticProps
+FNDA:1,getServerSideProps
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 FNDA:0,(anonymous_6)
@@ -1153,7 +1153,7 @@ SF:pages/contact-us/contact-old-age-security.js
 FN:15,ContactOldAgeSecurity
 FN:33,(anonymous_1)
 FN:38,(anonymous_2)
-FN:51,getStaticProps
+FN:51,getServerSideProps
 FN:52,(anonymous_4)
 FN:57,(anonymous_5)
 FN:82,(anonymous_6)
@@ -1164,7 +1164,7 @@ FNH:4
 FNDA:3,ContactOldAgeSecurity
 FNDA:3,(anonymous_1)
 FNDA:3,(anonymous_2)
-FNDA:1,getStaticProps
+FNDA:1,getServerSideProps
 FNDA:0,(anonymous_4)
 FNDA:0,(anonymous_5)
 FNDA:0,(anonymous_6)
