@@ -14,32 +14,19 @@ export default function MetaData(props) {
         <meta name="keywords" content={d.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="dcterms.title" content={d.title} />
-        <meta
-          name="dcterms.language"
-          content={props.language === 'en' ? 'eng' : 'fra'}
-        />
-        <meta
-          name="dcterms.creator"
-          content={
-            props.language === 'en'
-              ? 'Employment and Social Development Canada'
-              : 'Emploi et Développement social Canada'
-          }
-        />
-        <meta name="dcterms.accessRights" content="1" />
+        <meta name="dcterms.title" content="My Service Canada Account" />
+        <meta name="dcterms.language" content="eng" />
+        <meta name="dcterms.creator" content="Service Canada" />
+        <meta name="dcterms.accessRights" content="2" />
         <meta
           name="dcterms.service"
-          content={
-            props.language === 'en'
-              ? 'SDC-EDSC_MSCA-MDSC'
-              : 'ESDC-EDSC_MSCA-MDSC'
-          }
+          content="ESDC-
+EDSC_MSCA-MSDC"
         />
         {/* eslint-disable */}
         <script
-          src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
-          data-nscript="afterInteractive"
+          src="https://assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
+dfa8abb35555-staging.min.js"
         ></script>
         {/*eslint-enable */}
       </Head>
