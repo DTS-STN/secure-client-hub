@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
 
-import { getServerSideProps } from '../../pages/my-dashboard'
+import { getStaticProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
 
@@ -120,8 +120,8 @@ describe('My Dashboard page', () => {
     expect(testCard).toBeInTheDocument()
   })
 
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
+  it('Test getStaticProps', async () => {
+    const props = await getStaticProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {
@@ -135,12 +135,18 @@ describe('My Dashboard page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Dashboard',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
             title: 'Mon dossier Service Canada - Tableau de Bord',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         popupContent: {},

@@ -156,7 +156,7 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getStaticProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
@@ -203,12 +203,18 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Tableau de Bord',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

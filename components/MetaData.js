@@ -19,27 +19,13 @@ export default function MetaData(props) {
           name="dcterms.language"
           content={props.language === 'en' ? 'eng' : 'fra'}
         />
-        <meta
-          name="dcterms.creator"
-          content={
-            props.language === 'en'
-              ? 'Employment and Social Development Canada'
-              : 'Emploi et Développement social Canada'
-          }
-        />
-        <meta name="dcterms.accessRights" content="1" />
-        <meta
-          name="dcterms.service"
-          content={
-            props.language === 'en'
-              ? 'SDC-EDSC_MSCA-MDSC'
-              : 'ESDC-EDSC_MSCA-MDSC'
-          }
-        />
+        <meta name="dcterms.creator" content={d.creator} />
+        <meta name="dcterms.accessRights" content={d.accessRights} />
+        <meta name="dcterms.service" content={d.service} />
         {/* eslint-disable */}
         <script
-          src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
-          data-nscript="afterInteractive"
+          src="https://assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
+dfa8abb35555-staging.min.js"
         ></script>
         {/*eslint-enable */}
       </Head>
