@@ -4,6 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
+
 import { getStaticProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
@@ -29,6 +30,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   getMyDashboardContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
     })
   },
 }))
