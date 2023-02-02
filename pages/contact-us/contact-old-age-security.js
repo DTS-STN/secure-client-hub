@@ -48,7 +48,7 @@ export default function ContactOldAgeSecurity(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getStaticProps({ res, locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -112,6 +112,9 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title:
@@ -119,6 +122,9 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

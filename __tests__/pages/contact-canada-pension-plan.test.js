@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactCanadaPensionPlan, {
-  getServerSideProps,
+  getStaticProps,
 } from '../../pages/contact-us/contact-canada-pension-plan'
 
 expect.extend(toHaveNoViolations)
@@ -130,8 +130,8 @@ describe('CPP Contact Us Page', () => {
     expect(contactSection).toBeInTheDocument()
   })
 
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
+  it('Test getStaticProps', async () => {
+    const props = await getStaticProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {
@@ -145,12 +145,18 @@ describe('CPP Contact Us Page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Contact Canada Pension Plan',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
             title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         breadCrumbItems: undefined,

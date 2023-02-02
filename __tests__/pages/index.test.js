@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Index, { getServerSideProps } from '../../pages/index'
+import Index, { getStaticProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
@@ -93,8 +93,8 @@ describe('index page', () => {
     expect(heading).toBeInTheDocument()
   })
 
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({
+  it('Test getStaticProps', async () => {
+    const props = await getStaticProps({
       locale: 'en',
     })
 
@@ -107,12 +107,18 @@ describe('index page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Canada.ca',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
             title: 'Mon dossier Service Canada - Canada.ca',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         bannerContent: {},
