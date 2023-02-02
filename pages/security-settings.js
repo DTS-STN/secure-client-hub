@@ -50,7 +50,7 @@ export default function SecuritySettings(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

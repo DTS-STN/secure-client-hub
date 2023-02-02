@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactCanadaPensionPlan, {
-  getStaticProps,
+  getServerSideProps,
 } from '../../pages/contact-us/contact-canada-pension-plan'
 
 expect.extend(toHaveNoViolations)
@@ -130,8 +130,8 @@ describe('CPP Contact Us Page', () => {
     expect(contactSection).toBeInTheDocument()
   })
 
-  it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {

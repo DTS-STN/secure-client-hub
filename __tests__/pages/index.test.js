@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Index, { getStaticProps } from '../../pages/index'
+import Index, { getServerSideProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
@@ -93,8 +93,8 @@ describe('index page', () => {
     expect(heading).toBeInTheDocument()
   })
 
-  it('Test getStaticProps', async () => {
-    const props = await getStaticProps({
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({
       locale: 'en',
     })
 
