@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675285651387" clover="3.2.0">
-  <project timestamp="1675285651387" name="All files">
-    <metrics statements="315" coveredstatements="128" conditionals="218" coveredconditionals="72" methods="145" coveredmethods="46" elements="678" coveredelements="246" complexity="0" loc="315" ncloc="315" packages="9" files="40" classes="40"/>
+<coverage generated="1675348545013" clover="3.2.0">
+  <project timestamp="1675348545013" name="All files">
+    <metrics statements="316" coveredstatements="129" conditionals="216" coveredconditionals="70" methods="145" coveredmethods="46" elements="677" coveredelements="245" complexity="0" loc="316" ncloc="316" packages="9" files="40" classes="40"/>
     <package name="components">
-      <metrics statements="56" coveredstatements="35" conditionals="68" coveredconditionals="32" methods="26" coveredmethods="12"/>
+      <metrics statements="57" coveredstatements="36" conditionals="66" coveredconditionals="30" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="3" type="stmt"/>
@@ -52,8 +52,9 @@
         <line num="141" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
-        <metrics statements="2" coveredstatements="2" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+        <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
         <line num="5" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="6" type="stmt"/>
         <line num="7" count="6" type="stmt"/>
       </file>
       <file name="MostReqTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MostReqTasks.js">
