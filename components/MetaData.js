@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function MetaData(props) {
   const d = props.language === 'en' ? props.data.data_en : props.data.data_fr
-  console.log(d)
+
   return (
     <>
       <Head>
