@@ -1,7 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '../../lib/loadIcons'
-import { Collapse } from '@dts-stn/service-canada-design-system'
-
 const ContactRows = ({ rows }) => {
   let rowArr = []
   for (let i = 1; i <= 4; i++) {

@@ -9,7 +9,6 @@ import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
-import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
