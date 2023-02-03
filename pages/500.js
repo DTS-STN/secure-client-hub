@@ -1,15 +1,15 @@
 import { ErrorPage } from '@dts-stn/service-canada-design-system'
 
-export default function Custom404(props) {
+export default function Custom500(props) {
   return (
     <ErrorPage
       lang={props.locale}
-      errType="404"
+      errType="500"
       isAuth={!props.isAuth}
       homePageLink={
         props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
       }
-      accountPageLink="/"
+      accountPageLink={props.isAuth ? '/' : '/'}
     />
   )
 }
@@ -18,7 +18,7 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - 404',
+      title: 'My Service Canada Account - 500',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -27,7 +27,7 @@ export async function getStaticProps({ locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - 404',
+      title: 'Mon dossier Service Canada - 500',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

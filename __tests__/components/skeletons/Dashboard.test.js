@@ -10,7 +10,6 @@ describe('Dashboard', () => {
     render(<Dashboard sections={1} />)
 
     const box = screen.getByTestId('dashboard-skeleton')
-    console.log(box)
     expect(box).toBeTruthy()
   })
 })

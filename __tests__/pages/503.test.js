@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Custom404 from '../../pages/404'
-import { getStaticProps } from '../../pages/404'
+import Custom503 from '../../pages/503'
+import { getStaticProps } from '../../pages/503'
 
 // 'Mock' call to fetchContent
 jest.mock('../../lib/cms', () => ({
@@ -13,7 +13,7 @@ jest.mock('../../lib/cms', () => ({
   },
 }))
 
-describe('404', () => {
+describe('503', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
@@ -21,20 +21,20 @@ describe('404', () => {
     }
   })
 
-  it('renders 404 without crashing', () => {
-    render(<Custom404 locale="en" isAuth={false} />)
-    expect(screen.getByText('Error 404')).toBeInTheDocument()
+  it('renders 503 without crashing', () => {
+    render(<Custom503 locale="en" isAuth={false} />)
+    expect(screen.getByText('Error 503')).toBeInTheDocument()
   })
 
   it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en', isAuth: false })
+    const props = await getStaticProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {
         locale: 'en',
         meta: {
           data_en: {
-            title: 'My Service Canada Account - 404',
+            title: 'My Service Canada Account - 503',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -43,7 +43,7 @@ describe('404', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Mon dossier Service Canada - 404',
+            title: 'Mon dossier Service Canada - 503',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',
