@@ -35,6 +35,7 @@ export default function ContactCanadaPensionPlan(props) {
         }`}
       />
       <TableContent
+        id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}

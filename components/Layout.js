@@ -39,6 +39,7 @@ export default function Layout(props) {
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
+          lang={props.locale}
         ></PhaseBanner>
       )}
       <Header
