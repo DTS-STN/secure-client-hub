@@ -105,7 +105,7 @@ export default function Layout(props) {
       <div id="modal-root"></div>
 
       <Footer
-        lang={props.locale}
+        lang={!props.locale ? 'en' : props.locale}
         brandLinks={[
           {
             href: t.footerTermsAndConditionURL,
