@@ -38,14 +38,12 @@ export default function Layout(props) {
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
-          lang={props.locale}
         ></PhaseBanner>
       )}
       <Header
         // analyticsTracking
         dataTestId="topnav"
         id="header"
-        lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
@@ -107,7 +105,6 @@ export default function Layout(props) {
       <div id="modal-root"></div>
 
       <Footer
-        lang={props.locale}
         brandLinks={[
           {
             href: t.footerTermsAndConditionURL,

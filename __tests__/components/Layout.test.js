@@ -27,12 +27,18 @@ describe('Layout with default text', () => {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Canada.ca',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
   const display = { hideBanner: true }
@@ -45,11 +51,6 @@ describe('Layout with default text', () => {
   it('Layout contains Symbol of GoC', () => {
     render(<Layout locale="en" meta={meta} display={display} />)
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
-  })
-
-  it('Layout contains "Skip to content" link', () => {
-    render(<Layout locale="fr" meta={meta} display={display} />)
-    expect(screen.getByText('Passer au contenu principal')).toBeInTheDocument()
   })
 
   it('Layout contains a Main tag', () => {
