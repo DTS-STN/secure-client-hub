@@ -30,6 +30,7 @@ export default function ContactOldAgeSecurity(props) {
         }`}
       />
       <TableContent
+        id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}

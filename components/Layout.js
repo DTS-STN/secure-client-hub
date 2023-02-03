@@ -9,7 +9,6 @@ import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
-import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
@@ -45,7 +44,6 @@ export default function Layout(props) {
         // analyticsTracking
         dataTestId="topnav"
         id="header"
-        lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
@@ -107,7 +105,7 @@ export default function Layout(props) {
       <div id="modal-root"></div>
 
       <Footer
-        lang={props.locale}
+        lang={!props.locale ? 'en' : props.locale}
         brandLinks={[
           {
             href: t.footerTermsAndConditionURL,

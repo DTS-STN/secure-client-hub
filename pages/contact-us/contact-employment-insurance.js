@@ -36,6 +36,7 @@ export default function ContactEmploymentInsurance(props) {
       />
 
       <TableContent
+        id="eiContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
