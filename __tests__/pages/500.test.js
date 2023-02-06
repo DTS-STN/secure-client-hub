@@ -32,6 +32,7 @@ describe('500', () => {
     expect(props).toEqual({
       props: {
         locale: 'en',
+        langToggleLink: '/fr/500',
         meta: {
           data_en: {
             title: 'My Service Canada Account - 500',

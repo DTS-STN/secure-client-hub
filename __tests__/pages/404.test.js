@@ -32,6 +32,7 @@ describe('404', () => {
     expect(props).toEqual({
       props: {
         locale: 'en',
+        langToggleLink: '/fr/404',
         meta: {
           data_en: {
             title: 'My Service Canada Account - 404',
