@@ -85,7 +85,7 @@ Index.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
