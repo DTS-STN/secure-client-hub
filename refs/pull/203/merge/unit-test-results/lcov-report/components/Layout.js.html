@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.17% </span>
+                <span class="strong">27.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/34</span>
+                <span class='fraction'>10/36</span>
             </div>
         
             
@@ -266,9 +266,7 @@
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
 <a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,19 +281,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -484,16 +480,15 @@ import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
 import { useEffect } from 'react'
-import Script from 'next/script'
 import en from '../locales/en'
 import fr from '../locales/fr'
 &nbsp;
 export default function Layout(props) {
   const display = props.display ?? <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
-  const t = props.locale === 'en' ? en : fr
+  const t = props.locale === 'en' ? en : <span class="branch-1 cbranch-no" title="branch not covered" >fr</span>
   const defaultBreadcrumbs = []
   const contactLink =
-    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
+    props.locale === 'en' ? '/en/contact-us' : <span class="branch-1 cbranch-no" title="branch not covered" >'/fr/contactez-nous'</span>
 &nbsp;
   useEffect(() =&gt; {
     Modal.setAppElement('#modal-root')
@@ -520,7 +515,6 @@ export default function Layout(props) {
         // analyticsTracking
         dataTestId="topnav"
         id="header"
-        lang={props.locale}
         linkPath={props.langToggleLink}
         breadCrumbItems={
           props.breadCrumbItems ? <span class="branch-0 cbranch-no" title="branch not covered" >props.breadCrumbItems </span>: defaultBreadcrumbs
@@ -543,7 +537,7 @@ export default function Layout(props) {
               path: `${
                 props.locale === 'en'
                   ? '/en/my-dashboard'
-                  : '/fr/mon-tableau-de-bord'
+                  : <span class="branch-1 cbranch-no" title="branch not covered" >'/fr/mon-tableau-de-bord'</span>
               }`,
             },
             {
@@ -552,13 +546,13 @@ export default function Layout(props) {
               path: `${
                 props.locale === 'en'
                   ? '/en/security-settings'
-                  : '/fr/parametres-securite'
+                  : <span class="branch-1 cbranch-no" title="branch not covered" >'/fr/parametres-securite'</span>
               }`,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              path: `${props.locale === 'en' ? '/en/profile' : <span class="branch-1 cbranch-no" title="branch not covered" >'/fr/profil'}</span>`,
             },
             {
               key: 'signOutKey',
@@ -582,7 +576,7 @@ export default function Layout(props) {
       &lt;div id="modal-root"&gt;&lt;/div&gt;
 &nbsp;
       &lt;Footer
-        lang={props.locale}
+        lang={!props.locale ? <span class="branch-0 cbranch-no" title="branch not covered" >'en' </span>: props.locale}
         brandLinks={[
           {
             href: t.footerTermsAndConditionURL,
@@ -685,7 +679,7 @@ Layout.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-03T19:04:43.014Z
+                at 2023-02-06T16:28:39.518Z
             </div>
         <script src="../prettify.js"></script>
         <script>
