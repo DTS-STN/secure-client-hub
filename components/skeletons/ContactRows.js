@@ -1,6 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '../../lib/loadIcons'
-
 const ContactRows = ({ rows }) => {
   let rowArr = []
   for (let i = 1; i <= rows; i++) {

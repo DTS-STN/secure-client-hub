@@ -35,6 +35,7 @@ export default function ContactCanadaPensionPlan(props) {
         }`}
       />
       <TableContent
+        id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -57,7 +58,7 @@ export default function ContactCanadaPensionPlan(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500

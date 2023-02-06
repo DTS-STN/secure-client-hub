@@ -2,7 +2,7 @@ import CountDown from '../components/sessionModals/CountDown'
 import SignedOut from '../components/sessionModals/SignedOut'
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Heading, Button } from '@dts-stn/service-canada-design-system'
+import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
@@ -156,7 +156,7 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getStaticProps({ req, res, locale }) {
+export async function getServerSideProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
