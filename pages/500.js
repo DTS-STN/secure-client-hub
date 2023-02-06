@@ -15,6 +15,8 @@ export default function Custom500(props) {
 }
 
 export async function getStaticProps({ locale }) {
+  const langToggleLink = locale === 'en' ? '/fr/500' : '/500'
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -40,6 +42,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       locale,
+      langToggleLink,
       meta,
       hideBanner: true,
       isAuth: process.env.AUTH_DISABLED,
