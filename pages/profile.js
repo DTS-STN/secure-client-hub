@@ -3,7 +3,6 @@ import { Heading } from '@dts-stn/service-canada-design-system'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import Card from '../components/Card'
 import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
@@ -30,45 +29,32 @@ export default function Profile(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
-
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
-      {props.content.cards.map((card) => {
-        const moreLessButtonText = card.lists.tasks[0].title
-        const tasks = card.lists.tasks.slice(1, card.lists.tasks.length)
+      <p className="text-lg mt-2 font-body">{props.content.heading}</p>
+      {props.content.list.map((program, index) => {
         return (
-          <Card
-            key={card.id}
-            programUniqueId={card.id}
-            locale={props.locale}
-            cardTitle={card.title}
-            viewMoreLessCaption={moreLessButtonText}
-          >
-            <div
-              className="px-3 sm:px-8 md:px-15 border-t-2"
-              data-cy="task-list"
-            >
-              <ProfileTasks
-                tasks={tasks}
-                data-testID="profile-task-group-list"
-                openModal={openModal}
-                data-cy="task"
-              />
-            </div>
-          </Card>
+          <ProfileTasks
+            key={index}
+            programTitle={program.title}
+            tasks={program.tasks}
+            data-testID="profile-task-group-list"
+            openModal={openModal}
+            data-cy="task"
+          />
         )
       })}
       <PageLink
-        lookingForText={t.pageLinkSecurity}
-        accessText={t.accessYourSecurityText}
-        linkText={t.securityLinkText}
-        href="/security-settings"
+        lookingForText={props.content.lookingFor.title}
+        accessText={props.content.lookingFor.subText[0]}
+        linkText={props.content.lookingFor.subText[1]}
+        href={props.content.lookingFor.link}
         linkID="link-id"
         dataCy="access-security-page-link"
-        buttonHref={t.url_dashboard}
+        buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
-        buttonLinkText={t.backToDashboard}
+        buttonLinkText={props.content.backToDashboard.btnText}
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -91,7 +77,7 @@ export default function Profile(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getProfileContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
@@ -121,16 +107,18 @@ export async function getStaticProps({ res, locale }) {
   )
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/profile' : '/profile'
+  const langToggleLink = locale === 'en' ? '/fr/profil' : '/profile'
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -139,12 +127,18 @@ export async function getStaticProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Profil',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

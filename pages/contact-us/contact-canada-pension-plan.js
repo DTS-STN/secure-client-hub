@@ -35,6 +35,7 @@ export default function ContactCanadaPensionPlan(props) {
         }`}
       />
       <TableContent
+        id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -57,7 +58,7 @@ export default function ContactCanadaPensionPlan(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -83,7 +84,7 @@ export async function getStaticProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/contact-us/contact-canada-pension-plan'
+      ? '/fr/contactez-nous/communiquer-regime-pensions-canada'
       : '/contact-us/contact-canada-pension-plan'
 
   const t = locale === 'en' ? en : fr
@@ -97,10 +98,10 @@ export async function getStaticProps({ res, locale }) {
   const breadCrumbItems =
     locale === 'en'
       ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + link }
+          return { text, link: '/' + locale + '/' + link }
         })
       : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + link }
+          return { text, link: '/' + locale + '/' + link }
         })
 
   // const breadCrumbItems = [
@@ -121,12 +122,18 @@ export async function getStaticProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

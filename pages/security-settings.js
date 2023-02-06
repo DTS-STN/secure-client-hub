@@ -6,7 +6,6 @@ import fr from '../locales/fr'
 import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 
 export default function SecuritySettings(props) {
@@ -50,7 +49,7 @@ export default function SecuritySettings(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
@@ -80,16 +79,18 @@ export async function getStaticProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/security-settings' : '/security-settings'
+    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
 
   const t = locale === 'en' ? en : fr
 
-  const breadCrumbItems = [
-    {
-      link: t.url_dashboard,
-      text: t.pageHeading.title,
-    },
-  ]
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -98,12 +99,18 @@ export async function getStaticProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Sécurité',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

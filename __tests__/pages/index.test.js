@@ -3,8 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Index from '../../pages/index'
-import { getStaticProps } from '../../pages/index'
+import Index, { getServerSideProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
@@ -13,10 +12,54 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+const fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ data: 'mocked data' }),
+  })
+)
+
 // 'Mock' call to fetchContent
 jest.mock('../../lib/cms', () => ({
   fetchContent: () => {
     return {}
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
   },
 }))
 
@@ -50,8 +93,10 @@ describe('index page', () => {
     expect(heading).toBeInTheDocument()
   })
 
-  it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({
+      locale: 'en',
+    })
 
     expect(props).toEqual({
       props: {
@@ -62,14 +107,22 @@ describe('index page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Canada.ca',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
             title: 'Mon dossier Service Canada - Canada.ca',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
+        bannerContent: {},
+        popupContent: {},
       },
     })
   })

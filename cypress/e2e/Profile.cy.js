@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
-/// <reference types="cypress" />
 
 const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
-import dashboardData from '../../cypress/fixtures/dashboardData.json'
 
 beforeEach(() => {
   cy.visit('/profile')
@@ -62,23 +60,6 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderFR()
   })
 
-  it('Validate that the Card placeholder is present on Profile Page', () => {
-    profilePo.FirstCard().should('be.visible')
-  })
-
-  it('Validate that the Card Header is visible on profile page', () => {
-    profilePo.CardHeading().should('be.visible')
-  })
-
-  it('Validate that the Test card button on profile page expands and collapses on clicking', () => {
-    profilePo.CardButton().should('be.visible')
-    profilePo.ClickAllCardButtons()
-    profilePo.FirstCard().should('be.visible')
-    profilePo.Section().should('be.visible')
-    profilePo.ClickAllCardButtons()
-    profilePo.Section().should('not.exist')
-  })
-
   it('Validate that the "Looking for" section is present on Profile Page', () => {
     profilePo.LookingFor().should('be.visible')
     profilePo.LookingForSecurityLink().should('be.visible')
@@ -102,7 +83,7 @@ describe('Validate Profile page', () => {
     profilePo.LookingFor().should('have.text', 'Looking for security settings?')
     profilePo
       .BackToDashboardButton()
-      .should('have.text', 'Back to my Dashboard')
+      .should('have.text', 'Back to my dashboard')
   })
 
   it('Validate the "Looking for security Settings text" and button text in French', () => {
@@ -115,7 +96,7 @@ describe('Validate Profile page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
+  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/parametres-securite Page', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(2000)
     profilePo.LookingForSecurityLink().click()
@@ -128,48 +109,5 @@ describe('Validate Profile page', () => {
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
-  })
-
-  it('Validate that the Task List is Present for each card on profile page', () => {
-    profilePo.Cards().each(($el, index, $list) => {
-      cy.wrap($el).click()
-      dashboardPo.ExpandedCard().should('be.visible')
-    })
-  })
-
-  it('Validate the EI card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Employment Insurance', '5')
-    dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Assurance-emploi', '5')
-  })
-
-  it('Validate the CPP card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Canada Pension Plan', '4')
-    dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection(
-      'Régime de pensions du Canada',
-      '4'
-    )
-  })
-
-  it('Validate the OAS card in EN and FR', () => {
-    profilePo.ValidateCardTaskListAndSection('Old Age Security', '4')
-    dashboardPo.FrenchButton().click()
-    profilePo.ValidateCardTaskListAndSection('Sécurité de la vieillesse', '4')
-  })
-
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
-    profilePo.ExpandCard('Employment Insurance')
-    profilePo.ClickonTaskLinks()
-  })
-
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside CPP card', () => {
-    profilePo.ExpandCard('Canada Pension Plan')
-    profilePo.ClickonTaskLinks()
-  })
-
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
-    profilePo.ExpandCard('Old Age Security')
-    profilePo.ClickonTaskLinks()
   })
 })

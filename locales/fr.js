@@ -128,7 +128,7 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
-  url_dashboard: '/fr/my-dashboard',
+  url_dashboard: '/fr/mon-tableau-de-bord',
   aria_exit_beta_modal: 'Exiting beta warning modal',
   close_modal: 'Fermer modal',
 }

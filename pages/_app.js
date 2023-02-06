@@ -9,6 +9,7 @@ export default function MyApp({ Component, pageProps }) {
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />)
   }
+
   const display = { hideBanner: pageProps.hideBanner }
   /* istanbul ignore next */
   return (

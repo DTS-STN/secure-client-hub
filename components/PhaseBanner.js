@@ -36,7 +36,7 @@ export default function PhaseBanner(props) {
             className="pb-2 md:pb-7 font-body text-xl"
             data-cy="learnMoreAbtBeta"
           >
-            <span className="font-bold">{props.bannerBoldText} </span>
+            <span className="font-bold">{props.bannerBoldText || ''} </span>
             {props.bannerText}
           </p>
           <a
