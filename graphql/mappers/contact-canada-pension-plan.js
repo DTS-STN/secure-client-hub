@@ -30,17 +30,25 @@ export async function getContactCanadaPensionPlan() {
                     return {
                       content: z.scContentEn.markdown,
                       icon: z.scIconCSS,
-                      // button: z.scButtonType,
                       ...z.scFragments.map((a) => {
-                        return {
-                          city: a.scCityEn,
-                          country: a.scCountryEn,
-                          id: a.scId,
-                          poBox: a.scPostalBoxEn,
-                          postal: a.scPostalCode,
-                          program: a.scProgramEn,
-                          province: a.scProvTerrAbbrEnum,
-                          recipient: a.scRecipientEn,
+                        if (!a.scButtonType) {
+                          return {
+                            city: a.scCityEn,
+                            country: a.scCountryEn,
+                            id: a.scId,
+                            poBox: a.scPostalBoxEn,
+                            postal: a.scPostalCode,
+                            program: a.scProgramEn,
+                            province: a.scProvTerrAbbrEnum,
+                            recipient: a.scRecipientEn,
+                          }
+                        } else {
+                          return {
+                            id: a.scId,
+                            content: a.scLinkTextEn,
+                            link: a.scDestinationURLEn,
+                            button: a.scButtonType,
+                          }
                         }
                       })[0],
                     }
@@ -85,15 +93,24 @@ export async function getContactCanadaPensionPlan() {
                       icon: z.scIconCSS,
 
                       ...z.scFragments.map((a) => {
-                        return {
-                          city: a.scCityFr,
-                          country: a.scCountryFr,
-                          id: a.scId,
-                          poBox: a.scPostalBoxFr,
-                          postal: a.scPostalCode,
-                          program: a.scProgramFr,
-                          province: a.scProvTerrAbbrEnum,
-                          recipient: a.scRecipientFr,
+                        if (!a.scButtonType) {
+                          return {
+                            city: a.scCityFr,
+                            country: a.scCountryFr,
+                            id: a.scId,
+                            poBox: a.scPostalBoxFr,
+                            postal: a.scPostalCode,
+                            program: a.scProgramFr,
+                            province: a.scProvTerrAbbrEnum,
+                            recipient: a.scRecipientFr,
+                          }
+                        } else {
+                          return {
+                            id: a.scId,
+                            content: a.scLinkTextFr,
+                            link: a.scDestinationURLFr,
+                            button: a.scButtonType,
+                          }
                         }
                       })[0],
                     }
