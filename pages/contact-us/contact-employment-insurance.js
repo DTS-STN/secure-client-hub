@@ -55,7 +55,7 @@ export default function ContactEmploymentInsurance(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -117,7 +117,7 @@ export async function getStaticProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Ensurance',
+      title: 'My Service Canada Account - Contact Employment Insurance',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
