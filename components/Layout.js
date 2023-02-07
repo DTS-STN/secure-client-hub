@@ -119,7 +119,7 @@ export default function Layout(props) {
           },
         ]}
         contactLink={contactLink}
-        btnLink="/"
+        btnLink="#top"
         id="page-footer"
         isAuthenticated={true}
       />
