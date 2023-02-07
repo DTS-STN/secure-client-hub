@@ -3,10 +3,16 @@ import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
+import { useRouter } from 'next/router'
 
 function ContactSectionRow(props) {
-  const { label, detail, index, highlight, iconFeature, button } = props
-
+  const { label, detail, index, highlight, iconFeature, button, buttonURL } =
+    props
+  const router = useRouter()
+  function routeToPage(e) {
+    e.preventDefault()
+    router.push(props.buttonURL)
+  }
   return label && detail ? (
     <div
       className={`grid grid-cols-1 md:grid-cols-12 gap-4 border-t-2 my-4 p-2 font-body text-xl ${
@@ -17,7 +23,7 @@ function ContactSectionRow(props) {
       <div className="md:col-span-4 font-bold text-xl">{label}</div>
       <div className="md:col-span-8 list-disc [&_ul]:list-outside [&_ul]:pl-4 [&_ul]:ml-4 [&_ul]:list-disc font-body text-xl">
         {button ? (
-          <Button text={detail} styling={'primary'} />
+          <Button text={detail} styling={'primary'} onClick={routeToPage} />
         ) : (
           <div className="flex align-baseline">
             {iconFeature && (

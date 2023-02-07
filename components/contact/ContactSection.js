@@ -27,6 +27,8 @@ export default function ContactSection({ title, intro, id, details }) {
             detail: x.items[0].content,
             iconFeature: x.items[0].icon,
             highlight: x.color,
+            button: x.items[0].button,
+            buttonURL: x.items[0].link,
           })
         )}
       </div>

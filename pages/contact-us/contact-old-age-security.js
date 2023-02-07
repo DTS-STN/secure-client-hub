@@ -30,6 +30,7 @@ export default function ContactOldAgeSecurity(props) {
         }`}
       />
       <TableContent
+        id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -48,7 +49,7 @@ export default function ContactOldAgeSecurity(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500

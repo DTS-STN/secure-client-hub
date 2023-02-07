@@ -6,7 +6,6 @@ import fr from '../locales/fr'
 import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 
 export default function SecuritySettings(props) {
@@ -50,7 +49,7 @@ export default function SecuritySettings(props) {
   )
 }
 
-export async function getStaticProps({ res, locale }) {
+export async function getServerSideProps({ res, locale }) {
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
