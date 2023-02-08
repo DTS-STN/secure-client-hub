@@ -23,7 +23,6 @@ function ContactSectionRow(props) {
         {label}
       </div>
       <div
-        // className="md:col-span-8 list-disc [&_ul]:list-outside [&_ul]:pl-4 [&_ul]:ml-4 [&_ul]:list-disc font-body text-xl"
         className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
           highlight && 'bg-blue-100 py-2'
         }`}
