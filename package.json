@@ -43,7 +43,8 @@
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "release-please": "^15.7.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
