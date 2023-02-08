@@ -44,8 +44,8 @@ export default function Layout(props) {
       <Header
         // analyticsTracking
         lang={!props.locale ? 'en' : props.locale}
-        locale={false}
         dataTestId="topnav"
+        locale={false}
         customLink={Link}
         id="header"
         linkPath={props.langToggleLink}
