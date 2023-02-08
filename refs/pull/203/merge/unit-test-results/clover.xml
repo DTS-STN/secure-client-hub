@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675708017370" clover="3.2.0">
-  <project timestamp="1675708017370" name="All files">
-    <metrics statements="337" coveredstatements="145" conditionals="234" coveredconditionals="69" methods="153" coveredmethods="52" elements="724" coveredelements="266" complexity="0" loc="337" ncloc="337" packages="9" files="43" classes="43"/>
+<coverage generated="1675887495526" clover="3.2.0">
+  <project timestamp="1675887495526" name="All files">
+    <metrics statements="333" coveredstatements="141" conditionals="230" coveredconditionals="66" methods="151" coveredmethods="50" elements="714" coveredelements="257" complexity="0" loc="333" ncloc="333" packages="9" files="42" classes="42"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="64" coveredconditionals="20" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -98,7 +98,7 @@
       </file>
     </package>
     <package name="components.contact">
-      <metrics statements="15" coveredstatements="8" conditionals="18" coveredconditionals="2" methods="9" coveredmethods="3"/>
+      <metrics statements="15" coveredstatements="8" conditionals="20" coveredconditionals="2" methods="9" coveredmethods="3"/>
       <file name="ContactProvince.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvince.js">
         <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
@@ -119,7 +119,7 @@
         <line num="24" count="0" type="stmt"/>
       </file>
       <file name="ContactSectionRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSectionRow.js">
-        <metrics statements="5" coveredstatements="3" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="3" conditionals="12" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
@@ -195,16 +195,9 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="141" coveredstatements="52" conditionals="84" coveredconditionals="22" methods="62" coveredmethods="20"/>
+      <metrics statements="137" coveredstatements="48" conditionals="78" coveredconditionals="19" methods="60" coveredmethods="18"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-      </file>
-      <file name="500.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/500.js">
-        <metrics statements="4" coveredstatements="4" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
         <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="21" count="1" type="stmt"/>
