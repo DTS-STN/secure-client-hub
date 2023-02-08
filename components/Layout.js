@@ -45,6 +45,7 @@ export default function Layout(props) {
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
+        lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }

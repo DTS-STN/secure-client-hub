@@ -36,6 +36,7 @@ export default function Index(props) {
                   English
                 </a>
               </Link>
+
               <Link href="/fr/mon-tableau-de-bord">
                 <a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
