@@ -43,7 +43,10 @@ export default function Layout(props) {
       )}
       <Header
         // analyticsTracking
+        lang={!props.locale ? 'en' : props.locale}
+        locale={false}
         dataTestId="topnav"
+        customLink={Link}
         id="header"
         linkPath={props.langToggleLink}
         breadCrumbItems={
@@ -55,20 +58,16 @@ export default function Layout(props) {
           switchToBasicPath: '',
           displayAlternateLink: false,
         }}
-        customLink={Link}
         isAuthenticated={props.isAuth}
         menuProps={{
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
-          customLink: { Link },
           menuList: [
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-
               component: Link,
-              customLink: { Link },
               path: `${
                 props.locale === 'en'
                   ? '/en/my-dashboard'
@@ -78,9 +77,7 @@ export default function Layout(props) {
             {
               key: 'securityKey',
               value: t.menuItems.security,
-
               component: Link,
-              customLink: { Link },
               path: `${
                 props.locale === 'en'
                   ? '/en/security-settings'
@@ -91,7 +88,6 @@ export default function Layout(props) {
               key: 'profileKey',
               value: t.menuItems.profile,
               component: Link,
-              customLink: { Link },
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
@@ -99,7 +95,6 @@ export default function Layout(props) {
               value: t.menuItems.signOut,
               path: `/`,
               component: Link,
-              customLink: { Link },
             },
           ],
         }}
