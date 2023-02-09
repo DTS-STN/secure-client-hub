@@ -54,6 +54,7 @@ export default function Layout(props) {
         customLink={Link}
         id="header"
         linkPath={props.langToggleLink}
+        lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
@@ -132,7 +133,7 @@ export default function Layout(props) {
           },
         ]}
         contactLink={contactLink}
-        btnLink="/"
+        btnLink="#top"
         id="page-footer"
         isAuthenticated={true}
       />

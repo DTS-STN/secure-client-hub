@@ -23,10 +23,8 @@ export default function MetaData(props) {
         <meta name="dcterms.accessRights" content={d.accessRights} />
         <meta name="dcterms.service" content={d.service} />
         {/* eslint-disable */}
-        <script
-          src="https://assets.adobedtm.com/be5dfd287373/8cdb3d539c44/launch-
-dfa8abb35555-staging.min.js"
-        ></script>
+
+        <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
         {/*eslint-enable */}
       </Head>
     </>
