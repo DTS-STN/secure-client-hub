@@ -26,11 +26,16 @@ export default function Layout(props) {
 
   return (
     <>
-      <MetaData language={props.locale} data={props.meta}></MetaData>
+      <MetaData
+        language={props.locale}
+        data={props.meta}
+        lang={!props.locale ? 'en' : props.locale}
+      ></MetaData>
       {props.display.hideBanner ? (
         ''
       ) : (
         <PhaseBanner
+          lang={!props.locale ? 'en' : props.locale}
           bannerBoldText={props.bannerContent.bannerBoldText || ''}
           bannerText={props.bannerContent.bannerText || ''}
           bannerLink={props.bannerContent.bannerLink || ''}
