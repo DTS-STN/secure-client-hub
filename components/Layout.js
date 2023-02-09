@@ -54,7 +54,6 @@ export default function Layout(props) {
         customLink={Link}
         id="header"
         linkPath={props.langToggleLink}
-        lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
