@@ -59,7 +59,7 @@ export default function Layout(props) {
         }
         topnavProps={{
           skipToMainPath: '#mainContent',
-          skipToAboutPath: '#page-footer',
+          skipToAboutPath: '#page-footere',
           switchToBasicPath: '',
           displayAlternateLink: false,
         }}
