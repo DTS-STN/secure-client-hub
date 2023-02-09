@@ -35,7 +35,6 @@ export default function Layout(props) {
         ''
       ) : (
         <PhaseBanner
-          lang={!props.locale ? 'en' : props.locale}
           bannerBoldText={props.bannerContent.bannerBoldText || ''}
           bannerText={props.bannerContent.bannerText || ''}
           bannerLink={props.bannerContent.bannerLink || ''}
@@ -44,6 +43,7 @@ export default function Layout(props) {
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
+          popupId={props.popupId || ''}
         ></PhaseBanner>
       )}
       <Header
