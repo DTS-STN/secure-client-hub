@@ -14,11 +14,11 @@ describe('Validate Profile page', () => {
     profilePo.ProfileHeaderEN()
   })
 
-  // it('Validate Profile Page header in French', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   profilePo.ProfileHeaderFR()
-  //   profilePo.ProfileUrlFR()
-  // })
+  it.skip('Validate Profile Page header in French', () => {
+    dashboardPo.FrenchButton().click()
+    profilePo.ProfileHeaderFR()
+    profilePo.ProfileUrlFR()
+  })
 
   it('validate the breadcrumbs are present on Profile page', () => {
     securityPo
@@ -38,14 +38,14 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  // it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
-  //   cy.visit('/my-dashboard')
-  //   // dashboardPo.FrenchButton().click()
-  //   dashboardPo.Menu().click()
-  //   dashboardPo.ProfileMenu().click()
-  //   profilePo.ProfileUrlFR()
-  //   profilePo.ProfileHeaderFR()
-  // })
+  it.skip('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
+    cy.visit('/my-dashboard')
+    // dashboardPo.FrenchButton().click()
+    dashboardPo.Menu().click()
+    dashboardPo.ProfileMenu().click()
+    profilePo.ProfileUrlFR()
+    profilePo.ProfileHeaderFR()
+  })
 
   it('validate the "My dashboard" click from profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()
@@ -53,12 +53,12 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  // it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   securityPo.breadcrumbs().click()
-  //   dashboardPo.ValidateDashboardUrlFR()
-  //   dashboardPo.ValidateDashboardHeaderFR()
-  // })
+  it.skip('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () => {
+    dashboardPo.FrenchButton().click()
+    securityPo.breadcrumbs().click()
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
+  })
 
   it('Validate that the "Looking for" section is present on Profile Page', () => {
     profilePo.LookingFor().should('be.visible')
@@ -86,28 +86,28 @@ describe('Validate Profile page', () => {
       .should('have.text', 'Back to my dashboard')
   })
 
-  // it('Validate the "Looking for security Settings text" and button text in French', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   profilePo
-  //     .LookingFor()
-  //     .should('have.text', 'Vous recherchez les paramètres de sécurité?')
-  //   profilePo
-  //     .BackToDashboardButton()
-  //     .should('have.text', 'Retour à mon tableau de bord')
-  // })
+  it.skip('Validate the "Looking for security Settings text" and button text in French', () => {
+    dashboardPo.FrenchButton().click()
+    profilePo
+      .LookingFor()
+      .should('have.text', 'Vous recherchez les paramètres de sécurité?')
+    profilePo
+      .BackToDashboardButton()
+      .should('have.text', 'Retour à mon tableau de bord')
+  })
 
-  // it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/parametres-securite Page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   cy.wait(2000)
-  //   profilePo.LookingForSecurityLink().click()
-  //   securityPo.SecurityUrlFR()
-  //   securityPo.SecurityHeaderFR()
-  // })
+  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/parametres-securite Page', () => {
+    dashboardPo.FrenchButton().click()
+    cy.wait(2000)
+    profilePo.LookingForSecurityLink().click()
+    securityPo.SecurityUrlFR()
+    securityPo.SecurityHeaderFR()
+  })
 
-  // it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   profilePo.BackToDashboardButton().click()
-  //   dashboardPo.ValidateDashboardUrlFR()
-  //   dashboardPo.ValidateDashboardHeaderFR()
-  // })
+  it.skip('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
+    dashboardPo.FrenchButton().click()
+    profilePo.BackToDashboardButton().click()
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
+  })
 })

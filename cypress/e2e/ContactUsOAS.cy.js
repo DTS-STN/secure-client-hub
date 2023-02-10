@@ -15,11 +15,11 @@ describe('Validate OAS Contact Us Landing page', () => {
     OAScontactUs.ValidateOASContactUsHeaderEN()
   })
 
-  // it('Validate OAS Contact us URL and header in FR', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   OAScontactUs.ValidateOASContactUsUrlFR()
-  //   OAScontactUs.ValidateOASContactUsHeaderFR()
-  // })
+  it.skip('Validate OAS Contact us URL and header in FR', () => {
+    dashboardPo.FrenchButton().click()
+    OAScontactUs.ValidateOASContactUsUrlFR()
+    OAScontactUs.ValidateOASContactUsHeaderFR()
+  })
 
   it('Validate the breadcrumbs on OAS contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')
@@ -43,9 +43,9 @@ describe('Validate OAS Contact Us Landing page', () => {
     OAScontactUs.ValidateEachSectionOASContactUs()
   })
 
-  // it('Validate Mail section on OAS contact Us page', () => {
-  //   OAScontactUs.ValidateMailCardsOASContactUs()
-  // })
+  it.skip('Validate Mail section on OAS contact Us page', () => {
+    OAScontactUs.ValidateMailCardsOASContactUs()
+  })
 
   it('Validate Telephone section on OAS contact Us page', () => {
     OAScontactUs.ValidateEachSectionContent()

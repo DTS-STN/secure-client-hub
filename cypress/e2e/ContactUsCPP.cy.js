@@ -14,11 +14,11 @@ describe('Validate CPP Contact Us Landing page', () => {
     CPPcontactUs.ValidateCPPContactUsHeaderEN()
   })
 
-  // it('Validate CPP Contact us URL and header in FR', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   CPPcontactUs.ValidateCPPContactUsUrlFR()
-  //   CPPcontactUs.ValidateCPPContactUsHeaderFR()
-  // })
+  it.skip('Validate CPP Contact us URL and header in FR', () => {
+    dashboardPo.FrenchButton().click()
+    CPPcontactUs.ValidateCPPContactUsUrlFR()
+    CPPcontactUs.ValidateCPPContactUsHeaderFR()
+  })
 
   it('Validate the breadcrumbs on CPP contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')
@@ -42,9 +42,9 @@ describe('Validate CPP Contact Us Landing page', () => {
     CPPcontactUs.ValidateEachSectionCPPContactUs()
   })
 
-  // it('Validate Mail section on OAS contact Us page', () => {
-  //   OAScontactUs.ValidateMailCardsOASContactUs()
-  // })
+  it.skip('Validate Mail section on OAS contact Us page', () => {
+    OAScontactUs.ValidateMailCardsOASContactUs()
+  })
 
   it('Validate each section content on CPP contact Us page', () => {
     CPPcontactUs.ValidateEachSectionContent()

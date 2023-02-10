@@ -45,12 +45,12 @@ describe('Validate Security Settings page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  // it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   securityPo.breadcrumbs().click()
-  //   dashboardPo.ValidateDashboardUrlFR()
-  //   dashboardPo.ValidateDashboardHeaderFR()
-  // })
+  it.skip('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
+    dashboardPo.FrenchButton().click()
+    securityPo.breadcrumbs().click()
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
+  })
 
   it('validate the breadcrumbs are present on Security settings page', () => {
     securityPo
@@ -89,29 +89,32 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Back to my Dashboard')
   })
 
-  // it('Validate the "Looking for Profile Settings text" and button text in French', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   profilePo
-  //     .LookingFor()
-  //     .should('have.text', 'Vous recherchez les paramètres de votre profil?')
-  //   profilePo
-  //     .BackToDashboardButton()
-  //     .should('have.text', 'Retour à mon tableau de bord')
-  // })
+  it.skip('Validate the "Looking for Profile Settings text" and button text in French', () => {
+    dashboardPo.FrenchButton().click()
+    profilePo
+      .LookingFor()
+      .should('have.text', 'Vous recherchez les paramètres de votre profil?')
+    profilePo
+      .BackToDashboardButton()
+      .should('have.text', 'Retour à mon tableau de bord')
+  })
 
-  // it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   securityPo.LookingForProfileLink().click()
-  //   profilePo.ProfileUrlFR()
-  //   profilePo.ProfileHeaderFR()
-  // })
+  it.skip.skip(
+    'Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page',
+    () => {
+      dashboardPo.FrenchButton().click()
+      securityPo.LookingForProfileLink().click()
+      profilePo.ProfileUrlFR()
+      profilePo.ProfileHeaderFR()
+    }
+  )
 
-  // it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   profilePo.BackToDashboardButton().click()
-  //   dashboardPo.ValidateDashboardUrlFR()
-  //   dashboardPo.ValidateDashboardHeaderFR()
-  // })
+  it.skip('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
+    dashboardPo.FrenchButton().click()
+    profilePo.BackToDashboardButton().click()
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
+  })
 
   it('Validate the "Security Questions" Link in English and French', () => {
     securityPo
