@@ -12,32 +12,32 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  // it('Validate French button click goes to fr/Security-settings page', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   securityPo.SecurityUrlFR()
-  // })
+  it.skip('Validate French button click goes to fr/Security-settings page', () => {
+    dashboardPo.FrenchButton().click()
+    securityPo.SecurityUrlFR()
+  })
 
-  // it('Validate Security Settings Page header in French', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   securityPo.SecurityHeaderFR()
-  // })
+  it.skip('Validate Security Settings Page header in French', () => {
+    dashboardPo.FrenchButton().click()
+    securityPo.SecurityHeaderFR()
+  })
 
-  // it('Validate that user can select "Security settings" from Menu dropdown options', () => {
-  //   cy.visit('/my-dashboard')
-  //   dashboardPo.Menu().click()
-  //   dashboardPo.SecuritySettingsMenu().click()
-  //   securityPo.SecurityUrlEN()
-  //   securityPo.SecurityHeaderEN()
-  // })
+  it.skip('Validate that user can select "Security settings" from Menu dropdown options', () => {
+    cy.visit('/my-dashboard')
+    dashboardPo.Menu().click()
+    dashboardPo.SecuritySettingsMenu().click()
+    securityPo.SecurityUrlEN()
+    securityPo.SecurityHeaderEN()
+  })
 
-  // it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
-  //   cy.visit('/my-dashboard')
-  //   dashboardPo.FrenchButton().click()
-  //   dashboardPo.Menu().click()
-  //   dashboardPo.SecuritySettingsMenu().click()
-  //   securityPo.SecurityUrlFR()
-  //   securityPo.SecurityHeaderFR()
-  // })
+  it.skip('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
+    cy.visit('/my-dashboard')
+    dashboardPo.FrenchButton().click()
+    dashboardPo.Menu().click()
+    dashboardPo.SecuritySettingsMenu().click()
+    securityPo.SecurityUrlFR()
+    securityPo.SecurityHeaderFR()
+  })
 
   it('validate the "My dashboard" click goes to dashboard page', () => {
     securityPo.breadcrumbs().click()

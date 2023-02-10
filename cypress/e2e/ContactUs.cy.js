@@ -9,13 +9,13 @@ beforeEach(() => {
 })
 
 describe('Validate Contact Us Landing page', () => {
-  // it('Validate Contact us URL and header in EN and FR', () => {
-  //   contactUsPo.ValidateContactUsUrl()
-  //   contactUsPo.ValidateContactUsHeaderEN()
-  //   dashboardPo.FrenchButton().click()
-  //   contactUsPo.ValidateContactUsUrlFR()
-  //   contactUsPo.ValidateContactUsHeaderFR()
-  // })
+  it.skip('Validate Contact us URL and header in EN and FR', () => {
+    contactUsPo.ValidateContactUsUrl()
+    contactUsPo.ValidateContactUsHeaderEN()
+    dashboardPo.FrenchButton().click()
+    contactUsPo.ValidateContactUsUrlFR()
+    contactUsPo.ValidateContactUsHeaderFR()
+  })
 
   it('Validate the links on Contact us page', () => {
     contactUsPo.ValidateContactUsLinksNumber()

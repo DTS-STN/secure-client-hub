@@ -9,13 +9,13 @@ beforeEach(() => {
 })
 
 describe('Validate dashboard page', () => {
-  // it('Validate dashboard URL and Header in EN and FR', () => {
-  //   dashboardPo.ValidateDashboardUrl()
-  //   dashboardPo.ValidateDashboardHeaderEN()
-  //   dashboardPo.FrenchButton().click()
-  //   dashboardPo.ValidateDashboardUrlFR()
-  //   dashboardPo.ValidateDashboardHeaderFR()
-  // })
+  it.skip('Validate dashboard URL and Header in EN and FR', () => {
+    dashboardPo.ValidateDashboardUrl()
+    dashboardPo.ValidateDashboardHeaderEN()
+    dashboardPo.FrenchButton().click()
+    dashboardPo.ValidateDashboardUrlFR()
+    dashboardPo.ValidateDashboardHeaderFR()
+  })
 
   it('Validate that the Card placeholder is present and Car Header is Visible', () => {
     dashboardPo.FirstCard().should('be.visible')
@@ -54,21 +54,21 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  // it('Validate the EI,CPP and OAS card sections in FR', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   cy.wait(1000)
-  //   for (let i = 0; i < dashboardData.length; i++) {
-  //     const CardName = dashboardData[i].CardNameFR
-  //     dashboardPo.ExpandCard(CardName)
-  //     dashboardData[i].Section.forEach((section) => {
-  //       dashboardPo.ValidateCardTaskListAndSection(
-  //         section.sectionNameFR,
-  //         section.NumberOfLinks
-  //       )
-  //     })
-  //     dashboardPo.ExpandCard(CardName)
-  //   }
-  // })
+  it.skip('Validate the EI,CPP and OAS card sections in FR', () => {
+    dashboardPo.FrenchButton().click()
+    cy.wait(1000)
+    for (let i = 0; i < dashboardData.length; i++) {
+      const CardName = dashboardData[i].CardNameFR
+      dashboardPo.ExpandCard(CardName)
+      dashboardData[i].Section.forEach((section) => {
+        dashboardPo.ValidateCardTaskListAndSection(
+          section.sectionNameFR,
+          section.NumberOfLinks
+        )
+      })
+      dashboardPo.ExpandCard(CardName)
+    }
+  })
 
   it('Validate the "Most requested"section on EI,CPP and OAS cards in English', () => {
     for (let i = 0; i < dashboardData.length; i++) {
@@ -82,18 +82,18 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  // it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
-  //   dashboardPo.FrenchButton().click()
-  //   for (let i = 0; i < dashboardData.length; i++) {
-  //     const CardName = dashboardData[i].CardNameFR
-  //     dashboardPo.ExpandCard(CardName)
-  //     dashboardPo.ValidateMostRequestedsection(
-  //       dashboardData[i].MostReqCardNameFR,
-  //       dashboardData[i].NumberOfLinksinMostReqcards
-  //     )
-  //     dashboardPo.ExpandCard(CardName)
-  //   }
-  // })
+  it.skip('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
+    dashboardPo.FrenchButton().click()
+    for (let i = 0; i < dashboardData.length; i++) {
+      const CardName = dashboardData[i].CardNameFR
+      dashboardPo.ExpandCard(CardName)
+      dashboardPo.ValidateMostRequestedsection(
+        dashboardData[i].MostReqCardNameFR,
+        dashboardData[i].NumberOfLinksinMostReqcards
+      )
+      dashboardPo.ExpandCard(CardName)
+    }
+  })
 
   it('Validate Beta Version Banner is present on Dashboard', () => {
     dashboardPo.BetaBanner().should('be.visible')
