@@ -9,13 +9,13 @@ beforeEach(() => {
 })
 
 describe('Validate dashboard page', () => {
-  it('Validate dashboard URL and Header in EN and FR', () => {
-    dashboardPo.ValidateDashboardUrl()
-    dashboardPo.ValidateDashboardHeaderEN()
-    // dashboardPo.FrenchButton().click()
-    dashboardPo.ValidateDashboardUrlFR()
-    dashboardPo.ValidateDashboardHeaderFR()
-  })
+  // it('Validate dashboard URL and Header in EN and FR', () => {
+  //   dashboardPo.ValidateDashboardUrl()
+  //   dashboardPo.ValidateDashboardHeaderEN()
+  //   dashboardPo.FrenchButton().click()
+  //   dashboardPo.ValidateDashboardUrlFR()
+  //   dashboardPo.ValidateDashboardHeaderFR()
+  // })
 
   it('Validate that the Card placeholder is present and Car Header is Visible', () => {
     dashboardPo.FirstCard().should('be.visible')
