@@ -27,9 +27,8 @@ export default function Layout(props) {
   return (
     <>
       <MetaData
-        language={props.locale}
+        language={!props.locale ? 'en' : props.locale}
         data={props.meta}
-        lang={!props.locale ? 'en' : props.locale}
       ></MetaData>
       {props.display.hideBanner ? (
         ''
