@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676049315103" clover="3.2.0">
-  <project timestamp="1676049315103" name="All files">
-    <metrics statements="333" coveredstatements="141" conditionals="236" coveredconditionals="68" methods="151" coveredmethods="50" elements="720" coveredelements="259" complexity="0" loc="333" ncloc="333" packages="9" files="42" classes="42"/>
+<coverage generated="1676060093692" clover="3.2.0">
+  <project timestamp="1676060093692" name="All files">
+    <metrics statements="325" coveredstatements="133" conditionals="226" coveredconditionals="63" methods="147" coveredmethods="46" elements="698" coveredelements="242" complexity="0" loc="325" ncloc="325" packages="9" files="40" classes="40"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="70" coveredconditionals="22" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -47,9 +47,9 @@
         <line num="23" count="3" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
         <line num="27" count="3" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="148" count="2" type="stmt"/>
-        <line num="152" count="2" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="147" count="2" type="stmt"/>
+        <line num="151" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -195,21 +195,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="137" coveredstatements="48" conditionals="78" coveredconditionals="19" methods="60" coveredmethods="18"/>
-      <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
-        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-      </file>
-      <file name="503.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/503.js">
-        <metrics statements="4" coveredstatements="4" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="2"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-      </file>
+      <metrics statements="129" coveredstatements="40" conditionals="68" coveredconditionals="14" methods="56" coveredmethods="14"/>
       <file name="_app.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
