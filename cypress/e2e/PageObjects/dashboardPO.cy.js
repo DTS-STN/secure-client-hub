@@ -227,7 +227,7 @@ function ClickCompleteMyReportOrApplyEILink() {
 
 module.exports = {
   dashboardHeader,
-  FrenchButton,
+  // FrenchButton,
   FirstCard,
   CardHeading,
   CardButton,

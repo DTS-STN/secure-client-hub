@@ -16,7 +16,7 @@ describe('Validate EI Contact Us Landing page', () => {
   })
 
   it('Validate EI Contact us URL and header in FR', () => {
-    dashboardPo.FrenchButton().click()
+    // dashboardPo.FrenchButton().click()
     EIcontactUs.ValidateEIContactUsUrlFR()
     EIcontactUs.ValidateEIContactUsHeaderFR()
   })

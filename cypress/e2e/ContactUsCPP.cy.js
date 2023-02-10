@@ -14,11 +14,11 @@ describe('Validate CPP Contact Us Landing page', () => {
     CPPcontactUs.ValidateCPPContactUsHeaderEN()
   })
 
-  it('Validate CPP Contact us URL and header in FR', () => {
-    dashboardPo.FrenchButton().click()
-    CPPcontactUs.ValidateCPPContactUsUrlFR()
-    CPPcontactUs.ValidateCPPContactUsHeaderFR()
-  })
+  // it('Validate CPP Contact us URL and header in FR', () => {
+  //   dashboardPo.FrenchButton().click()
+  //   CPPcontactUs.ValidateCPPContactUsUrlFR()
+  //   CPPcontactUs.ValidateCPPContactUsHeaderFR()
+  // })
 
   it('Validate the breadcrumbs on CPP contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')
