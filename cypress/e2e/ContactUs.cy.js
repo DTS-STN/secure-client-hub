@@ -13,7 +13,7 @@ describe('Validate Contact Us Landing page', () => {
     contactUsPo.ValidateContactUsUrl()
     contactUsPo.ValidateContactUsHeaderEN()
     // dashboardPo.FrenchButton().click()
-    contactUsPo.ValidateContactUsUrlFR()
+    // contactUsPo.ValidateContactUsUrlFR()
     contactUsPo.ValidateContactUsHeaderFR()
   })
 

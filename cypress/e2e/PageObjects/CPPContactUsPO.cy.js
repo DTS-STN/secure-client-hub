@@ -127,7 +127,7 @@ module.exports = {
   CPPContactUsHeader,
   ValidateCPPContactUsUrl,
   ValidateCPPContactUsHeaderEN,
-  ValidateCPPContactUsUrlFR,
+  // ValidateCPPContactUsUrlFR,
   ValidateCPPContactUsHeaderFR,
   ValidateOnthisPageLinks,
   ValidateTelephoneLink,

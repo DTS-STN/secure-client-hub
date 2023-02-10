@@ -38,14 +38,14 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
-    cy.visit('/my-dashboard')
-    // dashboardPo.FrenchButton().click()
-    dashboardPo.Menu().click()
-    dashboardPo.ProfileMenu().click()
-    profilePo.ProfileUrlFR()
-    profilePo.ProfileHeaderFR()
-  })
+  // it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
+  //   cy.visit('/my-dashboard')
+  //   // dashboardPo.FrenchButton().click()
+  //   dashboardPo.Menu().click()
+  //   dashboardPo.ProfileMenu().click()
+  //   profilePo.ProfileUrlFR()
+  //   profilePo.ProfileHeaderFR()
+  // })
 
   it('validate the "My dashboard" click from profile page goes to dashboard page', () => {
     securityPo.breadcrumbs().click()

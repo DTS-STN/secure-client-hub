@@ -127,7 +127,7 @@ module.exports = {
   OASContactUsHeader,
   ValidateOASContactUsUrl,
   ValidateOASContactUsHeaderEN,
-  ValidateOASContactUsUrlFR,
+  // ValidateOASContactUsUrlFR,
   ValidateOASContactUsHeaderFR,
   ValidateOnthisPageLinks,
   ValidateTelephoneLink,

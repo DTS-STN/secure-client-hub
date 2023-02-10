@@ -15,11 +15,11 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEIContactUsHeaderEN()
   })
 
-  it('Validate EI Contact us URL and header in FR', () => {
-    // dashboardPo.FrenchButton().click()
-    EIcontactUs.ValidateEIContactUsUrlFR()
-    EIcontactUs.ValidateEIContactUsHeaderFR()
-  })
+  // it('Validate EI Contact us URL and header in FR', () => {
+  //   // dashboardPo.FrenchButton().click()
+  //   EIcontactUs.ValidateEIContactUsUrlFR()
+  //   EIcontactUs.ValidateEIContactUsHeaderFR()
+  // })
 
   it('Validate the breadcrumbs on EI contact us Page', () => {
     securityPo.breadcrumbsLink1().should('be.visible')

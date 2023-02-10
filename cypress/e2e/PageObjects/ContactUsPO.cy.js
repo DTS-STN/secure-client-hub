@@ -37,8 +37,8 @@ module.exports = {
   ContactUsHeader,
   ValidateContactUsUrl,
   ValidateContactUsHeaderEN,
-  ValidateContactUsUrlFR,
-  ValidateContactUsHeaderFR,
+  // ValidateContactUsUrlFR,
+  // ValidateContactUsHeaderFR,
   ValidateContactUsLinksNumber,
   EmploymentInsuranceLink,
 }
