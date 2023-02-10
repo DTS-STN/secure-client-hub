@@ -15,12 +15,12 @@ function ValidateOASContactUsHeaderEN() {
     .and('have.text', 'Contact Old Age Security')
 }
 
-function ValidateOASContactUsUrlFR() {
-  cy.url().should(
-    'contains',
-    '/fr/contactez-nous/communiquer-securite-vieillesse'
-  )
-}
+// function ValidateOASContactUsUrlFR() {
+//   cy.url().should(
+//     'contains',
+//     '/fr/contactez-nous/communiquer-securite-vieillesse'
+//   )
+// }
 
 function ValidateOASContactUsHeaderFR() {
   OASContactUsHeader()

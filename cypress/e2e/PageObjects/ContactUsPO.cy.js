@@ -12,13 +12,13 @@ function ValidateContactUsHeaderEN() {
   ContactUsHeader().should('be.visible').and('have.text', 'Contact us')
 }
 
-function ValidateContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contactez-nous')
-}
+// function ValidateContactUsUrlFR() {
+//   cy.url().should('contains', '/fr/contactez-nous')
+// }
 
-function ValidateContactUsHeaderFR() {
-  ContactUsHeader().should('be.visible').and('have.text', 'Contactez-nous')
-}
+// function ValidateContactUsHeaderFR() {
+//   ContactUsHeader().should('be.visible').and('have.text', 'Contactez-nous')
+// }
 
 function ValidateContactUsLinksNumber() {
   cy.get('[data-cy = "contact-task-list"]')

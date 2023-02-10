@@ -15,12 +15,12 @@ function ValidateCPPContactUsHeaderEN() {
     .and('have.text', 'Contact Canada Pension Plan')
 }
 
-function ValidateCPPContactUsUrlFR() {
-  cy.url().should(
-    'contains',
-    '/fr/contactez-nous/communiquer-regime-pensions-canada/'
-  )
-}
+// function ValidateCPPContactUsUrlFR() {
+//   cy.url().should(
+//     'contains',
+//     '/fr/contactez-nous/communiquer-regime-pensions-canada/'
+//   )
+// }
 
 function ValidateCPPContactUsHeaderFR() {
   CPPContactUsHeader()

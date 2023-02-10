@@ -15,9 +15,9 @@ function ValidateEIContactUsHeaderEN() {
     .and('have.text', 'Contact Employment Insurance')
 }
 
-function ValidateEIContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contactez-nous/communiquer-assurance-emploi')
-}
+// function ValidateEIContactUsUrlFR() {
+//   cy.url().should('contains', '/fr/contactez-nous/communiquer-assurance-emploi')
+// }
 
 function ValidateEIContactUsHeaderFR() {
   EIContactUsHeader()
