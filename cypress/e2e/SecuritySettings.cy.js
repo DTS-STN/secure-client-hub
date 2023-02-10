@@ -99,15 +99,12 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it.skip.skip(
-    'Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page',
-    () => {
-      dashboardPo.FrenchButton().click()
-      securityPo.LookingForProfileLink().click()
-      profilePo.ProfileUrlFR()
-      profilePo.ProfileHeaderFR()
-    }
-  )
+  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
+    dashboardPo.FrenchButton().click()
+    securityPo.LookingForProfileLink().click()
+    profilePo.ProfileUrlFR()
+    profilePo.ProfileHeaderFR()
+  })
 
   it.skip('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
