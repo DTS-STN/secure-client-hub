@@ -126,7 +126,7 @@ module.exports = {
   EIContactUsHeader,
   ValidateEIContactUsUrl,
   ValidateEIContactUsHeaderEN,
-  ValidateEIContactUsUrlFR,
+  // ValidateEIContactUsUrlFR,
   ValidateEIContactUsHeaderFR,
   ValidateOnthisPageLinks,
   ValidateTelephoneLink,
