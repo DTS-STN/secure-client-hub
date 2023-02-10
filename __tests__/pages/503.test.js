@@ -27,7 +27,7 @@ describe('503', () => {
   })
 
   it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+    const props = await getStaticProps({ locale: 'en', isAuth: false })
 
     expect(props).toEqual({
       props: {
