@@ -5,9 +5,9 @@ function dashboardHeader() {
   return cy.get('#my-dashboard-heading')
 }
 
-function FrenchButton() {
-  return cy.get('#lang1')
-}
+// function FrenchButton() {
+//   return cy.get('#lang1')
+// }
 
 function FirstCard() {
   return cy.get('#myDashboardContent:nth-child(1) > div')
