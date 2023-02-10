@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.77% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/36</span>
+                <span class='fraction'>12/42</span>
             </div>
         
             
@@ -277,7 +277,9 @@
 <a name='L212'></a><a href='#L212'>212</a>
 <a name='L213'></a><a href='#L213'>213</a>
 <a name='L214'></a><a href='#L214'>214</a>
-<a name='L215'></a><a href='#L215'>215</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,6 +306,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -338,12 +348,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -519,7 +523,11 @@ export default function Layout(props) {
 &nbsp;
   return (
     &lt;&gt;
-      &lt;MetaData language={props.locale} data={props.meta}&gt;&lt;/MetaData&gt;
+      &lt;MetaData
+        language={props.locale}
+        data={props.meta}
+        lang={!props.locale ? <span class="branch-0 cbranch-no" title="branch not covered" >'en' </span>: props.locale}
+      &gt;&lt;/MetaData&gt;
       {props.display.hideBanner ? (
         ''
       ) : (
@@ -532,11 +540,15 @@ export default function Layout(props) {
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
+          popupId={props.popupId || ''}
         &gt;&lt;/PhaseBanner&gt;
       )}
       &lt;Header
         // analyticsTracking
+        lang={!props.locale ? <span class="branch-0 cbranch-no" title="branch not covered" >'en' </span>: props.locale}
         dataTestId="topnav"
+        locale={false}
+        customLink={Link}
         id="header"
         linkPath={props.langToggleLink}
         breadCrumbItems={
@@ -557,9 +569,7 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-&nbsp;
               component: Link,
-              customLink: true,
               path: `${
                 props.locale === 'en'
                   ? '/en/my-dashboard'
@@ -569,9 +579,7 @@ export default function Layout(props) {
             {
               key: 'securityKey',
               value: t.menuItems.security,
-&nbsp;
               component: Link,
-              customLink: true,
               path: `${
                 props.locale === 'en'
                   ? '/en/security-settings'
@@ -582,7 +590,6 @@ export default function Layout(props) {
               key: 'profileKey',
               value: t.menuItems.profile,
               component: Link,
-              customLink: true,
               path: `${props.locale === 'en' ? '/en/profile' : <span class="branch-1 cbranch-no" title="branch not covered" >'/fr/profil'}</span>`,
             },
             {
@@ -590,7 +597,6 @@ export default function Layout(props) {
               value: t.menuItems.signOut,
               path: `/`,
               component: Link,
-              customLink: true,
             },
           ],
         }}
@@ -623,7 +629,7 @@ export default function Layout(props) {
           },
         ]}
         contactLink={contactLink}
-        btnLink="/"
+        btnLink="#top"
         id="page-footer"
         isAuthenticated={true}
       /&gt;
@@ -712,7 +718,7 @@ Layout.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-06T17:23:12.008Z
+                at 2023-02-10T16:45:06.077Z
             </div>
         <script src="../prettify.js"></script>
         <script>
