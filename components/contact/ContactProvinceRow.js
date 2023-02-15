@@ -16,7 +16,9 @@ const ContactProvinceRow = ({ label, items, id }) => {
         >
           {items.map((x, i) => (
             <div className="col-span-2 md:col-span-1 py-3" key={i}>
-              <p className="font-bold font-display">{x && x.content}</p>
+              <span className="prose prose-strong:text-xl prose-strong:font-display">
+                <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
+              </span>
               {x && (
                 <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
                   x.program,
