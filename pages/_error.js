@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import logger from '../lib/logger'
 
 function CustomError({ statusCode }) {
   return (

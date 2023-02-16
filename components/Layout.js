@@ -11,6 +11,7 @@ import Modal from 'react-modal'
 import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Link from 'next/link'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -69,6 +70,7 @@ export default function Layout(props) {
                   ? '/en/my-dashboard'
                   : '/fr/mon-tableau-de-bord'
               }`,
+              component: Link,
             },
             {
               key: 'securityKey',
@@ -78,16 +80,19 @@ export default function Layout(props) {
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
+              component: Link,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              component: Link,
             },
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
               path: `/`,
+              component: Link,
             },
           ],
         }}
