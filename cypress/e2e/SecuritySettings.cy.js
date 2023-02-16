@@ -86,7 +86,7 @@ describe('Validate Security Settings page', () => {
     profilePo.LookingFor().should('have.text', 'Looking for profile settings?')
     profilePo
       .BackToDashboardButton()
-      .should('have.text', 'Back to my Dashboard')
+      .should('have.text', 'Back to my dashboard')
   })
 
   it('Validate the "Looking for Profile Settings text" and button text in French', () => {
