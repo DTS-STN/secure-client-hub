@@ -18,7 +18,7 @@ function CardHeading() {
 }
 
 function CardButton() {
-  return cy.get('#myDashboardContent > div:nth-child(2)>div')
+  return cy.get('#myDashboardContent > div:nth-child(2)>button')
 }
 
 function ExpandedCard() {
@@ -26,7 +26,7 @@ function ExpandedCard() {
 }
 
 function CardsButton() {
-  return cy.get('#myDashboardContent').find('div>div')
+  return cy.get('#myDashboardContent').find('div>button')
 }
 
 function MostRequestedSection() {
@@ -90,7 +90,7 @@ function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2').text()
     if (cardHeader.includes(CardName)) {
-      cy.wrap($el).find('div').click()
+      cy.wrap($el).find('button').click()
       cy.wait(500)
     }
   })
