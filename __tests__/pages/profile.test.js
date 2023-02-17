@@ -52,13 +52,31 @@ jest.mock('../../components/Card', () => () => {
 
 describe('My Profile page', () => {
   const content = {
-    heading: 'heading',
-    paragraph: 'paragraph',
-    cards: [
-      { id: 'test', title: 'title', lists: { tasks: [{ title: 'test' }] } },
+    list: [
+      {
+        title: 'title',
+        tasks: [
+          {
+            id: 'id',
+            title: 'title',
+            areaLabel: 'areaLabel',
+            link: '/',
+            icon: '',
+            betaPopUp: 'betaPopUp',
+          },
+        ],
+      },
     ],
-    lookingFor: { title: 'title', subText: 'subText', link: 'link' },
-    exitBeta: { title: 'title', link: '#' },
+    lookingFor: {
+      title: 'title',
+      subText: ['text', 'text'],
+      link: '/',
+    },
+    backToDashboard: {
+      id: 'id',
+      btnText: 'btnText',
+      btnLink: '/',
+    },
   }
   const popupContent = {}
 
@@ -83,21 +101,5 @@ describe('My Profile page', () => {
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
-  })
-
-  it('should contain a card', () => {
-    render(
-      <Profile
-        locale="en"
-        meta={{}}
-        content={content}
-        popupContent={popupContent}
-        popupContentNA={popupContent}
-        breadCrumbItems={[]}
-        langToggleLink={''}
-      />
-    )
-    const testCard = screen.getByTestId('mock-card')
-    expect(testCard).toBeInTheDocument()
   })
 })

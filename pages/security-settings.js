@@ -6,7 +6,6 @@ import fr from '../locales/fr'
 import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 
 export default function SecuritySettings(props) {
@@ -100,12 +99,18 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Sécurité',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

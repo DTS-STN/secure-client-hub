@@ -111,10 +111,11 @@ export default {
   footerAbout: 'À propos de Canada.ca',
 
   footerTermsAndConditionURL:
-    'https://www.canada.ca/en/transparency/terms.html',
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndCondition: 'Avis',
 
-  footerPrivacyURL: 'https://www.canada.ca/en/transparency/privacy.html',
+  footerPrivacyURL:
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerPrivacy: 'Confidentialité',
 
   aboutThisSite: 'À propos de ce site',

@@ -146,6 +146,9 @@ describe('OAS Contact Us Page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Contact Old Age Security',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
@@ -153,6 +156,9 @@ describe('OAS Contact Us Page', () => {
             keywords: '',
             title:
               'Mon dossier Service Canada - Communiquer avec la Sécurité de la vieillesse',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         breadCrumbItems: undefined,

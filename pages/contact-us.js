@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types'
 import { Heading, Link } from '@dts-stn/service-canada-design-system'
-import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getContactUsContent } from '../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
 
 export default function ContactLanding(props) {
@@ -16,7 +14,6 @@ export default function ContactLanding(props) {
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
-
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
@@ -85,12 +82,18 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Contactez-nous',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

@@ -33,6 +33,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   },
 }))
 
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
+    })
+  },
+}))
+
 jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   getBetaBannerContent: () => {
     return new Promise(function (resolve, reject) {
@@ -126,12 +134,18 @@ describe('My Dashboard page', () => {
             author: 'Service Canada',
             keywords: '',
             title: 'My Service Canada Account - Dashboard',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
             title: 'Mon dossier Service Canada - Tableau de Bord',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         popupContent: {},

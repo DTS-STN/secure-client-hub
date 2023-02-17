@@ -30,6 +30,7 @@ export default function ContactOldAgeSecurity(props) {
         }`}
       />
       <TableContent
+        id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -112,6 +113,9 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title:
@@ -119,6 +123,9 @@ export async function getServerSideProps({ res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

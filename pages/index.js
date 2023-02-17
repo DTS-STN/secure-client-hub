@@ -36,6 +36,7 @@ export default function Index(props) {
                   English
                 </a>
               </Link>
+
               <Link href="/fr/mon-tableau-de-bord">
                 <a
                   className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
@@ -104,12 +105,18 @@ export async function getServerSideProps({ locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Canada.ca',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 

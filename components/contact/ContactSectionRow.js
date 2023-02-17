@@ -3,23 +3,47 @@ import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
+import { useRouter } from 'next/router'
 
 function ContactSectionRow(props) {
-  const { label, detail, index, highlight, iconFeature, button } = props
-
+  const {
+    label,
+    detail,
+    index,
+    highlight,
+    iconFeature,
+    button,
+    buttonURL,
+    buttonId,
+  } = props
+  const router = useRouter()
+  function routeToPage(e) {
+    e.preventDefault()
+    router.push(props.buttonURL)
+  }
   return label && detail ? (
-    <div
-      className={`grid grid-cols-1 md:grid-cols-12 gap-4 border-t-2 my-4 p-2 font-body text-xl ${
-        highlight && 'bg-blue-100'
-      }`}
-      key={index}
-    >
-      <div className="md:col-span-4 font-bold text-xl">{label}</div>
-      <div className="md:col-span-8 list-disc [&_ul]:list-outside [&_ul]:pl-4 [&_ul]:ml-4 [&_ul]:list-disc font-body text-xl">
+    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
+      <div
+        className={`md:col-span-4 font-bold font-body text-2xl md:pl-3 ${
+          highlight && 'bg-blue-100 py-2'
+        }`}
+      >
+        {label}
+      </div>
+      <div
+        className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
+          highlight && 'bg-blue-100 py-2'
+        }`}
+      >
         {button ? (
-          <Button text={detail} styling={'primary'} />
+          <Button
+            text={detail}
+            styling={'primary'}
+            id={buttonId}
+            onClick={routeToPage}
+          />
         ) : (
-          <div className="flex align-baseline">
+          <div className="flex align-baseline font-body text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body">
             {iconFeature && (
               <FontAwesomeIcon
                 className="pr-2 pt-1"

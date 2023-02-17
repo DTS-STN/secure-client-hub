@@ -33,6 +33,13 @@ export async function getContactUsContent() {
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
+          linkId: cppContactFragment.scId,
+          linkTitle: cppContactFragment.scLinkTextEn,
+          linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveEn,
+          linkDestination: cppContactFragment.scDestinationURLEn,
+          schBetaPopup: cppContactFragment.schBetaPopUp,
+        },
+        {
           linkId: oasContactFragment.scId,
           linkTitle: oasContactFragment.scLinkTextEn,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveEn,
@@ -40,13 +47,6 @@ export async function getContactUsContent() {
           linkDescription:
             oasContactFragment.scDescriptionEn.json[0].content[0].value,
           schBetaPopup: oasContactFragment.schBetaPopUp,
-        },
-        {
-          linkId: cppContactFragment.scId,
-          linkTitle: cppContactFragment.scLinkTextEn,
-          linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveEn,
-          linkDestination: cppContactFragment.scDestinationURLEn,
-          schBetaPopup: cppContactFragment.schBetaPopUp,
         },
       ],
     },
@@ -70,6 +70,13 @@ export async function getContactUsContent() {
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
+          linkId: cppContactFragment.scId,
+          linkTitle: cppContactFragment.scLinkTextFr,
+          linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveFr,
+          linkDestination: cppContactFragment.scDestinationURLFr,
+          schBetaPopup: cppContactFragment.schBetaPopUp,
+        },
+        {
           linkId: oasContactFragment.scId,
           linkTitle: oasContactFragment.scLinkTextFr,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveFr,
@@ -77,13 +84,6 @@ export async function getContactUsContent() {
           linkDescription:
             oasContactFragment.scDescriptionFr.json[0].content[0].value,
           schBetaPopup: oasContactFragment.schBetaPopUp,
-        },
-        {
-          linkId: cppContactFragment.scId,
-          linkTitle: cppContactFragment.scLinkTextFr,
-          linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveFr,
-          linkDestination: cppContactFragment.scDestinationURLFr,
-          schBetaPopup: cppContactFragment.schBetaPopUp,
         },
       ],
     },

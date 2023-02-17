@@ -72,6 +72,14 @@
                                       }
                                       scIconCSS
                                       scFragments {
+                                          ... on SCHTaskv1Model {
+                                              scId
+                                              scLinkTextEn
+                                              scLinkTextFr
+                                              scDestinationURLEn
+                                              scDestinationURLFr
+                                              scButtonType
+                                          }
                                           ... on SCHAddressv1Model {
                                               _path
                                               scId

@@ -70,7 +70,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://assets.adobedtm.com; connect-src 'self' https://canada.demdex.net https://dpm.demdex.net https://assets.adobedtm.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:",
+      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://assets.adobedtm.com; connect-src 'self' https://canada.demdex.net https://dpm.demdex.net https://assets.adobedtm.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' 'unsafe-inline' https://assets.adobedtm.com; img-src 'self' data: https:",
   },
 ]
 
