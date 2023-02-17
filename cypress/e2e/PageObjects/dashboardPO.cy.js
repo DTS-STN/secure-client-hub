@@ -18,7 +18,7 @@ function CardHeading() {
 }
 
 function CardButton() {
-  return cy.get('#myDashboardContent > div:nth-child(2)>button')
+  return cy.get('#myDashboardContent > div:nth-child(2)>div')
 }
 
 function ExpandedCard() {
@@ -90,7 +90,7 @@ function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2').text()
     if (cardHeader.includes(CardName)) {
-      cy.wrap($el).find('button').click()
+      cy.wrap($el).find('div').eq(0).click()
       cy.wait(500)
     }
   })

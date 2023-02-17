@@ -18,15 +18,15 @@ describe('Validate dashboard page', () => {
   })
 
   it('Validate that the Card placeholder is present and Car Header is Visible', () => {
-    dashboardPo.FirstCard().should('be.visible')
-    dashboardPo.CardHeading().should('be.visible')
+    dashboardPo.FirstCard().eq(0).should('be.visible')
+    dashboardPo.CardHeading().eq(0).should('be.visible')
   })
 
   it('Validate that the Test card button expands and collapses on clicking', () => {
     dashboardPo.CardButton().should('be.visible')
-    dashboardPo.CardButton().click()
+    dashboardPo.CardButton().eq(0).click()
     dashboardPo.ExpandedCard().should('be.visible')
-    dashboardPo.CardButton().click({ force: true })
+    dashboardPo.CardButton().eq(0).click({ force: true })
   })
 
   it('Validate that the Task List is Present for each card on dashboard page', () => {
@@ -55,7 +55,7 @@ describe('Validate dashboard page', () => {
   })
 
   it('Validate the EI,CPP and OAS card sections in FR', () => {
-    dashboardPo.FrenchButton().click()
+    dashboardPo.FrenchButton().eq(0).click()
     cy.wait(1000)
     for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameFR
