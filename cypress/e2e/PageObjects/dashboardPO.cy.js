@@ -18,7 +18,7 @@ function CardHeading() {
 }
 
 function CardButton() {
-  return cy.get('#myDashboardContent > div:nth-child(2)>button')
+  return cy.get('#myDashboardContent > div:nth-child(2)>div')
 }
 
 function ExpandedCard() {
