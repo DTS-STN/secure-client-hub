@@ -71,6 +71,11 @@ export default function Layout(props) {
               }`,
             },
             {
+              key: 'profileKey',
+              value: t.menuItems.profile,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+            },
+            {
               key: 'securityKey',
               value: t.menuItems.security,
               path: `${
@@ -78,11 +83,6 @@ export default function Layout(props) {
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
-            },
-            {
-              key: 'profileKey',
-              value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'signOutKey',

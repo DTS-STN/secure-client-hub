@@ -1,0 +1,19 @@
+NEXT_PUBLIC_BUILD_DATE = 12345
+AEM_GRAPHQL_ENDPOINT="https://www.canada.ca/content/_cq_graphql/decd-endc/endpoint.json"
+LOGGING_LEVEL = " info or debug" 
+MSCA_BASE_URL = "https://srv136.services.gc.ca"
+MSCA_EQ_BASE_URL = "https://srv136.services.gc.ca/msca-mdsc/eq-qe"
+MSCA_ECAS_RASC_BASE_URL = "https://srv136.services.gc.ca/ecas-seca/rascl_ii"
+OPENTELEMETRY_TRACING_DISABLED=true
+NEXTAUTH_SECRET="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+NEXTAUTH_URL="http://localhost:3000"
+CLIENT_SECRET="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+CLIENT_ID="DECD"
+AUTH_ECAS_BASE_URL="https://srv113-i.lab.hrdc-drhc.gc.ca"
+AUTH_ECAS_WELL_KNOWN="https://srv113-i.lab.hrdc-drhc.gc.ca/ecas-seca/raoidc/v1/.well-known/openid-configuration"
+AUTH_ECAS_AUTHORIZATION="https://srv113-i.lab.hrdc-drhc.gc.ca/ecas-seca/raoidc/v1/authorize"
+AUTH_ECAS_USERINFO="https://srv113-i.lab.hrdc-drhc.gc.ca/ecas-seca/raoidc/v1/userinfo"
+AUTH_PRIVATE={  "kty": "RSA",  "n": "z zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", "kid": "gc-decd" }
+AUTH_ECAS_GLOBAL_LOGOUT_URL="https://srv113-i.lab.hrdc-drhc.gc.ca/ecas-seca/rascl/Support/GlobalLogout.aspx?exitUrl=https%3A%2F%2Fwww.canada.ca%2Fen%2Femployment-social-development%2Fservices%2Fmy-account%2Flogout.html"
+AUTH_DISABLED="true"
+http_proxy="http://localhost:3128"
