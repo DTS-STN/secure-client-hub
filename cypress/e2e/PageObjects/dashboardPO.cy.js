@@ -26,7 +26,7 @@ function ExpandedCard() {
 }
 
 function CardsButton() {
-  return cy.get('#myDashboardContent').find('div>button')
+  return cy.get('#myDashboardContent').find('div>div')
 }
 
 function MostRequestedSection() {
