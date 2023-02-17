@@ -19,19 +19,20 @@ export default function ContactSection({ title, intro, id, details }) {
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <div className=" border-y-2 divide-y-2 " data-cy="section2">
+      <section className=" border-y-2 divide-y-2 " data-cy="section2">
         {details.map((x, index) =>
           ContactSectionRow({
             ...x,
             index,
             detail: x.items[0].content,
+            buttonId: x.items[0].id,
             iconFeature: x.items[0].icon,
             highlight: x.color,
             button: x.items[0].button,
             buttonURL: x.items[0].link,
           })
         )}
-      </div>
+      </section>
       <div className="mt-4  pb-6" />
     </div>
   )
