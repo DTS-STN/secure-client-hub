@@ -41,7 +41,7 @@ export default {
   pageLinkSecurity: 'Looking for security settings?',
   securityLinkText: 'security settings',
   accessYourSecurityText: 'Access your ',
-  backToDashboard: 'Back to my Dashboard',
+  backToDashboard: 'Back to my dashboard',
 
   // ViewMoreLessButton
   viewMoreLessButtonCaption: `Applications, payments and claims, taxes, reports and documents, personal information`,
