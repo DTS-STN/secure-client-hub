@@ -16,9 +16,9 @@ export async function getBetaBannerContent() {
       bannerLink: resOptOutContent.scFragments[0].scLinkTextEn,
       bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLEn,
       bannerButtonText: resOptOutContent.scFragments[1].scLinkTextEn,
-      bannerButtonExternalText: resDictionaryContent.filter(
+      bannerButtonExternalText: resDictionaryContent.find(
         (entry) => entry.scId === 'opens-in-a-new-tab'
-      )[0].scTermEn,
+      ).scTermEn,
       bannerButtonLink:
         resOptOutContent.scFragments[1].scDestinationURLEn || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
@@ -29,9 +29,9 @@ export async function getBetaBannerContent() {
       bannerLink: resOptOutContent.scFragments[0].scLinkTextFr,
       bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLFr,
       bannerButtonText: resOptOutContent.scFragments[1].scLinkTextFr,
-      bannerButtonExternalText: resDictionaryContent.filter(
+      bannerButtonExternalText: resDictionaryContent.find(
         (entry) => entry.scId === 'opens-in-a-new-tab'
-      )[0].scTermFr,
+      ).scTermFr,
       bannerButtonLink:
         resOptOutContent.scFragments[1].scDestinationURLFr || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
