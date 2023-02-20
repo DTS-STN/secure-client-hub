@@ -19,7 +19,7 @@ export default function ContactSection({ title, intro, id, details }) {
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <section className=" border-y-2 divide-y-2 " data-cy="section2">
+      <dl className=" border-y-2 divide-y-2 " data-cy="section2">
         {details.map((x, index) =>
           ContactSectionRow({
             ...x,
@@ -32,7 +32,7 @@ export default function ContactSection({ title, intro, id, details }) {
             buttonURL: x.items[0].link,
           })
         )}
-      </section>
+      </dl>
       <div className="mt-4  pb-6" />
     </div>
   )
