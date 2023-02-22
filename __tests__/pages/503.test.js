@@ -35,7 +35,7 @@ describe('503', () => {
         langToggleLink: '/fr/503',
         meta: {
           data_en: {
-            title: 'My Service Canada Account - 503',
+            title: '503 - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -44,7 +44,7 @@ describe('503', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Mon dossier Service Canada - 503',
+            title: '503 - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',

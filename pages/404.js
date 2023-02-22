@@ -22,7 +22,7 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - 404',
+      title: '404 - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -31,7 +31,7 @@ export async function getStaticProps({ locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - 404',
+      title: '404 - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

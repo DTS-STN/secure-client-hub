@@ -35,7 +35,7 @@ describe('404', () => {
         langToggleLink: '/fr/404',
         meta: {
           data_en: {
-            title: 'My Service Canada Account - 404',
+            title: '404 - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -44,7 +44,7 @@ describe('404', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Mon dossier Service Canada - 404',
+            title: '404 - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',
