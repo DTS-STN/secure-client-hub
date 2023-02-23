@@ -82,7 +82,7 @@ export async function getStaticProps({ res, err }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: `My Service Canada Account - ${statusCode}.`,
+      title: `${statusCode} - My Service Canada Account`,
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -91,7 +91,7 @@ export async function getStaticProps({ res, err }) {
       accessRights: '1',
     },
     data_fr: {
-      title: `Mon dossier Service Canada - ${statusCode}.`,
+      title: `${statusCode} - Mon dossier Service Canada`,
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
