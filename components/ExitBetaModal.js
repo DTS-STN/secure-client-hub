@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import { sentenceCase } from '../lib/text'
 
 export default function ExitBetaModal(props) {
-  console.log(sentenceCase('this is my Sentence to casify.'))
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
@@ -47,7 +46,7 @@ export default function ExitBetaModal(props) {
             className="w-full block mt-6 md:mt-0 md:w-fit"
             id={props.popupPrimaryBtn.id}
             styling="primary"
-            text={sentenceCase(props.popupPrimaryBtn.text)}
+            text={props.popupPrimaryBtn.text}
           />
         </a>
       </div>
