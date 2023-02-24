@@ -2,7 +2,6 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
-import { sentenceCase } from '../lib/text'
 
 export default function ExitBetaModal(props) {
   return (
@@ -17,7 +16,7 @@ export default function ExitBetaModal(props) {
           role="heading"
           aria-level="1"
         >
-          {sentenceCase(props.popupTitle)}
+          {props.popupTitle}
         </div>
         <button
           data-cy="x-button"
