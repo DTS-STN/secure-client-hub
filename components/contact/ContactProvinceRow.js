@@ -15,7 +15,7 @@ const ContactProvinceRow = ({ label, items, id }) => {
           data-cy="mailContactDetails"
         >
           {items.map((x, i) => (
-            <div className="col-span-2 md:col-span-1 py-3" key={i}>
+            <div className="col-span-2 md:col-span-1 py-3 mr-20" key={i}>
               <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
                 <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
               </strong>
