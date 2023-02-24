@@ -217,7 +217,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
   }
-
+  throw new Error('test')
   return {
     props: {
       locale,
