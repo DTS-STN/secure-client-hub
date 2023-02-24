@@ -77,12 +77,12 @@ BRH:0
 end_of_record
 TN:
 SF:components/ExitBetaModal.js
-FN:7,ExitBetaModal
+FN:6,ExitBetaModal
 FNF:1
 FNH:1
 FNDA:2,ExitBetaModal
-DA:8,2
-DA:57,6
+DA:7,2
+DA:56,6
 LF:2
 LH:2
 BRF:0
