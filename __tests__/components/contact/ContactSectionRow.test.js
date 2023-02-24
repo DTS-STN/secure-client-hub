@@ -10,4 +10,12 @@ describe('ContactSectionRow', () => {
     const primary = render(<ContactSectionRow {...ContactSectionRow.args} />)
     expect(primary).toBeTruthy()
   })
+
+  it('has no a11y violations', async () => {
+    const { container } = render(
+      <ContactSectionRow {...ContactSectionRow.args} />
+    )
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
 })

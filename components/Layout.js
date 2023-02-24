@@ -36,6 +36,10 @@ export default function Layout(props) {
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
+          bannerButtonExternalText={
+            props.bannerContent.bannerButtonExternalText || ''
+          }
+          bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
         ></PhaseBanner>

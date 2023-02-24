@@ -14,7 +14,6 @@ export default function ContactLanding(props) {
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
-
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
@@ -79,7 +78,7 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact',
+      title: 'Contact - My Service Canada Account - Contact',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -88,7 +87,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez-nous',
+      title: 'Contactez-nous - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

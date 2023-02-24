@@ -71,16 +71,22 @@ describe('EI Contact Us Page', () => {
 
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Insurance',
+      title: 'Contact Employment Insurance - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+      title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 
@@ -141,19 +147,19 @@ describe('EI Contact Us Page', () => {
         locale: 'en',
         meta: {
           data_en: {
+            title: 'Contact Employment Insurance - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Contact Employment Insurance',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Employment and Social Development Canada',
             accessRights: '1',
           },
           data_fr: {
-            author: 'Service Canada',
+            title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
             desc: 'Français',
+            author: 'Service Canada',
             keywords: '',
-            title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Emploi et Développement social Canada',
             accessRights: '1',
