@@ -39,6 +39,7 @@ export default function ContactCanadaPensionPlan(props) {
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
+        lang={props.locale}
       />
 
       {props.pageContent.items.map((item, i) => (
