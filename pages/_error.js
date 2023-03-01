@@ -6,11 +6,11 @@ import logger from '../lib/logger'
 function CustomError(props) {
   return (
     <ErrorPage
-      lang={props.locale}
-      errType={props.statusCode}
-      isAuth={!props.isAuth}
+      lang={props?.locale}
+      errType={props?.statusCode.toString()}
+      isAuth={!props?.isAuth}
       homePageLink={
-        props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
+        props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
       }
       accountPageLink="/"
     />
