@@ -7,7 +7,7 @@ function CustomError(props) {
   return (
     <ErrorPage
       lang={props?.locale}
-      errType={props?.statusCode.toString()}
+      errType={props?.statusCode}
       isAuth={!props?.isAuth}
       homePageLink={
         props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
@@ -19,8 +19,7 @@ function CustomError(props) {
 
 /* istanbul ignore next */
 export async function getServerSideProps({ req, res, locale }) {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-
+  const statusCode = res.statusCode.toString() || '500'
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500

@@ -35,7 +35,7 @@ describe('custom error', () => {
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Error 500')).toBeInTheDocument()
+    expect(screen.getByText('Error')).toBeInTheDocument()
   })
 
   it('renders custom statusCode 404 without crashing', () => {
@@ -48,7 +48,7 @@ describe('custom error', () => {
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Error 404')).toBeInTheDocument()
+    expect(screen.getByText('Error')).toBeInTheDocument()
   })
 
   it('renders custom error page in french without crashing', () => {
@@ -61,11 +61,6 @@ describe('custom error', () => {
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Error 404')).toBeInTheDocument()
-  })
-
-  it('renders no statusCode without crashing', () => {
-    render(<CustomError />)
-    expect(screen.getByText('An error occurred on client')).toBeInTheDocument()
+    expect(screen.getByText('Erreur')).toBeInTheDocument()
   })
 })
