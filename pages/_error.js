@@ -1,12 +1,13 @@
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { ErrorPage } from '@dts-stn/service-canada-design-system'
+import logger from '../lib/logger'
 
-function CustomError({ statusCode }) {
+function CustomError(props) {
   return (
     <ErrorPage
       lang={props.locale}
-      errType={statusCode}
+      errType={props.statusCode}
       isAuth={!props.isAuth}
       homePageLink={
         props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
@@ -17,7 +18,7 @@ function CustomError({ statusCode }) {
 }
 
 /* istanbul ignore next */
-export async function getStaticProps({ res, err }) {
+export async function getServerSideProps({ req, res, locale }) {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
 
   const bannerContent = await getBetaBannerContent().catch((error) => {
@@ -30,7 +31,8 @@ export async function getStaticProps({ res, err }) {
     // res.statusCode = 500
     throw error
   })
-
+  const langToggleLink =
+    locale === 'en' ? `/fr/${statusCode}` : `/${statusCode}`
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -54,10 +56,13 @@ export async function getStaticProps({ res, err }) {
   }
   return {
     props: {
+      locale: locale ? locale : 'en',
+      langToggleLink,
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
       statusCode,
       meta,
+      isAuth: process.env.AUTH_DISABLED,
     },
   }
 }
