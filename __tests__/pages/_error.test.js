@@ -25,11 +25,43 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
 }))
 
 describe('custom error', () => {
-  it('renders custom statusCode without crashing', () => {
-    render(<CustomError statusCode="500" />)
-    expect(
-      screen.getByText('An error 500 occurred on server')
-    ).toBeInTheDocument()
+  it('renders custom statusCode 500 without crashing', () => {
+    render(
+      <CustomError
+        lang="en"
+        errType="500"
+        isAuth={false}
+        homePageLink={'/en/my-dashboard'}
+        accountPageLink="/"
+      />
+    )
+    expect(screen.getByText('Error 500')).toBeInTheDocument()
+  })
+
+  it('renders custom statusCode 404 without crashing', () => {
+    render(
+      <CustomError
+        lang="en"
+        errType="404"
+        isAuth={false}
+        homePageLink={'/en/my-dashboard'}
+        accountPageLink="/"
+      />
+    )
+    expect(screen.getByText('Error 404')).toBeInTheDocument()
+  })
+
+  it('renders custom error page in french without crashing', () => {
+    render(
+      <CustomError
+        lang="fr"
+        errType="404"
+        isAuth={false}
+        homePageLink={'/fr/my-dashboard'}
+        accountPageLink="/"
+      />
+    )
+    expect(screen.getByText('Error 404')).toBeInTheDocument()
   })
 
   it('renders no statusCode without crashing', () => {
