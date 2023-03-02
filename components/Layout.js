@@ -11,6 +11,7 @@ import Modal from 'react-modal'
 import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Link from 'next/link'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -53,6 +54,7 @@ export default function Layout(props) {
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
+        customLink={Link}
         topnavProps={{
           skipToMainPath: '#mainContent',
           skipToAboutPath: '#page-footer',
@@ -68,6 +70,7 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
+              customLink: { Link },
               path: `${
                 props.locale === 'en'
                   ? '/en/my-dashboard'
@@ -77,11 +80,13 @@ export default function Layout(props) {
             {
               key: 'profileKey',
               value: t.menuItems.profile,
+              customLink: { Link },
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'securityKey',
               value: t.menuItems.security,
+              customLink: { Link },
               path: `${
                 props.locale === 'en'
                   ? '/en/security-settings'
@@ -91,6 +96,7 @@ export default function Layout(props) {
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
+              customLink: { Link },
               path: `/`,
             },
           ],
