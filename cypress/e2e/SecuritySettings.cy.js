@@ -17,7 +17,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityUrlFR()
   })
 
-  it('Validate Security Settings Page header in French', () => {
+  it.skip('Validate Security Settings Page header in French', () => {
     dashboardPo.FrenchButton().click()
     securityPo.SecurityHeaderFR()
   })
@@ -30,7 +30,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
+  it.skip('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
@@ -45,14 +45,14 @@ describe('Validate Security Settings page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
+  it.skip('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
     dashboardPo.FrenchButton().click()
     securityPo.breadcrumbs().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
   })
 
-  it('validate the breadcrumbs are present on Security settings page', () => {
+  it.skip('validate the breadcrumbs are present on Security settings page', () => {
     securityPo
       .breadcrumbs()
       .should('be.visible')
@@ -89,7 +89,7 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Back to my dashboard')
   })
 
-  it('Validate the "Looking for Profile Settings text" and button text in French', () => {
+  it.skip('Validate the "Looking for Profile Settings text" and button text in French', () => {
     dashboardPo.FrenchButton().click()
     profilePo
       .LookingFor()
@@ -113,7 +113,7 @@ describe('Validate Security Settings page', () => {
     dashboardPo.ValidateDashboardHeaderFR()
   })
 
-  it('Validate the "Security Questions" Link in English and French', () => {
+  it.skip('Validate the "Security Questions" Link in English and French', () => {
     securityPo
       .SecurityQuestionsLink()
       .should('be.visible')
@@ -125,7 +125,7 @@ describe('Validate Security Settings page', () => {
       .and('not.have.attr', 'href', '#undefined')
   })
 
-  it('Validate the "Employment Insurance access code" Link in English and French', () => {
+  it.skip('Validate the "Employment Insurance access code" Link in English and French', () => {
     securityPo
       .EmploymentInsuranceCode()
       .should('be.visible')

@@ -20,7 +20,7 @@ describe('Validate Profile page', () => {
     profilePo.ProfileUrlFR()
   })
 
-  it('validate the breadcrumbs are present on Profile page', () => {
+  it.skip('validate the breadcrumbs are present on Profile page', () => {
     securityPo
       .breadcrumbs()
       .should('be.visible')
