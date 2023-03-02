@@ -4,7 +4,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function ViewMoreLessButton(props) {
   return (
-    <div
+    <button
       className={
         'text-xl leading-8 text-deep-blue-60d hover:text-blue-hover ' +
         props.className
@@ -15,7 +15,7 @@ export default function ViewMoreLessButton(props) {
       data-testid={props.dataTestid}
       aria-expanded={props.ariaExpanded ?? undefined}
     >
-      <div className="flex sm:items-center">
+      <span className="flex sm:items-center">
         {props.icon ? (
           <FontAwesomeIcon
             icon={solid('circle-chevron-up')}
@@ -28,8 +28,8 @@ export default function ViewMoreLessButton(props) {
           />
         )}
         <span className="text-left underline font-body">{props.caption}</span>
-      </div>
-    </div>
+      </span>
+    </button>
   )
 }
 
