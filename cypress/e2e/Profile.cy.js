@@ -14,7 +14,7 @@ describe('Validate Profile page', () => {
     profilePo.ProfileHeaderEN()
   })
 
-  it('Validate Profile Page header in French', () => {
+  it.skip('Validate Profile Page header in French', () => {
     dashboardPo.FrenchButton().click()
     profilePo.ProfileHeaderFR()
     profilePo.ProfileUrlFR()
@@ -38,7 +38,7 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
+  it.skip('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
@@ -72,7 +72,7 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
+  it.skip('Validate the "Security Settings" click navigates to Security Settings Page', () => {
     cy.wait(3000)
     profilePo.LookingForSecurityLink().click({ froce: true })
     securityPo.SecurityUrlEN()

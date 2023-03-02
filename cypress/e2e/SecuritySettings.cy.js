@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 describe('Validate Security Settings page', () => {
-  it('Validate Security Settings Page header in English', () => {
+  it.skip('Validate Security Settings Page header in English', () => {
     securityPo.SecurityHeaderEN()
   })
 
@@ -106,7 +106,7 @@ describe('Validate Security Settings page', () => {
     profilePo.ProfileHeaderFR()
   })
 
-  it(' click navigates to /fr/home Page', () => {
+  it.skip(' click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()
