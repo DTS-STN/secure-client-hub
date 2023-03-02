@@ -139,6 +139,39 @@ export default function Layout(props) {
 
 Layout.defaultProps = {
   title: 'Service.Canada.ca',
+  bannerContent: {
+    bannerBoldText: '',
+    bannerText: '',
+    bannerLink: '',
+    bannerLinkHref: '',
+    bannerButtonText: '',
+    bannerButtonLink: '',
+    icon: '',
+  },
+  breadCrumbItems: [],
+  display: { hideBanner: true },
+  langToggleLink: '',
+  locale: 'en',
+  meta: '',
+  popupContent: {
+    scId: '',
+    scHeadingEn: '',
+    scHeadingFr: '',
+    scContentEn: '',
+    scContentFr: '',
+    scFragments: [
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+    ],
+  },
 }
 
 Layout.propTypes = {
