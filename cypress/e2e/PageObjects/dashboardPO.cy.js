@@ -90,7 +90,7 @@ function ExpandCard(CardName) {
   Cards().each(($el, index, $list) => {
     const cardHeader = $el.find('h2').text()
     if (cardHeader.includes(CardName)) {
-      cy.wrap($el).find('div').eq(0).click()
+      cy.wrap($el).find('span').eq(0).click()
       cy.wait(500)
     }
   })

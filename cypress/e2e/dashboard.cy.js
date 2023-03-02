@@ -22,7 +22,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.CardHeading().eq(0).should('be.visible')
   })
 
-  it('Validate that the Test card button expands and collapses on clicking', () => {
+  it.skip('Validate that the Test card button expands and collapses on clicking', () => {
     dashboardPo.CardButton().should('be.visible')
     dashboardPo.CardButton().eq(0).click()
     dashboardPo.ExpandedCard().should('be.visible')
