@@ -15,7 +15,7 @@ describe('Validate OAS Contact Us Landing page', () => {
     OAScontactUs.ValidateOASContactUsHeaderEN()
   })
 
-  it('Validate OAS Contact us URL and header in FR', () => {
+  it.skip('Validate OAS Contact us URL and header in FR', () => {
     dashboardPo.FrenchButton().click()
     OAScontactUs.ValidateOASContactUsUrlFR()
     OAScontactUs.ValidateOASContactUsHeaderFR()

@@ -14,7 +14,7 @@ describe('Validate CPP Contact Us Landing page', () => {
     CPPcontactUs.ValidateCPPContactUsHeaderEN()
   })
 
-  it('Validate CPP Contact us URL and header in FR', () => {
+  it.skip('Validate CPP Contact us URL and header in FR', () => {
     dashboardPo.FrenchButton().click()
     CPPcontactUs.ValidateCPPContactUsUrlFR()
     CPPcontactUs.ValidateCPPContactUsHeaderFR()

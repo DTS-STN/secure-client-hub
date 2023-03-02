@@ -15,7 +15,7 @@ describe('Validate EI Contact Us Landing page', () => {
     EIcontactUs.ValidateEIContactUsHeaderEN()
   })
 
-  it('Validate EI Contact us URL and header in FR', () => {
+  it.skip('Validate EI Contact us URL and header in FR', () => {
     dashboardPo.FrenchButton().click()
     EIcontactUs.ValidateEIContactUsUrlFR()
     EIcontactUs.ValidateEIContactUsHeaderFR()

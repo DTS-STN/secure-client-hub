@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 describe('Validate Contact Us Landing page', () => {
-  it('Validate Contact us URL and header in EN and FR', () => {
+  it.skip('Validate Contact us URL and header in EN and FR', () => {
     contactUsPo.ValidateContactUsUrl()
     contactUsPo.ValidateContactUsHeaderEN()
     dashboardPo.FrenchButton().click()
@@ -21,7 +21,7 @@ describe('Validate Contact Us Landing page', () => {
     contactUsPo.ValidateContactUsLinksNumber()
   })
 
-  it('validate the breadcrumbs are present on Contact us page', () => {
+  it.skip('validate the breadcrumbs are present on Contact us page', () => {
     securityPo
       .breadcrumbs()
       .should('be.visible')

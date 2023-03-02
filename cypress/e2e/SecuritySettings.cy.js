@@ -106,7 +106,7 @@ describe('Validate Security Settings page', () => {
     profilePo.ProfileHeaderFR()
   })
 
-  it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
+  it(' click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()

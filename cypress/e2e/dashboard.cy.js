@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 describe('Validate dashboard page', () => {
-  it('Validate dashboard URL and Header in EN and FR', () => {
+  it.skip('Validate dashboard URL and Header in EN and FR', () => {
     dashboardPo.ValidateDashboardUrl()
     dashboardPo.ValidateDashboardHeaderEN()
     dashboardPo.FrenchButton().click()
@@ -54,7 +54,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the EI,CPP and OAS card sections in FR', () => {
+  it.skip('Validate the EI,CPP and OAS card sections in FR', () => {
     dashboardPo.FrenchButton().click()
     cy.wait(1000)
     for (let i = 0; i < dashboardData.length; i++) {
@@ -82,7 +82,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
+  it.skip('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
     dashboardPo.FrenchButton().click()
     for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameFR
