@@ -11,6 +11,7 @@ import Modal from 'react-modal'
 import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Link from 'next/link'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -64,6 +65,7 @@ export default function Layout(props) {
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
+          customLink: Link,
           menuList: [
             {
               key: 'dashKey',

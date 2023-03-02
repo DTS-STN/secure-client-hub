@@ -4,9 +4,11 @@ module.exports = defineConfig({
   experimentalWebKitSupport: true,
   video: false,
   reporter: 'cypress-multi-reporters',
+
   reporterOptions: {
     configFile: 'reporter-config.json',
   },
+
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
@@ -14,5 +16,12 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'http://localhost:3000',
+  },
+
+  component: {
+    devServer: {
+      framework: 'next',
+      bundler: 'webpack',
+    },
   },
 })
