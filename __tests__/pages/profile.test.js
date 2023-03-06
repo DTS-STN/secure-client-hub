@@ -5,8 +5,17 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Profile from '../../pages/profile'
 import { getServerSideProps } from '../../pages/profile'
-
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+
+// Mock useSession
+jest.mock('next-auth/react', () => ({
+  useSession: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ status: '' })
+    })
+  },
+}))
 
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
@@ -94,6 +103,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
+        status={''}
       />
     )
     const testCard = screen.getByTestId('mock-card')

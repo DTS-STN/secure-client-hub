@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from '../../pages/_app'
 import Index from '../../pages/index'
-
+import { SessionProvider } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath

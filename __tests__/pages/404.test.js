@@ -6,6 +6,15 @@ import '@testing-library/jest-dom'
 import Custom404 from '../../pages/404'
 import { getStaticProps } from '../../pages/404'
 
+// Mock useSession
+jest.mock('next-auth/react', () => ({
+  useSession: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ status: '' })
+    })
+  },
+}))
+
 // 'Mock' call to fetchContent
 jest.mock('../../lib/cms', () => ({
   fetchContent: () => {

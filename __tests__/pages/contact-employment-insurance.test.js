@@ -8,6 +8,15 @@ import ContactEmploymentInsurance, {
 
 expect.extend(toHaveNoViolations)
 
+// Mock useSession
+jest.mock('next-auth/react', () => ({
+  useSession: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ status: '' })
+    })
+  },
+}))
+
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
