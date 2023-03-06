@@ -18,7 +18,7 @@ export default function MyApp({
   return (
     <SessionProvider
       session={session}
-      refetchInterval={5 * 60}
+      refetchInterval={20 * 60}
       refetchOnWindowFocus={true}
     >
       <Layout
