@@ -75,11 +75,13 @@ export default function Layout(props) {
                   ? '/en/my-dashboard'
                   : '/fr/mon-tableau-de-bord'
               }`,
+              component: Link,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              component: Link,
             },
             {
               key: 'securityKey',
@@ -89,11 +91,13 @@ export default function Layout(props) {
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
+              component: Link,
             },
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
               path: `/`,
+              component: Link,
             },
           ],
         }}
