@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+
 export default function Index(props) {
   return (
     <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">

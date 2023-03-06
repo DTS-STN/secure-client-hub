@@ -13,10 +13,19 @@ import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import { useSession } from 'next-auth/react'
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      console.log('User is not logged in')
+    },
+  })
+  console.log('User Status: ', status)
 
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,

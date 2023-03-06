@@ -11,10 +11,19 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactOldAgeSecurityContent } from '../../graphql/mappers/contact-old-age-security'
 import logger from '../../lib/logger'
 import React from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function ContactOldAgeSecurity(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      console.log('User is not logged in')
+    },
+  })
+  console.log('User Status: ', status)
 
   return (
     <div

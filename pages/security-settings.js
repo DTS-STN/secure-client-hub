@@ -8,9 +8,18 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import logger from '../lib/logger'
+import { useSession } from 'next-auth/react'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      console.log('User is not logged in')
+    },
+  })
+  console.log('User Status: ', status)
 
   return (
     <div id="securityContent" data-testid="securityContent-test">

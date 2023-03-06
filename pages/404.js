@@ -1,6 +1,16 @@
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export default function Custom404() {
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      console.log('User is not logged in')
+    },
+  })
+  console.log('User Status: ', status)
+
   return (
     <div className="grid md:grid-cols-2 sm:grid-cols-1 items-center justify-center overflow-visible md:h-96 sm:h-screen mx-2 my-2 px-20">
       <div className="error-404">
