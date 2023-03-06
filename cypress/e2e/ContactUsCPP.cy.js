@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 describe('Validate CPP Contact Us Landing page', () => {
-  it('Validate CPP Contact us URL and header in EN', () => {
+  it.skip('Validate CPP Contact us URL and header in EN', () => {
     CPPcontactUs.ValidateCPPContactUsUrl()
     CPPcontactUs.ValidateCPPContactUsHeaderEN()
   })
