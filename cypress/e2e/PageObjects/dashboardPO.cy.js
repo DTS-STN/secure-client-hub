@@ -46,11 +46,11 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
+  return cy.get('[id="dropdownNavbar"]>div:nth-child(3)')
 }
 
 function ProfileMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
+  return cy.get('[id="dropdownNavbar"]>div:nth-child(2)')
 }
 
 function ValidateDashboardUrl() {
@@ -167,7 +167,7 @@ function CloseModalButton() {
 }
 
 function ContactUsFooterLink() {
-  return cy.get('[data-cy="footerLink0"]')
+  return cy.get('[data-cy="footerContactUsLink"]')
 }
 
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {

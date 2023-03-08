@@ -38,7 +38,7 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it.skip('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
+  it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()

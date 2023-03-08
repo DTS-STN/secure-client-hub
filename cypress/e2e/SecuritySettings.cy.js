@@ -22,7 +22,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderFR()
   })
 
-  it.skip('Validate that user can select "Security settings" from Menu dropdown options', () => {
+  it('Validate that user can select "Security settings" from Menu dropdown options', () => {
     cy.visit('/my-dashboard')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
@@ -30,7 +30,7 @@ describe('Validate Security Settings page', () => {
     securityPo.SecurityHeaderEN()
   })
 
-  it.skip('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
+  it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
     dashboardPo.Menu().click()
@@ -66,7 +66,7 @@ describe('Validate Security Settings page', () => {
 
   it('Validate that the "Looking for" section is present on Security Settings Page', () => {
     profilePo.LookingFor().should('be.visible')
-    securityPo.LookingForProfileLink().should('be.visible')
+    securityPo.LookingForProfileLinkEn().should('be.visible')
     profilePo.BackToDashboardButton().should('be.visible')
   })
 
@@ -77,7 +77,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate the "Profile" click navigates to Profile Page', () => {
-    securityPo.LookingForProfileLink().click()
+    securityPo.LookingForProfileLinkEn().click()
     profilePo.ProfileUrlEN()
     profilePo.ProfileHeaderEN()
   })
@@ -99,9 +99,10 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
+  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
     dashboardPo.FrenchButton().click()
-    securityPo.LookingForProfileLink().click()
+    dashboardPo.Menu().click()
+    securityPo.LookingForProfileLinkFR().click()
     profilePo.ProfileUrlFR()
     profilePo.ProfileHeaderFR()
   })
