@@ -50,6 +50,7 @@ export default function Layout(props) {
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
+        locale={'en'}
         lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
@@ -61,11 +62,11 @@ export default function Layout(props) {
           displayAlternateLink: false,
         }}
         isAuthenticated={props.isAuth}
+        customLink={Link}
         menuProps={{
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
           },
-          customLink: Link,
           menuList: [
             {
               key: 'dashKey',
