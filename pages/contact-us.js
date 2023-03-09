@@ -9,7 +9,7 @@ import logger from '../lib/logger'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
-  console.log(props, t)
+
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
@@ -62,7 +62,8 @@ export async function getServerSideProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/contactez-nous' : '/contact-us'
+  const langToggleLink =
+    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
   const t = locale === 'en' ? en : fr
 
