@@ -7,6 +7,10 @@ expect.extend(toHaveNoViolations)
 
 describe('PhaseBanner', () => {
   const popupContent = {
+    popupId: '0',
+    popupTitle: 'Exiting beta version',
+    popupDescription:
+      'Thank you for trying the beta version. You are now returning to My Service Canada Account home page.',
     scId: 'beta-popup-exit',
     scHeadingEn: 'Exiting beta version',
     scHeadingFr: 'Vous quittez la version bêta',

@@ -4,6 +4,8 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 
+const popupContent = { popupId: '', popupTitle: '', popupDescription: '' }
+
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
@@ -49,12 +51,26 @@ describe('Layout with default text', () => {
   }))
 
   it('Layout contains Symbol of GoC', () => {
-    render(<Layout locale="en" meta={meta} display={display} />)
+    render(
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        popupContent={popupContent}
+      />
+    )
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
   })
 
   it('Layout contains a Main tag', () => {
-    render(<Layout locale="en" meta={meta} display={display} />)
+    render(
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        popupContent={popupContent}
+      />
+    )
     expect(screen.getByRole('main')).toBeInTheDocument()
   })
 
@@ -70,7 +86,12 @@ describe('Layout with default text', () => {
 
   it('Layout contains no a11y violations', async () => {
     const { container } = render(
-      <Layout locale="en" meta={meta} display={display} />
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        popupContent={popupContent}
+      />
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

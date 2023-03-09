@@ -29,38 +29,38 @@ describe('custom error', () => {
     render(
       <CustomError
         lang="en"
-        errType="500"
+        statusCode="500"
         isAuth={false}
         homePageLink={'/en/my-dashboard'}
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Error')).toBeInTheDocument()
+    expect(screen.getByText(/Error\s*/)).toBeInTheDocument()
   })
 
   it('renders custom statusCode 404 without crashing', () => {
     render(
       <CustomError
         lang="en"
-        errType="404"
+        statusCode="404"
         isAuth={false}
         homePageLink={'/en/my-dashboard'}
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Error')).toBeInTheDocument()
+    expect(screen.getByText(/Error\s*/)).toBeInTheDocument()
   })
 
   it('renders custom error page in french without crashing', () => {
     render(
       <CustomError
         lang="fr"
-        errType="404"
+        statusCode="404"
         isAuth={false}
         homePageLink={'/fr/my-dashboard'}
         accountPageLink="/"
       />
     )
-    expect(screen.getByText('Erreur')).toBeInTheDocument()
+    expect(screen.getByText(/Error\s*/)).toBeInTheDocument()
   })
 })
