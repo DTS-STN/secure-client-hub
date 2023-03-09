@@ -189,7 +189,6 @@ describe('Validate dashboard page', () => {
     dashboardPo.ClickCompleteMyReportOrApplyEILink()
   })
 
-  //
   it('Validate that the clicking Contact Us naviagtes to Contact US landing Page', () => {
     dashboardPo.ContactUsFooterLink().should('be.visible').click()
     contactUsPo.ValidateContactUsUrl()
