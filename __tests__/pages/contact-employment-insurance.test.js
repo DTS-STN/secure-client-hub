@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactEmploymentInsurance, {
-  getStaticProps,
+  getServerSideProps,
 } from '../../pages/contact-us/contact-employment-insurance'
 
 expect.extend(toHaveNoViolations)
@@ -71,16 +71,22 @@ describe('EI Contact Us Page', () => {
 
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Ensurance',
+      title: 'Contact Employment Insurance - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+      title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 
@@ -130,27 +136,33 @@ describe('EI Contact Us Page', () => {
     expect(contactSection).toBeInTheDocument()
   })
 
-  it('Test getStaticProps', async () => {
-    const props = await getStaticProps({ locale: 'en' })
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({ locale: 'en' })
 
     expect(props).toEqual({
       props: {
         pageContent: {},
         bannerContent: {},
-        langToggleLink: '/fr/contact-us/contact-employment-insurance',
+        langToggleLink: '/fr/contactez-nous/communiquer-assurance-emploi',
         locale: 'en',
         meta: {
           data_en: {
+            title: 'Contact Employment Insurance - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Contact Employment Ensurance',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
-            author: 'Service Canada',
+            title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
             desc: 'Français',
+            author: 'Service Canada',
             keywords: '',
-            title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         breadCrumbItems: undefined,

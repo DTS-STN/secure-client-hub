@@ -15,8 +15,9 @@ import fr from '../locales/fr'
 export default function Layout(props) {
   const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
-
   const defaultBreadcrumbs = []
+  const contactLink =
+    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 
   useEffect(() => {
     Modal.setAppElement('#modal-root')
@@ -29,22 +30,26 @@ export default function Layout(props) {
         ''
       ) : (
         <PhaseBanner
-          bannerBoldText={props.bannerContent.bannerBoldText}
-          bannerText={props.bannerContent.bannerText}
-          bannerLink={props.bannerContent.bannerLink}
-          bannerLinkHref={props.bannerContent.bannerLinkHref}
-          bannerButtonText={props.bannerContent.bannerButtonText}
-          bannerButtonLink={props.bannerContent.bannerButtonLink}
-          icon={props.bannerContent.icon}
-          popupContent={props.popupContent}
+          bannerBoldText={props.bannerContent.bannerBoldText || ''}
+          bannerText={props.bannerContent.bannerText || ''}
+          bannerLink={props.bannerContent.bannerLink || ''}
+          bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerButtonText={props.bannerContent.bannerButtonText || ''}
+          bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
+          bannerButtonExternalText={
+            props.bannerContent.bannerButtonExternalText || ''
+          }
+          bannerButtonExternalLink
+          icon={props.bannerContent.icon || ''}
+          popupContent={props.popupContent || ''}
         ></PhaseBanner>
       )}
       <Header
         // analyticsTracking
         dataTestId="topnav"
         id="header"
-        lang={props.locale}
         linkPath={props.langToggleLink}
+        lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
@@ -63,17 +68,25 @@ export default function Layout(props) {
             {
               key: 'dashKey',
               value: t.menuItems.dashboard,
-              path: `${props.locale === 'en' ? '' : '/fr'}/my-dashboard`,
-            },
-            {
-              key: 'securityKey',
-              value: t.menuItems.security,
-              path: `${props.locale === 'en' ? '' : '/fr'}/security-settings`,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/my-dashboard'
+                  : '/fr/mon-tableau-de-bord'
+              }`,
             },
             {
               key: 'profileKey',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '' : '/fr'}/profile`,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+            },
+            {
+              key: 'securityKey',
+              value: t.menuItems.security,
+              path: `${
+                props.locale === 'en'
+                  ? '/en/security-settings'
+                  : '/fr/parametres-securite'
+              }`,
             },
             {
               key: 'signOutKey',
@@ -87,7 +100,6 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-
       <main id="mainContent">
         {display.fullscreen ? (
           props.children
@@ -96,8 +108,9 @@ export default function Layout(props) {
         )}
       </main>
       <div id="modal-root"></div>
+
       <Footer
-        lang={props.locale}
+        lang={!props.locale ? 'en' : props.locale}
         brandLinks={[
           {
             href: t.footerTermsAndConditionURL,
@@ -110,11 +123,12 @@ export default function Layout(props) {
             text: t.footerPrivacy,
           },
         ]}
-        contactLink="/contact-us"
-        btnLink="/"
+        contactLink={contactLink}
+        btnLink="#top"
         id="page-footer"
         isAuthenticated={true}
       />
+      <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
 }
@@ -125,6 +139,39 @@ export default function Layout(props) {
 
 Layout.defaultProps = {
   title: 'Service.Canada.ca',
+  bannerContent: {
+    bannerBoldText: '',
+    bannerText: '',
+    bannerLink: '',
+    bannerLinkHref: '',
+    bannerButtonText: '',
+    bannerButtonLink: '',
+    icon: '',
+  },
+  breadCrumbItems: [],
+  display: { hideBanner: true },
+  langToggleLink: '',
+  locale: 'en',
+  meta: '',
+  popupContent: {
+    scId: '',
+    scHeadingEn: '',
+    scHeadingFr: '',
+    scContentEn: '',
+    scContentFr: '',
+    scFragments: [
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+    ],
+  },
 }
 
 Layout.propTypes = {

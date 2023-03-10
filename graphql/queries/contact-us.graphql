@@ -10,8 +10,11 @@
       scTitleFr
       scBreadcrumbParentPages {
         ... on SCHPagev1Model {
-          scTitleEn
-          scId
+              scId
+              scTitleEn
+              scTitleFr
+              scPageNameEn
+              scPageNameFr
         }
       }
       scFragments {

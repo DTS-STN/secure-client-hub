@@ -111,10 +111,11 @@ export default {
   footerAbout: 'À propos de Canada.ca',
 
   footerTermsAndConditionURL:
-    'https://www.canada.ca/en/transparency/terms.html',
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndCondition: 'Avis',
 
-  footerPrivacyURL: 'https://www.canada.ca/en/transparency/privacy.html',
+  footerPrivacyURL:
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerPrivacy: 'Confidentialité',
 
   aboutThisSite: 'À propos de ce site',
@@ -128,7 +129,7 @@ export default {
   url_canada_ca: 'https://www.canada.ca/home.html',
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
-  url_dashboard: '/fr/my-dashboard',
+  url_dashboard: '/fr/mon-tableau-de-bord',
   aria_exit_beta_modal: 'Exiting beta warning modal',
   close_modal: 'Fermer modal',
 }

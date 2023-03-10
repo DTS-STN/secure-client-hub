@@ -7,6 +7,37 @@ const builddate = process.env.BUILD_DATE
     process.env.BUILD_DATE.substring(6, 8)
   : 'DATE-NA'
 
+const REWRITES = [
+  {
+    source: '/contactez-nous',
+    destination: '/contact-us',
+  },
+  {
+    source: '/mon-tableau-de-bord',
+    destination: '/my-dashboard',
+  },
+  {
+    source: '/profil',
+    destination: '/profile',
+  },
+  {
+    source: '/parametres-securite',
+    destination: '/security-settings',
+  },
+  {
+    source: '/contactez-nous/communiquer-assurance-emploi',
+    destination: '/contact-us/contact-employment-insurance',
+  },
+  {
+    source: '/contactez-nous/communiquer-securite-vieillesse',
+    destination: '/contact-us/contact-old-age-security',
+  },
+  {
+    source: '/contactez-nous/communiquer-regime-pensions-canada',
+    destination: '/contact-us/contact-canada-pension-plan',
+  },
+]
+
 const securityHeaders = [
   {
     key: 'X-DNS-Prefetch-Control',
@@ -39,7 +70,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:",
+      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://assets.adobedtm.com; connect-src 'self' https://canada.demdex.net https://dpm.demdex.net https://assets.adobedtm.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' 'unsafe-inline' https://assets.adobedtm.com; img-src 'self' data: https:",
   },
 ]
 
@@ -54,10 +85,11 @@ module.exports = {
   // i18n setup
   //
   i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'en',
-    localeDetection: true,
+    locales: ['und', 'en', 'fr'],
+    defaultLocale: 'und',
+    localeDetection: false,
   },
+  trailingSlash: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //GraphQL loader for .graphql files
     config.module.rules.push({
@@ -96,5 +128,9 @@ module.exports = {
         headers: securityHeaders,
       },
     ]
+  },
+  //Redirect French URLs
+  async rewrites() {
+    return REWRITES
   },
 }

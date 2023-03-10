@@ -4,13 +4,51 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from '../../pages/_app'
-import Index from '../../pages/index'
+import Index, { getStaticProps } from '../../pages/index'
 
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
+}))
+
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
+  getBetaBannerContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        en: {},
+        fr: {},
+      })
+    })
+  },
+}))
+
+jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
+  getBetaPopupExitContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({ en: {}, fr: {} })
+    })
+  },
 }))
 
 describe('index page', () => {
@@ -27,12 +65,18 @@ describe('index page', () => {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
     },
     data_fr: {
       title: 'Mon dossier Service Canada - Canada.ca',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
     },
   }
 
@@ -42,7 +86,7 @@ describe('index page', () => {
     meta: meta,
   }
 
-  it('should render the page', () => {
+  it('should render the page ', () => {
     render(<App Component={component} pageProps={pageProps} />)
     const heading = screen.getByRole('heading', { level: 1 })
     expect(heading).toBeInTheDocument()

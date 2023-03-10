@@ -14,6 +14,18 @@ export default function MetaData(props) {
         <meta name="keywords" content={d.keywords} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="dcterms.title" content={d.title} />
+        <meta
+          name="dcterms.language"
+          content={props.language === 'en' ? 'eng' : 'fra'}
+        />
+        <meta name="dcterms.creator" content={d.creator} />
+        <meta name="dcterms.accessRights" content={d.accessRights} />
+        <meta name="dcterms.service" content={d.service} />
+        {/* eslint-disable */}
+
+        <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
+        {/*eslint-enable */}
       </Head>
     </>
   )

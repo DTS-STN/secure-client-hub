@@ -36,14 +36,21 @@ export default function PhaseBanner(props) {
             className="pb-2 md:pb-7 font-body text-xl"
             data-cy="learnMoreAbtBeta"
           >
-            <span className="font-bold">{props.bannerBoldText} </span>
+            <span className="font-bold">{props.bannerBoldText || ''} </span>
             {props.bannerText}
           </p>
           <a
             href={props.bannerLinkHref}
             className="font-body text-xl text-deep-blue-dark hover:text-blue-hover"
+            target={props.bannerButtonExternalLink ? '_blank' : undefined}
+            rel={
+              props.bannerButtonExternalLink ? 'noopener noreferrer' : undefined
+            }
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
+            {props.bannerButtonExternalLink && (
+              <span className="sr-only">{props.bannerButtonExternalText} </span>
+            )}
             <FontAwesomeIcon
               width="14"
               icon={icon[props.icon]}
@@ -108,6 +115,14 @@ PhaseBanner.propTypes = {
    * Phasebanner Button Href
    */
   bannerButtonHref: propTypes.string,
+  /**
+   * Boolean to determine if the button in the banner links to an external page
+   */
+  bannerButtonExternalLink: propTypes.bool,
+  /**
+   * Screen reader only external link text
+   */
+  bannerButtonExternalText: propTypes.string,
   /**
    * Icon Text
    */

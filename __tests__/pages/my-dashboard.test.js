@@ -4,6 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
+
 import { getServerSideProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
@@ -33,6 +34,14 @@ jest.mock('../../graphql/mappers/my-dashboard', () => ({
   },
 }))
 
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
+    })
+  },
+}))
+
 jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   getBetaBannerContent: () => {
     return new Promise(function (resolve, reject) {
@@ -48,6 +57,7 @@ jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
     })
   },
 }))
+
 jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   getBetaPopupNotAvailableContent: () => {
     return new Promise(function (resolve, reject) {
@@ -117,20 +127,26 @@ describe('My Dashboard page', () => {
       props: {
         content: {},
         bannerContent: {},
-        langToggleLink: '/fr/my-dashboard',
+        langToggleLink: '/fr/mon-tableau-de-bord',
         locale: 'en',
         meta: {
           data_en: {
+            title: 'Dashboard - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Dashboard',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
           },
           data_fr: {
-            author: 'Service Canada',
+            title: 'Tableau de Bord - Mon dossier Service Canada',
             desc: 'Français',
+            author: 'Service Canada',
             keywords: '',
-            title: 'Mon dossier Service Canada - Tableau de Bord',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
           },
         },
         popupContent: {},

@@ -46,11 +46,11 @@ function Menu() {
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
 }
 
 function ProfileMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
+  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
 }
 
 function ValidateDashboardUrl() {
@@ -62,7 +62,7 @@ function ValidateDashboardHeaderEN() {
 }
 
 function ValidateDashboardUrlFR() {
-  cy.url().should('contains', '/fr/my-dashboard')
+  cy.url().should('contains', '/fr/mon-tableau-de-bord')
 }
 
 function ValidateDashboardHeaderFR() {
@@ -167,7 +167,7 @@ function CloseModalButton() {
 }
 
 function ContactUsFooterLink() {
-  return cy.get('[data-cy="footerContactUsLink"]')
+  return cy.get('[data-cy="footerLink0"]')
 }
 
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {
