@@ -27,30 +27,45 @@ export async function getContactCanadaPensionPlan() {
                   id: y.scId,
                   color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
-                    return {
-                      content: z.scContentEn.markdown,
-                      icon: z.scIconCSS,
-                      ...z.scFragments.map((a) => {
-                        if (!a.scButtonType) {
-                          return {
-                            city: a.scCityEn,
-                            country: a.scCountryEn,
-                            id: a.scId,
-                            poBox: a.scPostalBoxEn,
-                            postal: a.scPostalCode,
-                            program: a.scProgramEn,
-                            province: a.scProvTerrAbbrEnum,
-                            recipient: a.scRecipientEn,
+                    if (z.scContentEn) {
+                      //Return address nested in content
+                      return {
+                        content: z.scContentEn.markdown,
+                        icon: z.scIconCSS,
+                        ...z.scFragments.map((a) => {
+                          if (!a.scButtonType) {
+                            return {
+                              city: a.scCityEn,
+                              country: a.scCountryEn,
+                              id: a.scId,
+                              poBox: a.scPostalBoxEn,
+                              postal: a.scPostalCode,
+                              program: a.scProgramEn,
+                              province: a.scProvTerrAbbrEnum,
+                              recipient: a.scRecipientEn,
+                            }
+                          } else {
+                            return {
+                              id: a.scId,
+                              content: a.scLinkTextEn,
+                              link: a.scDestinationURLEn,
+                              button: a.scButtonType,
+                            }
                           }
-                        } else {
-                          return {
-                            id: a.scId,
-                            content: a.scLinkTextEn,
-                            link: a.scDestinationURLEn,
-                            button: a.scButtonType,
-                          }
-                        }
-                      })[0],
+                        })[0],
+                      }
+                    } else {
+                      //Return address unnested
+                      return {
+                        city: z.scCityEn,
+                        country: z.scCountryEn.toUpperCase(),
+                        id: z.scId,
+                        poBox: z.scPostalBoxEn,
+                        postal: z.scPostalCode,
+                        province: z.scProvTerrAbbrEnum,
+                        recipient: z.scRecipientEn,
+                        station: z.scPostalStationEn,
+                      }
                     }
                   }),
                   label: y.scTitleEn,
@@ -88,31 +103,45 @@ export async function getContactCanadaPensionPlan() {
                   label: y.scTitleFr,
                   color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
-                    return {
-                      content: z.scContentFr.markdown,
-                      icon: z.scIconCSS,
-
-                      ...z.scFragments.map((a) => {
-                        if (!a.scButtonType) {
-                          return {
-                            city: a.scCityFr,
-                            country: a.scCountryFr,
-                            id: a.scId,
-                            poBox: a.scPostalBoxFr,
-                            postal: a.scPostalCode,
-                            program: a.scProgramFr,
-                            province: a.scProvTerrAbbrEnum,
-                            recipient: a.scRecipientFr,
+                    if (z.scContentFr) {
+                      //Return address nested in content
+                      return {
+                        content: z.scContentFr.markdown,
+                        icon: z.scIconCSS,
+                        ...z.scFragments.map((a) => {
+                          if (!a.scButtonType) {
+                            return {
+                              city: a.scCityFr,
+                              country: a.scCountryFr,
+                              id: a.scId,
+                              poBox: a.scPostalBoxFr,
+                              postal: a.scPostalCode,
+                              program: a.scProgramFr,
+                              province: a.scProvTerrAbbrEnum,
+                              recipient: a.scRecipientFr,
+                            }
+                          } else {
+                            return {
+                              id: a.scId,
+                              content: a.scLinkTextFr,
+                              link: a.scDestinationURLFr,
+                              button: a.scButtonType,
+                            }
                           }
-                        } else {
-                          return {
-                            id: a.scId,
-                            content: a.scLinkTextFr,
-                            link: a.scDestinationURLFr,
-                            button: a.scButtonType,
-                          }
-                        }
-                      })[0],
+                        })[0],
+                      }
+                    } else {
+                      //Return address unnested
+                      return {
+                        city: z.scCityFr,
+                        country: z.scCountryFr.toUpperCase(),
+                        id: z.scId,
+                        poBox: z.scPostalBoxFr,
+                        postal: z.scPostalCode,
+                        province: z.scProvTerrAbbrEnum,
+                        recipient: z.scRecipientFr,
+                        station: z.scPostalStationFr,
+                      }
                     }
                   }),
                   title: y.scTitleFr,
