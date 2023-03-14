@@ -54,6 +54,8 @@ export default function MyDashboard(props) {
   }
 
   useEffect(() => {
+    fetch('/api/refresh-msca')
+
     const id = setInterval(function () {
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
