@@ -31,7 +31,7 @@ export default function Profile(props) {
   }
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+      <Heading id="my-dashboard-heading" title={props.content.pageName} />
       <p className="text-lg mt-2 font-body">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
