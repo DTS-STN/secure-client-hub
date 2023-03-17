@@ -1,6 +1,6 @@
 import CountDown from '../components/sessionModals/CountDown'
 import SignedOut from '../components/sessionModals/SignedOut'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -12,13 +12,19 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  Redirect,
+  ValidateSession,
+} from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import Router from 'next/router'
+import throttle from 'lodash.throttle'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -54,8 +60,6 @@ export default function MyDashboard(props) {
   }
 
   useEffect(() => {
-    fetch('/api/refresh-msca')
-
     const id = setInterval(function () {
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
@@ -86,6 +90,21 @@ export default function MyDashboard(props) {
     }, 1000)
     return () => clearInterval(id)
   }, [])
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
