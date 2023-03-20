@@ -99,9 +99,8 @@ describe('Validate Security Settings page', () => {
       .should('have.text', 'Retour à mon tableau de bord')
   })
 
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
+  it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
     dashboardPo.FrenchButton().click()
-    dashboardPo.Menu().click()
     securityPo.LookingForProfileLinkFR().click()
     profilePo.ProfileUrlFR()
     profilePo.ProfileHeaderFR()

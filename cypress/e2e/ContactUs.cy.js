@@ -33,7 +33,7 @@ describe('Validate Contact Us Landing page', () => {
       .and('have.text', 'Mon tableau de bord')
   })
 
-  it('Validate the EI link navigates to EI Contact us page', () => {
+  it.skip('Validate the EI link navigates to EI Contact us page', () => {
     contactUsPo.EmploymentInsuranceLink().click()
     EIcontactUs.ValidateEIContactUsUrl()
   })

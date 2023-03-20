@@ -58,11 +58,11 @@ describe('My Profile page', () => {
         tasks: [
           {
             id: 'id',
-            betaPopUp: false,
             title: 'title',
             areaLabel: 'areaLabel',
             link: '/',
             icon: '',
+            betaPopUp: 'betaPopUp',
           },
         ],
       },
@@ -78,7 +78,7 @@ describe('My Profile page', () => {
       btnLink: '/',
     },
   }
-  const popupContent = { betaPopUp: false }
+  const popupContent = {}
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({

@@ -11,13 +11,11 @@ describe('ProfileTasks', () => {
       locale="en"
       tasks={[
         {
-          areaLabel: '0',
           title: 'Province of residence',
           icon: 'circle',
           link: '/dashboard',
         },
         {
-          areaLabel: '0',
           title: 'Language of correspondence',
           icon: 'stamp',
           link: '/dashboard',

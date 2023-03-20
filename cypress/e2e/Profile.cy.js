@@ -108,6 +108,6 @@ describe('Validate Profile page', () => {
     dashboardPo.FrenchButton().click()
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()
-    // dashboardPo.ValidateDashboardHeaderFR()
+    dashboardPo.ValidateDashboardHeaderFR()
   })
 })

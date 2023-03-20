@@ -42,8 +42,8 @@ describe('Validate CPP Contact Us Landing page', () => {
     CPPcontactUs.ValidateEachSectionCPPContactUs()
   })
 
-  // it('Validate Mail section on CPP contact Us page', () => {
-  //   CPPcontactUs.ValidateMailCardsOASContactUs()
+  // it('Validate Mail section on OAS contact Us page', () => {
+  //   OAScontactUs.ValidateMailCardsOASContactUs()
   // })
 
   it('Validate each section content on CPP contact Us page', () => {
