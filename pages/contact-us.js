@@ -62,7 +62,8 @@ export async function getServerSideProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/contactez-nous' : '/contact-us'
+  const langToggleLink =
+    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
   const t = locale === 'en' ? en : fr
 

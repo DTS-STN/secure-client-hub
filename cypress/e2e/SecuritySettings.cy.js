@@ -77,7 +77,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate the "Profile" click navigates to Profile Page', () => {
-    securityPo.LookingForProfileLink().click()
+    securityPo.LookingForProfileLinkEn().click()
     profilePo.ProfileUrlEN()
     profilePo.ProfileHeaderEN()
   })
@@ -101,7 +101,7 @@ describe('Validate Security Settings page', () => {
 
   it.skip('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
     dashboardPo.FrenchButton().click()
-    securityPo.LookingForProfileLink().click()
+    securityPo.LookingForProfileLinkFR().click()
     profilePo.ProfileUrlFR()
     profilePo.ProfileHeaderFR()
   })

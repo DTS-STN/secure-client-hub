@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.8",
-    "@dts-stn/service-canada-design-system": "^1.57.0",
+    "@dts-stn/service-canada-design-system": "^1.57.1-dev.efe8b7dc0",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
