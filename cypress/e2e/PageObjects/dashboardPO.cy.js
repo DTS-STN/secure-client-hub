@@ -42,7 +42,7 @@ function MostRequestedSectionLinks() {
 }
 
 function Menu() {
-  return cy.get('#dropdownNavbarLink')
+  return cy.get('#dropdownNavbarLink').parent()
 }
 
 function SecuritySettingsMenu() {

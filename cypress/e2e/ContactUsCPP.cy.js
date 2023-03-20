@@ -46,7 +46,8 @@ describe('Validate CPP Contact Us Landing page', () => {
   //   CPPcontactUs.ValidateMailCardsOASContactUs()
   // })
 
-  it('Validate each section content on CPP contact Us page', () => {
+  // Target content has been removed
+  it.skip('Validate each section content on CPP contact Us page', () => {
     CPPcontactUs.ValidateEachSectionContent()
   })
 })
