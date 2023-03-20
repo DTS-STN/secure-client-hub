@@ -66,7 +66,7 @@ describe('Validate Security Settings page', () => {
 
   it('Validate that the "Looking for" section is present on Security Settings Page', () => {
     profilePo.LookingFor().should('be.visible')
-    securityPo.LookingForProfileLink().should('be.visible')
+    securityPo.LookingForProfileLinkEn().should('be.visible')
     profilePo.BackToDashboardButton().should('be.visible')
   })
 
