@@ -25,6 +25,7 @@ export async function getContactOldAgeSecurityContent() {
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     if (z.scContentEn) {
                       //Return address nested in content
@@ -57,7 +58,9 @@ export async function getContactOldAgeSecurityContent() {
                       //Return address unnested
                       return {
                         city: z.scCityEn,
-                        country: z.scCountryEn.toUpperCase(),
+                        country: z.scCountryEn
+                          ? z.scCountryEn.toUpperCase()
+                          : null,
                         id: z.scId,
                         poBox: z.scPostalBoxEn,
                         postal: z.scPostalCode,
@@ -95,10 +98,10 @@ export async function getContactOldAgeSecurityContent() {
             return {
               id: x.scId,
               title: x.scTitleFr,
-              title: x.scTitleFr,
               details: x.schDetails.map((y) => {
                 return {
                   id: y.scId,
+                  color: y.scBackgroundColour,
                   items: y.scItems.map((z) => {
                     if (z.scContentFr) {
                       //Return address nested in content
@@ -131,7 +134,9 @@ export async function getContactOldAgeSecurityContent() {
                       //Return address unnested
                       return {
                         city: z.scCityFr,
-                        country: z.scCountryFr.toUpperCase(),
+                        country: z.scCountryFr
+                          ? z.scCountryFr.toUpperCase()
+                          : null,
                         id: z.scId,
                         poBox: z.scPostalBoxFr,
                         postal: z.scPostalCode,
