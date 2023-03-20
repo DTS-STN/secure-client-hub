@@ -61,6 +61,24 @@
                                   scTitleFr
                                    scId
                                    scItems {
+                                     ... on SCHAddressv1Model {
+                                              _path
+                                              scId
+                                              scRecipientEn
+                                              scRecipientFr
+                                              scPostalBoxEn
+                                              scPostalBoxFr
+                                              scPostalStationEn
+                                              scPostalStationFr
+                                              scCityEn
+                                              scCityFr
+                                              scProvTerrAbbr
+                                              scPostalCode
+                                              scCountry
+                                              scProvTerrAbbrEnum
+                                              scCountryEn
+                                              scCountryFr
+                                          }
                                       ... on SCHContentv1Model {
                                       _path
                                       scId
