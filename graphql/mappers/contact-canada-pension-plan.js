@@ -58,7 +58,9 @@ export async function getContactCanadaPensionPlan() {
                       //Return address unnested
                       return {
                         city: z.scCityEn,
-                        country: z.scCountryEn.toUpperCase(),
+                        country: z.scCountryEn
+                          ? z.scCountryEn.toUpperCase()
+                          : null,
                         id: z.scId,
                         poBox: z.scPostalBoxEn,
                         postal: z.scPostalCode,
@@ -134,7 +136,9 @@ export async function getContactCanadaPensionPlan() {
                       //Return address unnested
                       return {
                         city: z.scCityFr,
-                        country: z.scCountryFr.toUpperCase(),
+                        country: z.scCountryFr
+                          ? z.scCountryFr.toUpperCase()
+                          : null,
                         id: z.scId,
                         poBox: z.scPostalBoxFr,
                         postal: z.scPostalCode,
