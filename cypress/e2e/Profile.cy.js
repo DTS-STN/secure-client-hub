@@ -72,7 +72,7 @@ describe('Validate Profile page', () => {
     dashboardPo.ValidateDashboardHeaderEN()
   })
 
-  it.skip('Validate the "Security Settings" click navigates to Security Settings Page', () => {
+  it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
     cy.wait(3000)
     profilePo.LookingForSecurityLink().click({ froce: true })
     securityPo.SecurityUrlEN()
