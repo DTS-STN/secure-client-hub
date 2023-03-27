@@ -31,8 +31,6 @@ export default function Profile(props) {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
 
-  console.log(props.content.pageName, props)
-
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
