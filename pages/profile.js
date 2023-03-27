@@ -30,6 +30,9 @@ export default function Profile(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
+
+  console.log(props.content.pageName, props)
+
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
@@ -65,7 +68,6 @@ export default function Profile(props) {
         isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
-        refPageAA={props.content.pageName}
       >
         <ExitBetaModal
           closeModal={closeModal}

@@ -4,6 +4,7 @@ import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
 
 export default function ExitBetaModal(props) {
+  console.log(props)
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"

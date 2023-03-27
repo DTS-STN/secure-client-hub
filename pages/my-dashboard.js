@@ -157,7 +157,6 @@ export default function MyDashboard(props) {
         isOpen={demoModalBody === null ? false : true}
         onRequestClose={closeModal}
         contentLabel={'Demo Modal'}
-        refPageAA={props.content.heading}
       >
         {demoModalBody}
       </Modal>

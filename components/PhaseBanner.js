@@ -75,7 +75,6 @@ export default function PhaseBanner(props) {
         isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
         contentLabel={'Modal'}
-        refPageAA={props.refPageAA}
       >
         <ExitBetaModal
           closeModal={closeModal}
