@@ -46,6 +46,7 @@ export default function PhaseBanner(props) {
             rel={
               props.bannerButtonExternalLink ? 'noopener noreferrer' : undefined
             }
+            data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.bannerButtonExternalText}`}
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
             {props.bannerButtonExternalLink && (
@@ -74,6 +75,7 @@ export default function PhaseBanner(props) {
         isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
         contentLabel={'Modal'}
+        refPageAA={props.refPageAA}
       >
         <ExitBetaModal
           closeModal={closeModal}
@@ -84,6 +86,7 @@ export default function PhaseBanner(props) {
           popupDescription={props.popupContent.popupDescription}
           popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
+          refPageAA={props.refPageAA}
         />
       </Modal>
     </div>

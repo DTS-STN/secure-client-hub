@@ -64,7 +64,7 @@ export default function MyDashboard(props) {
               onContinue={() => Router.push('./')}
               id="SignedOut"
               {...props.popupYouHaveBeenSignedout}
-              refPageAA={'My Dashboard'}
+              refPageAA={props.content.heading}
             />
           ) : (
             <CountDown
@@ -79,7 +79,7 @@ export default function MyDashboard(props) {
               id="CountDown"
               deadline={expires.logout}
               {...props.popupStaySignedIn}
-              refPageAA={'My Dashboard'}
+              refPageAA={props.content.heading}
             />
           )
         )
@@ -109,6 +109,7 @@ export default function MyDashboard(props) {
                 dataCy="most-requested"
                 openModal={openModal}
                 acronym={acronym(card.title)}
+                refPageAA={props.content.heading}
               />
             </div>
             <div
@@ -123,6 +124,7 @@ export default function MyDashboard(props) {
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
+                      refPageAA={props.content.heading}
                     />
                   </div>
                 )
@@ -147,7 +149,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={'My Dashboard'}
+          refPageAA={props.content.heading}
         />
       </Modal>
       <Modal
@@ -155,7 +157,7 @@ export default function MyDashboard(props) {
         isOpen={demoModalBody === null ? false : true}
         onRequestClose={closeModal}
         contentLabel={'Demo Modal'}
-        refPageAA={'My Dashboard'}
+        refPageAA={props.content.heading}
       >
         {demoModalBody}
       </Modal>

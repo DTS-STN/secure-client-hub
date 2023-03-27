@@ -20,7 +20,6 @@ export default function SecuritySettings(props) {
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
-        // Placeholder for DS data-gc-analytics-customclick prop
       />
       <p className="mb-8 text-xl font-body">
         {props.content.securityQuestions.subTitle}
@@ -31,7 +30,6 @@ export default function SecuritySettings(props) {
         dataTestId="eiAccessCodeLink"
         text={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
-        // Placeholder for DS data-gc-analytics-customclick prop
       />
       <p className="pb-7 text-xl font-body">
         {props.content.eiAccessCode.subTitle}
@@ -46,7 +44,7 @@ export default function SecuritySettings(props) {
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
-        refPageAA={'Security settings'}
+        refPageAA={props.content.heading}
       ></PageLink>
     </div>
   )
