@@ -12,6 +12,16 @@ import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const Overlay = dynamic(() => import('../lib/invitation-manager/Overlay.js'), {
+  ssr: false,
+})
+
+const InvitationManager = dynamic(
+  () => import('../lib/invitation-manager/InvitationManager.js'),
+  { ssr: false }
+)
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -136,10 +146,8 @@ export default function Layout(props) {
         isAuthenticated={true}
       />
 
-      <script src="/invitation-manager/Overlay.js"></script>
-
-      <script src="/invitation-manager/InvitationManager.js"></script>
-
+      <InvitationManager />
+      <Overlay />
       <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
