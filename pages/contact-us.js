@@ -6,6 +6,7 @@ import { getContactUsContent } from '../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
+import NextLink from 'next/link'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
@@ -22,7 +23,10 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={link.linkDestination.split('/').pop()}
+                href={`/${props.content.pageName}/${link.linkDestination
+                  .split('/')
+                  .pop()}`}
+                component={NextLink}
               />
               <p className="text-xl font-body">{link.linkDescription}</p>
             </li>
