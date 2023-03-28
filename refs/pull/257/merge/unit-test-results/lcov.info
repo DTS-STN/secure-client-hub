@@ -82,10 +82,9 @@ FNF:1
 FNH:1
 FNDA:2,ExitBetaModal
 DA:7,2
-DA:8,2
-DA:58,6
-LF:3
-LH:3
+DA:57,6
+LF:2
+LH:2
 BRF:0
 BRH:0
 end_of_record
