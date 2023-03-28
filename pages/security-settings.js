@@ -44,6 +44,7 @@ export default function SecuritySettings(props) {
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
+        refPageAA={props.content.heading}
       ></PageLink>
     </div>
   )

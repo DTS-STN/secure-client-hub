@@ -19,6 +19,7 @@ import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import Router from 'next/router'
+import { acronym } from '../lib/acronym'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -63,6 +64,7 @@ export default function MyDashboard(props) {
               onContinue={() => Router.push('./')}
               id="SignedOut"
               {...props.popupYouHaveBeenSignedout}
+              refPageAA={props.content.heading}
             />
           ) : (
             <CountDown
@@ -77,6 +79,7 @@ export default function MyDashboard(props) {
               id="CountDown"
               deadline={expires.logout}
               {...props.popupStaySignedIn}
+              refPageAA={props.content.heading}
             />
           )
         )
@@ -105,6 +108,8 @@ export default function MyDashboard(props) {
                 taskListMR={mostReq}
                 dataCy="most-requested"
                 openModal={openModal}
+                acronym={acronym(card.title)}
+                refPageAA={props.content.heading}
               />
             </div>
             <div
@@ -115,9 +120,11 @@ export default function MyDashboard(props) {
                 return (
                   <div className="" key={index} data-cy="Task">
                     <BenefitTasks
+                      acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
+                      refPageAA={props.content.heading}
                     />
                   </div>
                 )
@@ -142,6 +149,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.content.heading}
         />
       </Modal>
       <Modal

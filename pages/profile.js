@@ -12,6 +12,7 @@ import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import { acronym } from '../lib/acronym'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -29,6 +30,7 @@ export default function Profile(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
+
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
@@ -37,11 +39,13 @@ export default function Profile(props) {
         return (
           <ProfileTasks
             key={index}
+            acronym={acronym(program.title)}
             programTitle={program.title}
             tasks={program.tasks}
             data-testID="profile-task-group-list"
             openModal={openModal}
             data-cy="task"
+            refPageAA={props.content.pageName}
           />
         )
       })}
@@ -55,6 +59,7 @@ export default function Profile(props) {
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
+        refPageAA={props.content.pageName}
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -71,6 +76,7 @@ export default function Profile(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.content.pageName}
         />
       </Modal>
     </div>
