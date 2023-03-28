@@ -23,9 +23,12 @@ export default function MetaData(props) {
         <meta name="dcterms.accessRights" content={d.accessRights} />
         <meta name="dcterms.service" content={d.service} />
         {/* eslint-disable */}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
         {/*eslint-enable */}
+
+        <link rel="stylesheet" href="/invitation-manager/Overlay.css" />
       </Head>
     </>
   )

@@ -135,6 +135,11 @@ export default function Layout(props) {
         id="page-footer"
         isAuthenticated={true}
       />
+
+      <script src="/invitation-manager/Overlay.js"></script>
+
+      <script src="/invitation-manager/InvitationManager.js"></script>
+
       <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
