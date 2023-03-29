@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     //Send request to ECAS to refresh MSCA session
     if (AuthIsDisabled()) {
       //Service unavailable when auth is disabled
-      res.status(503).json({ success: true })
+      res.status(503).json({ success: false })
     } else if (await AuthIsValid(req)) {
       res.status(200).json({ success: true })
     } else {
