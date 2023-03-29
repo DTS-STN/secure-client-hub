@@ -102,6 +102,8 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={card.dropdownText}
+            acronym={acronym(card.title)}
+            refPageAA={props.content.heading}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
