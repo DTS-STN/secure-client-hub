@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680119591106" clover="3.2.0">
-  <project timestamp="1680119591106" name="All files">
-    <metrics statements="369" coveredstatements="168" conditionals="212" coveredconditionals="61" methods="168" coveredmethods="61" elements="749" coveredelements="290" complexity="0" loc="369" ncloc="369" packages="8" files="39" classes="39"/>
+<coverage generated="1680120222223" clover="3.2.0">
+  <project timestamp="1680120222223" name="All files">
+    <metrics statements="364" coveredstatements="168" conditionals="212" coveredconditionals="61" methods="167" coveredmethods="61" elements="743" coveredelements="290" complexity="0" loc="364" ncloc="364" packages="8" files="39" classes="39"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="74" coveredconditionals="23" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -400,24 +400,19 @@
       </file>
     </package>
     <package name="pages.api.auth">
-      <metrics statements="15" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
       <file name="[...nextauth].js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/auth/[...nextauth].js">
-        <metrics statements="15" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="64" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages.contact-us">
