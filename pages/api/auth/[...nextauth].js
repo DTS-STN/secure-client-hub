@@ -38,11 +38,7 @@ export default NextAuth({
       userinfo: process.env.AUTH_ECAS_USERINFO,
       idToken: true,
       checks: ['state', 'nonce'],
-      profile(profile, tokens) {
-        console.log('-----START PROFILE-------')
-        console.log(profile)
-        console.log(tokens)
-        console.log('-----END PROFILE------')
+      profile(profile) {
         return {
           id: profile.sid,
         }
@@ -64,9 +60,6 @@ export default NextAuth({
       else if (new URL(url).origin === baseUrl) return url
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
-    },
-    async session({ session, token, user }) {
-      return session, token
     },
   },
   logger: {
