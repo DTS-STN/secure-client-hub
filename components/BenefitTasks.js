@@ -47,6 +47,7 @@ export default function BenefitTasks(props) {
                       props.openModal(task.link)
                     }
                   }}
+                  data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA} ${props.acronym}:${task.title}`}
                   className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
                 >
                   <FontAwesomeIcon

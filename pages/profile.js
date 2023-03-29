@@ -14,6 +14,7 @@ import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
+import { acronym } from '../lib/acronym'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -49,17 +50,19 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+      <Heading id="my-dashboard-heading" title={props.content.pageName} />
       <p className="text-lg mt-2 font-body">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
             key={index}
+            acronym={acronym(program.title)}
             programTitle={program.title}
             tasks={program.tasks}
             data-testID="profile-task-group-list"
             openModal={openModal}
             data-cy="task"
+            refPageAA={props.content.pageName}
           />
         )
       })}
@@ -73,6 +76,7 @@ export default function Profile(props) {
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
+        refPageAA={props.content.pageName}
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -89,6 +93,7 @@ export default function Profile(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.content.pageName}
         />
       </Modal>
     </div>

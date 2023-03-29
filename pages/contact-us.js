@@ -8,6 +8,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
+import NextLink from 'next/link'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
@@ -39,7 +40,10 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={link.linkDestination.split('/').pop()}
+                href={`/${props.content.pageName}/${link.linkDestination
+                  .split('/')
+                  .pop()}`}
+                component={NextLink}
               />
               <p className="text-xl font-body">{link.linkDescription}</p>
             </li>
@@ -79,7 +83,8 @@ export async function getServerSideProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/contactez-nous' : '/contact-us'
+  const langToggleLink =
+    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
   const t = locale === 'en' ? en : fr
 
