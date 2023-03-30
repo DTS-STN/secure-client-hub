@@ -26,6 +26,12 @@ export default NextAuth({
         token_endpoint_auth_signing_alg: 'RS256',
         id_token_signed_response_alg: 'RS512',
       },
+      token: {
+        url: 'https://srv241-s2.lab.hrdc-drhc.gc.ca/ecas-seca/raoidc_ii/v1/token',
+        params: {
+          scope: 'openid profile',
+        },
+      },
       jwks: {
         keys: [JSON.parse(process.env.AUTH_PRIVATE)],
       },
@@ -34,8 +40,7 @@ export default NextAuth({
       checks: ['state', 'nonce'],
       profile(profile) {
         return {
-          //id: profile.sub,
-          id: 'scrubbed',
+          id: profile.sid,
         }
       },
     },
