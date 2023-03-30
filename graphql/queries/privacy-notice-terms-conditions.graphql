@@ -1,0 +1,40 @@
+{
+    schPagev1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/privacy-notice-terms-conditions"
+  ) {
+    item {
+    scId
+    scPageNameEn
+    scPageNameFr
+    scTitleEn
+    scTitleFr
+    scBreadcrumbParentPages{
+        ... on SCHPagev1Model {
+              scId
+              scTitleEn
+              scTitleFr
+              scPageNameEn
+              scPageNameFr
+        }
+    }
+    scFragments{
+        ... on SCHContentv1Model{
+            scId
+            scContentEn{
+                json
+            }
+            scContentFr{
+                json
+            }
+        }
+        ... on SCHTaskv1Model{
+                    scId
+                    scTitleEn
+                    scTitleFr
+                    scDestinationURLEn
+                    scDestinationURLFr
+                }
+    }
+    }
+  }
+}
