@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import {
   Heading,
-  Link,
   ContextualAlert,
+  Date,
 } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -13,16 +13,18 @@ import logger from '../lib/logger'
 import BackToButton from '../components/BackToButton'
 
 export default function PrivacyCondition(props) {
-  // console.log(props.content)
   const t = props.locale === 'en' ? en : fr
   return (
     <div
       id="privacyConditionContent"
       data-testid="privacyConditionContent-test"
     >
-      <Heading id="PrivacyCondition-heading" title={props.content.heading} />
+      <Heading
+        id="PrivacyCondition-heading"
+        title={props.content.heading}
+        className="mb-2"
+      />
       <ContextualAlert
-        className="p-12 m-16 text-lg"
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
         message_heading="Information"
@@ -30,12 +32,14 @@ export default function PrivacyCondition(props) {
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
       />
-      <section>
-        <h2 className="text-3xl font-display font-bold">
+      <section className="font-body">
+        <h2 className="text-3xl font-display font-bold mt-10 mb-3">
           {props.content.privacyNoticeSection.title}
         </h2>
-        <p>{props.content.privacyNoticeSection.paragraphs[0]}</p>
-        <ol className="list-[lower-latin]">
+        <p className="mb-3">
+          {props.content.privacyNoticeSection.paragraphs[0]}
+        </p>
+        <ol className="list-[lower-latin] mx-8 mb-3">
           {props.content.privacyNoticeSection.lists[0].map((item, index) => {
             return (
               <li key={index}>
@@ -44,21 +48,28 @@ export default function PrivacyCondition(props) {
             )
           })}
         </ol>
-        <p>{props.content.privacyNoticeSection.paragraphs[1]}</p>
-        <p>{props.content.privacyNoticeSection.paragraphs[2]}</p>
-        <p>
+        <p className="mb-3">
+          {props.content.privacyNoticeSection.paragraphs[1]}
+        </p>
+        <p className="mb-3">
+          {props.content.privacyNoticeSection.paragraphs[2]}
+        </p>
+        <p className="mb-3">
           {props.content.privacyNoticeSection.paragraphs[3]}
-          <a href={props.content.privacyNoticeSection.links[0].href}>
+          <a
+            href={props.content.privacyNoticeSection.links[0].href}
+            className="underline text-deep-blue-dark"
+          >
             {props.content.privacyNoticeSection.links[0].text}
           </a>
           {props.content.privacyNoticeSection.paragraphs[4]}
         </p>
-        <p>
+        <p className="mb-3">
           {props.content.privacyNoticeSection.paragraphs[5]}
           <i>{props.content.privacyNoticeSection.paragraphs[6]}</i>
           {props.content.privacyNoticeSection.paragraphs[7]}
         </p>
-        <ol className="list-[lower-latin]">
+        <ol className="list-[lower-latin] mx-8 mb-3">
           {props.content.privacyNoticeSection.lists[1].map((item, index) => {
             return (
               <li key={index}>
@@ -67,27 +78,33 @@ export default function PrivacyCondition(props) {
             )
           })}
         </ol>
-        <p>
+        <p className="mb-3">
           {props.content.privacyNoticeSection.paragraphs[8]}
-          <a href={props.content.privacyNoticeSection.links[1].href}>
+          <a
+            href={props.content.privacyNoticeSection.links[1].href}
+            className="underline text-deep-blue-dark"
+          >
             {props.content.privacyNoticeSection.links[1].text}
           </a>
           {props.content.privacyNoticeSection.paragraphs[9]}
         </p>
-        <p>
+        <p className="mb-3">
           {props.content.privacyNoticeSection.paragraphs[10]}
-          <a href={props.content.privacyNoticeSection.links[2].href}>
+          <a
+            href={props.content.privacyNoticeSection.links[2].href}
+            className="underline text-deep-blue-dark"
+          >
             {props.content.privacyNoticeSection.links[2].text}
           </a>
           {props.content.privacyNoticeSection.paragraphs[11]}
         </p>
       </section>
-      <section>
-        <h2 className="text-3xl font-display font-bold">
+      <section className="font-body">
+        <h2 className="text-3xl font-display font-bold my-3">
           {props.content.digitalSection.title}
         </h2>
-        <p>{props.content.digitalSection.paragraphs[0]}</p>
-        <ol className="lst-lwr-alph">
+        <p className="mb-3">{props.content.digitalSection.paragraphs[0]}</p>
+        <ol className="list-[lower-latin] mx-8 mb-3">
           {props.content.digitalSection.lists[0].map((item, index) => {
             return (
               <li key={index}>
@@ -96,24 +113,27 @@ export default function PrivacyCondition(props) {
             )
           })}
         </ol>
-        <p>
+        <p className="my-3">
           {props.content.digitalSection.paragraphs[1]}
-          <a href={props.content.digitalSection.links[0].href}>
+          <a
+            href={props.content.digitalSection.links[0].href}
+            className="underline text-deep-blue-dark"
+          >
             {props.content.digitalSection.links[0].text}
           </a>
           {props.content.digitalSection.paragraphs[2]}
         </p>
       </section>
-      <section>
-        <h2 className="text-3xl font-display font-bold">
+      <section className="font-body">
+        <h2 className="text-3xl font-display font-bold my-3">
           {props.content.systemSection.title}
         </h2>
-        <ol className="lst-lwr-alph">
+        <ol className="list-[lower-latin] mx-8 mb-3">
           <li>{props.content.systemSection.lists[0]}</li>
           <li>{props.content.systemSection.lists[1]}</li>
           <li>
             {props.content.systemSection.lists[2]}
-            <ol className="lst-lwr-rmn">
+            <ol className="list-[lower-roman] mx-8">
               {props.content.systemSection.sublists.map((item, index) => {
                 return <li key={index}>{item}</li>
               })}
@@ -124,22 +144,26 @@ export default function PrivacyCondition(props) {
         </ol>
       </section>
 
-      <section>
-        <h2 className="text-3xl font-display font-bold">
+      <section className="font-body">
+        <h2 className="text-3xl font-display font-bold mb-3">
           {props.content.termsConditionsSection.title}
         </h2>
-        <p>{props.content.termsConditionsSection.paragraphs[0]}</p>
-        <p>{props.content.termsConditionsSection.paragraphs[1]}</p>
-        <ol className="lst-lwr-alph">
+        <p className="mb-3">
+          {props.content.termsConditionsSection.paragraphs[0]}
+        </p>
+        <p className="mb-3">
+          {props.content.termsConditionsSection.paragraphs[1]}
+        </p>
+        <ol className="list-[lower-latin] mx-8 mb-3">
           <li>{props.content.termsConditionsSection.lists[0][0]}</li>
           <li>{props.content.termsConditionsSection.lists[0][1]}</li>
         </ol>
-        <ol>
+        <ol className="list-[decimal] mx-8 mb-3">
           <li>
             <strong>
               {props.content.termsConditionsSection.listTitles[0]}
             </strong>
-            <ol className="lst-lwr-alph">
+            <ol className="list-[lower-latin] mx-8">
               <li>{props.content.termsConditionsSection.lists[1][0]}</li>
               <li>{props.content.termsConditionsSection.lists[1][1]}</li>
               <li>{props.content.termsConditionsSection.lists[1][2]}</li>
@@ -147,20 +171,23 @@ export default function PrivacyCondition(props) {
               <li>{props.content.termsConditionsSection.lists[1][4]}</li>
               <li>
                 {props.content.termsConditionsSection.lists[1][5]}
-                <ol className="lst-lwr-rmn">
+                <ol className="list-[lower-roman] mx-8">
                   <li>{props.content.termsConditionsSection.sublists[0][0]}</li>
                   <li>{props.content.termsConditionsSection.sublists[0][1]}</li>
                 </ol>
               </li>
               <li>
                 {props.content.termsConditionsSection.lists[1][6]}
-                <a href={props.content.termsConditionsSection.links[0].href}>
+                <a
+                  href={props.content.termsConditionsSection.links[0].href}
+                  className="underline text-deep-blue-dark"
+                >
                   {props.content.termsConditionsSection.links[0].text}
                 </a>
               </li>
               <li>
                 {props.content.termsConditionsSection.lists[1][7]}
-                <ol className="lst-lwr-rmn">
+                <ol className="list-[lower-roman] mx-8">
                   <li>{props.content.termsConditionsSection.sublists[1][0]}</li>
                   <li>{props.content.termsConditionsSection.sublists[1][1]}</li>
                   <li>{props.content.termsConditionsSection.sublists[1][2]}</li>
@@ -172,7 +199,7 @@ export default function PrivacyCondition(props) {
             <strong>
               {props.content.termsConditionsSection.listTitles[1]}
             </strong>
-            <ol className="lst-lwr-alph">
+            <ol className="list-[lower-latin] mx-8">
               <li>{props.content.termsConditionsSection.lists[2][0]}</li>
               <li>{props.content.termsConditionsSection.lists[2][1]}</li>
               <li>{props.content.termsConditionsSection.lists[2][2]}</li>
@@ -183,7 +210,10 @@ export default function PrivacyCondition(props) {
               <li>{props.content.termsConditionsSection.lists[2][7]}</li>
               <li>
                 {props.content.termsConditionsSection.lists[2][8]}
-                <a href={props.content.termsConditionsSection.links[1].href}>
+                <a
+                  href={props.content.termsConditionsSection.links[1].href}
+                  className="underline text-deep-blue-dark"
+                >
                   {props.content.termsConditionsSection.links[1].text}
                 </a>
               </li>
@@ -193,10 +223,10 @@ export default function PrivacyCondition(props) {
             <strong>
               {props.content.termsConditionsSection.listTitles[2]}
             </strong>
-            <ol>
-              <li className="lst-lwr-alph">
+            <ol className="list-[lower-latin] mx-8">
+              <li>
                 {props.content.termsConditionsSection.lists[3][0]}
-                <ol className="lst-lwr-rmn">
+                <ol className="list-[lower-roman] mx-8">
                   <li>{props.content.termsConditionsSection.sublists[2][0]}</li>
                   <li>{props.content.termsConditionsSection.sublists[2][1]}</li>
                   <li>{props.content.termsConditionsSection.sublists[2][2]}</li>
@@ -210,7 +240,7 @@ export default function PrivacyCondition(props) {
             <strong>
               {props.content.termsConditionsSection.listTitles[3]}
             </strong>
-            <ol className="lst-lwr-alph">
+            <ol className="list-[lower-latin] mx-8">
               <li>{props.content.termsConditionsSection.lists[4][0]}</li>
             </ol>
           </li>
@@ -218,7 +248,7 @@ export default function PrivacyCondition(props) {
             <strong>
               {props.content.termsConditionsSection.listTitles[4]}
             </strong>
-            <ol className="lst-lwr-alph">
+            <ol className="list-[lower-latin] mx-8">
               <li>{props.content.termsConditionsSection.lists[5][0]}</li>
             </ol>
           </li>
@@ -232,6 +262,7 @@ export default function PrivacyCondition(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
       />
+      <Date id="termsConditionsDateModified" date="20230331" />
     </div>
   )
 }
@@ -271,7 +302,7 @@ export async function getServerSideProps({ res, locale }) {
       : '/en/privacy-notice-terms-conditions'
 
   const t = locale === 'en' ? en : fr
-  console.log(content.fr.privacyNoticeSection.lists)
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {

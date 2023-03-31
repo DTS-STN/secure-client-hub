@@ -110,8 +110,7 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'À propos de Canada.ca',
 
-  footerTermsAndConditionURL:
-    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
+  footerTermsAndConditionURL: '/fr/avis-confidentialite-modalites/',
   footerTermsAndCondition: 'Avis',
 
   footerPrivacyURL:
