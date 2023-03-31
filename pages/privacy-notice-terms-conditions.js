@@ -6,13 +6,14 @@ import {
 } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import { getPrivacyConditionContent } from '../graphql/mappers/privacy-condition'
+import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
 import BackToButton from '../components/BackToButton'
 
 export default function PrivacyCondition(props) {
+  // console.log(props.content)
   const t = props.locale === 'en' ? en : fr
   return (
     <div
@@ -266,11 +267,11 @@ export async function getServerSideProps({ res, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/en/privacy-notice-terms-conditions'
+      ? '/fr/avis-confidentialite-modalites'
       : '/en/privacy-notice-terms-conditions'
 
   const t = locale === 'en' ? en : fr
-
+  console.log(content.fr.privacyNoticeSection.lists)
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -297,7 +298,7 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.en,
+      content: locale === 'en' ? content.en : content.fr,
       meta,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
