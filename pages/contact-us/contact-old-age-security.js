@@ -13,6 +13,8 @@ import logger from '../../lib/logger'
 import React from 'react'
 
 export default function ContactOldAgeSecurity(props) {
+  console.log('============', props, '===========')
+
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -22,7 +24,7 @@ export default function ContactOldAgeSecurity(props) {
       data-testid="contactOAS-test"
       data-cy="oasContactUsContent"
     >
-      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
+      {/* <Heading id="my-dashboard-heading" title={props.pageContent.title} />
       <div
         className="py-5"
         data-testid={`${
@@ -45,7 +47,7 @@ export default function ContactOldAgeSecurity(props) {
             <ContactSection programUniqueId={i} {...item} />
           )}
         </Fragment>
-      ))}
+      ))} */}
     </div>
   )
 }
@@ -87,14 +89,16 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
 
-  const breadCrumbItems =
-    locale === 'en'
-      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + locale + '/' + link }
-        })
-      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + locale + '/' + link }
-        })
+  // ====================================
+  // const breadCrumbItems =
+  //   locale === 'en'
+  //     ? pageContent.en.breadcrumb?.map(({ link, text }) => {
+  //         return { text, link: '/' + locale + '/' + link }
+  //       })
+  //     : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+  //         return { text, link: '/' + locale + '/' + link }
+  //       })
+  // ====================================
 
   // const breadCrumbItems = [
   //   {
@@ -135,10 +139,11 @@ export async function getServerSideProps({ res, locale }) {
       locale,
       langToggleLink,
       meta,
-      breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
+      pageContent,
+      // breadCrumbItems,
+      // bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      // popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      // pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
     },
   }
 }
