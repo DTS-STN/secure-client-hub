@@ -18,12 +18,10 @@ export async function getPrivacyConditionContent() {
     en: {
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return [
-            {
-              link: w.scPageNameEn,
-              text: w.scTitleEn,
-            },
-          ]
+          return {
+            link: w.scPageNameEn,
+            text: w.scTitleEn,
+          }
         }),
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
@@ -36,12 +34,10 @@ export async function getPrivacyConditionContent() {
     fr: {
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return [
-            {
-              link: w.scPageNameFr,
-              text: w.scTitleFr,
-            },
-          ]
+          return {
+            link: w.scPageNameFr,
+            text: w.scTitleFr,
+          }
         }),
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,

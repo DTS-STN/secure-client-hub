@@ -75,7 +75,6 @@ export async function getServerSideProps({ res, locale }) {
     //res.statusCode = 500
     throw error
   })
-  console.log(content)
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -104,8 +103,14 @@ export async function getServerSideProps({ res, locale }) {
       ? '/fr/avis-confidentialite-modalites'
       : '/en/privacy-notice-terms-conditions'
 
-  const t = locale === 'en' ? en : fr
-
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -134,6 +139,7 @@ export async function getServerSideProps({ res, locale }) {
       langToggleLink,
       content: locale === 'en' ? content.en : content.fr,
       meta,
+      breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
     },
