@@ -11,14 +11,12 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
 import BackToButton from '../components/BackToButton'
+import Markdown from 'markdown-to-jsx'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
   return (
-    <div
-      id="privacyConditionContent"
-      data-testid="privacyConditionContent-test"
-    >
+    <div className="font-body">
       <Heading
         id="PrivacyCondition-heading"
         title={props.content.heading}
@@ -32,231 +30,35 @@ export default function PrivacyCondition(props) {
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
       />
-      <section className="font-body">
-        <h2 className="text-3xl font-display font-bold mt-10 mb-3">
-          {props.content.privacyNoticeSection.title}
-        </h2>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[0]}
-        </p>
-        <ol className="list-[lower-latin] mx-8 mb-3">
-          {props.content.privacyNoticeSection.lists[0].map((item, index) => {
-            return (
-              <li key={index}>
-                <i>{item}</i>
-              </li>
-            )
-          })}
-        </ol>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[1]}
-        </p>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[2]}
-        </p>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[3]}
-          <a
-            href={props.content.privacyNoticeSection.links[0].href}
-            className="underline text-deep-blue-dark"
-          >
-            {props.content.privacyNoticeSection.links[0].text}
-          </a>
-          {props.content.privacyNoticeSection.paragraphs[4]}
-        </p>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[5]}
-          <i>{props.content.privacyNoticeSection.paragraphs[6]}</i>
-          {props.content.privacyNoticeSection.paragraphs[7]}
-        </p>
-        <ol className="list-[lower-latin] mx-8 mb-3">
-          {props.content.privacyNoticeSection.lists[1].map((item, index) => {
-            return (
-              <li key={index}>
-                <i>{item}</i>
-              </li>
-            )
-          })}
-        </ol>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[8]}
-          <a
-            href={props.content.privacyNoticeSection.links[1].href}
-            className="underline text-deep-blue-dark"
-          >
-            {props.content.privacyNoticeSection.links[1].text}
-          </a>
-          {props.content.privacyNoticeSection.paragraphs[9]}
-        </p>
-        <p className="mb-3">
-          {props.content.privacyNoticeSection.paragraphs[10]}
-          <a
-            href={props.content.privacyNoticeSection.links[2].href}
-            className="underline text-deep-blue-dark"
-          >
-            {props.content.privacyNoticeSection.links[2].text}
-          </a>
-          {props.content.privacyNoticeSection.paragraphs[11]}
-        </p>
-      </section>
-      <section className="font-body">
-        <h2 className="text-3xl font-display font-bold my-3">
-          {props.content.digitalSection.title}
-        </h2>
-        <p className="mb-3">{props.content.digitalSection.paragraphs[0]}</p>
-        <ol className="list-[lower-latin] mx-8 mb-3">
-          {props.content.digitalSection.lists[0].map((item, index) => {
-            return (
-              <li key={index}>
-                <i>{item}</i>
-              </li>
-            )
-          })}
-        </ol>
-        <p className="my-3">
-          {props.content.digitalSection.paragraphs[1]}
-          <a
-            href={props.content.digitalSection.links[0].href}
-            className="underline text-deep-blue-dark"
-          >
-            {props.content.digitalSection.links[0].text}
-          </a>
-          {props.content.digitalSection.paragraphs[2]}
-        </p>
-      </section>
-      <section className="font-body">
-        <h2 className="text-3xl font-display font-bold my-3">
-          {props.content.systemSection.title}
-        </h2>
-        <ol className="list-[lower-latin] mx-8 mb-3">
-          <li>{props.content.systemSection.lists[0]}</li>
-          <li>{props.content.systemSection.lists[1]}</li>
-          <li>
-            {props.content.systemSection.lists[2]}
-            <ol className="list-[lower-roman] mx-8">
-              {props.content.systemSection.sublists.map((item, index) => {
-                return <li key={index}>{item}</li>
-              })}
-            </ol>
-          </li>
-          <li>{props.content.systemSection.lists[3]}</li>
-          <li>{props.content.systemSection.lists[4]}</li>
-        </ol>
-      </section>
-
-      <section className="font-body">
-        <h2 className="text-3xl font-display font-bold mb-3">
-          {props.content.termsConditionsSection.title}
-        </h2>
-        <p className="mb-3">
-          {props.content.termsConditionsSection.paragraphs[0]}
-        </p>
-        <p className="mb-3">
-          {props.content.termsConditionsSection.paragraphs[1]}
-        </p>
-        <ol className="list-[lower-latin] mx-8 mb-3">
-          <li>{props.content.termsConditionsSection.lists[0][0]}</li>
-          <li>{props.content.termsConditionsSection.lists[0][1]}</li>
-        </ol>
-        <ol className="list-[decimal] mx-8 mb-3">
-          <li>
-            <strong>
-              {props.content.termsConditionsSection.listTitles[0]}
-            </strong>
-            <ol className="list-[lower-latin] mx-8">
-              <li>{props.content.termsConditionsSection.lists[1][0]}</li>
-              <li>{props.content.termsConditionsSection.lists[1][1]}</li>
-              <li>{props.content.termsConditionsSection.lists[1][2]}</li>
-              <li>{props.content.termsConditionsSection.lists[1][3]}</li>
-              <li>{props.content.termsConditionsSection.lists[1][4]}</li>
-              <li>
-                {props.content.termsConditionsSection.lists[1][5]}
-                <ol className="list-[lower-roman] mx-8">
-                  <li>{props.content.termsConditionsSection.sublists[0][0]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[0][1]}</li>
-                </ol>
-              </li>
-              <li>
-                {props.content.termsConditionsSection.lists[1][6]}
-                <a
-                  href={props.content.termsConditionsSection.links[0].href}
-                  className="underline text-deep-blue-dark"
-                >
-                  {props.content.termsConditionsSection.links[0].text}
-                </a>
-              </li>
-              <li>
-                {props.content.termsConditionsSection.lists[1][7]}
-                <ol className="list-[lower-roman] mx-8">
-                  <li>{props.content.termsConditionsSection.sublists[1][0]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[1][1]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[1][2]}</li>
-                </ol>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <strong>
-              {props.content.termsConditionsSection.listTitles[1]}
-            </strong>
-            <ol className="list-[lower-latin] mx-8">
-              <li>{props.content.termsConditionsSection.lists[2][0]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][1]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][2]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][3]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][4]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][5]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][6]}</li>
-              <li>{props.content.termsConditionsSection.lists[2][7]}</li>
-              <li>
-                {props.content.termsConditionsSection.lists[2][8]}
-                <a
-                  href={props.content.termsConditionsSection.links[1].href}
-                  className="underline text-deep-blue-dark"
-                >
-                  {props.content.termsConditionsSection.links[1].text}
-                </a>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <strong>
-              {props.content.termsConditionsSection.listTitles[2]}
-            </strong>
-            <ol className="list-[lower-latin] mx-8">
-              <li>
-                {props.content.termsConditionsSection.lists[3][0]}
-                <ol className="list-[lower-roman] mx-8">
-                  <li>{props.content.termsConditionsSection.sublists[2][0]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[2][1]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[2][2]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[2][3]}</li>
-                  <li>{props.content.termsConditionsSection.sublists[2][4]}</li>
-                </ol>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <strong>
-              {props.content.termsConditionsSection.listTitles[3]}
-            </strong>
-            <ol className="list-[lower-latin] mx-8">
-              <li>{props.content.termsConditionsSection.lists[4][0]}</li>
-            </ol>
-          </li>
-          <li>
-            <strong>
-              {props.content.termsConditionsSection.listTitles[4]}
-            </strong>
-            <ol className="list-[lower-latin] mx-8">
-              <li>{props.content.termsConditionsSection.lists[5][0]}</li>
-            </ol>
-          </li>
-        </ol>
-      </section>
-      <div id="readOnlyRemove" aria-readonly={true}>
-        <p>{props.content.termsConditionsSection.readOnly}</p>
-      </div>
+      <Markdown
+        options={{
+          overrides: {
+            h1: {
+              props: {
+                className: 'text-3xl font-display font-bold mt-10 mb-3',
+              },
+            },
+            p: {
+              props: {
+                className: 'mb-3',
+              },
+            },
+            ol: {
+              props: {
+                className:
+                  'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+              },
+            },
+            a: {
+              props: {
+                className: 'underline text-deep-blue-dark cursor-pointer',
+              },
+            },
+          },
+        }}
+      >
+        {props.content.content}
+      </Markdown>
       <BackToButton
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
@@ -273,6 +75,7 @@ export async function getServerSideProps({ res, locale }) {
     //res.statusCode = 500
     throw error
   })
+  console.log(content)
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500

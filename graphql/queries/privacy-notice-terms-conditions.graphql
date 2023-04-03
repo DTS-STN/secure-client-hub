@@ -21,10 +21,10 @@
         ... on SCHContentv1Model{
             scId
             scContentEn{
-                json
+                markdown
             }
             scContentFr{
-                json
+                markdown
             }
         }
         ... on SCHTaskv1Model{
