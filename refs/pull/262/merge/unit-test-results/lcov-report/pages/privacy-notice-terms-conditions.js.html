@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -228,7 +228,13 @@
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -307,7 +313,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,12 +339,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,6 +370,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -470,7 +482,6 @@ export async function <span class="fstat-no" title="function not covered" >getSe
     //res.statusCode = 500
 <span class="cstat-no" title="statement not covered" >    throw error</span>
   })
-<span class="cstat-no" title="statement not covered" >  console.log(content)</span>
   const bannerContent = <span class="cstat-no" title="statement not covered" >await getBetaBannerContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
     // res.statusCode = 500
@@ -499,8 +510,14 @@ export async function <span class="fstat-no" title="function not covered" >getSe
       ? '/fr/avis-confidentialite-modalites'
       : '/en/privacy-notice-terms-conditions'
 &nbsp;
-  const t = <span class="cstat-no" title="statement not covered" >locale === 'en' ? en : fr</span>
-&nbsp;
+  const breadCrumbItems =
+<span class="cstat-no" title="statement not covered" >    locale === 'en'</span>
+      ? content.en.breadcrumb?.map(<span class="fstat-no" title="function not covered" >({</span> link, text }) =&gt; {
+<span class="cstat-no" title="statement not covered" >          return { text, link: '/' + locale + '/' + link }</span>
+        })
+      : content.fr.breadcrumb?.map(<span class="fstat-no" title="function not covered" >({</span> link, text }) =&gt; {
+<span class="cstat-no" title="statement not covered" >          return { text, link: '/' + locale + '/' + link }</span>
+        })
   /* Place-holder Meta Data Props */
   const meta = <span class="cstat-no" title="statement not covered" >{</span>
     data_en: {
@@ -529,6 +546,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
       langToggleLink,
       content: locale === 'en' ? content.en : content.fr,
       meta,
+      breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
     },
@@ -565,7 +583,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-03T19:50:56.317Z
+                at 2023-04-04T16:53:40.145Z
             </div>
         <script src="../prettify.js"></script>
         <script>
