@@ -1,4 +1,5 @@
 import clientQuery from '../client'
+import { buildLink } from '../../lib/links'
 
 export async function getBetaBannerContent() {
   const queryOptOut = require('../queries/beta-banner-opt-out.graphql')
@@ -20,7 +21,10 @@ export async function getBetaBannerContent() {
         (entry) => entry.scId === 'opens-in-a-new-tab'
       ).scTermEn,
       bannerButtonLink:
-        resOptOutContent.scFragments[1].scDestinationURLEn || '/',
+        buildLink(
+          resOptOutContent.scFragments[1].schURLType,
+          resOptOutContent.scFragments[1].scDestinationURLEn
+        ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
     },
     fr: {
@@ -33,7 +37,10 @@ export async function getBetaBannerContent() {
         (entry) => entry.scId === 'opens-in-a-new-tab'
       ).scTermFr,
       bannerButtonLink:
-        resOptOutContent.scFragments[1].scDestinationURLFr || '/',
+        buildLink(
+          resOptOutContent.scFragments[1].schURLType,
+          resOptOutContent.scFragments[1].scDestinationURLEn
+        ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
     },
   }
