@@ -11,6 +11,8 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactEmploymentInsuranceContent } from '../../graphql/mappers/contact-employment-insurance'
 import logger from '../../lib/logger'
 import React from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
 
 export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
@@ -20,6 +22,21 @@ export default function ContactEmploymentInsurance(props) {
     isOpen: false,
     activeLink: '/',
   })
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div
@@ -40,6 +57,7 @@ export default function ContactEmploymentInsurance(props) {
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
+        lang={props.locale}
       />
 
       {props.pageContent.items.map((item, i) => (
@@ -117,7 +135,7 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Employment Insurance',
+      title: 'Contact Employment Insurance - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -126,7 +144,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Contactez Assurance Emploi',
+      title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

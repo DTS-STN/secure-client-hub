@@ -7,9 +7,26 @@ import { getSecuritySettingsContent } from '../graphql/mappers/security-settings
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
@@ -44,6 +61,7 @@ export default function SecuritySettings(props) {
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
+        refPageAA={props.content.heading}
       ></PageLink>
     </div>
   )
@@ -95,7 +113,7 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Security',
+      title: 'Security - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -104,7 +122,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Sécurité',
+      title: 'Sécurité - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

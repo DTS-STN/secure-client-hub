@@ -23,14 +23,14 @@ function ContactSectionRow(props) {
   }
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
-      <div
+      <dt
         className={`md:col-span-4 font-bold font-body text-2xl md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
         {label}
-      </div>
-      <div
+      </dt>
+      <dd
         className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
           highlight && 'bg-blue-100 py-2'
         }`}
@@ -54,7 +54,7 @@ function ContactSectionRow(props) {
             <Markdown>{detail}</Markdown>
           </div>
         )}
-      </div>
+      </dd>
     </div>
   ) : (
     <Fragment key={index} />

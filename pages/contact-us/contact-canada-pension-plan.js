@@ -11,6 +11,8 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactCanadaPensionPlan } from '../../graphql/mappers/contact-canada-pension-plan'
 import logger from '../../lib/logger'
 import React from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
 
 export default function ContactCanadaPensionPlan(props) {
   /* istanbul ignore next */
@@ -20,6 +22,21 @@ export default function ContactCanadaPensionPlan(props) {
     isOpen: false,
     activeLink: '/',
   })
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div
@@ -39,6 +56,7 @@ export default function ContactCanadaPensionPlan(props) {
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
+        lang={props.locale}
       />
 
       {props.pageContent.items.map((item, i) => (
@@ -118,7 +136,7 @@ export async function getServerSideProps({ res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Canada Pension Plan',
+      title: 'Contact Canada Pension Plan - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -127,7 +145,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
+      title: 'Régime de Pensions du Canada - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

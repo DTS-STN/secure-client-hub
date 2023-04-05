@@ -130,19 +130,19 @@ describe('My Dashboard page', () => {
         locale: 'en',
         meta: {
           data_en: {
+            title: 'Dashboard - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Dashboard',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Employment and Social Development Canada',
             accessRights: '1',
           },
           data_fr: {
-            author: 'Service Canada',
+            title: 'Tableau de Bord - Mon dossier Service Canada',
             desc: 'Français',
+            author: 'Service Canada',
             keywords: '',
-            title: 'Mon dossier Service Canada - Tableau de Bord',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Emploi et Développement social Canada',
             accessRights: '1',

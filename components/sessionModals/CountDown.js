@@ -54,6 +54,7 @@ const Countdown = (props) => {
           type="button"
           aria-label={'Close Modal'}
           onClick={props.closeModal}
+          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close-Fermer`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
         </button>

@@ -11,6 +11,7 @@ import Modal from 'react-modal'
 import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import Link from 'next/link'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -36,8 +37,16 @@ export default function Layout(props) {
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
+          bannerButtonExternalText={
+            props.bannerContent.bannerButtonExternalText || ''
+          }
+          bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
+          refPageAA={
+            props.children.props.content?.heading ||
+            props.children.props.pageContent?.title
+          }
         ></PhaseBanner>
       )}
       <Header
@@ -45,6 +54,7 @@ export default function Layout(props) {
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
+        locale={false}
         lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
@@ -56,6 +66,7 @@ export default function Layout(props) {
           displayAlternateLink: false,
         }}
         isAuthenticated={props.isAuth}
+        customLink={Link}
         menuProps={{
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
@@ -69,6 +80,13 @@ export default function Layout(props) {
                   ? '/en/my-dashboard'
                   : '/fr/mon-tableau-de-bord'
               }`,
+              component: Link,
+            },
+            {
+              key: 'profileKey',
+              value: t.menuItems.profile,
+              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              component: Link,
             },
             {
               key: 'securityKey',
@@ -78,16 +96,13 @@ export default function Layout(props) {
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
-            },
-            {
-              key: 'profileKey',
-              value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              component: Link,
             },
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
               path: `/`,
+              component: Link,
             },
           ],
         }}
@@ -135,6 +150,39 @@ export default function Layout(props) {
 
 Layout.defaultProps = {
   title: 'Service.Canada.ca',
+  bannerContent: {
+    bannerBoldText: '',
+    bannerText: '',
+    bannerLink: '',
+    bannerLinkHref: '',
+    bannerButtonText: '',
+    bannerButtonLink: '',
+    icon: '',
+  },
+  breadCrumbItems: [],
+  display: { hideBanner: true },
+  langToggleLink: '',
+  locale: 'en',
+  meta: '',
+  popupContent: {
+    scId: '',
+    scHeadingEn: '',
+    scHeadingFr: '',
+    scContentEn: '',
+    scContentFr: '',
+    scFragments: [
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+      {
+        scId: '',
+        scLinkTextEn: '',
+        scLinkTextFr: '',
+      },
+    ],
+  },
 }
 
 Layout.propTypes = {

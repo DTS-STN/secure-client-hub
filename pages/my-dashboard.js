@@ -1,6 +1,6 @@
 import CountDown from '../components/sessionModals/CountDown'
 import SignedOut from '../components/sessionModals/SignedOut'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -12,13 +12,20 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  Redirect,
+  ValidateSession,
+} from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import Router from 'next/router'
+import throttle from 'lodash.throttle'
+import { acronym } from '../lib/acronym'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -63,6 +70,7 @@ export default function MyDashboard(props) {
               onContinue={() => Router.push('./')}
               id="SignedOut"
               {...props.popupYouHaveBeenSignedout}
+              refPageAA={props.content.heading}
             />
           ) : (
             <CountDown
@@ -77,6 +85,7 @@ export default function MyDashboard(props) {
               id="CountDown"
               deadline={expires.logout}
               {...props.popupStaySignedIn}
+              refPageAA={props.content.heading}
             />
           )
         )
@@ -84,6 +93,21 @@ export default function MyDashboard(props) {
     }, 1000)
     return () => clearInterval(id)
   }, [])
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
@@ -99,12 +123,16 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={card.dropdownText}
+            acronym={acronym(card.title)}
+            refPageAA={props.content.heading}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
                 openModal={openModal}
+                acronym={acronym(card.title)}
+                refPageAA={props.content.heading}
               />
             </div>
             <div
@@ -115,9 +143,11 @@ export default function MyDashboard(props) {
                 return (
                   <div className="" key={index} data-cy="Task">
                     <BenefitTasks
+                      acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
+                      refPageAA={props.content.heading}
                     />
                   </div>
                 )
@@ -142,6 +172,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.content.heading}
         />
       </Modal>
       <Modal
@@ -199,7 +230,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Dashboard',
+      title: 'Dashboard - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -208,7 +239,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Tableau de Bord',
+      title: 'Tableau de Bord - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

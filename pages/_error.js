@@ -1,73 +1,25 @@
-import Link from 'next/link'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import { ErrorPage } from '@dts-stn/service-canada-design-system'
+import logger from '../lib/logger'
 
-function CustomError({ statusCode }) {
+function CustomError(props) {
   return (
-    <div className="grid md:grid-cols-2 sm:grid-cols-1 items-center justify-center overflow-visible md:h-96 sm:h-screen mx-2 my-2 px-20">
-      <div className="error-404">
-        <h1 className="text-2xl">{"We couldn't find that Web page"}</h1>
-        <h2>
-          {statusCode
-            ? `An error ${statusCode} occurred on server`
-            : 'An error occurred on client'}
-        </h2>
-        <p>
-          {
-            "We're sorry you ended up here. Sometimes a page gets moved or deleted, but hopefully we can help you find what you're looking for. What next?"
-          }
-        </p>
-        <ul>
-          <li>
-            Return to the{' '}
-            <Link href="/">
-              <a className="text-cyan-600 underline">home page</a>
-            </Link>
-            ;
-          </li>
-          <li>
-            <Link href="https://www.canada.ca/en/contact.html">
-              <a className="text-cyan-600 underline">Contact us</a>
-            </Link>
-            {" and we'll help you out."}
-          </li>
-        </ul>
-      </div>
-      <div className="error-404">
-        <h1 className="text-2xl">Nous ne pouvons trouver cette page Web</h1>
-        <h2>
-          {statusCode
-            ? `Erreur ${statusCode}`
-            : 'Erreur produite sur le client'}
-        </h2>
-        <p>
-          {
-            "Nous sommes désolés que vous ayez abouti ici. Il arrive parfois qu'une page ait été déplacée ou supprimée. Heureusement, nous pouvons vous aider à trouver ce que vous cherchez. Que faire?"
-          }
-        </p>
-        <ul>
-          <li>
-            Retournez à la{' '}
-            <Link href="/">
-              <a className="text-cyan-600 underline">page {"d'accueil;"}</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="https://www.canada.ca/en/contact.html">
-              <a className="text-cyan-600 underline">Communiquez avec nous</a>
-            </Link>
-            {" pour obtenir de l'aide."}
-          </li>
-        </ul>
-      </div>
-    </div>
+    <ErrorPage
+      lang={props?.locale}
+      errType={props?.statusCode}
+      isAuth={!props?.isAuth}
+      homePageLink={
+        props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
+      }
+      accountPageLink="/"
+    />
   )
 }
 
 /* istanbul ignore next */
-export async function getStaticProps({ res, err }) {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-
+export async function getServerSideProps({ req, res, locale }) {
+  const statusCode = res.statusCode.toString() || '500'
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -78,11 +30,12 @@ export async function getStaticProps({ res, err }) {
     // res.statusCode = 500
     throw error
   })
-
+  const langToggleLink =
+    locale === 'en' ? `/fr/${statusCode}` : `/${statusCode}`
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: `My Service Canada Account - ${statusCode}.`,
+      title: `${statusCode} - My Service Canada Account`,
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -91,7 +44,7 @@ export async function getStaticProps({ res, err }) {
       accessRights: '1',
     },
     data_fr: {
-      title: `Mon dossier Service Canada - ${statusCode}.`,
+      title: `${statusCode} - Mon dossier Service Canada`,
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -102,10 +55,13 @@ export async function getStaticProps({ res, err }) {
   }
   return {
     props: {
+      locale: locale ? locale : 'en',
+      langToggleLink,
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
       statusCode,
       meta,
+      isAuth: process.env.AUTH_DISABLED,
     },
   }
 }

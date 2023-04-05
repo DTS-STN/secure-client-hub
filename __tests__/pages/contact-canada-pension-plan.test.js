@@ -141,19 +141,19 @@ describe('CPP Contact Us Page', () => {
         locale: 'en',
         meta: {
           data_en: {
+            title: 'Contact Canada Pension Plan - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'My Service Canada Account - Contact Canada Pension Plan',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Employment and Social Development Canada',
             accessRights: '1',
           },
           data_fr: {
-            author: 'Service Canada',
+            title: 'Régime de Pensions du Canada - Mon dossier Service Canada',
             desc: 'Français',
+            author: 'Service Canada',
             keywords: '',
-            title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
             service: 'ESDC-EDSC_MSCA-MSDC',
             creator: 'Emploi et Développement social Canada',
             accessRights: '1',
