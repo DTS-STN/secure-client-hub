@@ -15,72 +15,135 @@ export async function getContactOldAgeSecurityContent() {
         }
       }),
       title: queryData.scTitleEn,
-      ...queryData.scFragments.map((w) => {
+      queryData,
+      fragments0: queryData.scFragments[0],
+
+      id: queryData.scFragments[1].scId,
+      items: queryData.scFragments[1].scItems.map((x) => {
         return {
-          id: w.scId,
-          // items: w.scItems.map((x) => {
-          //   return {
-          //     id: x.scId,
-          //     title: x.scTitleEn,
-          //     details: x.schDetails.map((y) => {
-          //       return {
-          //         id: y.scId,
-          //         color: y.scBackgroundColour,
-          //         items: y.scItems.map((z) => {
-          //           if (z.scContentEn) {
-          //             //Return address nested in content
-          //             return {
-          //               content: z.scContentEn.markdown,
-          //               icon: z.scIconCSS,
-          //               ...z.scFragments.map((a) => {
-          //                 if (!a.scButtonType) {
-          //                   return {
-          //                     city: a.scCityEn,
-          //                     country: a.scCountryEn,
-          //                     id: a.scId,
-          //                     poBox: a.scPostalBoxEn,
-          //                     postal: a.scPostalCode,
-          //                     program: a.scProgramEn,
-          //                     province: a.scProvTerrAbbrEnum,
-          //                     recipient: a.scRecipientEn,
-          //                   }
-          //                 } else {
-          //                   return {
-          //                     id: a.scId,
-          //                     content: a.scLinkTextEn,
-          //                     link: a.scDestinationURLEn,
-          //                     button: a.scButtonType,
-          //                   }
-          //                 }
-          //               })[0],
-          //             }
-          //           } else {
-          //             //Return address unnested
-          //             return {
-          //               city: z.scCityEn,
-          //               country: z.scCountryEn
-          //                 ? z.scCountryEn.toUpperCase()
-          //                 : null,
-          //               id: z.scId,
-          //               poBox: z.scPostalBoxEn,
-          //               postal: z.scPostalCode,
-          //               province: z.scProvTerrAbbrEnum,
-          //               recipient: z.scRecipientEn,
-          //               station: z.scPostalStationEn,
-          //             }
-          //           }
-          //         }),
-          //         label: y.scTitleEn,
-          //       }
-          //     }),
-          //     intro: x.schIntroEn.markdown,
-          //     layout: x.schContactMethodLayout,
-          //   }
-          // }),
-          items: w,
-          subHeader: w.scTitleEn,
+          id: x.scId,
+          title: x.scTitleEn,
+          details: x.schDetails.map((y) => {
+            return {
+              id: y.scId,
+              color: y.scBackgroundColour,
+              items: y.scItems.map((z) => {
+                if (z.scContentEn) {
+                  //Return address nested in content
+                  return {
+                    content: z.scContentEn.markdown,
+                    icon: z.scIconCSS,
+                    ...z.scFragments.map((a) => {
+                      if (!a.scButtonType) {
+                        return {
+                          city: a.scCityEn,
+                          country: a.scCountryEn,
+                          id: a.scId,
+                          poBox: a.scPostalBoxEn,
+                          postal: a.scPostalCode,
+                          program: a.scProgramEn,
+                          province: a.scProvTerrAbbrEnum,
+                          recipient: a.scRecipientEn,
+                        }
+                      } else {
+                        return {
+                          id: a.scId,
+                          content: a.scLinkTextEn,
+                          link: a.scDestinationURLEn,
+                          button: a.scButtonType,
+                        }
+                      }
+                    })[0],
+                  }
+                } else {
+                  //Return address unnested
+                  return {
+                    city: z.scCityEn,
+                    country: z.scCountryEn ? z.scCountryEn.toUpperCase() : null,
+                    id: z.scId,
+                    poBox: z.scPostalBoxEn,
+                    postal: z.scPostalCode,
+                    province: z.scProvTerrAbbrEnum,
+                    recipient: z.scRecipientEn,
+                    station: z.scPostalStationEn,
+                  }
+                }
+              }),
+              label: y.scTitleEn,
+            }
+          }),
+          intro: x.schIntroEn.markdown,
+          layout: x.schContactMethodLayout,
         }
-      })[0],
+      }),
+      subHeader: queryData.scFragments[1].scTitleEn,
+
+      // ...queryData.scFragments.map((w) => {
+      //   return {
+      //     // id: w.scId,
+      //     // items: w.scItems.map((x) => {
+      //     //   return {
+      //     //     id: x.scId,
+      //     //     title: x.scTitleEn,
+      //     //     details: x.schDetails.map((y) => {
+      //     //       return {
+      //     //         id: y.scId,
+      //     //         color: y.scBackgroundColour,
+      //     //         items: y.scItems.map((z) => {
+      //     //           if (z.scContentEn) {
+      //     //             //Return address nested in content
+      //     //             return {
+      //     //               content: z.scContentEn.markdown,
+      //     //               icon: z.scIconCSS,
+      //     //               ...z.scFragments.map((a) => {
+      //     //                 if (!a.scButtonType) {
+      //     //                   return {
+      //     //                     city: a.scCityEn,
+      //     //                     country: a.scCountryEn,
+      //     //                     id: a.scId,
+      //     //                     poBox: a.scPostalBoxEn,
+      //     //                     postal: a.scPostalCode,
+      //     //                     program: a.scProgramEn,
+      //     //                     province: a.scProvTerrAbbrEnum,
+      //     //                     recipient: a.scRecipientEn,
+      //     //                   }
+      //     //                 } else {
+      //     //                   return {
+      //     //                     id: a.scId,
+      //     //                     content: a.scLinkTextEn,
+      //     //                     link: a.scDestinationURLEn,
+      //     //                     button: a.scButtonType,
+      //     //                   }
+      //     //                 }
+      //     //               })[0],
+      //     //             }
+      //     //           } else {
+      //     //             //Return address unnested
+      //     //             return {
+      //     //               city: z.scCityEn,
+      //     //               country: z.scCountryEn
+      //     //                 ? z.scCountryEn.toUpperCase()
+      //     //                 : null,
+      //     //               id: z.scId,
+      //     //               poBox: z.scPostalBoxEn,
+      //     //               postal: z.scPostalCode,
+      //     //               province: z.scProvTerrAbbrEnum,
+      //     //               recipient: z.scRecipientEn,
+      //     //               station: z.scPostalStationEn,
+      //     //             }
+      //     //           }
+      //     //         }),
+      //     //         label: y.scTitleEn,
+      //     //       }
+      //     //     }),
+      //     //     intro: x.schIntroEn.markdown,
+      //     //     layout: x.schContactMethodLayout,
+      //     //   }
+      //     // }),
+      //     // items: w,
+      //     // subHeader: w.scTitleEn,
+      //   }
+      // })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameEn,
     },
@@ -92,9 +155,10 @@ export async function getContactOldAgeSecurityContent() {
         }
       }),
       title: queryData.scTitleFr,
+      queryData,
       ...queryData.scFragments.map((w) => {
         return {
-          id: w.scId,
+          // id: w.scId,
           // items: w.scItems.map((x) => {
           //   return {
           //     id: x.scId,
@@ -155,8 +219,9 @@ export async function getContactOldAgeSecurityContent() {
           //     layout: x.schContactMethodLayout,
           //   }
           // }),
-          items: w,
-          subHeader: w.scTitleFr,
+          // items: w,
+          // subHeader: w.scTitleFr,
+          w,
         }
       })[0],
       id: queryData.scId,
