@@ -36,6 +36,10 @@ const REWRITES = [
     source: '/contactez-nous/communiquer-regime-pensions-canada',
     destination: '/contact-us/contact-canada-pension-plan',
   },
+  {
+    source: '/avis-confidentialite-modalites',
+    destination: '/privacy-notice-terms-conditions',
+  },
 ]
 
 const securityHeaders = [
