@@ -16,7 +16,9 @@ const Signedout = (props) => {
   useEffect(() => {
     if (!router.isReady) return
     if (!router.query.error) {
-      signIn('ecasProvider')
+      signIn('ecasProvider', {
+        callbackUrl: `${window.location.origin}/my-dashboard`,
+      })
     }
   }, [router.isReady])
   return (

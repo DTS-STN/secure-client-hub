@@ -16,11 +16,12 @@
           scId
           scDestinationURLEn
           scDestinationURLFr
+           schURLType
           scIconCSS
           scLinkTextEn
           scLinkTextFr
           scLinkTextAssistiveEn
-          scLinkTextAssistiveFr
+          scLinkTextAssistiveFr      
         }
       }
     }

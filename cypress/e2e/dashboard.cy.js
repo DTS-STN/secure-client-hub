@@ -84,6 +84,7 @@ describe('Validate dashboard page', () => {
 
   it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
     dashboardPo.FrenchButton().click()
+    dashboardPo.ValidateDashboardHeaderFR()
     for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameFR
       dashboardPo.ExpandCard(CardName)
