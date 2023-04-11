@@ -67,7 +67,6 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         customLink={Link}
-        // data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.buttonLinkText}`}
         dataGcAnalyticsCustomClickInstitutionVariable={`ESDC-EDSC:${
           props.children.props.content?.heading ||
           props.children.props.pageContent?.title
