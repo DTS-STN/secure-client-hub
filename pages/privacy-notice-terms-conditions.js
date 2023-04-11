@@ -16,7 +16,7 @@ import Markdown from 'markdown-to-jsx'
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
   return (
-    <div className="font-body">
+    <div className="font-body" data-cy="terms-conditions">
       <Heading
         id="PrivacyCondition-heading"
         title={props.content.heading}
