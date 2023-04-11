@@ -61,8 +61,15 @@ jest.mock('../../components/contact/ContactProvince', () => () => {
 describe('OAS Contact Us Page', () => {
   const content = {
     title: 'test',
+    intro: '',
     items: [
-      { title: 'test', link: 'test', id: 'test', intro: 'test', details: [] },
+      {
+        title: 'test',
+        link: 'test',
+        id: 'test',
+        intro: 'test',
+        details: [],
+      },
     ],
     heading: 'heading',
     paragraph: 'paragraph',
