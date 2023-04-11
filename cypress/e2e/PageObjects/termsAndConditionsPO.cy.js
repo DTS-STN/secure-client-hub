@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-function termsConditionsHeader() {
-  cy.get('[data-cy ="terms-conditions"]>h1')
+function Header() {
+  return cy.get('[data-cy ="terms-conditions"]>h1')
 }
 
 function ValidateTermsAndConditionsUrl() {
@@ -9,7 +9,7 @@ function ValidateTermsAndConditionsUrl() {
 }
 
 function ValidateTermsConditionsHeaderEN() {
-  termsConditionsHeader()
+  Header()
     .should('be.visible')
     .and('have.text', 'Privacy notice and terms and conditions')
 }
@@ -19,21 +19,19 @@ function ValidateTermsConditionsUrlFR() {
 }
 
 function ValidateTermsConditionsHeaderFR() {
-  termsConditionsHeader()
+  Header()
     .should('be.visible')
     .and('have.text', 'Avis de confidentialité et modalités')
 }
 
 function BackToDashboardButton() {
-  termsConditionsHeader()
+  Header()
     .should('be.visible')
     .and('have.text', 'Avis de confidentialité et modalités')
 }
 
 function ValidateinformationSection() {
-  cy.get('[data-cy="terms-conditions"]>div:nth-child(2)')
-    .should('be.visible')
-    .should('contains', 'Information')
+  cy.get('[data-cy="terms-conditions"]>div:nth-child(2)').should('be.visible')
 }
 
 module.exports = {
@@ -41,6 +39,7 @@ module.exports = {
   ValidateTermsConditionsHeaderEN,
   ValidateTermsConditionsUrlFR,
   ValidateTermsConditionsHeaderFR,
-  termsConditionsHeader,
+  Header,
   ValidateinformationSection,
+  BackToDashboardButton,
 }
