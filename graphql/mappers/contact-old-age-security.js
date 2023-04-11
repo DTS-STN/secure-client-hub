@@ -16,8 +16,7 @@ export async function getContactOldAgeSecurityContent() {
       }),
       title: queryData.scTitleEn,
       queryData,
-      fragments0: queryData.scFragments[0],
-
+      intro: queryData.scFragments[0].scContentEn.markdown,
       id: queryData.scFragments[1].scId,
       items: queryData.scFragments[1].scItems.map((x) => {
         return {
@@ -78,72 +77,65 @@ export async function getContactOldAgeSecurityContent() {
       }),
       subHeader: queryData.scFragments[1].scTitleEn,
 
-      // ...queryData.scFragments.map((w) => {
-      //   return {
-      //     // id: w.scId,
-      //     // items: w.scItems.map((x) => {
-      //     //   return {
-      //     //     id: x.scId,
-      //     //     title: x.scTitleEn,
-      //     //     details: x.schDetails.map((y) => {
-      //     //       return {
-      //     //         id: y.scId,
-      //     //         color: y.scBackgroundColour,
-      //     //         items: y.scItems.map((z) => {
-      //     //           if (z.scContentEn) {
-      //     //             //Return address nested in content
-      //     //             return {
-      //     //               content: z.scContentEn.markdown,
-      //     //               icon: z.scIconCSS,
-      //     //               ...z.scFragments.map((a) => {
-      //     //                 if (!a.scButtonType) {
-      //     //                   return {
-      //     //                     city: a.scCityEn,
-      //     //                     country: a.scCountryEn,
-      //     //                     id: a.scId,
-      //     //                     poBox: a.scPostalBoxEn,
-      //     //                     postal: a.scPostalCode,
-      //     //                     program: a.scProgramEn,
-      //     //                     province: a.scProvTerrAbbrEnum,
-      //     //                     recipient: a.scRecipientEn,
-      //     //                   }
-      //     //                 } else {
-      //     //                   return {
-      //     //                     id: a.scId,
-      //     //                     content: a.scLinkTextEn,
-      //     //                     link: a.scDestinationURLEn,
-      //     //                     button: a.scButtonType,
-      //     //                   }
-      //     //                 }
-      //     //               })[0],
-      //     //             }
-      //     //           } else {
-      //     //             //Return address unnested
-      //     //             return {
-      //     //               city: z.scCityEn,
-      //     //               country: z.scCountryEn
-      //     //                 ? z.scCountryEn.toUpperCase()
-      //     //                 : null,
-      //     //               id: z.scId,
-      //     //               poBox: z.scPostalBoxEn,
-      //     //               postal: z.scPostalCode,
-      //     //               province: z.scProvTerrAbbrEnum,
-      //     //               recipient: z.scRecipientEn,
-      //     //               station: z.scPostalStationEn,
-      //     //             }
-      //     //           }
-      //     //         }),
-      //     //         label: y.scTitleEn,
-      //     //       }
-      //     //     }),
-      //     //     intro: x.schIntroEn.markdown,
-      //     //     layout: x.schContactMethodLayout,
-      //     //   }
-      //     // }),
-      //     // items: w,
-      //     // subHeader: w.scTitleEn,
-      //   }
-      // })[0],
+      id: queryData.scFragments[1].scId,
+      items: queryData.scFragments[1].scItems.map((x) => {
+        return {
+          id: x.scId,
+          title: x.scTitleEn,
+          details: x.schDetails.map((y) => {
+            return {
+              id: y.scId,
+              color: y.scBackgroundColour,
+              items: y.scItems.map((z) => {
+                if (z.scContentEn) {
+                  //Return address nested in content
+                  return {
+                    content: z.scContentEn.markdown,
+                    icon: z.scIconCSS,
+                    ...z.scFragments.map((a) => {
+                      if (!a.scButtonType) {
+                        return {
+                          city: a.scCityEn,
+                          country: a.scCountryEn,
+                          id: a.scId,
+                          poBox: a.scPostalBoxEn,
+                          postal: a.scPostalCode,
+                          program: a.scProgramEn,
+                          province: a.scProvTerrAbbrEnum,
+                          recipient: a.scRecipientEn,
+                        }
+                      } else {
+                        return {
+                          id: a.scId,
+                          content: a.scLinkTextEn,
+                          link: a.scDestinationURLEn,
+                          button: a.scButtonType,
+                        }
+                      }
+                    })[0],
+                  }
+                } else {
+                  //Return address unnested
+                  return {
+                    city: z.scCityEn,
+                    country: z.scCountryEn ? z.scCountryEn.toUpperCase() : null,
+                    id: z.scId,
+                    poBox: z.scPostalBoxEn,
+                    postal: z.scPostalCode,
+                    province: z.scProvTerrAbbrEnum,
+                    recipient: z.scRecipientEn,
+                    station: z.scPostalStationEn,
+                  }
+                }
+              }),
+              label: y.scTitleEn,
+            }
+          }),
+          intro: x.schIntroEn.markdown,
+          layout: x.schContactMethodLayout,
+        }
+      }),
+      subHeader: queryData.scFragments[1].scTitleEn,
       id: queryData.scId,
       pageName: queryData.scPageNameEn,
     },
@@ -156,74 +148,67 @@ export async function getContactOldAgeSecurityContent() {
       }),
       title: queryData.scTitleFr,
       queryData,
-      ...queryData.scFragments.map((w) => {
+      intro: queryData.scFragments[0].scContentFr.markdown,
+      id: queryData.scFragments[1].scId,
+      items: queryData.scFragments[1].scItems.map((x) => {
         return {
-          // id: w.scId,
-          // items: w.scItems.map((x) => {
-          //   return {
-          //     id: x.scId,
-          //     title: x.scTitleFr,
-          //     details: x.schDetails.map((y) => {
-          //       return {
-          //         id: y.scId,
-          //         color: y.scBackgroundColour,
-          //         items: y.scItems.map((z) => {
-          //           if (z.scContentFr) {
-          //             //Return address nested in content
-          //             return {
-          //               content: z.scContentFr.markdown,
-          //               icon: z.scIconCSS,
-          //               ...z.scFragments.map((a) => {
-          //                 if (!a.scButtonType) {
-          //                   return {
-          //                     city: a.scCityFr,
-          //                     country: a.scCountryFr,
-          //                     id: a.scId,
-          //                     poBox: a.scPostalBoxFr,
-          //                     postal: a.scPostalCode,
-          //                     program: a.scProgramFr,
-          //                     province: a.scProvTerrAbbrEnum,
-          //                     recipient: a.scRecipientFr,
-          //                   }
-          //                 } else {
-          //                   return {
-          //                     id: a.scId,
-          //                     content: a.scLinkTextFr,
-          //                     link: a.scDestinationURLFr,
-          //                     button: a.scButtonType,
-          //                   }
-          //                 }
-          //               })[0],
-          //             }
-          //           } else {
-          //             //Return address unnested
-          //             return {
-          //               city: z.scCityFr,
-          //               country: z.scCountryFr
-          //                 ? z.scCountryFr.toUpperCase()
-          //                 : null,
-          //               id: z.scId,
-          //               poBox: z.scPostalBoxFr,
-          //               postal: z.scPostalCode,
-          //               province: z.scProvTerrAbbrEnum,
-          //               recipient: z.scRecipientFr,
-          //               station: z.scPostalStationFr,
-          //             }
-          //           }
-          //         }),
-          //         label: y.scTitleFr,
-          //       }
-          //     }),
+          id: x.scId,
+          title: x.scTitleFr,
+          details: x.schDetails.map((y) => {
+            return {
+              id: y.scId,
+              color: y.scBackgroundColour,
+              items: y.scItems.map((z) => {
+                if (z.scContentFr) {
+                  //Return address nested in content
+                  return {
+                    content: z.scContentFr.markdown,
+                    icon: z.scIconCSS,
+                    ...z.scFragments.map((a) => {
+                      if (!a.scButtonType) {
+                        return {
+                          city: a.scCityFr,
+                          country: a.scCountryFr,
+                          id: a.scId,
+                          poBox: a.scPostalBoxFr,
+                          postal: a.scPostalCode,
+                          program: a.scProgramFr,
+                          province: a.scProvTerrAbbrEnum,
+                          recipient: a.scRecipientFr,
+                        }
+                      } else {
+                        return {
+                          id: a.scId,
+                          content: a.scLinkTextFr,
+                          link: a.scDestinationURLFr,
+                          button: a.scButtonType,
+                        }
+                      }
+                    })[0],
+                  }
+                } else {
+                  //Return address unnested
+                  return {
+                    city: z.scCityFr,
+                    country: z.scCountryFr ? z.scCountryFr.toUpperCase() : null,
+                    id: z.scId,
+                    poBox: z.scPostalBoxFr,
+                    postal: z.scPostalCode,
+                    province: z.scProvTerrAbbrEnum,
+                    recipient: z.scRecipientFr,
+                    station: z.scPostalStationFr,
+                  }
+                }
+              }),
+              label: y.scTitleFr,
+            }
+          }),
 
-          //     intro: x.schIntroFr.markdown,
-          //     layout: x.schContactMethodLayout,
-          //   }
-          // }),
-          // items: w,
-          // subHeader: w.scTitleFr,
-          w,
+          intro: x.schIntroFr.markdown,
+          layout: x.schContactMethodLayout,
         }
-      })[0],
+      }),
+      subHeader: queryData.scFragments[1].scTitleFr,
       id: queryData.scId,
       pageName: queryData.scPageNameFr,
     },

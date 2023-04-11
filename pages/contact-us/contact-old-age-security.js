@@ -11,10 +11,9 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactOldAgeSecurityContent } from '../../graphql/mappers/contact-old-age-security'
 import logger from '../../lib/logger'
 import React from 'react'
+import Markdown from 'markdown-to-jsx'
 
 export default function ContactOldAgeSecurity(props) {
-  console.log('============', props, '===========')
-
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -24,13 +23,18 @@ export default function ContactOldAgeSecurity(props) {
       data-testid="contactOAS-test"
       data-cy="oasContactUsContent"
     >
-      {/* <Heading id="my-dashboard-heading" title={props.pageContent.title} />
+      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
       <div
         className="py-5"
         data-testid={`${
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
+      <div className="pb-4 prose max-w-none prose-p:text-xl prose-p:mb-2 prose-p:font-body prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black">
+        {' '}
+        <Markdown>{props.pageContent.intro}</Markdown>
+      </div>
+
       <TableContent
         id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
@@ -47,7 +51,7 @@ export default function ContactOldAgeSecurity(props) {
             <ContactSection programUniqueId={i} {...item} />
           )}
         </Fragment>
-      ))} */}
+      ))}
     </div>
   )
 }
@@ -89,16 +93,14 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
 
-  // ====================================
-  // const breadCrumbItems =
-  //   locale === 'en'
-  //     ? pageContent.en.breadcrumb?.map(({ link, text }) => {
-  //         return { text, link: '/' + locale + '/' + link }
-  //       })
-  //     : pageContent.fr.breadcrumb?.map(({ link, text }) => {
-  //         return { text, link: '/' + locale + '/' + link }
-  //       })
-  // ====================================
+  const breadCrumbItems =
+    locale === 'en'
+      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
 
   // const breadCrumbItems = [
   //   {
@@ -140,10 +142,10 @@ export async function getServerSideProps({ res, locale }) {
       langToggleLink,
       meta,
       pageContent,
-      // breadCrumbItems,
-      // bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      // popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      // pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
+      breadCrumbItems,
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
     },
   }
 }
