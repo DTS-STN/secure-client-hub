@@ -15,7 +15,6 @@ import Markdown from 'markdown-to-jsx'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
-
 export default function ContactOldAgeSecurity(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
@@ -159,7 +158,6 @@ export async function getServerSideProps({ res, locale }) {
       locale,
       langToggleLink,
       meta,
-      pageContent,
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
