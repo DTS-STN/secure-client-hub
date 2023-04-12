@@ -11,6 +11,7 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactOldAgeSecurityContent } from '../../graphql/mappers/contact-old-age-security'
 import logger from '../../lib/logger'
 import React from 'react'
+import Markdown from 'markdown-to-jsx'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -46,6 +47,11 @@ export default function ContactOldAgeSecurity(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
+      <div className="pb-4 prose max-w-none prose-p:text-xl prose-p:mb-2 prose-p:font-body prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black">
+        {' '}
+        <Markdown>{props.pageContent.intro}</Markdown>
+      </div>
+
       <TableContent
         id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
