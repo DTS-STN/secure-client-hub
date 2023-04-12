@@ -67,6 +67,10 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         customLink={Link}
+        dataGcAnalyticsCustomClickInstitutionVariable={`ESDC-EDSC:${
+          props.children.props.content?.heading ||
+          props.children.props.pageContent?.title
+        }`}
         menuProps={{
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
