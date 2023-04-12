@@ -37,9 +37,9 @@ export default function MyDashboard(props) {
   })
   const currentDate = new Date()
   const [expires, setExpires] = useState({
-    warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
-    logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: false,
+    warning: new Date(currentDate.getTime() + 1 * 30 * 1000),
+    logout: new Date(currentDate.getTime() + 2 * 30 * 1000),
+    active: true,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
@@ -65,13 +65,7 @@ export default function MyDashboard(props) {
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
           new Date() >= expires.logout ? (
-            <SignedOut
-              closeModal={closeDemoModal}
-              onContinue={() => Router.push('./')}
-              id="SignedOut"
-              {...props.popupYouHaveBeenSignedout}
-              refPageAA={props.content.heading}
-            />
+            Router.push('./')
           ) : (
             <CountDown
               closeModal={closeDemoModal}
