@@ -38,7 +38,7 @@ export default function MyDashboard(props) {
   const [expires, setExpires] = useState({
     warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
     logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: true,
+    active: false,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
