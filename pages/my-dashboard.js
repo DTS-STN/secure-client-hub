@@ -1,5 +1,4 @@
 import CountDown from '../components/sessionModals/CountDown'
-import SignedOut from '../components/sessionModals/SignedOut'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
@@ -37,8 +36,8 @@ export default function MyDashboard(props) {
   })
   const currentDate = new Date()
   const [expires, setExpires] = useState({
-    warning: new Date(currentDate.getTime() + 1 * 30 * 1000),
-    logout: new Date(currentDate.getTime() + 2 * 30 * 1000),
+    warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
+    logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
     active: true,
   })
 
@@ -62,26 +61,25 @@ export default function MyDashboard(props) {
 
   useEffect(() => {
     const id = setInterval(function () {
+      if (new Date() >= expires.logout && expires.active) {
+        Router.push('./')
+      }
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
-          new Date() >= expires.logout ? (
-            Router.push('./')
-          ) : (
-            <CountDown
-              closeModal={closeDemoModal}
-              onSignOut={() => Router.push('./')}
-              onStay={() => {
-                setExpires((t) => {
-                  return { ...t, warning: t.logout }
-                })
-                setDemoModalBody(null)
-              }}
-              id="CountDown"
-              deadline={expires.logout}
-              {...props.popupStaySignedIn}
-              refPageAA={props.content.heading}
-            />
-          )
+          <CountDown
+            closeModal={closeDemoModal}
+            onSignOut={() => Router.push('./')}
+            onStay={() => {
+              setExpires((t) => {
+                return { ...t, warning: t.logout }
+              })
+              setDemoModalBody(null)
+            }}
+            id="CountDown"
+            deadline={expires.logout}
+            {...props.popupStaySignedIn}
+            refPageAA={props.content.heading}
+          />
         )
       } else return
     }, 1000)
