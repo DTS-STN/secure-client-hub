@@ -16,14 +16,14 @@ const Countdown = (props) => {
 
   const getTime = () => {
     const time = Date.parse(props.deadline) - Date.now()
-
+    console.log(parseInt(minutes), minutes)
     setClock((prev) => {
       return {
         ...prev,
-        days: time <= 0 ? Math.floor(time / (1000 * 60 * 60 * 24)) : 0,
-        hours: hours <= 0 ? Math.floor((time / (1000 * 60 * 60)) % 24) : 0,
-        minutes: minutes <= 0 ? Math.floor((time / 1000 / 60) % 60) : 0,
-        seconds: seconds <= 0 ? Math.floor((time / 1000) % 60) : 0,
+        days: time > 0 ? Math.floor(time / (1000 * 60 * 60 * 24)) : 0,
+        hours: time > 0 ? Math.floor((time / (1000 * 60 * 60)) % 24) : 0,
+        minutes: time > 0 ? Math.floor((time / 1000 / 60) % 60) : 0,
+        seconds: time > 0 ? Math.floor((time / 1000) % 60) : 0,
         ready: true,
       }
     })
