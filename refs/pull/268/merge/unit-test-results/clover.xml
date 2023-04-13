@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681320459648" clover="3.2.0">
-  <project timestamp="1681320459648" name="All files">
-    <metrics statements="380" coveredstatements="166" conditionals="234" coveredconditionals="63" methods="172" coveredmethods="60" elements="786" coveredelements="289" complexity="0" loc="380" ncloc="380" packages="8" files="39" classes="39"/>
+<coverage generated="1681413946702" clover="3.2.0">
+  <project timestamp="1681413946702" name="All files">
+    <metrics statements="381" coveredstatements="166" conditionals="234" coveredconditionals="63" methods="172" coveredmethods="60" elements="787" coveredelements="289" complexity="0" loc="381" ncloc="381" packages="8" files="39" classes="39"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="76" coveredconditionals="25" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -128,14 +128,15 @@
       </file>
     </package>
     <package name="components.sessionModals">
-      <metrics statements="11" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="6" coveredmethods="3"/>
+      <metrics statements="12" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="6" coveredmethods="3"/>
       <file name="CountDown.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/sessionModals/CountDown.js">
-        <metrics statements="11" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="6" coveredmethods="3"/>
+        <metrics statements="12" coveredstatements="8" conditionals="10" coveredconditionals="1" methods="6" coveredmethods="3"/>
         <line num="7" count="2" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
