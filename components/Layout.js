@@ -73,7 +73,8 @@ export default function Layout(props) {
         }`}
         menuProps={{
           onSignOut: () => {
-            signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
+            fetch('/api/logout')
+            signOut({ callbackUrl: `${window.location.origin}/` })
           },
           menuList: [
             {

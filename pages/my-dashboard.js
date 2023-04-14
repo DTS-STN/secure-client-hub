@@ -12,12 +12,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  Redirect,
-  ValidateSession,
-} from '../lib/auth'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
