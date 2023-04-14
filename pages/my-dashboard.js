@@ -78,7 +78,7 @@ export default function MyDashboard(props) {
             id="CountDown"
             deadline={expires.logout}
             {...props.popupStaySignedIn}
-            refPageAA={props.content.heading}
+            refPageAA={props.aaPrefix}
           />
         )
       } else return
@@ -116,7 +116,7 @@ export default function MyDashboard(props) {
             cardTitle={card.title}
             viewMoreLessCaption={card.dropdownText}
             acronym={acronym(card.title)}
-            refPageAA={props.content.heading}
+            refPageAA={props.aaPrefix}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
@@ -124,7 +124,7 @@ export default function MyDashboard(props) {
                 dataCy="most-requested"
                 openModal={openModal}
                 acronym={acronym(card.title)}
-                refPageAA={props.content.heading}
+                refPageAA={props.aaPrefix}
               />
             </div>
             <div
@@ -139,7 +139,7 @@ export default function MyDashboard(props) {
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
-                      refPageAA={props.content.heading}
+                      refPageAA={props.aaPrefix}
                     />
                   </div>
                 )
@@ -164,7 +164,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.content.heading}
+          refPageAA={props.aaPrefix}
         />
       </Modal>
       <Modal
@@ -250,6 +250,7 @@ export async function getServerSideProps({ req, res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
