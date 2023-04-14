@@ -15,6 +15,7 @@ import Markdown from 'markdown-to-jsx'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+
   return (
     <div className="font-body" data-cy="terms-conditions">
       <Heading
@@ -63,6 +64,7 @@ export default function PrivacyCondition(props) {
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
+        refPageAA={props.aaPrefix}
       />
       <Date id="termsConditionsDateModified" date="20230331" />
     </div>
@@ -142,6 +144,7 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
     },
   }
 }
