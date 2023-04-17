@@ -8,7 +8,7 @@ import MetaData from './MetaData'
 import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
@@ -22,6 +22,11 @@ export default function Layout(props) {
 
   useEffect(() => {
     Modal.setAppElement('#modal-root')
+  }, [])
+
+  const onLogout = useCallback(() => {
+    fetch('/api/logout')
+    signOut({ callbackUrl: `${window.location.origin}/` })
   }, [])
 
   return (
@@ -73,8 +78,7 @@ export default function Layout(props) {
         }`}
         menuProps={{
           onSignOut: () => {
-            fetch('/api/logout')
-            signOut({ callbackUrl: `${window.location.origin}/` })
+            onLogout()
           },
           menuList: [
             {
@@ -108,6 +112,7 @@ export default function Layout(props) {
               value: t.menuItems.signOut,
               path: `/`,
               component: Link,
+              showIcon: true,
             },
           ],
         }}
