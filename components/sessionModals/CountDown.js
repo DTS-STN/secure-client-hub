@@ -16,7 +16,7 @@ const Countdown = (props) => {
 
   const getTime = () => {
     const time = Date.parse(props.deadline) - Date.now()
-    console.log(parseInt(minutes), minutes)
+
     setClock((prev) => {
       return {
         ...prev,

@@ -21,7 +21,7 @@ export default function PageLink(props) {
             <a
               id={`link-for-${linkID}`}
               data-cy={props.dataCy}
-              data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.linkText}`}
+              data-gc-analytics-customclick={`${props.refPageAA}:${props.linkText}`}
               className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
             >
               {props.linkText}

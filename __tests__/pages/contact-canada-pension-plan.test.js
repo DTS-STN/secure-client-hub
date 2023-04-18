@@ -139,6 +139,7 @@ describe('CPP Contact Us Page', () => {
         bannerContent: {},
         langToggleLink: '/fr/contactez-nous/communiquer-regime-pensions-canada',
         locale: 'en',
+        aaPrefix: 'ESDC-EDSC:undefined',
         meta: {
           data_en: {
             title: 'Contact Canada Pension Plan - My Service Canada Account',

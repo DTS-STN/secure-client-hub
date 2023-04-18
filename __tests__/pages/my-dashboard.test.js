@@ -153,6 +153,7 @@ describe('My Dashboard page', () => {
         popupContentNA: {},
         popupYouHaveBeenSignedout: {},
         popupStaySignedIn: {},
+        aaPrefix: 'ESDC-EDSC:undefined',
       },
     })
   })
