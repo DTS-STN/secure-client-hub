@@ -67,6 +67,9 @@ export default function Layout(props) {
         }}
         isAuthenticated={props.isAuth}
         customLink={Link}
+        dataGcAnalyticsCustomClickInstitutionVariable={
+          props.children.props.aaPrefix
+        }
         menuProps={{
           onSignOut: () => {
             signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })

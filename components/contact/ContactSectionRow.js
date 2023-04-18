@@ -35,25 +35,32 @@ function ContactSectionRow(props) {
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {button ? (
-          <Button
-            text={detail}
-            styling={'primary'}
-            id={buttonId}
-            onClick={routeToPage}
-          />
-        ) : (
-          <div className="flex align-baseline font-body text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body">
-            {iconFeature && (
-              <FontAwesomeIcon
-                className="pr-2 pt-1"
-                style={{ color: '#2572B4' }}
-                icon={icon[iconFeature]}
-              />
-            )}
-            <Markdown>{detail}</Markdown>
-          </div>
-        )}
+        {props.items.map((detail, index) => {
+          return button ? (
+            <Button
+              key={index}
+              text={detail.content}
+              styling={'primary'}
+              id={buttonId}
+              onClick={routeToPage}
+            />
+          ) : (
+            <div
+              key={index}
+              className="flex align-baseline font-body text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4"
+            >
+              {iconFeature && (
+                <FontAwesomeIcon
+                  className="pr-2 pt-1"
+                  style={{ color: '#2572B4' }}
+                  icon={icon[iconFeature]}
+                />
+              )}
+
+              <Markdown>{detail.content}</Markdown>
+            </div>
+          )
+        })}
       </dd>
     </div>
   ) : (

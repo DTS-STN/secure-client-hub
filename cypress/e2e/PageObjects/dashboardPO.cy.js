@@ -225,6 +225,10 @@ function ClickCompleteMyReportOrApplyEILink() {
     })
 }
 
+function TermsAndConditionsLink() {
+  return cy.get('#footerLink0')
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -262,4 +266,5 @@ module.exports = {
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
   ContactUsFooterLink,
+  TermsAndConditionsLink,
 }
