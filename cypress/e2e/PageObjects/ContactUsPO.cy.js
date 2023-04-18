@@ -13,7 +13,7 @@ function ValidateContactUsHeaderEN() {
 }
 
 function ValidateContactUsUrlFR() {
-  cy.url().should('contains', '/fr/contactez-nous')
+  cy.url().should('contains', '/contactez-nous')
 }
 
 function ValidateContactUsHeaderFR() {

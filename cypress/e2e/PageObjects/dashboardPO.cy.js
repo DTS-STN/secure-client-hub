@@ -42,15 +42,15 @@ function MostRequestedSectionLinks() {
 }
 
 function Menu() {
-  return cy.get('#dropdownNavbarLink')
+  return cy.get('#dropdownNavbarLink').parent()
 }
 
 function SecuritySettingsMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(3)')
+  return cy.get('[id="dropdownNavbar"]>div:nth-child(3)')
 }
 
 function ProfileMenu() {
-  return cy.get('[id="dropdownNavbar"]>a:nth-child(2)')
+  return cy.get('[id="dropdownNavbar"]>div:nth-child(2)')
 }
 
 function ValidateDashboardUrl() {
@@ -167,7 +167,7 @@ function CloseModalButton() {
 }
 
 function ContactUsFooterLink() {
-  return cy.get('[data-cy="footerLink0"]')
+  return cy.get('[data-cy="footerContactUsLink"]')
 }
 
 function validateExitBetaModalbuttonLink(SectionName, LinkName) {
@@ -225,6 +225,10 @@ function ClickCompleteMyReportOrApplyEILink() {
     })
 }
 
+function TermsAndConditionsLink() {
+  return cy.get('#footerLink0')
+}
+
 module.exports = {
   dashboardHeader,
   FrenchButton,
@@ -262,4 +266,5 @@ module.exports = {
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
   ContactUsFooterLink,
+  TermsAndConditionsLink,
 }

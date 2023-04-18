@@ -28,6 +28,15 @@
       scAudience
       scOwner
       scFragments {
+           ... on SCHContentv1Model{
+              _path
+              scContentEn{
+                  markdown
+              }
+                scContentFr{
+                  markdown
+              }
+          }
           ... on SCHListv1Model {
               _path
               scId
@@ -56,6 +65,7 @@
                           {
                               ... on SCHListv1Model {
                                   _path
+                                  scBackgroundColour
                                   scTitleEn
                                   scTitleFr
                                    scId

@@ -1,6 +1,5 @@
 import CountDown from '../components/sessionModals/CountDown'
-import SignedOut from '../components/sessionModals/SignedOut'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -12,13 +11,20 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  Redirect,
+  ValidateSession,
+} from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import Router from 'next/router'
+import throttle from 'lodash.throttle'
+import { acronym } from '../lib/acronym'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -55,35 +61,45 @@ export default function MyDashboard(props) {
 
   useEffect(() => {
     const id = setInterval(function () {
+      if (new Date() >= expires.logout && expires.active) {
+        Router.push('./')
+      }
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
-          new Date() >= expires.logout ? (
-            <SignedOut
-              closeModal={closeDemoModal}
-              onContinue={() => Router.push('./')}
-              id="SignedOut"
-              {...props.popupYouHaveBeenSignedout}
-            />
-          ) : (
-            <CountDown
-              closeModal={closeDemoModal}
-              onSignOut={() => Router.push('./')}
-              onStay={() => {
-                setExpires((t) => {
-                  return { ...t, warning: t.logout }
-                })
-                setDemoModalBody(null)
-              }}
-              id="CountDown"
-              deadline={expires.logout}
-              {...props.popupStaySignedIn}
-            />
-          )
+          <CountDown
+            closeModal={closeDemoModal}
+            onSignOut={() => Router.push('./')}
+            onStay={() => {
+              setExpires((t) => {
+                return { ...t, warning: t.logout }
+              })
+              setDemoModalBody(null)
+            }}
+            id="CountDown"
+            deadline={expires.logout}
+            {...props.popupStaySignedIn}
+            refPageAA={props.aaPrefix}
+          />
         )
       } else return
     }, 1000)
     return () => clearInterval(id)
   }, [])
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
@@ -99,12 +115,16 @@ export default function MyDashboard(props) {
             locale={props.locale}
             cardTitle={card.title}
             viewMoreLessCaption={card.dropdownText}
+            acronym={acronym(card.title)}
+            refPageAA={props.aaPrefix}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
                 openModal={openModal}
+                acronym={acronym(card.title)}
+                refPageAA={props.aaPrefix}
               />
             </div>
             <div
@@ -115,9 +135,11 @@ export default function MyDashboard(props) {
                 return (
                   <div className="" key={index} data-cy="Task">
                     <BenefitTasks
+                      acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
+                      refPageAA={props.aaPrefix}
                     />
                   </div>
                 )
@@ -142,6 +164,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.aaPrefix}
         />
       </Modal>
       <Modal
@@ -227,6 +250,7 @@ export async function getServerSideProps({ req, res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

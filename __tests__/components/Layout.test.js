@@ -18,6 +18,9 @@ jest.mock('next/link', () => ({
   ),
 }))
 
+// Children must be passed to test Adobe Analytics through the design system
+const aaChildrenProps = <div content={{ heading: '' }} />
+
 expect.extend(toHaveNoViolations)
 
 describe('Layout with default text', () => {
@@ -49,12 +52,26 @@ describe('Layout with default text', () => {
   }))
 
   it('Layout contains Symbol of GoC', () => {
-    render(<Layout locale="en" meta={meta} display={display} />)
+    render(
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        children={aaChildrenProps}
+      />
+    )
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
   })
 
   it('Layout contains a Main tag', () => {
-    render(<Layout locale="en" meta={meta} display={display} />)
+    render(
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        children={aaChildrenProps}
+      />
+    )
     expect(screen.getByRole('main')).toBeInTheDocument()
   })
 
@@ -70,7 +87,12 @@ describe('Layout with default text', () => {
 
   it('Layout contains no a11y violations', async () => {
     const { container } = render(
-      <Layout locale="en" meta={meta} display={display} />
+      <Layout
+        locale="en"
+        meta={meta}
+        display={display}
+        children={aaChildrenProps}
+      />
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

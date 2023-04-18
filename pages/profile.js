@@ -12,6 +12,9 @@ import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
+import { acronym } from '../lib/acronym'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -29,19 +32,37 @@ export default function Profile(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
+
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={t.pageHeading.profile} />
+      <Heading id="my-dashboard-heading" title={props.content.pageName} />
       <p className="text-lg mt-2 font-body">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
             key={index}
+            acronym={acronym(program.title)}
             programTitle={program.title}
             tasks={program.tasks}
             data-testID="profile-task-group-list"
             openModal={openModal}
             data-cy="task"
+            refPageAA={props.aaPrefix}
           />
         )
       })}
@@ -55,6 +76,7 @@ export default function Profile(props) {
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
+        refPageAA={props.aaPrefix}
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -71,6 +93,7 @@ export default function Profile(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+          refPageAA={props.aaPrefix}
         />
       </Modal>
     </div>
@@ -152,6 +175,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
     },
   }
 }

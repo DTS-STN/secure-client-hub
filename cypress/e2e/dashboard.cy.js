@@ -84,6 +84,7 @@ describe('Validate dashboard page', () => {
 
   it('Validate the "Most requested"section on EI,CPP and OAS cards in French', () => {
     dashboardPo.FrenchButton().click()
+    dashboardPo.ValidateDashboardHeaderFR()
     for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameFR
       dashboardPo.ExpandCard(CardName)
@@ -189,7 +190,7 @@ describe('Validate dashboard page', () => {
     dashboardPo.ClickCompleteMyReportOrApplyEILink()
   })
 
-  it.skip('Validate that the clicking Contact Us naviagtes to Contact US landing Page', () => {
+  it('Validate that the clicking Contact Us naviagtes to Contact US landing Page', () => {
     dashboardPo.ContactUsFooterLink().should('be.visible').click()
     contactUsPo.ValidateContactUsUrl()
   })

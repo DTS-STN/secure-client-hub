@@ -20,11 +20,13 @@ export default function ViewMoreLessButton(props) {
           <FontAwesomeIcon
             icon={solid('circle-chevron-up')}
             className={`text-46px pr-3`}
+            data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Contract-Diminuer`}
           />
         ) : (
           <FontAwesomeIcon
             icon={solid('circle-chevron-down')}
             className={`text-46px pr-3`}
+            data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Expand-Etendre`}
           />
         )}
         <span className="text-left underline font-body">{props.caption}</span>

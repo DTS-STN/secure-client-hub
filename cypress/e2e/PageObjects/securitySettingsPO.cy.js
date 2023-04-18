@@ -17,8 +17,12 @@ function breadcrumbsLink2() {
   return cy.get("[class='ds-container'] >nav>ul>li:nth-child(2)>a")
 }
 
-function LookingForProfileLink() {
+function LookingForProfileLinkEn() {
   return cy.get('#link-for-profile')
+}
+
+function LookingForProfileLinkFR() {
+  return cy.get('#link-for-profil')
 }
 
 function SecurityHeaderEN() {
@@ -54,7 +58,8 @@ module.exports = {
   breadcrumbs,
   breadcrumbsLink1,
   breadcrumbsLink2,
-  LookingForProfileLink,
+  LookingForProfileLinkEn,
+  LookingForProfileLinkFR,
   SecurityHeaderEN,
   SecurityUrlFR,
   SecurityUrlEN,
