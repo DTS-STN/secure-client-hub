@@ -33,7 +33,7 @@ export default function MyDashboard(props) {
   const [expires, setExpires] = useState({
     warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
     logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: false,
+    active: true,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
@@ -57,13 +57,13 @@ export default function MyDashboard(props) {
   useEffect(() => {
     const id = setInterval(function () {
       if (new Date() >= expires.logout && expires.active) {
-        Router.push('./')
+        Router.push('/auth/logout')
       }
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
           <CountDown
             closeModal={closeDemoModal}
-            onSignOut={() => Router.push('./')}
+            onSignOut={() => Router.push('/auth/logout')}
             onStay={() => {
               setExpires((t) => {
                 return { ...t, warning: t.logout }
