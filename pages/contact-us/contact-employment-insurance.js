@@ -163,6 +163,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
+      aaPrefix: `ESDC-EDSC:${pageContent.en.title}`,
     },
   }
 }

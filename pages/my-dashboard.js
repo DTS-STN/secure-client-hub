@@ -1,5 +1,4 @@
 import CountDown from '../components/sessionModals/CountDown'
-import SignedOut from '../components/sessionModals/SignedOut'
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
@@ -57,32 +56,25 @@ export default function MyDashboard(props) {
 
   useEffect(() => {
     const id = setInterval(function () {
+      if (new Date() >= expires.logout && expires.active) {
+        Router.push('./')
+      }
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
-          new Date() >= expires.logout ? (
-            <SignedOut
-              closeModal={closeDemoModal}
-              onContinue={() => Router.push('./')}
-              id="SignedOut"
-              {...props.popupYouHaveBeenSignedout}
-              refPageAA={props.content.heading}
-            />
-          ) : (
-            <CountDown
-              closeModal={closeDemoModal}
-              onSignOut={() => Router.push('./')}
-              onStay={() => {
-                setExpires((t) => {
-                  return { ...t, warning: t.logout }
-                })
-                setDemoModalBody(null)
-              }}
-              id="CountDown"
-              deadline={expires.logout}
-              {...props.popupStaySignedIn}
-              refPageAA={props.content.heading}
-            />
-          )
+          <CountDown
+            closeModal={closeDemoModal}
+            onSignOut={() => Router.push('./')}
+            onStay={() => {
+              setExpires((t) => {
+                return { ...t, warning: t.logout }
+              })
+              setDemoModalBody(null)
+            }}
+            id="CountDown"
+            deadline={expires.logout}
+            {...props.popupStaySignedIn}
+            refPageAA={props.aaPrefix}
+          />
         )
       } else return
     }, 1000)
@@ -119,7 +111,7 @@ export default function MyDashboard(props) {
             cardTitle={card.title}
             viewMoreLessCaption={card.dropdownText}
             acronym={acronym(card.title)}
-            refPageAA={props.content.heading}
+            refPageAA={props.aaPrefix}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
@@ -127,7 +119,7 @@ export default function MyDashboard(props) {
                 dataCy="most-requested"
                 openModal={openModal}
                 acronym={acronym(card.title)}
-                refPageAA={props.content.heading}
+                refPageAA={props.aaPrefix}
               />
             </div>
             <div
@@ -142,7 +134,7 @@ export default function MyDashboard(props) {
                       taskList={taskList}
                       dataCy="task-group-list"
                       openModal={openModal}
-                      refPageAA={props.content.heading}
+                      refPageAA={props.aaPrefix}
                     />
                   </div>
                 )
@@ -167,7 +159,7 @@ export default function MyDashboard(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.content.heading}
+          refPageAA={props.aaPrefix}
         />
       </Modal>
       <Modal
@@ -254,6 +246,7 @@ export async function getServerSideProps({ req, res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

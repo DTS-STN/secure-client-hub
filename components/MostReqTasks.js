@@ -24,7 +24,7 @@ export default function MostReqTasks(props) {
                       props.openModal(task.link)
                     }
                   }}
-                  data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA} ${props.acronym}:${task.title}`}
+                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
                   className="flex items-center underline pl-2 text-white hover:text-gray-50a"
                 >
                   <FontAwesomeIcon

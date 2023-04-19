@@ -153,6 +153,7 @@ describe('OAS Contact Us Page', () => {
         bannerContent: {},
         langToggleLink: '/fr/contactez-nous/communiquer-securite-vieillesse',
         locale: 'en',
+        aaPrefix: 'ESDC-EDSC:undefined',
         meta: {
           data_en: {
             title: 'Contact Old Age Security - My Service Canada Account',

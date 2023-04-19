@@ -62,7 +62,7 @@ export default function Profile(props) {
             data-testID="profile-task-group-list"
             openModal={openModal}
             data-cy="task"
-            refPageAA={props.content.pageName}
+            refPageAA={props.aaPrefix}
           />
         )
       })}
@@ -76,7 +76,7 @@ export default function Profile(props) {
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
-        refPageAA={props.content.pageName}
+        refPageAA={props.aaPrefix}
       ></PageLink>
       <Modal
         className="flex justify-center bg-black/75 h-full"
@@ -93,7 +93,7 @@ export default function Profile(props) {
           popupDescription={props.popupContentNA.popupDescription}
           popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.content.pageName}
+          refPageAA={props.aaPrefix}
         />
       </Modal>
     </div>
@@ -175,6 +175,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
     },
   }
 }

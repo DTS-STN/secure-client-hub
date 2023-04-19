@@ -145,6 +145,7 @@ describe('EI Contact Us Page', () => {
         bannerContent: {},
         langToggleLink: '/fr/contactez-nous/communiquer-assurance-emploi',
         locale: 'en',
+        aaPrefix: 'ESDC-EDSC:undefined',
         meta: {
           data_en: {
             title: 'Contact Employment Insurance - My Service Canada Account',

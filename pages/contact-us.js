@@ -128,6 +128,7 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
     },
   }
 }
