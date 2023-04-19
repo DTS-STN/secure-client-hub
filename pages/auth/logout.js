@@ -55,8 +55,6 @@ export async function getServerSideProps({ req, res, locale }) {
       throw error
     }))
 
-  console.log('Logout URL in getServerSideProps:', logoutURL)
-
   return {
     props: {
       locale,
