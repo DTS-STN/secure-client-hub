@@ -24,11 +24,6 @@ export default function Layout(props) {
     Modal.setAppElement('#modal-root')
   }, [])
 
-  const onLogout = useCallback(() => {
-    fetch('/api/logout')
-    signOut({ callbackUrl: `${window.location.origin}/` })
-  }, [])
-
   return (
     <>
       <MetaData language={props.locale} data={props.meta}></MetaData>
@@ -78,7 +73,7 @@ export default function Layout(props) {
         }`}
         menuProps={{
           onSignOut: () => {
-            onLogout()
+            signOut()
           },
           menuList: [
             {
@@ -110,7 +105,7 @@ export default function Layout(props) {
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
-              path: `/`,
+              path: '/auth/logout',
               component: Link,
               showIcon: true,
             },

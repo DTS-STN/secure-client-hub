@@ -21,6 +21,7 @@ export default function MyApp({ Component, pageProps }) {
       bannerContent={pageProps.bannerContent}
       popupContent={pageProps.popupContent}
       display={display}
+      logoutURL={pageProps.logoutURL}
     >
       <Component {...pageProps} />
     </Layout>
