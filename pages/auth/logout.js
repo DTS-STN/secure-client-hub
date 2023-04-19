@@ -1,24 +1,18 @@
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/react'
+import { useEffect } from 'react'
+import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
 
-const bannerContent = {
-  bannerBoldText: '',
-  bannerText: '',
-  bannerLink: '',
-  bannerLinkHref: '',
-}
-
-const Signedout = (props) => {
+export default function Logout(props) {
   const router = useRouter()
 
-  //signIn('ecasProvider')
+  //Redirect to ECAS global sign out
   useEffect(() => {
     if (!router.isReady) return
     if (!router.query.error) {
-      signIn('ecasProvider')
+      router.push(props.logoutURL)
     }
-  }, [router.isReady])
+  }, [router, props.logoutURL])
+
   return (
     <div
       role="status"
@@ -48,8 +42,25 @@ const Signedout = (props) => {
   )
 }
 
-Signedout.getLayout = function PageLayout(page) {
+Logout.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export default Signedout
+export async function getServerSideProps({ req, res, locale }) {
+  const logoutURL =
+    !AuthIsDisabled() &&
+    (await getLogoutURL(req).catch((error) => {
+      logger.error(error)
+      res.statusCode = 500
+      throw error
+    }))
+
+  console.log('Logout URL in getServerSideProps:', logoutURL)
+
+  return {
+    props: {
+      locale,
+      logoutURL: logoutURL || null,
+    },
+  }
+}

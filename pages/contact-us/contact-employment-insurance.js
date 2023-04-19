@@ -11,6 +11,8 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactEmploymentInsuranceContent } from '../../graphql/mappers/contact-employment-insurance'
 import logger from '../../lib/logger'
 import React from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
 
 export default function ContactEmploymentInsurance(props) {
   /* istanbul ignore next */
@@ -20,6 +22,21 @@ export default function ContactEmploymentInsurance(props) {
     isOpen: false,
     activeLink: '/',
   })
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div
@@ -146,6 +163,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
+      aaPrefix: `ESDC-EDSC:${pageContent.en.title}`,
     },
   }
 }

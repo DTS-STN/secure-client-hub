@@ -34,8 +34,7 @@ export default NextAuth({
       checks: ['state', 'nonce'],
       profile(profile) {
         return {
-          //id: profile.sub,
-          id: 'scrubbed',
+          id: profile.sid,
         }
       },
     },
@@ -71,6 +70,6 @@ export default NextAuth({
     },
   },
   pages: {
-    signIn: '/signedout',
+    signIn: '/auth/login',
   },
 })

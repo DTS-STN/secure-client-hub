@@ -1,74 +1,78 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
-import PageLink from '../components/PageLink'
+import {
+  Heading,
+  ContextualAlert,
+  Date,
+} from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
+import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
-import { useEffect, useCallback, useMemo } from 'react'
-import throttle from 'lodash.throttle'
+import BackToButton from '../components/BackToButton'
+import Markdown from 'markdown-to-jsx'
 
-export default function SecuritySettings(props) {
+export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
-    [onClickEvent]
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent])
-
   return (
-    <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
-      <Link
-        id="securityQuestionsLink"
-        dataTestId="securityQuestionsLink"
-        text={props.content.securityQuestions.linkTitle.text}
-        href={props.content.securityQuestions.linkTitle.link}
+    <div className="font-body" data-cy="terms-conditions">
+      <Heading
+        id="PrivacyCondition-heading"
+        title={props.content.heading}
+        className="mb-2"
       />
-      <p className="mb-8 text-xl font-body">
-        {props.content.securityQuestions.subTitle}
-      </p>
-
-      <Link
-        id="eiAccessCodeLink"
-        dataTestId="eiAccessCodeLink"
-        text={props.content.eiAccessCode.linkTitle.text}
-        href={props.content.eiAccessCode.linkTitle.link}
+      <ContextualAlert
+        id="PrivacyCondition-alert"
+        type={props.content.alert.type}
+        message_heading="Information"
+        message_body={props.content.alert.text}
+        alert_icon_alt_text="info icon"
+        alert_icon_id="info-icon"
       />
-      <p className="pb-7 text-xl font-body">
-        {props.content.eiAccessCode.subTitle}
-      </p>
-      <PageLink
-        lookingForText={props.content.lookingFor.title}
-        accessText={props.content.lookingFor.subText[0]}
-        linkText={props.content.lookingFor.subText[1]}
-        href={props.content.lookingFor.link}
-        linkID="link-id"
-        dataCy="access-profile-page-link"
+      <Markdown
+        options={{
+          overrides: {
+            h1: {
+              props: {
+                className: 'text-3xl font-display font-bold mt-10 mb-3',
+              },
+            },
+            p: {
+              props: {
+                className: 'mb-3',
+              },
+            },
+            ol: {
+              props: {
+                className:
+                  'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+              },
+            },
+            a: {
+              props: {
+                className: 'underline text-deep-blue-dark cursor-pointer',
+              },
+            },
+          },
+        }}
+      >
+        {props.content.content}
+      </Markdown>
+      <BackToButton
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
-      ></PageLink>
+      />
+      <Date id="termsConditionsDateModified" date="20230331" />
     </div>
   )
 }
 
 export async function getServerSideProps({ res, locale }) {
-  const content = await getSecuritySettingsContent().catch((error) => {
+  const content = await getPrivacyConditionContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
     throw error
@@ -97,9 +101,9 @@ export async function getServerSideProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
-
-  const t = locale === 'en' ? en : fr
+    locale === 'en'
+      ? '/fr/avis-confidentialite-modalites'
+      : '/en/privacy-notice-terms-conditions'
 
   const breadCrumbItems =
     locale === 'en'
@@ -109,11 +113,10 @@ export async function getServerSideProps({ res, locale }) {
       : content.fr.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Security - My Service Canada Account',
+      title: 'Privacy and Conditions - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -122,7 +125,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Sécurité - Mon dossier Service Canada',
+      title: 'Confidentialité et conditions - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -141,12 +144,12 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading}`,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
     },
   }
 }
 
-SecuritySettings.propTypes = {
+PrivacyCondition.propTypes = {
   /**
    * current locale in the address
    */
@@ -168,14 +171,4 @@ SecuritySettings.propTypes = {
    */
 
   meta: PropTypes.object,
-
-  /*
-   * BreadCrumb Items
-   */
-  breadCrumbItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-    })
-  ),
 }

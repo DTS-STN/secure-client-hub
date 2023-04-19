@@ -6,9 +6,27 @@ import { getContactUsContent } from '../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
+import NextLink from 'next/link'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div id="contactContent" data-testid="contactContent-test">
@@ -22,7 +40,10 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={link.linkDestination.split('/').pop()}
+                href={`/${props.content.pageName}/${link.linkDestination
+                  .split('/')
+                  .pop()}`}
+                component={NextLink}
               />
               <p className="text-xl font-body">{link.linkDescription}</p>
             </li>
@@ -62,7 +83,8 @@ export async function getServerSideProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/contactez-nous' : '/contact-us'
+  const langToggleLink =
+    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
   const t = locale === 'en' ? en : fr
 
@@ -106,6 +128,7 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
     },
   }
 }

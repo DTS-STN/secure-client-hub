@@ -11,10 +11,28 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getContactOldAgeSecurityContent } from '../../graphql/mappers/contact-old-age-security'
 import logger from '../../lib/logger'
 import React from 'react'
+import Markdown from 'markdown-to-jsx'
+import { useEffect, useCallback, useMemo } from 'react'
+import throttle from 'lodash.throttle'
 
 export default function ContactOldAgeSecurity(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
 
   return (
     <div
@@ -29,6 +47,11 @@ export default function ContactOldAgeSecurity(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
+      <div className="pb-4 prose max-w-none prose-p:text-xl prose-p:mb-2 prose-p:font-body prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black">
+        {' '}
+        <Markdown>{props.pageContent.intro}</Markdown>
+      </div>
+
       <TableContent
         id="oasContent"
         sectionList={props.pageContent.items.map((item, i) => {
@@ -139,6 +162,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
+      aaPrefix: `ESDC-EDSC:${pageContent.en.title}`,
     },
   }
 }

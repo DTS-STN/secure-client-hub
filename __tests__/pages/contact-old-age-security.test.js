@@ -61,8 +61,15 @@ jest.mock('../../components/contact/ContactProvince', () => () => {
 describe('OAS Contact Us Page', () => {
   const content = {
     title: 'test',
+    intro: '',
     items: [
-      { title: 'test', link: 'test', id: 'test', intro: 'test', details: [] },
+      {
+        title: 'test',
+        link: 'test',
+        id: 'test',
+        intro: 'test',
+        details: [],
+      },
     ],
     heading: 'heading',
     paragraph: 'paragraph',
@@ -146,6 +153,7 @@ describe('OAS Contact Us Page', () => {
         bannerContent: {},
         langToggleLink: '/fr/contactez-nous/communiquer-securite-vieillesse',
         locale: 'en',
+        aaPrefix: 'ESDC-EDSC:undefined',
         meta: {
           data_en: {
             title: 'Contact Old Age Security - My Service Canada Account',

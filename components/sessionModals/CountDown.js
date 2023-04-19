@@ -20,10 +20,10 @@ const Countdown = (props) => {
     setClock((prev) => {
       return {
         ...prev,
-        days: Math.floor(time / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((time / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((time / 1000 / 60) % 60),
-        seconds: Math.floor((time / 1000) % 60),
+        days: time > 0 ? Math.floor(time / (1000 * 60 * 60 * 24)) : 0,
+        hours: time > 0 ? Math.floor((time / (1000 * 60 * 60)) % 24) : 0,
+        minutes: time > 0 ? Math.floor((time / 1000 / 60) % 60) : 0,
+        seconds: time > 0 ? Math.floor((time / 1000) % 60) : 0,
         ready: true,
       }
     })
@@ -54,6 +54,7 @@ const Countdown = (props) => {
           type="button"
           aria-label={'Close Modal'}
           onClick={props.closeModal}
+          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close-Fermer`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
         </button>
@@ -71,7 +72,7 @@ const Countdown = (props) => {
           <p className="mr-6">{props.bannerContent[0]}</p>
           <p className="font-bold mr-6">
             {ready &&
-              `${props.bannerContent[1]} ${minutes} ${props.bannerMinutesAnd} ${seconds} ${props.bannerSeconds}.`}
+              `${props.bannerContent[1]} ${clock.minutes} ${props.bannerMinutesAnd} ${clock.seconds} ${props.bannerSeconds}.`}
           </p>
         </div>
       </div>
