@@ -58,7 +58,7 @@ export async function getServerSideProps({ req, res, locale }) {
   return {
     props: {
       locale,
-      logoutURL: logoutURL || null,
+      logoutURL: logoutURL || '/',
     },
   }
 }
