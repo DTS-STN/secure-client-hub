@@ -31,9 +31,9 @@ export default function MyDashboard(props) {
   })
   const currentDate = new Date()
   const [expires, setExpires] = useState({
-    warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
+    warning: new Date(currentDate.getTime() + 0.5 * 60 * 1000),
     logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: false,
+    active: true,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
@@ -79,7 +79,7 @@ export default function MyDashboard(props) {
       } else return
     }, 1000)
     return () => clearInterval(id)
-  }, [])
+  }, [expires])
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
