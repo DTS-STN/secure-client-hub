@@ -79,7 +79,7 @@ export default function MyDashboard(props) {
       } else return
     }, 1000)
     return () => clearInterval(id)
-  }, [])
+  }, [expires])
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
