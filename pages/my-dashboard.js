@@ -11,12 +11,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  Redirect,
-  ValidateSession,
-} from '../lib/auth'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
@@ -38,7 +33,7 @@ export default function MyDashboard(props) {
   const [expires, setExpires] = useState({
     warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
     logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: false,
+    active: true,
   })
 
   const [demoModalBody, setDemoModalBody] = useState(null)
@@ -62,13 +57,13 @@ export default function MyDashboard(props) {
   useEffect(() => {
     const id = setInterval(function () {
       if (new Date() >= expires.logout && expires.active) {
-        Router.push('./')
+        Router.push('/auth/logout')
       }
       if (new Date() >= expires.warning && expires.active) {
         demoContent(
           <CountDown
             closeModal={closeDemoModal}
-            onSignOut={() => Router.push('./')}
+            onSignOut={() => Router.push('/auth/logout')}
             onStay={() => {
               setExpires((t) => {
                 return { ...t, warning: t.logout }
@@ -84,7 +79,7 @@ export default function MyDashboard(props) {
       } else return
     }, 1000)
     return () => clearInterval(id)
-  }, [])
+  }, [expires])
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -181,6 +176,7 @@ export default function MyDashboard(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
     res.statusCode = 500

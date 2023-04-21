@@ -72,7 +72,7 @@ export default function Layout(props) {
         }
         menuProps={{
           onSignOut: () => {
-            signOut({ callbackUrl: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL })
+            signOut()
           },
           menuList: [
             {
@@ -104,8 +104,9 @@ export default function Layout(props) {
             {
               key: 'signOutKey',
               value: t.menuItems.signOut,
-              path: `/`,
+              path: '/auth/logout',
               component: Link,
+              showIcon: true,
             },
           ],
         }}

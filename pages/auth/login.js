@@ -9,7 +9,7 @@ const bannerContent = {
   bannerLinkHref: '',
 }
 
-const Signedout = (props) => {
+const Login = (props) => {
   const router = useRouter()
 
   //signIn('ecasProvider')
@@ -50,8 +50,8 @@ const Signedout = (props) => {
   )
 }
 
-Signedout.getLayout = function PageLayout(page) {
+Login.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export default Signedout
+export default Login
