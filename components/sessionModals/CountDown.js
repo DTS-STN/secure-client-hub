@@ -4,7 +4,7 @@ import { icon } from '../../lib/loadIcons'
 import { Button } from '@dts-stn/service-canada-design-system'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const Countdown = (props) => {
+const CountDown = (props) => {
   const [clock, setClock] = useState({
     days: 0,
     hours: 0,
@@ -95,4 +95,4 @@ const Countdown = (props) => {
   )
 }
 
-export default Countdown
+export default CountDown

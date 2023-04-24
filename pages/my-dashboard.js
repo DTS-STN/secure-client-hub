@@ -1,5 +1,4 @@
-import CountDown from '../components/sessionModals/CountDown'
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
@@ -17,9 +16,9 @@ import MostReqTasks from './../components/MostReqTasks'
 import Modal from 'react-modal'
 import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
-import Router from 'next/router'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
+import SessionTimeTracker from '../components/sessionModals/SessionTimeTracker'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -29,22 +28,6 @@ export default function MyDashboard(props) {
     isOpen: false,
     activeLink: '/',
   })
-  const currentDate = new Date()
-  const [expires, setExpires] = useState({
-    warning: new Date(currentDate.getTime() + 1 * 60 * 1000),
-    logout: new Date(currentDate.getTime() + 2 * 60 * 1000),
-    active: true,
-  })
-
-  const [demoModalBody, setDemoModalBody] = useState(null)
-
-  function demoContent(content) {
-    setDemoModalBody(content)
-  }
-
-  function closeDemoModal() {
-    setDemoModalBody(null)
-  }
 
   function openModal(link) {
     setOpenModalWithLink({ isOpen: true, activeLink: link })
@@ -53,33 +36,6 @@ export default function MyDashboard(props) {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
-
-  useEffect(() => {
-    const id = setInterval(function () {
-      if (new Date() >= expires.logout && expires.active) {
-        Router.push('/auth/logout')
-      }
-      if (new Date() >= expires.warning && expires.active) {
-        demoContent(
-          <CountDown
-            closeModal={closeDemoModal}
-            onSignOut={() => Router.push('/auth/logout')}
-            onStay={() => {
-              setExpires((t) => {
-                return { ...t, warning: t.logout }
-              })
-              setDemoModalBody(null)
-            }}
-            id="CountDown"
-            deadline={expires.logout}
-            {...props.popupStaySignedIn}
-            refPageAA={props.aaPrefix}
-          />
-        )
-      } else return
-    }, 1000)
-    return () => clearInterval(id)
-  }, [expires])
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -162,14 +118,10 @@ export default function MyDashboard(props) {
           refPageAA={props.aaPrefix}
         />
       </Modal>
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={demoModalBody === null ? false : true}
-        onRequestClose={closeModal}
-        contentLabel={'Demo Modal'}
-      >
-        {demoModalBody}
-      </Modal>
+      <SessionTimeTracker
+        popupStaySignedIn={props.popupStaySignedIn}
+        aaPrefix={props.aaPrefix}
+      />
     </div>
   )
 }
