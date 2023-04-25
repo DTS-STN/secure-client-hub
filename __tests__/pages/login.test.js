@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Signedout from '../../pages/signedout'
+import Login from '../../pages/auth/login'
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath
@@ -11,7 +11,7 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-describe('signedout page', () => {
+describe('login page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -25,13 +25,13 @@ describe('signedout page', () => {
 
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
-      pathname: '/signedout',
-      asPath: '/signedout',
+      pathname: '/auth/login',
+      asPath: '/auth/login',
     }))
   })
 
   it('should render the page', () => {
-    render(<Signedout locale="en" />)
+    render(<Login locale="en" />)
     // const loading = screen.stringContaining('Loading / Chargement en cours ...')
     expect.toBeInTheDocument('stringContaining')
   })
