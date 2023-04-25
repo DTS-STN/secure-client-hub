@@ -8,9 +8,14 @@ const ContactProvince = ({ title, intro, id, i, details }) => {
       <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4 font-body text-xl">
         <Markdown>{intro}</Markdown>
       </div>
-      {details.map((item, i) => (
-        <ContactProvinceRow {...item} key={i} />
-      ))}
+      {/* Ensure provinces are sorted alphabetically regardless of language */}
+      {details
+        .sort(function (a, b) {
+          return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+        })
+        .map((item, i) => (
+          <ContactProvinceRow {...item} key={i} />
+        ))}
     </div>
   )
 }
