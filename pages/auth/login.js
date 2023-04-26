@@ -23,9 +23,9 @@ const Login = (props) => {
     }
   }, [router.isReady])
   return (
-    <>
+    <div className="grid h-screen place-items-center">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
-    </>
+    </div>
   )
 }
 
