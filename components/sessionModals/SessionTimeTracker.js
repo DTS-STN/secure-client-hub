@@ -28,7 +28,7 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   }
 
   useEffect(() => {
-    const updateMousePosition = (ev) => {
+    const updateModalTimer = (ev) => {
       if (!demoModalBody) {
         setExpires((prev) => {
           return {
@@ -38,9 +38,11 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
         })
       }
     }
-    window.addEventListener('mousemove', updateMousePosition)
+    window.addEventListener('mousemove', updateModalTimer)
+    window.addEventListener('scroll', updateModalTimer)
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
+      window.removeEventListener('mousemove', updateModalTimer)
+      window.removeEventListener('scroll', updateModalTimer)
     }
   }, [demoModalBody])
 
