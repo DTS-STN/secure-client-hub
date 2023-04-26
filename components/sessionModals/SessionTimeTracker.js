@@ -7,7 +7,7 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   const initialExpires = () => {
     const currentDate = new Date()
     return {
-      warning: new Date(currentDate.getTime() + 0.25 * 60 * 1000),
+      warning: new Date(currentDate.getTime() + 0.5 * 60 * 1000),
       logout: new Date(currentDate.getTime() + 1 * 60 * 1000),
     }
   }
