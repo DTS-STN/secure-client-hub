@@ -12,8 +12,18 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
     }
   }
   const [expires, setExpires] = useState({ ...initialExpires(), active: true })
-
   const [demoModalBody, setDemoModalBody] = useState(null)
+
+  const eventListeners = (callback) => {
+    window.addEventListener('mousemove', callback)
+    window.addEventListener('keydown', callback)
+    window.addEventListener('mousewheel', callback)
+    window.addEventListener('mousedown', callback)
+    window.addEventListener('touchstart', callback)
+    window.addEventListener('touchmove', callback)
+    window.addEventListener('visibilitychange', callback)
+    window.addEventListener('scroll', callback)
+  }
 
   function demoContent(content) {
     setDemoModalBody(content)
@@ -28,7 +38,7 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   }
 
   useEffect(() => {
-    const updateModalTimer = (ev) => {
+    const updateModalTimer = () => {
       if (!demoModalBody) {
         setExpires((prev) => {
           return {
@@ -38,11 +48,9 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
         })
       }
     }
-    window.addEventListener('mousemove', updateModalTimer)
-    window.addEventListener('scroll', updateModalTimer)
+    eventListeners(updateModalTimer)
     return () => {
-      window.removeEventListener('mousemove', updateModalTimer)
-      window.removeEventListener('scroll', updateModalTimer)
+      eventListeners(updateModalTimer)
     }
   }, [demoModalBody])
 
