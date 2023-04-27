@@ -30,7 +30,7 @@ const Login = (props) => {
 }
 
 Login.getLayout = function PageLayout(page) {
-  return { page }
+  return <>{page}</>
 }
 
 export default Login
