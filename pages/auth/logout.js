@@ -22,7 +22,7 @@ export default function Logout(props) {
 }
 
 Logout.getLayout = function PageLayout(page) {
-  return <>{page}</>
+  return { page }
 }
 
 export async function getServerSideProps({ req, res, locale }) {

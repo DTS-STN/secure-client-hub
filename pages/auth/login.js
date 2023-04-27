@@ -30,7 +30,7 @@ const Login = (props) => {
 }
 
 Login.getLayout = function PageLayout(page) {
-  return <div className="grid h-screen place-items-center">{page}</div>
+  return { page }
 }
 
 export default Login
