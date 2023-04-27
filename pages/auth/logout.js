@@ -15,9 +15,9 @@ export default function Logout(props) {
   }, [router, props.logoutURL])
 
   return (
-    <>
+    <div className="grid h-screen place-items-center">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
-    </>
+    </div>
   )
 }
 
