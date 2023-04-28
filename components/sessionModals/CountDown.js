@@ -41,7 +41,7 @@ const CountDown = (props) => {
         <div className="flex-auto">
           <p className="mr-6">{props.bannerContent[0]}</p>
           <p className="font-bold mr-6">
-            {props.xminutes || props.xseconds
+            {props.minutes || props.seconds
               ? `${props.bannerContent[1]} ${props.xminutes} ${props.bannerMinutesAnd} ${props.xseconds} ${props.bannerSeconds}.`
               : ''}
           </p>

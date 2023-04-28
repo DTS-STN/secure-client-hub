@@ -5,19 +5,7 @@ import Router from 'next/router'
 import { IIdleTimerProps, useIdleTimer } from 'react-idle-timer'
 
 const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
-  const initialExpires = () => {
-    const currentDate = new Date()
-    return {
-      // warning: new Date(currentDate.getTime() + 5 * 60 * 1000),
-      // logout: new Date(currentDate.getTime() + 10 * 60 * 1000),
-      xseconds: 0,
-      xminutes: 0,
-    }
-  }
-  const [expires, setExpires] = useState({ ...initialExpires(), active: true })
   const [demoModalBody, setDemoModalBody] = useState(null)
-  const [timeRemaining, setTimeRemaining] = useState('')
-  const promptTime = 0.5 * 60 * 1000
 
   const handleOnIdle = () => {
     Router.push('/auth/logout')
@@ -25,23 +13,8 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
 
   const { isPrompted, reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    onPrompt: () => {
-      const currentDate = new Date()
-      setDemoModalBody(
-        <CountDown
-          closeModal={onStay}
-          onSignOut={() => Router.push('/auth/logout')}
-          onStay={onStay}
-          id="CountDown"
-          xseconds={expires.xseconds}
-          xminutes={expires.xminutes}
-          {...popupStaySignedIn}
-          refPageAA={aaPrefix}
-        />
-      )
-    },
-    promptBeforeIdle: 0.5 * 60 * 1000, //5 minutes
-    timeout: 1 * 60 * 1000, //15 minutes
+    promptBeforeIdle: 0.5 * 60 * 1000,
+    timeout: 1 * 60 * 1000,
   })
 
   const onStay = () => {
@@ -57,11 +30,11 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
       setDemoModalBody(
         <CountDown
           closeModal={onStay}
-          onSignOut={() => Router.push('/auth/logout')}
+          onSignOut={handleOnIdle}
           onStay={onStay}
           id="CountDown"
-          xseconds={seconds}
-          xminutes={minutes}
+          seconds={seconds}
+          minutes={minutes}
           {...popupStaySignedIn}
           refPageAA={aaPrefix}
         />
@@ -69,17 +42,11 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   }, [getRemainingTime])
 
   useEffect(() => {
-    setInterval(tick, 1000)
+    const timer = setInterval(tick, 1000)
+    return () => {
+      clearInterval(timer)
+    }
   }, [tick])
-
-  function demoContent(content) {
-    setDemoModalBody(content)
-  }
-
-  function closeDemoModal() {
-    reset()
-    setDemoModalBody(null)
-  }
 
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
