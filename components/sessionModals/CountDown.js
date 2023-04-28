@@ -42,7 +42,7 @@ const CountDown = (props) => {
           <p className="mr-6">{props.bannerContent[0]}</p>
           <p className="font-bold mr-6">
             {props.minutes || props.seconds
-              ? `${props.bannerContent[1]} ${props.xminutes} ${props.bannerMinutesAnd} ${props.xseconds} ${props.bannerSeconds}.`
+              ? `${props.bannerContent[1]} ${props.minutes} ${props.bannerMinutesAnd} ${props.seconds} ${props.bannerSeconds}.`
               : ''}
           </p>
         </div>

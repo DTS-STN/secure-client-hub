@@ -25,7 +25,6 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   const tick = useCallback(() => {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
-    console.log(getRemainingTime(), isPrompted())
     isPrompted() &&
       setDemoModalBody(
         <CountDown
