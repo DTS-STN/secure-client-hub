@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1682697725948" clover="3.2.0">
-  <project timestamp="1682697725949" name="All files">
-    <metrics statements="399" coveredstatements="174" conditionals="230" coveredconditionals="66" methods="178" coveredmethods="61" elements="807" coveredelements="301" complexity="0" loc="399" ncloc="399" packages="9" files="41" classes="41"/>
+<coverage generated="1682700479339" clover="3.2.0">
+  <project timestamp="1682700479340" name="All files">
+    <metrics statements="388" coveredstatements="170" conditionals="230" coveredconditionals="66" methods="173" coveredmethods="61" elements="791" coveredelements="297" complexity="0" loc="388" ncloc="388" packages="9" files="41" classes="41"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="74" coveredconditionals="23" methods="26" coveredmethods="12"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -130,44 +130,33 @@
       </file>
     </package>
     <package name="components.sessionModals">
-      <metrics statements="32" coveredstatements="17" conditionals="8" coveredconditionals="4" methods="13" coveredmethods="4"/>
+      <metrics statements="21" coveredstatements="13" conditionals="8" coveredconditionals="4" methods="8" coveredmethods="4"/>
       <file name="CountDown.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/sessionModals/CountDown.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
       </file>
       <file name="SessionTimeTracker.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/sessionModals/SessionTimeTracker.js">
-        <metrics statements="30" coveredstatements="15" conditionals="4" coveredconditionals="1" methods="12" coveredmethods="3"/>
+        <metrics statements="19" coveredstatements="11" conditionals="4" coveredconditionals="1" methods="7" coveredmethods="3"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
         <line num="47" count="2" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="88" count="2" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.skeletons">
