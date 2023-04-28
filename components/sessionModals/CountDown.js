@@ -5,36 +5,6 @@ import { Button } from '@dts-stn/service-canada-design-system'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 const CountDown = (props) => {
-  const [clock, setClock] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    ready: false,
-  })
-  const { days, hours, minutes, seconds, ready } = clock
-
-  const getTime = () => {
-    const time = Date.parse(props.deadline) - Date.now()
-
-    setClock((prev) => {
-      return {
-        ...prev,
-        days: time > 0 ? Math.floor(time / (1000 * 60 * 60 * 24)) : 0,
-        hours: time > 0 ? Math.floor((time / (1000 * 60 * 60)) % 24) : 0,
-        minutes: time > 0 ? Math.floor((time / 1000 / 60) % 60) : 0,
-        seconds: time > 0 ? Math.floor((time / 1000) % 60) : 0,
-        ready: true,
-      }
-    })
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => getTime(props.deadline), 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <div
       className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
@@ -71,8 +41,9 @@ const CountDown = (props) => {
         <div className="flex-auto">
           <p className="mr-6">{props.bannerContent[0]}</p>
           <p className="font-bold mr-6">
-            {ready &&
-              `${props.bannerContent[1]} ${clock.minutes} ${props.bannerMinutesAnd} ${clock.seconds} ${props.bannerSeconds}.`}
+            {props.xminutes || props.xseconds
+              ? `${props.bannerContent[1]} ${props.xminutes} ${props.bannerMinutesAnd} ${props.xseconds} ${props.bannerSeconds}.`
+              : ''}
           </p>
         </div>
       </div>
