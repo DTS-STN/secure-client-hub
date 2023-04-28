@@ -18,7 +18,7 @@ import React from 'react'
 import ExitBetaModal from '../components/ExitBetaModal'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import SessionTimeTracker from '../components/sessionModals/SessionTimeTracker'
+import SessionTimeout from '../components/sessionModals/SessionTimeout'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -118,7 +118,7 @@ export default function MyDashboard(props) {
           refPageAA={props.aaPrefix}
         />
       </Modal>
-      <SessionTimeTracker
+      <SessionTimeout
         popupStaySignedIn={props.popupStaySignedIn}
         aaPrefix={props.aaPrefix}
       />

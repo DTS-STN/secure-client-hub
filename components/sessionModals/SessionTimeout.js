@@ -4,7 +4,7 @@ import CountDown from './CountDown'
 import Router from 'next/router'
 import { useIdleTimer } from 'react-idle-timer'
 
-const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
+const SessionTimeout = ({ popupStaySignedIn, aaPrefix }) => {
   const [demoModalBody, setDemoModalBody] = useState(null)
 
   const handleOnIdle = () => {
@@ -63,4 +63,4 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   )
 }
 
-export default SessionTimeTracker
+export default SessionTimeout
