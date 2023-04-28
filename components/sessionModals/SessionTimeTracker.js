@@ -52,13 +52,6 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   const tick = useCallback(() => {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
-    // setExpires((prev) => {
-    //   return {
-    //     ...prev,
-    //     xseconds: seconds,
-    //     xminutes: minutes,
-    //   }
-    // })
     console.log(getRemainingTime(), isPrompted())
     isPrompted() &&
       setDemoModalBody(
@@ -79,17 +72,6 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
     setInterval(tick, 1000)
   }, [tick])
 
-  // const eventListeners = (callback) => {
-  //   window.addEventListener('mousemove', callback)
-  //   window.addEventListener('keydown', callback)
-  //   window.addEventListener('mousewheel', callback)
-  //   window.addEventListener('mousedown', callback)
-  //   window.addEventListener('touchstart', callback)
-  //   window.addEventListener('touchmove', callback)
-  //   window.addEventListener('visibilitychange', callback)
-  //   window.addEventListener('scroll', callback)
-  // }
-
   function demoContent(content) {
     setDemoModalBody(content)
   }
@@ -102,56 +84,6 @@ const SessionTimeTracker = ({ popupStaySignedIn, aaPrefix }) => {
   function closeModal() {
     setOpenModalWithLink({ isOpen: false, activeLink: '/' })
   }
-
-  // // What does this do?
-  // useEffect(() => {
-  //   const updateModalTimer = () => {
-  //     if (!demoModalBody) {
-  //       setExpires((prev) => {
-  //         return {
-  //           ...prev,
-  //           ...initialExpires(),
-  //         }
-  //       })
-  //     }
-  //   }
-  //   eventListeners(updateModalTimer)
-  //   return () => {
-  //     eventListeners(updateModalTimer)
-  //   }
-  // }, [demoModalBody])
-
-  // // This rewrites the numbers
-  // useEffect(() => {
-  //   const id = setInterval(function () {
-  //     if (new Date() >= expires.logout && expires.active) {
-  //       Router.push('/auth/logout')
-  //     }
-  //     // if (
-  //     //   new Date() >= expires.warning &&
-  //     //   expires.active &&
-  //     //   expires.warning != expires.logout
-  //     // ) {
-  //     //   demoContent(
-  //     //     <CountDown
-  //     //       closeModal={closeDemoModal}
-  //     //       onSignOut={() => Router.push('/auth/logout')}
-  //     //       onStay={() => {
-  //     //         setExpires((t) => {
-  //     //           return { ...t, warning: t.logout }
-  //     //         })
-  //     //         setDemoModalBody(null)
-  //     //       }}
-  //     //       id="CountDown"
-  //     //       deadline={expires.logout}
-  //     //       {...popupStaySignedIn}
-  //     //       refPageAA={aaPrefix}
-  //     //     />
-  //     //   )
-  //     // } else return
-  //   }, 1000)
-  //   return () => clearInterval(id)
-  // }, [expires])
 
   return (
     <Modal
