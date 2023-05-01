@@ -10,8 +10,6 @@ const SessionTimeout = ({
   openModal,
   closeModal,
 }) => {
-  const [demoModalBody, setDemoModalBody] = useState(null)
-
   const handleOnIdle = () => {
     Router.push('/auth/logout')
   }
@@ -24,7 +22,6 @@ const SessionTimeout = ({
 
   const onStay = () => {
     reset()
-    setDemoModalBody(null)
     closeModal()
   }
 
