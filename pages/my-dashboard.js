@@ -27,15 +27,30 @@ export default function MyDashboard(props) {
   const [openModalWithLink, setOpenModalWithLink] = React.useState({
     isOpen: false,
     activeLink: '/',
+    context: null,
   })
 
-  function openModal(link) {
-    setOpenModalWithLink({ isOpen: true, activeLink: link })
+  function openModal(link, context) {
+    setOpenModalWithLink({ isOpen: true, activeLink: link, context })
   }
 
   function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
+    setOpenModalWithLink({ isOpen: false, activeLink: '/', context: null })
   }
+
+  const betaModal = (
+    <ExitBetaModal
+      closeModal={closeModal}
+      closeModalAria={t.close_modal}
+      continueLink={openModalWithLink.activeLink}
+      popupId={props.popupContentNA.popupId}
+      popupTitle={props.popupContentNA.popupTitle}
+      popupDescription={props.popupContentNA.popupDescription}
+      popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
+      popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
+      refPageAA={props.aaPrefix}
+    />
+  )
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -73,7 +88,7 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={openModal}
+                openModal={(link) => openModal('/', betaModal)}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -89,7 +104,7 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={openModal}
+                      openModal={(link) => openModal('/', betaModal)}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
@@ -99,29 +114,21 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={openModalWithLink.isOpen}
-        onRequestClose={closeModal}
-        contentLabel={t.aria_exit_beta_modal}
-      >
-        <ExitBetaModal
-          closeModal={closeModal}
-          closeModalAria={t.close_modal}
-          continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContentNA.popupId}
-          popupTitle={props.popupContentNA.popupTitle}
-          popupDescription={props.popupContentNA.popupDescription}
-          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.aaPrefix}
-        />
-      </Modal>
       <SessionTimeout
         popupStaySignedIn={props.popupStaySignedIn}
         aaPrefix={props.aaPrefix}
+        openModal={(context) => openModal('/', context)}
+        closeModal={closeModal}
       />
+      <Modal
+        className="flex justify-center bg-black/75 h-full"
+        // isOpen={openModalWithLink.isOpen}
+        isOpen={openModalWithLink.context != null}
+        onRequestClose={closeModal}
+        contentLabel={t.aria_exit_beta_modal}
+      >
+        {openModalWithLink.context}
+      </Modal>
     </div>
   )
 }

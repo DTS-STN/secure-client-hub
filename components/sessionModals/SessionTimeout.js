@@ -4,7 +4,12 @@ import CountDown from './CountDown'
 import Router from 'next/router'
 import { useIdleTimer } from 'react-idle-timer'
 
-const SessionTimeout = ({ popupStaySignedIn, aaPrefix }) => {
+const SessionTimeout = ({
+  popupStaySignedIn,
+  aaPrefix,
+  openModal,
+  closeModal,
+}) => {
   const [demoModalBody, setDemoModalBody] = useState(null)
 
   const handleOnIdle = () => {
@@ -20,13 +25,14 @@ const SessionTimeout = ({ popupStaySignedIn, aaPrefix }) => {
   const onStay = () => {
     reset()
     setDemoModalBody(null)
+    closeModal()
   }
 
   const tick = useCallback(() => {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
-    isPrompted() &&
-      setDemoModalBody(
+    if (isPrompted()) {
+      openModal(
         <CountDown
           closeModal={onStay}
           onSignOut={handleOnIdle}
@@ -38,6 +44,7 @@ const SessionTimeout = ({ popupStaySignedIn, aaPrefix }) => {
           refPageAA={aaPrefix}
         />
       )
+    }
   }, [getRemainingTime])
 
   useEffect(() => {
@@ -47,20 +54,7 @@ const SessionTimeout = ({ popupStaySignedIn, aaPrefix }) => {
     }
   }, [tick])
 
-  function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  }
-
-  return (
-    <Modal
-      className="flex justify-center bg-black/75 h-full"
-      isOpen={demoModalBody === null ? false : true}
-      onRequestClose={closeModal}
-      contentLabel={'Demo Modal'}
-    >
-      {demoModalBody}
-    </Modal>
-  )
+  return null
 }
 
 export default SessionTimeout
