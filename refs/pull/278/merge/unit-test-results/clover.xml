@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683124680398" clover="3.2.0">
-  <project timestamp="1683124680398" name="All files">
+<coverage generated="1683143728579" clover="3.2.0">
+  <project timestamp="1683143728579" name="All files">
     <metrics statements="390" coveredstatements="170" conditionals="228" coveredconditionals="65" methods="175" coveredmethods="61" elements="793" coveredelements="296" complexity="0" loc="390" ncloc="390" packages="9" files="41" classes="41"/>
     <package name="components">
       <metrics statements="56" coveredstatements="35" conditionals="74" coveredconditionals="23" methods="26" coveredmethods="12"/>
@@ -281,26 +281,26 @@
         <line num="101" count="0" type="stmt"/>
         <line num="107" count="0" type="stmt"/>
         <line num="120" count="0" type="stmt"/>
-        <line num="137" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="139" count="1" type="stmt"/>
+        <line num="136" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
         <line num="140" count="0" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="144" count="1" type="stmt"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="149" count="1" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="159" count="1" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="167" count="1" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="170" count="0" type="stmt"/>
-        <line num="178" count="1" type="stmt"/>
-        <line num="199" count="1" type="stmt"/>
-        <line num="221" count="1" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="148" count="1" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="151" count="0" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="177" count="1" type="stmt"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="220" count="1" type="stmt"/>
       </file>
       <file name="privacy-notice-terms-conditions.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/privacy-notice-terms-conditions.js">
         <metrics statements="17" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="7" coveredmethods="0"/>
