@@ -88,7 +88,7 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={(link) => openModal('/', betaModal)}
+                openModal={() => openModal('/', betaModal)}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -122,7 +122,6 @@ export default function MyDashboard(props) {
       />
       <Modal
         className="flex justify-center bg-black/75 h-full"
-        // isOpen={openModalWithLink.isOpen}
         isOpen={openModalWithLink.context != null}
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
