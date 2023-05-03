@@ -4,15 +4,22 @@ import { NextRequest, NextResponse } from 'next/server'
 const PUBLIC_FILE = /\.(.*)$/
 
 export async function middleware(req) {
+  const { nextUrl, url } = req
+  const { locale, pathname } = nextUrl
   if (
-    req.nextUrl.pathname.startsWith('/_next') ||
-    req.nextUrl.pathname.includes('/api/') ||
-    PUBLIC_FILE.test(req.nextUrl.pathname)
+    pathname.startsWith('/_next') ||
+    pathname.includes('/api/') ||
+    PUBLIC_FILE.test(pathname)
   ) {
     return
   }
 
-  if (req.nextUrl.pathname !== '/' && req.nextUrl.locale === 'und') {
-    return NextResponse.redirect(new URL(`/en${req.nextUrl.pathname}`, req.url))
+  if (pathname !== '/' && locale === 'und') {
+    return NextResponse.redirect(new URL(`/en${pathname}`, url))
+  }
+
+  //Redirect for index page as it's meant to be bilingual so we don't want users navigating to /en or /fr
+  if ((locale === 'en' || locale === 'fr') && pathname === '/') {
+    return NextResponse.redirect(new URL(`/`, url))
   }
 }
