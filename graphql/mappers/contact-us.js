@@ -30,6 +30,9 @@ export async function getContactUsContent() {
           linkTitle: eiContactFragment.scLinkTextEn,
           linkAssistiveTitle: eiContactFragment.scLinkTextAssistiveEn,
           linkDestination: eiContactFragment.scDestinationURLEn,
+          linkDescription: eiContactFragment.scDescriptionEn.json
+            ? eiContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
@@ -37,6 +40,9 @@ export async function getContactUsContent() {
           linkTitle: cppContactFragment.scLinkTextEn,
           linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveEn,
           linkDestination: cppContactFragment.scDestinationURLEn,
+          linkDescription: cppContactFragment.scDescriptionEn.json
+            ? cppContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: cppContactFragment.schBetaPopUp,
         },
         {
@@ -44,8 +50,9 @@ export async function getContactUsContent() {
           linkTitle: oasContactFragment.scLinkTextEn,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveEn,
           linkDestination: oasContactFragment.scDestinationURLEn,
-          linkDescription:
-            oasContactFragment.scDescriptionEn.json[0].content[0].value,
+          linkDescription: oasContactFragment.scDescriptionEn
+            ? oasContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: oasContactFragment.schBetaPopUp,
         },
       ],
@@ -67,6 +74,9 @@ export async function getContactUsContent() {
           linkTitle: eiContactFragment.scLinkTextFr,
           linkAssistiveTitle: eiContactFragment.scLinkTextAssistiveFr,
           linkDestination: eiContactFragment.scDestinationURLFr,
+          linkDescription: eiContactFragment.scDescriptionFr.json
+            ? eiContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
@@ -74,6 +84,9 @@ export async function getContactUsContent() {
           linkTitle: cppContactFragment.scLinkTextFr,
           linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveFr,
           linkDestination: cppContactFragment.scDestinationURLFr,
+          linkDescription: cppContactFragment.scDescriptionFr.json
+            ? cppContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: cppContactFragment.schBetaPopUp,
         },
         {
@@ -81,8 +94,9 @@ export async function getContactUsContent() {
           linkTitle: oasContactFragment.scLinkTextFr,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveFr,
           linkDestination: oasContactFragment.scDestinationURLFr,
-          linkDescription:
-            oasContactFragment.scDescriptionFr.json[0].content[0].value,
+          linkDescription: oasContactFragment.scDescriptionFr
+            ? oasContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: oasContactFragment.schBetaPopUp,
         },
       ],
