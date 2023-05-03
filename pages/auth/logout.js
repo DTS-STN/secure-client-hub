@@ -5,7 +5,7 @@ import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
 export default function Logout(props) {
   //Redirect to ECAS global sign out
   useEffect(() => {
-    window.location.replace(`${window.location.origin}${props.logoutURL}`)
+    window.location.replace(props.logoutURL)
   }, [props.logoutURL])
 
   return (
