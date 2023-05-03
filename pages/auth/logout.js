@@ -26,18 +26,18 @@ Logout.getLayout = function PageLayout(page) {
 }
 
 export async function getServerSideProps({ req, res, locale }) {
-  const logoutURL =
-    !AuthIsDisabled() &&
-    (await getLogoutURL(req).catch((error) => {
-      logger.error(error)
-      res.statusCode = 500
-      throw error
-    }))
+  const logoutURL = !AuthIsDisabled()
+    ? await getLogoutURL(req).catch((error) => {
+        logger.error(error)
+        res.statusCode = 500
+        throw error
+      })
+    : '/'
 
   return {
     props: {
       locale,
-      logoutURL: logoutURL || '/',
+      logoutURL: logoutURL,
     },
   }
 }
