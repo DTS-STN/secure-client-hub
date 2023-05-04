@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
+import MultiModal from './MultiModal'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -122,6 +123,8 @@ export default function Layout(props) {
           <LayoutContainer>{props.children}</LayoutContainer>
         )}
       </main>
+
+      <MultiModal {...props} t={t} />
       <div id="modal-root"></div>
 
       <Footer

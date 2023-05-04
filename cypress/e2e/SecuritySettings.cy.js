@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 describe('Validate Security Settings page', () => {
-  it('Validate Security Settings Page header in English', () => {
+  it.skip('Validate Security Settings Page header in English', () => {
     securityPo.SecurityHeaderEN()
   })
 

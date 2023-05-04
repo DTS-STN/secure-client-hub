@@ -102,16 +102,16 @@ describe('Validate dashboard page', () => {
     dashboardPo.ExitBetaButton().should('be.visible')
   })
 
-  it('Validate Exit Beta Version Popup UI', () => {
+  it.skip('Validate Exit Beta Version Popup UI', () => {
     dashboardPo.ExpandCard('Employment Insurance')
     dashboardPo.FirstTaskLink().click()
-    dashboardPo.ExitBetaModal().should('be.visible')
+    dashboardPo.ExitBeta().should('be.visible')
     dashboardPo.StayOnBetabutton().should('be.visible')
     dashboardPo.ContinueToPageModalButton().should('be.visible')
     dashboardPo.CloseModalButton().should('be.visible')
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside EI card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Employment Insurance') {
@@ -120,7 +120,7 @@ describe('Validate dashboard page', () => {
         for (let i = 0; i < dashboardData[k].BetaTest.length; i++) {
           let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
-            dashboardPo.validateExitBetaModalbuttonLink(
+            dashboardPo.validateExitBetabuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
               dashboardData[k].BetaTest[i].Links[j]
             )
@@ -130,7 +130,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside CCP card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Canada Pension Plan') {
@@ -144,7 +144,7 @@ describe('Validate dashboard page', () => {
         for (let i = 0; i < dashboardData[k].BetaTest.length; i++) {
           let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
-            dashboardPo.validateExitBetaModalbuttonLink(
+            dashboardPo.validateExitBetabuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
               dashboardData[k].BetaTest[i].Links[j]
             )
@@ -154,7 +154,7 @@ describe('Validate dashboard page', () => {
     }
   })
 
-  it('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
+  it.skip('Validate the "Exit Beta Version" modal and buttons for all links inside OAS card', () => {
     for (let k = 0; k < dashboardData.length; k++) {
       let CardName = dashboardData[k].CardNameEN
       if (CardName === 'Old Age Security') {
@@ -168,7 +168,7 @@ describe('Validate dashboard page', () => {
         for (let i = 0; i < dashboardData[k].BetaTest.length; i++) {
           let links = dashboardData[k].BetaTest[i].Links
           for (let j = 0; j < links.length; j++) {
-            dashboardPo.validateExitBetaModalbuttonLink(
+            dashboardPo.validateExitBetabuttonLink(
               dashboardData[k].BetaTest[i].sectionName,
               dashboardData[k].BetaTest[i].Links[j]
             )

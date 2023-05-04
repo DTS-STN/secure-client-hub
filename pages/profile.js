@@ -7,11 +7,12 @@ import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
 import ProfileTasks from './../components/ProfileTasks'
 import Modal from 'react-modal'
 import React from 'react'
-import ExitBetaModal from '../components/ExitBetaModal'
+import ExitBeta from '../components/ExitBeta'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
@@ -84,7 +85,7 @@ export default function Profile(props) {
         onRequestClose={closeModal}
         contentLabel={t.aria_exit_beta_modal}
       >
-        <ExitBetaModal
+        <ExitBeta
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
@@ -128,6 +129,12 @@ export async function getServerSideProps({ res, locale }) {
       throw error
     }
   )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profil' : '/profile'
@@ -175,7 +182,15 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

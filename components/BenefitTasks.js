@@ -44,7 +44,7 @@ export default function BenefitTasks(props) {
                       !newTabTaskExceptions.includes(task.link)
                     ) {
                       e.preventDefault()
-                      props.openModal(task.link, 'ExitBetaModal')
+                      props.openModal(task.link, 'ExitBeta')
                     }
                   }}
                   data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
