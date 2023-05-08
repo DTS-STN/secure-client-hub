@@ -1,27 +1,17 @@
 import PropTypes from 'prop-types'
-import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
-import { Fragment } from 'react'
+import { Heading, Link } from '@dts-stn/service-canada-design-system'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
-import ContactSection from '../../components/contact/ContactSection'
-import ContactProvince from '../../components/contact/ContactProvince'
+import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
-import { getContactEmploymentInsuranceContent } from '../../graphql/mappers/contact-employment-insurance'
 import logger from '../../lib/logger'
-import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
+import NextLink from 'next/link'
 
-export default function ContactEmploymentInsurance(props) {
-  /* istanbul ignore next */
+export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
-
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -39,41 +29,37 @@ export default function ContactEmploymentInsurance(props) {
   }, [throttledOnClickEvent])
 
   return (
-    <div
-      id="homeContent"
-      data-testid="contactEI-test"
-      data-cy="eIContactUsContent"
-    >
-      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
-      <div
-        className="py-5"
-        data-testid={`${
-          props.pageContent.items.length > 0 && 'tableOfContents-test'
-        }`}
-      />
-
-      <TableContent
-        id="eiContent"
-        sectionList={props.pageContent.items.map((item, i) => {
-          return { name: item.title, link: `#${item.id}` }
+    <div id="contactContent" data-testid="contactContent-test">
+      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <ul className="list-disc" data-cy="contact-task-list">
+        {props.content.links.map((link) => {
+          return (
+            <li className="mb-6 ml-5" key={link.linkId}>
+              <Link
+                id={link.linkId}
+                dataTestId={link.linkId}
+                text={link.linkTitle}
+                href={`/${props.content.pageName}/${link.linkDestination
+                  .split('/')
+                  .pop()}`}
+                component={NextLink}
+              />
+              <p className="text-xl font-body">{link.linkDescription}</p>
+            </li>
+          )
         })}
-        lang={props.locale}
-      />
-
-      {props.pageContent.items.map((item, i) => (
-        <Fragment key={i}>
-          {item.layout === 'provinces' ? (
-            <ContactProvince {...item} i={i} />
-          ) : (
-            <ContactSection programUniqueId={i} {...item} />
-          )}
-        </Fragment>
-      ))}
+      </ul>
     </div>
   )
 }
 
 export async function getServerSideProps({ res, locale }) {
+  const content = await getContactUsContent().catch((error) => {
+    logger.error(error)
+    //res.statusCode = 500
+    throw error
+  })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -98,44 +84,23 @@ export async function getServerSideProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en'
-      ? '/fr/contactez-nous/communiquer-assurance-emploi'
-      : '/contact-us/contact-employment-insurance'
+    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
   const t = locale === 'en' ? en : fr
 
-  const pageContent = await getContactEmploymentInsuranceContent().catch(
-    (error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    }
-  )
-
   const breadCrumbItems =
     locale === 'en'
-      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
+      ? content.en.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+      : content.fr.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-
-  // const breadCrumbItems = [
-  //   {
-  //     link: 't.url_dashboard',
-  //     text: 't.pageHeading.title',
-  //   },
-  //   {
-  //     link: 't.pageHeading.title',
-  //     text: 't.pageHeading.title',
-  //   },
-  // ]
 
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact Employment Insurance - My Service Canada Account',
+      title: 'Contact - My Service Canada Account - Contact',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -144,7 +109,7 @@ export async function getServerSideProps({ res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
+      title: 'Contactez-nous - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -158,24 +123,46 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
+      content: locale === 'en' ? content.en : content.fr,
       meta,
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en.title}`,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
     },
   }
 }
 
-ContactEmploymentInsurance.propTypes = {
+ContactLanding.propTypes = {
   /**
    * current locale in the address
    */
   locale: PropTypes.string,
 
   /*
+   * Language link toggle text
+   */
+  langToggleLink: PropTypes.string,
+
+  /*
+   * Content Tags
+   */
+
+  content: PropTypes.object,
+
+  /*
    * Meta Tags
    */
+
   meta: PropTypes.object,
+
+  /*
+   * BreadCrumb Items
+   */
+  breadCrumbItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+    })
+  ),
 }

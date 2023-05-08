@@ -2,7 +2,7 @@
 import ContactUsCPPdata from '../../fixtures/ContactUsCPPdata.json'
 
 function CPPContactUsHeader() {
-  return cy.get('[data-cy ="eIContactUsContent"]>h1')
+  return cy.get('[data-cy ="ContactUsContent"]>h1')
 }
 
 function ValidateCPPContactUsUrl() {
@@ -30,7 +30,7 @@ function ValidateCPPContactUsHeaderFR() {
 
 function ValidateOnthisPageLinks() {
   return cy
-    .get('[data-cy ="eIContactUsContent"]>section')
+    .get('[data-cy ="ContactUsContent"]>section')
     .find('a')
     .should('be.visible')
     .and('have.length', '4')
@@ -63,7 +63,7 @@ function ValidateCallbackSectionContent() {
 
 function ValidateEachtableOfContentLink() {
   for (let i = 0; i < ContactUsCPPdata.length; i++) {
-    cy.get('[data-cy ="eIContactUsContent"]>section')
+    cy.get('[data-cy ="ContactUsContent"]>section')
       .find('a')
       .each(($el1, index, $list) => {
         const linkText = $el1.find('span').text()
@@ -83,7 +83,7 @@ function ValidateEachSectionCPPContactUs() {
 }
 
 function EachContactSection() {
-  return cy.get('[data-cy="eIContactUsContent"]>div')
+  return cy.get('[data-cy="ContactUsContent"]>div')
 }
 
 function ProvinceCard() {

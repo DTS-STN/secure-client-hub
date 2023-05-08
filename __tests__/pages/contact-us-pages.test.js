@@ -2,9 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
-import ContactCanadaPensionPlan, {
-  getServerSideProps,
-} from '../../pages/contact-us/contact-canada-pension-plan'
+import ContactUsPage, { getServerSideProps } from '../../pages/contact-us/[id]'
 
 expect.extend(toHaveNoViolations)
 
@@ -43,12 +41,20 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
-jest.mock('../../graphql/mappers/contact-canada-pension-plan', () => ({
-  getContactCanadaPensionPlan: () => {
+jest.mock('../../graphql/mappers/contact-us-pages-dynamic', () => ({
+  getContactUsPage: () => {
     return new Promise(function (resolve, reject) {
       resolve({
-        en: {},
-        fr: {},
+        en: {
+          title: 'Contact Us Page',
+          description: 'This is a contact page',
+          pageName: 'test-contact-page',
+        },
+        fr: {
+          title: 'Contactez-nous',
+          description: "C'est une page de contact",
+          pageName: 'tester-la-page-contact',
+        },
       })
     })
   },
@@ -58,7 +64,7 @@ jest.mock('../../components/contact/ContactProvince', () => () => {
   return <mock-province data-testid="mock-province" />
 })
 
-describe('CPP Contact Us Page', () => {
+describe('Dynamic Contact Us Page', () => {
   const content = {
     title: 'test',
     items: [
@@ -71,14 +77,14 @@ describe('CPP Contact Us Page', () => {
 
   const meta = {
     data_en: {
-      title: 'My Service Canada Account - Contact Canada Pension Plan',
-      desc: 'English',
+      title: 'Contact Us Page - My Service Canada Account',
+      desc: 'This is a contact page',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Mon dossier Service Canada - Régime de Pensions du Canada',
-      desc: 'Français',
+      title: 'Contactez-nous - Mon dossier Service Canada',
+      desc: "C'est une page de contact",
       author: 'Service Canada',
       keywords: '',
     },
@@ -93,20 +99,20 @@ describe('CPP Contact Us Page', () => {
 
   it('should render the page', () => {
     render(
-      <ContactCanadaPensionPlan
+      <ContactUsPage
         locale="en"
         pageContent={content}
         popupContent={popupContent}
         meta={meta}
       />
     )
-    const contactCPPDiv = screen.getByTestId('contactCPP-test')
-    expect(contactCPPDiv).toBeInTheDocument
+    const contactUsDiv = screen.getByTestId('contactUsPage-test')
+    expect(contactUsDiv).toBeInTheDocument
   })
 
   it('should contain a table of contents', () => {
     render(
-      <ContactCanadaPensionPlan
+      <ContactUsPage
         locale="en"
         pageContent={content}
         popupContent={popupContent}
@@ -119,7 +125,7 @@ describe('CPP Contact Us Page', () => {
 
   it('should contain a contact section listing', () => {
     render(
-      <ContactCanadaPensionPlan
+      <ContactUsPage
         locale="en"
         pageContent={content}
         popupContent={popupContent}
@@ -131,32 +137,39 @@ describe('CPP Contact Us Page', () => {
   })
 
   it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
+    const props = await getServerSideProps({
+      locale: 'en',
+      params: { id: 'test-contact-page' },
+    })
 
     expect(props).toEqual({
       props: {
-        pageContent: {},
+        pageContent: {
+          description: 'This is a contact page',
+          title: 'Contact Us Page',
+          pageName: 'test-contact-page',
+        },
         bannerContent: {},
-        langToggleLink: '/fr/contactez-nous/communiquer-regime-pensions-canada',
+        langToggleLink: '/fr/contactez-nous/tester-la-page-contact',
         locale: 'en',
-        aaPrefix: 'ESDC-EDSC:undefined',
+        aaPrefix: 'ESDC-EDSC:Contact Us Page',
         meta: {
           data_en: {
-            title: 'Contact Canada Pension Plan - My Service Canada Account',
-            desc: 'English',
+            title: 'Contact Us Page - My Service Canada Account',
+            desc: 'This is a contact page',
             author: 'Service Canada',
             keywords: '',
             service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Employment and Social Development Canada',
+            creator: 'Service Canada',
             accessRights: '1',
           },
           data_fr: {
-            title: 'Régime de Pensions du Canada - Mon dossier Service Canada',
-            desc: 'Français',
+            title: 'Contactez-nous - Mon dossier Service Canada',
+            desc: "C'est une page de contact",
             author: 'Service Canada',
             keywords: '',
             service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Emploi et Développement social Canada',
+            creator: 'Service Canada',
             accessRights: '1',
           },
         },
