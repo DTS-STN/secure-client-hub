@@ -8,13 +8,13 @@ import ContactProvince from '../../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
-import { getContactEmploymentInsuranceContent } from '../../graphql/mappers/contact-employment-insurance'
+import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import logger from '../../lib/logger'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
-export default function ContactEmploymentInsurance(props) {
+export default function ContactUsPage(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -41,7 +41,7 @@ export default function ContactEmploymentInsurance(props) {
   return (
     <div
       id="homeContent"
-      data-testid="contactEI-test"
+      data-testid="contactCPP-test"
       data-cy="eIContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
@@ -51,9 +51,8 @@ export default function ContactEmploymentInsurance(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
-
       <TableContent
-        id="eiContent"
+        id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -69,11 +68,15 @@ export default function ContactEmploymentInsurance(props) {
           )}
         </Fragment>
       ))}
+
+      {/*  */}
+
+      {/*  */}
     </div>
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ res, locale, params }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -97,20 +100,18 @@ export async function getServerSideProps({ res, locale }) {
   */
 
   /* istanbul ignore next */
-  const langToggleLink =
-    locale === 'en'
-      ? '/fr/contactez-nous/communiquer-assurance-emploi'
-      : '/contact-us/contact-employment-insurance'
-
   const t = locale === 'en' ? en : fr
 
-  const pageContent = await getContactEmploymentInsuranceContent().catch(
-    (error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    }
-  )
+  const pageContent = await getContactUsPage(params.id).catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  const langToggleLink =
+    locale === 'en'
+      ? `/fr/contactez-nous/${pageContent.fr.pageName}`
+      : `/contact-us/${pageContent.en.pageName}`
 
   const breadCrumbItems =
     locale === 'en'
@@ -121,35 +122,24 @@ export async function getServerSideProps({ res, locale }) {
           return { text, link: '/' + locale + '/' + link }
         })
 
-  // const breadCrumbItems = [
-  //   {
-  //     link: 't.url_dashboard',
-  //     text: 't.pageHeading.title',
-  //   },
-  //   {
-  //     link: 't.pageHeading.title',
-  //     text: 't.pageHeading.title',
-  //   },
-  // ]
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact Employment Insurance - My Service Canada Account',
-      desc: 'English',
+      title: `${pageContent.en.title} - My Service Canada Account`,
+      desc: pageContent.en.description,
       author: 'Service Canada',
       keywords: '',
       service: 'ESDC-EDSC_MSCA-MSDC',
-      creator: 'Employment and Social Development Canada',
+      creator: 'Service Canada',
       accessRights: '1',
     },
     data_fr: {
-      title: 'Contactez Assurance Emploi - Mon dossier Service Canada',
-      desc: 'Français',
+      title: `${pageContent.fr.title} - Mon dossier Service Canada`,
+      desc: pageContent.fr.description,
       author: 'Service Canada',
       keywords: '',
       service: 'ESDC-EDSC_MSCA-MSDC',
-      creator: 'Emploi et Développement social Canada',
+      creator: 'Service Canada',
       accessRights: '1',
     },
   }
@@ -168,7 +158,7 @@ export async function getServerSideProps({ res, locale }) {
   }
 }
 
-ContactEmploymentInsurance.propTypes = {
+ContactUsPage.propTypes = {
   /**
    * current locale in the address
    */

@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactEmploymentInsurance, {
   getServerSideProps,
-} from '../../pages/contact-us/contact-employment-insurance'
+} from '../../pages/contact-us/[id]'
 
 expect.extend(toHaveNoViolations)
 
@@ -43,7 +43,7 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
-jest.mock('../../graphql/mappers/contact-employment-insurance', () => ({
+jest.mock('../../graphql/mappers/contact-us-pages-dynamic', () => ({
   getContactEmploymentInsuranceContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({

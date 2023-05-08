@@ -4,7 +4,7 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 import ContactOldAgeSecurity, {
   getServerSideProps,
-} from '../../pages/contact-us/contact-old-age-security'
+} from '../../pages/contact-us/[id]'
 
 expect.extend(toHaveNoViolations)
 
@@ -43,7 +43,7 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
-jest.mock('../../graphql/mappers/contact-old-age-security', () => ({
+jest.mock('../../graphql/mappers/contact-us-pages-dynamic', () => ({
   getContactOldAgeSecurityContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({

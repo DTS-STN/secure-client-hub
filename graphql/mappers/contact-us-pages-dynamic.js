@@ -1,12 +1,17 @@
 import clientQuery from '../client'
 
-export async function getContactCanadaPensionPlan() {
-  const query = require('../queries/contact-canada-pension-plan.graphql')
+export async function getContactUsPage(id) {
+  //   const query = require('../queries/contact-canada-pension-plan.graphql')
+  //   const response = await clientQuery(query)
+
+  const query = require('../queries/contact-us-pages-dynamic.graphql')
   const response = await clientQuery(query)
 
-  const queryData = response.data.schPagev1ByPath.item
+  const queryData = response.data.schPagev1List.items.find(
+    (page) => page.scId === id
+  )
 
-  const mappedContactCPP = {
+  const mappedContactPage = {
     en: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
         return {
@@ -15,6 +20,7 @@ export async function getContactCanadaPensionPlan() {
         }
       }),
       title: queryData.scTitleEn,
+      description: queryData.scDescriptionEn.plaintext,
       ...queryData.scFragments.map((w) => {
         return {
           id: w.scId,
@@ -91,6 +97,7 @@ export async function getContactCanadaPensionPlan() {
         }
       }),
       title: queryData.scTitleFr,
+      description: queryData.scDescriptionFr.plaintext,
       ...queryData.scFragments.map((w) => {
         return {
           id: w.scId,
@@ -164,5 +171,5 @@ export async function getContactCanadaPensionPlan() {
     },
   }
 
-  return mappedContactCPP
+  return mappedContactPage
 }
