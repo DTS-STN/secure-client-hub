@@ -8,6 +8,11 @@ export async function getContactUsPage(id) {
     (page) => page.scId === id
   )
 
+  //Fail fast if a non-existent page is queried
+  if (queryData === undefined) {
+    return
+  }
+
   const mappedContactPage = {
     en: {
       breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {

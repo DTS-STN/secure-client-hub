@@ -108,6 +108,16 @@ export async function getServerSideProps({ res, locale, params }) {
     throw error
   })
 
+  //Redirect to 404 page if user navigates to non-existent page
+  if (!pageContent) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    }
+  }
+
   const langToggleLink =
     locale === 'en'
       ? `/fr/contactez-nous/${pageContent.fr.pageName}`
