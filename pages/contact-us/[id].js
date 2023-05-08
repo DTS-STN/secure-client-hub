@@ -41,8 +41,8 @@ export default function ContactUsPage(props) {
   return (
     <div
       id="homeContent"
-      data-testid="contactCPP-test"
-      data-cy="eIContactUsContent"
+      data-testid="contactUsPage-test"
+      data-cy="ContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
       <div
