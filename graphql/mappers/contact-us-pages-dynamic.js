@@ -1,9 +1,6 @@
 import clientQuery from '../client'
 
 export async function getContactUsPage(id) {
-  //   const query = require('../queries/contact-canada-pension-plan.graphql')
-  //   const response = await clientQuery(query)
-
   const query = require('../queries/contact-us-pages-dynamic.graphql')
   const response = await clientQuery(query)
 
