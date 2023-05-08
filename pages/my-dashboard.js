@@ -36,6 +36,8 @@ export default function MyDashboard(props) {
     }
   }, [throttledOnClickEvent])
 
+  console.log(props, '======')
+
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />

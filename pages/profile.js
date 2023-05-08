@@ -79,7 +79,7 @@ export default function Profile(props) {
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
       ></PageLink>
-      <Modal
+      {/* <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.isOpen}
         onRequestClose={closeModal}
@@ -96,7 +96,7 @@ export default function Profile(props) {
           popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
           refPageAA={props.aaPrefix}
         />
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
