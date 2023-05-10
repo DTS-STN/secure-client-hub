@@ -26,7 +26,7 @@ export default function Layout(props) {
     contentLabel: null,
   })
 
-  function openModal(link, context) {
+  const openModal = (link, context) => {
     setOpenModalWithLink((prev) => {
       return {
         isOpen: true,
@@ -37,7 +37,7 @@ export default function Layout(props) {
     })
   }
 
-  function closeModal() {
+  const closeModal = () => {
     setOpenModalWithLink((prev) => {
       return {
         isOpen: false,
