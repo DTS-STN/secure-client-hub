@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
 import { Button } from '@dts-stn/service-canada-design-system'

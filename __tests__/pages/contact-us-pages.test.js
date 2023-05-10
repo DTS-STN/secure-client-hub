@@ -60,6 +60,17 @@ jest.mock('../../graphql/mappers/contact-us-pages-dynamic', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/auth-modals', () => ({
+  getAuthModalsContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        mappedPopupStaySignedIn: { en: {}, fr: {} },
+        mappedPopupSignedOut: { en: {}, fr: {} },
+      })
+    })
+  },
+}))
+
 jest.mock('../../components/contact/ContactProvince', () => () => {
   return <mock-province data-testid="mock-province" />
 })
@@ -175,6 +186,10 @@ describe('Dynamic Contact Us Page', () => {
         },
         breadCrumbItems: undefined,
         popupContent: {},
+        popupContentNA: {},
+        popupYouHaveBeenSignedout: {},
+        popupStaySignedIn: {},
+        aaPrefix: 'ESDC-EDSC:Contact Us Page',
       },
     })
   })

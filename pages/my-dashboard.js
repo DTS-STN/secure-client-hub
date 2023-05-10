@@ -13,29 +13,13 @@ import logger from '../lib/logger'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import Modal from 'react-modal'
 import React from 'react'
-import ExitBetaModal from '../components/ExitBetaModal'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import SessionTimeout from '../components/sessionModals/SessionTimeout'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
-
-  function openModal(link) {
-    setOpenModalWithLink({ isOpen: true, activeLink: link })
-  }
-
-  function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  }
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -73,7 +57,7 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={openModal}
+                openModal={props.openModal}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -89,7 +73,7 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={openModal}
+                      openModal={props.openModal}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
@@ -99,29 +83,6 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={openModalWithLink.isOpen}
-        onRequestClose={closeModal}
-        contentLabel={t.aria_exit_beta_modal}
-      >
-        <ExitBetaModal
-          closeModal={closeModal}
-          closeModalAria={t.close_modal}
-          continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContentNA.popupId}
-          popupTitle={props.popupContentNA.popupTitle}
-          popupDescription={props.popupContentNA.popupDescription}
-          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.aaPrefix}
-        />
-      </Modal>
-      <SessionTimeout
-        popupStaySignedIn={props.popupStaySignedIn}
-        aaPrefix={props.aaPrefix}
-      />
     </div>
   )
 }

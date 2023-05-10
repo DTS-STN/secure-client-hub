@@ -8,6 +8,7 @@ import ContactProvince from '../../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import logger from '../../lib/logger'
 import React from 'react'
@@ -17,11 +18,6 @@ import throttle from 'lodash.throttle'
 export default function ContactUsPage(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -83,6 +79,24 @@ export async function getServerSideProps({ res, locale, params }) {
     throw error
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
     throw error
@@ -163,7 +177,16 @@ export async function getServerSideProps({ res, locale, params }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en.title}`,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${pageContent.en?.heading || pageContent.en?.title}`,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
