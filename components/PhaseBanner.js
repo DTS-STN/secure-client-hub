@@ -16,13 +16,13 @@ export default function PhaseBanner(props) {
     activeLink: '/',
   })
 
-  function openModal(link) {
-    setOpenModalWithLink({ isOpen: true, activeLink: link })
-  }
+  // function openModal(link) {
+  //   setOpenModalWithLink({ isOpen: true, activeLink: link })
+  // }
 
-  function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  }
+  // function closeModal() {
+  //   setOpenModalWithLink({ isOpen: false, activeLink: '/' })
+  // }
 
   return (
     <div className="bg-brighter-blue-medium">
@@ -65,7 +65,7 @@ export default function PhaseBanner(props) {
           className="font-body text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
           onClick={(e) => {
             e.preventDefault()
-            props.openModal(props.bannerButtonLink, 'betaModal')
+            props.openModal(props.bannerButtonLink, 'betaBannerModal')
           }}
         ></Button>
       </div>

@@ -59,7 +59,21 @@ export default function MultiModal(props) {
 
   switch (openModalWithLink.context) {
     case 'betaModal':
-      // code block
+      modalBody = (
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={t.close_modal}
+          continueLink={openModalWithLink.activeLink}
+          popupId={popupContentNA.popupId}
+          popupTitle={popupContentNA.popupTitle}
+          popupDescription={popupContentNA.popupDescription}
+          popupPrimaryBtn={popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={popupContentNA.popupSecondaryBtn}
+          refPageAA={aaPrefix}
+        />
+      )
+      break
+    case 'betaBannerModal':
       modalBody = (
         <ExitBeta
           closeModal={closeModal}
@@ -75,7 +89,6 @@ export default function MultiModal(props) {
       )
       break
     case 'countDown':
-      // code block
       modalBody = (
         <CountDown
           closeModal={onStay}
