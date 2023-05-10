@@ -11,19 +11,6 @@ import ExitBeta from './ExitBeta'
  */
 
 export default function PhaseBanner(props) {
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
-
-  // function openModal(link) {
-  //   setOpenModalWithLink({ isOpen: true, activeLink: link })
-  // }
-
-  // function closeModal() {
-  //   setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  // }
-
   return (
     <div className="bg-brighter-blue-medium">
       <div
@@ -69,25 +56,6 @@ export default function PhaseBanner(props) {
           }}
         ></Button>
       </div>
-
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={openModalWithLink.isOpen}
-        onRequestClose={props.closeModal}
-        contentLabel={'Modal'}
-      >
-        <ExitBeta
-          closeModal={props.closeModal}
-          closeModalAria={props.bannerButtonText}
-          continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContent.popupId}
-          popupTitle={props.popupContent.popupTitle}
-          popupDescription={props.popupContent.popupDescription}
-          popupPrimaryBtn={props.popupContent.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContent.popupSecondaryBtn}
-          refPageAA={props.refPageAA}
-        />
-      </Modal>
     </div>
   )
 }

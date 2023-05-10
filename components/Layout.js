@@ -4,11 +4,10 @@ import {
   Footer,
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
-import { useEffect, useState, useCallback, useMemo } from 'react'
+import { useState, cloneElement } from 'react'
 import MetaData from './MetaData'
 import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
-import Modal from 'react-modal'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
@@ -26,10 +25,6 @@ export default function Layout(props) {
     context: null,
     contentLabel: null,
   })
-
-  // useEffect(() => {
-  //   Modal.setAppElement('#modal-root')
-  // }, [])
 
   function openModal(link, context) {
     setOpenModalWithLink((prev) => {
@@ -150,7 +145,9 @@ export default function Layout(props) {
         {display.fullscreen ? (
           props.children
         ) : (
-          <LayoutContainer>{props.children}</LayoutContainer>
+          <LayoutContainer>
+            {cloneElement(props.children, { openModal, closeModal })}
+          </LayoutContainer>
         )}
       </main>
       <MultiModal
@@ -161,6 +158,7 @@ export default function Layout(props) {
         aaPrefix={props.aaPrefix}
         t={t}
         popupStaySignedIn={props.popupStaySignedIn}
+        popupContent={props.popupContent}
       />
       {/* <div id="modal-root">
 

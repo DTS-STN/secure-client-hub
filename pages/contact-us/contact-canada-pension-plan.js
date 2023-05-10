@@ -19,11 +19,6 @@ export default function ContactCanadaPensionPlan(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
-
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
   const throttledOnClickEvent = useMemo(

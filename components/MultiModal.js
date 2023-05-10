@@ -16,6 +16,7 @@ export default function MultiModal(props) {
     popupContentNA,
     aaPrefix,
     popupStaySignedIn,
+    popupContent,
   } = props
 
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
@@ -40,7 +41,7 @@ export default function MultiModal(props) {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
     setTimer({ seconds, minutes })
-    console.log(minutes, seconds, 'sssss')
+
     if (isPrompted()) {
       openModal('', 'countDown')
     }
@@ -53,12 +54,9 @@ export default function MultiModal(props) {
     }
   }, [tick])
 
-  // const betaModal = (
-
-  // )
-
   switch (openModalWithLink.context) {
     case 'betaModal':
+      // code block
       modalBody = (
         <ExitBeta
           closeModal={closeModal}
@@ -79,11 +77,11 @@ export default function MultiModal(props) {
           closeModal={closeModal}
           closeModalAria={t.close_modal}
           continueLink={openModalWithLink.activeLink}
-          popupId={popupContentNA.popupId}
-          popupTitle={popupContentNA.popupTitle}
-          popupDescription={popupContentNA.popupDescription}
-          popupPrimaryBtn={popupContentNA.popupPrimaryBtn}
-          popupSecondaryBtn={popupContentNA.popupSecondaryBtn}
+          popupId={popupContent.popupId}
+          popupTitle={popupContent.popupTitle}
+          popupDescription={popupContent.popupDescription}
+          popupPrimaryBtn={popupContent.popupPrimaryBtn}
+          popupSecondaryBtn={popupContent.popupSecondaryBtn}
           refPageAA={aaPrefix}
         />
       )
@@ -106,15 +104,9 @@ export default function MultiModal(props) {
       // code block
       null
   }
-  console.log(openModalWithLink.context)
+
   return (
     <>
-      {/* <SessionTimeout
-        popupStaySignedIn={props.popupStaySignedIn}
-        aaPrefix={props.aaPrefix}
-        openModal={(context) => openModal('/', context)}
-        closeModal={closeModal}
-      /> */}
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.context != null}
