@@ -1,63 +1,114 @@
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-import { useState } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import ExitBeta from './ExitBeta'
 import SessionTimeout from './sessionModals/SessionTimeout'
+import { useIdleTimer } from 'react-idle-timer'
+import CountDown from './sessionModals/CountDown'
+import Router from 'next/router'
 
 export default function MultiModal(props) {
-  const [openModalWithLink, setOpenModalWithLink] = useState({
-    activeLink: '/',
-    context: null,
-    contentLabel: null,
+  const {
+    openModalWithLink,
+    t,
+    openModal,
+    closeModal,
+    popupContentNA,
+    aaPrefix,
+    popupStaySignedIn,
+  } = props
+
+  const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
+  let modalBody
+
+  const handleOnIdle = () => {
+    Router.push('/auth/logout')
+  }
+
+  const { isPrompted, reset, getRemainingTime } = useIdleTimer({
+    onIdle: handleOnIdle,
+    promptBeforeIdle: 0.5 * 60 * 1000, // 30 seconds
+    timeout: 1 * 60 * 1000, // 1 minute
   })
 
-  function openModal(link, context) {
-    setOpenModalWithLink({
-      isOpen: true,
-      activeLink: link,
-      context,
-      contentLabel: null,
-    })
+  const onStay = () => {
+    reset()
+    closeModal()
   }
 
-  function closeModal() {
-    setOpenModalWithLink({
-      isOpen: false,
-      activeLink: '/',
-      context: null,
-      contentLabel: null,
-    })
+  const tick = useCallback(() => {
+    const minutes = Math.floor(getRemainingTime() / 60000)
+    const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
+    setTimer({ seconds, minutes })
+    console.log(minutes, seconds, 'sssss')
+    if (isPrompted()) {
+      openModal('', 'countDown')
+    }
+  }, [getRemainingTime])
+
+  useEffect(() => {
+    const timer = setInterval(tick, 1000)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [tick])
+
+  // const betaModal = (
+
+  // )
+
+  switch (openModalWithLink.context) {
+    case 'betaModal':
+      // code block
+      modalBody = (
+        <ExitBeta
+          closeModal={closeModal}
+          closeModalAria={t.close_modal}
+          continueLink={openModalWithLink.activeLink}
+          popupId={popupContentNA.popupId}
+          popupTitle={popupContentNA.popupTitle}
+          popupDescription={popupContentNA.popupDescription}
+          popupPrimaryBtn={popupContentNA.popupPrimaryBtn}
+          popupSecondaryBtn={popupContentNA.popupSecondaryBtn}
+          refPageAA={aaPrefix}
+        />
+      )
+      break
+    case 'countDown':
+      // code block
+      modalBody = (
+        <CountDown
+          closeModal={onStay}
+          onSignOut={handleOnIdle}
+          onStay={onStay}
+          id="CountDown"
+          seconds={timer.seconds}
+          minutes={timer.minutes}
+          {...popupStaySignedIn}
+          refPageAA={aaPrefix}
+        />
+      )
+      break
+    default:
+      // code block
+      null
   }
-
-  const betaModal = (
-    <ExitBeta
-      closeModal={closeModal}
-      closeModalAria={props.t.close_modal}
-      continueLink={openModalWithLink.activeLink}
-      popupId={props.popupContentNA.popupId}
-      popupTitle={props.popupContentNA.popupTitle}
-      popupDescription={props.popupContentNA.popupDescription}
-      popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
-      popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-      refPageAA={props.aaPrefix}
-    />
-  )
-
+  console.log(openModalWithLink.context)
   return (
     <>
-      <SessionTimeout
+      {/* <SessionTimeout
         popupStaySignedIn={props.popupStaySignedIn}
         aaPrefix={props.aaPrefix}
         openModal={(context) => openModal('/', context)}
         closeModal={closeModal}
-      />
+      /> */}
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.context != null}
         onRequestClose={closeModal}
         contentLabel={openModalWithLink.contentLabel}
       >
-        {openModalWithLink.context}
+        {modalBody}
       </Modal>
     </>
   )

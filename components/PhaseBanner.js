@@ -65,7 +65,7 @@ export default function PhaseBanner(props) {
           className="font-body text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
           onClick={(e) => {
             e.preventDefault()
-            openModal(props.bannerButtonLink)
+            props.openModal(props.bannerButtonLink, 'betaModal')
           }}
         ></Button>
       </div>
@@ -73,11 +73,11 @@ export default function PhaseBanner(props) {
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={props.closeModal}
         contentLabel={'Modal'}
       >
         <ExitBeta
-          closeModal={closeModal}
+          closeModal={props.closeModal}
           closeModalAria={props.bannerButtonText}
           continueLink={openModalWithLink.activeLink}
           popupId={props.popupContent.popupId}

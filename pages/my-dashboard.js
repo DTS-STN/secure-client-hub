@@ -16,10 +16,40 @@ import MostReqTasks from './../components/MostReqTasks'
 import React from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
+import MultiModal from '../components/MultiModal'
+import { useState } from 'react'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  const [openModalWithLink, setOpenModalWithLink] = useState({
+    activeLink: '/',
+    context: null,
+    contentLabel: null,
+  })
+
+  // function openModal(link, context) {
+  //   setOpenModalWithLink((prev) => {
+  //     return {
+  //       isOpen: true,
+  //       activeLink: link,
+  //       context,
+  //       contentLabel: null,
+  //     }
+  //   })
+  // }
+
+  // function closeModal() {
+  //   setOpenModalWithLink((prev) => {
+  //     return {
+  //       isOpen: false,
+  //       activeLink: '/',
+  //       context: null,
+  //       contentLabel: null,
+  //     }
+  //   })
+  // }
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -35,8 +65,6 @@ export default function MyDashboard(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
-
-  console.log(props, '======')
 
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
@@ -59,7 +87,7 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={() => openModal('/', betaModal)}
+                openModal={() => openModal('/', 'betaModal')}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -75,7 +103,7 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={() => openModal('/', betaModal)}
+                      openModal={() => openModal('/', 'betaModal')}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
@@ -85,6 +113,15 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
+      {/* <MultiModal
+        openModalWithLink={openModalWithLink}
+        openModal={openModal}
+        closeModal={closeModal}
+        popupContentNA={props.popupContentNA}
+        aaPrefix={props.aaPrefix}
+        t={t}
+        popupStaySignedIn={props.popupStaySignedIn}
+      /> */}
     </div>
   )
 }

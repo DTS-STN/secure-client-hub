@@ -4,11 +4,11 @@ import {
   Footer,
   LayoutContainer,
 } from '@dts-stn/service-canada-design-system'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import MetaData from './MetaData'
 import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import Modal from 'react-modal'
-import { useEffect } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
@@ -21,9 +21,37 @@ export default function Layout(props) {
   const contactLink =
     props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 
-  useEffect(() => {
-    Modal.setAppElement('#modal-root')
-  }, [])
+  const [openModalWithLink, setOpenModalWithLink] = useState({
+    activeLink: '/',
+    context: null,
+    contentLabel: null,
+  })
+
+  // useEffect(() => {
+  //   Modal.setAppElement('#modal-root')
+  // }, [])
+
+  function openModal(link, context) {
+    setOpenModalWithLink((prev) => {
+      return {
+        isOpen: true,
+        activeLink: link,
+        context,
+        contentLabel: null,
+      }
+    })
+  }
+
+  function closeModal() {
+    setOpenModalWithLink((prev) => {
+      return {
+        isOpen: false,
+        activeLink: '/',
+        context: null,
+        contentLabel: null,
+      }
+    })
+  }
 
   return (
     <>
@@ -48,6 +76,8 @@ export default function Layout(props) {
             props.children.props.content?.heading ||
             props.children.props.pageContent?.title
           }
+          openModal={openModal}
+          closeModal={closeModal}
         ></PhaseBanner>
       )}
       <Header
@@ -123,9 +153,18 @@ export default function Layout(props) {
           <LayoutContainer>{props.children}</LayoutContainer>
         )}
       </main>
+      <MultiModal
+        openModalWithLink={openModalWithLink}
+        openModal={openModal}
+        closeModal={closeModal}
+        popupContentNA={props.popupContentNA}
+        aaPrefix={props.aaPrefix}
+        t={t}
+        popupStaySignedIn={props.popupStaySignedIn}
+      />
+      {/* <div id="modal-root">
 
-      <MultiModal {...props} t={t} />
-      <div id="modal-root"></div>
+      </div> */}
 
       <Footer
         lang={!props.locale ? 'en' : props.locale}

@@ -16,8 +16,8 @@ const SessionTimeout = ({
 
   const { isPrompted, reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    promptBeforeIdle: 5 * 60 * 1000, // 30 seconds
-    timeout: 10 * 60 * 1000, // 1 minute
+    promptBeforeIdle: 0.5 * 60 * 1000, // 30 seconds
+    timeout: 1 * 60 * 1000, // 1 minute
   })
 
   const onStay = () => {
