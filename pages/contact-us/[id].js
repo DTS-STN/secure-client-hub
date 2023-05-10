@@ -8,15 +8,14 @@ import ContactProvince from '../../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
-import { getContactOldAgeSecurityContent } from '../../graphql/mappers/contact-old-age-security'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
+import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import logger from '../../lib/logger'
 import React from 'react'
-import Markdown from 'markdown-to-jsx'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
-export default function ContactOldAgeSecurity(props) {
+export default function ContactUsPage(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
@@ -38,8 +37,8 @@ export default function ContactOldAgeSecurity(props) {
   return (
     <div
       id="homeContent"
-      data-testid="contactOAS-test"
-      data-cy="oasContactUsContent"
+      data-testid="contactUsPage-test"
+      data-cy="ContactUsContent"
     >
       <Heading id="my-dashboard-heading" title={props.pageContent.title} />
       <div
@@ -48,13 +47,8 @@ export default function ContactOldAgeSecurity(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
-      <div className="pb-4 prose max-w-none prose-p:text-xl prose-p:mb-2 prose-p:font-body prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black">
-        {' '}
-        <Markdown>{props.pageContent.intro}</Markdown>
-      </div>
-
       <TableContent
-        id="oasContent"
+        id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}
@@ -70,42 +64,21 @@ export default function ContactOldAgeSecurity(props) {
           )}
         </Fragment>
       ))}
+
+      {/*  */}
+
+      {/*  */}
     </div>
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ res, locale, params }) {
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
     throw error
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    // res.statusCode = 500
-    throw error
-  })
-
-  /* 
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    })
-  */
-
-  /* istanbul ignore next */
-  const langToggleLink =
-    locale === 'en'
-      ? '/fr/contactez-nous/communiquer-securite-vieillesse'
-      : '/contact-us/contact-old-age-security'
-
-  const t = locale === 'en' ? en : fr
-
-  const pageContent = await getContactOldAgeSecurityContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
     throw error
@@ -129,6 +102,41 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
 
+  /* 
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+  
+    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    })
+  */
+
+  /* istanbul ignore next */
+  const t = locale === 'en' ? en : fr
+
+  const pageContent = await getContactUsPage(params.id).catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  //Redirect to 404 page if user navigates to non-existent page
+  if (!pageContent) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    }
+  }
+
+  const langToggleLink =
+    locale === 'en'
+      ? `/fr/contactez-nous/${pageContent.fr.pageName}`
+      : `/contact-us/${pageContent.en.pageName}`
+
   const breadCrumbItems =
     locale === 'en'
       ? pageContent.en.breadcrumb?.map(({ link, text }) => {
@@ -138,36 +146,24 @@ export async function getServerSideProps({ res, locale }) {
           return { text, link: '/' + locale + '/' + link }
         })
 
-  // const breadCrumbItems = [
-  //   {
-  //     link: 't.url_dashboard',
-  //     text: 't.pageHeading.title',
-  //   },
-  //   {
-  //     link: 't.pageHeading.title',
-  //     text: 't.pageHeading.title',
-  //   },
-  // ]
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact Old Age Security - My Service Canada Account',
-      desc: 'English',
+      title: `${pageContent.en.title} - My Service Canada Account`,
+      desc: pageContent.en.description,
       author: 'Service Canada',
       keywords: '',
       service: 'ESDC-EDSC_MSCA-MSDC',
-      creator: 'Employment and Social Development Canada',
+      creator: 'Service Canada',
       accessRights: '1',
     },
     data_fr: {
-      title:
-        'Communiquer avec la Sécurité de la vieillesse - Mon dossier Service Canada',
-      desc: 'Français',
+      title: `${pageContent.fr.title} - Mon dossier Service Canada`,
+      desc: pageContent.fr.description,
       author: 'Service Canada',
       keywords: '',
       service: 'ESDC-EDSC_MSCA-MSDC',
-      creator: 'Emploi et Développement social Canada',
+      creator: 'Service Canada',
       accessRights: '1',
     },
   }
@@ -195,7 +191,7 @@ export async function getServerSideProps({ res, locale }) {
   }
 }
 
-ContactOldAgeSecurity.propTypes = {
+ContactUsPage.propTypes = {
   /**
    * current locale in the address
    */
