@@ -16,8 +16,6 @@ import MostReqTasks from './../components/MostReqTasks'
 import React from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import MultiModal from '../components/MultiModal'
-import { useState } from 'react'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */

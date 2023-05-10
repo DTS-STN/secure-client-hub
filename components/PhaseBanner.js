@@ -2,9 +2,7 @@ import propTypes from 'prop-types'
 import { Button } from '@dts-stn/service-canada-design-system'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
-import Modal from 'react-modal'
 import React from 'react'
-import ExitBeta from './ExitBeta'
 
 /**
  * Displays the PhaseBanner on the page

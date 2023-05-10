@@ -1,5 +1,4 @@
-import Modal from 'react-modal'
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 import CountDown from './CountDown'
 import Router from 'next/router'
 import { useIdleTimer } from 'react-idle-timer'
