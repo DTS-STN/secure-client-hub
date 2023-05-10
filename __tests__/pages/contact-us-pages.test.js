@@ -189,7 +189,7 @@ describe('Dynamic Contact Us Page', () => {
         popupContentNA: {},
         popupYouHaveBeenSignedout: {},
         popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:undefined',
+        aaPrefix: 'ESDC-EDSC:Contact Us Page',
       },
     })
   })
