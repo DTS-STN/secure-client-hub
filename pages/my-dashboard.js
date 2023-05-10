@@ -59,7 +59,7 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={() => props.openModal('/', 'betaModal')}
+                openModal={props.openModal}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -75,7 +75,7 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={() => props.openModal('/', 'betaModal')}
+                      openModal={props.openModal}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
