@@ -7,6 +7,22 @@ export default function MetaData(props) {
   return (
     <>
       <Head>
+        <style jsx>
+          {`
+            html {
+              animation: fouc-fix 0.001s steps(1);
+            }
+            @keyframes fouc-fix {
+              0% {
+                visibility: hidden;
+              }
+              100% {
+                visibility: visible;
+              }
+            }
+          `}
+        </style>
+
         <title>{d.title}</title>
         <meta charSet="utf-8" />
         <meta name="description" content={d.desc} />
