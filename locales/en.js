@@ -16,6 +16,7 @@ export default {
     dashboard: 'My Dashboard',
     security: 'Security settings',
     profile: 'Profile',
+    contactUs: 'Contact us',
     signOut: 'Sign Out',
   },
   //
@@ -57,7 +58,6 @@ export default {
   login: 'Login',
   serviceAndBenefits: 'Service and Benefits',
   tools: 'Tools',
-  contactUs: 'Contact us',
 
   // Government of Canada symbols
   goc: 'Government of Canada',
