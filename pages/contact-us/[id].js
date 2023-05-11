@@ -64,10 +64,6 @@ export default function ContactUsPage(props) {
           )}
         </Fragment>
       ))}
-
-      {/*  */}
-
-      {/*  */}
     </div>
   )
 }
