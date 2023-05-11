@@ -15,6 +15,7 @@ export default {
     dashboard: 'Mon tableau de bord',
     security: 'Paramètres de sécurité',
     profile: 'Profil',
+    contactUs: 'Contactez-nous',
     signOut: 'Se déconnecter',
   },
   //Heading
@@ -54,7 +55,6 @@ export default {
   login: 'Connexion',
   serviceAndBenefits: 'Service et avantages',
   tools: 'Outils',
-  contactUs: 'Nous contacter',
 
   // Government of Canada symbols
   goc: 'Governement du Canada',
