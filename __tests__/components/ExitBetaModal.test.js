@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import ExitBetaModal from '../../components/ExitBetaModal'
+import ExitBeta from '../../components/ExitBeta'
 
 expect.extend(toHaveNoViolations)
 
 describe('Exit Beta Modal', () => {
   it('renders Exit Beta Modal', () => {
     render(
-      <ExitBetaModal
+      <ExitBeta
         closeModal={() => {}}
         closeModalAria={'close'}
         continueLink="/"
@@ -33,7 +33,7 @@ describe('Exit Beta Modal', () => {
   })
   it('has no a11y viollations', async () => {
     const { container } = render(
-      <ExitBetaModal
+      <ExitBeta
         closeModal={() => {}}
         closeModalAria={'close'}
         continueLink="/"

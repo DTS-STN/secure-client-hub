@@ -1,14 +1,27 @@
 {
-    schPagev1ByPath(
-    _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/oas-contacts"
-  ) {
-    item {
+    schPagev1List(
+            filter:{
+                scContentType: {
+                    _expressions:[{
+                        value: "gc:content-types/contact-us"
+                        _operator: EQUALS
+                    }]
+                }
+            }
+        ){
+    items {
       _path
       scId
       scTitleEn
       scTitleFr
       scPageNameEn
       scPageNameFr
+      scDescriptionEn {
+          plaintext
+      }
+      scDescriptionFr {
+          plaintext
+      }
       scShortTitleEn
       scShortTitleFr
       scBreadcrumbParentPages {
@@ -28,15 +41,6 @@
       scAudience
       scOwner
       scFragments {
-           ... on SCHContentv1Model{
-              _path
-              scContentEn{
-                  markdown
-              }
-                scContentFr{
-                  markdown
-              }
-          }
           ... on SCHListv1Model {
               _path
               scId
@@ -70,7 +74,7 @@
                                   scTitleFr
                                    scId
                                    scItems {
-                                       ... on SCHAddressv1Model {
+                                     ... on SCHAddressv1Model {
                                               _path
                                               scId
                                               scRecipientEn
@@ -99,7 +103,7 @@
                                       }
                                       scIconCSS
                                       scFragments {
-                                        ... on SCHTaskv1Model {
+                                          ... on SCHTaskv1Model {
                                               scId
                                               scLinkTextEn
                                               scLinkTextFr

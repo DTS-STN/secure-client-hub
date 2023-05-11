@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types'
 import { Heading, Link } from '@dts-stn/service-canada-design-system'
-import en from '../locales/en'
-import fr from '../locales/fr'
-import { getContactUsContent } from '../graphql/mappers/contact-us'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import logger from '../lib/logger'
+import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
+import en from '../../locales/en'
+import fr from '../../locales/fr'
+import { getContactUsContent } from '../../graphql/mappers/contact-us'
+import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
+import logger from '../../lib/logger'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import NextLink from 'next/link'
@@ -71,6 +73,24 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
 
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
   /* 
    * Uncomment this block to make Banner Popup Content display "Page Not Available"
    * Comment "getBetaPopupExitContent()" block of code above.
@@ -128,7 +148,16 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

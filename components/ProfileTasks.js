@@ -21,7 +21,7 @@ export default function ProfileTasks(props) {
                   onClick={(e) => {
                     if (task.betaPopUp) {
                       e.preventDefault()
-                      props.openModal(task.link)
+                      props.openModal(task.link, 'betaModal')
                     }
                   }}
                   data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
