@@ -15,49 +15,53 @@ export async function getContactUsPage(id) {
 
   const mappedContactPage = {
     en: {
-      breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
+      breadcrumb: queryData.scBreadcrumbParentPages.map((level) => {
         return {
-          link: w.scPageNameEn,
-          text: w.scTitleEn,
+          link: level.scPageNameEn,
+          text: level.scTitleEn,
         }
       }),
       title: queryData.scTitleEn,
       description: queryData.scDescriptionEn.plaintext,
-      ...queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((body) => {
         return {
-          id: w.scId,
-          items: w.scItems.map((x) => {
+          id: body.scId,
+          subHeader: body.scTitleEn,
+          items: body.scItems.map((fragment) => {
             return {
-              id: x.scId,
-              title: x.scTitleEn,
-              details: x.schDetails.map((y) => {
+              id: fragment.scId,
+              title: fragment.scTitleEn,
+              intro: fragment.schIntroEn.markdown,
+              layout: fragment.schContactMethodLayout,
+              details: fragment.schDetails.map((row) => {
                 return {
-                  id: y.scId,
-                  color: y.scBackgroundColour,
-                  items: y.scItems.map((z) => {
-                    if (z.scContentEn) {
+                  id: row.scId,
+                  color: row.scBackgroundColour,
+                  label: row.scTitleEn,
+                  items: row.scItems.map((contentItem) => {
+                    if (contentItem.scContentEn) {
                       //Return address nested in content
                       return {
-                        content: z.scContentEn.markdown,
-                        icon: z.scIconCSS,
-                        ...z.scFragments.map((a) => {
-                          if (!a.scButtonType) {
+                        content: contentItem.scContentEn.markdown,
+                        icon: contentItem.scIconCSS,
+                        ...contentItem.scFragments.map((destination) => {
+                          if (!destination.scButtonType) {
                             return {
-                              city: a.scCityEn,
-                              country: a.scCountryEn,
-                              id: a.scId,
-                              poBox: a.scPostalBoxEn,
-                              postal: a.scPostalCode,
-                              program: a.scProgramEn,
-                              province: a.scProvTerrAbbrEnum,
-                              recipient: a.scRecipientEn,
+                              city: destination.scCityEn,
+                              country: destination.scCountryEn,
+                              id: destination.scId,
+                              poBox: destination.scPostalBoxEn,
+                              postal: destination.scPostalCode,
+                              program: destination.scProgramEn,
+                              province: destination.scProvTerrAbbrEnum,
+                              recipient: destination.scRecipientEn,
                             }
                           } else {
                             return {
-                              id: a.scId,
-                              content: a.scLinkTextEn,
-                              link: a.scDestinationURLEn,
-                              button: a.scButtonType,
+                              id: destination.scId,
+                              content: destination.scLinkTextEn,
+                              link: destination.scDestinationURLEn,
+                              button: destination.scButtonType,
                             }
                           }
                         })[0],
@@ -65,78 +69,78 @@ export async function getContactUsPage(id) {
                     } else {
                       //Return address unnested
                       return {
-                        city: z.scCityEn,
-                        country: z.scCountryEn
-                          ? z.scCountryEn.toUpperCase()
+                        city: contentItem.scCityEn,
+                        country: contentItem.scCountryEn
+                          ? contentItem.scCountryEn.toUpperCase()
                           : null,
-                        id: z.scId,
-                        poBox: z.scPostalBoxEn,
-                        postal: z.scPostalCode,
-                        province: z.scProvTerrAbbrEnum,
-                        recipient: z.scRecipientEn,
-                        station: z.scPostalStationEn,
+                        id: contentItem.scId,
+                        poBox: contentItem.scPostalBoxEn,
+                        postal: contentItem.scPostalCode,
+                        province: contentItem.scProvTerrAbbrEnum,
+                        recipient: contentItem.scRecipientEn,
+                        station: contentItem.scPostalStationEn,
                       }
                     }
                   }),
-                  label: y.scTitleEn,
                 }
               }),
-              intro: x.schIntroEn.markdown,
-              layout: x.schContactMethodLayout,
             }
           }),
-          subHeader: w.scTitleEn,
         }
       })[0],
       id: queryData.scId,
       pageName: queryData.scPageNameEn,
     },
     fr: {
-      breadcrumb: queryData.scBreadcrumbParentPages.map((w) => {
+      breadcrumb: queryData.scBreadcrumbParentPages.map((level) => {
         return {
-          link: w.scPageNameFr,
-          text: w.scTitleFr,
+          link: level.scPageNameFr,
+          text: level.scTitleFr,
         }
       }),
       title: queryData.scTitleFr,
       description: queryData.scDescriptionFr.plaintext,
-      ...queryData.scFragments.map((w) => {
+      ...queryData.scFragments.map((body) => {
         return {
-          id: w.scId,
-          items: w.scItems.map((x) => {
+          id: body.scId,
+          subHeader: body.scTitleFr,
+          items: body.scItems.map((fragment) => {
             return {
-              id: x.scId,
-              title: x.scTitleFr,
-              details: x.schDetails.map((y) => {
+              id: fragment.scId,
+              title: fragment.scTitleFr,
+              intro: fragment.schIntroFr.markdown,
+              layout: fragment.schContactMethodLayout,
+              details: fragment.schDetails.map((row) => {
                 return {
-                  id: y.scId,
-                  title: y.scTitleFr,
-                  label: y.scTitleFr,
-                  color: y.scBackgroundColour,
-                  items: y.scItems.map((z) => {
-                    if (z.scContentFr) {
+                  id: row.scId,
+                  title: row.scTitleFr,
+                  label: row.scTitleFr,
+                  title: row.scTitleFr,
+                  color: row.scBackgroundColour,
+                  items: row.scItems.map((contentItem) => {
+                    if (contentItem.scContentFr) {
                       //Return address nested in content
                       return {
-                        content: z.scContentFr.markdown,
-                        icon: z.scIconCSS,
-                        ...z.scFragments.map((a) => {
-                          if (!a.scButtonType) {
+                        content: contentItem.scContentFr.markdown,
+                        icon: contentItem.scIconCSS,
+                        ...contentItem.scFragments.map((destination) => {
+                          if (!destination.scButtonType) {
                             return {
-                              city: a.scCityFr,
-                              country: a.scCountryFr,
-                              id: a.scId,
-                              poBox: a.scPostalBoxFr,
-                              postal: a.scPostalCode,
-                              program: a.scProgramFr,
-                              province: a.scProvTerrAbbrEnum,
-                              recipient: a.scRecipientFr,
+                              city: destination.scCityFr,
+                              country: destination.scCountryFr,
+                              id: destination.scId,
+                              poBox: destination.scPostalBoxFr,
+                              postal: destination.scPostalCode,
+                              program: destination.scProgramFr,
+                              province: destination.scProvTerrAbbrEnum,
+                              recipient: destination.scRecipientFr,
                             }
                           } else {
                             return {
-                              id: a.scId,
-                              content: a.scLinkTextFr,
-                              link: a.scDestinationURLFr,
-                              button: a.scButtonType,
+                              id: destination.scId,
+                              content: destination.scLinkTextFr,
+                              link: destination.scDestinationURLFr,
+                              button: destination.scButtonType,
                             }
                           }
                         })[0],
@@ -144,28 +148,23 @@ export async function getContactUsPage(id) {
                     } else {
                       //Return address unnested
                       return {
-                        city: z.scCityFr,
-                        country: z.scCountryFr
-                          ? z.scCountryFr.toUpperCase()
+                        city: contentItem.scCityFr,
+                        country: contentItem.scCountryFr
+                          ? contentItem.scCountryFr.toUpperCase()
                           : null,
-                        id: z.scId,
-                        poBox: z.scPostalBoxFr,
-                        postal: z.scPostalCode,
-                        province: z.scProvTerrAbbrEnum,
-                        recipient: z.scRecipientFr,
-                        station: z.scPostalStationFr,
+                        id: contentItem.scId,
+                        poBox: contentItem.scPostalBoxFr,
+                        postal: contentItem.scPostalCode,
+                        province: contentItem.scProvTerrAbbrEnum,
+                        recipient: contentItem.scRecipientFr,
+                        station: contentItem.scPostalStationFr,
                       }
                     }
                   }),
-                  title: y.scTitleFr,
                 }
               }),
-
-              intro: x.schIntroFr.markdown,
-              layout: x.schContactMethodLayout,
             }
           }),
-          subHeader: w.scTitleFr,
         }
       })[0],
       id: queryData.scId,
