@@ -15,12 +15,14 @@ export async function getContactUsContent() {
   const mappedSecurity = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameEn,
-            text: w.scTitleEn,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameEn,
+              text: level.scTitleEn,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       subHeading: introFragment.scContentEn.json[0].content[0].value,
@@ -59,12 +61,14 @@ export async function getContactUsContent() {
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameFr,
-            text: w.scTitleFr,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameFr,
+              text: level.scTitleFr,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       subHeading: introFragment.scContentFr.json[0].content[0].value,
