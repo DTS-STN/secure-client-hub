@@ -45,6 +45,12 @@ describe('Layout with default text', () => {
     },
   }
   const display = { hideBanner: true }
+  const popupContentNA = {
+    popupId: '',
+    popupTitle: '',
+    popupDescription: '',
+    popupPrimaryBtn: '',
+  }
 
   useRouter.mockImplementation(() => ({
     pathname: '/',
@@ -58,6 +64,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
@@ -70,6 +77,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     expect(screen.getByRole('main')).toBeInTheDocument()
@@ -92,6 +100,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     const results = await axe(container)

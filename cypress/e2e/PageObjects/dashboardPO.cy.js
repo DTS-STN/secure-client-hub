@@ -150,8 +150,8 @@ function FirstTaskLink() {
     .find('li:nth-child(1)>a:nth-child(1)')
 }
 
-function ExitBetaModal() {
-  return cy.get("[data-cy ='exitBetaModal']")
+function ExitBeta() {
+  return cy.get("[data-cy ='exitBeta']")
 }
 
 function StayOnBetabutton() {
@@ -170,7 +170,7 @@ function ContactUsFooterLink() {
   return cy.get('[data-cy="footerContactUsLink"]')
 }
 
-function validateExitBetaModalbuttonLink(SectionName, LinkName) {
+function validateExitBetabuttonLink(SectionName, LinkName) {
   return cy
     .get('[data-cy="sectionList"]')
     .find('div>div')
@@ -184,10 +184,10 @@ function validateExitBetaModalbuttonLink(SectionName, LinkName) {
             const linkText = $el2.find('span')
             if (linkText.text() === LinkName) {
               cy.wrap($el2).click()
-              ExitBetaModal().should('be.visible')
+              ExitBeta().should('be.visible')
               StayOnBetabutton().click()
               cy.wrap($el2).click()
-              ExitBetaModal().should('be.visible')
+              ExitBeta().should('be.visible')
               CloseModalButton().click()
             }
           })
@@ -258,11 +258,11 @@ module.exports = {
   LearnMoreABtBetaLink,
   ExitBetaButton,
   FirstTaskLink,
-  ExitBetaModal,
+  ExitBeta,
   StayOnBetabutton,
   ContinueToPageModalButton,
   CloseModalButton,
-  validateExitBetaModalbuttonLink,
+  validateExitBetabuttonLink,
   ClickUpdatemyProfileLink,
   ClickCompleteMyReportOrApplyEILink,
   ContactUsFooterLink,

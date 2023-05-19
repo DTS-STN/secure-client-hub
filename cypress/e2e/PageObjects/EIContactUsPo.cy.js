@@ -2,7 +2,7 @@
 import ContactUsEIdata from '../../fixtures/ContactUsEIdata.json'
 
 function EIContactUsHeader() {
-  return cy.get('[data-cy ="eIContactUsContent"]>h1')
+  return cy.get('[data-cy ="ContactUsContent"]>h1')
 }
 
 function ValidateEIContactUsUrl() {
@@ -27,7 +27,7 @@ function ValidateEIContactUsHeaderFR() {
 
 function ValidateOnthisPageLinks() {
   return cy
-    .get('[data-cy ="eIContactUsContent"]>section')
+    .get('[data-cy ="ContactUsContent"]>section')
     .find('a')
     .should('be.visible')
     .and('have.length', '4')
@@ -60,7 +60,7 @@ function ValidateCallbackSectionContent() {
 
 function ValidateEachtableOfContentLink() {
   for (let i = 0; i < ContactUsEIdata.length; i++) {
-    cy.get('[data-cy ="eIContactUsContent"]>section')
+    cy.get('[data-cy ="ContactUsContent"]>section')
       .find('a')
       .each(($el1, index, $list) => {
         const linkText = $el1.find('span').text()
@@ -80,7 +80,7 @@ function ValidateEachSectionEIContactUs() {
 }
 
 function EachContactSection() {
-  return cy.get('[data-cy="eIContactUsContent"]>div')
+  return cy.get('[data-cy="ContactUsContent"]>div')
 }
 
 function ProvinceCard() {
