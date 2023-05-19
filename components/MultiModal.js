@@ -104,6 +104,8 @@ export default function MultiModal(props) {
       null
   }
 
+  Modal.setAppElement('#__next')
+
   return (
     <>
       <Modal
