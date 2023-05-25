@@ -5,7 +5,7 @@ export default function Document() {
     <Html>
       <Head />
       <body>
-        {/* Dummy script that will force the page to render only after CSS is loaded */}
+        {/* Dummy script that will force the page to render only after CSS is loaded - fix for FireFox only */}
         <script>0</script>
         <Main />
         <NextScript />

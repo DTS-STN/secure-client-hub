@@ -128,6 +128,14 @@ export default function Layout(props) {
               component: Link,
             },
             {
+              key: 'contactKey',
+              value: t.menuItems.contactUs,
+              path: `${
+                props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
+              }`,
+              component: Link,
+            },
+            {
               key: 'signOutKey',
               value: t.menuItems.signOut,
               path: '/auth/logout',
