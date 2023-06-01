@@ -18,6 +18,13 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
 
+  const pageContent = props.content.content
+  const [privacy, ...termsAndConditions] = pageContent.split(
+    props.locale === 'en'
+      ? /(?=# Terms and conditions of use)/
+      : /(?=# Conditions d’utilisation)/
+  )
+
   return (
     <div className="font-body" data-cy="terms-conditions">
       <Heading
@@ -33,35 +40,68 @@ export default function PrivacyCondition(props) {
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
       />
-      <Markdown
-        options={{
-          overrides: {
-            h1: {
-              props: {
-                className: 'text-3xl font-display font-bold mt-10 mb-3',
+      <section id={t.footerPrivacyAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h1: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                },
+              },
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
               },
             },
-            p: {
-              props: {
-                className: 'mb-3',
+          }}
+        >
+          {privacy}
+        </Markdown>
+      </section>
+      <section id={t.footerTermsAndConditionAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h1: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                },
+              },
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
               },
             },
-            ol: {
-              props: {
-                className:
-                  'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
-              },
-            },
-            a: {
-              props: {
-                className: 'underline text-deep-blue-dark cursor-pointer',
-              },
-            },
-          },
-        }}
-      >
-        {props.content.content}
-      </Markdown>
+          }}
+        >
+          {termsAndConditions[0]}
+        </Markdown>
+      </section>
       <BackToButton
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"

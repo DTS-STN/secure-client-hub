@@ -4,7 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from '../../pages/_app'
-import Index, { getStaticProps } from '../../pages/index'
+import Index from '../../pages/index'
 
 import { useRouter } from 'next/router'
 

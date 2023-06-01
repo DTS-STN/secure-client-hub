@@ -37,7 +37,7 @@
     "babel-plugin-macros": "^3.1.0",
     "cross-env": "^7.0.3",
     "lodash.throttle": "^4.1.1",
-    "markdown-to-jsx": "^7.1.8",
+    "markdown-to-jsx": "^7.2.0",
     "next": "^12.3.3",
     "next-auth": "^4.20.1",
     "next-i18next": "^13.0.3",
@@ -45,7 +45,7 @@
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-focus-on": "^3.8.0",
+    "react-focus-on": "^3.8.1",
     "react-idle-timer": "^5.6.2",
     "react-modal": "^3.16.1",
     "release-please": "^15.7.0"

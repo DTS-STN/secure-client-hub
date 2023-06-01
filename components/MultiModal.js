@@ -5,6 +5,7 @@ import ExitBeta from './ExitBeta'
 import { useIdleTimer } from 'react-idle-timer'
 import CountDown from './sessionModals/CountDown'
 import Router from 'next/router'
+import { FocusOn } from 'react-focus-on'
 
 export default function MultiModal(props) {
   const {
@@ -25,10 +26,11 @@ export default function MultiModal(props) {
     Router.push('/auth/logout')
   }
 
-  const { isPrompted, reset, getRemainingTime } = useIdleTimer({
+  const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    promptBeforeIdle: 0.5 * 60 * 1000, // 30 seconds
-    timeout: 1 * 60 * 1000, // 1 minute
+    onPrompt: () => openModal('', 'countDown'),
+    promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
+    timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
 
   const onStay = () => {
@@ -40,10 +42,6 @@ export default function MultiModal(props) {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
     setTimer({ seconds, minutes })
-
-    if (isPrompted()) {
-      openModal('', 'countDown')
-    }
   }, [getRemainingTime])
 
   useEffect(() => {
@@ -112,7 +110,9 @@ export default function MultiModal(props) {
         onRequestClose={closeModal}
         contentLabel={openModalWithLink.contentLabel}
       >
-        {modalBody}
+        <FocusOn enabled={openModalWithLink.context != null}>
+          {modalBody}
+        </FocusOn>
       </Modal>
     </>
   )
@@ -121,4 +121,6 @@ export default function MultiModal(props) {
 MultiModal.propTypes = {
   contentLabel: PropTypes.string,
   closeModal: PropTypes.func,
+  timeout: PropTypes.number,
+  promptBeforeIdle: PropTypes.number,
 }
