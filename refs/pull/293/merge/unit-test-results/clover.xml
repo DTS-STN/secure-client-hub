@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685633554990" clover="3.2.0">
-  <project timestamp="1685633554990" name="All files">
-    <metrics statements="385" coveredstatements="139" conditionals="242" coveredconditionals="57" methods="158" coveredmethods="47" elements="785" coveredelements="243" complexity="0" loc="385" ncloc="385" packages="9" files="40" classes="40"/>
+<coverage generated="1685644380098" clover="3.2.0">
+  <project timestamp="1685644380098" name="All files">
+    <metrics statements="384" coveredstatements="138" conditionals="244" coveredconditionals="60" methods="159" coveredmethods="47" elements="787" coveredelements="245" complexity="0" loc="384" ncloc="384" packages="9" files="40" classes="40"/>
     <package name="components">
-      <metrics statements="86" coveredstatements="53" conditionals="82" coveredconditionals="26" methods="33" coveredmethods="15"/>
+      <metrics statements="85" coveredstatements="52" conditionals="84" coveredconditionals="29" methods="34" coveredmethods="15"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="3" type="stmt"/>
@@ -71,34 +71,33 @@
         <line num="54" count="1" type="stmt"/>
       </file>
       <file name="MultiModal.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MultiModal.js">
-        <metrics statements="28" coveredstatements="18" conditionals="6" coveredconditionals="2" methods="6" coveredmethods="4"/>
-        <line num="19" count="5" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="24" count="4" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="4" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
+        <metrics statements="27" coveredstatements="17" conditionals="8" coveredconditionals="5" methods="7" coveredmethods="4"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="22" count="4" type="stmt"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="44" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="49" count="4" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
         <line num="50" count="3" type="stmt"/>
-        <line num="51" count="3" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
-        <line num="56" count="4" type="cond" truecount="1" falsecount="3"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="54" count="4" type="cond" truecount="1" falsecount="3"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="104" count="4" type="stmt"/>
-        <line num="107" count="4" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="4" type="stmt"/>
+        <line num="105" count="4" type="stmt"/>
         <line num="121" count="2" type="stmt"/>
       </file>
       <file name="PageLink.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.js">
