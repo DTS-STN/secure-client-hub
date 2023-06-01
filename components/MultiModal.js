@@ -5,6 +5,7 @@ import ExitBeta from './ExitBeta'
 import { useIdleTimer } from 'react-idle-timer'
 import CountDown from './sessionModals/CountDown'
 import Router from 'next/router'
+import { FocusOn } from 'react-focus-on'
 
 export default function MultiModal(props) {
   const {
@@ -112,7 +113,9 @@ export default function MultiModal(props) {
         onRequestClose={closeModal}
         contentLabel={openModalWithLink.contentLabel}
       >
-        {modalBody}
+        <FocusOn enabled={openModalWithLink.context != null}>
+          {modalBody}
+        </FocusOn>
       </Modal>
     </>
   )
