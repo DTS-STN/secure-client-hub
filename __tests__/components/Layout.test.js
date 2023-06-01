@@ -19,7 +19,9 @@ jest.mock('next/link', () => ({
 }))
 
 // Children must be passed to test Adobe Analytics through the design system
-const aaChildrenProps = <div content={{ heading: '' }} />
+const aaChildrenProps = (
+  <div content={{ heading: '' }} id="__next" data-reactroot />
+)
 
 expect.extend(toHaveNoViolations)
 

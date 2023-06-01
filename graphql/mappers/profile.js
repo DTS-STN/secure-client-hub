@@ -26,12 +26,14 @@ export async function getProfileContent() {
   const mappedProfile = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameEn,
-            text: w.scTitleEn,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameEn,
+              text: level.scTitleEn,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scTitleEn,
       heading: profileIntroFragment.scContentEn.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments
@@ -73,12 +75,14 @@ export async function getProfileContent() {
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameFr,
-            text: w.scTitleFr,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameFr,
+              text: level.scTitleFr,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scTitleFr,
       heading: profileIntroFragment.scContentFr.json[0].content[0].value,
       list: response.data.schPagev1ByPath.item.scFragments

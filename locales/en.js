@@ -117,12 +117,14 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'About Canada.ca',
 
-  footerTermsAndConditionURL: '/privacy-notice-terms-conditions',
+  footerTermsAndConditionURL:
+    '/privacy-notice-terms-conditions#termsAndConditions',
   footerTermsAndCondition: 'Terms and conditions',
+  footerTermsAndConditionAnchor: 'termsAndConditions',
 
-  footerPrivacyURL:
-    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=eng',
+  footerPrivacyURL: '/privacy-notice-terms-conditions',
   footerPrivacy: 'Privacy',
+  footerPrivacyAnchor: 'privacy',
 
   aboutThisSite: 'About this Site',
   topOfPage: 'Top of Page',

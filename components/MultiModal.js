@@ -28,8 +28,8 @@ export default function MultiModal(props) {
 
   const { isPrompted, reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    promptBeforeIdle: 0.5 * 60 * 1000, // 30 seconds
-    timeout: 1 * 60 * 1000, // 1 minute
+    promptBeforeIdle: 5 * 60 * 1000, // 5 minutes
+    timeout: 15 * 60 * 1000, // 15 minutes
   })
 
   const onStay = () => {
