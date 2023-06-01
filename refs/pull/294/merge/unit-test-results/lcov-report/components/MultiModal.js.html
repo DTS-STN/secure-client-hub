@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.28% </span>
+                <span class="strong">62.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/28</span>
+                <span class='fraction'>17/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.28% </span>
+                <span class="strong">62.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/28</span>
+                <span class='fraction'>17/27</span>
             </div>
         
             
@@ -189,8 +189,7 @@
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,6 +219,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,10 +233,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -317,6 +313,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import { useState, useCallback, useEffect } from 'react'
@@ -345,10 +343,11 @@ export default function MultiModal(props) {
 <span class="cstat-no" title="statement not covered" >    Router.push('/auth/logout')</span>
   }
 &nbsp;
-  const { isPrompted, reset, getRemainingTime } = useIdleTimer({
+  const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    promptBeforeIdle: 5 * 60 * 1000, // 5 minutes
-    timeout: 15 * 60 * 1000, // 15 minutes
+    onPrompt: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >openModal('', 'countDown'),</span>
+    promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
+    timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
 &nbsp;
   const onStay = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
@@ -360,10 +359,6 @@ export default function MultiModal(props) {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
     setTimer({ seconds, minutes })
-&nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (isPrompted()) {
-<span class="cstat-no" title="statement not covered" >      openModal('', 'countDown')</span>
-    }
   }, [getRemainingTime])
 &nbsp;
   useEffect(() =&gt; {
@@ -443,6 +438,8 @@ export default function MultiModal(props) {
 MultiModal.propTypes = {
   contentLabel: PropTypes.string,
   closeModal: PropTypes.func,
+  timeout: PropTypes.number,
+  promptBeforeIdle: PropTypes.number,
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -451,7 +448,7 @@ MultiModal.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-01T16:18:07.117Z
+                at 2023-06-01T18:16:02.084Z
             </div>
         <script src="../prettify.js"></script>
         <script>
