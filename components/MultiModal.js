@@ -26,10 +26,11 @@ export default function MultiModal(props) {
     Router.push('/auth/logout')
   }
 
-  const { isPrompted, reset, getRemainingTime } = useIdleTimer({
+  const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    promptBeforeIdle: 5 * 60 * 1000, // 5 minutes
-    timeout: 15 * 60 * 1000, // 15 minutes
+    onPrompt: () => openModal('', 'countDown'),
+    promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
+    timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
 
   const onStay = () => {
@@ -41,10 +42,6 @@ export default function MultiModal(props) {
     const minutes = Math.floor(getRemainingTime() / 60000)
     const seconds = Math.floor((getRemainingTime() / 1000) % 60).toFixed(0)
     setTimer({ seconds, minutes })
-
-    if (isPrompted()) {
-      openModal('', 'countDown')
-    }
   }, [getRemainingTime])
 
   useEffect(() => {
@@ -124,4 +121,6 @@ export default function MultiModal(props) {
 MultiModal.propTypes = {
   contentLabel: PropTypes.string,
   closeModal: PropTypes.func,
+  timeout: PropTypes.number,
+  promptBeforeIdle: PropTypes.number,
 }
