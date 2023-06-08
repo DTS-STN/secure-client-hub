@@ -15,12 +15,14 @@ export async function getContactUsContent() {
   const mappedSecurity = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameEn,
-            text: w.scTitleEn,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameEn,
+              text: level.scTitleEn,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scPageNameEn,
       heading: response.data.schPagev1ByPath.item.scTitleEn,
       subHeading: introFragment.scContentEn.json[0].content[0].value,
@@ -30,6 +32,9 @@ export async function getContactUsContent() {
           linkTitle: eiContactFragment.scLinkTextEn,
           linkAssistiveTitle: eiContactFragment.scLinkTextAssistiveEn,
           linkDestination: eiContactFragment.scDestinationURLEn,
+          linkDescription: eiContactFragment.scDescriptionEn.json
+            ? eiContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
@@ -37,6 +42,9 @@ export async function getContactUsContent() {
           linkTitle: cppContactFragment.scLinkTextEn,
           linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveEn,
           linkDestination: cppContactFragment.scDestinationURLEn,
+          linkDescription: cppContactFragment.scDescriptionEn.json
+            ? cppContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: cppContactFragment.schBetaPopUp,
         },
         {
@@ -44,20 +52,23 @@ export async function getContactUsContent() {
           linkTitle: oasContactFragment.scLinkTextEn,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveEn,
           linkDestination: oasContactFragment.scDestinationURLEn,
-          linkDescription:
-            oasContactFragment.scDescriptionEn.json[0].content[0].value,
+          linkDescription: oasContactFragment.scDescriptionEn
+            ? oasContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
           schBetaPopup: oasContactFragment.schBetaPopUp,
         },
       ],
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map((w) => {
-          return {
-            link: w.scPageNameFr,
-            text: w.scTitleFr,
+        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+          (level) => {
+            return {
+              link: level.scPageNameFr,
+              text: level.scTitleFr,
+            }
           }
-        }),
+        ),
       pageName: response.data.schPagev1ByPath.item.scPageNameFr,
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       subHeading: introFragment.scContentFr.json[0].content[0].value,
@@ -67,6 +78,9 @@ export async function getContactUsContent() {
           linkTitle: eiContactFragment.scLinkTextFr,
           linkAssistiveTitle: eiContactFragment.scLinkTextAssistiveFr,
           linkDestination: eiContactFragment.scDestinationURLFr,
+          linkDescription: eiContactFragment.scDescriptionFr.json
+            ? eiContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: eiContactFragment.schBetaPopUp,
         },
         {
@@ -74,6 +88,9 @@ export async function getContactUsContent() {
           linkTitle: cppContactFragment.scLinkTextFr,
           linkAssistiveTitle: cppContactFragment.scLinkTextAssistiveFr,
           linkDestination: cppContactFragment.scDestinationURLFr,
+          linkDescription: cppContactFragment.scDescriptionFr.json
+            ? cppContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: cppContactFragment.schBetaPopUp,
         },
         {
@@ -81,8 +98,9 @@ export async function getContactUsContent() {
           linkTitle: oasContactFragment.scLinkTextFr,
           linkAssistiveTitle: oasContactFragment.scLinkTextAssistiveFr,
           linkDestination: oasContactFragment.scDestinationURLFr,
-          linkDescription:
-            oasContactFragment.scDescriptionFr.json[0].content[0].value,
+          linkDescription: oasContactFragment.scDescriptionFr
+            ? oasContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
           schBetaPopup: oasContactFragment.schBetaPopUp,
         },
       ],

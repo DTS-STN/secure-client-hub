@@ -12,9 +12,18 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import logger from '../lib/logger'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+
+  const pageContent = props.content.content
+  const [privacy, ...termsAndConditions] = pageContent.split(
+    props.locale === 'en'
+      ? /(?=# Terms and conditions of use)/
+      : /(?=# Conditions d’utilisation)/
+  )
 
   return (
     <div className="font-body" data-cy="terms-conditions">
@@ -31,35 +40,68 @@ export default function PrivacyCondition(props) {
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
       />
-      <Markdown
-        options={{
-          overrides: {
-            h1: {
-              props: {
-                className: 'text-3xl font-display font-bold mt-10 mb-3',
+      <section id={t.footerPrivacyAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h1: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                },
+              },
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
               },
             },
-            p: {
-              props: {
-                className: 'mb-3',
+          }}
+        >
+          {privacy}
+        </Markdown>
+      </section>
+      <section id={t.footerTermsAndConditionAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h1: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                },
+              },
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
               },
             },
-            ol: {
-              props: {
-                className:
-                  'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
-              },
-            },
-            a: {
-              props: {
-                className: 'underline text-deep-blue-dark cursor-pointer',
-              },
-            },
-          },
-        }}
-      >
-        {props.content.content}
-      </Markdown>
+          }}
+        >
+          {termsAndConditions[0]}
+        </Markdown>
+      </section>
       <BackToButton
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
@@ -83,6 +125,24 @@ export async function getServerSideProps({ res, locale }) {
     throw error
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
+      logger.error(error)
+      // res.statusCode = 500
+      throw error
+    }
+  )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
     throw error
@@ -144,7 +204,16 @@ export async function getServerSideProps({ res, locale }) {
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

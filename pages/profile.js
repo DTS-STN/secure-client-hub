@@ -7,11 +7,10 @@ import { getProfileContent } from '../graphql/mappers/profile'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import logger from '../lib/logger'
 import ProfileTasks from './../components/ProfileTasks'
-import Modal from 'react-modal'
 import React from 'react'
-import ExitBetaModal from '../components/ExitBetaModal'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
@@ -19,19 +18,6 @@ import { acronym } from '../lib/acronym'
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const [openModalWithLink, setOpenModalWithLink] = React.useState({
-    isOpen: false,
-    activeLink: '/',
-  })
-
-  function openModal(link) {
-    setOpenModalWithLink({ isOpen: true, activeLink: link })
-  }
-
-  function closeModal() {
-    setOpenModalWithLink({ isOpen: false, activeLink: '/' })
-  }
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
   const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
@@ -60,7 +46,7 @@ export default function Profile(props) {
             programTitle={program.title}
             tasks={program.tasks}
             data-testID="profile-task-group-list"
-            openModal={openModal}
+            openModal={props.openModal}
             data-cy="task"
             refPageAA={props.aaPrefix}
           />
@@ -78,24 +64,6 @@ export default function Profile(props) {
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
       ></PageLink>
-      <Modal
-        className="flex justify-center bg-black/75 h-full"
-        isOpen={openModalWithLink.isOpen}
-        onRequestClose={closeModal}
-        contentLabel={t.aria_exit_beta_modal}
-      >
-        <ExitBetaModal
-          closeModal={closeModal}
-          closeModalAria={t.close_modal}
-          continueLink={openModalWithLink.activeLink}
-          popupId={props.popupContentNA.popupId}
-          popupTitle={props.popupContentNA.popupTitle}
-          popupDescription={props.popupContentNA.popupDescription}
-          popupPrimaryBtn={props.popupContentNA.popupPrimaryBtn}
-          popupSecondaryBtn={props.popupContentNA.popupSecondaryBtn}
-          refPageAA={props.aaPrefix}
-        />
-      </Modal>
     </div>
   )
 }
@@ -128,6 +96,12 @@ export async function getServerSideProps({ res, locale }) {
       throw error
     }
   )
+
+  const authModals = await getAuthModalsContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profil' : '/profile'
@@ -175,7 +149,15 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      popupStaySignedIn:
+        locale === 'en'
+          ? authModals.mappedPopupStaySignedIn.en
+          : authModals.mappedPopupStaySignedIn.fr,
+      popupYouHaveBeenSignedout:
+        locale === 'en'
+          ? authModals.mappedPopupSignedOut.en
+          : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

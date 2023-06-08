@@ -53,23 +53,23 @@ function ClickonTaskLinks() {
     .find('a')
     .each(($el1, index, $list) => {
       cy.wrap($el1).click()
-      ExitBetaModal().should('be.visible')
+      ExitBeta().should('be.visible')
       StayOnBetabutton().click()
       cy.wrap($el1).click()
-      ExitBetaModal().should('be.visible')
+      ExitBeta().should('be.visible')
       CloseModalButton().click()
     })
 }
 
-function ExitBetaModal() {
-  return cy.get("[data-cy ='exitBetaModal']")
+function ExitBeta() {
+  return cy.get("[data-cy ='exitBeta']")
 }
 
 function StayOnBetabutton() {
   return cy.get("[id ='stay-on-beta-version']")
 }
 
-function ExitBetaModalButton() {
+function ExitBetaButton() {
   return cy.get("[id ='modal-btn-continue']")
 }
 
@@ -91,8 +91,8 @@ module.exports = {
   ProfileHeader,
   Section,
   ClickonTaskLinks,
-  ExitBetaModal,
+  ExitBeta,
   StayOnBetabutton,
-  ExitBetaModalButton,
+  ExitBetaButton,
   CloseModalButton,
 }

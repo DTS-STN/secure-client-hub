@@ -46,6 +46,17 @@ jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
   },
 }))
 
+jest.mock('../../graphql/mappers/auth-modals', () => ({
+  getAuthModalsContent: () => {
+    return new Promise(function (resolve, reject) {
+      resolve({
+        mappedPopupStaySignedIn: { en: {}, fr: {} },
+        mappedPopupSignedOut: { en: {}, fr: {} },
+      })
+    })
+  },
+}))
+
 jest.mock('../../components/Card', () => () => {
   return <mock-card data-testid="mock-card" />
 })

@@ -19,7 +19,9 @@ jest.mock('next/link', () => ({
 }))
 
 // Children must be passed to test Adobe Analytics through the design system
-const aaChildrenProps = <div content={{ heading: '' }} />
+const aaChildrenProps = (
+  <div content={{ heading: '' }} id="__next" data-reactroot />
+)
 
 expect.extend(toHaveNoViolations)
 
@@ -45,6 +47,12 @@ describe('Layout with default text', () => {
     },
   }
   const display = { hideBanner: true }
+  const popupContentNA = {
+    popupId: '',
+    popupTitle: '',
+    popupDescription: '',
+    popupPrimaryBtn: '',
+  }
 
   useRouter.mockImplementation(() => ({
     pathname: '/',
@@ -58,6 +66,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
@@ -70,6 +79,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     expect(screen.getByRole('main')).toBeInTheDocument()
@@ -92,6 +102,7 @@ describe('Layout with default text', () => {
         meta={meta}
         display={display}
         children={aaChildrenProps}
+        popupContentNA={popupContentNA}
       />
     )
     const results = await axe(container)

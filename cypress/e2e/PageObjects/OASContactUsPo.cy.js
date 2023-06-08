@@ -2,7 +2,7 @@
 import ContactUsOASdata from '../../fixtures/ContactUsOASdata.json'
 
 function OASContactUsHeader() {
-  return cy.get('[data-cy ="oasContactUsContent"]>h1')
+  return cy.get('[data-cy ="ContactUsContent"]>h1')
 }
 
 function ValidateOASContactUsUrl() {
@@ -30,7 +30,7 @@ function ValidateOASContactUsHeaderFR() {
 
 function ValidateOnthisPageLinks() {
   return cy
-    .get('[data-cy ="oasContactUsContent"]>section')
+    .get('[data-cy ="ContactUsContent"]>section')
     .find('a')
     .should('be.visible')
     .and('have.length', '4')
@@ -63,7 +63,7 @@ function ValidateCallbackSectionContent() {
 
 function ValidateEachtableOfContentLink() {
   for (let i = 0; i < ContactUsOASdata.length; i++) {
-    cy.get('[data-cy ="oasContactUsContent"]>section')
+    cy.get('[data-cy ="ContactUsContent"]>section')
       .find('a')
       .each(($el1, index, $list) => {
         const linkText = $el1.find('span').text()
@@ -83,7 +83,7 @@ function ValidateEachSectionOASContactUs() {
 }
 
 function EachContactSection() {
-  return cy.get('[data-cy="oasContactUsContent"]>div')
+  return cy.get('[data-cy="ContactUsContent"]>div')
 }
 
 function ProvinceCard() {

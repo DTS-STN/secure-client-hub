@@ -15,6 +15,7 @@ export default {
     dashboard: 'Mon tableau de bord',
     security: 'Paramètres de sécurité',
     profile: 'Profil',
+    contactUs: 'Contactez-nous',
     signOut: 'Se déconnecter',
   },
   //Heading
@@ -54,7 +55,6 @@ export default {
   login: 'Connexion',
   serviceAndBenefits: 'Service et avantages',
   tools: 'Outils',
-  contactUs: 'Nous contacter',
 
   // Government of Canada symbols
   goc: 'Governement du Canada',
@@ -110,12 +110,14 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'À propos de Canada.ca',
 
-  footerTermsAndConditionURL: '/fr/avis-confidentialite-modalites/',
+  footerTermsAndConditionURL:
+    '/fr/avis-confidentialite-modalites#termesEtConditions',
   footerTermsAndCondition: 'Avis',
+  footerTermsAndConditionAnchor: 'termesEtConditions',
 
-  footerPrivacyURL:
-    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
+  footerPrivacyURL: '/fr/avis-confidentialite-modalites/',
   footerPrivacy: 'Confidentialité',
+  footerPrivacyAnchor: 'confidentialité',
 
   aboutThisSite: 'À propos de ce site',
   topOfPage: 'Haut de la page',
