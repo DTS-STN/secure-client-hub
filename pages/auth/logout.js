@@ -1,12 +1,18 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
 import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
+import { useRouter } from 'next/router'
 
 export default function Logout(props) {
+  const router = useRouter()
+
   //Redirect to ECAS global sign out
   useEffect(() => {
-    window.location.replace(props.logoutURL)
-  }, [props.logoutURL])
+    if (!router.isReady) return
+    if (!router.query.error) {
+      window.location.replace(props.logoutURL)
+    }
+  }, [props.logoutURL, router.isReady, router.query.error])
 
   return (
     <div className="grid h-screen place-items-center">
