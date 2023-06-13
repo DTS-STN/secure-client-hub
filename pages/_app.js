@@ -11,6 +11,9 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getLayout(<Component {...pageProps} />)
   }
 
+  //Test env var
+  console.log(process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL)
+
   Modal.setAppElement('#__next')
   const display = { hideBanner: pageProps.hideBanner }
   /* istanbul ignore next */
