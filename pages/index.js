@@ -5,6 +5,8 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 
 export default function Index(props) {
+  //Test env var
+  console.log(process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL)
   return (
     <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">
       <MetaData language="en" data={props.meta}></MetaData>
