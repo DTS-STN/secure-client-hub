@@ -70,6 +70,6 @@ export default NextAuth({
     },
   },
   pages: {
-    login: '/auth/login',
+    signIn: '/auth/login',
   },
 })
