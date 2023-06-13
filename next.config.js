@@ -82,6 +82,7 @@ module.exports = {
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
     LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+    AUTH_ECAS_GLOBAL_LOGOUT_URL: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL,
   },
   reactStrictMode: true,
   //
