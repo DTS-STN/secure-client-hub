@@ -6,7 +6,6 @@ import {
 } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import MetaData from './MetaData'
-import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -97,9 +96,6 @@ export default function Layout(props) {
           props.children.props.aaPrefix
         }
         menuProps={{
-          onSignOut: () => {
-            signOut()
-          },
           menuList: [
             {
               key: 'dashKey',

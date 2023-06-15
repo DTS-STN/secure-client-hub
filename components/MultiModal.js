@@ -29,8 +29,8 @@ export default function MultiModal(props) {
   const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
     onPrompt: () => openModal('', 'countDown'),
-    promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
-    timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
+    promptBeforeIdle: props.promptBeforeIdle ?? 0.75 * 60 * 1000, // 5 minutes
+    timeout: props.timeout ?? 1 * 60 * 1000, // 15 minutes
   })
 
   const onStay = () => {

@@ -1,18 +1,17 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
 import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
-import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
 
 export default function Logout(props) {
-  const router = useRouter()
-
   //Redirect to ECAS global sign out
   useEffect(() => {
-    if (!router.isReady) return
-    if (!router.query.error) {
+    const logout = async () => {
+      await signOut({ redirect: false })
       window.location.replace(props.logoutURL)
     }
-  }, [props.logoutURL, router.isReady, router.query.error])
+    logout().catch(console.error)
+  }, [props.logoutURL])
 
   return (
     <div className="grid h-screen place-items-center">
@@ -37,7 +36,7 @@ export async function getServerSideProps({ req, res, locale }) {
   return {
     props: {
       locale,
-      logoutURL: logoutURL,
+      logoutURL: logoutURL ?? '/',
     },
   }
 }
