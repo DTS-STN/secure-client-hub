@@ -24,6 +24,7 @@ export default function Card(props) {
         className="pb-6 md:pb-12 md:pt-0.5 px-3 sm:px-8 md:px-15"
         acronym={props.acronym}
         refPageAA={props.refPageAA}
+        ariaLabel={props.cardTitle}
       />
       {!isOpen ? null : (
         <div className="pb-6" data-cy="sectionList">
