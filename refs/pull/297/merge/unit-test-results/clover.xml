@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686922713867" clover="3.2.0">
-  <project timestamp="1686922713867" name="All files">
+<coverage generated="1686922944384" clover="3.2.0">
+  <project timestamp="1686922944384" name="All files">
     <metrics statements="386" coveredstatements="140" conditionals="246" coveredconditionals="60" methods="159" coveredmethods="48" elements="791" coveredelements="248" complexity="0" loc="386" ncloc="386" packages="9" files="40" classes="40"/>
     <package name="components">
       <metrics statements="84" coveredstatements="52" conditionals="84" coveredconditionals="29" methods="33" coveredmethods="15"/>
@@ -445,19 +445,19 @@
       </file>
       <file name="logout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/auth/logout.js">
         <metrics statements="13" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="3"/>
-        <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="29" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages.contact-us">
