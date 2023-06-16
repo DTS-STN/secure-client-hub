@@ -10,6 +10,7 @@ export default function ProfileTasks(props) {
       <ul
         className="w-full grid md:grid-cols-1 items-center pt-3"
         data-cy="task"
+        aria-label={props.programTitle}
       >
         {props.tasks.map((task, index) => {
           return (

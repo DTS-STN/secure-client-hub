@@ -14,6 +14,7 @@ export default function ViewMoreLessButton(props) {
       id={props.id}
       data-testid={props.dataTestid}
       aria-expanded={props.ariaExpanded ?? undefined}
+      aria-label={props.ariaLabel}
     >
       <div className="flex sm:items-center">
         {props.icon ? (
@@ -44,4 +45,5 @@ ViewMoreLessButton.propTypes = {
   ariaExpanded: propTypes.string,
   className: propTypes.string,
   dataCy: propTypes.string,
+  ariaLabel: propTypes.string,
 }
