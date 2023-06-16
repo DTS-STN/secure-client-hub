@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
 import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
+import { signOut } from 'next-auth/react'
 
 export default function Logout(props) {
   //Redirect to ECAS global sign out
