@@ -47,7 +47,7 @@ export default function BenefitTasks(props) {
                       props.openModal(task.link, 'betaModal')
                     }
                   }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
+                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
                   className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
                 >
                   <FontAwesomeIcon

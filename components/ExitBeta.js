@@ -23,7 +23,7 @@ export default function ExitBeta(props) {
           type="button"
           aria-label={props.closeModalAria}
           onClick={props.closeModal}
-          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close-Fermer`}
+          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
         </button>

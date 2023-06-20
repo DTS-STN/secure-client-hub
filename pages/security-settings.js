@@ -58,7 +58,7 @@ export default function SecuritySettings(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID="link-id"
+        linkID={t.backToDashboard.id}
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"

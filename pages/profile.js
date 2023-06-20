@@ -33,7 +33,7 @@ export default function Profile(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
-
+  console.log(props.content.backToDashboard, '00000000000000')
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
@@ -57,7 +57,7 @@ export default function Profile(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID="link-id"
+        linkID={props.content.backToDashboard.id}
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"

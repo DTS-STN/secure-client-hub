@@ -26,6 +26,7 @@ export async function getBetaBannerContent() {
           resOptOutContent.scFragments[1].scDestinationURLEn
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
+      id: resOptOutContent.scFragments[0].scId,
     },
     fr: {
       bannerBoldText: resOptOutContent.scContentFr.json[0].content[0].value,
@@ -42,6 +43,7 @@ export async function getBetaBannerContent() {
           resOptOutContent.scFragments[1].scDestinationURLEn
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
+      id: resOptOutContent.scFragments[0].scId,
     },
   }
 

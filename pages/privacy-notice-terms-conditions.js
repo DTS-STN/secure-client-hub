@@ -107,6 +107,7 @@ export default function PrivacyCondition(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
+        id={t.id}
       />
       <Date id="termsConditionsDateModified" date="20230331" />
     </div>

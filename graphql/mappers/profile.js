@@ -44,6 +44,7 @@ export async function getProfileContent() {
             element.scId === 'oas-profile-list'
           ) {
             return {
+              id: element.scId,
               title: element.scTitleEn,
               tasks: element.scItems.map((item) => {
                 return {
@@ -93,6 +94,7 @@ export async function getProfileContent() {
             element.scId === 'oas-profile-list'
           ) {
             return {
+              id: element.scId,
               title: element.scTitleFr,
               tasks: element.scItems.map((item) => {
                 return {

@@ -60,9 +60,7 @@ export default function Layout(props) {
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
-          bannerButtonExternalText={
-            props.bannerContent.bannerButtonExternalText || ''
-          }
+          id={props.bannerContent.id || ''}
           bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
@@ -99,6 +97,7 @@ export default function Layout(props) {
           menuList: [
             {
               key: 'dashKey',
+              id: 'dash',
               value: t.menuItems.dashboard,
               path: `${
                 props.locale === 'en'
@@ -109,12 +108,14 @@ export default function Layout(props) {
             },
             {
               key: 'profileKey',
+              id: 'profile',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
               component: Link,
             },
             {
               key: 'securityKey',
+              id: 'security',
               value: t.menuItems.security,
               path: `${
                 props.locale === 'en'
@@ -125,6 +126,7 @@ export default function Layout(props) {
             },
             {
               key: 'contactKey',
+              id: 'contact',
               value: t.menuItems.contactUs,
               path: `${
                 props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
@@ -133,6 +135,7 @@ export default function Layout(props) {
             },
             {
               key: 'signOutKey',
+              id: 'signOut',
               value: t.menuItems.signOut,
               path: '/auth/logout',
               component: Link,
