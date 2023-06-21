@@ -41,14 +41,14 @@ export default function ExitBeta(props) {
         />
         {/* Using anchor tag due to ref errors
         continueLink is always external so NextJS routing can be ignored */}
-        <a href={props.continueLink}>
-          <Button
-            className="w-full block mt-6 md:mt-0 md:w-fit"
-            id={props.popupPrimaryBtn.id}
-            styling="primary"
-            text={props.popupPrimaryBtn.text}
-          />
-        </a>
+        <Button
+          className="w-full block mt-6 md:mt-0 md:w-fit"
+          id={props.popupPrimaryBtn.id}
+          styling="primary"
+          text={''}
+        >
+          <a href={props.continueLink}>{props.popupPrimaryBtn.text}</a>
+        </Button>
       </div>
     </div>
   )
