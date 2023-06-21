@@ -23,6 +23,7 @@ export async function getPrivacyConditionContent() {
             return {
               link: level.scPageNameEn,
               text: level.scTitleEn,
+              id: level.scId,
             }
           }
         ),
@@ -42,6 +43,7 @@ export async function getPrivacyConditionContent() {
             return {
               link: level.scPageNameFr,
               text: level.scTitleFr,
+              id: level.scId,
             }
           }
         ),

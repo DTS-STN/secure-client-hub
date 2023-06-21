@@ -33,7 +33,7 @@ export default function Profile(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
-  console.log(props.content.backToDashboard, '00000000000000')
+
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
@@ -63,6 +63,8 @@ export default function Profile(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
+        dashId={t.id_dashboard}
+        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
@@ -149,7 +151,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

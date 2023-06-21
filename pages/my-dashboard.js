@@ -35,7 +35,7 @@ export default function MyDashboard(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
-  console.log(props.content, 'kkkkkkkkkkkk')
+
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
