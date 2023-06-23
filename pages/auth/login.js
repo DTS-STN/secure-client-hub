@@ -38,7 +38,6 @@ export async function getServerSideProps({ req, res, locale }) {
 
   return {
     props: {
-      locale,
       authDisabled: authDisabled ?? true,
     },
   }
