@@ -24,7 +24,7 @@ export default function Login(props) {
     }
   }, [router.isReady, props.authDisabled, router])
   return (
-    <div className="grid h-screen place-items-center" id="loading-spinner">
+    <div className="grid h-screen place-items-center" data-cy="loading-spinner">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
     </div>
   )

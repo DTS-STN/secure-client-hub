@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe('Validate login page', () => {
   it('Lands on login page and displays loading spinner', () => {
-    const spinner = cy.get('[id="loading-spinner"]')
+    const spinner = cy.get('[data-cy="loading-spinner"]')
     spinner
       .should('be.visible')
       .and('have.text', 'Loading / Chargement en cours ...')
