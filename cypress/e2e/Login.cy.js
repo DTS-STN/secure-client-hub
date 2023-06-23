@@ -7,13 +7,13 @@ beforeEach(() => {
 
 describe('Validate login page', () => {
   it('Lands on login page and displays loading spinner', () => {
-    const spinner = cy.get('[data-cy="loading-spinner"]')
+    const spinner = cy.get('[id="loading-spinner"]')
     spinner
       .should('be.visible')
       .and('have.text', 'Loading / Chargement en cours ...')
   })
   it('Redirects to dashboard', () => {
-    cy.wait(5000)
+    cy.wait(2000)
     cy.url().should('contains', '/my-dashboard')
   })
 })

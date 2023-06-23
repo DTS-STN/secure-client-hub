@@ -13,7 +13,9 @@ export default function Login(props) {
     if (!router.query.error) {
       //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
       if (props.authDisabled) {
-        router.push('/my-dashboard')
+        setTimeout(() => {
+          router.push('/my-dashboard')
+        }, 3000)
         return
       }
       signIn('ecasProvider', {
@@ -22,7 +24,7 @@ export default function Login(props) {
     }
   }, [router.isReady, props.authDisabled, router])
   return (
-    <div className="grid h-screen place-items-center" data-cy="loading-spinner">
+    <div className="grid h-screen place-items-center" id="loading-spinner">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
     </div>
   )
