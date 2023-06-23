@@ -20,7 +20,7 @@ export default function Login(props) {
         callbackUrl: `${window.location.origin}/my-dashboard`,
       })
     }
-  }, [router.isReady])
+  }, [router.isReady, props.authDisabled, router])
   return (
     <div className="grid h-screen place-items-center" data-cy="loading-spinner">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
