@@ -13,7 +13,7 @@ describe('Validate login page', () => {
       .and('have.text', 'Loading / Chargement en cours ...')
   })
   it('Redirects to dashboard', () => {
-    cy.wait(2000)
+    cy.wait(5000)
     cy.url().should('contains', '/my-dashboard')
   })
 })

@@ -5,8 +5,8 @@ beforeEach(() => {
   cy.visit('/auth/logout')
 })
 
-describe('Validate login page', () => {
-  it('Lands on login page and displays loading spinner', () => {
+describe('Validate logout page', () => {
+  it('Lands on logout page and displays loading spinner', () => {
     const spinner = cy.get('[data-cy="loading-spinner"]')
     spinner
       .should('be.visible')
