@@ -14,7 +14,7 @@ export default function Logout(props) {
   }, [props.logoutURL])
 
   return (
-    <div className="grid h-screen place-items-center">
+    <div className="grid h-screen place-items-center" data-cy="loading-spinner">
       <LoadingSpinner text="Loading / Chargement en cours ..." />
     </div>
   )
