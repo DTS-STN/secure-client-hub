@@ -11,6 +11,13 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
+//mock auth function
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return true
+  },
+}))
+
 describe('login page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
