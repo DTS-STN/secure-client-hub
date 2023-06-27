@@ -25,7 +25,7 @@ export default function ProfileTasks(props) {
                       props.openModal(task.link, 'betaModal')
                     }
                   }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
+                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
                 >
                   <FontAwesomeIcon
                     icon={

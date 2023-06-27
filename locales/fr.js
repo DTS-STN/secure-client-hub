@@ -131,6 +131,7 @@ export default {
   url_serviceCanada:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   url_dashboard: '/fr/mon-tableau-de-bord',
+  id_dashboard: 'my-dashboard',
   aria_exit_beta_modal: 'Exiting beta warning modal',
   close_modal: 'Fermer modal',
 }

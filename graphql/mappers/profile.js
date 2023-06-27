@@ -44,6 +44,7 @@ export async function getProfileContent() {
             element.scId === 'oas-profile-list'
           ) {
             return {
+              id: element.scId,
               title: element.scTitleEn,
               tasks: element.scItems.map((item) => {
                 return {
@@ -66,6 +67,7 @@ export async function getProfileContent() {
           enLookingForFragment.json[1].content[1].value,
         ],
         link: 'security-settings',
+        id: 'security-settings',
       },
       backToDashboard: {
         id: backToDashboardFragment.scId,
@@ -93,6 +95,7 @@ export async function getProfileContent() {
             element.scId === 'oas-profile-list'
           ) {
             return {
+              id: element.scId,
               title: element.scTitleFr,
               tasks: element.scItems.map((item) => {
                 return {
@@ -115,6 +118,7 @@ export async function getProfileContent() {
           frLookingForFragment.json[1].content[1].value,
         ],
         link: 'parametres-securite',
+        id: 'security-settings',
       },
       backToDashboard: {
         id: backToDashboardFragment.scId,

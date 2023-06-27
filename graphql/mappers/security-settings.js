@@ -53,6 +53,7 @@ export async function getSecuritySettingsContent() {
           return element.value || null
         }),
         link: '/profile',
+        id: 'profile',
       },
       securityQuestions: {
         linkTitle: {
@@ -94,6 +95,7 @@ export async function getSecuritySettingsContent() {
           return element.value || null
         }),
         link: '/fr/profil',
+        id: 'profile',
       },
       securityQuestions: {
         linkTitle: {

@@ -68,7 +68,7 @@ export default function MyDashboard(props) {
             >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="" key={index} data-cy="Task">
+                  <div key={index} data-cy="Task">
                     <BenefitTasks
                       acronym={acronym(card.title)}
                       taskList={taskList}

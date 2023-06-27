@@ -21,7 +21,7 @@ export default function PageLink(props) {
             <a
               id={`link-for-${linkID}`}
               data-cy={props.dataCy}
-              data-gc-analytics-customclick={`${props.refPageAA}:${props.linkText}`}
+              data-gc-analytics-customclick={`${props.refPageAA}:${props.linkId}`}
               className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
             >
               {props.linkText}
@@ -35,6 +35,7 @@ export default function PageLink(props) {
           buttonId={props.buttonId}
           buttonLinkText={props.buttonLinkText}
           refPageAA={props.refPageAA}
+          id={props.dashId}
         />
       </div>
     </>

@@ -57,12 +57,14 @@ export default function Profile(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID="link-id"
+        linkID={props.content.backToDashboard.id}
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
+        dashId={t.id_dashboard}
+        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
@@ -149,7 +151,7 @@ export async function getServerSideProps({ res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

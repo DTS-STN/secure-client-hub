@@ -16,12 +16,14 @@ export async function getPrivacyConditionContent() {
 
   const mappedPrivacyConditions = {
     en: {
+      id: response.data.schPagev1ByPath.item.scId,
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
               text: level.scTitleEn,
+              id: level.scId,
             }
           }
         ),
@@ -34,12 +36,14 @@ export async function getPrivacyConditionContent() {
       content: privacyTermsConditionsFragment.scContentEn.markdown,
     },
     fr: {
+      id: response.data.schPagev1ByPath.item.scId,
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
               text: level.scTitleFr,
+              id: level.scId,
             }
           }
         ),
