@@ -39,15 +39,15 @@ export default function ExitBeta(props) {
           onClick={props.closeModal}
           text={props.popupSecondaryBtn.text}
         />
-        {/* Using anchor tag due to ref errors
-        continueLink is always external so NextJS routing can be ignored */}
-        <a
-          href={props.continueLink}
-          id={props.popupPrimaryBtn.id}
-          className="flex justify-center align-middle text-lg py-2 px-4 mt-6 bg-deep-blue-medium text-white font-body rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
-        >
-          {props.popupPrimaryBtn.text}
-        </a>
+        <form action={props.continueLink}>
+          <Button
+            className="w-full block mt-6 md:mt-0 md:w-fit bg-blue-primary"
+            id={props.popupPrimaryBtn.id}
+            styling="primary"
+            text={props.popupPrimaryBtn.text}
+            type="submit"
+          />
+        </form>
       </div>
     </div>
   )
