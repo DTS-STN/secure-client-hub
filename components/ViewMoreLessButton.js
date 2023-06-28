@@ -6,7 +6,7 @@ export default function ViewMoreLessButton(props) {
   return (
     <button
       className={
-        'text-xl leading-8 text-deep-blue-60d hover:text-blue-hover ' +
+        'text-xl leading-8 text-deep-blue-60d hover:text-blue-hover focus:text-blue-hover ' +
         props.className
       }
       data-cy={props.dataCy}
@@ -30,7 +30,7 @@ export default function ViewMoreLessButton(props) {
             data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Expand`}
           />
         )}
-        <span className="text-left underline font-body">{props.caption}</span>
+        <span className="text-left font-body">{props.caption}</span>
       </div>
     </button>
   )

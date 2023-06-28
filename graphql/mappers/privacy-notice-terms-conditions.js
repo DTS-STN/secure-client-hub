@@ -51,7 +51,7 @@ export async function getPrivacyConditionContent() {
       heading: response.data.schPagev1ByPath.item.scTitleFr,
       alert: {
         type: 'info',
-        text: alertFragment.scContentEn.markdown,
+        text: alertFragment.scContentFr.markdown,
       },
       content: privacyTermsConditionsFragment.scContentFr.markdown,
     },
