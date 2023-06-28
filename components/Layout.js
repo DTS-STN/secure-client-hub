@@ -22,7 +22,6 @@ export default function Layout(props) {
   const [openModalWithLink, setOpenModalWithLink] = useState({
     activeLink: '/',
     context: null,
-    contentLabel: null,
   })
 
   const openModal = (link, context) => {
@@ -31,7 +30,6 @@ export default function Layout(props) {
         isOpen: true,
         activeLink: link,
         context,
-        contentLabel: null,
       }
     })
   }
@@ -42,7 +40,6 @@ export default function Layout(props) {
         isOpen: false,
         activeLink: '/',
         context: null,
-        contentLabel: null,
       }
     })
   }
