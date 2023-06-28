@@ -21,8 +21,8 @@ export default function PrivacyCondition(props) {
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
-      ? /(?=# Terms and conditions of use)/
-      : /(?=# Conditions d’utilisation)/
+      ? /(?=## Terms and conditions of use)/
+      : /(?=## Conditions d’utilisation)/
   )
 
   return (
@@ -44,7 +44,7 @@ export default function PrivacyCondition(props) {
         <Markdown
           options={{
             overrides: {
-              h1: {
+              h2: {
                 props: {
                   className: 'text-3xl font-display font-bold mt-10 mb-3',
                 },
@@ -75,7 +75,7 @@ export default function PrivacyCondition(props) {
         <Markdown
           options={{
             overrides: {
-              h1: {
+              h2: {
                 props: {
                   className: 'text-3xl font-display font-bold mt-10 mb-3',
                 },
