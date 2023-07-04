@@ -31,7 +31,7 @@ export default function PhaseBanner(props) {
             rel={
               props.bannerButtonExternalLink ? 'noopener noreferrer' : undefined
             }
-            data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.bannerButtonExternalText}`}
+            data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
           >
             <span className="mr-2 underline">{props.bannerLink}</span>
             {props.bannerButtonExternalLink && (

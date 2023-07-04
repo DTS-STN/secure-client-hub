@@ -6,7 +6,6 @@ import {
 } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import MetaData from './MetaData'
-import { signOut } from 'next-auth/react'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -23,7 +22,6 @@ export default function Layout(props) {
   const [openModalWithLink, setOpenModalWithLink] = useState({
     activeLink: '/',
     context: null,
-    contentLabel: null,
   })
 
   const openModal = (link, context) => {
@@ -32,7 +30,6 @@ export default function Layout(props) {
         isOpen: true,
         activeLink: link,
         context,
-        contentLabel: null,
       }
     })
   }
@@ -43,7 +40,6 @@ export default function Layout(props) {
         isOpen: false,
         activeLink: '/',
         context: null,
-        contentLabel: null,
       }
     })
   }
@@ -61,9 +57,7 @@ export default function Layout(props) {
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
-          bannerButtonExternalText={
-            props.bannerContent.bannerButtonExternalText || ''
-          }
+          id={props.bannerContent.id || ''}
           bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
@@ -97,12 +91,10 @@ export default function Layout(props) {
           props.children.props.aaPrefix
         }
         menuProps={{
-          onSignOut: () => {
-            signOut()
-          },
           menuList: [
             {
               key: 'dashKey',
+              id: 'dash',
               value: t.menuItems.dashboard,
               path: `${
                 props.locale === 'en'
@@ -113,12 +105,14 @@ export default function Layout(props) {
             },
             {
               key: 'profileKey',
+              id: 'profile',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
               component: Link,
             },
             {
               key: 'securityKey',
+              id: 'security',
               value: t.menuItems.security,
               path: `${
                 props.locale === 'en'
@@ -129,6 +123,7 @@ export default function Layout(props) {
             },
             {
               key: 'contactKey',
+              id: 'contact',
               value: t.menuItems.contactUs,
               path: `${
                 props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
@@ -137,6 +132,7 @@ export default function Layout(props) {
             },
             {
               key: 'signOutKey',
+              id: 'signOut',
               value: t.menuItems.signOut,
               path: '/auth/logout',
               component: Link,

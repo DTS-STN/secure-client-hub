@@ -59,12 +59,6 @@
                       schIntroFr {
                           markdown
                       }
-                      schHoursDetailsFr {
-                          markdown
-                      }
-                      schLocationLabelEn {
-                          markdown
-                      }
                       schDetails 
                           {
                               ... on SCHListv1Model {

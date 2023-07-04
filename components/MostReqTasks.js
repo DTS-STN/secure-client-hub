@@ -24,8 +24,8 @@ export default function MostReqTasks(props) {
                       props.openModal(task.link, 'betaModal')
                     }
                   }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
-                  className="flex items-center underline pl-2 text-white hover:text-gray-50a"
+                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                  className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
                 >
                   <FontAwesomeIcon
                     icon={

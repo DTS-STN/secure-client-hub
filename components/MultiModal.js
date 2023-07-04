@@ -20,7 +20,7 @@ export default function MultiModal(props) {
   } = props
 
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
-  let modalBody
+  let modalBody, contentLabel
 
   const handleOnIdle = () => {
     Router.push('/auth/logout')
@@ -67,6 +67,7 @@ export default function MultiModal(props) {
           refPageAA={aaPrefix}
         />
       )
+      contentLabel = popupContentNA.popupTitle
       break
     case 'betaBannerModal':
       modalBody = (
@@ -82,6 +83,7 @@ export default function MultiModal(props) {
           refPageAA={aaPrefix}
         />
       )
+      contentLabel = popupContent.popupTitle
       break
     case 'countDown':
       modalBody = (
@@ -96,6 +98,7 @@ export default function MultiModal(props) {
           refPageAA={aaPrefix}
         />
       )
+      contentLabel = popupStaySignedIn.bannerHeading
       break
     default:
       // code block
@@ -108,7 +111,7 @@ export default function MultiModal(props) {
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.context != null}
         onRequestClose={closeModal}
-        contentLabel={openModalWithLink.contentLabel}
+        contentLabel={contentLabel}
       >
         <FocusOn enabled={openModalWithLink.context != null}>
           {modalBody}

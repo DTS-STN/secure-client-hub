@@ -23,7 +23,7 @@ export default function ExitBeta(props) {
           type="button"
           aria-label={props.closeModalAria}
           onClick={props.closeModal}
-          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close-Fermer`}
+          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
         </button>
@@ -41,13 +41,12 @@ export default function ExitBeta(props) {
         />
         {/* Using anchor tag due to ref errors
         continueLink is always external so NextJS routing can be ignored */}
-        <a href={props.continueLink}>
-          <Button
-            className="w-full block mt-6 md:mt-0 md:w-fit"
-            id={props.popupPrimaryBtn.id}
-            styling="primary"
-            text={props.popupPrimaryBtn.text}
-          />
+        <a
+          href={props.continueLink}
+          id={props.popupPrimaryBtn.id}
+          className="flex justify-center align-middle text-lg py-2 px-4 mt-6 bg-deep-blue-medium text-white font-body rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
+        >
+          {props.popupPrimaryBtn.text}
         </a>
       </div>
     </div>

@@ -47,6 +47,7 @@
                                     scTitleFr
                                     scItems {
                                         ... on SCHTaskv1Model{
+                                            scId
                                             scLinkTextEn
                                             scLinkTextFr
                                             scLinkTextAssistiveEn
