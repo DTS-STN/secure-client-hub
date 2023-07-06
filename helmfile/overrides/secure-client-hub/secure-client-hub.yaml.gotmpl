@@ -42,6 +42,21 @@ service:
     prometheus.io/scrape: "true"
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
+ingress:
+    enabled: true
+    annotations: 
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      appgw.ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.class: azure/application-gateway
+    tls:
+      - hosts:
+          - {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+        secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+    hosts:
+    - host: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
 resources:
   requests:
     cpu: 200m
