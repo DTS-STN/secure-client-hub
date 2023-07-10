@@ -37,8 +37,8 @@ export default function MultiModal(props) {
       click()
       openModal('', 'countDown')
     },
-    promptBeforeIdle: props.promptBeforeIdle ?? 1 * 60 * 1000, // 5 minutes
-    timeout: props.timeout ?? 2 * 60 * 1000, // 15 minutes
+    promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
+    timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
 
   const onStay = () => {
