@@ -3,7 +3,7 @@ name: Pull Request Helper
 on:
   pull_request:
   push:
-      branches: [main]
+      branches: [dev, main]
 
 jobs:
   comment_pr:

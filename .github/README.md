@@ -13,6 +13,11 @@ This project uses
 - [Jest](https://jestjs.io/) for unit testing ![Jest Version (dev dependancy)](https://img.shields.io/github/package-json/dependency-version/DTS-STN/secure-client-hub/dev/jest)
 - [Cypress](https://www.cypress.io/) for end-to-end testing. ![Cypress Version (dev dependancy)](https://img.shields.io/github/package-json/dependency-version/DTS-STN/secure-client-hub/dev/cypress)
 
+## Click to view the test reports for DEV 👩‍🔬 🧪
+
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/sc-digital-centre/End-To-End%20Tests/dev?label=End-To-End%20Tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/e2e-test-report/?event=push)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/sc-digital-centre/Unit%20Checks/dev?label=Lint%20and%20Unit%20Checks)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/unit-test-results/lcov-report/)
+
 ## Test reports for Main 👩‍🔬 🧪
 
 [![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/?event=push)
