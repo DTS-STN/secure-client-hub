@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1689085908232" clover="3.2.0">
-  <project timestamp="1689085908232" name="All files">
+<coverage generated="1689089702631" clover="3.2.0">
+  <project timestamp="1689089702632" name="All files">
     <metrics statements="376" coveredstatements="138" conditionals="248" coveredconditionals="60" methods="155" coveredmethods="48" elements="779" coveredelements="246" complexity="0" loc="376" ncloc="376" packages="9" files="39" classes="39"/>
     <package name="components">
       <metrics statements="87" coveredstatements="52" conditionals="84" coveredconditionals="29" methods="33" coveredmethods="15"/>
@@ -35,7 +35,7 @@
       </file>
       <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="56" count="3" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
@@ -52,8 +52,8 @@
         <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="47" count="3" type="stmt"/>
-        <line num="199" count="2" type="stmt"/>
-        <line num="236" count="2" type="stmt"/>
+        <line num="198" count="2" type="stmt"/>
+        <line num="235" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -111,7 +111,7 @@
       </file>
       <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
         <metrics statements="4" coveredstatements="2" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
-        <line num="12" count="3" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="61" count="3" type="stmt"/>
@@ -168,7 +168,7 @@
       <file name="CountDown.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/sessionModals/CountDown.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="6" count="3" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.skeletons">
