@@ -1,6 +1,6 @@
-# Secure Client Hub.
+# Service Canada Client Hub
 
-Secure Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
+Service Canada Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
 
 This application is not released yet.
 
@@ -15,7 +15,7 @@ This project uses
 
 ## Test reports for Main 👩‍🔬 🧪
 
-[![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/)
+[![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/?event=push)
 [![Jest Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/Lint%20and%20Test?label=Jest)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/unit-test-results/lcov-report/)
 
 ![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
