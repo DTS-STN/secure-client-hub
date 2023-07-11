@@ -17,6 +17,8 @@ This project uses
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=dev?label=End-To-End%20Tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/e2e-test-report/?event=push)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=dev?label=Lint%20and%20Unit%20Checks)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/unit-test-results/lcov-report/?event=push)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-test.yml/dev?label=Lint%20and%20Unit%20Checks)](https://dts-stn.github.io/secure-client-hub/dev/coverage/lcov-report)
+![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fdev%2Fcoverage%2Fcoverage-summary.json)
 
 ## Test reports for Main 👩‍🔬 🧪
 
