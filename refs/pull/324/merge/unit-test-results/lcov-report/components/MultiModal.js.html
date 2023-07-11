@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.66% </span>
+                <span class="strong">55.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/30</span>
+                <span class='fraction'>19/34</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.66% </span>
+                <span class="strong">55.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/30</span>
+                <span class='fraction'>19/34</span>
             </div>
         
             
@@ -192,7 +192,16 @@
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -214,6 +223,11 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -222,7 +236,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -300,6 +317,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,7 +341,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import ExitBeta from './ExitBeta'
 import { useIdleTimer } from 'react-idle-timer'
 import CountDown from './sessionModals/CountDown'
@@ -343,15 +361,23 @@ export default function MultiModal(props) {
   } = props
 &nbsp;
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
+  const clicker = useRef(null)
   let modalBody, contentLabel
 &nbsp;
   const handleOnIdle = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    Router.push('/auth/logout')</span>
   }
 &nbsp;
+  const click = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    clicker.current.click()</span>
+  }
+&nbsp;
   const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    onPrompt: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >openModal('', 'countDown'),</span>
+    onPrompt: <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      click()</span>
+<span class="cstat-no" title="statement not covered" >      openModal('', 'countDown')</span>
+    },
     promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
     timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
@@ -430,6 +456,7 @@ export default function MultiModal(props) {
 &nbsp;
   return (
     &lt;&gt;
+      &lt;div ref={clicker} /&gt;
       &lt;Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.context != null}
@@ -457,7 +484,7 @@ MultiModal.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-11T17:13:44.134Z
+                at 2023-07-11T19:31:35.150Z
             </div>
         <script src="../prettify.js"></script>
         <script>
