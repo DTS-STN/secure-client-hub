@@ -15,9 +15,9 @@ This project uses
 
 ## Click to view the test reports for DEV 👩‍🔬 🧪
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=dev?label=End-To-End%20Tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/e2e-test-report/?event=push)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=dev&event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/unit-test-results/lcov-report/?event=push)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-test.yml/dev?event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/dev/coverage/lcov-report)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?label=E2E%20tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/e2e-test-report/?event=push)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/pr-helper.yml?event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/unit-test-results/lcov-report/?event=push)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-test.yml/?branch=dev&event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/dev/coverage/lcov-report)
 
 ## Test reports for Main 👩‍🔬 🧪
 
