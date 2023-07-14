@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     #dependabot doesn't get write access
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - uses: actions/download-artifact@v3
       with:
@@ -154,12 +154,14 @@ jobs:
         CI: true
 
     - name: Deploy Report 🚀
+      if: ${{ github.event_name == 'pull_request' }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         target-folder: ${{ github.ref }}
         folder: test_results
-
+    
     - name: Deploy Report to GHpages 🚀
+      if: ${{ github.event_name != 'pull_request' }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
           branch: gh-pages
