@@ -154,15 +154,16 @@ jobs:
         CI: true
 
     - name: Deploy Report 🚀
-      if: ${{ github.event_name == 'pull_request' }}
+      if: github.event_name == 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         target-folder: ${{ github.ref }}
         folder: test_results
     
-    - name: Deploy Report to GHpages 🚀
-      if: ${{ github.event_name != 'pull_request' }}
+    - name: Deploy Report if push 🚀
+      if: github.event_name != 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
+          TARGET_FOLDER: ${{ github.head_ref }}/
           branch: gh-pages
           folder: test_results
