@@ -18,7 +18,11 @@ This project uses
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?label=E2E%20tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/e2e-test-report/?event=push)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/refs/heads/dev/unit-test-results/lcov-report/)
 
+[![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=dev)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
+
 ## Test reports for Main 👩‍🔬 🧪
+
+[![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=main)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
 
 [![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=main?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/?event=push)
 [![Jest Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=main?label=Jest)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/unit-test-results/lcov-report/)

@@ -3,6 +3,8 @@ name: Default Testing
 on: 
   pull_request:
     branches: [dev, main, release*]
+  push:
+      branches: [dev, main]
 
 jobs:
   lint:
@@ -156,3 +158,9 @@ jobs:
       with:
         target-folder: ${{ github.ref }}
         folder: test_results
+
+    - name: Deploy Report to GHpages 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+          branch: gh-pages
+          folder: test_results
