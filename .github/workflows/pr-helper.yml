@@ -2,8 +2,6 @@ name: Pull Request Helper
 
 on:
   pull_request:
-  push:
-      branches: [dev, main]
 
 jobs:
   comment_pr:
