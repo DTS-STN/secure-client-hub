@@ -164,6 +164,6 @@ jobs:
       if: github.event_name != 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-          TARGET_FOLDER: ${{ github.head_ref }}/
+          target-folder: ${{ github.head_ref }}/${{ github.base_ref}}/
           branch: gh-pages
           folder: test_results
