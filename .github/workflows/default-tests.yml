@@ -157,14 +157,14 @@ jobs:
       if: github.event_name == 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        target-folder: ${{ github.ref }}
+        target-folder: ${{ github.ref }} #source branch
         folder: test_results
     
     - name: Deploy Report if push 🚀
       if: github.event_name != 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-          target-folder: ${{ github.ref_name }}/
+          target-folder: ${{ github.ref_name }}/  #target branch of the PR run will be the folder name used for gh-pages
           branch: gh-pages
           folder: test_results
           clean: false
