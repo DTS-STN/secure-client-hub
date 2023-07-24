@@ -15,7 +15,7 @@ This project uses
 
 ## Click to view the test reports for DEV 👩‍🔬 🧪
 
-[![GitHub Workflow Status](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=dev&label=E2E%20tests)](https://dts-stn.github.io/secure-client-hub/dev/e2e-test-report/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&label=E2E%20tests)](https://dts-stn.github.io/secure-client-hub/dev/e2e-test-report/)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/dev/unit-test-results/lcov-report/)
 
 [![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=dev)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
@@ -25,7 +25,7 @@ This project uses
 [![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=main)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
 
 [![end-to-end Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=main&label=E2E)](https://dts-stn.github.io/secure-client-hub/main/e2e-test-report/)
-[![Jest Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=main&label=Jest)](https://dts-stn.github.io/secure-client-hub/main/unit-test-results/lcov-report/)
+[![Jest Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&branch=main&label=Jest)](https://dts-stn.github.io/secure-client-hub/main/unit-test-results/lcov-report/)
 
 ![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
 ![Statements Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Statement%20Coverage&query=%24.total.statements.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
