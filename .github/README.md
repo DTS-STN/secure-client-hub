@@ -1,6 +1,6 @@
-# Secure Client Hub.
+# Service Canada Client Hub
 
-Secure Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
+Service Canada Client Hub for Service Canada users accessing benefit details in a unified and consistent experience.
 
 This application is not released yet.
 
@@ -13,15 +13,24 @@ This project uses
 - [Jest](https://jestjs.io/) for unit testing ![Jest Version (dev dependancy)](https://img.shields.io/github/package-json/dependency-version/DTS-STN/secure-client-hub/dev/jest)
 - [Cypress](https://www.cypress.io/) for end-to-end testing. ![Cypress Version (dev dependancy)](https://img.shields.io/github/package-json/dependency-version/DTS-STN/secure-client-hub/dev/cypress)
 
+## Click to view the test reports for DEV 👩‍🔬 🧪
+
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&label=E2E%20tests)](https://dts-stn.github.io/secure-client-hub/dev/e2e-test-report/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&label=Unit%20tests)](https://dts-stn.github.io/secure-client-hub/dev/unit-test-results/lcov-report/)
+
+[![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=dev)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
+
 ## Test reports for Main 👩‍🔬 🧪
 
-[![end-to-end Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/E2E%20Test?label=E2E)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/e2e-test-report/)
-[![Jest Workflow Status](https://img.shields.io/github/workflow/status/DTS-STN/next-template/Lint%20and%20Test?label=Jest)](https://dts-stn.github.io/secure-client-hub/refs/heads/main/unit-test-results/lcov-report/)
+[![Default Testing](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml/badge.svg?branch=main)](https://github.com/DTS-STN/secure-client-hub/actions/workflows/default-tests.yml)
 
-![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
-![Statements Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Statement%20Coverage&query=%24.total.statements.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
-![Function Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Function%20Coverage&query=%24.total.functions.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
-![Branch Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Branch%20Coverage&query=%24.total.branches.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Frefs%2Fheads%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
+[![end-to-end Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?branch=main&label=E2E)](https://dts-stn.github.io/secure-client-hub/main/e2e-test-report/)
+[![Jest Workflow Status](https://img.shields.io/github/actions/workflow/status/DTS-STN/secure-client-hub/default-tests.yml?event=push&branch=main&label=Jest)](https://dts-stn.github.io/secure-client-hub/main/unit-test-results/lcov-report/)
+
+![Line Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Line%20Coverage&query=%24.total.lines.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
+![Statements Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Statement%20Coverage&query=%24.total.statements.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
+![Function Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Function%20Coverage&query=%24.total.functions.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
+![Branch Coverage Badge](https://img.shields.io/badge/dynamic/json?label=Branch%20Coverage&query=%24.total.branches.pct&suffix=%25&url=https%3A%2F%2Fdts-stn.github.io%2Fsecure-client-hub%2Fmain%2Funit-test-results%2Fcoverage-summary.json)
 
 ## Getting Started
 

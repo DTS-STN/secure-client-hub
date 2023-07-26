@@ -70,7 +70,6 @@ export default function Layout(props) {
         ></PhaseBanner>
       )}
       <Header
-        // analyticsTracking
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
