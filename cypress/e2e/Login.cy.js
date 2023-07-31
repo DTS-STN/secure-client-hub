@@ -5,6 +5,11 @@ beforeEach(() => {
   cy.visit('/auth/login')
 })
 
+it.only('Dashboard has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate login page', () => {
   it('Lands on login page and displays loading spinner', () => {
     cy.get('[data-cy="loading-spinner"]')

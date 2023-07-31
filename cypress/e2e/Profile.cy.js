@@ -8,6 +8,11 @@ beforeEach(() => {
   cy.visit('/profile')
 })
 
+it.only('Dashboard has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate Profile page', () => {
   it('Validate Profile Page header in English', () => {
     profilePo.ProfileUrlEN()

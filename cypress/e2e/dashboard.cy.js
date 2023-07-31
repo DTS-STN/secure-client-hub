@@ -8,6 +8,11 @@ beforeEach(() => {
   cy.visit('/my-dashboard')
 })
 
+it.only('Dashboard has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate dashboard page', () => {
   it('Validate dashboard URL and Header in EN and FR', () => {
     dashboardPo.ValidateDashboardUrl()

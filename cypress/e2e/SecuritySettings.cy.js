@@ -7,6 +7,11 @@ beforeEach(() => {
   cy.visit('/security-settings')
 })
 
+it.only('Dashboard has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate Security Settings page', () => {
   it('Validate Security Settings Page header in English', () => {
     securityPo.SecurityHeaderEN()

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
 import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
 import { signOut } from 'next-auth/react'
+import Head from 'next/head'
 
 export default function Logout(props) {
   //Redirect to ECAS global sign out
@@ -14,8 +15,19 @@ export default function Logout(props) {
   }, [props.logoutURL])
 
   return (
-    <div className="grid h-screen place-items-center" data-cy="loading-spinner">
-      <LoadingSpinner text="Loading / Chargement en cours ..." />
+    <div role="main">
+      <Head>
+        {' '}
+        <title>Loading-Chargement en cours</title>
+      </Head>
+      <h1
+        className="grid h-screen place-items-center"
+        data-cy="loading-spinner"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <LoadingSpinner text="Loading / Chargement en cours ..." />
+      </h1>
     </div>
   )
 }

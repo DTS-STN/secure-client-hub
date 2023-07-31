@@ -9,6 +9,11 @@ beforeEach(() => {
   cy.visit('/contact-us/contact-employment-insurance')
 })
 
+it.only('Dashboard has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate EI Contact Us Landing page', () => {
   it('Validate EI Contact us URL and header in EN', () => {
     EIcontactUs.ValidateEIContactUsUrl()
