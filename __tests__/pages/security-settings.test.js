@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import PrivacyCondition from '../../pages/privacy-notice-terms-conditions'
-import { getServerSideProps } from '../../pages/privacy-notice-terms-conditions'
+import SecuritySettings from '../../pages/security-settings'
+import { getServerSideProps } from '../../pages/security-settings'
 
 import { useRouter } from 'next/router'
 
@@ -25,8 +25,8 @@ jest.mock('../../lib/auth', () => ({
 }))
 
 // mocks home mapper
-jest.mock('../../graphql/mappers/privacy-notice-terms-conditions', () => ({
-  getPrivacyConditionContent: () => {
+jest.mock('../../graphql/mappers/security-settings', () => ({
+  getSecuritySettingsContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
     })
@@ -78,17 +78,29 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
 
 describe('Privacy Notice Terms Conditions page', () => {
   const content = {
-    id: 'privacy-notice-terms-conditions',
+    id: 'security-settings',
     breadcrumb: [
       { link: 'my-dashboard', text: 'My dashboard', id: 'my-dashboard' },
     ],
-    pageName: 'privacy-notice-terms-conditions',
-    heading: 'Privacy notice and terms and conditions',
-    alert: {
-      type: 'info',
-      text: 'You may wish to print this page for future reference since it contains important information.\n',
+    pageName: 'parametres-securite',
+    heading: 'Paramètres de sécurité',
+    subHeading:
+      'Les paramètres sont utilisés pour valider votre identité et assurer la sécurité de votre compte.',
+    lookingFor: {
+      title: 'Vous recherchez les paramètres de votre profil?',
+      subText: ['', ''],
+      link: '/fr/profil',
+      id: 'profile',
     },
-    content: 'testing ## Terms and conditions of use testing',
+    securityQuestions: {
+      linkTitle: { link: '', title: '' },
+      subTitle: 'Change your security questions and answers.',
+    },
+    eiAccessCode: {
+      linkTitle: { link: '', title: '' },
+      subTitle:
+        'This secure code is needed to submit your reports and access information about your claim.',
+    },
   }
   const popupContent = {}
 
@@ -101,7 +113,7 @@ describe('Privacy Notice Terms Conditions page', () => {
 
   it('should render the page', () => {
     render(
-      <PrivacyCondition
+      <SecuritySettings
         locale="en"
         content={content}
         popupContent={popupContent}
@@ -111,10 +123,26 @@ describe('Privacy Notice Terms Conditions page', () => {
         langToggleLink={''}
       />
     )
-    const PrivacyConditionDiv = screen.getByTestId(
-      'terms-conditionsContent-test'
+    const SecuritySettingsDiv = screen.getByTestId('securityContent-test')
+    expect(SecuritySettingsDiv).toBeInTheDocument()
+  })
+
+  it('should render the links on the page', () => {
+    render(
+      <SecuritySettings
+        locale="en"
+        content={content}
+        popupContent={popupContent}
+        popupContentNA={popupContent}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
+        langToggleLink={''}
+      />
     )
-    expect(PrivacyConditionDiv).toBeInTheDocument()
+    const eiAccessCodeLink = screen.getByTestId('eiAccessCodeLink')
+    const securityQuestionsLink = screen.getByTestId('securityQuestionsLink')
+    expect(eiAccessCodeLink).toBeInTheDocument()
+    expect(securityQuestionsLink).toBeInTheDocument()
   })
 
   it('Test getServerSideProps', async () => {
@@ -125,11 +153,11 @@ describe('Privacy Notice Terms Conditions page', () => {
         content: {},
         bannerContent: {},
         breadCrumbItems: undefined,
-        langToggleLink: '/fr/avis-confidentialite-modalites',
+        langToggleLink: '/fr/parametres-securite',
         locale: 'en',
         meta: {
           data_en: {
-            title: 'Privacy and Conditions - My Service Canada Account',
+            title: 'Security - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -138,7 +166,7 @@ describe('Privacy Notice Terms Conditions page', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Confidentialité et conditions - Mon dossier Service Canada',
+            title: 'Sécurité - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',
