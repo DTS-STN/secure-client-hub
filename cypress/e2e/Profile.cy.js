@@ -8,7 +8,7 @@ beforeEach(() => {
   cy.visit('/profile')
 })
 
-it('Dashboard has no detectable a11y violations on load', () => {
+it('Profile has no detectable a11y violations on load', () => {
   cy.injectAxe()
   cy.checkA11y()
 })

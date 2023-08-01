@@ -5,7 +5,7 @@ beforeEach(() => {
   cy.visit('/auth/login')
 })
 
-it('Dashboard has no detectable a11y violations on load', () => {
+it('Login has no detectable a11y violations on load', () => {
   cy.injectAxe()
   cy.checkA11y()
 })

@@ -9,7 +9,7 @@ beforeEach(() => {
   cy.visit('/contact-us/contact-employment-insurance')
 })
 
-it('Dashboard has no detectable a11y violations on load', () => {
+it('Contact us EI has no detectable a11y violations on load', () => {
   cy.injectAxe()
   cy.checkA11y()
 })
