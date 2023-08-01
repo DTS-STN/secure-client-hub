@@ -8,6 +8,11 @@ beforeEach(() => {
   cy.visit('/privacy-notice-terms-conditions')
 })
 
+it.skip('Terms and conditions and Privacy has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate Terms and Conditions Page', () => {
   it('validate the "Terms and Conditions" click on dashboard page goes to Terms and Conditions page', () => {
     cy.visit('/my-dashboard')

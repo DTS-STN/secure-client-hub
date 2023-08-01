@@ -22,12 +22,17 @@ describe('login page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: '',
+      title: 'Loading-Chargement en cours - Canada.ca',
       desc: '',
       author: '',
       keywords: '',
     },
-    data_fr: { title: '', desc: '', author: '', keywords: '' },
+    data_fr: {
+      title: 'Loading-Chargement en cours - Canada.ca',
+      desc: '',
+      author: '',
+      keywords: '',
+    },
   }
 
   beforeEach(() => {
@@ -38,8 +43,10 @@ describe('login page', () => {
   })
 
   it('should render the page', () => {
-    render(<Login locale="en" />)
-    // const loading = screen.stringContaining('Loading / Chargement en cours ...')
-    expect.toBeInTheDocument('stringContaining')
+    render(<Login locale="en" meta={meta} />)
+    const heading = screen.getByRole('heading')
+    expect(heading).toBeInTheDocument()
+    const loading = screen.getAllByText('Loading / Chargement en cours ...')
+    expect(loading).toBeInTheDocument
   })
 })
