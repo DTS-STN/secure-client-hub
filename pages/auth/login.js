@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import { AuthIsDisabled } from '../../lib/auth'
 import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
-import Head from 'next/head'
+import MetaData from '../../components/MetaData'
 
 export default function Login(props) {
   const router = useRouter()
@@ -24,12 +24,10 @@ export default function Login(props) {
       })
     }
   }, [router.isReady, props.authDisabled, router])
+
   return (
     <div role="main">
-      <Head>
-        {' '}
-        <title>Loading-Chargement en cours</title>
-      </Head>
+      <MetaData language="en" data={props.meta}></MetaData>
       <h1
         className="grid h-screen place-items-center"
         data-cy="loading-spinner"
@@ -50,8 +48,32 @@ export async function getServerSideProps({ req, res, locale }) {
   //Temporary for testing purposes until auth flow is publicly accessible
   const authDisabled = AuthIsDisabled() ? true : false
 
+  /* Place-holder Meta Data Props */
+  const meta = {
+    data_en: {
+      title: 'Loading-Chargement en cours - Canada.ca',
+      desc: 'English',
+      author: 'Service Canada',
+      keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Employment and Social Development Canada',
+      accessRights: '1',
+    },
+    data_fr: {
+      title: 'Loading-Chargement en cours - Canada.ca',
+      desc: 'Français',
+      author: 'Service Canada',
+      keywords: '',
+      service: 'ESDC-EDSC_MSCA-MSDC',
+      creator: 'Emploi et Développement social Canada',
+      accessRights: '1',
+    },
+  }
+
   return {
     props: {
+      locale,
+      meta,
       authDisabled: authDisabled ?? true,
     },
   }
