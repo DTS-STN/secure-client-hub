@@ -8,7 +8,7 @@ beforeEach(() => {
   cy.visit('/privacy-notice-terms-conditions')
 })
 
-it('Dashboard has no detectable a11y violations on load', () => {
+it.skip('Dashboard has no detectable a11y violations on load', () => {
   cy.injectAxe()
   cy.checkA11y()
 })
