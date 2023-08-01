@@ -2,7 +2,7 @@
 
 Fixed AB#
 
-### Changelog - "fix:" for bug fixes, "feat:" for features. Read more about Convenional Commits at https://www.conventionalcommits.org/en/v1.0.0/#summary
+### Changelog - "fix:" for bug fixes, "feat:" for features. Read more about Conventional Commits at https://www.conventionalcommits.org/en/v1.0.0/#summary
 
 ### Description of proposed changes:
 
