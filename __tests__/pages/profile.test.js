@@ -15,7 +15,7 @@ jest.mock('next/router', () => ({
 
 // mocks profile mapper
 jest.mock('../../graphql/mappers/profile', () => ({
-  getMyDashboardContent: () => {
+  getProfileContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
     })
@@ -112,5 +112,44 @@ describe('My Profile page', () => {
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
+  })
+
+  it('Test getServerSideProps', async () => {
+    const props = await getServerSideProps({ locale: 'en' })
+
+    expect(props).toEqual({
+      props: {
+        content: {},
+        bannerContent: {},
+        breadCrumbItems: undefined,
+        langToggleLink: '/fr/profil',
+        locale: 'en',
+        meta: {
+          data_en: {
+            title: 'Profile - My Service Canada Account',
+            desc: 'English',
+            author: 'Service Canada',
+            keywords: '',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Employment and Social Development Canada',
+            accessRights: '1',
+          },
+          data_fr: {
+            title: 'Profil - Mon dossier Service Canada',
+            desc: 'Français',
+            author: 'Service Canada',
+            keywords: '',
+            service: 'ESDC-EDSC_MSCA-MSDC',
+            creator: 'Emploi et Développement social Canada',
+            accessRights: '1',
+          },
+        },
+        popupContent: {},
+        popupContentNA: {},
+        popupYouHaveBeenSignedout: {},
+        popupStaySignedIn: {},
+        aaPrefix: 'ESDC-EDSC:undefined',
+      },
+    })
   })
 })
