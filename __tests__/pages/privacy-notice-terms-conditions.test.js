@@ -76,10 +76,6 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-// jest.mock('../../components/Card', () => () => {
-//   return <mock-card data-testid="mock-card" />
-// })
-
 describe('Privacy Notice Terms Conditions page', () => {
   const content = {
     id: 'privacy-notice-terms-conditions',
