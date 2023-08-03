@@ -57,10 +57,6 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-jest.mock('../../components/Card', () => () => {
-  return <mock-card data-testid="mock-card" />
-})
-
 describe('My Profile page', () => {
   const content = {
     list: [
