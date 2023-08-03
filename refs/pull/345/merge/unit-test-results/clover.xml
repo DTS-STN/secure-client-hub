@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1690996879681" clover="3.2.0">
-  <project timestamp="1690996879681" name="All files">
-    <metrics statements="382" coveredstatements="181" conditionals="248" coveredconditionals="88" methods="156" coveredmethods="56" elements="786" coveredelements="325" complexity="0" loc="382" ncloc="382" packages="9" files="39" classes="39"/>
+<coverage generated="1691096510701" clover="3.2.0">
+  <project timestamp="1691096510702" name="All files">
+    <metrics statements="382" coveredstatements="178" conditionals="248" coveredconditionals="88" methods="156" coveredmethods="55" elements="786" coveredelements="321" complexity="0" loc="382" ncloc="382" packages="9" files="39" classes="39"/>
     <package name="components">
-      <metrics statements="91" coveredstatements="54" conditionals="84" coveredconditionals="29" methods="34" coveredmethods="15"/>
+      <metrics statements="91" coveredstatements="51" conditionals="84" coveredconditionals="29" methods="34" coveredmethods="14"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="6" type="stmt"/>
@@ -70,29 +70,29 @@
         <line num="54" count="1" type="stmt"/>
       </file>
       <file name="MultiModal.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MultiModal.js">
-        <metrics statements="34" coveredstatements="19" conditionals="8" coveredconditionals="5" methods="8" coveredmethods="4"/>
-        <line num="20" count="5" type="stmt"/>
-        <line num="22" count="4" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="26" count="4" type="stmt"/>
+        <metrics statements="34" coveredstatements="16" conditionals="8" coveredconditionals="5" methods="8" coveredmethods="3"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="30" count="4" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="49" count="4" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="55" count="4" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
         <line num="56" count="3" type="stmt"/>
         <line num="57" count="3" type="stmt"/>
         <line num="58" count="3" type="stmt"/>
-        <line num="62" count="4" type="cond" truecount="1" falsecount="3"/>
+        <line num="62" count="3" type="cond" truecount="1" falsecount="3"/>
         <line num="65" count="0" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
@@ -102,8 +102,8 @@
         <line num="97" count="0" type="stmt"/>
         <line num="109" count="0" type="stmt"/>
         <line num="110" count="0" type="stmt"/>
-        <line num="113" count="4" type="stmt"/>
-        <line num="116" count="4" type="stmt"/>
+        <line num="113" count="3" type="stmt"/>
+        <line num="116" count="3" type="stmt"/>
         <line num="133" count="2" type="stmt"/>
       </file>
       <file name="PageLink.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.js">
