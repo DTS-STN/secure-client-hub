@@ -60,6 +60,7 @@ module.exports = {
           '60d': '#295376',
           '60f': '#0E62C9',
           'focus': '#1c578a',
+          'active': '#21303F',
         },
         'red': {
           light: '#B76565',

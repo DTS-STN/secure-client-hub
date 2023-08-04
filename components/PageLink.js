@@ -3,7 +3,6 @@ import Link from 'next/link'
 import BackToButton from './BackToButton'
 
 export default function PageLink(props) {
-  const linkText = undefined
   let linkID = props.linkText?.replace(/\s+/g, '')
 
   return (
