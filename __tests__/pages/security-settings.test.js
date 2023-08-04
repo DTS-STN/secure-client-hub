@@ -76,7 +76,7 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-describe('Privacy Notice Terms Conditions page', () => {
+describe('Security Settings page', () => {
   const content = {
     id: 'security-settings',
     breadcrumb: [
