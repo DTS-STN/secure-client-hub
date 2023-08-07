@@ -24,7 +24,7 @@
     "proxystart": "kubectl port-forward $(kubectl get pods -n squidproxy | awk '{print $1}' | grep squidproxy) 3128:3128 -n squidproxy"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.16",
+    "@apollo/client": "^3.7.17",
     "@dts-stn/service-canada-design-system": "^1.66.1-dev.de18726cf",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
