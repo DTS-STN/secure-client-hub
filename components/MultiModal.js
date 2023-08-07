@@ -61,7 +61,6 @@ export default function MultiModal(props) {
 
   switch (openModalWithLink.context) {
     case 'betaModal':
-      // code block
       modalBody = (
         <ExitBeta
           closeModal={closeModal}
@@ -109,7 +108,6 @@ export default function MultiModal(props) {
       contentLabel = popupStaySignedIn.bannerHeading
       break
     default:
-      // code block
       null
   }
 

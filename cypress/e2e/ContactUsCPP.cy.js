@@ -8,6 +8,11 @@ beforeEach(() => {
   cy.visit('/contact-us/contact-canada-pension-plan')
 })
 
+it('Contact us CPP has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate CPP Contact Us Landing page', () => {
   it('Validate CPP Contact us URL and header in EN', () => {
     CPPcontactUs.ValidateCPPContactUsUrl()
