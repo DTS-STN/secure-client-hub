@@ -70,6 +70,7 @@ export default function Layout(props) {
         ></PhaseBanner>
       )}
       <Header
+        legacyBehavior
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
@@ -90,6 +91,7 @@ export default function Layout(props) {
           props.children.props.aaPrefix
         }
         menuProps={{
+          legacyBehavior: true,
           menuList: [
             {
               key: 'dashKey',
