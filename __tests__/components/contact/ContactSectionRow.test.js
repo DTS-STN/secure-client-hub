@@ -5,6 +5,10 @@ import ContactSectionRow from '../../../components/contact/ContactSectionRow'
 
 expect.extend(toHaveNoViolations)
 
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
+}))
+
 describe('ContactSectionRow', () => {
   it('renders contactSectionRow', () => {
     const primary = render(<ContactSectionRow {...ContactSectionRow.args} />)

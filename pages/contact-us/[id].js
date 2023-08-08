@@ -112,6 +112,15 @@ export async function getServerSideProps({ res, locale, params }) {
   /* istanbul ignore next */
   const t = locale === 'en' ? en : fr
 
+  /*
+    For some reason when using dynamic routes, the locale gets set to the default (und) after trying to switch back to English from French.
+    The below fixes this issue by setting the locale to English if it is undefined, which is what the middleware is doing on all
+    other pages and what it should also be doing for the contact pages.
+  */
+  if (locale === 'und') {
+    locale = 'en'
+  }
+
   const pageContent = await getContactUsPage(params.id).catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -131,7 +140,7 @@ export async function getServerSideProps({ res, locale, params }) {
   const langToggleLink =
     locale === 'en'
       ? `/fr/contactez-nous/${pageContent.fr.pageName}`
-      : `/contact-us/${pageContent.en.pageName}`
+      : `/en/contact-us/${pageContent.en.pageName}`
 
   const breadCrumbItems =
     locale === 'en'
