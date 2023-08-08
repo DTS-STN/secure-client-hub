@@ -10,7 +10,6 @@ import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import logger from '../../lib/logger'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
-import NextLink from 'next/link'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
@@ -45,7 +44,6 @@ export default function ContactLanding(props) {
                 href={`/${props.content.pageName}/${link.linkDestination
                   .split('/')
                   .pop()}`}
-                component={NextLink}
               />
               <p className="text-xl font-body">{link.linkDescription}</p>
             </li>

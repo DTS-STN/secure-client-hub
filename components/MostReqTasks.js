@@ -27,7 +27,6 @@ export default function MostReqTasks(props) {
                 }}
                 data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
                 className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
-                legacyBehavior
               >
                 <FontAwesomeIcon
                   icon={

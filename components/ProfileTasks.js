@@ -27,7 +27,6 @@ export default function ProfileTasks(props) {
                   }
                 }}
                 data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
-                legacyBehavior
               >
                 <FontAwesomeIcon
                   icon={

@@ -22,7 +22,6 @@ export default function PageLink(props) {
             data-cy={props.dataCy}
             data-gc-analytics-customclick={`${props.refPageAA}:${props.linkId}`}
             className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
-            legacyBehavior
           >
             {props.linkText}
           </Link>
