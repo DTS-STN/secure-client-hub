@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import ExitBeta from './ExitBeta'
 import { useIdleTimer } from 'react-idle-timer'
 import CountDown from './sessionModals/CountDown'
@@ -20,15 +20,23 @@ export default function MultiModal(props) {
   } = props
 
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
+  const clicker = useRef(null)
   let modalBody, contentLabel
 
   const handleOnIdle = () => {
     Router.push('/auth/logout')
   }
 
+  const click = () => {
+    clicker.current.click()
+  }
+
   const { reset, getRemainingTime } = useIdleTimer({
     onIdle: handleOnIdle,
-    onPrompt: () => openModal('', 'countDown'),
+    onPrompt: () => {
+      click()
+      openModal('', 'countDown')
+    },
     promptBeforeIdle: props.promptBeforeIdle ?? 5 * 60 * 1000, // 5 minutes
     timeout: props.timeout ?? 15 * 60 * 1000, // 15 minutes
   })
@@ -53,7 +61,6 @@ export default function MultiModal(props) {
 
   switch (openModalWithLink.context) {
     case 'betaModal':
-      // code block
       modalBody = (
         <ExitBeta
           closeModal={closeModal}
@@ -101,12 +108,12 @@ export default function MultiModal(props) {
       contentLabel = popupStaySignedIn.bannerHeading
       break
     default:
-      // code block
       null
   }
 
   return (
     <>
+      <div ref={clicker} />
       <Modal
         className="flex justify-center bg-black/75 h-full"
         isOpen={openModalWithLink.context != null}

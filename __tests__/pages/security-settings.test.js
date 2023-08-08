@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Profile from '../../pages/profile'
-import { getServerSideProps } from '../../pages/profile'
+import SecuritySettings from '../../pages/security-settings'
+import { getServerSideProps } from '../../pages/security-settings'
 
 import { useRouter } from 'next/router'
 
@@ -13,11 +13,30 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-// mocks profile mapper
-jest.mock('../../graphql/mappers/profile', () => ({
-  getProfileContent: () => {
+// mocks useRouter to be able to use component' router.asPath
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return true
+  },
+  AuthIsValid: () => {
+    return true
+  },
+  Redirect: jest.fn(),
+}))
+
+// mocks home mapper
+jest.mock('../../graphql/mappers/security-settings', () => ({
+  getSecuritySettingsContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
     })
   },
 }))
@@ -57,32 +76,30 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-describe('My Profile page', () => {
+describe('Security Settings page', () => {
   const content = {
-    list: [
-      {
-        title: 'title',
-        tasks: [
-          {
-            id: 'id',
-            title: 'title',
-            areaLabel: 'areaLabel',
-            link: '/',
-            icon: '',
-            betaPopUp: 'betaPopUp',
-          },
-        ],
-      },
+    id: 'security-settings',
+    breadcrumb: [
+      { link: 'my-dashboard', text: 'My dashboard', id: 'my-dashboard' },
     ],
+    pageName: 'parametres-securite',
+    heading: 'Paramètres de sécurité',
+    subHeading:
+      'Les paramètres sont utilisés pour valider votre identité et assurer la sécurité de votre compte.',
     lookingFor: {
-      title: 'title',
-      subText: ['text', 'text'],
-      link: '/',
+      title: 'Vous recherchez les paramètres de votre profil?',
+      subText: ['', ''],
+      link: '/fr/profil',
+      id: 'profile',
     },
-    backToDashboard: {
-      id: 'id',
-      btnText: 'btnText',
-      btnLink: '/',
+    securityQuestions: {
+      linkTitle: { link: '', title: '' },
+      subTitle: 'Change your security questions and answers.',
+    },
+    eiAccessCode: {
+      linkTitle: { link: '', title: '' },
+      subTitle:
+        'This secure code is needed to submit your reports and access information about your claim.',
     },
   }
   const popupContent = {}
@@ -96,18 +113,36 @@ describe('My Profile page', () => {
 
   it('should render the page', () => {
     render(
-      <Profile
+      <SecuritySettings
         locale="en"
         content={content}
-        meta={{}}
         popupContent={popupContent}
         popupContentNA={popupContent}
-        breadCrumbItems={[]}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
       />
     )
-    const profileDiv = screen.getByTestId('profileContent-test')
-    expect(profileDiv).toBeInTheDocument()
+    const SecuritySettingsDiv = screen.getByTestId('securityContent-test')
+    expect(SecuritySettingsDiv).toBeInTheDocument()
+  })
+
+  it('should render the links on the page', () => {
+    render(
+      <SecuritySettings
+        locale="en"
+        content={content}
+        popupContent={popupContent}
+        popupContentNA={popupContent}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
+        langToggleLink={''}
+      />
+    )
+    const eiAccessCodeLink = screen.getByTestId('eiAccessCodeLink')
+    const securityQuestionsLink = screen.getByTestId('securityQuestionsLink')
+    expect(eiAccessCodeLink).toBeInTheDocument()
+    expect(securityQuestionsLink).toBeInTheDocument()
   })
 
   it('Test getServerSideProps', async () => {
@@ -118,11 +153,11 @@ describe('My Profile page', () => {
         content: {},
         bannerContent: {},
         breadCrumbItems: undefined,
-        langToggleLink: '/fr/profil',
+        langToggleLink: '/fr/parametres-securite',
         locale: 'en',
         meta: {
           data_en: {
-            title: 'Profile - My Service Canada Account',
+            title: 'Security - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -131,7 +166,7 @@ describe('My Profile page', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Profil - Mon dossier Service Canada',
+            title: 'Sécurité - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',

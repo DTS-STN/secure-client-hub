@@ -3,8 +3,8 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Profile from '../../pages/profile'
-import { getServerSideProps } from '../../pages/profile'
+import PrivacyCondition from '../../pages/privacy-notice-terms-conditions'
+import { getServerSideProps } from '../../pages/privacy-notice-terms-conditions'
 
 import { useRouter } from 'next/router'
 
@@ -13,11 +13,30 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-// mocks profile mapper
-jest.mock('../../graphql/mappers/profile', () => ({
-  getProfileContent: () => {
+// mocks useRouter to be able to use component' router.asPath
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return true
+  },
+  AuthIsValid: () => {
+    return true
+  },
+  Redirect: jest.fn(),
+}))
+
+// mocks home mapper
+jest.mock('../../graphql/mappers/privacy-notice-terms-conditions', () => ({
+  getPrivacyConditionContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
     })
   },
 }))
@@ -57,33 +76,19 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-describe('My Profile page', () => {
+describe('Privacy Notice Terms Conditions page', () => {
   const content = {
-    list: [
-      {
-        title: 'title',
-        tasks: [
-          {
-            id: 'id',
-            title: 'title',
-            areaLabel: 'areaLabel',
-            link: '/',
-            icon: '',
-            betaPopUp: 'betaPopUp',
-          },
-        ],
-      },
+    id: 'privacy-notice-terms-conditions',
+    breadcrumb: [
+      { link: 'my-dashboard', text: 'My dashboard', id: 'my-dashboard' },
     ],
-    lookingFor: {
-      title: 'title',
-      subText: ['text', 'text'],
-      link: '/',
+    pageName: 'privacy-notice-terms-conditions',
+    heading: 'Privacy notice and terms and conditions',
+    alert: {
+      type: 'info',
+      text: 'You may wish to print this page for future reference since it contains important information.\n',
     },
-    backToDashboard: {
-      id: 'id',
-      btnText: 'btnText',
-      btnLink: '/',
-    },
+    content: 'testing ## Terms and conditions of use testing',
   }
   const popupContent = {}
 
@@ -96,18 +101,20 @@ describe('My Profile page', () => {
 
   it('should render the page', () => {
     render(
-      <Profile
+      <PrivacyCondition
         locale="en"
         content={content}
-        meta={{}}
         popupContent={popupContent}
         popupContentNA={popupContent}
-        breadCrumbItems={[]}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
       />
     )
-    const profileDiv = screen.getByTestId('profileContent-test')
-    expect(profileDiv).toBeInTheDocument()
+    const PrivacyConditionDiv = screen.getByTestId(
+      'terms-conditionsContent-test'
+    )
+    expect(PrivacyConditionDiv).toBeInTheDocument()
   })
 
   it('Test getServerSideProps', async () => {
@@ -118,11 +125,11 @@ describe('My Profile page', () => {
         content: {},
         bannerContent: {},
         breadCrumbItems: undefined,
-        langToggleLink: '/fr/profil',
+        langToggleLink: '/fr/avis-confidentialite-modalites',
         locale: 'en',
         meta: {
           data_en: {
-            title: 'Profile - My Service Canada Account',
+            title: 'Privacy and Conditions - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -131,7 +138,7 @@ describe('My Profile page', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Profil - Mon dossier Service Canada',
+            title: 'Confidentialité et conditions - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',

@@ -5,6 +5,11 @@ beforeEach(() => {
   cy.visit('/auth/logout')
 })
 
+it('Logout has no detectable a11y violations on load', () => {
+  cy.injectAxe()
+  cy.checkA11y()
+})
+
 describe('Validate logout page', () => {
   it('Lands on logout page and displays loading spinner', () => {
     cy.get('[data-cy="loading-spinner"]')

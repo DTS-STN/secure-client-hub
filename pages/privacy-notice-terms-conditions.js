@@ -26,7 +26,11 @@ export default function PrivacyCondition(props) {
   )
 
   return (
-    <div className="font-body" data-cy="terms-conditions">
+    <div
+      className="font-body"
+      data-cy="terms-conditions"
+      data-testid="terms-conditionsContent-test"
+    >
       <Heading
         id="PrivacyCondition-heading"
         title={props.content.heading}

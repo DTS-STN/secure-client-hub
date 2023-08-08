@@ -25,7 +25,7 @@ export default function Layout(props) {
   })
 
   const openModal = (link, context) => {
-    setOpenModalWithLink((prev) => {
+    setOpenModalWithLink(() => {
       return {
         isOpen: true,
         activeLink: link,
@@ -35,7 +35,7 @@ export default function Layout(props) {
   }
 
   const closeModal = () => {
-    setOpenModalWithLink((prev) => {
+    setOpenModalWithLink(() => {
       return {
         isOpen: false,
         activeLink: '/',
@@ -70,7 +70,6 @@ export default function Layout(props) {
         ></PhaseBanner>
       )}
       <Header
-        // analyticsTracking
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
@@ -164,9 +163,6 @@ export default function Layout(props) {
         popupStaySignedIn={props.popupStaySignedIn}
         popupContent={props.popupContent}
       />
-      {/* <div id="modal-root">
-
-      </div> */}
 
       <Footer
         lang={!props.locale ? 'en' : props.locale}
