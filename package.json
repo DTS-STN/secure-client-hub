@@ -24,15 +24,15 @@
     "proxystart": "kubectl port-forward $(kubectl get pods -n squidproxy | awk '{print $1}' | grep squidproxy) 3128:3128 -n squidproxy"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.16",
+    "@apollo/client": "^3.8.0",
     "@dts-stn/service-canada-design-system": "^1.67.8-dev.d86ee812c",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@opentelemetry/api": "^1.4.1",
-    "@opentelemetry/auto-instrumentations-node": "^0.37.1",
-    "@opentelemetry/sdk-node": "^0.41.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.38.0",
+    "@opentelemetry/sdk-node": "^0.41.2",
     "axios": "^1.4.0",
     "babel-plugin-macros": "^3.1.0",
     "cross-env": "^7.0.3",
@@ -48,7 +48,7 @@
     "react-focus-on": "^3.9.1",
     "react-idle-timer": "^5.7.2",
     "react-modal": "^3.16.1",
-    "release-please": "^15.11.0"
+    "release-please": "^15.12.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
@@ -59,9 +59,9 @@
     "autoprefixer": "^10.4.2",
     "axe-core": "^4.3.3",
     "babel-jest": "^27.1.0",
-    "cypress": "^12.15.0",
+    "cypress": "^12.17.3",
     "cypress-axe": "^1.4.0",
-    "cypress-multi-reporters": "^1.5.0",
+    "cypress-multi-reporters": "^1.6.3",
     "eslint": "7.32.0",
     "eslint-config-next": "^13.4.12",
     "husky": "^7.0.0",
