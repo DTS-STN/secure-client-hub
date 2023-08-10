@@ -10,7 +10,7 @@ export default function MetaData(props) {
         <style jsx>
           {`
             html {
-              animation: fouc-fix 0.001s steps(1);
+              animation: fouc-fix 0.01s steps(1);
             }
             @keyframes fouc-fix {
               0% {
