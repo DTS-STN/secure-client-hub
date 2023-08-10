@@ -111,10 +111,26 @@ describe('Security Settings page', () => {
     }))
   })
 
-  it('should render the page', () => {
+  it('should render the page English', () => {
     render(
       <SecuritySettings
         locale="en"
+        content={content}
+        popupContent={popupContent}
+        popupContentNA={popupContent}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
+        langToggleLink={''}
+      />
+    )
+    const SecuritySettingsDiv = screen.getByTestId('securityContent-test')
+    expect(SecuritySettingsDiv).toBeInTheDocument()
+  })
+
+  it('should render the page French', () => {
+    render(
+      <SecuritySettings
+        locale="fr"
         content={content}
         popupContent={popupContent}
         popupContentNA={popupContent}
