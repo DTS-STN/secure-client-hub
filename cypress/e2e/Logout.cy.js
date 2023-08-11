@@ -7,10 +7,8 @@ beforeEach(() => {
 
 describe('Validate logout scenario and page', () => {
   it('should click Sign-out from the menu item go to /auth/logout/', () => {
-    cy.visit('/auth/logout')
     cy.intercept('POST', 'api/auth/signout').as('signout')
 
-    cy.visit('/my-dashboard')
     cy.get('[data-testid="menuButton"]').click()
     cy.get('[id="dropdownNavbar"]>div:nth-child(5)').click()
 
@@ -24,7 +22,7 @@ describe('Validate logout scenario and page', () => {
     cy.url().should('eq', 'http://localhost:3000/en/auth/logout/')
   })
 
-  it('should show the loading spinner + text the return to index page once logged out', () => {
+  it('should show the loading spinner + text then return to index page once logged out', () => {
     // Create a Promise and capture a reference to its resolve
     // function so that we can resolve it when we want to:
     let sendResponse
