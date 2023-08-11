@@ -3,11 +3,11 @@ It does not test the authentication functionality currently since those endpoint
 
 beforeEach(() => {
   cy.visit('/auth/login')
-  cy.injectAxe()
 })
 
 describe('Validate login page', () => {
   it('Login has no detectable a11y violations on load', () => {
+    cy.injectAxe()
     cy.checkA11y()
   })
   it('Lands on login page and displays loading spinner', () => {
