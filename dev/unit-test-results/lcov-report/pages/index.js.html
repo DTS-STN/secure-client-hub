@@ -173,20 +173,12 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -291,7 +283,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Image from 'next/image'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Image from 'next/legacy/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
 &nbsp;
@@ -315,28 +307,26 @@ export default function Index(props) {
           &lt;/div&gt;
           &lt;div className="flex w-max container py-11 mx-auto font-display"&gt;
             &lt;div className="grid grid-cols-2 gap-2 xl:gap-6"&gt;
-              &lt;Link href="/en/my-dashboard"&gt;
-                &lt;a
-                  className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
-                  role="button"
-                  draggable="false"
-                  lang="en"
-                  id="english-button"
-                &gt;
-                  English
-                &lt;/a&gt;
+              &lt;Link
+                href="/en/my-dashboard"
+                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
+                role="button"
+                draggable="false"
+                lang="en"
+                id="english-button"
+              &gt;
+                English
               &lt;/Link&gt;
 &nbsp;
-              &lt;Link href="/fr/mon-tableau-de-bord"&gt;
-                &lt;a
-                  className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
-                  role="button"
-                  draggable="false"
-                  lang="fr"
-                  id="french-button"
-                &gt;
-                  Français
-                &lt;/a&gt;
+              &lt;Link
+                href="/fr/mon-tableau-de-bord"
+                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
+                role="button"
+                draggable="false"
+                lang="fr"
+                id="french-button"
+              &gt;
+                Français
               &lt;/Link&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -344,24 +334,22 @@ export default function Index(props) {
 &nbsp;
         &lt;div className="relative py-8 bg-gray-light text-p h-auto min-w-[18.75rem] w-[18.75rem] flex justify-between p-6 xl:w-[31.25rem] xl:items-center"&gt;
           &lt;div className="w-28 text-base xl:text-p xl:w-max font-body text-bright-blue-dark"&gt;
-            &lt;Link href="https://www.canada.ca/en/transparency/terms.html"&gt;
-              &lt;a
-                className="inline-block w-28 xl:w-max mr-0 hover:underline splash-a text-lg"
-                lang="en"
-                data-cy="terms"
-              &gt;
-                Terms &amp;amp; conditions
-              &lt;/a&gt;
+            &lt;Link
+              href="https://www.canada.ca/en/transparency/terms.html"
+              className="inline-block w-28 xl:w-max mr-0 hover:underline splash-a text-lg"
+              lang="en"
+              data-cy="terms"
+            &gt;
+              Terms &amp;amp; conditions
             &lt;/Link&gt;
             &lt;span&gt; • &lt;/span&gt;
-            &lt;Link href="https://www.canada.ca/fr/transparence/avis.html"&gt;
-              &lt;a
-                className="inline-block hover:underline font-body text-lg"
-                lang="fr"
-                data-cy="avis"
-              &gt;
-                Avis
-              &lt;/a&gt;
+            &lt;Link
+              href="https://www.canada.ca/fr/transparence/avis.html"
+              className="inline-block hover:underline font-body text-lg"
+              lang="fr"
+              data-cy="avis"
+            &gt;
+              Avis
             &lt;/Link&gt;
           &lt;/div&gt;
           &lt;img className="h-auto w-24 xl:w-28" src="/wmms-blk.svg" alt="" /&gt;
@@ -412,7 +400,7 @@ export async function getServerSideProps({ locale }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-07T17:29:57.894Z
+                at 2023-08-11T13:30:54.784Z
             </div>
         <script src="../prettify.js"></script>
         <script>

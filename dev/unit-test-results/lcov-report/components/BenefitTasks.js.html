@@ -151,11 +151,7 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,16 +191,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -279,41 +271,37 @@ export default function <span class="fstat-no" title="function not covered" >Ben
               className="font-body font-bold "
               data-cy="task-link"
             &gt;
-              &lt;Link href={task.link} passHref&gt;
-                &lt;a
-                  target={
-                    newTabTaskExceptions.includes(task.link)
-                      ? '_blank'
-                      : '_self'
+              &lt;Link
+                href={task.link}
+                passHref
+                target={
+                  newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
+                }
+                onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+                  //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
+<span class="cstat-no" title="statement not covered" >                  if (</span>
+                    task.betaPopUp &amp;&amp;
+                    !newTabTaskExceptions.includes(task.link)
+                  ) {
+<span class="cstat-no" title="statement not covered" >                    e.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >                    props.openModal(task.link, 'betaModal')</span>
                   }
-                  onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-                    //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
-<span class="cstat-no" title="statement not covered" >                    if (</span>
-                      task.betaPopUp &amp;&amp;
-                      !newTabTaskExceptions.includes(task.link)
-                    ) {
-<span class="cstat-no" title="statement not covered" >                      e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >                      props.openModal(task.link, 'betaModal')</span>
-                    }
-                  }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
-                  className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
+                }}
+                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
+              &gt;
+                &lt;FontAwesomeIcon
+                  icon={
+                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
+                  }
+                  className="pr-4 text-2xl w-8"
+                /&gt;
+                &lt;span
+                  aria-label={task.areaLabel}
+                  className="font-normal text-xl"
                 &gt;
-                  &lt;FontAwesomeIcon
-                    icon={
-                      icon[task.icon]
-                        ? icon[task.icon]
-                        : icon['question-circle']
-                    }
-                    className="pr-4 text-2xl w-8"
-                  /&gt;
-                  &lt;span
-                    aria-label={task.areaLabel}
-                    className="font-normal text-xl"
-                  &gt;
-                    {task.title}
-                  &lt;/span&gt;
-                &lt;/a&gt;
+                  {task.title}
+                &lt;/span&gt;
               &lt;/Link&gt;
             &lt;/li&gt;
           )
@@ -346,7 +334,7 @@ BenefitTasks.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-07T17:29:57.894Z
+                at 2023-08-11T13:30:54.784Z
             </div>
         <script src="../prettify.js"></script>
         <script>
