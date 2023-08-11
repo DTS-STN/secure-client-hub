@@ -95,10 +95,22 @@ describe('My Dashboard page', () => {
     }))
   })
 
-  it('should render the page', () => {
+  it('should render the page in English', () => {
     render(
       <MyDashboard
         locale="en"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
+    const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
+    expect(myDashboardDiv).toBeInTheDocument()
+  })
+
+  it('should render the page in French', () => {
+    render(
+      <MyDashboard
+        locale="fr"
         content={content}
         popupContentNA={popupContent}
       />

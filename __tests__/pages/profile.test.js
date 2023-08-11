@@ -94,10 +94,26 @@ describe('My Profile page', () => {
     }))
   })
 
-  it('should render the page', () => {
+  it('should render the page in English', () => {
     render(
       <Profile
         locale="en"
+        content={content}
+        meta={{}}
+        popupContent={popupContent}
+        popupContentNA={popupContent}
+        breadCrumbItems={[]}
+        langToggleLink={''}
+      />
+    )
+    const profileDiv = screen.getByTestId('profileContent-test')
+    expect(profileDiv).toBeInTheDocument()
+  })
+
+  it('should render the page in French', () => {
+    render(
+      <Profile
+        locale="fr"
         content={content}
         meta={{}}
         popupContent={popupContent}
