@@ -90,6 +90,26 @@ describe('Privacy Notice Terms Conditions page', () => {
     },
     content: 'testing ## Terms and conditions of use testing',
   }
+  const contentFr = {
+    id: 'privacy-notice-terms-conditions',
+    breadcrumb: [
+      {
+        link: 'mon-tableau-de-bord',
+        text: 'Mon tableau de bord',
+        id: 'my-dashboard',
+      },
+    ],
+    pageName: 'avis-confidentialite-modalites',
+    heading: 'Avis de confidentialité et modalités',
+    alert: {
+      type: 'info',
+      text:
+        'Vous pouvez imprimer cette page pour vous y référer ultérieurement car elle contient des informations importantes.\n' +
+        '\n' +
+        ' ',
+    },
+    content: 'testing ## Conditions d’utilisation testing',
+  }
   const popupContent = {}
 
   beforeEach(() => {
@@ -99,11 +119,29 @@ describe('Privacy Notice Terms Conditions page', () => {
     }))
   })
 
-  it('should render the page', () => {
+  it('should render the page in English', () => {
     render(
       <PrivacyCondition
         locale="en"
         content={content}
+        popupContent={popupContent}
+        popupContentNA={popupContent}
+        meta={{}}
+        breadCrumbItems={content.breadcrumb}
+        langToggleLink={''}
+      />
+    )
+    const PrivacyConditionDiv = screen.getByTestId(
+      'terms-conditionsContent-test'
+    )
+    expect(PrivacyConditionDiv).toBeInTheDocument()
+  })
+
+  it('should render the page in French', () => {
+    render(
+      <PrivacyCondition
+        locale="fr"
+        content={contentFr}
         popupContent={popupContent}
         popupContentNA={popupContent}
         meta={{}}
