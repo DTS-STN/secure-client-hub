@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1691765750328" clover="3.2.0">
-  <project timestamp="1691765750328" name="All files">
-    <metrics statements="353" coveredstatements="174" conditionals="250" coveredconditionals="92" methods="148" coveredmethods="55" elements="751" coveredelements="321" complexity="0" loc="353" ncloc="353" packages="8" files="33" classes="33"/>
+<coverage generated="1692201610781" clover="3.2.0">
+  <project timestamp="1692201610781" name="All files">
+    <metrics statements="353" coveredstatements="177" conditionals="250" coveredconditionals="94" methods="148" coveredmethods="57" elements="751" coveredelements="328" complexity="0" loc="353" ncloc="353" packages="8" files="33" classes="33"/>
     <package name="components">
-      <metrics statements="90" coveredstatements="53" conditionals="84" coveredconditionals="29" methods="34" coveredmethods="15"/>
+      <metrics statements="90" coveredstatements="56" conditionals="84" coveredconditionals="31" methods="34" coveredmethods="17"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
         <line num="21" count="4" type="stmt"/>
       </file>
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
-        <metrics statements="7" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <metrics statements="7" coveredstatements="4" conditionals="8" coveredconditionals="2" methods="3" coveredmethods="2"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
         <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
