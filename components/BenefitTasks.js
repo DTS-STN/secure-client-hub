@@ -15,7 +15,7 @@ export default function BenefitTasks(props) {
   ]
 
   return (
-    <div className="inline-block w-full">
+    <div className="inline-block w-full" data-testid="benefitTasks-test">
       <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
