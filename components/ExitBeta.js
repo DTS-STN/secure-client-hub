@@ -1,4 +1,4 @@
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { icon } from '../lib/loadIcons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@dts-stn/service-canada-design-system'
 import PropTypes from 'prop-types'
@@ -25,7 +25,7 @@ export default function ExitBeta(props) {
           onClick={props.closeModal}
           data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close`}
         >
-          <FontAwesomeIcon aria-hidden="true" icon={solid('xmark')} size="xl" />
+          <FontAwesomeIcon aria-hidden="true" icon={icon['xmark']} size="xl" />
         </button>
       </div>
       <p className="text-xl font-display py-4 mr-10">

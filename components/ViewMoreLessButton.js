@@ -1,6 +1,9 @@
 import propTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+import {
+  faCircleChevronUp,
+  faCircleChevronDown,
+} from '@fortawesome/free-solid-svg-icons'
 
 export default function ViewMoreLessButton(props) {
   return (
@@ -19,13 +22,13 @@ export default function ViewMoreLessButton(props) {
       <div className="flex sm:items-center">
         {props.icon ? (
           <FontAwesomeIcon
-            icon={solid('circle-chevron-up')}
+            icon={faCircleChevronUp}
             className={`text-46px pr-3`}
             data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Contract`}
           />
         ) : (
           <FontAwesomeIcon
-            icon={solid('circle-chevron-down')}
+            icon={faCircleChevronDown}
             className={`text-46px pr-3`}
             data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Expand`}
           />

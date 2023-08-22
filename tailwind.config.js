@@ -6,9 +6,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['Lato', 'sans-serif'],
-      body: ['Noto sans', 'sans-serif'],
-      extra: ['Patua One', 'cursive'],
+      display: ['var(--lato-font)', '"Open Sans"', 'sans-serif'],
+      body: ['var(--noto-sans-font)', 'sans-serif'],
     },
     screens: {
       'xs': '376px',
