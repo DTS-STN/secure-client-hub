@@ -183,7 +183,9 @@ export async function getServerSideProps({ res, locale, params }) {
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en?.heading || pageContent.en?.title}`,
+      aaPrefix: `ESDC-EDSC:${
+        pageContent.en?.heading || pageContent.en?.pageName
+      }`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

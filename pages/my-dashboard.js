@@ -43,6 +43,7 @@ export default function MyDashboard(props) {
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
+        console.log(card)
         return (
           <Card
             key={card.id}
@@ -162,7 +163,7 @@ export async function getServerSideProps({ req, res, locale }) {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.pageName}`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
