@@ -16,7 +16,7 @@ export default function BenefitTasks(props) {
 
   return (
     <div className="inline-block w-full" data-testid="benefitTasks-test">
-      <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
+      <h3 className="font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
       <ul
@@ -25,11 +25,7 @@ export default function BenefitTasks(props) {
       >
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li
-              key={index}
-              className="font-body font-bold "
-              data-cy="task-link"
-            >
+            <li key={index} className="font-bold " data-cy="task-link">
               <Link
                 href={task.link}
                 passHref

@@ -32,16 +32,14 @@ export default function SecuritySettings(props) {
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <Link
         id="securityQuestionsLink"
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
       />
-      <p className="mb-8 text-xl font-body">
-        {props.content.securityQuestions.subTitle}
-      </p>
+      <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
 
       <Link
         id="eiAccessCodeLink"
@@ -49,9 +47,7 @@ export default function SecuritySettings(props) {
         text={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
       />
-      <p className="pb-7 text-xl font-body">
-        {props.content.eiAccessCode.subTitle}
-      </p>
+      <p className="pb-7 text-xl">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}

@@ -18,6 +18,19 @@ jest.mock('next/link', () => ({
   ),
 }))
 
+jest.mock('../../utils/fonts', () => ({
+  lato: {
+    style: {
+      fontFamily: 'Lato',
+    },
+  },
+  notoSans: {
+    style: {
+      fontFamily: '"Noto Sans"',
+    },
+  },
+}))
+
 // Children must be passed to test Adobe Analytics through the design system
 const aaChildrenProps = (
   <div content={{ heading: '' }} id="__next" data-reactroot />

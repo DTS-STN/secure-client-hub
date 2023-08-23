@@ -11,6 +11,7 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Link from 'next/link'
 import MultiModal from './MultiModal'
+import { lato, notoSans } from '../utils/fonts'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -46,6 +47,12 @@ export default function Layout(props) {
 
   return (
     <>
+      <style jsx global>{`
+        :root {
+          --lato-font: ${lato.style.fontFamily};
+          --noto-sans-font: ${notoSans.style.fontFamily};
+        }
+      `}</style>
       <MetaData language={props.locale} data={props.meta}></MetaData>
       {props.display.hideBanner ? (
         ''

@@ -48,7 +48,7 @@ export default function Index(props) {
         </div>
 
         <div className="relative py-8 bg-gray-light text-p h-auto min-w-[18.75rem] w-[18.75rem] flex justify-between p-6 xl:w-[31.25rem] xl:items-center">
-          <div className="w-28 text-base xl:text-p xl:w-max font-body text-bright-blue-dark">
+          <div className="w-28 text-base xl:text-p xl:w-max text-bright-blue-dark">
             <Link
               href="https://www.canada.ca/en/transparency/terms.html"
               className="inline-block w-28 xl:w-max mr-0 hover:underline splash-a text-lg"
@@ -60,7 +60,7 @@ export default function Index(props) {
             <span> • </span>
             <Link
               href="https://www.canada.ca/fr/transparence/avis.html"
-              className="inline-block hover:underline font-body text-lg"
+              className="inline-block hover:underline text-lg"
               lang="fr"
               data-cy="avis"
             >
