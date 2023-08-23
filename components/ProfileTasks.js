@@ -6,7 +6,7 @@ import { icon } from '../lib/loadIcons'
 export default function ProfileTasks(props) {
   return (
     <div data-cy="task-list" className="mt-10 mb-12">
-      <h2 className="text-4xl font-bold font-body">{props.programTitle}</h2>
+      <h2 className="text-4xl font-bold ">{props.programTitle}</h2>
       <ul
         className="w-full grid md:grid-cols-1 items-center pt-3"
         data-cy="task"
@@ -14,7 +14,7 @@ export default function ProfileTasks(props) {
       >
         {props.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-body font-bold justify-center py-3">
+            <li key={index} className="font-bold justify-center py-3">
               <Link
                 href={task.link}
                 passHref

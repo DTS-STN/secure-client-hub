@@ -47,7 +47,6 @@ export default function Layout(props) {
 
   return (
     <>
-      {/* <div className={`${lato.variable} ${notoSans.variable}`}> */}
       <style jsx global>{`
         :root {
           --lato-font: ${lato.style.fontFamily};
@@ -193,7 +192,6 @@ export default function Layout(props) {
         id="page-footer"
         isAuthenticated={true}
       />
-      {/* </div> */}
       <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )

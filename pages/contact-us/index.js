@@ -32,7 +32,7 @@ export default function ContactLanding(props) {
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
@@ -45,7 +45,7 @@ export default function ContactLanding(props) {
                   .split('/')
                   .pop()}`}
               />
-              <p className="text-xl font-body">{link.linkDescription}</p>
+              <p className="text-xl">{link.linkDescription}</p>
             </li>
           )
         })}

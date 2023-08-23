@@ -11,6 +11,10 @@
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black;
   }
+
+  body{
+  @apply font-body
+  }
 }
 ds-container{
   max-width: 992px;

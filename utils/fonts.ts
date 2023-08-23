@@ -1,11 +1,20 @@
-import { Noto_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 
-export const notoSans = Noto_Sans({
+export const notoSans = localFont({
   display: 'swap',
-  subsets: ['latin'],
+  src: [
+    {
+      path: '../public/fonts/NotoSans.woff2',
+      style: 'normal',
+      weight: '400',
+    },
+    {
+      path: '../public/fonts/NotoSans-Bold.woff2',
+      style: 'normal',
+      weight: '700',
+    },
+  ],
   variable: '--noto-sans-font',
-  weight: ['400', '700'],
 })
 
 export const lato = localFont({

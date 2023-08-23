@@ -24,7 +24,7 @@ function ContactSectionRow(props) {
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
-        className={`md:col-span-4 font-bold font-body text-2xl md:pl-3 ${
+        className={`md:col-span-4 font-bold text-2xl md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
@@ -47,7 +47,7 @@ function ContactSectionRow(props) {
           ) : (
             <div
               key={index}
-              className="flex align-baseline font-body text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4"
+              className="flex align-baseline text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4"
             >
               {iconFeature && (
                 <FontAwesomeIcon

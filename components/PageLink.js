@@ -14,7 +14,7 @@ export default function PageLink(props) {
         >
           {props.lookingForText}
         </h2>
-        <div className="font-body pb-8  text-xl">
+        <div className="pb-8  text-xl">
           <span className=" text-gray-darker">{props.accessText}</span>
           <Link
             href={props.href}

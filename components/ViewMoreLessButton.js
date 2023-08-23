@@ -33,7 +33,7 @@ export default function ViewMoreLessButton(props) {
             data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Expand`}
           />
         )}
-        <span className="text-left font-body">{props.caption}</span>
+        <span className="text-left">{props.caption}</span>
       </div>
     </button>
   )

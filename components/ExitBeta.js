@@ -44,7 +44,7 @@ export default function ExitBeta(props) {
         <a
           href={props.continueLink}
           id={props.popupPrimaryBtn.id}
-          className="flex justify-center align-middle text-lg py-2 px-4 mt-6 bg-deep-blue-medium text-white font-body rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
+          className="flex justify-center align-middle text-lg py-2 px-4 mt-6 bg-deep-blue-medium text-white rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
         >
           {props.popupPrimaryBtn.text}
         </a>
