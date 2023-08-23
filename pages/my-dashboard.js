@@ -43,7 +43,7 @@ export default function MyDashboard(props) {
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
-        console.log(card)
+
         return (
           <Card
             key={card.id}
