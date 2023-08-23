@@ -18,18 +18,6 @@ jest.mock('next/link', () => ({
   ),
 }))
 
-// jest.mock('next/font/local', () => ({
-//   lato: () => ({
-//     style: {
-//       fontFamily: 'mocked',
-//     },
-//     notoSans: () => ({
-//       style: {
-//         fontFamily: 'mocked',
-//       },
-//     }),
-//   }),
-// }))
 jest.mock('../../utils/fonts', () => ({
   lato: {
     style: {
