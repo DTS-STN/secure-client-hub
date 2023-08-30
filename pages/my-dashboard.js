@@ -124,6 +124,9 @@ export async function getServerSideProps({ req, res, locale }) {
     throw error
   })
 
+  if (locale === 'und') {
+    locale = 'en'
+  }
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/mon-tableau-de-bord' : '/en/my-dashboard'
