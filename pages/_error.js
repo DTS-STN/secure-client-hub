@@ -31,7 +31,7 @@ export async function getServerSideProps({ req, res, locale }) {
     throw error
   })
   const langToggleLink =
-    locale === 'en' ? `/fr/${statusCode}` : `/${statusCode}`
+    locale === 'en' ? `/fr/${statusCode}` : `/en/${statusCode}`
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {

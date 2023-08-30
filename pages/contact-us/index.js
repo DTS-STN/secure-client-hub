@@ -41,9 +41,9 @@ export default function ContactLanding(props) {
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={`/${props.content.pageName}/${link.linkDestination
-                  .split('/')
-                  .pop()}`}
+                href={`/${props.locale}/${
+                  props.content.pageName
+                }/${link.linkDestination.split('/').pop()}`}
               />
               <p className="text-xl">{link.linkDescription}</p>
             </li>

@@ -6,7 +6,7 @@ beforeEach(() => {
 })
 
 describe('Validate logout scenario and page', () => {
-  it('should click Sign-out from the menu item go to /auth/logout/', () => {
+  it('should click Sign-out from the menu item go to /auth/logout', () => {
     cy.intercept('POST', 'api/auth/signout').as('signout')
 
     cy.get('[data-testid="menuButton"]').click()
@@ -16,10 +16,9 @@ describe('Validate logout scenario and page', () => {
       .its('response')
       .then((response) => {
         const { statusCode } = response
-        // confirm the status code is 308 for a redirect
-        expect(statusCode).to.eq(308)
+        expect(statusCode).to.eq(200)
       })
-    cy.url().should('eq', 'http://localhost:3000/en/auth/logout/')
+    cy.url().should('eq', 'http://localhost:3000/en/auth/logout')
   })
 
   it('should show the loading spinner + text then return to index page once logged out', () => {
