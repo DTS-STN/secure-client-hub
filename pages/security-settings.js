@@ -114,7 +114,7 @@ export async function getServerSideProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
+    locale === 'en' ? '/fr/parametres-securite' : '/en/security-settings'
 
   const t = locale === 'en' ? en : fr
 
