@@ -2,11 +2,11 @@
 It does not test the authentication functionality currently since those endpoints are on prem only at this time. **/
 
 beforeEach(() => {
-  cy.visit('/my-dashboard')
+  cy.visit('/en/my-dashboard')
 })
 
 describe('Validate logout scenario and page', () => {
-  it('should click Sign-out from the menu item go to /auth/logout/', () => {
+  it('should click Sign-out from the menu item go to /auth/logout', () => {
     cy.intercept('POST', 'api/auth/signout').as('signout')
 
     cy.get('[data-testid="menuButton"]').click()
@@ -16,10 +16,9 @@ describe('Validate logout scenario and page', () => {
       .its('response')
       .then((response) => {
         const { statusCode } = response
-        // confirm the status code is 308 for a redirect
-        expect(statusCode).to.eq(308)
+        expect(statusCode).to.eq(200)
       })
-    cy.url().should('eq', 'http://localhost:3000/en/auth/logout/')
+    cy.url().should('eq', 'http://localhost:3000/en/auth/logout')
   })
 
   it('should show the loading spinner + text then return to index page once logged out', () => {
@@ -34,7 +33,7 @@ describe('Validate logout scenario and page', () => {
       await trigger
       request.reply()
     })
-    cy.visit('/auth/logout/')
+    cy.visit('/auth/logout')
     // Verify the loading spinner and text
     cy.get('[data-cy="loading-spinner"]')
       .should('be.visible')
