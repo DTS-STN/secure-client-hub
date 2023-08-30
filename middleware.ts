@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 //regex to check if there's an extension in the path, ie .jpg
 const PUBLIC_FILE = /\.(.*)$/
 
-export async function middleware(req) {
+export async function middleware(req: NextRequest) {
   const { nextUrl, url } = req
   const { locale, pathname } = nextUrl
   if (
@@ -14,7 +14,7 @@ export async function middleware(req) {
     return
   }
 
-  if (pathname !== '/' && locale === 'und') {
+  if (locale === 'und' && !pathname.endsWith('/')) {
     return NextResponse.redirect(new URL(`/en${pathname}`, url))
   }
 
@@ -22,4 +22,6 @@ export async function middleware(req) {
   if ((locale === 'en' || locale === 'fr') && pathname === '/') {
     return NextResponse.redirect(new URL(`/`, url))
   }
+
+  return NextResponse.next()
 }
