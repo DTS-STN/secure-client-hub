@@ -92,7 +92,7 @@ module.exports = {
     defaultLocale: 'und',
     localeDetection: false,
   },
-  trailingSlash: true,
+  trailingSlash: false,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //GraphQL loader for .graphql files
     config.module.rules.push({
