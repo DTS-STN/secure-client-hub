@@ -76,7 +76,7 @@ export default function Layout(props) {
           closeModal={closeModal}
         ></PhaseBanner>
       )}
-      <Header
+      {/* <Header
         legacyBehavior
         dataTestId="topnav"
         id="header"
@@ -152,7 +152,7 @@ export default function Layout(props) {
           onChange: function noRefCheck() {},
           onSubmit: function noRefCheck() {},
         }}
-      />
+      /> */}
       <main id="mainContent">
         {display.fullscreen ? (
           props.children
