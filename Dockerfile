@@ -1,10 +1,18 @@
-FROM node:18-alpine3.16 AS base
-WORKDIR /base
+FROM node:20.5.1-bullseye-slim AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
 COPY package*.json ./
 RUN npm ci
-COPY . .
 
-FROM base AS build
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
 # Build envs
 ARG BUILD_DATE
@@ -21,20 +29,18 @@ ARG MSCA_ECAS_RASC_BASE_URL
 ENV MSCA_ECAS_RASC_BASE_URL=$MSCA_ECAS_RASC_BASE_URL
 
 ENV NODE_ENV=production
-WORKDIR /build
-COPY --from=base /base ./
-RUN npm run build
 
-FROM node:18-alpine3.16 AS production
-ENV NODE_ENV=production
-WORKDIR /app
-COPY --from=build /build/next.config.js ./
-COPY --from=build /build/package*.json ./
-COPY --from=build /build/.next ./.next
-COPY --from=build /build/public ./public
-COPY --from=build /build/tracing.js ./
-COPY --from=build /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
-RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& npm install --no-package-lock --no-save next@"$VERSION_NEXT"
+
+# FROM node:18-alpine3.16 AS production
+# ENV NODE_ENV=production
+# WORKDIR /app
+# COPY --from=build /build/next.config.js ./
+# COPY --from=build /build/package*.json ./
+# COPY --from=build /build/.next ./.next
+# COPY --from=build /build/public ./public
+# COPY --from=build /build/tracing.js ./
+# COPY --from=build /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
+# RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& npm install --no-package-lock --no-save next@"$VERSION_NEXT"
 
 # Runtime envs -- will default to build args if no env values are specified at docker run
 ARG AEM_GRAPHQL_ENDPOINT
@@ -83,5 +89,26 @@ ENV AUTH_DISABLED=$AUTH_DISABLED
 ARG AUTH_ECAS_GLOBAL_LOGOUT_URL
 ENV AUTH_ECAS_GLOBAL_LOGOUT_URL=$AUTH_ECAS_GLOBAL_LOGOUT_URL
 # ECAS/next-auth env end
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+
+# next-i18next
+# https://github.com/i18next/next-i18next#docker
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/next-i18next.config.js ./next-i18next.config.js
+
+# install next.js
+COPY --from=builder /app/package*.json ./
+RUN npm install --no-save next
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT 3000
 
 CMD npm run start
