@@ -8,7 +8,7 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -67,6 +67,10 @@ export default function SecuritySettings(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('security-settings')
+  logger.level = 'error'
+
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

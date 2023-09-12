@@ -10,7 +10,7 @@ import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
-import logger from '../../lib/logger'
+import { getLogger } from '../../logging/log-util'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
@@ -69,6 +69,10 @@ export default function ContactUsPage(props) {
 }
 
 export async function getServerSideProps({ res, locale, params }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger(params.id)
+  logger.level = 'error'
+
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500

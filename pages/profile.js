@@ -8,7 +8,7 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
@@ -71,6 +71,10 @@ export default function Profile(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('profile')
+  logger.level = 'error'
+
   const content = await getProfileContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
