@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import { Link } from '@dts-stn/service-canada-design-system'
+import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
