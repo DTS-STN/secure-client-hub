@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "npm run proxyconfig & cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev",
+    "dev": "npm run proxyconfig & cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
     "build": "next build",
     "start": "next start",
     "start:next": "next start",
@@ -41,6 +41,8 @@
     "next": "^13.4.12",
     "next-auth": "^4.22.1",
     "next-i18next": "^13.3.0",
+    "pino": "^8.15.1",
+    "pino-pretty": "^10.2.0",
     "prom-client": "^12.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
