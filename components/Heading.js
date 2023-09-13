@@ -16,7 +16,7 @@ export default function Heading(props) {
           <strong>From: </strong>
           <a
             href={fromLink}
-            className="font-body underline text-deep-blue-dark text-20px font-bold ds-leading-33px hover:text-blue-hover"
+            className="font-body underline text-deep-blue-dark text-20px font-bold leading-33px hover:text-blue-hover"
           >
             {fromText}
           </a>
