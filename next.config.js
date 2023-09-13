@@ -102,6 +102,7 @@ module.exports = {
 
     return config
   },
+  output: 'standalone',
   //disable X-Powered-By
   poweredByHeader: false,
   // Image configured host
