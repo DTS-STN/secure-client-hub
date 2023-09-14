@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import { Link } from '@dts-stn/service-canada-design-system'
+import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import en from '../../locales/en'

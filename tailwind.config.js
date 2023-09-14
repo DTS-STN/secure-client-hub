@@ -16,8 +16,11 @@ module.exports = {
     },
     extend: {
       fontSize: {
+        '20px': ['20px', '33px'],
         '32px': ['32px', '35px'],
+        '34px': ['34px', '38px'],
         '36px': ['36px', '40px'],
+        '38px': ['38px', '42px'],
         '46px': ['46px'],
       },
       padding: {
@@ -65,6 +68,7 @@ module.exports = {
           light: '#B76565',
           medium: '#D94141',
           dark: '#881515',
+          red50a: '#AF3C43',
         },
         'yellow': {
           light: '#F9F4DA',
