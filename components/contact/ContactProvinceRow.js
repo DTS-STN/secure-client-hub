@@ -1,5 +1,6 @@
 import Markdown from 'markdown-to-jsx'
-import { Collapse } from '@dts-stn/service-canada-design-system'
+// import { Collapse } from '@dts-stn/service-canada-design-system'
+import Collapse from '../../components/Collapse'
 import { Fragment } from 'react'
 
 const ap = (x, append) => {
