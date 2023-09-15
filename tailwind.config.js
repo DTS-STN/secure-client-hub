@@ -16,7 +16,6 @@ module.exports = {
     },
     extend: {
       fontSize: {
-        '20-22': ['20px', '22px'],
         '20px': ['20px', '33px'],
         '32px': ['32px', '35px'],
         '34px': ['34px', '38px'],
