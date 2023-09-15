@@ -6,16 +6,16 @@ export default function Collapse(props) {
     <details
       key={id}
       id={id}
-      className="bg-lime-50 mb-5px text-gray-darker leading-33px text-20-22 font-body"
+      className="mb-5px text-gray-darker leading-[33px] text-20-22 font-body"
       data-testid={`${id}-${props.dataTestId}`}
     >
       <summary
         key={`summary-${id}`}
-        className="bg-yellow-100 text-deep-blue-60d hover:text-blue-hover hover:underline border border-grey-40 rounded px-15px py-2 cursor-pointer select-none outline-none"
+        className=" text-deep-blue-60d hover:text-blue-hover hover:underline border border-gray-40 rounded px-15px py-5px cursor-pointer select-none outline-none"
       >
         {title}
       </summary>
-      <div className="bg-pink-200 border border-grey-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none">
+      <div className="border border-gray-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none">
         {children}
       </div>
     </details>
