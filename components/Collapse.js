@@ -6,7 +6,7 @@ export default function Collapse(props) {
     <details
       key={id}
       id={id}
-      className="mb-5px text-gray-darker leading-[33px] text-20-22 font-body"
+      className="mb-5px text-gray-darker text-20px font-body"
       data-testid={`${id}-${props.dataTestId}`}
     >
       <summary
