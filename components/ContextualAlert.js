@@ -99,11 +99,6 @@ ContextualAlert.propTypes = {
   ]).isRequired,
 
   /**
-   * HTML toggle. Determines if text is parsed as plain text or HTML.
-   */
-  asHtml: PropTypes.bool,
-
-  /**
    * If true the background will be white, default is transparent.
    */
   whiteBG: PropTypes.bool,
