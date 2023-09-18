@@ -5,8 +5,6 @@ import warning_img from '../public/warning_img.svg'
 import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
 
-import { icon } from '../lib/loadIcons'
-
 export default function ContextualAlert(props) {
   const {
     message_heading,
@@ -39,30 +37,30 @@ export default function ContextualAlert(props) {
 
   return (
     <div id={id} className={`relative min-w-72 pl-4 sm:pl-6 ${white_BG}`}>
-      <div className="absolute top-3 left-1.5 sm:left-3.5  bg-white py-1">
+      <div
+        data-testid="alert-icon"
+        className="absolute top-3 left-1.5 sm:left-3.5  bg-white py-1"
+      >
         <Image
           src={alert_type}
-          width={30}
-          height={30}
+          width={28}
+          height={28}
           alt={alert_icon_alt_text}
           id={alert_icon_id}
         ></Image>
-
-        {/* change back to image component once fixed */}
-        {/* <img id={alert_icon_id} src={alert_type} alt={alert_icon_alt_text} /> */}
       </div>
       <div
-        className={`overflow-auto border-l-8 ${alert_color} pl-6 py-4 leading-8`}
+        className={`overflow-auto border-l-[6px] ${alert_color} pl-6 py-4 leading-8`}
       >
         {asHtml ? (
-          <h3
+          <div
             className="text-2xl leading-[26px] font-bold font-display text-gray-dark ml-1"
             dangerouslySetInnerHTML={{ __html: message_heading }}
           />
         ) : (
-          <h3 className="text-2xl leading-[26px] font-bold font-display text-gray-darker ml-1">
+          <p className="text-2xl leading-[26px] font-bold font-display text-gray-darker ml-1">
             {message_heading}
-          </h3>
+          </p>
         )}
         {asHtml ? (
           <div
