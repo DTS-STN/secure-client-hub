@@ -73,10 +73,11 @@ module.exports = {
           'active': '#21303F',
         },
         'red': {
-          light: '#B76565',
-          medium: '#D94141',
-          dark: '#881515',
-          red50a: '#AF3C43',
+          'light': '#B76565',
+          'medium': '#D94141',
+          'dark': '#881515',
+          'red50a': '#AF3C43',
+          '50b': '#D3080C',
         },
         'yellow': {
           light: '#F9F4DA',
@@ -87,9 +88,10 @@ module.exports = {
           dark: '#EE7100',
         },
         'green': {
-          light: '#A3D88180',
-          medium: '#A3D881',
-          dark: '#65B234',
+          'light': '#A3D88180',
+          'medium': '#A3D881',
+          'dark': '#65B234',
+          '50a': '#278400',
         },
       },
       backgroundImage: () => ({
