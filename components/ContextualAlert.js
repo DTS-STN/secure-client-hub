@@ -13,7 +13,6 @@ export default function ContextualAlert(props) {
     type,
     alert_icon_id,
     alert_icon_alt_text,
-    asHtml,
     whiteBG,
   } = props
   let alert_type =
@@ -52,26 +51,13 @@ export default function ContextualAlert(props) {
       <div
         className={`overflow-auto border-l-[6px] ${alert_color} pl-6 py-4 leading-8`}
       >
-        {asHtml ? (
-          <div
-            className="text-2xl leading-[26px] font-bold font-display text-gray-dark ml-1"
-            dangerouslySetInnerHTML={{ __html: message_heading }}
-          />
-        ) : (
-          <p className="text-2xl leading-[26px] font-bold font-display text-gray-darker ml-1">
-            {message_heading}
-          </p>
-        )}
-        {asHtml ? (
-          <div
-            className="font-body text-20px text-gray-darker ml-0.5"
-            dangerouslySetInnerHTML={{ __html: message_body }}
-          />
-        ) : (
-          <div className="font-body text-20px text-gray-darker ml-0.5">
-            {message_body}
-          </div>
-        )}
+        <div className="text-2xl leading-[26px] font-bold font-display text-gray-darker ml-1">
+          {message_heading}
+        </div>
+
+        <p className="font-body text-20px text-gray-darker ml-0.5">
+          {message_body}
+        </p>
       </div>
     </div>
   )
