@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695057304862" clover="3.2.0">
-  <project timestamp="1695057304862" name="All files">
-    <metrics statements="376" coveredstatements="189" conditionals="255" coveredconditionals="98" methods="148" coveredmethods="56" elements="779" coveredelements="343" complexity="0" loc="376" ncloc="376" packages="8" files="34" classes="34"/>
+<coverage generated="1695065539558" clover="3.2.0">
+  <project timestamp="1695065539558" name="All files">
+    <metrics statements="380" coveredstatements="193" conditionals="255" coveredconditionals="98" methods="149" coveredmethods="57" elements="784" coveredelements="348" complexity="0" loc="380" ncloc="380" packages="8" files="35" classes="35"/>
     <package name="components">
-      <metrics statements="93" coveredstatements="59" conditionals="87" coveredconditionals="34" methods="35" coveredmethods="18"/>
+      <metrics statements="97" coveredstatements="63" conditionals="87" coveredconditionals="34" methods="36" coveredmethods="19"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -26,6 +26,13 @@
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
+      </file>
+      <file name="Collapse.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Collapse.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
       </file>
       <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
