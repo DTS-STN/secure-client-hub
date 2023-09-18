@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694797731827" clover="3.2.0">
-  <project timestamp="1694797731827" name="All files">
+<coverage generated="1695064984713" clover="3.2.0">
+  <project timestamp="1695064984713" name="All files">
     <metrics statements="380" coveredstatements="193" conditionals="255" coveredconditionals="98" methods="149" coveredmethods="57" elements="784" coveredelements="348" complexity="0" loc="380" ncloc="380" packages="8" files="35" classes="35"/>
     <package name="components">
       <metrics statements="97" coveredstatements="63" conditionals="87" coveredconditionals="34" methods="36" coveredmethods="19"/>
@@ -158,11 +158,11 @@
       </file>
       <file name="ContactProvinceRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvinceRow.js">
         <metrics statements="5" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="16" count="0" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
       </file>
       <file name="ContactSection.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSection.js">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
