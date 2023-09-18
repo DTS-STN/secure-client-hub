@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695062501256" clover="3.2.0">
-  <project timestamp="1695062501256" name="All files">
-    <metrics statements="382" coveredstatements="195" conditionals="269" coveredconditionals="107" methods="149" coveredmethods="57" elements="800" coveredelements="359" complexity="0" loc="382" ncloc="382" packages="8" files="35" classes="35"/>
+<coverage generated="1695066281245" clover="3.2.0">
+  <project timestamp="1695066281245" name="All files">
+    <metrics statements="386" coveredstatements="199" conditionals="269" coveredconditionals="107" methods="150" coveredmethods="58" elements="805" coveredelements="364" complexity="0" loc="386" ncloc="386" packages="8" files="36" classes="36"/>
     <package name="components">
-      <metrics statements="99" coveredstatements="65" conditionals="101" coveredconditionals="43" methods="36" coveredmethods="19"/>
+      <metrics statements="103" coveredstatements="69" conditionals="101" coveredconditionals="43" methods="37" coveredmethods="20"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -26,6 +26,13 @@
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
+      </file>
+      <file name="Collapse.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Collapse.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
       </file>
       <file name="ContextualAlert.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ContextualAlert.js">
         <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="9" methods="1" coveredmethods="1"/>
