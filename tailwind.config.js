@@ -24,8 +24,15 @@ module.exports = {
         '46px': ['46px'],
       },
       padding: {
-        10.5: '42px',
-        15: '60px',
+        '5px': '5px',
+        '15px': '15px',
+        '18px': '18px',
+        '10.5': '42px',
+        '15': '60px',
+      },
+      margin: {
+        '5px': '5px',
+        '15px': '15px',
       },
       colors: {
         'gray': {
@@ -36,6 +43,7 @@ module.exports = {
           'darker': '#333333',
           '30a': '#EAEBED',
           '50a': '#CFD1D5',
+          '40': '#DDDDDD',
         },
         'bright-blue': {
           light: '#78B9E4',
