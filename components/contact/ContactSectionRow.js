@@ -1,5 +1,5 @@
 import Button from '../../components/Button'
-import { Component, Fragment } from 'react'
+import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
