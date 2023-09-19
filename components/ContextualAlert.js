@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import Image from 'next/image'
+import Image from 'next/Image'
 import success_img from '../public/success_img.svg'
 import warning_img from '../public/warning_img.svg'
 import danger_img from '../public/danger_img.svg'
