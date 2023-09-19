@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
-import { Button } from '@dts-stn/service-canada-design-system'
+import Button from '../../components/Button'
 
 const CountDown = (props) => {
   return (
@@ -50,7 +50,7 @@ const CountDown = (props) => {
         <Button
           text={props.signOutLinkText}
           onClick={props.onSignOut}
-          styling="secondary"
+          style="secondary"
           className="mr-3"
         />
         <Button
