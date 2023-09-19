@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import PropTypes from 'prop-types'
-import React from 'react'
 
 export default function Link(props) {
   //Styling for links based on Figma Design
