@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import { Footer, LayoutContainer } from '@dts-stn/service-canada-design-system'
+import { LayoutContainer } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import { Header } from './Header'
+import { Footer } from './Footer'
 import MetaData from './MetaData'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
@@ -180,7 +181,6 @@ export default function Layout(props) {
         contactLink={contactLink}
         btnLink="#top"
         id="page-footer"
-        isAuthenticated={true}
       />
       <script type="text/javascript">_satellite.pageBottom();</script>
     </>

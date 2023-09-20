@@ -37,6 +37,7 @@ module.exports = {
           '30a': '#EAEBED',
           '50a': '#CFD1D5',
           'blue': '#EBF2FC',
+          'subFooter': '#F5F5F5',
         },
         'bright-blue': {
           light: '#78B9E4',
