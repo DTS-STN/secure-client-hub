@@ -1,5 +1,5 @@
 import propTypes from 'prop-types'
-import { Button } from '@dts-stn/service-canada-design-system'
+import Button from '../components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
 import React from 'react'
@@ -41,9 +41,9 @@ export default function PhaseBanner(props) {
         </div>
         <Button
           id="bannerButton"
-          styling="primary"
+          style="primary"
           text={props.bannerButtonText}
-          className="text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
+          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
           onClick={(e) => {
             e.preventDefault()
             props.openModal(props.bannerButtonLink, 'betaBannerModal')
