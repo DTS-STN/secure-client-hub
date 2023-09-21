@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import Links from '../../components/Links'
+import Links from '../components/Links'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 export default function Links(props) {
   //Styling for links based on Figma Design
@@ -40,7 +41,7 @@ export default function Links(props) {
   }
 
   return Component !== 'a' ? (
-    <Component
+    <Link
       href={props.href}
       disabled={props.disabled}
       lang={props.lang}
@@ -73,7 +74,7 @@ export default function Links(props) {
           {props.abbr}
         </abbr>
       </a>
-    </Component>
+    </Link>
   ) : (
     <a
       href={props.href}
