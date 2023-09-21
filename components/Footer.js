@@ -39,6 +39,7 @@ export function Footer(props) {
               href={contactLink}
               target={target}
               locale={lang}
+              aria-label={text}
             >
               {t.mscaFooterContactUsText}
             </Link>
@@ -89,6 +90,7 @@ export function Footer(props) {
                             id={'footerLink' + index}
                             href={href}
                             target={target}
+                            aria-label={text}
                           >
                             {text}
                           </Link>

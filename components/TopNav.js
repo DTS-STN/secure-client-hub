@@ -15,10 +15,10 @@ export function TopNav(props) {
     <>
       {/* Top navigation accessible only when using a keyboard to navigate the page */}
       <nav role="navigation" aria-label="topNavigation">
-        <ul id="TopNavLinks" className="ds-z-10">
-          <li className="ds-left-0 ds-top-2 ds-absolute ds-text-center ds-box-border ds-w-full -ds-z-50 focus-within:ds-z-50 ">
+        <ul id="TopNavLinks" className="z-10">
+          <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
             <a
-              className="focus:ds-bg-multi-blue-blue70 ds-font-bold ds-p-1 ds-text-white"
+              className="focus:bg-blue-primary font-bold p-1 text-white"
               href={skipToMainPath}
             >
               {lang === 'fr'
@@ -26,9 +26,9 @@ export function TopNav(props) {
                 : 'Skip to main content'}
             </a>
           </li>
-          <li className="ds-left-0 ds-top-2 ds-absolute ds-text-center ds-box-border ds-w-full -ds-z-50 focus-within:ds-z-50 ">
+          <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
             <a
-              className="focus:ds-bg-multi-blue-blue70 ds-font-bold ds-p-1 ds-text-white"
+              className="focus:bg-blue-primary font-bold p-1 text-white"
               href={skipToAboutPath}
             >
               {lang === 'fr'
@@ -38,9 +38,9 @@ export function TopNav(props) {
           </li>
 
           {displayAlternateLink ? (
-            <li className="ds-left-0 ds-top-2 ds-absolute ds-text-center ds-box-border ds-w-full -ds-z-50 focus-within:ds-z-50 ">
+            <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
               <a
-                className="focus:ds-bg-multi-blue-blue70 ds-font-bold ds-p-1 ds-text-white"
+                className="focus:bg-blue-primary font-bold p-1 text-white"
                 href={switchToBasicPath}
                 rel="alternate"
               >

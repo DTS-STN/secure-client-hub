@@ -115,6 +115,7 @@ export function Menu(props) {
                             } font-body flex items-center h-[55px] px-4 hover:text-blue-hover focus:outline-none ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:border-none`}
                             onClick={element.showIcon ? onSignOut : onClick}
                             href={element.path}
+                            aria-label={element.value}
                             data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
                           >
                             {element.showIcon && (
