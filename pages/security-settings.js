@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from '@dts-stn/service-canada-design-system'
+import Links from '../../components/Links'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
@@ -34,7 +34,7 @@ export default function SecuritySettings(props) {
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
-      <Link
+      <Links
         id="securityQuestionsLink"
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
@@ -42,7 +42,7 @@ export default function SecuritySettings(props) {
       />
       <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
 
-      <Link
+      <Links
         id="eiAccessCodeLink"
         dataTestId="eiAccessCodeLink"
         text={props.content.eiAccessCode.linkTitle.text}

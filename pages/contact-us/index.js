@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from '@dts-stn/service-canada-design-system'
+import Links from '../../components/Links'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
@@ -38,7 +38,7 @@ export default function ContactLanding(props) {
         {props.content.links.map((link) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
-              <Link
+              <Links
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
