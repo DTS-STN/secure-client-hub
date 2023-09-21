@@ -12,14 +12,18 @@ export function Language(props) {
           data-testid={props.dataTestId}
           data-cy={props.dataCy || props.id}
           lang={props.lang === 'en' ? 'fr' : 'en'}
-          aria-label={props.ariaLabel || props.text}
+          aria-label={
+            props.ariaLabel || props.lang === 'en' ? 'Français' : 'English'
+          }
           locale={props.locale}
           data-gc-analytics-customclick={`${props.dataGcAnalyticsCustomClick}:${
             props.lang === 'en' ? 'Français' : 'English'
           }`}
         >
           {/* <!-- English Text: title="English", en --> */}
-          <abbr title={props.text}>{props.abbr}</abbr>
+          <abbr title={props.lang === 'en' ? 'Français' : 'English'}>
+            {props.abbr}
+          </abbr>
         </Link>
       ) : (
         <Link

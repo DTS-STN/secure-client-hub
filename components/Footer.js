@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import en from '../locales/en'
@@ -24,7 +23,7 @@ export function Footer(props) {
   const container = containerClass || 'ds-container'
 
   return (
-    <footer id={id} className="w-full" data-testid="ds-footer">
+    <footer id={id} className="w-full" data-testid="footer">
       <>
         <div className="bg-blue-primary">
           <section
@@ -39,7 +38,7 @@ export function Footer(props) {
               href={contactLink}
               target={target}
               locale={lang}
-              aria-label={text}
+              aria-label={t.mscaFooterContactUsText}
             >
               {t.mscaFooterContactUsText}
             </Link>
@@ -114,6 +113,8 @@ export function Footer(props) {
                 } my-[15px]`}
                 src={logo}
                 alt="Symbol of the Government of Canada"
+                width={143}
+                height={34}
               />
             </div>
           </div>
@@ -126,6 +127,12 @@ export function Footer(props) {
 Footer.defaultProps = {
   lang: 'en',
   contactLink: 'https://www.canada.ca/en/contact.html',
+  brandLinks: [
+    {
+      href: 'https://example.com/link1',
+      text: 'Link 1',
+    },
+  ],
 }
 
 Footer.propTypes = {

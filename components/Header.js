@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TopNav } from './TopNav'
@@ -16,7 +13,6 @@ export function Header(props) {
     id,
     lang,
     locale,
-    isAuthenticated,
     linkPath,
     menuProps,
     breadCrumbItems,
@@ -28,7 +24,7 @@ export function Header(props) {
   const containerClass = useParentContainer ? '' : 'ds-container'
 
   return (
-    <div className="header" id={id} data-testid="header">
+    <div className="font-display" id={id} data-testid="header">
       <TopNav
         lang={lang}
         skipToMainPath={topnavProps.skipToMainPath}
@@ -41,7 +37,7 @@ export function Header(props) {
           className={`${containerClass} flex flex-col sm:flex-row md:pb-3.5`}
         >
           <div className="flex flex-row sm:pt-3">
-            <div className={`header-logo pt-1.5`}>
+            <div className="pt-1.5">
               <Image
                 className={`${
                   lang === 'en'
@@ -50,6 +46,8 @@ export function Header(props) {
                 } md:max-w-[360px] max-w-[206px]`}
                 src={lang === 'en' ? logoFile : logoFileFR}
                 alt="Government of Canada"
+                width={819}
+                height={76}
               />
             </div>
             <div className="sm:hidden ml-auto pb-2.5">
@@ -80,7 +78,6 @@ export function Header(props) {
         {!menuProps.hasNoMenu && (
           <Menu
             lang={lang}
-            isAuthenticated={isAuthenticated}
             menuList={menuProps.menuList}
             onSignOut={menuProps.onSignOut}
             dataGcAnalyticsCustomClickInstitutionVariable={
@@ -101,7 +98,6 @@ export function Header(props) {
 Header.defaultProps = {
   lang: 'en',
   id: Math.random(),
-  isAuthenticated: true,
   useParentContainer: false,
   searchProps: {
     onChange: () => {},
@@ -109,7 +105,6 @@ Header.defaultProps = {
   },
   menuProps: {
     onSignOut: () => {},
-    isAuthenticated: true,
     menuList: [
       { key: 'dashKey', value: 'My dashboard', path: '/' },
       { key: 'securityKey', value: 'Security Settings', path: '/' },
@@ -141,11 +136,6 @@ Header.propTypes = {
    * Language toggle redirection link
    */
   linkPath: PropTypes.string,
-
-  /**
-   * isAuthenticated: bool to switch between authenticated and non authenticated menus
-   **/
-  isAuthenticated: PropTypes.bool,
 
   /**
    * useParentContainer: bool to choose whether to use the partent container or header's container

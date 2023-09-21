@@ -89,7 +89,6 @@ export default function Layout(props) {
           switchToBasicPath: '',
           displayAlternateLink: false,
         }}
-        isAuthenticated={props.isAuth}
         dataGcAnalyticsCustomClickInstitutionVariable={
           props.children.props.aaPrefix
         }
