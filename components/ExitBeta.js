@@ -1,6 +1,6 @@
 import { icon } from '../lib/loadIcons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button } from '@dts-stn/service-canada-design-system'
+import Button from '../components/Button'
 import PropTypes from 'prop-types'
 
 export default function ExitBeta(props) {
@@ -33,9 +33,9 @@ export default function ExitBeta(props) {
       </p>
       <div className="md:flex mt-8 md:space-x-12">
         <Button
-          className="w-full block md:w-fit"
+          className="whitespace-nowrap my-auto w-full justify-center md:w-fit py-2 px-4"
           id={props.popupSecondaryBtn.id}
-          styling="secondary"
+          style="secondary"
           onClick={props.closeModal}
           text={props.popupSecondaryBtn.text}
         />
@@ -44,7 +44,7 @@ export default function ExitBeta(props) {
         <a
           href={props.continueLink}
           id={props.popupPrimaryBtn.id}
-          className="flex justify-center align-middle text-lg py-2 px-4 mt-6 bg-deep-blue-medium text-white rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
+          className="flex justify-center text-xl py-2 px-4 mt-6 bg-deep-blue-medium text-white rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
         >
           {props.popupPrimaryBtn.text}
         </a>

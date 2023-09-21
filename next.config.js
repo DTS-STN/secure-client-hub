@@ -102,7 +102,6 @@ module.exports = {
 
     return config
   },
-  output: 'standalone',
   //disable X-Powered-By
   poweredByHeader: false,
   // Image configured host
@@ -121,7 +120,6 @@ module.exports = {
   async rewrites() {
     return REWRITES
   },
-
   async redirects() {
     return [
       {
