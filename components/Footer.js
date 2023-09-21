@@ -34,6 +34,7 @@ export function Footer(props) {
             </h2>
             <Link
               className="text-white font-body text-sm hover:text-white hover:underline focus:ring-1 focus:ring-white"
+              data-cy="footerContactUsLink"
               id="footerContactUsLink"
               href={contactLink}
               target={target}
