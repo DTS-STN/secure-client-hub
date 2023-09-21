@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695129720918" clover="3.2.0">
-  <project timestamp="1695129720918" name="All files">
-    <metrics statements="407" coveredstatements="207" conditionals="296" coveredconditionals="117" methods="152" coveredmethods="59" elements="855" coveredelements="383" complexity="0" loc="407" ncloc="407" packages="8" files="37" classes="37"/>
+<coverage generated="1695318759009" clover="3.2.0">
+  <project timestamp="1695318759009" name="All files">
+    <metrics statements="416" coveredstatements="216" conditionals="326" coveredconditionals="129" methods="153" coveredmethods="60" elements="895" coveredelements="405" complexity="0" loc="416" ncloc="416" packages="8" files="38" classes="38"/>
     <package name="components">
-      <metrics statements="124" coveredstatements="77" conditionals="128" coveredconditionals="53" methods="39" coveredmethods="21"/>
+      <metrics statements="133" coveredstatements="86" conditionals="158" coveredconditionals="65" methods="40" coveredmethods="22"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -18,6 +18,18 @@
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
+      </file>
+      <file name="Button.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Button.js">
+        <metrics statements="9" coveredstatements="9" conditionals="30" coveredconditionals="12" methods="1" coveredmethods="1"/>
+        <line num="7" count="9" type="stmt"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="11" count="9" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="15" count="9" type="stmt"/>
+        <line num="18" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="106" count="7" type="stmt"/>
+        <line num="113" count="7" type="stmt"/>
       </file>
       <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
         <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
@@ -51,7 +63,7 @@
       </file>
       <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="56" count="2" type="stmt"/>
       </file>
       <file name="Heading.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Heading.js">
@@ -160,7 +172,7 @@
       </file>
       <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
         <metrics statements="4" coveredstatements="2" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
-        <line num="12" count="3" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="57" count="2" type="stmt"/>
@@ -217,7 +229,7 @@
       <file name="CountDown.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/sessionModals/CountDown.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
       </file>
     </package>
     <package name="pages">
