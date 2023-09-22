@@ -7,7 +7,6 @@ import Link from 'next/link'
  */
 export function Menu(props) {
   const {
-    onClick,
     menuList,
     lang,
     onSignOut,
@@ -108,7 +107,11 @@ export function Menu(props) {
                           className={`${
                             index === 0 ? 'border-none' : 'border-t-2'
                           } font-body flex items-center h-[55px] px-4 hover:text-blue-hover focus:outline-none ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:border-none`}
-                          onClick={element.showIcon ? onSignOut : onClick}
+                          onClick={
+                            element.showIcon
+                              ? onSignOut
+                              : () => setShowDropdown((e) => !e)
+                          }
                           href={element.path}
                           aria-label={element.value}
                           data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
@@ -169,11 +172,6 @@ Menu.propTypes = {
    * Language code.
    */
   lang: PropTypes.string.isRequired,
-
-  /**
-   * function for handling on click
-   */
-  onClick: PropTypes.func,
 
   /**
    * Adobe Analytics Prefix
