@@ -43,37 +43,32 @@ export default function Links(props) {
   return Component !== 'a' ? (
     <Link
       href={props.href}
+      locale={props.locale}
       disabled={props.disabled}
       lang={props.lang}
       target={props.target}
+      onClick={props.onClick ? props.onClick : undefined}
+      id={props.id}
       aria-label={props.ariaLabel || props.text}
-      role="link"
+      className={`${basicStyle}`}
+      data-testid={props.dataTestId}
+      data-cy={props.dataCy || props.id}
+      data-cy-button={props.dataCyButton}
+      data-gc-analytics-customclick={props.dataGcAnalyticsCustomClick}
+      onKeyDown={onKeyDown}
     >
-      <a
-        href={props.href}
-        locale={props.locale}
-        onClick={props.onClick ? props.onClick : undefined}
-        id={props.id}
-        className={`${basicStyle}`}
-        data-testid={props.dataTestId}
-        data-cy={props.dataCy || props.id}
-        data-cy-button={props.dataCyButton}
-        data-gc-analytics-customclick={props.dataGcAnalyticsCustomClick}
-        onKeyDown={onKeyDown}
-      >
-        {/* <!-- English Text: English --> */}
-        <span className={props.abbr ? 'font-body text-base font-normal' : ''}>
-          {props.text}
-        </span>
-        {/* <!-- English Text: title="English", en --> */}
+      {/* <!-- English Text: English --> */}
+      <span className={props.abbr ? 'font-body text-base font-normal' : ''}>
+        {props.text}
+      </span>
+      {/* <!-- English Text: title="English", en --> */}
 
-        <abbr
-          className="uppercase text-gray-darker font-medium md:hidden"
-          title={props.text}
-        >
-          {props.abbr}
-        </abbr>
-      </a>
+      <abbr
+        className="uppercase text-gray-darker font-medium md:hidden"
+        title={props.text}
+      >
+        {props.abbr}
+      </abbr>
     </Link>
   ) : (
     <a
