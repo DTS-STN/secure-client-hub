@@ -6,6 +6,10 @@ beforeEach(() => {
 })
 
 describe('Validate login page', () => {
+  it('Login has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
   it('Lands on login page and displays loading spinner', () => {
     cy.get('[data-cy="loading-spinner"]')
       .should('be.visible')

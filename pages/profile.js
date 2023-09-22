@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Heading } from '@dts-stn/service-canada-design-system'
+import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -8,7 +8,7 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
@@ -37,7 +37,7 @@ export default function Profile(props) {
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
-      <p className="text-lg mt-2 font-body">{props.content.heading}</p>
+      <p className="text-lg mt-2">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
@@ -45,7 +45,7 @@ export default function Profile(props) {
             acronym={acronym(program.title)}
             programTitle={program.title}
             tasks={program.tasks}
-            data-testID="profile-task-group-list"
+            data-testid="profile-task-group-list"
             openModal={props.openModal}
             data-cy="task"
             refPageAA={props.aaPrefix}
@@ -71,6 +71,10 @@ export default function Profile(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('profile')
+  logger.level = 'error'
+
   const content = await getProfileContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
@@ -106,7 +110,7 @@ export async function getServerSideProps({ res, locale }) {
   })
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/profil' : '/profile'
+  const langToggleLink = locale === 'en' ? '/fr/profil' : '/en/profile'
 
   const t = locale === 'en' ? en : fr
 

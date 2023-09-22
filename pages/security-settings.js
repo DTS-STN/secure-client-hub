@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import { Link } from '@dts-stn/service-canada-design-system'
+import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -8,7 +9,7 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -32,16 +33,14 @@ export default function SecuritySettings(props) {
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <Link
         id="securityQuestionsLink"
         dataTestId="securityQuestionsLink"
         text={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
       />
-      <p className="mb-8 text-xl font-body">
-        {props.content.securityQuestions.subTitle}
-      </p>
+      <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
 
       <Link
         id="eiAccessCodeLink"
@@ -49,9 +48,7 @@ export default function SecuritySettings(props) {
         text={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
       />
-      <p className="pb-7 text-xl font-body">
-        {props.content.eiAccessCode.subTitle}
-      </p>
+      <p className="pb-7 text-xl">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
@@ -71,6 +68,10 @@ export default function SecuritySettings(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('security-settings')
+  logger.level = 'error'
+
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
@@ -118,7 +119,7 @@ export async function getServerSideProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
+    locale === 'en' ? '/fr/parametres-securite' : '/en/security-settings'
 
   const t = locale === 'en' ? en : fr
 

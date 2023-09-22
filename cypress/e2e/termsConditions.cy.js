@@ -44,4 +44,8 @@ describe('Validate Terms and Conditions Page', () => {
   it('Validate the Information section is present on Terms and conditions page', () => {
     termsConditionsPo.ValidateinformationSection()
   })
+  it.skip('Terms and conditions and Privacy has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
 })

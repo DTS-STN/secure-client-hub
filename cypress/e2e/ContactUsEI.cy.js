@@ -10,6 +10,10 @@ beforeEach(() => {
 })
 
 describe('Validate EI Contact Us Landing page', () => {
+  it('Contact us EI has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
   it('Validate EI Contact us URL and header in EN', () => {
     EIcontactUs.ValidateEIContactUsUrl()
     EIcontactUs.ValidateEIContactUsHeaderEN()

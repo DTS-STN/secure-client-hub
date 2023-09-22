@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
-import {
-  Heading,
-  ContextualAlert,
-  Date,
-} from '@dts-stn/service-canada-design-system'
+import { Date } from '@dts-stn/service-canada-design-system'
+import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
@@ -26,7 +24,7 @@ export default function PrivacyCondition(props) {
   )
 
   return (
-    <div className="font-body" data-cy="terms-conditions">
+    <div data-cy="terms-conditions" data-testid="terms-conditionsContent-test">
       <Heading
         id="PrivacyCondition-heading"
         title={props.content.heading}
@@ -115,6 +113,10 @@ export default function PrivacyCondition(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('privacy-notice-terms-and-conditions')
+  logger.level = 'error'
+
   const content = await getPrivacyConditionContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

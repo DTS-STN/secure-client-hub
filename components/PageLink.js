@@ -3,7 +3,6 @@ import Link from 'next/link'
 import BackToButton from './BackToButton'
 
 export default function PageLink(props) {
-  const linkText = undefined
   let linkID = props.linkText?.replace(/\s+/g, '')
 
   return (
@@ -15,17 +14,16 @@ export default function PageLink(props) {
         >
           {props.lookingForText}
         </h2>
-        <div className="font-body pb-8  text-xl">
+        <div className="pb-8  text-xl">
           <span className=" text-gray-darker">{props.accessText}</span>
-          <Link href={props.href}>
-            <a
-              id={`link-for-${linkID}`}
-              data-cy={props.dataCy}
-              data-gc-analytics-customclick={`${props.refPageAA}:${props.linkId}`}
-              className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
-            >
-              {props.linkText}
-            </a>
+          <Link
+            href={props.href}
+            id={`link-for-${linkID}`}
+            data-cy={props.dataCy}
+            data-gc-analytics-customclick={`${props.refPageAA}:${props.linkId}`}
+            className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
+          >
+            {props.linkText}
           </Link>
           <span className=" text-gray-darker">.</span>
         </div>

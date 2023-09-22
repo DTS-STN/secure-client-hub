@@ -10,6 +10,10 @@ beforeEach(() => {
 })
 
 describe('Validate OAS Contact Us Landing page', () => {
+  it('Contact us OAS has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
   it('Validate OAS Contact us URL and header in EN', () => {
     OAScontactUs.ValidateOASContactUsUrl()
     OAScontactUs.ValidateOASContactUsHeaderEN()

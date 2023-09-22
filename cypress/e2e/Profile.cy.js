@@ -41,6 +41,7 @@ describe('Validate Profile page', () => {
   it('validate that user is navigated to /fr/profile page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     dashboardPo.Menu().click()
     dashboardPo.ProfileMenu().click()
     profilePo.ProfileUrlFR()
@@ -55,6 +56,7 @@ describe('Validate Profile page', () => {
 
   it('validate the "Mon tableau de bord" click goes from Profile to "/fr/home"page', () => {
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     securityPo.breadcrumbs().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
@@ -106,8 +108,14 @@ describe('Validate Profile page', () => {
 
   it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
+  })
+
+  it('Profile has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
   })
 })

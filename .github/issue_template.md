@@ -1,4 +1,4 @@
-## [DC-XXX](https://jira-dev.bdm-dev.dts-stn.com/browse/DC-XXX) (JIRA issue, if applicable)
+## [ADO-XXX](https://dev.azure.com/VP-BD/DECD/_workitems/edit/XXX)
 
 ### Description
 

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
+import { TableContent } from '@dts-stn/service-canada-design-system'
+import Heading from '../../components/Heading'
 import { Fragment } from 'react'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
@@ -10,7 +11,7 @@ import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
-import logger from '../../lib/logger'
+import { getLogger } from '../../logging/log-util'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
@@ -69,6 +70,10 @@ export default function ContactUsPage(props) {
 }
 
 export async function getServerSideProps({ res, locale, params }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger(params.id)
+  logger.level = 'error'
+
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -112,6 +117,15 @@ export async function getServerSideProps({ res, locale, params }) {
   /* istanbul ignore next */
   const t = locale === 'en' ? en : fr
 
+  /*
+    For some reason when using dynamic routes, the locale gets set to the default (und) after trying to switch back to English from French.
+    The below fixes this issue by setting the locale to English if it is undefined, which is what the middleware is doing on all
+    other pages and what it should also be doing for the contact pages.
+  */
+  if (locale === 'und') {
+    locale = 'en'
+  }
+
   const pageContent = await getContactUsPage(params.id).catch((error) => {
     logger.error(error)
     // res.statusCode = 500
@@ -131,7 +145,7 @@ export async function getServerSideProps({ res, locale, params }) {
   const langToggleLink =
     locale === 'en'
       ? `/fr/contactez-nous/${pageContent.fr.pageName}`
-      : `/contact-us/${pageContent.en.pageName}`
+      : `/en/contact-us/${pageContent.en.pageName}`
 
   const breadCrumbItems =
     locale === 'en'
