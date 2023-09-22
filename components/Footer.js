@@ -46,7 +46,7 @@ export function Footer(props) {
           </section>
         </div>
         {/* Subfooter */}
-        <div className="bg-gray-subFooter">
+        <div className="bg-gray-lightest">
           <div
             className={`'min-h-[86px] ' ${
               error ? 'items-center' : ''
@@ -57,7 +57,7 @@ export function Footer(props) {
                 <a
                   id="top_btn"
                   href={btnLink}
-                  className="sm:hidden float-left cursor-pointer"
+                  className="sm:hidden float-left cursor-pointer text-sm"
                 >
                   Top of page / Haut de la page
                   <FontAwesomeIcon
@@ -67,7 +67,7 @@ export function Footer(props) {
                 </a>
               </div>
             ) : (
-              <section className="md:flex-row md:flex-row flex items-center">
+              <section className="md:flex-row flex items-center">
                 <nav
                   role="navigation"
                   aria-labelledby="accessibleSectionHeader2"
@@ -82,7 +82,7 @@ export function Footer(props) {
                           key={index}
                           className={`${
                             index === 0 ? '' : 'md:list-disc'
-                          } pr-4 mb-[17px] list-inside list-none text-xxs`}
+                          } pr-4 mb-[17px] list-inside list-none`}
                         >
                           <Link
                             className="text-deep-blue-dark font-body text-sm hover:underline"
@@ -97,6 +97,15 @@ export function Footer(props) {
                         </li>
                       )
                     })}
+                    <li className="sm:hidden float-left cursor-pointer text-sm">
+                      <a id="top_btn" href={btnLink}>
+                        Top of page / Haut de la page
+                        <FontAwesomeIcon
+                          icon={icon['chevron-up']}
+                          className="text-sm sm:hidden pl-2"
+                        />
+                      </a>
+                    </li>
                   </ul>
                 </nav>
               </section>

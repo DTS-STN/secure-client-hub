@@ -43,7 +43,7 @@ export function Menu(props) {
           </p>
         </div>
         <div
-          className="w-full sm:w-[260px] h-full bg-gray-blue hover:bg-gray-50a focus:bg-gray-50a"
+          className="w-full sm:w-[260px] h-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a"
           ref={dropdown}
         >
           <button
