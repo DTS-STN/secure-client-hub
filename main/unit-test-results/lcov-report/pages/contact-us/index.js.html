@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/33</span>
+                <span class='fraction'>0/35</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
@@ -260,7 +260,10 @@
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,6 +321,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -458,7 +464,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import { Link } from '@dts-stn/service-canada-design-system'
+import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import en from '../../locales/en'
@@ -466,10 +473,9 @@ import fr from '../../locales/fr'
 import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import logger from '../../lib/logger'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
-import NextLink from 'next/link'
+import { getLogger } from '../../logging/log-util'
 &nbsp;
 export default function <span class="fstat-no" title="function not covered" >ContactLanding(</span>props) {
   const t = <span class="cstat-no" title="statement not covered" >props.locale === 'en' ? en : fr</span>
@@ -492,7 +498,7 @@ export default function <span class="fstat-no" title="function not covered" >Con
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div id="contactContent" data-testid="contactContent-test"&gt;
       &lt;Heading id="my-dashboard-heading" title={props.content.heading} /&gt;
-      &lt;p className="mt-3 mb-8 text-xl font-body"&gt;{props.content.subHeading}&lt;/p&gt;
+      &lt;p className="mt-3 mb-8 text-xl"&gt;{props.content.subHeading}&lt;/p&gt;
       &lt;ul className="list-disc" data-cy="contact-task-list"&gt;
         {props.content.links.map(<span class="fstat-no" title="function not covered" >(l</span>ink) =&gt; {
 <span class="cstat-no" title="statement not covered" >          return (</span>
@@ -501,12 +507,11 @@ export default function <span class="fstat-no" title="function not covered" >Con
                 id={link.linkId}
                 dataTestId={link.linkId}
                 text={link.linkTitle}
-                href={`/${props.content.pageName}/${link.linkDestination
-                  .split('/')
-                  .pop()}`}
-                component={NextLink}
+                href={`/${props.locale}/${
+                  props.content.pageName
+                }/${link.linkDestination.split('/').pop()}`}
               /&gt;
-              &lt;p className="text-xl font-body"&gt;{link.linkDescription}&lt;/p&gt;
+              &lt;p className="text-xl"&gt;{link.linkDescription}&lt;/p&gt;
             &lt;/li&gt;
           )
         })}
@@ -516,6 +521,10 @@ export default function <span class="fstat-no" title="function not covered" >Con
 }
 &nbsp;
 export async function <span class="fstat-no" title="function not covered" >getServerSideProps(</span>{ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = <span class="cstat-no" title="statement not covered" >getLogger('contact-us')</span>
+<span class="cstat-no" title="statement not covered" >  logger.level = 'error'</span>
+&nbsp;
   const content = <span class="cstat-no" title="statement not covered" >await getContactUsContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
     //res.statusCode = 500
@@ -661,7 +670,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-26T16:04:46.341Z
+                at 2023-09-22T21:26:54.415Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

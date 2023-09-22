@@ -131,9 +131,7 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,12 +152,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -212,7 +208,7 @@ export default function <span class="fstat-no" title="function not covered" >Mos
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div className="h-full"&gt;
       &lt;h3
-        className="font-body font-bold text-xl text-white pt-6 pl-3 sm:pl-8 md:pl-15 "
+        className="font-bold text-xl text-white pt-6 pl-3 sm:pl-8 md:pl-15 "
         data-cy={props.dataCy}
       &gt;
         {props.taskListMR.title}
@@ -220,33 +216,31 @@ export default function <span class="fstat-no" title="function not covered" >Mos
       &lt;ul className="w-full gap-x-0 grid md:grid-cols-2 pl-3 sm:pl-8 md:pl-15 pt-4  md:pt-5 pb-6 "&gt;
         {props.taskListMR.tasks.map(<span class="fstat-no" title="function not covered" >(t</span>ask, index) =&gt; {
 <span class="cstat-no" title="statement not covered" >          return (</span>
-            &lt;li key={index} className="font-body font-bold justify-center py-2"&gt;
-              &lt;Link href={task.link} passHref&gt;
-                &lt;a
-                  onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >                    if (task.betaPopUp) {</span>
-<span class="cstat-no" title="statement not covered" >                      e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >                      props.openModal(task.link, 'betaModal')</span>
-                    }
-                  }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
-                  className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
+            &lt;li key={index} className="font-bold justify-center py-2"&gt;
+              &lt;Link
+                href={task.link}
+                passHref
+                onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >                  if (task.betaPopUp) {</span>
+<span class="cstat-no" title="statement not covered" >                    e.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >                    props.openModal(task.link, 'betaModal')</span>
+                  }
+                }}
+                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
+              &gt;
+                &lt;FontAwesomeIcon
+                  icon={
+                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
+                  }
+                  className="pr-4 text-2xl w-8"
+                /&gt;
+                &lt;span
+                  aria-label={task.areaLabel}
+                  className="font-normal text-xl"
                 &gt;
-                  &lt;FontAwesomeIcon
-                    icon={
-                      icon[task.icon]
-                        ? icon[task.icon]
-                        : icon['question-circle']
-                    }
-                    className="pr-4 text-2xl w-8"
-                  /&gt;
-                  &lt;span
-                    aria-label={task.areaLabel}
-                    className="font-normal text-xl"
-                  &gt;
-                    {task.title}
-                  &lt;/span&gt;
-                &lt;/a&gt;
+                  {task.title}
+                &lt;/span&gt;
               &lt;/Link&gt;
             &lt;/li&gt;
           )
@@ -280,7 +274,7 @@ MostReqTasks.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-26T16:04:46.341Z
+                at 2023-09-22T21:26:54.415Z
             </div>
         <script src="../prettify.js"></script>
         <script>
