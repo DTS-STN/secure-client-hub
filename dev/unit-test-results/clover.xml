@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695396507532" clover="3.2.0">
-  <project timestamp="1695396507532" name="All files">
-    <metrics statements="432" coveredstatements="216" conditionals="387" coveredconditionals="170" methods="171" coveredmethods="67" elements="990" coveredelements="453" complexity="0" loc="432" ncloc="432" packages="8" files="43" classes="43"/>
+<coverage generated="1695397431374" clover="3.2.0">
+  <project timestamp="1695397431374" name="All files">
+    <metrics statements="432" coveredstatements="216" conditionals="387" coveredconditionals="166" methods="171" coveredmethods="67" elements="990" coveredelements="449" complexity="0" loc="432" ncloc="432" packages="8" files="43" classes="43"/>
     <package name="components">
-      <metrics statements="149" coveredstatements="86" conditionals="219" coveredconditionals="106" methods="58" coveredmethods="29"/>
+      <metrics statements="149" coveredstatements="86" conditionals="219" coveredconditionals="102" methods="58" coveredmethods="29"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -26,7 +26,7 @@
         <line num="40" count="3" type="stmt"/>
       </file>
       <file name="Button.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Button.js">
-        <metrics statements="9" coveredstatements="9" conditionals="30" coveredconditionals="12" methods="1" coveredmethods="1"/>
+        <metrics statements="9" coveredstatements="9" conditionals="30" coveredconditionals="8" methods="1" coveredmethods="1"/>
         <line num="7" count="9" type="stmt"/>
         <line num="9" count="9" type="stmt"/>
         <line num="11" count="9" type="stmt"/>
