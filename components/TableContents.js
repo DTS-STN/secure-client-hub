@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import Link from 'next/link'
-import Links from './Links'
 
 export default function TableContents(props) {
   const lang = props.lang?.trim?.() === 'fr' ? 'fr' : 'en'
@@ -20,12 +19,15 @@ export default function TableContents(props) {
                   'underline underline-offset-4 text-20px text-gray-darker underline-offset-3.1 decoration-1 pr-1 list-outside list-disc'
                 }
               >
-                <Links
+                <Link
                   href={option.link}
                   id={`tableLink${index + 1}`}
-                  text={option.name}
-                  linkStyle="cardActionLink"
-                />
+                  data-cy={`tableLink${index + 1}`}
+                  aria-label={option.name}
+                  className="text-deep-blue-dark font-body text-xl hover:text-blue-hover"
+                >
+                  {option.name}
+                </Link>
               </li>
             )
           })}
