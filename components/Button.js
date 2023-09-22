@@ -36,7 +36,7 @@ export default function Button(props) {
       id={props.id}
       disabled={props.disabled}
       {...props.attributes}
-      data-testId={props?.id}
+      data-testid={props?.id}
       alt={props.iconAltText}
     >
       {props.icon && !props.iconEnd ? (
@@ -105,7 +105,7 @@ export default function Button(props) {
 
 Button.defaultProps = {
   id: 'btn1',
-  styling: 'supertask',
+  style: 'supertask',
   text: 'default',
   href: 'no ref',
 }

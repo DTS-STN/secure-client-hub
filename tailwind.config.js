@@ -36,6 +36,7 @@ module.exports = {
       },
       colors: {
         'gray': {
+          'lightest': '#F5F5F5',
           'lighter': '#F3F3F3',
           'light': '#DBDBDB',
           'medium': '#C4C4C4',
@@ -51,6 +52,7 @@ module.exports = {
           lighter: '#93D0FF',
           medium: '#0069AD',
           dark: '#245C81',
+          pale: '#EBF2FC',
         },
         'brighter-blue': {
           light: '#DBE5F2',
