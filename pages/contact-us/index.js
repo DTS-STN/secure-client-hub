@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import Links from '../../components/Links'
+import Link from 'next/link'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
@@ -38,14 +38,16 @@ export default function ContactLanding(props) {
         {props.content.links.map((link) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
-              <Links
+              <Link
                 id={link.linkId}
                 dataTestId={link.linkId}
-                text={link.linkTitle}
+                aria-label={link.linkTitle}
                 href={`/${props.locale}/${
                   props.content.pageName
                 }/${link.linkDestination.split('/').pop()}`}
-              />
+              >
+                {link.linkTitle}
+              </Link>
               <p className="text-xl">{link.linkDescription}</p>
             </li>
           )
