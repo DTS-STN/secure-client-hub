@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695391758266" clover="3.2.0">
-  <project timestamp="1695391758266" name="All files">
-    <metrics statements="431" coveredstatements="216" conditionals="387" coveredconditionals="170" methods="169" coveredmethods="67" elements="987" coveredelements="453" complexity="0" loc="431" ncloc="431" packages="8" files="43" classes="43"/>
+<coverage generated="1695392360268" clover="3.2.0">
+  <project timestamp="1695392360268" name="All files">
+    <metrics statements="432" coveredstatements="216" conditionals="387" coveredconditionals="170" methods="171" coveredmethods="67" elements="990" coveredelements="453" complexity="0" loc="432" ncloc="432" packages="8" files="43" classes="43"/>
     <package name="components">
-      <metrics statements="148" coveredstatements="86" conditionals="219" coveredconditionals="106" methods="56" coveredmethods="29"/>
+      <metrics statements="149" coveredstatements="86" conditionals="219" coveredconditionals="106" methods="58" coveredmethods="29"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -120,21 +120,22 @@
         <line num="230" count="1" type="stmt"/>
       </file>
       <file name="Menu.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Menu.js">
-        <metrics statements="14" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="8" coveredmethods="6"/>
-        <line num="15" count="7" type="stmt"/>
+        <metrics statements="15" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="10" coveredmethods="6"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
         <line num="17" count="7" type="stmt"/>
-        <line num="18" count="7" type="stmt"/>
-        <line num="20" count="7" type="stmt"/>
-        <line num="22" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
+        <line num="21" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="32" count="7" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="105" count="10" type="stmt"/>
-        <line num="145" count="3" type="stmt"/>
-        <line num="167" count="3" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="104" count="10" type="stmt"/>
+        <line num="113" count="0" type="stmt"/>
+        <line num="148" count="3" type="stmt"/>
+        <line num="170" count="3" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
