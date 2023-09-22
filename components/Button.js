@@ -105,7 +105,7 @@ export default function Button(props) {
 
 Button.defaultProps = {
   id: 'btn1',
-  styling: 'supertask',
+  style: 'supertask',
   text: 'default',
   href: 'no ref',
 }
