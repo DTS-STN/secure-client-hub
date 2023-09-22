@@ -1,5 +1,5 @@
 import propTypes from 'prop-types'
-import { Button } from '@dts-stn/service-canada-design-system'
+import Button from '../components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
 import React from 'react'
@@ -16,16 +16,13 @@ export default function PhaseBanner(props) {
         data-cy="topBanner"
       >
         <div className="pb-4 md:pb-0" role="alert">
-          <p
-            className="pb-2 md:pb-7 font-body text-xl"
-            data-cy="learnMoreAbtBeta"
-          >
+          <p className="pb-2 md:pb-7 text-xl" data-cy="learnMoreAbtBeta">
             <span className="font-bold">{props.bannerBoldText || ''} </span>
             {props.bannerText}
           </p>
           <a
             href={props.bannerLinkHref}
-            className="font-body text-xl text-deep-blue-dark hover:text-blue-hover"
+            className="text-xl text-deep-blue-dark hover:text-blue-hover"
             target={props.bannerButtonExternalLink ? '_blank' : undefined}
             rel={
               props.bannerButtonExternalLink ? 'noopener noreferrer' : undefined
@@ -44,9 +41,9 @@ export default function PhaseBanner(props) {
         </div>
         <Button
           id="bannerButton"
-          styling="primary"
+          style="primary"
           text={props.bannerButtonText}
-          className="font-body text-xl whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
+          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
           onClick={(e) => {
             e.preventDefault()
             props.openModal(props.bannerButtonLink, 'betaBannerModal')

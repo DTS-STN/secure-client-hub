@@ -12,8 +12,8 @@ async function openidClient(options) {
   const provider = options.provider
   let httpOptions = {}
   if (provider.httpOptions) httpOptions = { ...provider.httpOptions }
-  if (process.env.http_proxy) {
-    let agent = new HttpsProxyAgent(process.env.http_proxy)
+  if (process.env.http_proxy_agent) {
+    let agent = new HttpsProxyAgent(process.env.http_proxy_agent)
     httpOptions.agent = agent
   }
   _openidClient.custom.setHttpOptionsDefaults(httpOptions)

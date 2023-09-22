@@ -7,11 +7,6 @@ beforeEach(() => {
   cy.visit('/security-settings')
 })
 
-it('Security settings has no detectable a11y violations on load', () => {
-  cy.injectAxe()
-  cy.checkA11y()
-})
-
 describe('Validate Security Settings page', () => {
   it('Validate Security Settings Page header in English', () => {
     securityPo.SecurityHeaderEN()
@@ -38,6 +33,7 @@ describe('Validate Security Settings page', () => {
   it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
     cy.visit('/my-dashboard')
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     dashboardPo.Menu().click()
     dashboardPo.SecuritySettingsMenu().click()
     securityPo.SecurityUrlFR()
@@ -52,6 +48,7 @@ describe('Validate Security Settings page', () => {
 
   it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     securityPo.breadcrumbs().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
@@ -113,6 +110,7 @@ describe('Validate Security Settings page', () => {
 
   it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
     dashboardPo.FrenchButton().click()
+    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
     profilePo.BackToDashboardButton().click()
     dashboardPo.ValidateDashboardUrlFR()
     dashboardPo.ValidateDashboardHeaderFR()
@@ -140,5 +138,10 @@ describe('Validate Security Settings page', () => {
       .EmploymentInsuranceCode()
       .should('be.visible')
       .and('not.have.attr', 'href', '#undefined')
+  })
+
+  it('Security settings has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
   })
 })
