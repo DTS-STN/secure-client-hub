@@ -1,7 +1,7 @@
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { ErrorPage } from '@dts-stn/service-canada-design-system'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 
 function CustomError(props) {
   return (
@@ -20,6 +20,11 @@ function CustomError(props) {
 /* istanbul ignore next */
 export async function getServerSideProps({ req, res, locale }) {
   const statusCode = res.statusCode.toString() || '500'
+
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger(`${statusCode} error page`)
+  logger.level = 'error'
+
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
     // res.statusCode = 500
