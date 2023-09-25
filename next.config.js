@@ -120,7 +120,6 @@ module.exports = {
   async rewrites() {
     return REWRITES
   },
-
   async redirects() {
     return [
       {

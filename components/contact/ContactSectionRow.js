@@ -1,4 +1,4 @@
-import { Button } from '@dts-stn/service-canada-design-system'
+import Button from '../../components/Button'
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -40,7 +40,8 @@ function ContactSectionRow(props) {
             <Button
               key={index}
               text={detail.content}
-              styling={'primary'}
+              style={'primary'}
+              className={'font-display'}
               id={buttonId}
               onClick={routeToPage}
             />
