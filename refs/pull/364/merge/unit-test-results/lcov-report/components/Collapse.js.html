@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/ViewMoreLessButton.js</title>
+    <title>Code coverage report for components/Collapse.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> ViewMoreLessButton.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Collapse.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -115,28 +115,12 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,6 +144,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,57 +152,75 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import propTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCircleChevronUp,
-  faCircleChevronDown,
-} from '@fortawesome/free-solid-svg-icons'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 &nbsp;
-export default function ViewMoreLessButton(props) {
+export default function Collapse(props) {
+  const { id, title, children } = props
   return (
-    &lt;button
-      className={
-        'text-xl leading-8 text-deep-blue-60d hover:text-blue-hover focus:text-blue-hover ' +
-        props.className
-      }
-      data-cy={props.dataCy}
-      onClick={props.onClick}
-      id={props.id}
-      data-testid={props.dataTestid}
-      aria-expanded={props.ariaExpanded ?? undefined}
-      aria-label={props.ariaLabel}
+    &lt;details
+      key={id}
+      id={id}
+      className="mb-5px text-gray-darker text-20px font-body"
+      data-testid={`${id}-${props.dataTestId}`}
     &gt;
-      &lt;div className="flex sm:items-center"&gt;
-        {props.icon ? (
-          &lt;FontAwesomeIcon
-            icon={faCircleChevronUp}
-            className={`text-46px pr-3`}
-            data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Contract`}
-          /&gt;
-        ) : (
-          &lt;FontAwesomeIcon
-            icon={faCircleChevronDown}
-            className={`text-46px pr-3`}
-            data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:Expand`}
-          /&gt;
-        )}
-        &lt;span className="text-left"&gt;{props.caption}&lt;/span&gt;
+      &lt;summary
+        key={`summary-${id}`}
+        className=" text-deep-blue-60d hover:text-blue-hover hover:underline border border-gray-40 rounded px-15px py-5px cursor-pointer select-none outline-none"
+      &gt;
+        {title}
+      &lt;/summary&gt;
+      &lt;div className="border border-gray-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none"&gt;
+        {children}
       &lt;/div&gt;
-    &lt;/button&gt;
+    &lt;/details&gt;
   )
 }
 &nbsp;
-ViewMoreLessButton.propTypes = {
-  caption: propTypes.string.isRequired,
-  icon: propTypes.bool,
-  onClick: propTypes.func.isRequired,
-  id: propTypes.string.isRequired,
-  dataTestid: propTypes.string,
-  ariaExpanded: propTypes.string,
-  className: propTypes.string,
-  dataCy: propTypes.string,
-  ariaLabel: propTypes.string,
+Collapse.defaultProps = {
+  id: 'defaultAccordion',
+}
+&nbsp;
+Collapse.propTypes = {
+  /**
+   * component id
+   */
+  id: PropTypes.string,
+&nbsp;
+  /**
+   * Title of the collapsible header
+   */
+  title: PropTypes.string,
+&nbsp;
+  /**
+   * code passed in to fill the expanded area.
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
+&nbsp;
+  /**
+   * Test id for unit test
+   */
+  dataTestId: PropTypes.string,
 }
 &nbsp;</pre></td></tr></table></pre>
 
