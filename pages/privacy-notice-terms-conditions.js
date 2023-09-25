@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types'
-import {
-  Heading,
-  ContextualAlert,
-  Date,
-} from '@dts-stn/service-canada-design-system'
+import { Date } from '@dts-stn/service-canada-design-system'
+import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'

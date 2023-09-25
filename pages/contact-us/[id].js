@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, TableContent } from '@dts-stn/service-canada-design-system'
+import { TableContent } from '@dts-stn/service-canada-design-system'
+import Heading from '../../components/Heading'
 import { Fragment } from 'react'
 import en from '../../locales/en'
 import fr from '../../locales/fr'

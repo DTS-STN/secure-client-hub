@@ -141,4 +141,8 @@ export default {
   id_dashboard: 'my-dashboard',
   aria_exit_beta_modal: 'Exiting beta warning modal',
   close_modal: 'Close modal',
+
+  //Authenticated footer links & text
+  mscaFooterContactUsText: 'Contact Us',
+  mscaFooterHeading: 'My Service Canada Account',
 }
