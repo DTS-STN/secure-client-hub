@@ -120,4 +120,56 @@ module.exports = {
   async rewrites() {
     return REWRITES
   },
+  async redirects() {
+    return [
+      {
+        source: '/en',
+        destination: '/',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/fr',
+        destination: '/',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/my-dashboard',
+        destination: '/en/my-dashboard',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/privacy-notice-terms-conditions',
+        destination: '/en/privacy-notice-terms-conditions',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/profile',
+        destination: '/en/profile',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/security-settings',
+        destination: '/en/security-settings',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/contact-us',
+        destination: '/en/contact-us',
+        locale: false,
+        permanent: false,
+      },
+      {
+        source: '/und/contact-us/:path*',
+        destination: '/en/contact-us/:path*',
+        locale: false,
+        permanent: false,
+      },
+    ]
+  },
 }
