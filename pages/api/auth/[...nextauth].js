@@ -1,5 +1,10 @@
 import NextAuth from 'next-auth'
-import logger from '../../../lib/logger'
+
+import { getLogger } from '../../../logging/log-util'
+
+//The below sets the minimum logging level to error and surpresses everything below that
+const logger = getLogger('next-auth')
+logger.level = 'warn'
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -63,10 +68,6 @@ export default NextAuth({
     },
     warn(code) {
       logger.warn(code)
-    },
-    debug(code, metadata) {
-      logger.debug(code)
-      logger.debug(metadata)
     },
   },
   pages: {
