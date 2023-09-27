@@ -46,11 +46,11 @@ function SecurityHeader() {
 }
 
 function SecurityQuestionsLink() {
-  return cy.get('[data-cy ="securityQuestionsLink"]')
+  return cy.get('[data-testid="securityQuestionsLink"]')
 }
 
 function EmploymentInsuranceCode() {
-  return cy.get('[data-cy ="eiAccessCodeLink"]')
+  return cy.get('[data-testid="eiAccessCodeLink"]')
 }
 
 module.exports = {
