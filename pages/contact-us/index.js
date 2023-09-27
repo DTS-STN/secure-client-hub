@@ -39,8 +39,9 @@ export default function ContactLanding(props) {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
+                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
                 id={link.linkId}
-                dataTestId={link.linkId}
+                data-testid={link.linkId}
                 aria-label={link.linkTitle}
                 href={`/${props.locale}/${
                   props.content.pageName

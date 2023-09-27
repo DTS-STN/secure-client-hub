@@ -79,7 +79,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate the "Profile" click navigates to Profile Page', () => {
-    securityPo.LookingForProfileLinkEn().click()
+    securityPo.LookingForProfileLinkEn().click({ force: true })
     profilePo.ProfileUrlEN()
     profilePo.ProfileHeaderEN()
   })
