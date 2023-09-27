@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { TableContent } from '@dts-stn/service-canada-design-system'
+import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
 import { Fragment } from 'react'
 import en from '../../locales/en'
@@ -48,7 +48,7 @@ export default function ContactUsPage(props) {
           props.pageContent.items.length > 0 && 'tableOfContents-test'
         }`}
       />
-      <TableContent
+      <TableContents
         id="cppContent"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }

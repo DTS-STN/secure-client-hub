@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
@@ -35,19 +35,25 @@ export default function SecuritySettings(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <Link
+        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="securityQuestionsLink"
-        dataTestId="securityQuestionsLink"
-        text={props.content.securityQuestions.linkTitle.text}
+        data-testid="securityQuestionsLink"
+        aria-label={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
-      />
+      >
+        {props.content.securityQuestions.linkTitle.text}
+      </Link>
       <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
 
       <Link
+        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="eiAccessCodeLink"
-        dataTestId="eiAccessCodeLink"
-        text={props.content.eiAccessCode.linkTitle.text}
+        data-testid="eiAccessCodeLink"
+        aria-label={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
-      />
+      >
+        {props.content.eiAccessCode.linkTitle.text}
+      </Link>
       <p className="pb-7 text-xl">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
