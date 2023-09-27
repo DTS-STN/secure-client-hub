@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-// import { TableContent } from '@dts-stn/service-canada-design-system'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
 import { Fragment } from 'react'
