@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
@@ -39,13 +39,16 @@ export default function ContactLanding(props) {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
+                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
                 id={link.linkId}
-                dataTestId={link.linkId}
-                text={link.linkTitle}
+                data-testid={link.linkId}
+                aria-label={link.linkTitle}
                 href={`/${props.locale}/${
                   props.content.pageName
                 }/${link.linkDestination.split('/').pop()}`}
-              />
+              >
+                {link.linkTitle}
+              </Link>
               <p className="text-xl">{link.linkDescription}</p>
             </li>
           )
