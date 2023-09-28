@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695931223796" clover="3.2.0">
-  <project timestamp="1695931223796" name="All files">
+<coverage generated="1695932467275" clover="3.2.0">
+  <project timestamp="1695932467276" name="All files">
     <metrics statements="435" coveredstatements="219" conditionals="385" coveredconditionals="167" methods="173" coveredmethods="69" elements="993" coveredelements="455" complexity="0" loc="435" ncloc="435" packages="8" files="44" classes="44"/>
     <package name="components">
       <metrics statements="152" coveredstatements="89" conditionals="217" coveredconditionals="103" methods="60" coveredmethods="31"/>
@@ -114,8 +114,8 @@
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
-        <line num="188" count="1" type="stmt"/>
-        <line num="225" count="1" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="223" count="1" type="stmt"/>
       </file>
       <file name="Menu.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Menu.js">
         <metrics statements="15" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="10" coveredmethods="6"/>
