@@ -30,11 +30,11 @@ export function Menu(props) {
 
   return (
     <div className="relative w-full bg-blue-primary">
-      <nav className="sm:ds-container sm:flex items-center justify-between sm:h-[60px]">
+      <nav className="sch-container sm:flex items-center justify-between sm:h-[60px]">
         <div className="h-[60px] flex sm:h-full items-center">
           <p
             id="mainSiteNav"
-            className="text-white font-display font-bold md:text-[24px] text-[19px] sm:p-0 ds-container mb-0 pr-0 sm:ml-4 md:ml-0"
+            className="text-white font-display font-bold md:text-[24px] text-[19px] sm:p-0 sch-container mb-0 pr-0 sm:ml-4 md:ml-0"
           >
             {lang === 'fr'
               ? 'Mon dossier Service Canada'

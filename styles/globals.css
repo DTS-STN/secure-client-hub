@@ -17,7 +17,7 @@
   }
 }
 
-.ds-container {
+.sch-container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -25,21 +25,21 @@
   padding-left: 15px;
 }
 @media (min-width: 768px) {
-  .ds-container {
+  .sch-container {
       max-width: 768px;
       padding-right: 24px;
       padding-left: 24px;
   }
 }
 @media (min-width: 992px) {
-  .ds-container {
+  .sch-container {
       max-width: 992px;
       padding-right: 26px;
       padding-left: 26px;
   }
 }
 @media (min-width: 1200px) {
-  .ds-container {
+  .sch-container {
       max-width: 1200px;
       padding-right: 30px;
       padding-left: 30px;

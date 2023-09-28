@@ -30,7 +30,7 @@ export function Header(props) {
         displayAlternateLink={topnavProps.displayAlternateLink}
       />
       <header>
-        <div className={`ds-container flex flex-col sm:flex-row md:pb-3.5`}>
+        <div className={`sch-container flex flex-col sm:flex-row md:pb-3.5`}>
           <div className="flex flex-row sm:pt-3">
             <div className="pt-1.5">
               <Image
@@ -81,7 +81,7 @@ export function Header(props) {
           />
         )}
         {breadCrumbItems && (
-          <div className="ds-container">
+          <div className="sch-container">
             <Breadcrumb items={breadCrumbItems} />
           </div>
         )}

@@ -17,7 +17,7 @@ export function Footer(props) {
       <>
         <div className="bg-blue-primary">
           <section
-            className={`ds-container h-[5.75rem] pb-5 flex flex-col items-start`}
+            className={`sch-container h-[5.75rem] pb-5 flex flex-col items-start`}
           >
             <h2 className="pt-[22px] pb-2 text-white font-body font-bold">
               {t.mscaFooterHeading}
@@ -40,7 +40,7 @@ export function Footer(props) {
           <div
             className={`'min-h-[86px] ' ${
               error ? 'items-center' : ''
-            } flex justify-between ds-container`}
+            } flex justify-between sch-container`}
           >
             {error ? (
               <div>

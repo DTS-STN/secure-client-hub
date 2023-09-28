@@ -142,10 +142,8 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-      <main id="mainContent">
-        <div className="ds-container grid gap-[30px]">
-          {cloneElement(props.children, { openModal, closeModal })}
-        </div>
+      <main id="mainContent" className="sch-container grid gap-[30px]">
+        {cloneElement(props.children, { openModal, closeModal })}
       </main>
       <MultiModal
         openModalWithLink={openModalWithLink}
