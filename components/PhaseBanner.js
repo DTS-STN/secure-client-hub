@@ -12,7 +12,7 @@ export default function PhaseBanner(props) {
   return (
     <div className="bg-brighter-blue-medium">
       <div
-        className=" ds-container py-4 md:flex md:justify-between"
+        className="ds-container py-4 md:flex md:justify-between"
         data-cy="topBanner"
       >
         <div className="pb-4 md:pb-0" role="alert">

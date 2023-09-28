@@ -16,10 +16,32 @@
   @apply font-body
   }
 }
-ds-container{
-  max-width: 992px;
-  padding-left: 26px;
-  padding-right: 26px
-}
 
- 
+.ds-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media (min-width: 768px) {
+  .ds-container {
+      max-width: 768px;
+      padding-right: 24px;
+      padding-left: 24px;
+  }
+}
+@media (min-width: 992px) {
+  .ds-container {
+      max-width: 992px;
+      padding-right: 26px;
+      padding-left: 26px;
+  }
+}
+@media (min-width: 1200px) {
+  .ds-container {
+      max-width: 1200px;
+      padding-right: 30px;
+      padding-left: 30px;
+  }
+}
