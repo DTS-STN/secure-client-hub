@@ -5,9 +5,9 @@ export function Date(props) {
   const { id, label, date } = props
   const dateFormatted = date ? date.replace(/^(.{4})(.{2})/gm, '$1-$2-') : 'NA'
   return (
-    <dl id={id} data-testid={id} className="ds-mt-8 ds-py-2 ds-font-body">
-      <dt className="ds-inline">{label}</dt>
-      <dd className="ds-inline">
+    <dl id={id} data-testid={id} className="mt-8 py-2 font-body">
+      <dt className="inline">{label}</dt>
+      <dd className="inline">
         {dateFormatted === 'NA' ? (
           <time>{` ${dateFormatted}`}</time>
         ) : (
