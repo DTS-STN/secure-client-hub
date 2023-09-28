@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Date } from '@dts-stn/service-canada-design-system'
+import { Date } from '../components/Date'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
