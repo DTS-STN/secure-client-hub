@@ -4,9 +4,6 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
-
-import LoadingSpinner from '../components/LoadingSpinner'
-
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
@@ -42,8 +39,6 @@ export default function MyDashboard(props) {
   return (
     <div id="myDashboardContent" data-testid="myDashboardContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-
-      <LoadingSpinner text="Loading / Chargement en cours ..." />
 
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
