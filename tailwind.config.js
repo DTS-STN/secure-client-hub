@@ -112,16 +112,6 @@ module.exports = {
       boxShadow: {
         card: '0px 2px 8px rgba(0, 0, 0, 0.25)',
       },
-      keyframes: {
-        spokecolor: {
-          '0%': { stroke: '#65b234' },
-
-          '50%': { stroke: '#D4D6DA' },
-        },
-      },
-      animation: {
-        spoke: 'spokecolor 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
