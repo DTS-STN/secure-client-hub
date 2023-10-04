@@ -22,8 +22,8 @@ const Spoke = () => {
 
 export default function LoadingSpinner(props) {
   return (
-    <div className="loading-spinners flex flex-col align-middle">
-      <div className="relative loading-spinners justify-center mr-0 p-8">
+    <div className="loading-spinners flex flex-col md:flex-row align-middle">
+      <div className="relative loading-spinners justify-center mr-0 p-9 ">
         <Spoke />
         <Spoke />
         <Spoke />
@@ -33,7 +33,7 @@ export default function LoadingSpinner(props) {
         <Spoke />
         <Spoke />
       </div>
-      <div className={'text-center text-xl font-display'}>
+      <div className={'text-center text-xl font-display md:pl-2'}>
         <span>{props.text}</span>
       </div>
     </div>
