@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1695931707591" clover="3.2.0">
-  <project timestamp="1695931707591" name="All files">
-    <metrics statements="442" coveredstatements="226" conditionals="395" coveredconditionals="172" methods="174" coveredmethods="70" elements="1011" coveredelements="468" complexity="0" loc="442" ncloc="442" packages="8" files="45" classes="45"/>
+<coverage generated="1696431859341" clover="3.2.0">
+  <project timestamp="1696431859341" name="All files">
+    <metrics statements="439" coveredstatements="223" conditionals="395" coveredconditionals="172" methods="173" coveredmethods="69" elements="1007" coveredelements="464" complexity="0" loc="439" ncloc="439" packages="8" files="44" classes="44"/>
     <package name="components">
-      <metrics statements="159" coveredstatements="96" conditionals="227" coveredconditionals="108" methods="61" coveredmethods="32"/>
+      <metrics statements="156" coveredstatements="93" conditionals="227" coveredconditionals="108" methods="60" coveredmethods="31"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -63,17 +63,11 @@
       </file>
       <file name="Date.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Date.js">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="5" count="4" type="stmt"/>
-        <line num="6" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-      </file>
-      <file name="DateModified.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/DateModified.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
       </file>
       <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
