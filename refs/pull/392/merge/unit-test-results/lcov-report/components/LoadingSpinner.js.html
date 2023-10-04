@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Collapse.js</title>
+    <title>Code coverage report for components/LoadingSpinner.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Collapse.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> LoadingSpinner.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -39,7 +39,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -111,16 +111,10 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,26 +138,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,56 +161,51 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 &nbsp;
-export default function Collapse(props) {
-  const { id, title, children } = props
+const Spoke = () =&gt; {
   return (
-    &lt;details
-      key={id}
-      id={id}
-      className="mb-5px text-gray-darker text-20px font-body"
-      data-testid={`${id}-${props.dataTestId}`}
+    &lt;svg
+      width="6"
+      height="16"
+      viewBox="0 0 6 16"
+      fill="none"
+      className="spoke"
+      xmlns="http://www.w3.org/2000/svg"
     &gt;
-      &lt;summary
-        key={`summary-${id}`}
-        className=" text-deep-blue-60d hover:text-blue-hover hover:underline border border-gray-40 rounded px-15px py-5px cursor-pointer select-none outline-none"
-      &gt;
-        {title}
-      &lt;/summary&gt;
-      &lt;div className="border border-gray-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none"&gt;
-        {children}
-      &lt;/div&gt;
-    &lt;/details&gt;
+      &lt;path
+        d="M3 13V2.5"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      /&gt;
+    &lt;/svg&gt;
   )
 }
 &nbsp;
-Collapse.defaultProps = {
-  id: 'defaultAccordion',
+export default function LoadingSpinner(props) {
+  return (
+    &lt;div className="loading-spinners flex flex-col md:flex-row align-middle"&gt;
+      &lt;div className="relative loading-spinners justify-center mr-0 p-9 "&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+        &lt;Spoke /&gt;
+      &lt;/div&gt;
+      &lt;div className={'text-center text-xl font-display md:pl-2'}&gt;
+        &lt;span&gt;{props.text}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
 }
 &nbsp;
-Collapse.propTypes = {
+LoadingSpinner.propTypes = {
   /**
-   * component id
+   * text
    */
-  id: PropTypes.string,
-&nbsp;
-  /**
-   * Title of the collapsible header
-   */
-  title: PropTypes.string,
-&nbsp;
-  /**
-   * code passed in to fill the expanded area.
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
-&nbsp;
-  /**
-   * Test id for unit test
-   */
-  dataTestId: PropTypes.string,
+  text: PropTypes.string,
 }
 &nbsp;</pre></td></tr></table></pre>
 
