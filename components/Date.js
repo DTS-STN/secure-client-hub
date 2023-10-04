@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 
 export function Date(props) {
   const { id, label, date } = props
@@ -19,7 +18,9 @@ export function Date(props) {
 }
 
 Date.defaultProps = {
+  id: 'Date-id',
   label: 'Date Modified: ',
+  date: '20231225',
 }
 
 Date.propTypes = {

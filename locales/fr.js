@@ -64,7 +64,6 @@ export default {
   // Footer
   //
   reportProblem: '(FR) Report a problem',
-  dateModified: 'Date de modification : ',
   // Landscape Links
 
   footerContactUsURL: 'https://www.canada.ca/fr/contact.html',
