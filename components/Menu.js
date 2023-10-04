@@ -30,7 +30,7 @@ export function Menu(props) {
 
   return (
     <div className="relative w-full bg-blue-primary">
-      <nav className="sch-container sm:flex items-center justify-between sm:h-[60px]">
+      <nav className="sm:sch-container sm:flex items-center justify-between sm:h-[60px]">
         <div className="h-[60px] flex sm:h-full items-center">
           <p
             id="mainSiteNav"
