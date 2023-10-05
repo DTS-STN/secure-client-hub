@@ -107,10 +107,7 @@ export default function PrivacyCondition(props) {
         refPageAA={props.aaPrefix}
         id={t.id_dashboard}
       />
-      <Date
-        id="termsConditionsDateModified"
-        date={process.env.NEXT_PUBLIC_BUILD_DATE}
-      />
+      <Date id="termsConditionsDateModified" date={process.env.BUILD_DATE} />
     </div>
   )
 }
