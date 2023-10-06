@@ -76,7 +76,7 @@
     "mochawesome-merge": "^4.2.1",
     "mochawesome-report-generator": "^6.0.1",
     "playwright-webkit": "^1.28.1",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.31",
     "prettier": "^2.3.2",
     "react-test-renderer": "^18.2.0",
     "start-server-and-test": "^1.14.0",
