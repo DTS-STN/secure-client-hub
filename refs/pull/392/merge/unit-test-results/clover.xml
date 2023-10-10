@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1696605633647" clover="3.2.0">
-  <project timestamp="1696605633647" name="All files">
+<coverage generated="1696957200909" clover="3.2.0">
+  <project timestamp="1696957200909" name="All files">
     <metrics statements="443" coveredstatements="227" conditionals="395" coveredconditionals="174" methods="175" coveredmethods="71" elements="1013" coveredelements="472" complexity="0" loc="443" ncloc="443" packages="8" files="45" classes="45"/>
     <package name="components">
       <metrics statements="160" coveredstatements="97" conditionals="227" coveredconditionals="110" methods="62" coveredmethods="33"/>
@@ -64,10 +64,10 @@
       <file name="Date.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Date.js">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="4" count="4" type="stmt"/>
-        <line num="5" count="4" type="stmt"/>
-        <line num="6" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
+        <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
       </file>
       <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
