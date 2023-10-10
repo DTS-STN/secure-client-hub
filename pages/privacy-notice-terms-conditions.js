@@ -15,7 +15,7 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
-
+  console.log(props.content.dateModified)
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
@@ -107,7 +107,10 @@ export default function PrivacyCondition(props) {
         refPageAA={props.aaPrefix}
         id={t.id_dashboard}
       />
-      <Date id="termsConditionsDateModified" date={process.env.BUILD_DATE} />
+      <Date
+        id="termsConditionsDateModified"
+        date={props.content.dateModified}
+      />
     </div>
   )
 }
