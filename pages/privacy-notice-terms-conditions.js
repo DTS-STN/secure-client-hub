@@ -109,6 +109,7 @@ export default function PrivacyCondition(props) {
       <Date
         id="termsConditionsDateModified"
         date={props.content.dateModified}
+        label={t.dateModified}
       />
     </div>
   )
