@@ -24,6 +24,11 @@
   padding-right: 15px;
   padding-left: 15px;
 }
+.sch-container-menu {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 @media (min-width: 768px) {
   .sch-container {
       max-width: 768px;
