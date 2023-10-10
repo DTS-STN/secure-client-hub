@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 
 export function Date(props) {
   const { id, label, date } = props
-  console.log(date)
   const dateFormatted = date ? date.replace(/^(.{4})(.{2})/gm, '$1-$2-') : 'NA'
   return (
     <dl id={id} data-testid={id} className="mt-8 py-2 font-body">
@@ -16,6 +15,10 @@ export function Date(props) {
       </dd>
     </dl>
   )
+}
+
+Date.defaultProps = {
+  date: process.env.BUILD_DATE,
 }
 
 Date.propTypes = {
