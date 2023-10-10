@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1696431131552" clover="3.2.0">
-  <project timestamp="1696431131553" name="All files">
-    <metrics statements="435" coveredstatements="219" conditionals="385" coveredconditionals="167" methods="173" coveredmethods="69" elements="993" coveredelements="455" complexity="0" loc="435" ncloc="435" packages="8" files="44" classes="44"/>
+<coverage generated="1696977019026" clover="3.2.0">
+  <project timestamp="1696977019026" name="All files">
+    <metrics statements="439" coveredstatements="223" conditionals="385" coveredconditionals="167" methods="175" coveredmethods="71" elements="999" coveredelements="461" complexity="0" loc="439" ncloc="439" packages="8" files="45" classes="45"/>
     <package name="components">
-      <metrics statements="152" coveredstatements="89" conditionals="217" coveredconditionals="103" methods="60" coveredmethods="31"/>
+      <metrics statements="156" coveredstatements="93" conditionals="217" coveredconditionals="103" methods="62" coveredmethods="33"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -116,6 +116,13 @@
         <line num="44" count="0" type="stmt"/>
         <line num="186" count="1" type="stmt"/>
         <line num="223" count="1" type="stmt"/>
+      </file>
+      <file name="LoadingSpinner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/LoadingSpinner.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="16" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
       </file>
       <file name="Menu.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Menu.js">
         <metrics statements="15" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="10" coveredmethods="6"/>
@@ -273,9 +280,9 @@
       <metrics statements="139" coveredstatements="85" conditionals="76" coveredconditionals="43" methods="55" coveredmethods="22"/>
       <file name="_app.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.js">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
       </file>
       <file name="_document.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_document.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
