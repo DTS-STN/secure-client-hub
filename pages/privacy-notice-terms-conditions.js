@@ -15,7 +15,6 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
-  console.log(props.content.dateModified)
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
