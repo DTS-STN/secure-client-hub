@@ -7,9 +7,9 @@ expect.extend(toHaveNoViolations)
 
 describe('Date', () => {
   it('renders Date', () => {
-    render(<Date id="testID" date="20230331" />)
+    render(<Date id="testID" date="20230331T00001" />)
     const title = screen.getByTestId('testID')
-    const caption = screen.getByText('2023-03-31')
+    const caption = screen.getByText('20230331')
     expect(title).toBeInTheDocument()
     expect(caption).toBeInTheDocument()
   })
