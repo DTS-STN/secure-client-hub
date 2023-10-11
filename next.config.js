@@ -1,12 +1,3 @@
-//formatting TC Date
-const builddate = process.env.BUILD_DATE
-  ? process.env.BUILD_DATE.substring(0, 4) +
-    '-' +
-    process.env.BUILD_DATE.substring(4, 6) +
-    '-' +
-    process.env.BUILD_DATE.substring(6, 8)
-  : 'DATE-NA'
-
 const REWRITES = [
   {
     source: '/contactez-nous',
@@ -80,7 +71,6 @@ const securityHeaders = [
 
 module.exports = {
   env: {
-    NEXT_PUBLIC_BUILD_DATE: builddate,
     LOGGING_LEVEL: process.env.LOGGING_LEVEL,
   },
   reactStrictMode: true,
