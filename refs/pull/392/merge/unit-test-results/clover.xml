@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1696976989475" clover="3.2.0">
-  <project timestamp="1696976989475" name="All files">
-    <metrics statements="442" coveredstatements="226" conditionals="395" coveredconditionals="174" methods="175" coveredmethods="71" elements="1012" coveredelements="471" complexity="0" loc="442" ncloc="442" packages="8" files="45" classes="45"/>
+<coverage generated="1697000280395" clover="3.2.0">
+  <project timestamp="1697000280395" name="All files">
+    <metrics statements="440" coveredstatements="224" conditionals="389" coveredconditionals="171" methods="175" coveredmethods="71" elements="1004" coveredelements="466" complexity="0" loc="440" ncloc="440" packages="8" files="45" classes="45"/>
     <package name="components">
-      <metrics statements="159" coveredstatements="96" conditionals="227" coveredconditionals="110" methods="62" coveredmethods="33"/>
+      <metrics statements="157" coveredstatements="94" conditionals="221" coveredconditionals="107" methods="62" coveredmethods="33"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -74,22 +74,20 @@
         <line num="56" count="2" type="stmt"/>
       </file>
       <file name="Footer.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Footer.js">
-        <metrics statements="7" coveredstatements="7" conditionals="16" coveredconditionals="10" methods="2" coveredmethods="2"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="22" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="23" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="80" count="3" type="stmt"/>
-        <line num="137" count="2" type="stmt"/>
-        <line num="148" count="2" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="8" methods="2" coveredmethods="2"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
+        <line num="138" count="2" type="stmt"/>
       </file>
       <file name="Header.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Header.js">
-        <metrics statements="5" coveredstatements="5" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="1"/>
-        <line num="22" count="3" type="stmt"/>
-        <line num="24" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
-        <line num="124" count="2" type="stmt"/>
+        <metrics statements="4" coveredstatements="4" conditionals="10" coveredconditionals="7" methods="4" coveredmethods="1"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="118" count="2" type="stmt"/>
       </file>
       <file name="Heading.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Heading.js">
         <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
@@ -104,21 +102,21 @@
         <line num="54" count="3" type="stmt"/>
       </file>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
-        <metrics statements="14" coveredstatements="2" conditionals="42" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <metrics statements="14" coveredstatements="2" conditionals="40" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="193" count="1" type="stmt"/>
-        <line num="230" count="1" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="223" count="1" type="stmt"/>
       </file>
       <file name="LoadingSpinner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/LoadingSpinner.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
