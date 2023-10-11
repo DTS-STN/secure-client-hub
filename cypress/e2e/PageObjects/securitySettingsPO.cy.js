@@ -6,15 +6,15 @@ function pageHeader() {
 }
 
 function breadcrumbs() {
-  return cy.get("[class='ds-container'] >nav>ul>li>a")
+  return cy.get("[class='sch-container'] >nav>ul>li>a")
 }
 
 function breadcrumbsLink1() {
-  return cy.get("[class='ds-container'] >nav>ul>li:nth-child(1)>a")
+  return cy.get("[class='sch-container'] >nav>ul>li:nth-child(1)>a")
 }
 
 function breadcrumbsLink2() {
-  return cy.get("[class='ds-container'] >nav>ul>li:nth-child(2)>a")
+  return cy.get("[class='sch-container'] >nav>ul>li:nth-child(2)>a")
 }
 
 function LookingForProfileLinkEn() {
