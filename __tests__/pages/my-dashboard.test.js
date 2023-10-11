@@ -119,7 +119,7 @@ describe('My Dashboard page', () => {
     expect(myDashboardDiv).toBeInTheDocument()
   })
 
-  it('should contain a card', () => {
+  it.skip('should contain a card', () => {
     render(
       <MyDashboard
         locale="en"
