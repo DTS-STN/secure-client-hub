@@ -41,7 +41,13 @@ describe('PhaseBanner', () => {
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
         icon={'bell'}
-        popupContent={popupContent}
+        popupContent={{
+          popupId: 'popup id',
+          popupTitle: 'pop up title',
+          popupDescription: 'pop up desc',
+          popupPrimaryBtn: { id: 'Test Primary Id', text: 'Test Primary Text' },
+          popupSecondaryBtn: { id: 'Test secont Id', text: 'Test second Text' },
+        }}
       ></PhaseBanner>
     )
     const bannerBoldText = screen.getByText('bannerBoldText')
@@ -64,7 +70,13 @@ describe('PhaseBanner', () => {
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
         icon={'bell'}
-        popupContent={popupContent}
+        popupContent={{
+          popupId: 'popup id',
+          popupTitle: 'pop up title',
+          popupDescription: 'pop up desc',
+          popupPrimaryBtn: { id: 'Test Primary Id', text: 'Test Primary Text' },
+          popupSecondaryBtn: { id: 'Test secont Id', text: 'Test second Text' },
+        }}
       ></PhaseBanner>
     )
     const results = await axe(container)

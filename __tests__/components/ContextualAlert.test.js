@@ -10,6 +10,10 @@ describe('ContextualAlert', () => {
     <ContextualAlert
       data-testid="alert-icon"
       alt="alert_icon_alt_text"
+      id="alert_icon_id"
+      alert_icon_id="icon-id"
+      alert_icon_alt_text="alt"
+      type="info"
       message_heading="Information"
       message_body="You may wish to print this page..."
     />
@@ -27,7 +31,12 @@ describe('ContextualAlert', () => {
   it('has no a11y violations', async () => {
     render(
       <ContextualAlert
+        data-testid="alert-icon"
         alt="alert_icon_alt_text"
+        id="alert_icon_id"
+        alert_icon_id="icon-id"
+        alert_icon_alt_text="alt"
+        type="info"
         message_heading="Information"
         message_body="You may wish to print this page..."
       />
