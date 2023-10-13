@@ -52,7 +52,7 @@ export function ErrorPage(props) {
             <p className="font-bold text-gray-darker sm:text-black text-[20px]">
               {val.errorPageNextText}
             </p>
-            <h2 className="sr-only">What&apos;s Next Links</h2>
+            <h2 className="sr-only">{`What's Next Links`}</h2>
             <ul id={'errorTypes' + index + errType}>
               <li
                 key={'errorLink1' + index.toString()}
