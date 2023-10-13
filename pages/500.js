@@ -62,7 +62,7 @@ export async function getStaticProps({ locale }) {
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
       meta,
-      isAuth: process.env.AUTH_DISABLED,
+      isAuth: process.env.AUTH_DISABLED ?? true,
     },
   }
 }
