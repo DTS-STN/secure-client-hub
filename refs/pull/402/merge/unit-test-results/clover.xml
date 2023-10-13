@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1697124312286" clover="3.2.0">
-  <project timestamp="1697124312286" name="All files">
-    <metrics statements="454" coveredstatements="237" conditionals="435" coveredconditionals="208" methods="178" coveredmethods="74" elements="1067" coveredelements="519" complexity="0" loc="454" ncloc="454" packages="8" files="47" classes="47"/>
+<coverage generated="1697209200171" clover="3.2.0">
+  <project timestamp="1697209200171" name="All files">
+    <metrics statements="454" coveredstatements="237" conditionals="435" coveredconditionals="206" methods="178" coveredmethods="74" elements="1067" coveredelements="517" complexity="0" loc="454" ncloc="454" packages="8" files="47" classes="47"/>
     <package name="components">
-      <metrics statements="170" coveredstatements="106" conditionals="261" coveredconditionals="141" methods="64" coveredmethods="35"/>
+      <metrics statements="170" coveredstatements="106" conditionals="261" coveredconditionals="139" methods="64" coveredmethods="35"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -53,8 +53,8 @@
         <line num="29" count="2" type="stmt"/>
       </file>
       <file name="ContextualAlert.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ContextualAlert.js">
-        <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="9" methods="1" coveredmethods="1"/>
-        <line num="17" count="5" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="7" methods="1" coveredmethods="1"/>
+        <line num="17" count="4" type="stmt"/>
         <line num="19" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="27" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="35" count="4" type="cond" truecount="1" falsecount="1"/>
@@ -136,10 +136,10 @@
       </file>
       <file name="LoadingSpinner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/LoadingSpinner.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="16" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="32" type="stmt"/>
+        <line num="24" count="4" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
       </file>
       <file name="Menu.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Menu.js">
         <metrics statements="15" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="10" coveredmethods="6"/>
@@ -218,7 +218,7 @@
       </file>
       <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
         <metrics statements="4" coveredstatements="2" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
-        <line num="12" count="3" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="57" count="2" type="stmt"/>
@@ -234,11 +234,11 @@
       </file>
       <file name="TableContents.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/TableContents.js">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="5" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
+        <line num="5" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
       </file>
       <file name="TopNav.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/TopNav.js">
         <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
