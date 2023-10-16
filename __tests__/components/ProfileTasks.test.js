@@ -14,11 +14,15 @@ describe('ProfileTasks', () => {
           title: 'Province of residence',
           icon: 'circle',
           link: '/dashboard',
+          areaLabel: 'taks1',
+          betaPopUp: false,
         },
         {
           title: 'Language of correspondence',
           icon: 'stamp',
           link: '/dashboard',
+          areaLabel: 'taks2',
+          betaPopUp: false,
         },
       ]}
     />

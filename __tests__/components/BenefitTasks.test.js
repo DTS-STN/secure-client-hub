@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, act, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+
 import { axe, toHaveNoViolations } from 'jest-axe'
 import BenefitTasks from '../../components/BenefitTasks'
 
@@ -19,7 +20,7 @@ describe('BenefitTasks', () => {
       },
     ],
   }
-  it('renders Benefit Task', () => {
+  it('renders Benefit Task', async () => {
     render(
       <BenefitTasks
         acronym={'test'}
@@ -43,7 +44,11 @@ describe('BenefitTasks', () => {
         refPageAA={'test'}
       />
     )
-    const results = await axe(container)
-    expect(results).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
+    })
   })
 })

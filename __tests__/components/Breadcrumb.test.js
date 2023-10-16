@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from '@testing-library/react'
+import { render, screen, act, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { Breadcrumb } from '../../components/Breadcrumb'
@@ -57,8 +57,11 @@ describe('BreadCrumb', () => {
         items={[{ text: 'Canada.ca', link: '/' }]}
       />
     )
-    const results = await axe(container)
-
-    expect(results).toHaveNoViolations()
+    await act(async () => {
+      const results = await axe(container)
+      await waitFor(() => {
+        expect(results).toHaveNoViolations()
+      })
+    })
   })
 })
