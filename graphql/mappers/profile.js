@@ -26,7 +26,7 @@ export async function getProfileContent() {
   const mappedProfile = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -34,9 +34,9 @@ export async function getProfileContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scTitleEn,
+      pageName: response.data.schPageV1ByPath.item.scTitleEn,
       heading: profileIntroFragment.scContentEn.json[0].content[0].value,
-      list: response.data.schPagev1ByPath.item.scFragments
+      list: response.data.schPageV1ByPath.item.scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -77,7 +77,7 @@ export async function getProfileContent() {
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -85,9 +85,9 @@ export async function getProfileContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scTitleFr,
+      pageName: response.data.schPageV1ByPath.item.scTitleFr,
       heading: profileIntroFragment.scContentFr.json[0].content[0].value,
-      list: response.data.schPagev1ByPath.item.scFragments
+      list: response.data.schPageV1ByPath.item.scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -131,7 +131,7 @@ export async function getProfileContent() {
 }
 
 const findFragmentByScId = (res, id) => {
-  return res.data.schPagev1ByPath.item.scFragments.find(
+  return res.data.schPageV1ByPath.item.scFragments.find(
     (element) => element.scId === id
   )
 }

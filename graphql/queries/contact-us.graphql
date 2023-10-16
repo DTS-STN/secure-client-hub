@@ -1,5 +1,5 @@
 {
-  schPagev1ByPath(
+  schPageV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/pages/contact-us-pages/contact-us"
   ) {
     item {
@@ -9,7 +9,7 @@
       scTitleEn
       scTitleFr
       scBreadcrumbParentPages {
-        ... on SCHPagev1Model {
+        ... on SchPageV1Model {
               scId
               scTitleEn
               scTitleFr
@@ -18,7 +18,7 @@
         }
       }
       scFragments {
-          ... on SCHContentv1Model {
+          ... on SchContentV1Model {
           scId
           scContentEn {
               json
@@ -27,7 +27,7 @@
             json
           }
       }
-      ... on SCHTaskv1Model {
+      ... on SchTaskV1Model {
           scId
           scLinkTextEn
           scLinkTextFr

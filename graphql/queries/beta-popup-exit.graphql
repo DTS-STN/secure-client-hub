@@ -1,5 +1,5 @@
 {
-  schContentv1ByPath(
+  schContentV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/content/beta-popup-exit"
   ) {
     item {
@@ -14,7 +14,7 @@
           json
       }
       scFragments{
-          ... on SCHTaskv1Model{
+          ... on SchTaskV1Model{
               scId
               scLinkTextAssistiveEn
               scLinkTextAssistiveFr
