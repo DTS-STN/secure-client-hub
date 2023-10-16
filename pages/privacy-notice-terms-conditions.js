@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Date } from '@dts-stn/service-canada-design-system'
+import { Date } from '../components/Date'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
@@ -15,7 +15,6 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
-
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
@@ -107,7 +106,11 @@ export default function PrivacyCondition(props) {
         refPageAA={props.aaPrefix}
         id={t.id_dashboard}
       />
-      <Date id="termsConditionsDateModified" date="20230331" />
+      <Date
+        id="termsConditionsDateModified"
+        date={props.content.dateModified}
+        label={t.dateModified}
+      />
     </div>
   )
 }

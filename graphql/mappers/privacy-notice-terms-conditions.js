@@ -17,6 +17,7 @@ export async function getPrivacyConditionContent() {
   const mappedPrivacyConditions = {
     en: {
       id: response.data.schPagev1ByPath.item.scId,
+      dateModified: response.data.schPagev1ByPath.item.scDateModifiedOverwrite,
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
@@ -37,6 +38,7 @@ export async function getPrivacyConditionContent() {
     },
     fr: {
       id: response.data.schPagev1ByPath.item.scId,
+      dateModified: response.data.schPagev1ByPath.item.scDateModifiedOverwrite,
       breadcrumb:
         response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
