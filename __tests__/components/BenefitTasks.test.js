@@ -1,10 +1,16 @@
-import { render, screen, act, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 import { axe, toHaveNoViolations } from 'jest-axe'
 import BenefitTasks from '../../components/BenefitTasks'
 
 expect.extend(toHaveNoViolations)
+// the code below is to avoid the following error: ... was not wrapped in act(...)"
+jest.mock('next/link', () => {
+  return ({ children }) => {
+    return children
+  }
+})
 
 describe('BenefitTasks', () => {
   const taskListTest = {
@@ -44,11 +50,7 @@ describe('BenefitTasks', () => {
         refPageAA={'test'}
       />
     )
-    await act(async () => {
-      const results = await axe(container)
-      await waitFor(() => {
-        expect(results).toHaveNoViolations()
-      })
-    })
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })
