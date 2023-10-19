@@ -8,6 +8,13 @@ import { Breadcrumb } from '../../components/Breadcrumb'
 
 expect.extend(toHaveNoViolations)
 
+// the code below is to avoid the following error: ... was not wrapped in act(...)"
+jest.mock('next/link', () => {
+  return ({ children }) => {
+    return children
+  }
+})
+
 describe('BreadCrumb', () => {
   it('renders primary', () => {
     const primary = render(
@@ -58,7 +65,6 @@ describe('BreadCrumb', () => {
       />
     )
     const results = await axe(container)
-
     expect(results).toHaveNoViolations()
   })
 })
