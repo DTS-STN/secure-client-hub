@@ -1,5 +1,5 @@
 {
-    schPagev1ByPath(
+    schPageV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/pages/privacy-notice-terms-conditions"
   ) {
     item {
@@ -10,7 +10,7 @@
     scTitleFr
     scDateModifiedOverwrite
     scBreadcrumbParentPages{
-        ... on SCHPagev1Model {
+        ... on SchPageV1Model {
               scId
               scTitleEn
               scTitleFr
@@ -19,7 +19,7 @@
         }
     }
     scFragments{
-        ... on SCHContentv1Model{
+        ... on SchContentV1Model{
             scId
             scContentEn{
                 markdown
@@ -28,7 +28,7 @@
                 markdown
             }
         }
-        ... on SCHTaskv1Model{
+        ... on SchTaskV1Model{
                     scId
                     scTitleEn
                     scTitleFr
