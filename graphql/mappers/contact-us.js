@@ -15,7 +15,7 @@ export async function getContactUsContent() {
   const mappedSecurity = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -23,8 +23,8 @@ export async function getContactUsContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
-      heading: response.data.schPagev1ByPath.item.scTitleEn,
+      pageName: response.data.schPageV1ByPath.item.scPageNameEn,
+      heading: response.data.schPageV1ByPath.item.scTitleEn,
       subHeading: introFragment.scContentEn.json[0].content[0].value,
       links: [
         {
@@ -61,7 +61,7 @@ export async function getContactUsContent() {
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -69,8 +69,8 @@ export async function getContactUsContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
-      heading: response.data.schPagev1ByPath.item.scTitleFr,
+      pageName: response.data.schPageV1ByPath.item.scPageNameFr,
+      heading: response.data.schPageV1ByPath.item.scTitleFr,
       subHeading: introFragment.scContentFr.json[0].content[0].value,
       links: [
         {
@@ -110,7 +110,7 @@ export async function getContactUsContent() {
 }
 
 const findFragmentByScId = (res, id) => {
-  return res.data.schPagev1ByPath.item.scFragments.find(
+  return res.data.schPageV1ByPath.item.scFragments.find(
     (element) => element.scId === id
   )
 }

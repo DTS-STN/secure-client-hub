@@ -1,5 +1,5 @@
 {
-	schPagev1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard") {
+	schPageV1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard") {
 	    item {
             _path
             scPageNameEn
@@ -9,7 +9,7 @@
             scShortTitleEn
             scShortTitleFr
             scBreadcrumbParentPages {
-                ... on SCHPagev1Model{
+                ... on SchPageV1Model{
                     scTitleEn
                 }
             }
@@ -18,22 +18,22 @@
             scDateModifiedOverwrite
             scAudience
             scFragments {
-                ... on SCHTaskv1Model{
+                ... on SchTaskV1Model{
                     scId
                     scTitleEn
                     scTitleFr
                     scDestinationURLEn
                     scDestinationURLFr
                 }
-                ... on SCHListv1Model {
+                ... on SchListV1Model {
                     scId
                     scItems {
-                        ... on SCHCardv1Model {
+                        ... on SchCardV1Model {
                             scId
                             scTitleEn
                             scTitleFr
                             schTasks{
-                               ... on SCHTaskv1Model {
+                               ... on SchTaskV1Model {
                                     scId
                                     scLinkTextEn
                                     scLinkTextFr
@@ -42,11 +42,11 @@
                                 }
                             }
                             schLists{
-                                ... on SCHListv1Model {
+                                ... on SchListV1Model {
                                     scTitleEn
                                     scTitleFr
                                     scItems {
-                                        ... on SCHTaskv1Model{
+                                        ... on SchTaskV1Model{
                                             scId
                                             scLinkTextEn
                                             scLinkTextFr
