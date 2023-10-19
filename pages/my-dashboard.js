@@ -87,7 +87,6 @@ export default function MyDashboard(props) {
   )
 }
 
-//comment
 export async function getServerSideProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
