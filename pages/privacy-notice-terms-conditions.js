@@ -29,14 +29,17 @@ export default function PrivacyCondition(props) {
         title={props.content.heading}
         className="mb-2"
       />
-      <ContextualAlert
-        id="PrivacyCondition-alert"
-        type={props.content.alert.type}
-        message_heading="Information"
-        message_body={props.content.alert.text}
-        alert_icon_alt_text="info icon"
-        alert_icon_id="info-icon"
-      />
+      <h2>
+        <ContextualAlert
+          id="PrivacyCondition-alert"
+          type={props.content.alert.type}
+          message_heading="Information"
+          message_body={props.content.alert.text}
+          alert_icon_alt_text="info icon"
+          alert_icon_id="info-icon"
+        />
+      </h2>
+
       <section id={t.footerPrivacyAnchor}>
         <Markdown
           options={{
@@ -54,7 +57,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -85,7 +88,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
