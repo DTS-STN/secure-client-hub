@@ -89,7 +89,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
