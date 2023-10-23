@@ -32,11 +32,7 @@ export default function PrivacyCondition(props) {
       <ContextualAlert
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
-        message_heading={
-          <>
-            <h2>Information</h2>
-          </>
-        }
+        message_heading={<h2>Information</h2>}
         message_body={props.content.alert.text}
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
