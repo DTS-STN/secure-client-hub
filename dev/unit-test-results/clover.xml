@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1697738124043" clover="3.2.0">
-  <project timestamp="1697738124044" name="All files">
-    <metrics statements="454" coveredstatements="237" conditionals="435" coveredconditionals="206" methods="178" coveredmethods="74" elements="1067" coveredelements="517" complexity="0" loc="454" ncloc="454" packages="8" files="47" classes="47"/>
+<coverage generated="1698086849010" clover="3.2.0">
+  <project timestamp="1698086849010" name="All files">
+    <metrics statements="460" coveredstatements="241" conditionals="441" coveredconditionals="209" methods="181" coveredmethods="76" elements="1082" coveredelements="526" complexity="0" loc="460" ncloc="460" packages="8" files="47" classes="47"/>
     <package name="components">
-      <metrics statements="170" coveredstatements="106" conditionals="261" coveredconditionals="139" methods="64" coveredmethods="35"/>
+      <metrics statements="176" coveredstatements="110" conditionals="267" coveredconditionals="142" methods="67" coveredmethods="37"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -99,11 +99,11 @@
         <line num="138" count="2" type="stmt"/>
       </file>
       <file name="Header.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Header.js">
-        <metrics statements="4" coveredstatements="4" conditionals="10" coveredconditionals="7" methods="4" coveredmethods="1"/>
+        <metrics statements="4" coveredstatements="4" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="1"/>
         <line num="21" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
-        <line num="93" count="2" type="stmt"/>
-        <line num="118" count="2" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="122" count="2" type="stmt"/>
       </file>
       <file name="Heading.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Heading.js">
         <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
@@ -142,7 +142,7 @@
         <line num="46" count="3" type="stmt"/>
       </file>
       <file name="Menu.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Menu.js">
-        <metrics statements="15" coveredstatements="12" conditionals="24" coveredconditionals="17" methods="10" coveredmethods="6"/>
+        <metrics statements="21" coveredstatements="16" conditionals="28" coveredconditionals="19" methods="13" coveredmethods="8"/>
         <line num="14" count="7" type="stmt"/>
         <line num="16" count="7" type="stmt"/>
         <line num="17" count="7" type="stmt"/>
@@ -153,11 +153,17 @@
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
         <line num="31" count="7" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
-        <line num="104" count="10" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="148" count="3" type="stmt"/>
-        <line num="170" count="3" type="stmt"/>
+        <line num="32" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="42" count="7" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="112" count="10" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="156" count="3" type="stmt"/>
+        <line num="178" count="3" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
