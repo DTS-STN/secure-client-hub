@@ -116,32 +116,27 @@ export async function getServerSideProps({ req, res, locale }) {
 
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
-    const errAEM = { err: '500' }
-    return errAEM
+    return { err: '500' }
   })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    const errAEM = { err: '500' }
-    return errAEM
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    const errAEM = { err: '500' }
-    return errAEM
+    return { err: '500' }
   })
 
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      const errAEM = { err: '500' }
-      return errAEM
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    const errAEM = { err: '500' }
-    return errAEM
+    return { err: '500' }
   })
 
   if (locale === 'und') {
