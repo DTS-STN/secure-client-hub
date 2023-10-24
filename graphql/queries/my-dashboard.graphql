@@ -1,5 +1,5 @@
 {
-	schPageV1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/my-dashboards") {
+	schPageV1ByPath(_path: "/content/dam/decd-endc/content-fragments/sch/pages/my-dashboard") {
 	    item {
             _path
             scPageNameEn
