@@ -36,7 +36,7 @@ export async function getSecuritySettingsContent() {
   const mappedSecurity = {
     en: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -44,8 +44,8 @@ export async function getSecuritySettingsContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
-      heading: response.data.schPagev1ByPath.item.scTitleEn,
+      pageName: response.data.schPageV1ByPath.item.scPageNameEn,
+      heading: response.data.schPageV1ByPath.item.scTitleEn,
       subHeading: enContentFragment.json[0].content[0].value,
       lookingFor: {
         title: enLookingForFragment.json[0].content[0].value,
@@ -53,6 +53,7 @@ export async function getSecuritySettingsContent() {
           return element.value || null
         }),
         link: '/profile',
+        id: 'profile',
       },
       securityQuestions: {
         linkTitle: {
@@ -77,7 +78,7 @@ export async function getSecuritySettingsContent() {
     },
     fr: {
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -85,8 +86,8 @@ export async function getSecuritySettingsContent() {
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
-      heading: response.data.schPagev1ByPath.item.scTitleFr,
+      pageName: response.data.schPageV1ByPath.item.scPageNameFr,
+      heading: response.data.schPageV1ByPath.item.scTitleFr,
       subHeading: frContentFragment.json[0].content[0].value,
       lookingFor: {
         title: frLookingForFragment.json[0].content[0].value,
@@ -94,6 +95,7 @@ export async function getSecuritySettingsContent() {
           return element.value || null
         }),
         link: '/fr/profil',
+        id: 'profile',
       },
       securityQuestions: {
         linkTitle: {
@@ -121,7 +123,7 @@ export async function getSecuritySettingsContent() {
 }
 
 const findFragmentByScId = (res, id) => {
-  return res.data.schPagev1ByPath.item.scFragments.find(
+  return res.data.schPageV1ByPath.item.scFragments.find(
     (element) => element.scId === id
   )
 }

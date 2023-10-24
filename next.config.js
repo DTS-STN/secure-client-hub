@@ -1,12 +1,3 @@
-//formatting TC Date
-const builddate = process.env.BUILD_DATE
-  ? process.env.BUILD_DATE.substring(0, 4) +
-    '-' +
-    process.env.BUILD_DATE.substring(4, 6) +
-    '-' +
-    process.env.BUILD_DATE.substring(6, 8)
-  : 'DATE-NA'
-
 const REWRITES = [
   {
     source: '/contactez-nous',
@@ -80,7 +71,6 @@ const securityHeaders = [
 
 module.exports = {
   env: {
-    NEXT_PUBLIC_BUILD_DATE: builddate,
     LOGGING_LEVEL: process.env.LOGGING_LEVEL,
     AUTH_ECAS_GLOBAL_LOGOUT_URL: process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL,
   },
@@ -93,7 +83,6 @@ module.exports = {
     defaultLocale: 'und',
     localeDetection: false,
   },
-  trailingSlash: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //GraphQL loader for .graphql files
     config.module.rules.push({
@@ -110,21 +99,6 @@ module.exports = {
   images: {
     domains: ['www.canada.ca'],
   },
-  //
-  // rewrites setup
-  //
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/accueil',
-  //       destination: '/home',
-  //     },
-  //     // {
-  //     //   source: " french page name with/without route ",
-  //     //   destination: " 'english' page ",
-  //     // },
-  //   ]
-  // },
   async headers() {
     return [
       {

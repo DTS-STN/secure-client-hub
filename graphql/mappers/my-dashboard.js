@@ -8,9 +8,9 @@ export async function getMyDashboardContent() {
 
   const mappedHome = {
     en: {
-      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
-      heading: response.data.schPagev1ByPath.item.scTitleEn,
-      cards: response.data.schPagev1ByPath.item.scFragments
+      pageName: response.data.schPageV1ByPath.item.scPageNameEn,
+      heading: response.data.schPageV1ByPath.item.scTitleEn,
+      cards: response.data.schPageV1ByPath.item.scFragments
         .find((element) => element.scId === 'dashboard-cards')
         .scItems.map((fragment) => {
           return {
@@ -22,6 +22,7 @@ export async function getMyDashboardContent() {
                 title: list.scTitleEn,
                 tasks: list.scItems.map((item) => {
                   return {
+                    id: item.scId,
                     title: item.scLinkTextEn,
                     areaLabel: item.scLinkTextAssistiveEn,
                     link: buildLink(item.schURLType, item.scDestinationURLEn),
@@ -35,18 +36,18 @@ export async function getMyDashboardContent() {
         })
         .filter((e) => e),
       exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
+        title: response.data.schPageV1ByPath.item.scFragments.find(
           (element) => element.scId === 'exit-beta-version'
         ).scTitleEn,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
+        link: response.data.schPageV1ByPath.item.scFragments.find(
           (element) => element.scId === 'exit-beta-version'
         ).scDestinationURLEn,
       },
     },
     fr: {
-      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
-      heading: response.data.schPagev1ByPath.item.scTitleFr,
-      cards: response.data.schPagev1ByPath.item.scFragments
+      pageName: response.data.schPageV1ByPath.item.scPageNameFr,
+      heading: response.data.schPageV1ByPath.item.scTitleFr,
+      cards: response.data.schPageV1ByPath.item.scFragments
         .find((element) => element.scId === 'dashboard-cards')
         .scItems.map((fragment) => {
           if (!fragment.scId) return
@@ -59,6 +60,7 @@ export async function getMyDashboardContent() {
                 title: list.scTitleFr,
                 tasks: list.scItems.map((item) => {
                   return {
+                    id: item.scId,
                     title: item.scLinkTextFr,
                     areaLabel: item.scLinkTextAssistiveFr,
                     link: buildLink(item.schURLType, item.scDestinationURLFr),
@@ -72,10 +74,10 @@ export async function getMyDashboardContent() {
         })
         .filter((e) => e),
       exitBeta: {
-        title: response.data.schPagev1ByPath.item.scFragments.find(
+        title: response.data.schPageV1ByPath.item.scFragments.find(
           (element) => element.scId === 'exit-beta-version'
         ).scTitleFr,
-        link: response.data.schPagev1ByPath.item.scFragments.find(
+        link: response.data.schPageV1ByPath.item.scFragments.find(
           (element) => element.scId === 'exit-beta-version'
         ).scDestinationURLFr,
       },

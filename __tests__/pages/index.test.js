@@ -12,57 +12,6 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
-  getBetaBannerContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({
-        en: {},
-        fr: {},
-      })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
-  getBetaPopupExitContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-const fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ data: 'mocked data' }),
-  })
-)
-
-// 'Mock' call to fetchContent
-jest.mock('../../lib/cms', () => ({
-  fetchContent: () => {
-    return {}
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
-  getBetaBannerContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({
-        en: {},
-        fr: {},
-      })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
-  getBetaPopupExitContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
 describe('index page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
@@ -121,8 +70,6 @@ describe('index page', () => {
             accessRights: '1',
           },
         },
-        bannerContent: {},
-        popupContent: {},
       },
     })
   })

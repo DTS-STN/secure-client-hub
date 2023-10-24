@@ -1,14 +1,12 @@
-FROM node:18-alpine3.16 AS base
+FROM node:18-alpine3.18 AS base
 WORKDIR /base
 COPY package*.json ./
-RUN npm ci
+RUN npm ci && npm cache clean --force
 COPY . .
 
 FROM base AS build
 
 # Build envs
-ARG BUILD_DATE
-ENV BUILD_DATE=$BUILD_DATE
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 ARG AUTH_ECAS_BASE_URL
@@ -25,16 +23,36 @@ WORKDIR /build
 COPY --from=base /base ./
 RUN npm run build
 
-FROM node:18-alpine3.16 AS production
+FROM node:18-alpine3.18 AS production
 ENV NODE_ENV=production
-WORKDIR /app
-COPY --from=build /build/next.config.js ./
-COPY --from=build /build/package*.json ./
-COPY --from=build /build/.next ./.next
-COPY --from=build /build/public ./public
-COPY --from=build /build/tracing.js ./
-COPY --from=build /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
-RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& npm install --no-package-lock --no-save next@"$VERSION_NEXT"
+
+ARG user=nodeuser
+ARG group=nodegroup
+ARG home=/srv/app
+
+RUN addgroup \
+    -S ${group} \
+    --gid 1001 && \
+    adduser \
+    --disabled-password \
+    --gecos "" \
+    --uid 1001 \
+    --home ${home} \
+    --ingroup ${group} \
+    ${user}
+
+WORKDIR ${home}
+
+USER ${user}
+
+COPY --from=build --chown=${user}:${group} /build/next.config.js ./
+COPY --from=build --chown=${user}:${group} /build/package*.json ./
+COPY --from=build --chown=${user}:${group} /build/.next ./.next
+COPY --from=build --chown=${user}:${group} /build/public ./public
+COPY --from=build --chown=${user}:${group} /build/tracing.js ./
+COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
+
+RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
 # Runtime envs -- will default to build args if no env values are specified at docker run
 ARG AEM_GRAPHQL_ENDPOINT
@@ -83,5 +101,13 @@ ENV AUTH_DISABLED=$AUTH_DISABLED
 ARG AUTH_ECAS_GLOBAL_LOGOUT_URL
 ENV AUTH_ECAS_GLOBAL_LOGOUT_URL=$AUTH_ECAS_GLOBAL_LOGOUT_URL
 # ECAS/next-auth env end
+
+ARG PORT=3000
+ENV PORT=${PORT}
+
+ARG HOSTNAME=localhost
+ENV HOSTNAME=${HOSTNAME}
+
+EXPOSE ${PORT}
 
 CMD npm run start

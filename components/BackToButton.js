@@ -5,14 +5,13 @@ export default function BackToButton(props) {
   return (
     <>
       <div className=" ">
-        <Link href={props.buttonHref}>
-          <a
-            id={props.buttonId}
-            className="inline-block my-4 py-2.5 px-3.5 font-display text-xl rounded bg-gray-30a text-deep-blue-60b hover:bg-gray-50a hover:cursor-pointer focus:ring focus:ring-offset-4 ring-deep-blue-60f"
-            data-gc-analytics-customclick={`${props.refPageAA}:${props.buttonLinkText}`}
-          >
-            {props.buttonLinkText}
-          </a>
+        <Link
+          href={props.buttonHref}
+          id={props.buttonId}
+          className="inline-block my-4 py-2.5 px-3.5 font-display text-xl rounded bg-gray-30a text-deep-blue-60b hover:bg-gray-50a hover:cursor-pointer focus:ring focus:ring-offset-4 ring-deep-blue-60f"
+          data-gc-analytics-customclick={`${props.refPageAA}:${props.id}`}
+        >
+          {props.buttonLinkText}
         </Link>
       </div>
     </>

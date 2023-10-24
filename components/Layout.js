@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types'
-import {
-  Header,
-  Footer,
-  LayoutContainer,
-} from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
+import { Header } from './Header'
+import { Footer } from './Footer'
 import MetaData from './MetaData'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import Link from 'next/link'
 import MultiModal from './MultiModal'
+import { lato, notoSans } from '../utils/fonts'
 
 export default function Layout(props) {
   const display = props.display ?? {}
@@ -22,33 +19,36 @@ export default function Layout(props) {
   const [openModalWithLink, setOpenModalWithLink] = useState({
     activeLink: '/',
     context: null,
-    contentLabel: null,
   })
 
   const openModal = (link, context) => {
-    setOpenModalWithLink((prev) => {
+    setOpenModalWithLink(() => {
       return {
         isOpen: true,
         activeLink: link,
         context,
-        contentLabel: null,
       }
     })
   }
 
   const closeModal = () => {
-    setOpenModalWithLink((prev) => {
+    setOpenModalWithLink(() => {
       return {
         isOpen: false,
         activeLink: '/',
         context: null,
-        contentLabel: null,
       }
     })
   }
 
   return (
     <>
+      <style jsx global>{`
+        :root {
+          --lato-font: ${lato.style.fontFamily};
+          --noto-sans-font: ${notoSans.style.fontFamily};
+        }
+      `}</style>
       <MetaData language={props.locale} data={props.meta}></MetaData>
       {props.display.hideBanner ? (
         ''
@@ -60,9 +60,7 @@ export default function Layout(props) {
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
-          bannerButtonExternalText={
-            props.bannerContent.bannerButtonExternalText || ''
-          }
+          id={props.bannerContent.id || ''}
           bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
@@ -75,7 +73,7 @@ export default function Layout(props) {
         ></PhaseBanner>
       )}
       <Header
-        // analyticsTracking
+        legacyBehavior
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
@@ -90,52 +88,51 @@ export default function Layout(props) {
           switchToBasicPath: '',
           displayAlternateLink: false,
         }}
-        isAuthenticated={props.isAuth}
-        customLink={Link}
         dataGcAnalyticsCustomClickInstitutionVariable={
           props.children.props.aaPrefix
         }
         menuProps={{
+          legacyBehavior: true,
           menuList: [
             {
               key: 'dashKey',
+              id: 'dash',
               value: t.menuItems.dashboard,
               path: `${
                 props.locale === 'en'
                   ? '/en/my-dashboard'
                   : '/fr/mon-tableau-de-bord'
               }`,
-              component: Link,
             },
             {
               key: 'profileKey',
+              id: 'profile',
               value: t.menuItems.profile,
               path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
-              component: Link,
             },
             {
               key: 'securityKey',
+              id: 'security',
               value: t.menuItems.security,
               path: `${
                 props.locale === 'en'
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
-              component: Link,
             },
             {
               key: 'contactKey',
+              id: 'contact',
               value: t.menuItems.contactUs,
               path: `${
                 props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
               }`,
-              component: Link,
             },
             {
               key: 'signOutKey',
+              id: 'signOut',
               value: t.menuItems.signOut,
               path: '/auth/logout',
-              component: Link,
               showIcon: true,
             },
           ],
@@ -145,14 +142,8 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-      <main id="mainContent">
-        {display.fullscreen ? (
-          props.children
-        ) : (
-          <LayoutContainer>
-            {cloneElement(props.children, { openModal, closeModal })}
-          </LayoutContainer>
-        )}
+      <main id="mainContent" className="sch-container grid gap-[30px]">
+        {cloneElement(props.children, { openModal, closeModal })}
       </main>
       <MultiModal
         openModalWithLink={openModalWithLink}
@@ -164,9 +155,6 @@ export default function Layout(props) {
         popupStaySignedIn={props.popupStaySignedIn}
         popupContent={props.popupContent}
       />
-      {/* <div id="modal-root">
-
-      </div> */}
 
       <Footer
         lang={!props.locale ? 'en' : props.locale}
@@ -185,7 +173,6 @@ export default function Layout(props) {
         contactLink={contactLink}
         btnLink="#top"
         id="page-footer"
-        isAuthenticated={true}
       />
       <script type="text/javascript">_satellite.pageBottom();</script>
     </>
@@ -291,10 +278,6 @@ Layout.propTypes = {
      * Toggle use of DS footer (default false)
      */
     hideFooter: PropTypes.bool,
-    /*
-     * Toggle the LayoutContainer from Design System (default on/true)
-     */
-    fullscreen: PropTypes.bool,
   }),
   breadCrumbItems: PropTypes.array,
 }

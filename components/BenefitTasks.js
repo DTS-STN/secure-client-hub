@@ -15,8 +15,8 @@ export default function BenefitTasks(props) {
   ]
 
   return (
-    <div className="inline-block w-full">
-      <h3 className="font-body font-bold text-xl " data-cy={props.dataCy}>
+    <div className="inline-block w-full" data-testid="benefitTasks-test">
+      <h3 className="font-bold text-xl " data-cy={props.dataCy}>
         {props.taskList.title}
       </h3>
       <ul
@@ -25,46 +25,38 @@ export default function BenefitTasks(props) {
       >
         {props.taskList.tasks.map((task, index) => {
           return (
-            <li
-              key={index}
-              className="font-body font-bold "
-              data-cy="task-link"
-            >
-              <Link href={task.link} passHref>
-                <a
-                  target={
-                    newTabTaskExceptions.includes(task.link)
-                      ? '_blank'
-                      : '_self'
+            <li key={index} className="font-bold " data-cy="task-link">
+              <Link
+                href={task.link}
+                passHref
+                target={
+                  newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
+                }
+                onClick={(e) => {
+                  //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
+                  if (
+                    task.betaPopUp &&
+                    !newTabTaskExceptions.includes(task.link)
+                  ) {
+                    e.preventDefault()
+                    props.openModal(task.link, 'betaModal')
                   }
-                  onClick={(e) => {
-                    //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
-                    if (
-                      task.betaPopUp &&
-                      !newTabTaskExceptions.includes(task.link)
-                    ) {
-                      e.preventDefault()
-                      props.openModal(task.link, 'betaModal')
-                    }
-                  }}
-                  data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.title}`}
-                  className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
+                }}
+                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
+              >
+                <FontAwesomeIcon
+                  icon={
+                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
+                  }
+                  className="pr-4 text-2xl w-8"
+                />
+                <span
+                  aria-label={task.areaLabel}
+                  className="font-normal text-xl"
                 >
-                  <FontAwesomeIcon
-                    icon={
-                      icon[task.icon]
-                        ? icon[task.icon]
-                        : icon['question-circle']
-                    }
-                    className="pr-4 text-2xl w-8"
-                  />
-                  <span
-                    aria-label={task.areaLabel}
-                    className="font-normal text-xl"
-                  >
-                    {task.title}
-                  </span>
-                </a>
+                  {task.title}
+                </span>
               </Link>
             </li>
           )

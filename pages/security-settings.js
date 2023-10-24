@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
+import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -8,7 +9,7 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -29,47 +30,54 @@ export default function SecuritySettings(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
-
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <Link
+        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="securityQuestionsLink"
-        dataTestId="securityQuestionsLink"
-        text={props.content.securityQuestions.linkTitle.text}
+        data-testid="securityQuestionsLink"
+        aria-label={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
-      />
-      <p className="mb-8 text-xl font-body">
-        {props.content.securityQuestions.subTitle}
-      </p>
+      >
+        {props.content.securityQuestions.linkTitle.text}
+      </Link>
+      <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
 
       <Link
+        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="eiAccessCodeLink"
-        dataTestId="eiAccessCodeLink"
-        text={props.content.eiAccessCode.linkTitle.text}
+        data-testid="eiAccessCodeLink"
+        aria-label={props.content.eiAccessCode.linkTitle.text}
         href={props.content.eiAccessCode.linkTitle.link}
-      />
-      <p className="pb-7 text-xl font-body">
-        {props.content.eiAccessCode.subTitle}
-      </p>
+      >
+        {props.content.eiAccessCode.linkTitle.text}
+      </Link>
+      <p className="pb-7 text-xl">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID="link-id"
+        linkID={t.backToDashboard.id}
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
+        dashId={t.id_dashboard}
+        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('security-settings')
+  logger.level = 'error'
+
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500
@@ -117,7 +125,7 @@ export async function getServerSideProps({ res, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/parametres-securite' : '/security-settings'
+    locale === 'en' ? '/fr/parametres-securite' : '/en/security-settings'
 
   const t = locale === 'en' ? en : fr
 

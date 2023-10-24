@@ -18,7 +18,7 @@ function ValidateCPPContactUsHeaderEN() {
 function ValidateCPPContactUsUrlFR() {
   cy.url().should(
     'contains',
-    '/fr/contactez-nous/communiquer-regime-pensions-canada/'
+    '/fr/contactez-nous/communiquer-regime-pensions-canada'
   )
 }
 

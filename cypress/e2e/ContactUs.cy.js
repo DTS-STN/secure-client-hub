@@ -9,6 +9,10 @@ beforeEach(() => {
 })
 
 describe('Validate Contact Us Landing page', () => {
+  it('Contact us has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
   it('Validate Contact us URL and header in EN and FR', () => {
     contactUsPo.ValidateContactUsUrl()
     contactUsPo.ValidateContactUsHeaderEN()

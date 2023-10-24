@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { Heading, Link } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
+import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import en from '../../locales/en'
@@ -7,10 +8,9 @@ import fr from '../../locales/fr'
 import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import logger from '../../lib/logger'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
-import NextLink from 'next/link'
+import { getLogger } from '../../logging/log-util'
 
 export default function ContactLanding(props) {
   const t = props.locale === 'en' ? en : fr
@@ -33,21 +33,23 @@ export default function ContactLanding(props) {
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl font-body">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
+                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
                 id={link.linkId}
-                dataTestId={link.linkId}
-                text={link.linkTitle}
-                href={`/${props.content.pageName}/${link.linkDestination
-                  .split('/')
-                  .pop()}`}
-                component={NextLink}
-              />
-              <p className="text-xl font-body">{link.linkDescription}</p>
+                data-testid={link.linkId}
+                aria-label={link.linkTitle}
+                href={`/${props.locale}/${
+                  props.content.pageName
+                }/${link.linkDestination.split('/').pop()}`}
+              >
+                {link.linkTitle}
+              </Link>
+              <p className="text-xl">{link.linkDescription}</p>
             </li>
           )
         })}
@@ -57,6 +59,10 @@ export default function ContactLanding(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('contact-us')
+  logger.level = 'error'
+
   const content = await getContactUsContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

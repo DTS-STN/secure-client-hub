@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
-import {
-  Heading,
-  ContextualAlert,
-  Date,
-} from '@dts-stn/service-canada-design-system'
+import { Date } from '../components/Date'
+import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
@@ -17,16 +15,15 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
-
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
-      ? /(?=# Terms and conditions of use)/
-      : /(?=# Conditions d’utilisation)/
+      ? /(?=## Terms and conditions of use)/
+      : /(?=## Conditions d’utilisation)/
   )
 
   return (
-    <div className="font-body" data-cy="terms-conditions">
+    <div data-cy="terms-conditions" data-testid="terms-conditionsContent-test">
       <Heading
         id="PrivacyCondition-heading"
         title={props.content.heading}
@@ -44,7 +41,7 @@ export default function PrivacyCondition(props) {
         <Markdown
           options={{
             overrides: {
-              h1: {
+              h2: {
                 props: {
                   className: 'text-3xl font-display font-bold mt-10 mb-3',
                 },
@@ -75,7 +72,7 @@ export default function PrivacyCondition(props) {
         <Markdown
           options={{
             overrides: {
-              h1: {
+              h2: {
                 props: {
                   className: 'text-3xl font-display font-bold mt-10 mb-3',
                 },
@@ -107,13 +104,22 @@ export default function PrivacyCondition(props) {
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
+        id={t.id_dashboard}
       />
-      <Date id="termsConditionsDateModified" date="20230331" />
+      <Date
+        id="termsConditionsDateModified"
+        date={props.content.dateModified}
+        label={t.dateModified}
+      />
     </div>
   )
 }
 
 export async function getServerSideProps({ res, locale }) {
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('privacy-notice-terms-and-conditions')
+  logger.level = 'error'
+
   const content = await getPrivacyConditionContent().catch((error) => {
     logger.error(error)
     //res.statusCode = 500

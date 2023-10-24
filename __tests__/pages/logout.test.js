@@ -26,12 +26,17 @@ describe('logout page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: '',
+      title: 'Loading-Chargement en cours - Canada.ca',
       desc: '',
       author: '',
       keywords: '',
     },
-    data_fr: { title: '', desc: '', author: '', keywords: '' },
+    data_fr: {
+      title: 'Loading-Chargement en cours - Canada.ca',
+      desc: '',
+      author: '',
+      keywords: '',
+    },
   }
 
   beforeEach(() => {
@@ -42,7 +47,9 @@ describe('logout page', () => {
   })
 
   it('should render the page', () => {
-    render(<Logout locale="en" />)
+    render(<Logout locale="en" meta={meta} />)
+    const heading = screen.getByRole('heading')
+    expect(heading).toBeInTheDocument()
     const loading = screen.getAllByText('Loading / Chargement en cours ...')
     expect(loading).toBeInTheDocument
   })

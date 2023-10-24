@@ -1,15 +1,15 @@
 import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { Heading } from '@dts-stn/service-canada-design-system'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
+import Heading from '../components/Heading'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import logger from '../lib/logger'
+import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
@@ -68,7 +68,7 @@ export default function MyDashboard(props) {
             >
               {tasks.map((taskList, index) => {
                 return (
-                  <div className="" key={index} data-cy="Task">
+                  <div key={index} data-cy="Task">
                     <BenefitTasks
                       acronym={acronym(card.title)}
                       taskList={taskList}
@@ -83,12 +83,25 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
+      <Card
+        key="SINonMSCA"
+        programUniqueId="SINonMSCA"
+        locale={props.locale}
+        cardTitle="Social Insurance Number"
+        viewMoreLessCaption="Personal information"
+        acronym="SINOM"
+        refPageAA="SINOM"
+      />
     </div>
   )
 }
 
 export async function getServerSideProps({ req, res, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
+  //The below sets the minimum logging level to error and surpresses everything below that
+  const logger = getLogger('my-dashboard')
+  logger.level = 'error'
 
   const content = await getMyDashboardContent().catch((error) => {
     logger.error(error)
@@ -124,9 +137,12 @@ export async function getServerSideProps({ req, res, locale }) {
     throw error
   })
 
+  if (locale === 'und') {
+    locale = 'en'
+  }
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/mon-tableau-de-bord' : '/my-dashboard'
+    locale === 'en' ? '/fr/mon-tableau-de-bord' : '/en/my-dashboard'
 
   /* Place-holder Meta Data Props */
   const meta = {

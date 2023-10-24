@@ -16,17 +16,20 @@ export async function getPrivacyConditionContent() {
 
   const mappedPrivacyConditions = {
     en: {
+      id: response.data.schPageV1ByPath.item.scId,
+      dateModified: response.data.schPageV1ByPath.item.scDateModifiedOverwrite,
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
               text: level.scTitleEn,
+              id: level.scId,
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameEn,
-      heading: response.data.schPagev1ByPath.item.scTitleEn,
+      pageName: response.data.schPageV1ByPath.item.scPageNameEn,
+      heading: response.data.schPageV1ByPath.item.scTitleEn,
       alert: {
         type: 'info',
         text: alertFragment.scContentEn.markdown,
@@ -34,20 +37,23 @@ export async function getPrivacyConditionContent() {
       content: privacyTermsConditionsFragment.scContentEn.markdown,
     },
     fr: {
+      id: response.data.schPageV1ByPath.item.scId,
+      dateModified: response.data.schPageV1ByPath.item.scDateModifiedOverwrite,
       breadcrumb:
-        response.data.schPagev1ByPath.item.scBreadcrumbParentPages.map(
+        response.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
               text: level.scTitleFr,
+              id: level.scId,
             }
           }
         ),
-      pageName: response.data.schPagev1ByPath.item.scPageNameFr,
-      heading: response.data.schPagev1ByPath.item.scTitleFr,
+      pageName: response.data.schPageV1ByPath.item.scPageNameFr,
+      heading: response.data.schPageV1ByPath.item.scTitleFr,
       alert: {
         type: 'info',
-        text: alertFragment.scContentEn.markdown,
+        text: alertFragment.scContentFr.markdown,
       },
       content: privacyTermsConditionsFragment.scContentFr.markdown,
     },
@@ -56,7 +62,7 @@ export async function getPrivacyConditionContent() {
 }
 
 const findFragmentByScId = (res, id) => {
-  return res.data.schPagev1ByPath.item.scFragments.find(
+  return res.data.schPageV1ByPath.item.scFragments.find(
     (element) => element.scId === id
   )
 }

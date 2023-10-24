@@ -7,7 +7,7 @@ export async function getBetaBannerContent() {
   const resOptOut = await clientQuery(queryOptOut)
   const resDictionary = await clientQuery(queryDictionary)
 
-  const resOptOutContent = resOptOut.data.schContentv1ByPath.item || {}
+  const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 
   const mappedBanner = {
@@ -26,6 +26,7 @@ export async function getBetaBannerContent() {
           resOptOutContent.scFragments[1].scDestinationURLEn
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
+      id: resOptOutContent.scFragments[0].scId,
     },
     fr: {
       bannerBoldText: resOptOutContent.scContentFr.json[0].content[0].value,
@@ -42,6 +43,7 @@ export async function getBetaBannerContent() {
           resOptOutContent.scFragments[1].scDestinationURLEn
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
+      id: resOptOutContent.scFragments[0].scId,
     },
   }
 

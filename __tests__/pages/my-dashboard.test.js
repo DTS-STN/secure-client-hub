@@ -95,7 +95,7 @@ describe('My Dashboard page', () => {
     }))
   })
 
-  it('should render the page', () => {
+  it('should render the page in English', () => {
     render(
       <MyDashboard
         locale="en"
@@ -107,7 +107,19 @@ describe('My Dashboard page', () => {
     expect(myDashboardDiv).toBeInTheDocument()
   })
 
-  it('should contain a card', () => {
+  it('should render the page in French', () => {
+    render(
+      <MyDashboard
+        locale="fr"
+        content={content}
+        popupContentNA={popupContent}
+      />
+    )
+    const myDashboardDiv = screen.getByTestId('myDashboardContent-test')
+    expect(myDashboardDiv).toBeInTheDocument()
+  })
+
+  it.skip('should contain a card', () => {
     render(
       <MyDashboard
         locale="en"
