@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/16</span>
+                <span class='fraction'>8/14</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -245,32 +245,7 @@
 <a name='L180'></a><a href='#L180'>180</a>
 <a name='L181'></a><a href='#L181'>181</a>
 <a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L183'></a><a href='#L183'>183</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -282,7 +257,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -453,12 +427,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
 import Link from 'next/link'
 import en from '../locales/en'
@@ -469,26 +437,16 @@ import { icon } from '../lib/loadIcons'
 import logo from '../public/wmms-blk.svg'
 &nbsp;
 export function Footer(props) {
-  const {
-    error,
-    lang,
-    id,
-    containerClass,
-    contactLink,
-    brandLinks,
-    target,
-    btnLink,
-  } = props
+  const { error, lang, id, contactLink, brandLinks, target, btnLink } = props
 &nbsp;
   const t = lang === 'en' ? en : <span class="branch-1 cbranch-no" title="branch not covered" >fr</span>
-  const container = containerClass || 'ds-container'
 &nbsp;
   return (
     &lt;footer id={id} className="w-full" data-testid="footer"&gt;
       &lt;&gt;
         &lt;div className="bg-blue-primary"&gt;
           &lt;section
-            className={`${container} h-[5.75rem] pb-5 flex flex-col items-start`}
+            className={`sch-container h-[5.75rem] pb-5 flex flex-col items-start`}
           &gt;
             &lt;h2 className="pt-[22px] pb-2 text-white font-body font-bold"&gt;
               {t.mscaFooterHeading}
@@ -511,7 +469,7 @@ export function Footer(props) {
           &lt;div
             className={`'min-h-[86px] ' ${
               error ? <span class="branch-0 cbranch-no" title="branch not covered" >'items-center' </span>: ''
-            } flex justify-between ${container}`}
+            } flex justify-between sch-container`}
           &gt;
             {error ? (
 <span class="branch-0 cbranch-no" title="branch not covered" >              &lt;div&gt;</span>
@@ -520,7 +478,7 @@ export function Footer(props) {
                   href={btnLink}
                   className="sm:hidden float-left cursor-pointer text-sm"
                 &gt;
-                  Top of page / Haut de la page
+                  {t.topOfPage}
                   &lt;FontAwesomeIcon
                     icon={icon['chevron-up']}
                     className="text-sm sm:hidden pl-2"
@@ -560,7 +518,7 @@ export function Footer(props) {
                     })}
                     &lt;li className="sm:hidden float-left cursor-pointer text-sm"&gt;
                       &lt;a id="top_btn" href={btnLink}&gt;
-                        Top of page / Haut de la page
+                        {t.topOfPage}
                         &lt;FontAwesomeIcon
                           icon={icon['chevron-up']}
                           className="text-sm sm:hidden pl-2"
@@ -583,7 +541,7 @@ export function Footer(props) {
                     : 'h-[25px] md:h-[40px] w-[105px] md:w-[164px]'
                 } my-[15px]`}
                 src={logo}
-                alt="Symbol of the Government of Canada"
+                alt={t.footerCanadaCaAltText}
                 width={143}
                 height={34}
               /&gt;
@@ -619,12 +577,6 @@ Footer.propTypes = {
    * Add the path Link to the top of your page for the "to the Top" button in mobile
    */
   btnLink: PropTypes.string.isRequired,
-&nbsp;
-  /**
-   * containerClass: Customized container class name. If pass a existing class name, then 'ds-container' will be
-   * replaced by the passed in class name.
-   **/
-  containerClass: PropTypes.string,
 &nbsp;
   /**
    * If true will display the error page version of the footer component
@@ -664,7 +616,7 @@ Footer.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-04T05:27:19.618Z
+                at 2023-10-25T18:14:31.188Z
             </div>
         <script src="../prettify.js"></script>
         <script>
