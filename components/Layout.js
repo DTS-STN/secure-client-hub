@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { LayoutContainer } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
@@ -143,14 +142,8 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-      <main id="mainContent">
-        {display.fullscreen ? (
-          props.children
-        ) : (
-          <LayoutContainer>
-            {cloneElement(props.children, { openModal, closeModal })}
-          </LayoutContainer>
-        )}
+      <main id="mainContent" className="sch-container grid gap-[30px]">
+        {cloneElement(props.children, { openModal, closeModal })}
       </main>
       <MultiModal
         openModalWithLink={openModalWithLink}
@@ -285,10 +278,6 @@ Layout.propTypes = {
      * Toggle use of DS footer (default false)
      */
     hideFooter: PropTypes.bool,
-    /*
-     * Toggle the LayoutContainer from Design System (default on/true)
-     */
-    fullscreen: PropTypes.bool,
   }),
   breadCrumbItems: PropTypes.array,
 }

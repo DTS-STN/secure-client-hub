@@ -1,5 +1,5 @@
 query {
-  staySignedIn: schContentv1ByPath(
+  staySignedIn: schContentV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/content/stay-signed-in"
   ) {
     item {
@@ -15,7 +15,7 @@ query {
           json
       }
             scFragments{
-          ... on SCHTaskv1Model{
+          ... on SchTaskV1Model{
               scId
               scLinkTextEn
               scLinkTextFr
@@ -23,7 +23,7 @@ query {
       }
     }
   }
-  youHaveBeenSignedOut: schContentv1ByPath(
+  youHaveBeenSignedOut: schContentV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/content/you-have-been-signed-out"
   ) {
     item {
@@ -39,7 +39,7 @@ query {
           json
       }
             scFragments{
-          ... on SCHTaskv1Model{
+          ... on SchTaskV1Model{
               scId
               scLinkTextEn
               scLinkTextFr

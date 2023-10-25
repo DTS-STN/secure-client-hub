@@ -17,11 +17,8 @@ export function Header(props) {
     menuProps,
     breadCrumbItems,
     topnavProps,
-    useParentContainer,
     dataGcAnalyticsCustomClickInstitutionVariable,
   } = props
-
-  const containerClass = useParentContainer ? '' : 'ds-container'
 
   return (
     <div className="font-display" id={id} data-testid="header">
@@ -33,9 +30,7 @@ export function Header(props) {
         displayAlternateLink={topnavProps.displayAlternateLink}
       />
       <header>
-        <div
-          className={`${containerClass} flex flex-col sm:flex-row md:pb-3.5`}
-        >
+        <div className={`sch-container flex flex-col sm:flex-row md:pb-3.5`}>
           <div className="flex flex-row sm:pt-3">
             <div className="pt-1.5">
               <Image
@@ -45,7 +40,11 @@ export function Header(props) {
                     : 'md:max-h-[35px] max-h-[20px]'
                 } md:max-w-[360px] max-w-[206px]`}
                 src={lang === 'en' ? logoFile : logoFileFR}
-                alt="Government of Canada"
+                alt={
+                  lang === 'en'
+                    ? 'Government of Canada'
+                    : 'Governement du Canada'
+                }
                 width={819}
                 height={76}
               />
@@ -86,7 +85,7 @@ export function Header(props) {
           />
         )}
         {breadCrumbItems && (
-          <div className={containerClass}>
+          <div className="sch-container">
             <Breadcrumb items={breadCrumbItems} />
           </div>
         )}
@@ -98,7 +97,6 @@ export function Header(props) {
 Header.defaultProps = {
   lang: 'en',
   id: Math.random(),
-  useParentContainer: false,
   searchProps: {
     onChange: () => {},
     onSubmit: () => {},
@@ -138,11 +136,6 @@ Header.propTypes = {
   linkPath: PropTypes.string,
 
   /**
-   * useParentContainer: bool to choose whether to use the partent container or header's container
-   **/
-  useParentContainer: PropTypes.bool,
-
-  /**
    * Search Props:
    *
    * onChange: can add function for when typing in the search bar
@@ -178,7 +171,6 @@ Header.propTypes = {
       })
     ),
     hasNoMenu: PropTypes.bool,
-    useParentContainer: PropTypes.bool,
   }),
 
   /**

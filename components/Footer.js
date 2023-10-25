@@ -8,26 +8,16 @@ import { icon } from '../lib/loadIcons'
 import logo from '../public/wmms-blk.svg'
 
 export function Footer(props) {
-  const {
-    error,
-    lang,
-    id,
-    containerClass,
-    contactLink,
-    brandLinks,
-    target,
-    btnLink,
-  } = props
+  const { error, lang, id, contactLink, brandLinks, target, btnLink } = props
 
   const t = lang === 'en' ? en : fr
-  const container = containerClass || 'ds-container'
 
   return (
     <footer id={id} className="w-full" data-testid="footer">
       <>
         <div className="bg-blue-primary">
           <section
-            className={`${container} h-[5.75rem] pb-5 flex flex-col items-start`}
+            className={`sch-container h-[5.75rem] pb-5 flex flex-col items-start`}
           >
             <h2 className="pt-[22px] pb-2 text-white font-body font-bold">
               {t.mscaFooterHeading}
@@ -50,7 +40,7 @@ export function Footer(props) {
           <div
             className={`'min-h-[86px] ' ${
               error ? 'items-center' : ''
-            } flex justify-between ${container}`}
+            } flex justify-between sch-container`}
           >
             {error ? (
               <div>
@@ -59,7 +49,7 @@ export function Footer(props) {
                   href={btnLink}
                   className="sm:hidden float-left cursor-pointer text-sm"
                 >
-                  Top of page / Haut de la page
+                  {t.topOfPage}
                   <FontAwesomeIcon
                     icon={icon['chevron-up']}
                     className="text-sm sm:hidden pl-2"
@@ -99,7 +89,7 @@ export function Footer(props) {
                     })}
                     <li className="sm:hidden float-left cursor-pointer text-sm">
                       <a id="top_btn" href={btnLink}>
-                        Top of page / Haut de la page
+                        {t.topOfPage}
                         <FontAwesomeIcon
                           icon={icon['chevron-up']}
                           className="text-sm sm:hidden pl-2"
@@ -122,7 +112,7 @@ export function Footer(props) {
                     : 'h-[25px] md:h-[40px] w-[105px] md:w-[164px]'
                 } my-[15px]`}
                 src={logo}
-                alt="Symbol of the Government of Canada"
+                alt={t.footerCanadaCaAltText}
                 width={143}
                 height={34}
               />
@@ -158,12 +148,6 @@ Footer.propTypes = {
    * Add the path Link to the top of your page for the "to the Top" button in mobile
    */
   btnLink: PropTypes.string.isRequired,
-
-  /**
-   * containerClass: Customized container class name. If pass a existing class name, then 'ds-container' will be
-   * replaced by the passed in class name.
-   **/
-  containerClass: PropTypes.string,
 
   /**
    * If true will display the error page version of the footer component

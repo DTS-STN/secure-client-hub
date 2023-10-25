@@ -7,7 +7,7 @@ export async function getBetaBannerContent() {
   const resOptOut = await clientQuery(queryOptOut)
   const resDictionary = await clientQuery(queryDictionary)
 
-  const resOptOutContent = resOptOut.data.schContentv1ByPath.item || {}
+  const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 
   const mappedBanner = {
@@ -40,7 +40,7 @@ export async function getBetaBannerContent() {
       bannerButtonLink:
         buildLink(
           resOptOutContent.scFragments[1].schURLType,
-          resOptOutContent.scFragments[1].scDestinationURLEn
+          resOptOutContent.scFragments[1].scDestinationURLFr
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
       id: resOptOutContent.scFragments[0].scId,

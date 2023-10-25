@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Date } from '@dts-stn/service-canada-design-system'
+import { Date } from '../components/Date'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
@@ -15,7 +15,6 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
-
   const pageContent = props.content.content
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
@@ -33,7 +32,7 @@ export default function PrivacyCondition(props) {
       <ContextualAlert
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
-        message_heading="Information"
+        message_heading={<h2>Information</h2>}
         message_body={props.content.alert.text}
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
@@ -55,7 +54,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -86,7 +85,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -107,7 +106,11 @@ export default function PrivacyCondition(props) {
         refPageAA={props.aaPrefix}
         id={t.id_dashboard}
       />
-      <Date id="termsConditionsDateModified" date="20230331" />
+      <Date
+        id="termsConditionsDateModified"
+        date={props.content.dateModified}
+        label={t.dateModified}
+      />
     </div>
   )
 }
