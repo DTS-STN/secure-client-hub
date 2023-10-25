@@ -1,5 +1,5 @@
 {
-  schPagev1ByPath(
+  schPageV1ByPath(
     _path: "/content/dam/decd-endc/content-fragments/sch/pages/security-settings"
   ) {
     item {
@@ -9,7 +9,7 @@
       scTitleEn
       scTitleFr
       scBreadcrumbParentPages {
-        ... on SCHPagev1Model {
+        ... on SchPageV1Model {
           scId
           scTitleEn
           scTitleFr
@@ -18,7 +18,7 @@
         }
       }
       scFragments {
-        ... on SCHTaskv1Model {
+        ... on SchTaskV1Model {
           scId
           scDestinationURLEn
           scDestinationURLFr
@@ -26,7 +26,7 @@
           scTitleEn
           scTitleFr
         }
-        ... on SCHContentv1Model {
+        ... on SchContentV1Model {
           scId
           scContentFr {
             json
@@ -35,7 +35,7 @@
             json
           }
           scFragments{
-              ... on SCHTaskv1Model{
+              ... on SchTaskV1Model{
                   scId
                   scLinkTextEn
                   scLinkTextFr

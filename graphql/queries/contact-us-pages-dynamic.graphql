@@ -1,5 +1,5 @@
 {
-    schPagev1List(
+    schPageV1List(
             filter:{
                 scContentType: {
                     _expressions:[{
@@ -41,13 +41,13 @@
       scAudience
       scOwner
       scFragments {
-          ... on SCHListv1Model {
+          ... on SchListV1Model {
               _path
               scId
               scTitleEn
               scTitleFr
               scItems {
-                  ... on SCHContactMethodv1Model {
+                  ... on SchContactMethodV1Model {
                       _path
                       scId
                       scTitleEn
@@ -61,14 +61,14 @@
                       }
                       schDetails 
                           {
-                              ... on SCHListv1Model {
+                              ... on SchListV1Model {
                                   _path
                                   scBackgroundColour
                                   scTitleEn
                                   scTitleFr
                                    scId
                                    scItems {
-                                     ... on SCHAddressv1Model {
+                                     ... on SchAddressV1Model {
                                               _path
                                               scId
                                               scRecipientEn
@@ -86,7 +86,7 @@
                                               scCountryEn
                                               scCountryFr
                                           }
-                                      ... on SCHContentv1Model {
+                                      ... on SchContentV1Model {
                                       _path
                                       scId
                                       scContentEn {
@@ -97,7 +97,7 @@
                                       }
                                       scIconCSS
                                       scFragments {
-                                          ... on SCHTaskv1Model {
+                                          ... on SchTaskV1Model {
                                               scId
                                               scLinkTextEn
                                               scLinkTextFr
@@ -105,7 +105,7 @@
                                               scDestinationURLFr
                                               scButtonType
                                           }
-                                          ... on SCHAddressv1Model {
+                                          ... on SchAddressV1Model {
                                               _path
                                               scId
                                               scRecipientEn
