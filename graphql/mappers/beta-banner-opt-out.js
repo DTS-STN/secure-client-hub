@@ -7,7 +7,7 @@ export async function getBetaBannerContent() {
   const resOptOut = await clientQuery(queryOptOut)
   const resDictionary = await clientQuery(queryDictionary)
 
-  const resOptOutContent = resOptOut.data.schContentv1ByPath.item || {}
+  const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 
   const mappedBanner = {

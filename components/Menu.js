@@ -28,18 +28,26 @@ export function Menu(props) {
     return () => window.removeEventListener('click', handleClick)
   }, [showDropdown])
 
+  useEffect(() => {
+    if (!showDropdown) return
+    function handleEsc(event) {
+      if (event.key === 'Escape') {
+        setShowDropdown(false)
+      }
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [showDropdown])
+
   return (
-    <div className="relative w-full bg-blue-primary">
+    <div className="w-full bg-blue-primary">
       <nav className="sch-container sch-container-menu sm:flex items-center justify-between sm:h-[60px]">
-        <div className="h-[60px] flex sm:h-full items-center">
-          <p
-            id="mainSiteNav"
-            className="text-white font-display font-bold md:text-[24px] text-[19px] sm:p-0 sch-container mb-0 pr-0 sm:ml-4 md:ml-0"
-          >
+        <div className="h-[60px] flex items-center text-white font-display font-bold text-[19px] leading-[21px] md:text-2xl mx-15px md:m-0 ">
+          <span id="mainSiteNav">
             {lang === 'fr'
               ? 'Mon dossier Service Canada'
               : 'My Service Canada Account'}
-          </p>
+          </span>
         </div>
         <div
           className="w-full sm:w-[260px] h-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a"
@@ -54,7 +62,7 @@ export function Menu(props) {
             aria-haspopup="true"
             data-testid="menuButton"
             aria-expanded={showDropdown}
-            className="flex h-[60px] justify-between w-full h-full font-bold font-body items-center sm:py-2px pl-4 text-blue-primary ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:outline-none focus:mb-1"
+            className="flex justify-between w-full h-full font-bold font-body items-center py-0.5 pl-4 text-blue-primary ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:outline-none focus:mb-1"
           >
             <span className="flex items-center">
               <svg

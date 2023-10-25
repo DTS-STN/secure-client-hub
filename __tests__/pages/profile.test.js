@@ -4,6 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Profile from '../../pages/profile'
+import Heading from '../../components/Heading'
 import { getServerSideProps } from '../../pages/profile'
 
 import { useRouter } from 'next/router'
@@ -57,6 +58,10 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
+jest.mock('../../components/Heading')
+// return props.title from Heading mock
+Heading.mockImplementation((props) => props.title)
+
 describe('My Profile page', () => {
   const content = {
     list: [
@@ -69,7 +74,7 @@ describe('My Profile page', () => {
             areaLabel: 'areaLabel',
             link: '/',
             icon: '',
-            betaPopUp: 'betaPopUp',
+            betaPopUp: false,
           },
         ],
       },
@@ -97,6 +102,10 @@ describe('My Profile page', () => {
   it('should render the page in English', () => {
     render(
       <Profile
+        heading={{
+          id: 'my-dashboard-heading',
+          title: 'pageName',
+        }}
         locale="en"
         content={content}
         meta={{}}
@@ -113,6 +122,10 @@ describe('My Profile page', () => {
   it('should render the page in French', () => {
     render(
       <Profile
+        heading={{
+          id: 'my-dashboard-headingFR',
+          title: 'headingFR',
+        }}
         locale="fr"
         content={content}
         meta={{}}

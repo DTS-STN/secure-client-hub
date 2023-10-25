@@ -49,7 +49,7 @@ export function Footer(props) {
                   href={btnLink}
                   className="sm:hidden float-left cursor-pointer text-sm"
                 >
-                  Top of page / Haut de la page
+                  {t.topOfPage}
                   <FontAwesomeIcon
                     icon={icon['chevron-up']}
                     className="text-sm sm:hidden pl-2"
@@ -89,7 +89,7 @@ export function Footer(props) {
                     })}
                     <li className="sm:hidden float-left cursor-pointer text-sm">
                       <a id="top_btn" href={btnLink}>
-                        Top of page / Haut de la page
+                        {t.topOfPage}
                         <FontAwesomeIcon
                           icon={icon['chevron-up']}
                           className="text-sm sm:hidden pl-2"
@@ -112,7 +112,7 @@ export function Footer(props) {
                     : 'h-[25px] md:h-[40px] w-[105px] md:w-[164px]'
                 } my-[15px]`}
                 src={logo}
-                alt="Symbol of the Government of Canada"
+                alt={t.footerCanadaCaAltText}
                 width={143}
                 height={34}
               />
