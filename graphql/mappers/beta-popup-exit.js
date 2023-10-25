@@ -4,7 +4,7 @@ export async function getBetaPopupExitContent() {
   const query = require('../queries/beta-popup-exit.graphql')
   const res = await clientQuery(query)
 
-  const content = res.data.schContentv1ByPath.item || {}
+  const content = res.data.schContentV1ByPath.item || {}
   const fallbackContent = {
     scId: 'beta-popup-exit',
     scHeadingEn: 'Exiting beta version',
