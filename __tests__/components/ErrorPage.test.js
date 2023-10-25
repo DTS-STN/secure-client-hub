@@ -9,6 +9,13 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 
 expect.extend(toHaveNoViolations)
 
+// the code below is to avoid the following error: ... was not wrapped in act(...)"
+jest.mock('next/link', () => {
+  return ({ children }) => {
+    return children
+  }
+})
+
 describe('Error Pages', () => {
   it('has no a11y violations 404', async () => {
     const { container } = render(<ErrorPage lang="en" errType="404" isAuth />)

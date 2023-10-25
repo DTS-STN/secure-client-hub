@@ -40,7 +40,11 @@ export function Header(props) {
                     : 'md:max-h-[35px] max-h-[20px]'
                 } md:max-w-[360px] max-w-[206px]`}
                 src={lang === 'en' ? logoFile : logoFileFR}
-                alt="Government of Canada"
+                alt={
+                  lang === 'en'
+                    ? 'Government of Canada'
+                    : 'Governement du Canada'
+                }
                 width={819}
                 height={76}
               />

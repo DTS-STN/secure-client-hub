@@ -24,7 +24,7 @@ export default function Card(props) {
         className="pb-6 md:pb-8 md:pt-4 px-3 sm:px-8 md:px-15 w-full"
         acronym={props.acronym}
         refPageAA={props.refPageAA}
-        ariaLabel={props.cardTitle}
+        ariaLabel={`${props.cardTitle} - ${props.viewMoreLessCaption}`}
       />
       {!isOpen ? null : (
         <div className="pb-6" data-cy="sectionList">
