@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/_error.js</title>
+    <title>Code coverage report for pages/500.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> _error.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> 500.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
@@ -133,21 +133,13 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,14 +205,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { ErrorPage } from '@dts-stn/service-canada-design-system'
+import { ErrorPage } from '../components/ErrorPage'
 import { getLogger } from '../logging/log-util'
 &nbsp;
-function CustomError(props) {
+function Custom500(props) {
   return (
     &lt;ErrorPage
-      lang={props?.locale}
-      errType={props?.statusCode}
+      lang={props.lang ? props.lang : <span class="branch-1 cbranch-no" title="branch not covered" >props.locale}</span>
+      errType="500"
       isAuth={!props?.isAuth}
       homePageLink={
         props?.locale === 'en' ? <span class="branch-0 cbranch-no" title="branch not covered" >'/en/my-dashboard' </span>: '/fr/mon-tableau-de-bord'
@@ -231,11 +223,9 @@ function CustomError(props) {
 }
 &nbsp;
 /* istanbul ignore next */
-export async function getServerSideProps({ req, res, locale }) {
-  const statusCode = res.statusCode.toString() || '500'
-&nbsp;
+export async function getStaticProps({ locale }) {
   //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger(`${statusCode} error page`)
+  const logger = getLogger(`500 error page`)
   logger.level = 'error'
 &nbsp;
   const bannerContent = await getBetaBannerContent().catch((error) =&gt; {
@@ -248,12 +238,11 @@ export async function getServerSideProps({ req, res, locale }) {
     // res.statusCode = 500
     throw error
   })
-  const langToggleLink =
-    locale === 'en' ? `/fr/${statusCode}` : `/en/${statusCode}`
+  const langToggleLink = locale === 'en' ? `/fr/500` : `/en/500`
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: `${statusCode} - My Service Canada Account`,
+      title: `500 - My Service Canada Account`,
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -262,7 +251,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: `${statusCode} - Mon dossier Service Canada`,
+      title: `500 - Mon dossier Service Canada`,
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -277,14 +266,13 @@ export async function getServerSideProps({ req, res, locale }) {
       langToggleLink,
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
-      statusCode,
       meta,
-      isAuth: process.env.AUTH_DISABLED,
+      isAuth: process.env.AUTH_DISABLED ?? true,
     },
   }
 }
 &nbsp;
-export default CustomError
+export default Custom500
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -292,7 +280,7 @@ export default CustomError
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-12T03:38:15.683Z
+                at 2023-10-25T19:23:07.213Z
             </div>
         <script src="../prettify.js"></script>
         <script>
