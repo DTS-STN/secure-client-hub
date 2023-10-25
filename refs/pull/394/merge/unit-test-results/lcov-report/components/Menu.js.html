@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.94% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/19</span>
+                <span class='fraction'>21/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.83% </span>
+                <span class="strong">67.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/24</span>
+                <span class='fraction'>19/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">76.19% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/15</span>
+                <span class='fraction'>16/21</span>
             </div>
         
             
@@ -260,7 +260,15 @@
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -291,9 +299,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -487,18 +503,26 @@ export function Menu(props) {
     return () =&gt; window.removeEventListener('click', handleClick)
   }, [showDropdown])
 &nbsp;
+  useEffect(() =&gt; {
+    if (!showDropdown) return
+    function <span class="fstat-no" title="function not covered" >handleEsc(</span>event) {
+<span class="cstat-no" title="statement not covered" >      if (event.key === 'Escape') {</span>
+<span class="cstat-no" title="statement not covered" >        setShowDropdown(false)</span>
+      }
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () =&gt; window.removeEventListener('keydown', handleEsc)
+  }, [showDropdown])
+&nbsp;
   return (
-    &lt;div className="relative w-full bg-blue-primary"&gt;
-      &lt;nav className="sm:ds-container sm:flex items-center justify-between sm:h-[60px]"&gt;
-        &lt;div className="h-[60px] flex sm:h-full items-center"&gt;
-          &lt;p
-            id="mainSiteNav"
-            className="text-white font-display font-bold md:text-[24px] text-[19px] sm:p-0 ds-container mb-0 pr-0 sm:ml-4 md:ml-0"
-          &gt;
+    &lt;div className="w-full bg-blue-primary"&gt;
+      &lt;nav className="sch-container sch-container-menu sm:flex items-center justify-between sm:h-[60px]"&gt;
+        &lt;div className="h-[60px] flex items-center text-white font-display font-bold text-[19px] leading-[21px] md:text-2xl mx-15px md:m-0 "&gt;
+          &lt;span id="mainSiteNav"&gt;
             {lang === 'fr'
               ? <span class="branch-0 cbranch-no" title="branch not covered" >'Mon dossier Service Canada'</span>
               : 'My Service Canada Account'}
-          &lt;/p&gt;
+          &lt;/span&gt;
         &lt;/div&gt;
         &lt;div
           className="w-full sm:w-[260px] h-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a"
@@ -513,7 +537,7 @@ export function Menu(props) {
             aria-haspopup="true"
             data-testid="menuButton"
             aria-expanded={showDropdown}
-            className="flex h-[60px] justify-between w-full h-full font-bold font-body items-center sm:py-2px pl-4 text-blue-primary ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:outline-none focus:mb-1"
+            className="flex justify-between w-full h-full font-bold font-body items-center py-0.5 pl-4 text-blue-primary ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:outline-none focus:mb-1"
           &gt;
             &lt;span className="flex items-center"&gt;
               &lt;svg
@@ -661,7 +685,7 @@ Menu.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-02T16:13:32.854Z
+                at 2023-10-25T17:13:40.030Z
             </div>
         <script src="../prettify.js"></script>
         <script>
