@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1698168915991" clover="3.2.0">
-  <project timestamp="1698168915991" name="All files">
-    <metrics statements="462" coveredstatements="243" conditionals="466" coveredconditionals="222" methods="181" coveredmethods="76" elements="1109" coveredelements="541" complexity="0" loc="462" ncloc="462" packages="8" files="47" classes="47"/>
+<coverage generated="1698357951223" clover="3.2.0">
+  <project timestamp="1698357951223" name="All files">
+    <metrics statements="472" coveredstatements="243" conditionals="468" coveredconditionals="222" methods="185" coveredmethods="76" elements="1125" coveredelements="541" complexity="0" loc="472" ncloc="472" packages="8" files="48" classes="48"/>
     <package name="components">
-      <metrics statements="176" coveredstatements="110" conditionals="267" coveredconditionals="142" methods="67" coveredmethods="37"/>
+      <metrics statements="186" coveredstatements="110" conditionals="269" coveredconditionals="142" methods="71" coveredmethods="37"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -67,6 +67,19 @@
         <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="6" count="4" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
+      </file>
+      <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
+        <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
       </file>
       <file name="ErrorPage.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorPage.js">
         <metrics statements="13" coveredstatements="12" conditionals="40" coveredconditionals="34" methods="2" coveredmethods="2"/>
@@ -311,9 +324,9 @@
       </file>
       <file name="_app.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.js">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
       </file>
       <file name="_document.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_document.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
