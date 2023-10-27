@@ -40,7 +40,7 @@ export async function getBetaBannerContent() {
       bannerButtonLink:
         buildLink(
           resOptOutContent.scFragments[1].schURLType,
-          resOptOutContent.scFragments[1].scDestinationURLEn
+          resOptOutContent.scFragments[1].scDestinationURLFr
         ) || '/',
       icon: resOptOutContent.scFragments[0].scIconCSS,
       id: resOptOutContent.scFragments[0].scId,
