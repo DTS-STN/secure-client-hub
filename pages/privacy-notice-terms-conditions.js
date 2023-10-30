@@ -32,7 +32,6 @@ export default function PrivacyCondition(props) {
       <ContextualAlert
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
-        message_heading={<h2>Information</h2>}
         message_body={props.content.alert.text}
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
@@ -54,7 +53,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -85,7 +84,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal bg-pink-200  list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
