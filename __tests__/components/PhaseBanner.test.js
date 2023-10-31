@@ -36,11 +36,10 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
-        bannerLink={'bannerLink'}
-        bannerLinkHref={'bannerLinkHref'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
         popupContent={{
           popupId: 'popup id',
           popupTitle: 'pop up title',
@@ -51,12 +50,12 @@ describe('PhaseBanner', () => {
       ></PhaseBanner>
     )
     const bannerBoldText = screen.getByText('bannerBoldText')
-    const bannerText = screen.getByText('bannerText')
-    const bannerLink = screen.getByText('bannerLink')
+    const bannerSummaryTitle = screen.getByText('bannerSummaryTitle')
+    const bannerSummaryContent = screen.getByText('bannerSummaryContent')
     const bannerButtonText = screen.getByText('bannerButtonText')
     expect(bannerBoldText).toBeInTheDocument()
-    expect(bannerText).toBeInTheDocument()
-    expect(bannerLink).toBeInTheDocument()
+    expect(bannerSummaryTitle).toBeInTheDocument()
+    expect(bannerSummaryContent).toBeInTheDocument()
     expect(bannerButtonText).toBeInTheDocument()
   })
 
@@ -65,11 +64,10 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
-        bannerLink={'bannerLink'}
-        bannerLinkHref={'bannerLinkHref'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
         popupContent={{
           popupId: 'popup id',
           popupTitle: 'pop up title',

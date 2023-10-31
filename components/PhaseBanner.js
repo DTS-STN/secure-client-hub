@@ -1,8 +1,8 @@
 import propTypes from 'prop-types'
 import Button from '../components/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '../lib/loadIcons'
 import React from 'react'
+
+import Markdown from 'markdown-to-jsx'
 
 /**
  * Displays the PhaseBanner on the page
@@ -20,24 +20,42 @@ export default function PhaseBanner(props) {
             <span className="font-bold">{props.bannerBoldText || ''} </span>
             {props.bannerText}
           </p>
-          <a
-            href={props.bannerLinkHref}
-            className="text-xl text-deep-blue-dark hover:text-blue-hover"
-            target={props.bannerButtonExternalLink ? '_blank' : undefined}
-            rel={
-              props.bannerButtonExternalLink ? 'noopener noreferrer' : undefined
-            }
-            data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+          <details
+            key={props.id}
+            id={props.id}
+            className="mb-5px text-gray-darker text-20px font-body"
+            data-testid="learn-more"
           >
-            <span className="mr-2 underline">{props.bannerLink}</span>
-            {props.bannerButtonExternalLink && (
-              <span className="sr-only">{props.bannerButtonExternalText} </span>
-            )}
-            <FontAwesomeIcon
-              width="14"
-              icon={icon[props.icon]}
-            ></FontAwesomeIcon>
-          </a>
+            <summary
+              key={`summary-${props.id}`}
+              className=" text-deep-blue-60d hover:text-blue-hover hover:underline border border-gray-40 rounded px-15px py-5px cursor-pointer select-none outline-none"
+            >
+              {props.bannerSummaryTitle}
+            </summary>
+            <div
+              className="border border-gray-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none"
+              data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+            >
+              <Markdown
+                options={{
+                  overrides: {
+                    p: {
+                      props: {
+                        className: ' mb-3',
+                      },
+                    },
+                    ul: {
+                      props: {
+                        className: ' list-disc ml-2 sm:mx-8 mb-3',
+                      },
+                    },
+                  },
+                }}
+              >
+                {props.bannerSummaryContent}
+              </Markdown>
+            </div>
+          </details>
         </div>
         <Button
           id="bannerButton"
@@ -66,11 +84,11 @@ PhaseBanner.propTypes = {
   /**
    * Phasebanner Link text
    */
-  bannerLink: propTypes.string,
+  bannerSummaryTitle: propTypes.string,
   /**
    * Phasebanner Link href
    */
-  bannerLinkHref: propTypes.string,
+  bannerSummaryContent: propTypes.string,
   /**
    * Phasebanner Button Text
    */
