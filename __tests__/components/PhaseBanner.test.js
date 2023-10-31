@@ -36,11 +36,10 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
-        bannerLink={'bannerLink'}
-        bannerLinkHref={'bannerLinkHref'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
         popupContent={{
           popupId: 'popup id',
           popupTitle: 'pop up title',
@@ -65,11 +64,10 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
-        bannerLink={'bannerLink'}
-        bannerLinkHref={'bannerLinkHref'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
         popupContent={{
           popupId: 'popup id',
           popupTitle: 'pop up title',
