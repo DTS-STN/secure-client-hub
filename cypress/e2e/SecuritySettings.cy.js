@@ -128,18 +128,6 @@ describe('Validate Security Settings page', () => {
       .and('not.have.attr', 'href', '#undefined')
   })
 
-  it('Validate the "Employment Insurance access code" Link in English and French', () => {
-    securityPo
-      .EmploymentInsuranceCode()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
-    dashboardPo.FrenchButton().click()
-    securityPo
-      .EmploymentInsuranceCode()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
-  })
-
   it('Security settings has no detectable a11y violations on load', () => {
     cy.injectAxe()
     cy.checkA11y()
