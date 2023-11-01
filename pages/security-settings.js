@@ -44,7 +44,6 @@ export default function SecuritySettings(props) {
         {props.content.securityQuestions.linkTitle.text}
       </Link>
       <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
-
       <Link
         className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="eiAccessCodeLink"
