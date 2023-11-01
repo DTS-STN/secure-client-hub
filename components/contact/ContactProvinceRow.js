@@ -12,7 +12,10 @@ const ContactProvinceRow = ({ label, items, id }) => {
       <Collapse title={label} id={id} dataTestId={`dataTest`}>
         <div className="grid text-xl grid-cols-2" data-cy="mailContactDetails">
           {items.map((x, i) => (
-            <div className="col-span-2 md:col-span-1 py-3" key={i}>
+            <div
+              className="col-span-2 md:col-span-1 py-3 select-text cursor-default"
+              key={i}
+            >
               <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
                 <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
               </strong>
