@@ -56,7 +56,7 @@ module.exports = {
         },
         'brighter-blue': {
           light: '#DBE5F2',
-          medium: '#269ABC66',
+          medium: '#D9EDF7',
           dark: '#269ABC',
         },
         'blue': {
