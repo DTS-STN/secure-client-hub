@@ -56,8 +56,8 @@ export default function Layout(props) {
         <PhaseBanner
           bannerBoldText={props.bannerContent.bannerBoldText || ''}
           bannerText={props.bannerContent.bannerText || ''}
-          bannerLink={props.bannerContent.bannerLink || ''}
-          bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerSummaryTitle={props.bannerContent.bannerSummaryTitle || ''}
+          bannerSummaryContent={props.bannerContent.bannerSummaryContent || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           id={props.bannerContent.id || ''}
@@ -188,8 +188,8 @@ Layout.defaultProps = {
   bannerContent: {
     bannerBoldText: '',
     bannerText: '',
-    bannerLink: '',
-    bannerLinkHref: '',
+    bannerSummaryTitle: '',
+    bannerSummaryContent: '',
     bannerButtonText: '',
     bannerButtonLink: '',
     icon: '',
@@ -239,11 +239,10 @@ Layout.propTypes = {
   bannerContent: PropTypes.shape({
     bannerBoldText: PropTypes.string.isRequired,
     bannerText: PropTypes.string.isRequired,
-    bannerLink: PropTypes.string.isRequired,
-    bannerLinkHref: PropTypes.string.isRequired,
+    bannerSummaryTitle: PropTypes.string.isRequired,
+    bannerSummaryContent: PropTypes.string.isRequired,
     bannerButtonText: PropTypes.string.isRequired,
     bannerButtonLink: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
   }),
   /*
    * popupContent
