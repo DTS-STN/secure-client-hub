@@ -21,12 +21,12 @@ export default function PhaseBanner(props) {
             <details
               key={props.id}
               id={props.id}
-              className="mb-5px text-gray-darker text-20px font-body  "
+              className="mb-5px text-gray-darker text-20px font-body"
               data-testid="learn-more"
             >
               <summary
                 key={`summary-${props.id}`}
-                className=" text-deep-blue-60d hover:text-blue-hover hover:underline px-0.5 py-5px cursor-pointer select-none outline-none"
+                className=" text-deep-blue-60d hover:text-blue-hover hover:underline focus:text-blue-hover px-0.5 py-5px cursor-pointer select-none outline-none"
               >
                 {props.bannerSummaryTitle}
               </summary>
