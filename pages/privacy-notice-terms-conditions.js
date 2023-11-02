@@ -16,10 +16,11 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
   const pageContent = props.content.content
+
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
-      ? /(?=## Terms and conditions of use)/
-      : /(?=## Conditions d’utilisation)/
+      ? /(?=## Terms and conditions of use|1\. \*\*Your credentials\*\*)/
+      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/
   )
 
   return (
@@ -84,6 +85,30 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
+                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
+                },
+              },
+            },
+          }}
+        >
+          {termsAndConditions[0]}
+        </Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
                     'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
@@ -95,7 +120,7 @@ export default function PrivacyCondition(props) {
             },
           }}
         >
-          {termsAndConditions[0]}
+          {termsAndConditions[1]}
         </Markdown>
       </section>
       <BackToButton
