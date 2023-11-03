@@ -5,7 +5,7 @@ import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 import { getToken } from 'next-auth/jwt'
-import { useRouter } from 'next/router'
+
 export default function Logout(props) {
   //Redirect to ECAS global sign out
   useEffect(() => {
