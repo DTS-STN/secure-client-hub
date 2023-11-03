@@ -1,3 +1,4 @@
+import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Date } from '../components/Date'
 import Heading from '../components/Heading'
@@ -12,10 +13,50 @@ import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import ErrorBoundary from '../components/ErrorBoundary'
+import React from 'react'
+import throttle from 'lodash.throttle'
+import { ErrorPage } from '../components/ErrorPage'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
+
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink="/"
+      />
+    )
+  }
+
   const pageContent = props.content.content
 
   const [privacy, ...termsAndConditions] = pageContent.split(
@@ -25,123 +66,118 @@ export default function PrivacyCondition(props) {
   )
 
   return (
-    <ErrorBoundary>
-      <div
-        data-cy="terms-conditions"
-        data-testid="terms-conditionsContent-test"
-      >
-        <Heading
-          id="PrivacyCondition-heading"
-          title={props.content.heading}
-          className="mb-2"
-        />
-        <ContextualAlert
-          id="PrivacyCondition-alert"
-          type={props.content.alert.type}
-          message_body={props.content.alert.text}
-          alert_icon_alt_text="info icon"
-          alert_icon_id="info-icon"
-        />
-        <section id={t.footerPrivacyAnchor}>
-          <Markdown
-            options={{
-              overrides: {
-                h2: {
-                  props: {
-                    className: 'text-3xl font-display font-bold mt-10 mb-3',
-                  },
-                },
-                p: {
-                  props: {
-                    className: 'mb-3',
-                  },
-                },
-                ol: {
-                  props: {
-                    className:
-                      'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3',
-                  },
-                },
-                a: {
-                  props: {
-                    className: 'underline text-deep-blue-dark cursor-pointer',
-                  },
+    <div data-cy="terms-conditions" data-testid="terms-conditionsContent-test">
+      <Heading
+        id="PrivacyCondition-heading"
+        title={props.content.heading}
+        className="mb-2"
+      />
+      <ContextualAlert
+        id="PrivacyCondition-alert"
+        type={props.content.alert.type}
+        message_body={props.content.alert.text}
+        alert_icon_alt_text="info icon"
+        alert_icon_id="info-icon"
+      />
+      <section id={t.footerPrivacyAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
                 },
               },
-            }}
-          >
-            {privacy}
-          </Markdown>
-        </section>
-        <section id={t.footerTermsAndConditionAnchor}>
-          <Markdown
-            options={{
-              overrides: {
-                h2: {
-                  props: {
-                    className: 'text-3xl font-display font-bold mt-10 mb-3',
-                  },
-                },
-                p: {
-                  props: {
-                    className: 'mb-3',
-                  },
-                },
-                ol: {
-                  props: {
-                    className:
-                      'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
-                  },
+              p: {
+                props: {
+                  className: 'mb-3',
                 },
               },
-            }}
-          >
-            {termsAndConditions[0]}
-          </Markdown>
-          <Markdown
-            options={{
-              overrides: {
-                h2: {
-                  props: {
-                    className: 'text-3xl font-display font-bold mt-10 mb-3',
-                  },
-                },
-                p: {
-                  props: {
-                    className: 'mb-3',
-                  },
-                },
-                ol: {
-                  props: {
-                    className:
-                      'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
-                  },
-                },
-                a: {
-                  props: {
-                    className: 'underline text-deep-blue-dark cursor-pointer',
-                  },
+              ol: {
+                props: {
+                  className:
+                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3',
                 },
               },
-            }}
-          >
-            {termsAndConditions[1]}
-          </Markdown>
-        </section>
-        <BackToButton
-          buttonHref={t.url_dashboard}
-          buttonId="back-to-dashboard-button"
-          buttonLinkText={t.backToDashboard}
-          refPageAA={props.aaPrefix}
-          id={t.id_dashboard}
-        />
-        <Date
-          id="termsConditionsDateModified"
-          date={props.content.dateModified}
-          label={t.dateModified}
-        />
-      </div>
-    </ErrorBoundary>
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
+              },
+            },
+          }}
+        >
+          {privacy}
+        </Markdown>
+      </section>
+      <section id={t.footerTermsAndConditionAnchor}>
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
+                },
+              },
+            },
+          }}
+        >
+          {termsAndConditions[0]}
+        </Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                },
+              },
+              a: {
+                props: {
+                  className: 'underline text-deep-blue-dark cursor-pointer',
+                },
+              },
+            },
+          }}
+        >
+          {termsAndConditions[1]}
+        </Markdown>
+      </section>
+      <BackToButton
+        buttonHref={t.url_dashboard}
+        buttonId="back-to-dashboard-button"
+        buttonLinkText={t.backToDashboard}
+        refPageAA={props.aaPrefix}
+        id={t.id_dashboard}
+      />
+      <Date
+        id="termsConditionsDateModified"
+        date={props.content.dateModified}
+        label={t.dateModified}
+      />
+    </div>
   )
 }
 
