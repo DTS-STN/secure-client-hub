@@ -28,11 +28,6 @@ export async function getSecuritySettingsContent() {
     'security-settings-main-content'
   ).scFragments.find((element) => element.scId === 'security-questions')
 
-  const eiAccessCode = findFragmentByScId(
-    response,
-    'security-settings-main-content'
-  ).scFragments.find((element) => element.scId === 'ei-access-code')
-
   const mappedSecurity = {
     en: {
       breadcrumb:
@@ -65,16 +60,6 @@ export async function getSecuritySettingsContent() {
         },
         subTitle: securityQuestions.scDescriptionEn.json[0].content[0].value,
       },
-      eiAccessCode: {
-        linkTitle: {
-          text: eiAccessCode.scLinkTextEn,
-          link: buildLink(
-            eiAccessCode.schURLType,
-            eiAccessCode.scDestinationURLEn
-          ),
-        },
-        subTitle: eiAccessCode.scDescriptionEn.json[0].content[0].value,
-      },
     },
     fr: {
       breadcrumb:
@@ -101,21 +86,11 @@ export async function getSecuritySettingsContent() {
         linkTitle: {
           text: securityQuestions.scLinkTextFr,
           link: buildLink(
-            eiAccessCode.schURLType,
+            securityQuestions.schURLType,
             securityQuestions.scDestinationURLFr
           ),
         },
         subTitle: securityQuestions.scDescriptionFr.json[0].content[0].value,
-      },
-      eiAccessCode: {
-        linkTitle: {
-          text: eiAccessCode.scLinkTextFr,
-          link: buildLink(
-            eiAccessCode.schURLType,
-            eiAccessCode.scDestinationURLFr
-          ),
-        },
-        subTitle: eiAccessCode.scDescriptionFr.json[0].content[0].value,
       },
     },
   }
