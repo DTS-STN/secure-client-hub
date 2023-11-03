@@ -274,10 +274,28 @@ export async function getServerSideProps({ res, locale }) {
           : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        content?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
