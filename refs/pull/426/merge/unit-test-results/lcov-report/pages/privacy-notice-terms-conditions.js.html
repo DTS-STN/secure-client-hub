@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.62% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/29</span>
+                <span class='fraction'>20/35</span>
             </div>
         
             
@@ -378,7 +378,11 @@
 <a name='L313'></a><a href='#L313'>313</a>
 <a name='L314'></a><a href='#L314'>314</a>
 <a name='L315'></a><a href='#L315'>315</a>
-<a name='L316'></a><a href='#L316'>316</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -568,17 +572,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -589,14 +590,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -648,6 +647,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -883,18 +891,15 @@ export async function getServerSideProps({ res, locale }) {
 &nbsp;
   const content = await getPrivacyConditionContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-    //res.statusCode = 500
-<span class="cstat-no" title="statement not covered" >    throw error</span>
+<span class="cstat-no" title="statement not covered" >    return { err: '500' }</span>
   })
   const bannerContent = await getBetaBannerContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-    // res.statusCode = 500
-<span class="cstat-no" title="statement not covered" >    throw error</span>
+<span class="cstat-no" title="statement not covered" >    return { err: '500' }</span>
   })
   const popupContent = await getBetaPopupExitContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-    // res.statusCode = 500
-<span class="cstat-no" title="statement not covered" >    throw error</span>
+<span class="cstat-no" title="statement not covered" >    return { err: '500' }</span>
   })
 &nbsp;
   /*
@@ -904,15 +909,13 @@ export async function getServerSideProps({ res, locale }) {
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
 <span class="fstat-no" title="function not covered" >    (e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >      logger.error(error)</span>
-      // res.statusCode = 500
-<span class="cstat-no" title="statement not covered" >      throw error</span>
+<span class="cstat-no" title="statement not covered" >      return { err: '500' }</span>
     }
   )
 &nbsp;
   const authModals = await getAuthModalsContent().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >    logger.error(error)</span>
-    // res.statusCode = 500
-<span class="cstat-no" title="statement not covered" >    throw error</span>
+<span class="cstat-no" title="statement not covered" >    return { err: '500' }</span>
   })
 &nbsp;
   /* 
@@ -966,7 +969,12 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : <span class="branch-1 cbranch-no" title="branch not covered" >content.fr,</span>
+      content:
+        content?.err !== undefined
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >content</span>
+          : locale === 'en'
+          ? content.en
+          : <span class="branch-1 cbranch-no" title="branch not covered" >content.fr,</span>
       meta,
       breadCrumbItems,
       bannerContent: locale === 'en' ? bannerContent.en : <span class="branch-1 cbranch-no" title="branch not covered" >bannerContent.fr,</span>
@@ -974,11 +982,15 @@ export async function getServerSideProps({ res, locale }) {
       popupContentNA: locale === 'en' ? popupContentNA.en : <span class="branch-1 cbranch-no" title="branch not covered" >popupContentNA.fr,</span>
       aaPrefix: `ESDC-EDSC:${content.en.heading}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >authModals</span>
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : <span class="branch-1 cbranch-no" title="branch not covered" >authModals.mappedPopupStaySignedIn.fr,</span>
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >authModals</span>
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : <span class="branch-1 cbranch-no" title="branch not covered" >authModals.mappedPopupSignedOut.fr,</span>
     },
@@ -1015,7 +1027,7 @@ PrivacyCondition.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-03T16:00:41.611Z
+                at 2023-11-03T17:31:39.109Z
             </div>
         <script src="../prettify.js"></script>
         <script>
