@@ -36,6 +36,9 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
+        bannerLink={'bannerLink'}
+        bannerLinkHref={'bannerLinkHref'}
+        icon={'bell'}
         bannerSummaryTitle={'bannerSummaryTitle'}
         bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
@@ -51,10 +54,14 @@ describe('PhaseBanner', () => {
     )
     const bannerBoldText = screen.getByText('bannerBoldText')
     const bannerSummaryTitle = screen.getByText('bannerSummaryTitle')
+    const bannerText = screen.getByText('bannerText')
+    const bannerLink = screen.getByText('bannerLink')
     const bannerSummaryContent = screen.getByText('bannerSummaryContent')
     const bannerButtonText = screen.getByText('bannerButtonText')
     expect(bannerBoldText).toBeInTheDocument()
     expect(bannerSummaryTitle).toBeInTheDocument()
+    expect(bannerText).toBeInTheDocument()
+    expect(bannerLink).toBeInTheDocument()
     expect(bannerSummaryContent).toBeInTheDocument()
     expect(bannerButtonText).toBeInTheDocument()
   })
@@ -64,6 +71,9 @@ describe('PhaseBanner', () => {
       <PhaseBanner
         bannerBoldText={'bannerBoldText'}
         bannerText={'bannerText'}
+        bannerLink={'bannerLink'}
+        bannerLinkHref={'bannerLinkHref'}
+        icon={'bell'}
         bannerSummaryTitle={'bannerSummaryTitle'}
         bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
