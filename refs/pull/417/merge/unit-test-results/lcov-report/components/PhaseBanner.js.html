@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -173,7 +173,24 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,8 +237,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -285,9 +319,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import propTypes from 'prop-types'
 import Button from '../components/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '../lib/loadIcons'
 import React from 'react'
+&nbsp;
+import Markdown from 'markdown-to-jsx'
 &nbsp;
 /**
  * Displays the PhaseBanner on the page
@@ -296,44 +330,61 @@ import React from 'react'
 export default function PhaseBanner(props) {
   return (
     &lt;div className="bg-brighter-blue-medium"&gt;
-      &lt;div
-        className="sch-container py-4 md:flex md:justify-between"
-        data-cy="topBanner"
-      &gt;
+      &lt;div className="sch-container py-4 " data-cy="topBanner"&gt;
         &lt;div className="pb-4 md:pb-0" role="alert"&gt;
           &lt;p className="pb-2 md:pb-7 text-xl" data-cy="learnMoreAbtBeta"&gt;
             &lt;span className="font-bold"&gt;{props.bannerBoldText || <span class="branch-1 cbranch-no" title="branch not covered" >''}</span> &lt;/span&gt;
             {props.bannerText}
           &lt;/p&gt;
-          &lt;a
-            href={props.bannerLinkHref}
-            className="text-xl text-deep-blue-dark hover:text-blue-hover"
-            target={props.bannerButtonExternalLink ? <span class="branch-0 cbranch-no" title="branch not covered" >'_blank' </span>: undefined}
-            rel={
-              props.bannerButtonExternalLink ? <span class="branch-0 cbranch-no" title="branch not covered" >'noopener noreferrer' </span>: undefined
-            }
-            data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
-          &gt;
-            &lt;span className="mr-2 underline"&gt;{props.bannerLink}&lt;/span&gt;
-            {props.bannerButtonExternalLink &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;span className="sr-only"&gt;{props.bannerButtonExternalText} &lt;/span&gt;</span>
-            )}
-            &lt;FontAwesomeIcon
-              width="14"
-              icon={icon[props.icon]}
-            &gt;&lt;/FontAwesomeIcon&gt;
-          &lt;/a&gt;
+          &lt;div className="md:flex sm:flex-row md:justify-between"&gt;
+            &lt;details
+              key={props.id}
+              id={props.id}
+              className="mb-5px text-gray-darker text-20px font-body"
+              data-testid="learn-more"
+            &gt;
+              &lt;summary
+                key={`summary-${props.id}`}
+                className=" text-deep-blue-60d hover:text-blue-hover hover:underline focus:underline focus:text-blue-hover px-0.5 py-5px cursor-pointer select-none outline-none"
+              &gt;
+                {props.bannerSummaryTitle}
+              &lt;/summary&gt;
+              &lt;div
+                data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+              &gt;
+                &lt;Markdown
+                  options={{
+                    overrides: {
+                      p: {
+                        props: {
+                          className: 'px-2 mb-1',
+                        },
+                      },
+                      ul: {
+                        props: {
+                          className:
+                            'text-lg md:text-20px list-disc sm:px-2 mx-8 mb-3',
+                        },
+                      },
+                    },
+                  }}
+                &gt;
+                  {props.bannerSummaryContent}
+                &lt;/Markdown&gt;
+              &lt;/div&gt;
+            &lt;/details&gt;
+            &lt;Button
+              id="bannerButton"
+              style="primary"
+              text={props.bannerButtonText}
+              className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+              onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >                e.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >                props.openModal(props.bannerButtonLink, 'betaBannerModal')</span>
+              }}
+            &gt;&lt;/Button&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-        &lt;Button
-          id="bannerButton"
-          style="primary"
-          text={props.bannerButtonText}
-          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto sm:w-auto"
-          onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >            e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >            props.openModal(props.bannerButtonLink, 'betaBannerModal')</span>
-          }}
-        &gt;&lt;/Button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   )
@@ -351,11 +402,11 @@ PhaseBanner.propTypes = {
   /**
    * Phasebanner Link text
    */
-  bannerLink: propTypes.string,
+  bannerSummaryTitle: propTypes.string,
   /**
    * Phasebanner Link href
    */
-  bannerLinkHref: propTypes.string,
+  bannerSummaryContent: propTypes.string,
   /**
    * Phasebanner Button Text
    */
@@ -400,7 +451,7 @@ PhaseBanner.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-10-26T14:40:12.213Z
+                at 2023-11-06T15:41:47.096Z
             </div>
         <script src="../prettify.js"></script>
         <script>
