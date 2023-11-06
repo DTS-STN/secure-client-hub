@@ -29,7 +29,7 @@
       {
         "sectionNameEN": "Personal information",
         "sectionNameFR": "Renseignements personnels",
-        "NumberOfLinks": "4"
+        "NumberOfLinks": "3"
       }
     ],
     "BetaTest": [
@@ -175,12 +175,12 @@
       {
         "sectionNameEN": "Applications",
         "sectionNameFR": "Demandes de prestations",
-        "NumberOfLinks": "4"
+        "NumberOfLinks": "5"
       },
       {
         "sectionNameEN": "Payments",
         "sectionNameFR": "Paiements",
-        "NumberOfLinks": "4"
+        "NumberOfLinks": "3"
       },
       {
         "sectionNameEN": "Taxes",

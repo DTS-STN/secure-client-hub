@@ -41,7 +41,8 @@ export async function getProfileContent() {
           if (
             element.scId === 'ei-profile-list' ||
             element.scId === 'cpp-profile-list' ||
-            element.scId === 'oas-profile-list'
+            element.scId === 'oas-profile-list' ||
+            element.scId === 'sin-profile-list'
           ) {
             return {
               id: element.scId,
@@ -92,7 +93,8 @@ export async function getProfileContent() {
           if (
             element.scId === 'ei-profile-list' ||
             element.scId === 'cpp-profile-list' ||
-            element.scId === 'oas-profile-list'
+            element.scId === 'oas-profile-list' ||
+            element.scId === 'sin-profile-list'
           ) {
             return {
               id: element.scId,
