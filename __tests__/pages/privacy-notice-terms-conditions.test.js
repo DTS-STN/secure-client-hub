@@ -88,7 +88,8 @@ describe('Privacy Notice Terms Conditions page', () => {
       type: 'info',
       text: 'You may wish to print this page for future reference since it contains important information.\n',
     },
-    content: 'testing ## Terms and conditions of use testing',
+    content:
+      'testing ## Terms and conditions of use testing 1. **Your credentials** testing',
   }
   const contentFr = {
     id: 'privacy-notice-terms-conditions',
@@ -108,7 +109,8 @@ describe('Privacy Notice Terms Conditions page', () => {
         '\n' +
         ' ',
     },
-    content: 'testing ## Conditions d’utilisation testing',
+    content:
+      'testing ## Conditions d’utilisation testing 1. **Vos identifiants** testing',
   }
   const popupContent = {}
 
