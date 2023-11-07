@@ -91,8 +91,8 @@ export default NextAuth({
   },
   session: { jwt: true },
   callbacks: {
-    async jwt({ token, account, user }) {
-      return token, account, user
+    async jwt({ token, account }) {
+      return token, account
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -101,9 +101,6 @@ export default NextAuth({
       else if (new URL(url).origin === baseUrl) return url
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
-    },
-    async session({ session, token, user }) {
-      return session, token
     },
   },
   logger: {
