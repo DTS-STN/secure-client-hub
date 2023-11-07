@@ -1,3 +1,4 @@
+import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Date } from '../components/Date'
 import Heading from '../components/Heading'
@@ -12,14 +13,56 @@ import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
+import React from 'react'
+import throttle from 'lodash.throttle'
+import { ErrorPage } from '../components/ErrorPage'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 15000, { trailing: false }),
+    [onClickEvent]
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent])
+
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink="/"
+      />
+    )
+  }
+
   const pageContent = props.content.content
+
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
-      ? /(?=## Terms and conditions of use)/
-      : /(?=## Conditions d’utilisation)/
+      ? /(?=## Terms and conditions of use|1\. \*\*Your credentials\*\*)/
+      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/
   )
 
   return (
@@ -32,7 +75,6 @@ export default function PrivacyCondition(props) {
       <ContextualAlert
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
-        message_heading="Information"
         message_body={props.content.alert.text}
         alert_icon_alt_text="info icon"
         alert_icon_id="info-icon"
@@ -54,7 +96,7 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -85,7 +127,31 @@ export default function PrivacyCondition(props) {
               ol: {
                 props: {
                   className:
-                    'list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
+                },
+              },
+            },
+          }}
+        >
+          {termsAndConditions[0]}
+        </Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-3',
+                },
+              },
+              ol: {
+                props: {
+                  className:
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
                 },
               },
               a: {
@@ -96,7 +162,7 @@ export default function PrivacyCondition(props) {
             },
           }}
         >
-          {termsAndConditions[0]}
+          {termsAndConditions[1]}
         </Markdown>
       </section>
       <BackToButton
@@ -122,18 +188,15 @@ export async function getServerSideProps({ res, locale }) {
 
   const content = await getPrivacyConditionContent().catch((error) => {
     logger.error(error)
-    //res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /*
@@ -143,15 +206,13 @@ export async function getServerSideProps({ res, locale }) {
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      // res.statusCode = 500
-      throw error
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /* 
@@ -205,19 +266,46 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.fr,
+      content:
+        content?.err !== undefined
+          ? content
+          : locale === 'en'
+          ? content.en
+          : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        content?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },

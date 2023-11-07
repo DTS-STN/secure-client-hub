@@ -44,17 +44,6 @@ export default function SecuritySettings(props) {
         {props.content.securityQuestions.linkTitle.text}
       </Link>
       <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
-
-      <Link
-        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
-        id="eiAccessCodeLink"
-        data-testid="eiAccessCodeLink"
-        aria-label={props.content.eiAccessCode.linkTitle.text}
-        href={props.content.eiAccessCode.linkTitle.link}
-      >
-        {props.content.eiAccessCode.linkTitle.text}
-      </Link>
-      <p className="pb-7 text-xl">{props.content.eiAccessCode.subTitle}</p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
