@@ -5,7 +5,7 @@ function Header() {
 }
 
 function ValidateTermsAndConditionsUrl() {
-  cy.url().should('contains', '/privacy-notice-terms-conditions')
+  cy.url().should('include', '/privacy-notice-terms-conditions')
 }
 
 function ValidateTermsConditionsHeaderEN() {
