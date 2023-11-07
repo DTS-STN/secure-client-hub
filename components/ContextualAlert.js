@@ -87,8 +87,7 @@ ContextualAlert.propTypes = {
   /**
    * heading text
    */
-  message_heading: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-    .isRequired,
+  message_heading: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * body text
    */

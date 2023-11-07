@@ -23,6 +23,17 @@
           scLinkTextAssistiveEn
           scLinkTextAssistiveFr      
         }
+        ... on SchContentV1Model {
+          scId
+          scHeadingEn
+          scHeadingFr
+          scContentEn {  
+            markdown
+          }
+          scContentFr {
+            markdown 
+          }
+        }
       }
     }
   }

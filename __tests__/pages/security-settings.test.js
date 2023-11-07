@@ -96,11 +96,6 @@ describe('Security Settings page', () => {
       linkTitle: { link: '', title: '' },
       subTitle: 'Change your security questions and answers.',
     },
-    eiAccessCode: {
-      linkTitle: { link: '', title: '' },
-      subTitle:
-        'This secure code is needed to submit your reports and access information about your claim.',
-    },
   }
   const popupContent = {}
 
@@ -155,9 +150,7 @@ describe('Security Settings page', () => {
         langToggleLink={''}
       />
     )
-    const eiAccessCodeLink = screen.getByTestId('eiAccessCodeLink')
     const securityQuestionsLink = screen.getByTestId('securityQuestionsLink')
-    expect(eiAccessCodeLink).toBeInTheDocument()
     expect(securityQuestionsLink).toBeInTheDocument()
   })
 
