@@ -81,6 +81,8 @@ Index.getLayout = function PageLayout(page) {
 }
 
 export async function getServerSideProps({ locale, req }) {
+  // Temporary check to handle redirect since the default Next-Auth sign in page redirects you to the index page
+  // This checks to see if there is a valid session and redirects to the dashboard if one exists
   const session = await getSession({ req })
   const token = await getToken({ req })
 
