@@ -96,6 +96,9 @@ export default NextAuth({
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
     },
+    async session({ session, token, user }) {
+      return session, token
+    },
   },
   logger: {
     error(code, metadata) {
