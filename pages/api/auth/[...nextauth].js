@@ -85,8 +85,8 @@ export default NextAuth({
   },
   session: { jwt: true },
   callbacks: {
-    async jwt({ token, account }) {
-      return token, account
+    async jwt({ token, account, user }) {
+      return token, account, user
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
