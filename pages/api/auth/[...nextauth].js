@@ -80,7 +80,8 @@ export default NextAuth({
     },
   ],
   theme: {
-    colorScheme: 'dark',
+    colorScheme: 'light',
+    logo: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg',
   },
   session: { jwt: true },
   callbacks: {
