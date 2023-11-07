@@ -9,6 +9,7 @@ import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-te
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
