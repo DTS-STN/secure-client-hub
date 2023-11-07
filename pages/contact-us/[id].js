@@ -12,6 +12,7 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import { getLogger } from '../../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
@@ -70,6 +71,8 @@ export default function ContactUsPage(props) {
 }
 
 export async function getServerSideProps({ res, locale, params }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger(params.id)
   logger.level = 'error'

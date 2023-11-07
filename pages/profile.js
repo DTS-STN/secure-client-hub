@@ -9,6 +9,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
@@ -71,6 +72,8 @@ export default function Profile(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('profile')
   logger.level = 'error'

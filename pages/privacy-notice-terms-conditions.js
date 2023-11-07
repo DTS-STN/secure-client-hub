@@ -182,6 +182,8 @@ export default function PrivacyCondition(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('privacy-notice-terms-and-conditions')
   logger.level = 'error'

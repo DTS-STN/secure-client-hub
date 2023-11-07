@@ -10,6 +10,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -63,6 +64,8 @@ export default function SecuritySettings(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('security-settings')
   logger.level = 'error'
