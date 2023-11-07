@@ -12,7 +12,7 @@ import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popu
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import { getLogger } from '../../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
