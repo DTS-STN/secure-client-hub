@@ -1,6 +1,8 @@
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+import { getSession } from 'next-auth/react'
+import { getToken } from 'next-auth/jwt'
 
 export default function Index(props) {
   return (
@@ -78,7 +80,18 @@ Index.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps({ locale, req }) {
+  const session = await getSession({ req })
+  const token = await getToken({ req })
+
+  if (session !== null && token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/my-dashboard',
+      },
+    }
+  }
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
