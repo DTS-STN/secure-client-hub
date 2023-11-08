@@ -103,15 +103,6 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-      <Card
-        key="SINonMSCA"
-        programUniqueId="SINonMSCA"
-        locale={props.locale}
-        cardTitle="Social Insurance Number"
-        viewMoreLessCaption="Personal information"
-        acronym="SINOM"
-        refPageAA="SINOM"
-      />
     </div>
   )
 }
