@@ -6,7 +6,6 @@ export async function getBetaBannerContent() {
   const queryDictionary = require('../queries/dictionary.graphql')
   const resOptOut = await clientQuery(queryOptOut)
   const resDictionary = await clientQuery(queryDictionary)
-
   const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 
@@ -14,36 +13,43 @@ export async function getBetaBannerContent() {
     en: {
       bannerBoldText: resOptOutContent.scContentEn.json[0].content[0].value,
       bannerText: resOptOutContent.scContentEn.json[0].content[1].value,
-      bannerLink: resOptOutContent.scFragments[0].scLinkTextEn,
-      bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLEn,
-      bannerButtonText: resOptOutContent.scFragments[1].scLinkTextEn,
+      bannerLink: resOptOutContent.scFragments[2].scLinkTextEn,
+      bannerLinkHref: resOptOutContent.scFragments[2].scDestinationURLEn,
+      bannerButtonText: resOptOutContent.scFragments[0].scLinkTextEn,
       bannerButtonExternalText: resDictionaryContent.find(
         (entry) => entry.scId === 'opens-in-a-new-tab'
       ).scTermEn,
       bannerButtonLink:
         buildLink(
-          resOptOutContent.scFragments[1].schURLType,
-          resOptOutContent.scFragments[1].scDestinationURLEn
+          resOptOutContent.scFragments[0].schURLType,
+          resOptOutContent.scFragments[0].scDestinationURLEn
         ) || '/',
-      icon: resOptOutContent.scFragments[0].scIconCSS,
-      id: resOptOutContent.scFragments[0].scId,
+      id: resOptOutContent.scFragments[1].scId,
+      feedbackId: resOptOutContent.scFragments[1].scId,
+      bannerSummaryTitle: resOptOutContent.scFragments[1].scHeadingEn,
+      bannerSummaryContent:
+        resOptOutContent.scFragments[1].scContentEn.markdown,
+      icon: resOptOutContent.scFragments[2].scIconCSS,
     },
     fr: {
       bannerBoldText: resOptOutContent.scContentFr.json[0].content[0].value,
       bannerText: resOptOutContent.scContentFr.json[0].content[1].value,
-      bannerLink: resOptOutContent.scFragments[0].scLinkTextFr,
-      bannerLinkHref: resOptOutContent.scFragments[0].scDestinationURLFr,
-      bannerButtonText: resOptOutContent.scFragments[1].scLinkTextFr,
+      bannerLink: resOptOutContent.scFragments[2].scLinkTextFr,
+      bannerLinkHref: resOptOutContent.scFragments[2].scDestinationURLFr,
+      bannerButtonText: resOptOutContent.scFragments[0].scLinkTextFr,
       bannerButtonExternalText: resDictionaryContent.find(
         (entry) => entry.scId === 'opens-in-a-new-tab'
       ).scTermFr,
       bannerButtonLink:
         buildLink(
-          resOptOutContent.scFragments[1].schURLType,
-          resOptOutContent.scFragments[1].scDestinationURLFr
+          resOptOutContent.scFragments[0].schURLType,
+          resOptOutContent.scFragments[0].scDestinationURLFr
         ) || '/',
-      icon: resOptOutContent.scFragments[0].scIconCSS,
-      id: resOptOutContent.scFragments[0].scId,
+      id: resOptOutContent.scFragments[1].scId,
+      bannerSummaryTitle: resOptOutContent.scFragments[1].scHeadingFr,
+      bannerSummaryContent:
+        resOptOutContent.scFragments[1].scContentFr.markdown,
+      icon: resOptOutContent.scFragments[2].scIconCSS,
     },
   }
 
