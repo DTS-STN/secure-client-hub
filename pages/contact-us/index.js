@@ -8,6 +8,7 @@ import fr from '../../locales/fr'
 import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { getLogger } from '../../logging/log-util'
@@ -59,6 +60,8 @@ export default function ContactLanding(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('contact-us')
   logger.level = 'error'
