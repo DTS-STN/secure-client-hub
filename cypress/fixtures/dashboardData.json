@@ -88,7 +88,7 @@
       {
         "sectionNameEN": "Payments",
         "sectionNameFR": "Paiements",
-        "NumberOfLinks": "4"
+        "NumberOfLinks": "3"
       },
       {
         "sectionNameEN": "Taxes",
@@ -175,12 +175,12 @@
       {
         "sectionNameEN": "Applications",
         "sectionNameFR": "Demandes de prestations",
-        "NumberOfLinks": "5"
+        "NumberOfLinks": "6"
       },
       {
         "sectionNameEN": "Payments",
         "sectionNameFR": "Paiements",
-        "NumberOfLinks": "3"
+        "NumberOfLinks": "2"
       },
       {
         "sectionNameEN": "Taxes",
