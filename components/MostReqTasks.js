@@ -4,6 +4,10 @@ import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
 
 export default function MostReqTasks(props) {
+  const newTabTaskExceptions = [
+    'https://www.uat.pca-cal.ca/en/Home',
+    'https://www.uat.pca-cal.ca/fr/Accueil',
+  ]
   return (
     <div className="h-full">
       <h3
@@ -19,6 +23,9 @@ export default function MostReqTasks(props) {
               <Link
                 href={task.link}
                 passHref
+                target={
+                  newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
+                }
                 onClick={(e) => {
                   if (task.betaPopUp) {
                     e.preventDefault()

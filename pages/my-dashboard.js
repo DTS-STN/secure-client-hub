@@ -57,7 +57,11 @@ export default function MyDashboard(props) {
     )
   }
   return (
-    <div id="myDashboardContent" data-testid="myDashboardContent-test">
+    <div
+      className="pb-2"
+      id="myDashboardContent"
+      data-testid="myDashboardContent-test"
+    >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
       {props.content.cards.map((card) => {
