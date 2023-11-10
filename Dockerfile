@@ -49,7 +49,6 @@ COPY --from=build --chown=${user}:${group} /build/next.config.js ./
 COPY --from=build --chown=${user}:${group} /build/package*.json ./
 COPY --from=build --chown=${user}:${group} /build/.next ./.next
 COPY --from=build --chown=${user}:${group} /build/public ./public
-COPY --from=build --chown=${user}:${group} /build/tracing.js ./
 COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
 
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force

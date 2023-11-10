@@ -79,13 +79,11 @@ export async function getServerSideProps({ res, locale, params }) {
 
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /*
@@ -95,15 +93,13 @@ export async function getServerSideProps({ res, locale, params }) {
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      // res.statusCode = 500
-      throw error
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /* 
@@ -111,9 +107,8 @@ export async function getServerSideProps({ res, locale, params }) {
    * Comment "getBetaPopupExitContent()" block of code above.
   
     const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
+       logger.error(error)
+    return { err: '500' }
     })
   */
 
@@ -131,8 +126,7 @@ export async function getServerSideProps({ res, locale, params }) {
 
   const pageContent = await getContactUsPage(params.id).catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   //Redirect to 404 page if user navigates to non-existent page
@@ -185,19 +179,46 @@ export async function getServerSideProps({ res, locale, params }) {
     props: {
       locale,
       langToggleLink,
+      pageContent:
+        pageContent?.err !== undefined
+          ? pageContent
+          : locale === 'en'
+          ? pageContent.en
+          : pageContent.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      pageContent: locale === 'en' ? pageContent.en : pageContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en?.heading || pageContent.en?.title}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        pageContent?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${pageContent.en?.heading || pageContent.en?.title}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },
