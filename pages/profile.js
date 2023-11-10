@@ -77,18 +77,15 @@ export async function getServerSideProps({ res, locale }) {
 
   const content = await getProfileContent().catch((error) => {
     logger.error(error)
-    //res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /*
@@ -98,15 +95,13 @@ export async function getServerSideProps({ res, locale }) {
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      // res.statusCode = 500
-      throw error
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /* istanbul ignore next */
@@ -149,19 +144,46 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.fr,
+      content:
+        content?.err !== undefined
+          ? content
+          : locale === 'en'
+          ? content.en
+          : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.pageName}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        content?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },
