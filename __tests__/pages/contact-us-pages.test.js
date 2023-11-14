@@ -11,6 +11,17 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
+// mocks useRouter to be able to use component' router.asPath
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return true
+  },
+  AuthIsValid: () => {
+    return true
+  },
+  Redirect: jest.fn(),
+}))
+
 jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
   getBetaBannerContent: () => {
     return new Promise(function (resolve, reject) {
@@ -18,6 +29,14 @@ jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
         en: {},
         fr: {},
       })
+    })
+  },
+}))
+
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
     })
   },
 }))

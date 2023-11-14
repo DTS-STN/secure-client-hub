@@ -10,6 +10,7 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 
@@ -63,42 +64,35 @@ export default function SecuritySettings(props) {
 }
 
 export async function getServerSideProps({ res, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('security-settings')
   logger.level = 'error'
 
   const content = await getSecuritySettingsContent().catch((error) => {
     logger.error(error)
-    //res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
-  /*
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-   */
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      // res.statusCode = 500
-      throw error
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /* 
@@ -106,9 +100,8 @@ export async function getServerSideProps({ res, locale }) {
    * Comment "getBetaPopupExitContent()" block of code above.
   
     const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
+    logger.error(error)
+    return { err: '500' }
     })
   */
 
@@ -153,19 +146,46 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.fr,
+      content:
+        content?.err !== undefined
+          ? content
+          : locale === 'en'
+          ? content.en
+          : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        content?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },

@@ -14,11 +14,30 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
+// mocks useRouter to be able to use component' router.asPath
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return true
+  },
+  AuthIsValid: () => {
+    return true
+  },
+  Redirect: jest.fn(),
+}))
+
 // mocks profile mapper
 jest.mock('../../graphql/mappers/profile', () => ({
   getProfileContent: () => {
     return new Promise(function (resolve, reject) {
       resolve({ en: {}, fr: {} })
+    })
+  },
+}))
+
+jest.mock('../../lib/auth', () => ({
+  AuthIsDisabled: () => {
+    return new Promise(function (resolve, reject) {
+      resolve(true)
     })
   },
 }))
