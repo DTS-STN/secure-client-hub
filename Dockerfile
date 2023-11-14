@@ -1,4 +1,4 @@
-FROM node:18-alpine3.18 AS base
+FROM node:20-alpine3.18 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
@@ -7,6 +7,8 @@ COPY . .
 FROM base AS build
 
 # Build envs
+ARG LOGGING_LEVEL
+ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 ARG AUTH_ECAS_BASE_URL
@@ -23,7 +25,7 @@ WORKDIR /build
 COPY --from=base /base ./
 RUN npm run build
 
-FROM node:18-alpine3.18 AS production
+FROM node:20-alpine3.18 AS production
 ENV NODE_ENV=production
 
 ARG user=nodeuser
@@ -54,6 +56,8 @@ COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-g
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
 # Runtime envs -- will default to build args if no env values are specified at docker run
+ARG LOGGING_LEVEL
+ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 ARG MSCA_BASE_URL
