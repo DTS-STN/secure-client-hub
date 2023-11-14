@@ -99,6 +99,9 @@ module.exports = {
   images: {
     domains: ['www.canada.ca'],
   },
+  experimental: {
+    instrumentationHook: true,
+  },
   async headers() {
     return [
       {
