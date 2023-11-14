@@ -22,6 +22,11 @@ extraEnv:
 extraEnv:
   - name: OTEL_ENVIRONMENT
     value: {{ .Environment.Name }}
+  - name: OTEL_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: secure-client-hub
+          key: OTEL_API_KEY
   {{ if (eq .Environment.Name "prod") }}
   - name: OTEL_METRICS_ENDPOINT
     value: https://dynatrace.prod-dp.admin.dts-stn.com/e/676a0299-9802-4933-99d4-481318a557db/api/v2/otlp/v1/metrics
