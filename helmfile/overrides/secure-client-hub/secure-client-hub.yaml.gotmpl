@@ -94,6 +94,6 @@ persistence:
 secrets:
   nameSuffix: secure-client-hub
   labels:
-    app.kubernetes.io/name: service-canada-client-hub
+      app.kubernetes.io/name: service-canada-client-hub
   data:
     OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
