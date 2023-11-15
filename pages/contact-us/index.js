@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
@@ -8,6 +8,7 @@ import fr from '../../locales/fr'
 import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { getLogger } from '../../logging/log-util'
@@ -39,13 +40,16 @@ export default function ContactLanding(props) {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
+                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
                 id={link.linkId}
-                dataTestId={link.linkId}
-                text={link.linkTitle}
+                data-testid={link.linkId}
+                aria-label={link.linkTitle}
                 href={`/${props.locale}/${
                   props.content.pageName
                 }/${link.linkDestination.split('/').pop()}`}
-              />
+              >
+                {link.linkTitle}
+              </Link>
               <p className="text-xl">{link.linkDescription}</p>
             </li>
           )
@@ -55,25 +59,24 @@ export default function ContactLanding(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ req, locale }) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('contact-us')
   logger.level = 'error'
 
   const content = await getContactUsContent().catch((error) => {
     logger.error(error)
-    //res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const bannerContent = await getBetaBannerContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
   const popupContent = await getBetaPopupExitContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /*
@@ -83,15 +86,13 @@ export async function getServerSideProps({ res, locale }) {
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
-      // res.statusCode = 500
-      throw error
+      return { err: '500' }
     }
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    // res.statusCode = 500
-    throw error
+    return { err: '500' }
   })
 
   /* 
@@ -99,9 +100,8 @@ export async function getServerSideProps({ res, locale }) {
    * Comment "getBetaPopupExitContent()" block of code above.
   
     const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
+    logger.error(error)
+    return { err: '500' }
     })
   */
 
@@ -146,19 +146,46 @@ export async function getServerSideProps({ res, locale }) {
     props: {
       locale,
       langToggleLink,
-      content: locale === 'en' ? content.en : content.fr,
+      content:
+        content?.err !== undefined
+          ? content
+          : locale === 'en'
+          ? content.en
+          : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+          ? bannerContent.en
+          : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+          ? popupContent.en
+          : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+          ? popupContentNA.en
+          : popupContentNA.fr,
+      aaPrefix:
+        content?.err !== undefined
+          ? ''
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
-        locale === 'en'
+        authModals?.err !== undefined
+          ? authModals
+          : locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },

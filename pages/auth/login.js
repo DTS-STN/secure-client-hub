@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import { AuthIsDisabled } from '../../lib/auth'
-import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
+import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 
 export default function Login(props) {

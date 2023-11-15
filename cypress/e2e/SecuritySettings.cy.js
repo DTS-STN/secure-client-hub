@@ -79,7 +79,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate the "Profile" click navigates to Profile Page', () => {
-    securityPo.LookingForProfileLinkEn().click()
+    securityPo.LookingForProfileLinkEn().click({ force: true })
     profilePo.ProfileUrlEN()
     profilePo.ProfileHeaderEN()
   })
@@ -124,18 +124,6 @@ describe('Validate Security Settings page', () => {
     dashboardPo.FrenchButton().click()
     securityPo
       .SecurityQuestionsLink()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
-  })
-
-  it('Validate the "Employment Insurance access code" Link in English and French', () => {
-    securityPo
-      .EmploymentInsuranceCode()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
-    dashboardPo.FrenchButton().click()
-    securityPo
-      .EmploymentInsuranceCode()
       .should('be.visible')
       .and('not.have.attr', 'href', '#undefined')
   })

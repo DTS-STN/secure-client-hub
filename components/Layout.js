@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { LayoutContainer } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
@@ -59,6 +58,8 @@ export default function Layout(props) {
           bannerText={props.bannerContent.bannerText || ''}
           bannerLink={props.bannerContent.bannerLink || ''}
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerSummaryTitle={props.bannerContent.bannerSummaryTitle || ''}
+          bannerSummaryContent={props.bannerContent.bannerSummaryContent || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           id={props.bannerContent.id || ''}
@@ -143,14 +144,8 @@ export default function Layout(props) {
           onSubmit: function noRefCheck() {},
         }}
       />
-      <main id="mainContent">
-        {display.fullscreen ? (
-          props.children
-        ) : (
-          <LayoutContainer>
-            {cloneElement(props.children, { openModal, closeModal })}
-          </LayoutContainer>
-        )}
+      <main id="mainContent" className="sch-container grid gap-[30px]">
+        {cloneElement(props.children, { openModal, closeModal })}
       </main>
       <MultiModal
         openModalWithLink={openModalWithLink}
@@ -195,8 +190,12 @@ Layout.defaultProps = {
   bannerContent: {
     bannerBoldText: '',
     bannerText: '',
+
     bannerLink: '',
     bannerLinkHref: '',
+
+    bannerSummaryTitle: '',
+    bannerSummaryContent: '',
     bannerButtonText: '',
     bannerButtonLink: '',
     icon: '',
@@ -246,11 +245,14 @@ Layout.propTypes = {
   bannerContent: PropTypes.shape({
     bannerBoldText: PropTypes.string.isRequired,
     bannerText: PropTypes.string.isRequired,
+
     bannerLink: PropTypes.string.isRequired,
     bannerLinkHref: PropTypes.string.isRequired,
+
+    bannerSummaryTitle: PropTypes.string.isRequired,
+    bannerSummaryContent: PropTypes.string.isRequired,
     bannerButtonText: PropTypes.string.isRequired,
     bannerButtonLink: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
   }),
   /*
    * popupContent
@@ -285,10 +287,6 @@ Layout.propTypes = {
      * Toggle use of DS footer (default false)
      */
     hideFooter: PropTypes.bool,
-    /*
-     * Toggle the LayoutContainer from Design System (default on/true)
-     */
-    fullscreen: PropTypes.bool,
   }),
   breadCrumbItems: PropTypes.array,
 }

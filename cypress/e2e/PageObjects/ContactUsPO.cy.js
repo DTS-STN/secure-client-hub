@@ -30,7 +30,7 @@ function ValidateContactUsLinksNumber() {
 }
 
 function EmploymentInsuranceLink() {
-  return cy.get('[data-cy="ei-contact-us"]')
+  return cy.get('[data-testid="ei-contact-us"]')
 }
 
 module.exports = {

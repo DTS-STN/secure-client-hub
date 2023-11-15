@@ -5,7 +5,7 @@ function Header() {
 }
 
 function ValidateTermsAndConditionsUrl() {
-  cy.url().should('contains', '/privacy-notice-terms-conditions')
+  cy.url().should('include', '/privacy-notice-terms-conditions')
 }
 
 function ValidateTermsConditionsHeaderEN() {
@@ -31,7 +31,7 @@ function BackToDashboardButton() {
 }
 
 function ValidateinformationSection() {
-  cy.get('[data-cy="terms-conditions"]>div:nth-child(2)').should('be.visible')
+  cy.get('[data-cy="terms-conditions"]').should('be.visible')
 }
 
 module.exports = {

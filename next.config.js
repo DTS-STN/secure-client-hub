@@ -1,12 +1,3 @@
-//formatting TC Date
-const builddate = process.env.BUILD_DATE
-  ? process.env.BUILD_DATE.substring(0, 4) +
-    '-' +
-    process.env.BUILD_DATE.substring(4, 6) +
-    '-' +
-    process.env.BUILD_DATE.substring(6, 8)
-  : 'DATE-NA'
-
 const REWRITES = [
   {
     source: '/contactez-nous',
@@ -80,7 +71,6 @@ const securityHeaders = [
 
 module.exports = {
   env: {
-    NEXT_PUBLIC_BUILD_DATE: builddate,
     LOGGING_LEVEL: process.env.LOGGING_LEVEL,
   },
   reactStrictMode: true,
@@ -108,6 +98,9 @@ module.exports = {
   images: {
     domains: ['www.canada.ca'],
   },
+  experimental: {
+    instrumentationHook: true,
+  },
   async headers() {
     return [
       {
@@ -119,57 +112,5 @@ module.exports = {
   //Redirect French URLs
   async rewrites() {
     return REWRITES
-  },
-  async redirects() {
-    return [
-      {
-        source: '/en',
-        destination: '/',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/fr',
-        destination: '/',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/my-dashboard',
-        destination: '/en/my-dashboard',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/privacy-notice-terms-conditions',
-        destination: '/en/privacy-notice-terms-conditions',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/profile',
-        destination: '/en/profile',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/security-settings',
-        destination: '/en/security-settings',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/contact-us',
-        destination: '/en/contact-us',
-        locale: false,
-        permanent: false,
-      },
-      {
-        source: '/und/contact-us/:path*',
-        destination: '/en/contact-us/:path*',
-        locale: false,
-        permanent: false,
-      },
-    ]
   },
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
-import { LoadingSpinner } from '@dts-stn/service-canada-design-system'
+import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'

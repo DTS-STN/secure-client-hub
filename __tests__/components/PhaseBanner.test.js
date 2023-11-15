@@ -38,19 +38,31 @@ describe('PhaseBanner', () => {
         bannerText={'bannerText'}
         bannerLink={'bannerLink'}
         bannerLinkHref={'bannerLinkHref'}
+        icon={'bell'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
-        popupContent={popupContent}
+        popupContent={{
+          popupId: 'popup id',
+          popupTitle: 'pop up title',
+          popupDescription: 'pop up desc',
+          popupPrimaryBtn: { id: 'Test Primary Id', text: 'Test Primary Text' },
+          popupSecondaryBtn: { id: 'Test secont Id', text: 'Test second Text' },
+        }}
       ></PhaseBanner>
     )
     const bannerBoldText = screen.getByText('bannerBoldText')
+    const bannerSummaryTitle = screen.getByText('bannerSummaryTitle')
     const bannerText = screen.getByText('bannerText')
     const bannerLink = screen.getByText('bannerLink')
+    const bannerSummaryContent = screen.getByText('bannerSummaryContent')
     const bannerButtonText = screen.getByText('bannerButtonText')
     expect(bannerBoldText).toBeInTheDocument()
+    expect(bannerSummaryTitle).toBeInTheDocument()
     expect(bannerText).toBeInTheDocument()
     expect(bannerLink).toBeInTheDocument()
+    expect(bannerSummaryContent).toBeInTheDocument()
     expect(bannerButtonText).toBeInTheDocument()
   })
 
@@ -61,10 +73,18 @@ describe('PhaseBanner', () => {
         bannerText={'bannerText'}
         bannerLink={'bannerLink'}
         bannerLinkHref={'bannerLinkHref'}
+        icon={'bell'}
+        bannerSummaryTitle={'bannerSummaryTitle'}
+        bannerSummaryContent={'bannerSummaryContent'}
         bannerButtonText={'bannerButtonText'}
         bannerButtonLink={'bannerButtonLink'}
-        icon={'bell'}
-        popupContent={popupContent}
+        popupContent={{
+          popupId: 'popup id',
+          popupTitle: 'pop up title',
+          popupDescription: 'pop up desc',
+          popupPrimaryBtn: { id: 'Test Primary Id', text: 'Test Primary Text' },
+          popupSecondaryBtn: { id: 'Test secont Id', text: 'Test second Text' },
+        }}
       ></PhaseBanner>
     )
     const results = await axe(container)
