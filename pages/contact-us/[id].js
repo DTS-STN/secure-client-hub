@@ -70,7 +70,7 @@ export default function ContactUsPage(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale, params }) {
+export async function getServerSideProps({ req, locale, params }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that
