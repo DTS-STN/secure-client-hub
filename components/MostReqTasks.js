@@ -5,8 +5,8 @@ import { icon } from '../lib/loadIcons'
 
 export default function MostReqTasks(props) {
   const newTabTaskExceptions = [
-    'https://www.uat.pca-cal.ca/en/Home',
-    'https://www.uat.pca-cal.ca/fr/Accueil',
+    'https://protege-secure.pca-cal.ca/en/Account/Authorize',
+    'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
   return (
     <div className="h-full">
@@ -25,6 +25,9 @@ export default function MostReqTasks(props) {
                 passHref
                 target={
                   newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
+                }
+                rel={
+                  props.newTabTaskExceptions ? 'noopener noreferrer' : undefined
                 }
                 onClick={(e) => {
                   if (task.betaPopUp) {

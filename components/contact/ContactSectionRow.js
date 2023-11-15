@@ -1,11 +1,19 @@
-import Button from '../../components/Button'
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
-import { useRouter } from 'next/router'
 
 function ContactSectionRow(props) {
+  const newTabTaskExceptions = [
+    'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
+    'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
+    'https://eservices.canada.ca/en/service/',
+    'https://eservices.canada.ca/fr/service/',
+    'https://ep-be.alpha.service.canada.ca/en',
+    'https://ep-be.alpha.service.canada.ca/fr',
+    'https://protege-secure.pca-cal.ca/en/Account/Authorize',
+    'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
+  ]
   const {
     label,
     detail,
@@ -16,11 +24,6 @@ function ContactSectionRow(props) {
     buttonURL,
     buttonId,
   } = props
-  const router = useRouter()
-  function routeToPage(e) {
-    e.preventDefault()
-    router.push(props.buttonURL)
-  }
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
@@ -37,14 +40,28 @@ function ContactSectionRow(props) {
       >
         {props.items.map((detail, index) => {
           return button ? (
-            <Button
+            <a
               key={index}
-              text={detail.content}
-              style={'primary'}
-              className={'font-display'}
-              id={buttonId}
-              onClick={routeToPage}
-            />
+              id={'test-card-button-' + buttonId}
+              data-cy="contact-us-button"
+              href={detail.link}
+              className="font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
+              target={
+                newTabTaskExceptions.includes(detail.link) ? '_blank' : '_self'
+              }
+              rel={
+                props.newTabTaskExceptions ? 'noopener noreferrer' : undefined
+              }
+              data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+            >
+              {detail.content}
+
+              <FontAwesomeIcon
+                className="ml-2"
+                width="14"
+                icon={icon['arrow-up-right-from-square']}
+              ></FontAwesomeIcon>
+            </a>
           ) : (
             <div
               key={index}
