@@ -91,9 +91,9 @@ persistence:
         path: /mnt/example
     storageClass: dtsstorageclass
     size: 2Gi
-secrets:
-  nameSuffix: secure-client-hub
-  labels:
+secrets: 
+  secure-client-hub:
+    labels: 
       app.kubernetes.io/name: service-canada-client-hub
-  data:
-    OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
+    data:
+      OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
