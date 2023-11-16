@@ -53,7 +53,7 @@ export default function DecisionReviews(props) {
       />
     )
   }
-
+  console.log(props.content.content[0])
   return (
     <div
       data-cy="decision-reviews"
@@ -189,7 +189,7 @@ export async function getServerSideProps({ req, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Demande de revison - Mon dossier Service Canada',
+      title: 'Demande de revision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

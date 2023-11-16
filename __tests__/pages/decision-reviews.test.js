@@ -84,7 +84,22 @@ describe('Decision Reviews page', () => {
     ],
     pageName: 'decision-reviews',
     heading: 'Decision Reviews',
-    content: 'testing ## Decision Reviews testing testing',
+    content: [
+      {
+        content: 'testing ## Decision Reviews testing testing',
+        button: {
+          id: 'test-id',
+          text: 'test-text',
+        },
+      },
+      {
+        content: 'testing ## Decision Reviews testing testing',
+        button: {
+          id: 'test-id',
+          text: 'test-text',
+        },
+      },
+    ],
   }
   const contentFr = {
     id: 'demande-revision',
@@ -97,7 +112,22 @@ describe('Decision Reviews page', () => {
     ],
     pageName: 'demande-revision',
     heading: 'Demande Revision',
-    content: 'testing ## Demand Revision testing testing',
+    content: [
+      {
+        content: 'testing ## Demande Revision testing testing',
+        button: {
+          id: 'test-id',
+          text: 'test-text',
+        },
+      },
+      {
+        content: 'testing ## Demande Revision testing testing',
+        button: {
+          id: 'test-id',
+          text: 'test-text',
+        },
+      },
+    ],
   }
 
   beforeEach(() => {
@@ -155,7 +185,7 @@ describe('Decision Reviews page', () => {
         locale: 'en',
         meta: {
           data_en: {
-            title: 'Decision Reviews - My Service Canada Account',
+            title: 'Request Review Decison - My Service Canada Account',
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
@@ -164,7 +194,7 @@ describe('Decision Reviews page', () => {
             accessRights: '1',
           },
           data_fr: {
-            title: 'Demande Revisions - Mon dossier Service Canada',
+            title: 'Demande de revision - Mon dossier Service Canada',
             desc: 'Français',
             author: 'Service Canada',
             keywords: '',
