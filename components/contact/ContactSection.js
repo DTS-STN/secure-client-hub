@@ -10,7 +10,7 @@ export default function ContactSection({ title, intro, id, details }) {
       id={id}
       data-testid="contactSection-test"
     >
-      <h2 className="py-2 text-32px md:pt-6 md:text-4xl font-display font-bold">
+      <h2 className="py-2 text-32px md:pt-6 md:text-4xl font-display font-bold text-gray-darker">
         {title}
       </h2>
       <div
