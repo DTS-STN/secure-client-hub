@@ -20,6 +20,8 @@ extraEnv:
           key: example-secret-password         
 */}}
 extraEnv:
+  - name: LOGGING_LEVEL
+    value: {{ env "LOGGING_LEVEL" }}
   - name: OTEL_ENVIRONMENT
     value: {{ .Environment.Name }}
   - name: OTEL_API_KEY
