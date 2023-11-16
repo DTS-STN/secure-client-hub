@@ -21,7 +21,7 @@ extraEnv:
 */}}
 extraEnv:
   - name: LOGGING_LEVEL
-    value: {{ env "LOGGING_LEVEL" }}
+    value: {{ env "LOGGING_LEVEL" | default "error" }}
 deployment: 
   labels: 
     branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
