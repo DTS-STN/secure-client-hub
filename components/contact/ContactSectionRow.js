@@ -24,7 +24,7 @@ function ContactSectionRow(props) {
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
-        className={`md:col-span-4 font-bold text-2xl md:pl-3 ${
+        className={`md:col-span-4 font-bold text-2xl text-gray-darker md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
