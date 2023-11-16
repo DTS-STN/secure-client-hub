@@ -34,7 +34,9 @@ export default function ContactLanding(props) {
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl text-gray-darker">
+        {props.content.subHeading}
+      </p>
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
@@ -50,7 +52,7 @@ export default function ContactLanding(props) {
               >
                 {link.linkTitle}
               </Link>
-              <p className="text-xl">{link.linkDescription}</p>
+              <p className="text-xl text-gray-darker">{link.linkDescription}</p>
             </li>
           )
         })}
@@ -59,7 +61,7 @@ export default function ContactLanding(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ req, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that

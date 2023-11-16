@@ -10,7 +10,7 @@ export default function PageLink(props) {
       <div className="pt-2 md:pt-4 my-8 border-t border-gray-light ">
         <h2
           data-cy="looking-for"
-          className="font-display font-bold text-32px md:text-36px pb-2"
+          className="font-display font-bold text-gray-darker text-32px md:text-36px pb-2"
         >
           {props.lookingForText}
         </h2>

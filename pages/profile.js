@@ -38,7 +38,7 @@ export default function Profile(props) {
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
-      <p className="text-lg mt-2">{props.content.heading}</p>
+      <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
@@ -71,7 +71,7 @@ export default function Profile(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ req, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that

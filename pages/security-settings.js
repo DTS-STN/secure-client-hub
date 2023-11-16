@@ -34,7 +34,9 @@ export default function SecuritySettings(props) {
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl text-gray-darker">
+        {props.content.subHeading}
+      </p>
       <Link
         className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="securityQuestionsLink"
@@ -44,7 +46,9 @@ export default function SecuritySettings(props) {
       >
         {props.content.securityQuestions.linkTitle.text}
       </Link>
-      <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
+      <p className="mb-8 text-xl text-gray-darker">
+        {props.content.securityQuestions.subTitle}
+      </p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
@@ -63,7 +67,7 @@ export default function SecuritySettings(props) {
   )
 }
 
-export async function getServerSideProps({ res, locale }) {
+export async function getServerSideProps({ req, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that
