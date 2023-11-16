@@ -27,7 +27,9 @@ export default function MostReqTasks(props) {
                   newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
                 }
                 rel={
-                  props.newTabTaskExceptions ? 'noopener noreferrer' : undefined
+                  newTabTaskExceptions.includes(task.link)
+                    ? 'noopener noreferrer'
+                    : undefined
                 }
                 onClick={(e) => {
                   if (task.betaPopUp) {

@@ -50,7 +50,9 @@ function ContactSectionRow(props) {
                 newTabTaskExceptions.includes(detail.link) ? '_blank' : '_self'
               }
               rel={
-                props.newTabTaskExceptions ? 'noopener noreferrer' : undefined
+                newTabTaskExceptions.includes(detail.link)
+                  ? 'noopener noreferrer'
+                  : undefined
               }
               data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
             >

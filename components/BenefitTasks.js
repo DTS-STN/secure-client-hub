@@ -33,7 +33,9 @@ export default function BenefitTasks(props) {
                   newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
                 }
                 rel={
-                  props.newTabTaskExceptions ? 'noopener noreferrer' : undefined
+                  newTabTaskExceptions.includes(task.link)
+                    ? 'noopener noreferrer'
+                    : undefined
                 }
                 onClick={(e) => {
                   //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
