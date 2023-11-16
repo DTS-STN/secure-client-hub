@@ -86,18 +86,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl text-gray-darker font-display font-bold mt-10 mb-3',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3',
+                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
               a: {
@@ -117,18 +118,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
             },
@@ -141,18 +143,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
               a: {
