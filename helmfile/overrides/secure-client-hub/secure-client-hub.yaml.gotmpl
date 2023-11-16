@@ -19,6 +19,9 @@ extraEnv:
           name: web-example-secret
           key: example-secret-password         
 */}}
+extraEnv:
+  - name: LOGGING_LEVEL
+    value: {{ env "LOGGING_LEVEL" }}
 deployment: 
   labels: 
     branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
