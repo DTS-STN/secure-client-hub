@@ -95,5 +95,5 @@ secrets:
   secure-client-hub:
     labels: 
       app.kubernetes.io/name: service-canada-client-hub
-    data:
+    stringData:
       OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
