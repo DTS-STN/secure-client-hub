@@ -1,8 +1,8 @@
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
-import { getSession } from 'next-auth/react'
-import { getToken } from 'next-auth/jwt'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
 export default function Index(props) {
   return (
@@ -80,13 +80,12 @@ Index.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ locale, req }) {
+export async function getServerSideProps({ locale, req, res }) {
   // Temporary check to handle redirect since the default Next-Auth sign in page redirects you to the index page
   // This checks to see if there is a valid session and redirects to the dashboard if one exists
-  const session = await getSession({ req })
-  const token = await getToken({ req })
+  const session = await getServerSession(req, res, authOptions)
 
-  if (session !== null && token) {
+  if (session) {
     return {
       redirect: {
         permanent: false,

@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { NextAuthOptions } from 'next-auth'
 
 import { getLogger } from '../../../logging/log-util'
 
@@ -7,12 +8,10 @@ import { getLogger } from '../../../logging/log-util'
 const logger = getLogger('next-auth')
 logger.level = 'warn'
 
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
-export default NextAuth({
-  // https://next-auth.js.org/configuration/providers/oauth
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
+      type: 'credentials',
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: 'Credentials',
       // The credentials is used to generate a suitable form on the sign in page.
@@ -34,8 +33,8 @@ export default NextAuth({
         //Find user based on credentials used to login
         const user = listOfUsers.find(
           (user) =>
-            user.username === credentials.username &&
-            user.password === credentials.password
+            user.username === credentials?.username &&
+            user.password === credentials?.password
         )
 
         // If no error and we have user data, return it
@@ -73,7 +72,7 @@ export default NextAuth({
         },
       },
       jwks: {
-        keys: [JSON.parse(process.env.AUTH_PRIVATE)],
+        keys: [JSON.parse(process.env.AUTH_PRIVATE ?? '')],
       },
       userinfo: process.env.AUTH_ECAS_USERINFO,
       idToken: true,
@@ -89,10 +88,12 @@ export default NextAuth({
     colorScheme: 'light',
     logo: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg',
   },
-  session: { jwt: true },
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
     async jwt({ token, account }) {
-      return token, account
+      return { ...token, ...account }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -115,4 +116,5 @@ export default NextAuth({
   // pages: {
   //   signIn: '/auth/login/',
   // },
-})
+}
+export default NextAuth(authOptions)
