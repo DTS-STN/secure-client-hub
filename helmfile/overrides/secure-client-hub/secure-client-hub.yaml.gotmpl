@@ -21,7 +21,7 @@ extraEnv:
 */}}
 extraEnv:
   - name: LOGGING_LEVEL
-    value: {{ env "LOGGING_LEVEL" }}
+    value: {{ env "LOGGING_LEVEL" | default "error" }}
   - name: OTEL_ENVIRONMENT
     value: {{ .Environment.Name }}
   - name: OTEL_API_KEY
