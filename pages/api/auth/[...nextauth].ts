@@ -72,7 +72,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       jwks: {
-        keys: [JSON.parse(process.env.AUTH_PRIVATE)],
+        keys: [JSON.parse(process.env.AUTH_PRIVATE ?? '{}')],
       },
       userinfo: process.env.AUTH_ECAS_USERINFO,
       idToken: true,
