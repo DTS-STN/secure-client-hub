@@ -27,7 +27,7 @@ extraEnv:
   - name: OTEL_API_KEY
     valueFrom:
       secretKeyRef:
-        name: secure-client-hub
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
         key: OTEL_API_KEY
   {{ if (eq .Environment.Name "prod") }}
   - name: OTEL_METRICS_ENDPOINT
