@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700159792548" clover="3.2.0">
-  <project timestamp="1700159792548" name="All files">
-    <metrics statements="486" coveredstatements="256" conditionals="587" coveredconditionals="269" methods="188" coveredmethods="79" elements="1261" coveredelements="604" complexity="0" loc="486" ncloc="486" packages="8" files="48" classes="48"/>
+<coverage generated="1700257635024" clover="3.2.0">
+  <project timestamp="1700257635024" name="All files">
+    <metrics statements="486" coveredstatements="256" conditionals="597" coveredconditionals="273" methods="188" coveredmethods="79" elements="1271" coveredelements="608" complexity="0" loc="486" ncloc="486" packages="8" files="48" classes="48"/>
     <package name="components">
-      <metrics statements="187" coveredstatements="110" conditionals="279" coveredconditionals="143" methods="71" coveredmethods="37"/>
+      <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="145" methods="71" coveredmethods="37"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="9" type="stmt"/>
@@ -82,7 +82,7 @@
         <line num="37" count="0" type="stmt"/>
       </file>
       <file name="ErrorPage.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorPage.js">
-        <metrics statements="13" coveredstatements="12" conditionals="40" coveredconditionals="34" methods="2" coveredmethods="2"/>
+        <metrics statements="13" coveredstatements="12" conditionals="42" coveredconditionals="36" methods="2" coveredmethods="2"/>
         <line num="8" count="7" type="stmt"/>
         <line num="9" count="7" type="stmt"/>
         <line num="10" count="7" type="cond" truecount="3" falsecount="1"/>
@@ -94,8 +94,8 @@
         <line num="34" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="39" count="7" type="stmt"/>
         <line num="42" count="7" type="stmt"/>
-        <line num="108" count="5" type="stmt"/>
-        <line num="114" count="5" type="stmt"/>
+        <line num="110" count="5" type="stmt"/>
+        <line num="116" count="5" type="stmt"/>
       </file>
       <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -312,13 +312,13 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="155" coveredstatements="100" conditionals="176" coveredconditionals="96" methods="60" coveredmethods="26"/>
+      <metrics statements="155" coveredstatements="100" conditionals="184" coveredconditionals="98" methods="60" coveredmethods="26"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
-        <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
       </file>
       <file name="500.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/500.js">
-        <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
       </file>
       <file name="_app.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.js">
@@ -340,7 +340,7 @@
         <line num="104" count="1" type="stmt"/>
       </file>
       <file name="my-dashboard.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/my-dashboard.js">
-        <metrics statements="38" coveredstatements="25" conditionals="45" coveredconditionals="24" methods="13" coveredmethods="6"/>
+        <metrics statements="38" coveredstatements="25" conditionals="47" coveredconditionals="24" methods="13" coveredmethods="6"/>
         <line num="26" count="3" type="stmt"/>
         <line num="27" count="3" type="stmt"/>
         <line num="28" count="3" type="stmt"/>
@@ -351,37 +351,37 @@
         <line num="41" count="3" type="cond" truecount="5" falsecount="0"/>
         <line num="46" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="59" count="3" type="stmt"/>
-        <line num="68" count="3" type="stmt"/>
-        <line num="69" count="3" type="stmt"/>
-        <line num="70" count="3" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="115" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="118" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="121" count="1" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="3" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="119" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
         <line num="125" count="1" type="stmt"/>
         <line num="126" count="0" type="stmt"/>
         <line num="127" count="0" type="stmt"/>
         <line num="129" count="1" type="stmt"/>
         <line num="130" count="0" type="stmt"/>
         <line num="131" count="0" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="141" count="1" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="146" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
         <line num="147" count="0" type="stmt"/>
-        <line num="154" count="1" type="stmt"/>
-        <line num="175" count="1" type="stmt"/>
-        <line num="224" count="1" type="stmt"/>
+        <line num="150" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="151" count="0" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="179" count="1" type="stmt"/>
+        <line num="228" count="1" type="stmt"/>
       </file>
       <file name="privacy-notice-terms-conditions.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/privacy-notice-terms-conditions.js">
-        <metrics statements="38" coveredstatements="25" conditionals="49" coveredconditionals="28" methods="13" coveredmethods="5"/>
+        <metrics statements="38" coveredstatements="25" conditionals="51" coveredconditionals="28" methods="13" coveredmethods="5"/>
         <line num="22" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="25" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
@@ -393,33 +393,33 @@
         <line num="40" count="2" type="cond" truecount="5" falsecount="0"/>
         <line num="45" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="61" count="2" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="189" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="192" count="1" type="stmt"/>
-        <line num="193" count="1" type="stmt"/>
-        <line num="195" count="1" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="197" count="0" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="193" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="196" count="1" type="stmt"/>
+        <line num="197" count="1" type="stmt"/>
         <line num="199" count="1" type="stmt"/>
         <line num="200" count="0" type="stmt"/>
         <line num="201" count="0" type="stmt"/>
         <line num="203" count="1" type="stmt"/>
         <line num="204" count="0" type="stmt"/>
         <line num="205" count="0" type="stmt"/>
-        <line num="212" count="1" type="stmt"/>
-        <line num="214" count="0" type="stmt"/>
-        <line num="215" count="0" type="stmt"/>
-        <line num="219" count="1" type="stmt"/>
-        <line num="220" count="0" type="stmt"/>
-        <line num="221" count="0" type="stmt"/>
-        <line num="242" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="244" count="0" type="stmt"/>
-        <line num="247" count="0" type="stmt"/>
-        <line num="250" count="1" type="stmt"/>
-        <line num="271" count="1" type="stmt"/>
-        <line num="321" count="1" type="stmt"/>
+        <line num="207" count="1" type="stmt"/>
+        <line num="208" count="0" type="stmt"/>
+        <line num="209" count="0" type="stmt"/>
+        <line num="216" count="1" type="stmt"/>
+        <line num="218" count="0" type="stmt"/>
+        <line num="219" count="0" type="stmt"/>
+        <line num="223" count="1" type="stmt"/>
+        <line num="224" count="0" type="stmt"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="246" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="251" count="0" type="stmt"/>
+        <line num="254" count="1" type="stmt"/>
+        <line num="275" count="1" type="stmt"/>
+        <line num="325" count="1" type="stmt"/>
       </file>
       <file name="profile.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/profile.js">
         <metrics statements="34" coveredstatements="22" conditionals="36" coveredconditionals="19" methods="14" coveredmethods="6"/>
