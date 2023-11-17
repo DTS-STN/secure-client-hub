@@ -12,7 +12,9 @@ function Custom404(props) {
       homePageLink={
         props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
       }
-      accountPageLink="/"
+      accountPageLink={
+        props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
+      }
     />
   )
 }
