@@ -94,7 +94,7 @@ persistence:
     storageClass: dtsstorageclass
     size: 2Gi
 secrets: 
-  secure-client-hub:
+  secure-client-hub-{{ requiredEnv "BRANCH" | lower }}:
     labels: 
       app.kubernetes.io/name: service-canada-client-hub
     stringData:
