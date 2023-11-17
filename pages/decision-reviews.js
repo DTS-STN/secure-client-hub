@@ -71,12 +71,13 @@ export default function DecisionReviews(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-4xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-10',
+                  className: 'mb-10 text-gray-darker',
                 },
               },
             },
@@ -101,12 +102,13 @@ export default function DecisionReviews(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-4xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-10',
+                  className: 'mb-10 text-gray-darker',
                 },
               },
             },
@@ -167,7 +169,7 @@ export async function getServerSideProps({ req, locale }) {
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/demande-revision' : '/en/request-review-decision'
+    locale === 'en' ? '/fr/demande-revision' : '/en/decision-reviews'
   console.log(content)
   const breadCrumbItems =
     locale === 'en'
