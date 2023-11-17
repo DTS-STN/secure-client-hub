@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { NextAuthOptions } from 'next-auth'
+import { users } from '../../../lib/users'
 
 import { getLogger } from '../../../logging/log-util'
 
@@ -22,23 +23,17 @@ export const authOptions: NextAuthOptions = {
         username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
         password: { label: 'Password', type: 'password' },
       },
+      // @ts-expect-error
       async authorize(credentials) {
-        const res = await fetch(
-          'https://jsonendpoint.com/my-unique/endpoint/scch'
-        )
-
-        //Array of user objects
-        const listOfUsers = await res.json()
-
         //Find user based on credentials used to login
-        const user = listOfUsers.find(
+        const user = users.find(
           (user) =>
             user.username === credentials?.username &&
             user.password === credentials?.password
         )
 
         // If no error and we have user data, return it
-        if (res.ok && user) {
+        if (user) {
           return user
         }
         // Return null if user data could not be retrieved
