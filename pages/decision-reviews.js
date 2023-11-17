@@ -53,7 +53,6 @@ export default function DecisionReviews(props) {
       />
     )
   }
-  console.log(props.content.content[0])
   return (
     <div
       data-cy="decision-reviews"
@@ -170,7 +169,6 @@ export async function getServerSideProps({ req, locale }) {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/demande-revision' : '/en/decision-reviews'
-  console.log(content)
   const breadCrumbItems =
     locale === 'en'
       ? content.en.breadcrumb?.map(({ link, text }) => {
