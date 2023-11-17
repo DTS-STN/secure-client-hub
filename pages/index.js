@@ -83,16 +83,16 @@ Index.getLayout = function PageLayout(page) {
 export async function getServerSideProps({ locale, req, res }) {
   // Temporary check to handle redirect since the default Next-Auth sign in page redirects you to the index page
   // This checks to see if there is a valid session and redirects to the dashboard if one exists
-  // const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
 
-  // if (session) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: '/my-dashboard',
-  //     },
-  //   }
-  // }
+  if (session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/my-dashboard',
+      },
+    }
+  }
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
