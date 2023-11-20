@@ -52,7 +52,11 @@ export default function MyDashboard(props) {
         homePageLink={
           props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
         }
-        accountPageLink="/"
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
       />
     )
   }
