@@ -12,6 +12,8 @@ export default function BenefitTasks(props) {
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=en-CA',
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=fr-CA',
     'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/107e.html',
+    'https://ep-be.alpha.service.canada.ca/en',
+    'https://ep-be.alpha.service.canada.ca/fr',
   ]
 
   return (
