@@ -22,6 +22,24 @@ extraEnv:
 extraEnv:
   - name: LOGGING_LEVEL
     value: {{ env "LOGGING_LEVEL" | default "error" }}
+  - name: OTEL_ENVIRONMENT
+    value: {{ .Environment.Name }}
+  - name: OTEL_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: OTEL_API_KEY
+  {{ if (eq .Environment.Name "prod") }}
+  - name: OTEL_METRICS_ENDPOINT
+    value: https://dynatrace.prod-dp.admin.dts-stn.com/e/676a0299-9802-4933-99d4-481318a557db/api/v2/otlp/v1/metrics
+  - name: OTEL_TRACES_ENDPOINT
+    value: https://dynatrace.prod-dp.admin.dts-stn.com/e/676a0299-9802-4933-99d4-481318a557db/api/v2/otlp/v1/traces
+    {{ else }}
+  - name: OTEL_METRICS_ENDPOINT
+    value: https://dynatrace.dev-dp.admin.dts-stn.com/e/21a07aef-852b-4d9b-aa87-ee5f8b79f8c9/api/v2/otlp/v1/metrics
+  - name: OTEL_TRACES_ENDPOINT
+    value: https://dynatrace.dev-dp.admin.dts-stn.com/e/21a07aef-852b-4d9b-aa87-ee5f8b79f8c9/api/v2/otlp/v1/traces
+  {{ end }}
 deployment: 
   labels: 
     branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
@@ -75,3 +93,9 @@ persistence:
         path: /mnt/example
     storageClass: dtsstorageclass
     size: 2Gi
+secrets: 
+  secure-client-hub-{{ requiredEnv "BRANCH" | lower }}:
+    labels: 
+      app.kubernetes.io/name: service-canada-client-hub
+    stringData:
+      OTEL_API_KEY: {{ env "OTEL_API_KEY" }}

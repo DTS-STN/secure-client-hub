@@ -53,7 +53,11 @@ export default function PrivacyCondition(props) {
             ? 'en/privacy-notice-terms-conditions'
             : 'fr/avis-confidentialite-modalites'
         }
-        accountPageLink="/"
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
       />
     )
   }

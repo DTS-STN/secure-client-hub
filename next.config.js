@@ -31,6 +31,10 @@ const REWRITES = [
     source: '/avis-confidentialite-modalites',
     destination: '/privacy-notice-terms-conditions',
   },
+  {
+    source: '/demande-revision',
+    destination: '/decision-reviews',
+  },
 ]
 
 const securityHeaders = [

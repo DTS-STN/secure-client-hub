@@ -1,25 +1,22 @@
 import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import Heading from '../components/Heading'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import Card from '../components/Card'
-import Heading from '../components/Heading'
-import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
+import { getDecisionReviewsContent } from '../graphql/mappers/decision-reviews'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
-import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
-import BenefitTasks from './../components/BenefitTasks'
-import MostReqTasks from './../components/MostReqTasks'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
-import { acronym } from '../lib/acronym'
+import Markdown from 'markdown-to-jsx'
 import { ErrorPage } from '../components/ErrorPage'
+import Button from '../components/Button'
 
-export default function MyDashboard(props) {
-  /* istanbul ignore next */
+export default function DecisionReviews(props) {
   const t = props.locale === 'en' ? en : fr
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
@@ -50,79 +47,97 @@ export default function MyDashboard(props) {
         errType={errorCode}
         isAuth={false}
         homePageLink={
-          props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
+          props.locale === 'en' ? 'en/my-dashboard' : 'fr/mon-tableau-de-bord'
         }
-        accountPageLink={
-          props?.locale === 'en'
-            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
-            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
-        }
+        accountPageLink="/"
       />
     )
   }
   return (
     <div
-      className="pb-2"
-      id="myDashboardContent"
-      data-testid="myDashboardContent-test"
+      data-cy="decision-reviews"
+      data-testid="decision-reviewsContent-test"
+      className="mb-16"
     >
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
-
-      {props.content.cards.map((card) => {
-        const mostReq = card.lists[0]
-        var tasks = card.lists.slice(1, card.lists.length)
-        return (
-          <Card
-            key={card.id}
-            programUniqueId={card.id}
-            locale={props.locale}
-            cardTitle={card.title}
-            viewMoreLessCaption={card.dropdownText}
-            acronym={acronym(card.title)}
-            refPageAA={props.aaPrefix}
-          >
-            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
-              <MostReqTasks
-                taskListMR={mostReq}
-                dataCy="most-requested"
-                openModal={props.openModal}
-                acronym={acronym(card.title)}
-                refPageAA={props.aaPrefix}
-              />
-            </div>
-            <div
-              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
-              data-cy="task-list"
-            >
-              {tasks.map((taskList, index) => {
-                return (
-                  <div key={index} data-cy="Task">
-                    <BenefitTasks
-                      acronym={acronym(card.title)}
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                      openModal={props.openModal}
-                      refPageAA={props.aaPrefix}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </Card>
-        )
-      })}
+      <Heading
+        id="DecisionReviews-heading"
+        title={props.content.heading}
+        className="mb-2"
+      />
+      <section id="">
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-10 text-gray-darker',
+                },
+              },
+            },
+          }}
+        >
+          {props.content.content[0].content}
+        </Markdown>
+      </section>
+      <Button
+        id={props.content.content[0].button.id}
+        style="primary"
+        text={props.content.content[0].button.text}
+        className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+        onClick={(e) => {
+          // e.preventDefault()
+          // TODO: To be implemented.
+        }}
+      ></Button>
+      <section id="">
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-10 text-gray-darker',
+                },
+              },
+            },
+          }}
+        >
+          {props.content.content[1].content}
+        </Markdown>
+        <Button
+          id={props.content.content[1].button.id}
+          style="primary"
+          text={props.content.content[1].button.text}
+          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          onClick={(e) => {
+            // e.preventDefault()
+            // TODO: To be implemented.
+          }}
+        ></Button>
+      </section>
     </div>
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({ req, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger('my-dashboard')
+  const logger = getLogger('decision-reviews')
   logger.level = 'error'
 
-  const content = await getMyDashboardContent().catch((error) => {
+  const content = await getDecisionReviewsContent().catch((error) => {
     logger.error(error)
     return { err: '500' }
   })
@@ -135,6 +150,10 @@ export async function getServerSideProps({ req, res, locale }) {
     return { err: '500' }
   })
 
+  /*
+   * Uncomment this block to make Banner Popup Content display "Page Not Available"
+   * Comment "getBetaPopupExitContent()" block of code above.
+   */
   const popupContentNA = await getBetaPopupNotAvailableContent().catch(
     (error) => {
       logger.error(error)
@@ -147,17 +166,21 @@ export async function getServerSideProps({ req, res, locale }) {
     return { err: '500' }
   })
 
-  if (locale === 'und') {
-    locale = 'en'
-  }
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/mon-tableau-de-bord' : '/en/my-dashboard'
-
+    locale === 'en' ? '/fr/demande-revision' : '/en/decision-reviews'
+  const breadCrumbItems =
+    locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Dashboard - My Service Canada Account',
+      title: 'Request Review Decison - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -166,7 +189,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Tableau de Bord - Mon dossier Service Canada',
+      title: 'Demande de revision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -187,6 +210,7 @@ export async function getServerSideProps({ req, res, locale }) {
           ? content.en
           : content.fr,
       meta,
+      breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
@@ -225,14 +249,26 @@ export async function getServerSideProps({ req, res, locale }) {
   }
 }
 
-MyDashboard.propTypes = {
+DecisionReviews.propTypes = {
   /**
    * current locale in the address
    */
   locale: PropTypes.string,
 
   /*
+   * Language link toggle text
+   */
+  langToggleLink: PropTypes.string,
+
+  /*
+   * Content Tags
+   */
+
+  content: PropTypes.object,
+
+  /*
    * Meta Tags
    */
+
   meta: PropTypes.object,
 }
