@@ -11,6 +11,10 @@ export async function middleware(req: NextRequest) {
 
   // logger.trace(`Incoming request for [${url}]`)
 
+  if (pathname.includes('/api/livez')) {
+    logger.trace(`livez check`)
+  }
+
   if (
     pathname.startsWith('/_next') ||
     pathname.includes('/api/') ||
