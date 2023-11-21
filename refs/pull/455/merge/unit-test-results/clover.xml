@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700597002517" clover="3.2.0">
-  <project timestamp="1700597002517" name="All files">
+<coverage generated="1700597766911" clover="3.2.0">
+  <project timestamp="1700597766911" name="All files">
     <metrics statements="525" coveredstatements="279" conditionals="646" coveredconditionals="299" methods="202" coveredmethods="84" elements="1373" coveredelements="662" complexity="0" loc="525" ncloc="525" packages="8" files="49" classes="49"/>
     <package name="components">
       <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="145" methods="71" coveredmethods="37"/>
@@ -348,30 +348,30 @@
         <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="95" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
-        <line num="136" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="139" count="1" type="stmt"/>
-        <line num="140" count="1" type="stmt"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="144" count="0" type="stmt"/>
+        <line num="140" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
         <line num="146" count="1" type="stmt"/>
         <line num="147" count="0" type="stmt"/>
         <line num="148" count="0" type="stmt"/>
         <line num="150" count="1" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
-        <line num="159" count="1" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
-        <line num="166" count="1" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="175" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="177" count="0" type="stmt"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="183" count="1" type="stmt"/>
-        <line num="204" count="1" type="stmt"/>
-        <line num="254" count="1" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="163" count="1" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="179" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="187" count="1" type="stmt"/>
+        <line num="208" count="1" type="stmt"/>
+        <line num="258" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/index.js">
         <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
