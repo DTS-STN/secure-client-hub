@@ -1,0 +1,47 @@
+{
+  schPageV1ByPath(
+    _path: "/content/dam/decd-endc/content-fragments/sch/pages/request-review-decision"
+  ) {
+    item {
+      _path
+      scPageNameEn
+      scPageNameFr
+      scTitleEn
+      scTitleFr
+      scBreadcrumbParentPages {
+        ... on SchPageV1Model {
+              scId
+              scTitleEn
+              scTitleFr
+              scPageNameEn
+              scPageNameFr
+        }
+      }
+      scFragments {
+          ... on SchContentV1Model {
+          scId
+          scContentEn {
+              markdown
+          }
+          scContentFr {
+            markdown
+          }
+          scFragments {
+              ... on SchTaskV1Model {
+                scId
+                scLinkTextEn
+                scLinkTextFr
+                scLinkTextAssistiveEn
+                scLinkTextAssistiveFr
+                scDestinationURLEn
+                scDestinationURLFr
+                schBetaPopUp
+                schURLType
+              }
+          }
+      }
+      
+    }
+  }
+}
+}
