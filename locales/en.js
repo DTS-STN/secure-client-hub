@@ -158,7 +158,7 @@ export default {
     'The web server that provides this service is currently overloaded, or may be temporarily down for maintenance. We apologize for the inconvenience. ',
   errorPageNextText: ' What next?',
   errorTextLinkCommon: '• Go to the ',
-  errorTextLinkCommon_2: ' Service Canada home page',
+  errorTextLinkCommon_2: ' My Service Canada Account home page',
   errorTextLinkCommonLink:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   errorAuthTextLinkCommon: '• Go to your ',

@@ -86,7 +86,9 @@ export function ErrorPage(props) {
                 >
                   {!isAuth
                     ? val.errorTextLinkCommon_2
-                    : val.errorAuthTextLinkCommon_2}
+                    : errType === '404'
+                    ? val.errorAuthTextLinkCommon_2
+                    : val.errorTextLinkCommon_2}
                 </Link>
               </li>
             </ul>
