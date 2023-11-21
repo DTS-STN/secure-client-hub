@@ -76,13 +76,13 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-replicaCount: 2
+replicaCount: 5
 resources:
   requests:
     cpu: 200m
     memory: 1024Mi
   limits:
-    cpu: 500m
+    cpu: 1500m
     memory: 4096Mi
 healthChecks:
     livenessDelay: 15
