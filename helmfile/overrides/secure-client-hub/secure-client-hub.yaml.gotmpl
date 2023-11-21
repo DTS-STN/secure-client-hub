@@ -85,8 +85,8 @@ resources:
     cpu: 1500m
     memory: 4096Mi
 healthChecks:
-    livenessDelay: 15
-    readinessDelay: 15
+    livenessDelay: 120
+    readinessDelay: 120
     livenessPath: /api/livez
     readinessPath: /api/readyz
 port: 3000
