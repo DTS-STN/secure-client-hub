@@ -10,6 +10,8 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
@@ -190,7 +192,9 @@ export default function PrivacyCondition(props) {
 }
 
 export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('privacy-notice-terms-and-conditions')
