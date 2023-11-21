@@ -123,7 +123,11 @@ export default function DecisionReviews(props) {
           data-testid={props.content.content[1].button.id}
           alt={props.content.content[1].button.areaLabel}
         >
-          <a target="_blank" href={props.content.content[1].button.link}>
+          <a
+            target="_blank"
+            href={props.content.content[1].button.link}
+            rel="noreferrer noopener"
+          >
             {props.content.content[1].button.text}
           </a>
         </button>
