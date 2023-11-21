@@ -5,6 +5,8 @@ import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 import { getToken } from 'next-auth/jwt'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
 export default function Logout(props) {
   //Redirect to ECAS global sign out
@@ -40,6 +42,8 @@ Logout.getLayout = function PageLayout(page) {
 }
 
 export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
   logger.level = 'error'
@@ -49,7 +53,7 @@ export async function getServerSideProps({ req, res, locale }) {
 
   const logoutURL =
     !AuthIsDisabled() && provider !== 'credentials'
-      ? await getLogoutURL(req).catch((error) => {
+      ? await getLogoutURL(req, session).catch((error) => {
           logger.error(error)
           res.statusCode = 500
           throw error
