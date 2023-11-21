@@ -87,8 +87,8 @@ resources:
 healthChecks:
     livenessDelay: 15
     readinessDelay: 15
-    livenessPath: /
-    readinessPath: /
+    livenessPath: /api/livez
+    readinessPath: /api/readyz
 port: 3000
 persistence:
     enabled: true
