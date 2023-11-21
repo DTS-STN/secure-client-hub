@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const { locale, pathname } = nextUrl
   const logger = getLogger('middleware')
 
-  logger.trace(`Incoming request for [${url}]`)
+  // logger.trace(`Incoming request for [${url}]`)
 
   if (
     pathname.startsWith('/_next') ||

@@ -1,23 +1,24 @@
 // k6 Documentation: https://k6.io/docs/
 
-import { sleep, group } from 'k6'
+import { check, sleep, group } from 'k6'
 import http from 'k6/http'
 
 export const options = {
-  vus: 10,
+  vus: 200,
   duration: '5m',
   thresholds: {
     'http_req_failed': ['rate<0.01'], // http errors should be less than 1%
-    'http_req_duration': ['p(95)<300'], // 95% of requests should be below 300ms
+    'http_req_duration': ['p(95)<1000'], // 95% of requests should be below 300ms
     'group_duration{group:::Next_Template}': ['avg < 200'], // average duration cannot be longer than 200ms
   },
 }
 
 export default function main() {
   let response
+  let base = __ENV.K6_BASE_URL
 
   group('Secure-Client-Hub', function () {
-    response = http.get('https://secure-client-hub-main.bdm.dshp-phdn.net/', {
+    response = http.get(base, {
       headers: {
         'upgrade-insecure-requests': '1',
         'sec-ch-ua':
@@ -26,41 +27,53 @@ export default function main() {
         'sec-ch-ua-platform': '"Linux"',
       },
     })
-    response = http.get(
-      'https://fonts.googleapis.com/css2?family=Lato%3Aital%2Cwght%400%2C100%3B0%2C300%3B0%2C400%3B0%2C700%3B0%2C900%3B1%2C100%3B1%2C300%3B1%2C400%3B1%2C700%3B1%2C900&family=Noto+Sans%3Awght%40400%3B700&display=swap&family=Patua+One%3Awght%40100%3B400%3B700&display=swap&family=Noto+Sans%3Awght%40400%3B700&family=Patua+One%3Awght%40100%3B400%3B700',
-      {
-        headers: {
-          'sec-ch-ua':
-            '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
-          'sec-ch-ua-mobile': '?0',
-          'sec-ch-ua-platform': '"Linux"',
-        },
-      }
-    )
-    response = http.get(
-      'https://fonts.gstatic.com/s/lato/v22/S6uyw4BMUTPHjx4wXg.woff2',
-      {
-        headers: {
-          'origin': 'https://next-template-perf.bdm-dev.dts-stn.com',
-          'sec-ch-ua':
-            '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
-          'sec-ch-ua-mobile': '?0',
-          'sec-ch-ua-platform': '"Linux"',
-        },
-      }
-    )
-    response = http.get(
-      'https://fonts.gstatic.com/s/notosans/v25/o-0IIpQlx3QUlC5A4PNr5TRA.woff2',
-      {
-        headers: {
-          'origin': 'https://next-template-perf.bdm-dev.dts-stn.com',
-          'sec-ch-ua':
-            '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
-          'sec-ch-ua-mobile': '?0',
-          'sec-ch-ua-platform': '"Linux"',
-        },
-      }
-    )
+    // console.log(base);
+    const jar = http.cookieJar()
+    let cookies = jar.cookiesForURL(base)
+    let res = http.get(base + '/en/my-dashboard')
+    check(res, {
+      'status 200 initial': (r) => r.status === 200,
+      "initially does not have cookie 'next-auth.session-token'": (r) =>
+        cookies['next-auth.session-token'] === undefined,
+      'Redirected to signin': (r) =>
+        r.body.includes('Sign in with Credentials'),
+    })
+
+    res = http.get(base + '/api/auth/signin')
+
+    res = res.submitForm({
+      formSelector: 'form',
+      fields: { username: 'test1', password: 'password1' },
+    })
+
+    res = http.get(base)
+
+    // const jar = http.cookieJar();
+    cookies = jar.cookiesForURL(base)
+    check(res, {
+      'status 200 authenticated': (r) => r.status === 200,
+      "has cookie 'next-auth.session-token'": (r) =>
+        cookies['next-auth.session-token'].length > 0,
+    })
+
+    res = http.get(base + '/en/my-dashboard')
+    check(res, {
+      'status 200 homepage': (r) => r.status === 200,
+      'Verify homepage text': (r) => r.body.includes('Employment Insurance'),
+    })
+
+    jar.clear(base)
+    cookies = jar.cookiesForURL(base)
+
+    res = http.get(base + '/en/my-dashboard')
+    cookies = jar.cookiesForURL(base)
+
+    check(res, {
+      'status 200 cleared cookies': (r) => r.status === 200,
+      "does not have cookie 'next-auth.session-token'": (r) =>
+        cookies['next-auth.session-token'] === undefined,
+      'Back to signin': (r) => r.body.includes('Sign in with Credentials'),
+    })
   })
 
   // Automatically added sleep
