@@ -191,7 +191,7 @@ export default function PrivacyCondition(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
+export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) return Redirect()
