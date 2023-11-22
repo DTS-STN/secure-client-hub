@@ -132,7 +132,7 @@ export async function getContactUsPage(id) {
                               id: destination.scId,
                               poBox: destination.scPostalBoxFr,
                               postal: destination.scPostalCode,
-                              station: destination.scPostalStationEn,
+                              station: destination.scPostalStationFr,
                               program: destination.scProgramFr,
                               province: destination.scProvTerrAbbrEnum,
                               recipient: destination.scRecipientFr,
