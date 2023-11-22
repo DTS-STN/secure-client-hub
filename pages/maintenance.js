@@ -20,7 +20,7 @@ export default function Maintenance(props) {
         <p className="font-bold text-gray-darker sm:text-black text-[20px]">
           {language.errorPageNextText}
         </p>
-        <h2 className="sr-only">{`What's Next Links`}</h2>
+        <h2 className="sr-only">{language.errorPageNextText}</h2>
         <ul id={'maintenace-next-list'}>
           <li className={'text-20px text-gray-darker pl-3'}>
             {language.error503TextLink}
