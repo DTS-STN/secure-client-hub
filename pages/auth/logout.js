@@ -6,16 +6,21 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
+import { getToken } from 'next-auth/jwt'
 
 export default function Logout(props) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
-      await signOut({ redirect: false })
-      window.location.replace(props.logoutURL)
+      if (props.provider === 'credentials') {
+        await signOut({ callbackUrl: props.logoutURL })
+      } else {
+        await signOut({ redirect: false })
+        window.location.replace(props.logoutURL)
+      }
     }
     logout().catch(console.error)
-  }, [props.logoutURL])
+  }, [])
 
   return (
     <div role="main">
@@ -43,13 +48,17 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req, session).catch((error) => {
-        logger.error(error)
-        res.statusCode = 500
-        throw error
-      })
-    : '/'
+  const token = await getToken({ req })
+  const provider = token.provider
+
+  const logoutURL =
+    !AuthIsDisabled() && provider !== 'credentials'
+      ? await getLogoutURL(req).catch((error) => {
+          logger.error(error)
+          res.statusCode = 500
+          throw error
+        })
+      : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -78,6 +87,7 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       meta,
       logoutURL: logoutURL ?? '/',
+      provider: provider,
     },
   }
 }
