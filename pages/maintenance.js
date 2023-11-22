@@ -5,7 +5,6 @@ import FR from '../locales/fr'
 import Link from 'next/link'
 
 export default function Maintenance(props) {
-  console.log(props.locale)
   let language = props.locale === 'en' ? EN : FR
   return (
     <div className="container">
