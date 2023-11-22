@@ -4,7 +4,7 @@ import { check, sleep, group } from 'k6'
 import http from 'k6/http'
 
 export const options = {
-  vus: 200,
+  vus: 300,
   duration: '5m',
   thresholds: {
     'http_req_failed': ['rate<0.01'], // http errors should be less than 1%
@@ -15,7 +15,8 @@ export const options = {
 
 export default function main() {
   let response
-  let base = __ENV.K6_BASE_URL
+  const base = __ENV.K6_BASE_URL
+  const session_name = __ENV.K6_SESSION_TOKEN // FIXME: this can be made dynamic
 
   group('Secure-Client-Hub', function () {
     response = http.get(base, {
@@ -33,8 +34,8 @@ export default function main() {
     let res = http.get(base + '/en/my-dashboard')
     check(res, {
       'status 200 initial': (r) => r.status === 200,
-      "initially does not have cookie 'next-auth.session-token'": (r) =>
-        cookies['next-auth.session-token'] === undefined,
+      'initially does not have session cookie': (r) =>
+        cookies[session_name] === undefined,
       'Redirected to signin': (r) =>
         r.body.includes('Sign in with Credentials'),
     })
@@ -52,8 +53,7 @@ export default function main() {
     cookies = jar.cookiesForURL(base)
     check(res, {
       'status 200 authenticated': (r) => r.status === 200,
-      "has cookie 'next-auth.session-token'": (r) =>
-        cookies['next-auth.session-token'].length > 0,
+      'has session cookie': (r) => cookies[session_name].length > 0,
     })
 
     res = http.get(base + '/en/my-dashboard')
@@ -70,8 +70,8 @@ export default function main() {
 
     check(res, {
       'status 200 cleared cookies': (r) => r.status === 200,
-      "does not have cookie 'next-auth.session-token'": (r) =>
-        cookies['next-auth.session-token'] === undefined,
+      'does not have cookie session': (r) =>
+        cookies[session_name] === undefined,
       'Back to signin': (r) => r.body.includes('Sign in with Credentials'),
     })
   })
