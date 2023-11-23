@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700671197291" clover="3.2.0">
-  <project timestamp="1700671197291" name="All files">
-    <metrics statements="536" coveredstatements="285" conditionals="696" coveredconditionals="317" methods="204" coveredmethods="84" elements="1436" coveredelements="686" complexity="0" loc="536" ncloc="536" packages="8" files="49" classes="49"/>
+<coverage generated="1700753652773" clover="3.2.0">
+  <project timestamp="1700753652773" name="All files">
+    <metrics statements="541" coveredstatements="288" conditionals="700" coveredconditionals="321" methods="206" coveredmethods="85" elements="1447" coveredelements="694" complexity="0" loc="541" ncloc="541" packages="8" files="50" classes="50"/>
     <package name="components">
       <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="145" methods="71" coveredmethods="37"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -120,9 +120,9 @@
       </file>
       <file name="Heading.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Heading.js">
         <metrics statements="3" coveredstatements="3" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="4" count="22" type="stmt"/>
-        <line num="6" count="22" type="stmt"/>
-        <line num="29" count="10" type="stmt"/>
+        <line num="4" count="24" type="stmt"/>
+        <line num="6" count="24" type="stmt"/>
+        <line num="29" count="11" type="stmt"/>
       </file>
       <file name="Language.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Language.js">
         <metrics statements="3" coveredstatements="3" conditionals="24" coveredconditionals="24" methods="1" coveredmethods="1"/>
@@ -312,7 +312,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="197" coveredstatements="127" conditionals="257" coveredconditionals="136" methods="75" coveredmethods="31"/>
+      <metrics statements="202" coveredstatements="130" conditionals="261" coveredconditionals="140" methods="77" coveredmethods="32"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
@@ -377,6 +377,14 @@
         <line num="78" count="0" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
         <line num="104" count="1" type="stmt"/>
+      </file>
+      <file name="maintenance.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/maintenance.js">
+        <metrics statements="5" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="1"/>
+        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
       </file>
       <file name="my-dashboard.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/my-dashboard.js">
         <metrics statements="38" coveredstatements="25" conditionals="47" coveredconditionals="24" methods="13" coveredmethods="6"/>
