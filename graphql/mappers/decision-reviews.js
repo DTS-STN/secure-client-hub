@@ -50,10 +50,6 @@ export async function getDecisionReviewsContent() {
             text: appealFragment.scFragments[0].scLinkTextEn,
             areaLabel: appealFragment.scFragments[0].scLinkTextAssistiveEn,
             link: appealFragment.scFragments[0].scDestinationURLEn,
-            // link: buildLink(
-            //   appealFragment.scFragments[0].schURLType,
-            //   appealFragment.scFragments[0].scDestinationURLEn
-            // ),
             betaPopUp: askFragment.scFragments[0].schBetaPopUp,
           },
         },
