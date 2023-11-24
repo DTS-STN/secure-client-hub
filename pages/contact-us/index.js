@@ -11,6 +11,7 @@ import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
+import { ErrorPage } from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { getLogger } from '../../logging/log-util'
@@ -32,6 +33,32 @@ export default function ContactLanding(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
+
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
+      />
+    )
+  }
 
   return (
     <div id="contactContent" data-testid="contactContent-test">

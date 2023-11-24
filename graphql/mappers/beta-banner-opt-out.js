@@ -1,11 +1,14 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getBetaBannerContent() {
-  const queryOptOut = require('../queries/beta-banner-opt-out.graphql')
-  const queryDictionary = require('../queries/dictionary.graphql')
-  const resOptOut = await clientQuery(queryOptOut)
-  const resDictionary = await clientQuery(queryDictionary)
+  const queryOptOut = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`
+  )
+  const queryDictionary = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDictionaryV1`
+  )
+  const resOptOut = await queryOptOut.json()
+  const resDictionary = await queryDictionary.json()
   const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 

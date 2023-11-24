@@ -93,8 +93,10 @@ export default function DecisionReviews(props) {
         text={props.content.content[0].button.text}
         className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
         onClick={(e) => {
-          // e.preventDefault()
-          // TODO: To be implemented.
+          if (props.content.content[0].button.betaPopUp) {
+            e.preventDefault()
+            props.openModal(props.content.content[0].button.link, 'betaModal')
+          }
         }}
       ></Button>
       <section id="">
@@ -117,16 +119,20 @@ export default function DecisionReviews(props) {
         >
           {props.content.content[1].content}
         </Markdown>
-        <Button
+        <button
+          className="flex flex-row text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4"
           id={props.content.content[1].button.id}
-          style="primary"
-          text={props.content.content[1].button.text}
-          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={(e) => {
-            // e.preventDefault()
-            // TODO: To be implemented.
-          }}
-        ></Button>
+          data-testid={props.content.content[1].button.id}
+          alt={props.content.content[1].button.areaLabel}
+        >
+          <a
+            target="_blank"
+            href={props.content.content[1].button.link}
+            rel="noreferrer noopener"
+          >
+            {props.content.content[1].button.text}
+          </a>
+        </button>
       </section>
     </div>
   )
@@ -275,4 +281,10 @@ DecisionReviews.propTypes = {
    */
 
   meta: PropTypes.object,
+
+  /*
+   * Modal Function
+   */
+
+  openModal: PropTypes.func,
 }

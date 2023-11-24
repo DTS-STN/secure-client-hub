@@ -1,9 +1,10 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getProfileContent() {
-  const query = require('../queries/profile.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`
+  )
+  const response = await query.json()
 
   // LookingFor Fragment
   const enLookingForFragment = findFragmentByScId(

@@ -1,10 +1,10 @@
-import clientQuery from '../client'
-
 export async function getBetaPopupNotAvailableContent() {
-  const query = require('../queries/beta-popup-page-not-available.graphql')
-  const res = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpPageNotAvailableV1`
+  )
+  const response = await query.json()
 
-  const content = res.data.schContentV1ByPath.item
+  const content = response.data.schContentV1ByPath.item
   const fallbackContent = {
     scId: 'beta-popup-page-not-available',
     scHeadingEn: 'Exiting beta version',
