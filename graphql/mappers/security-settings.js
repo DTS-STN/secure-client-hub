@@ -1,10 +1,10 @@
-import en from '../../locales/en'
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getSecuritySettingsContent() {
-  const query = require('../queries/security-settings.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`
+  )
+  const response = await query.json()
 
   const enLookingForFragment = findFragmentByScId(
     response,

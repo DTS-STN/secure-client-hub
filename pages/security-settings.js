@@ -13,6 +13,7 @@ import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
+import { ErrorPage } from '../components/ErrorPage'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
@@ -31,10 +32,39 @@ export default function SecuritySettings(props) {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent])
+
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
+      />
+    )
+  }
+
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl text-gray-darker">
+        {props.content.subHeading}
+      </p>
       <Link
         className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
         id="securityQuestionsLink"
@@ -44,7 +74,9 @@ export default function SecuritySettings(props) {
       >
         {props.content.securityQuestions.linkTitle.text}
       </Link>
-      <p className="mb-8 text-xl">{props.content.securityQuestions.subTitle}</p>
+      <p className="mb-8 text-xl text-gray-darker">
+        {props.content.securityQuestions.subTitle}
+      </p>
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}

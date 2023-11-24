@@ -5,6 +5,9 @@ environments:
   pre-prod:
   prod:
 
+helmDefaults:
+  createNamespace: false
+
 releases:
 # Single Tier Website
   - name: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}

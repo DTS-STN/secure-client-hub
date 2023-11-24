@@ -1,20 +1,22 @@
-import PropTypes from 'prop-types'
-import Link from 'next/link'
-import Heading from '../../components/Heading'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
-import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
-import en from '../../locales/en'
-import fr from '../../locales/fr'
-import { getContactUsContent } from '../../graphql/mappers/contact-us'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
-import { ErrorPage } from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo } from 'react'
+import PropTypes from 'prop-types'
+import Heading from '../components/Heading'
+import en from '../locales/en'
+import fr from '../locales/fr'
+import { getDecisionReviewsContent } from '../graphql/mappers/decision-reviews'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
+import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
+import React from 'react'
 import throttle from 'lodash.throttle'
-import { getLogger } from '../../logging/log-util'
+import Markdown from 'markdown-to-jsx'
+import { ErrorPage } from '../components/ErrorPage'
+import Button from '../components/Button'
 
-export default function ContactLanding(props) {
+export default function DecisionReviews(props) {
   const t = props.locale === 'en' ? en : fr
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
@@ -45,45 +47,91 @@ export default function ContactLanding(props) {
         errType={errorCode}
         isAuth={false}
         homePageLink={
-          props.locale === 'en'
-            ? 'en/privacy-notice-terms-conditions'
-            : 'fr/avis-confidentialite-modalites'
+          props.locale === 'en' ? 'en/my-dashboard' : 'fr/mon-tableau-de-bord'
         }
-        accountPageLink={
-          props?.locale === 'en'
-            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
-            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
-        }
+        accountPageLink="/"
       />
     )
   }
-
   return (
-    <div id="contactContent" data-testid="contactContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl text-gray-darker">
-        {props.content.subHeading}
-      </p>
-      <ul className="list-disc" data-cy="contact-task-list">
-        {props.content.links.map((link) => {
-          return (
-            <li className="mb-6 ml-5" key={link.linkId}>
-              <Link
-                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
-                id={link.linkId}
-                data-testid={link.linkId}
-                aria-label={link.linkTitle}
-                href={`/${props.locale}/${
-                  props.content.pageName
-                }/${link.linkDestination.split('/').pop()}`}
-              >
-                {link.linkTitle}
-              </Link>
-              <p className="text-xl text-gray-darker">{link.linkDescription}</p>
-            </li>
-          )
-        })}
-      </ul>
+    <div
+      data-cy="decision-reviews"
+      data-testid="decision-reviewsContent-test"
+      className="mb-16"
+    >
+      <Heading
+        id="DecisionReviews-heading"
+        title={props.content.heading}
+        className="mb-2"
+      />
+      <section id="">
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-10 text-gray-darker',
+                },
+              },
+            },
+          }}
+        >
+          {props.content.content[0].content}
+        </Markdown>
+      </section>
+      <Button
+        id={props.content.content[0].button.id}
+        style="primary"
+        text={props.content.content[0].button.text}
+        className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+        onClick={(e) => {
+          if (props.content.content[0].button.betaPopUp) {
+            e.preventDefault()
+            props.openModal(props.content.content[0].button.link, 'betaModal')
+          }
+        }}
+      ></Button>
+      <section id="">
+        <Markdown
+          options={{
+            overrides: {
+              h2: {
+                props: {
+                  className:
+                    'text-4xl font-display font-bold mt-10 mb-3 text-gray-darker',
+                },
+              },
+              p: {
+                props: {
+                  className: 'mb-10 text-gray-darker',
+                },
+              },
+            },
+          }}
+        >
+          {props.content.content[1].content}
+        </Markdown>
+        <button
+          className="flex flex-row text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4"
+          id={props.content.content[1].button.id}
+          data-testid={props.content.content[1].button.id}
+          alt={props.content.content[1].button.areaLabel}
+        >
+          <a
+            target="_blank"
+            href={props.content.content[1].button.link}
+            rel="noreferrer noopener"
+          >
+            {props.content.content[1].button.text}
+          </a>
+        </button>
+      </section>
     </div>
   )
 }
@@ -92,10 +140,10 @@ export async function getServerSideProps({ req, locale }) {
   if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
 
   //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger('contact-us')
+  const logger = getLogger('decision-reviews')
   logger.level = 'error'
 
-  const content = await getContactUsContent().catch((error) => {
+  const content = await getDecisionReviewsContent().catch((error) => {
     logger.error(error)
     return { err: '500' }
   })
@@ -124,22 +172,9 @@ export async function getServerSideProps({ req, locale }) {
     return { err: '500' }
   })
 
-  /* 
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-    })
-  */
-
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
-
-  const t = locale === 'en' ? en : fr
-
+    locale === 'en' ? '/fr/demande-revision' : '/en/decision-reviews'
   const breadCrumbItems =
     locale === 'en'
       ? content.en.breadcrumb?.map(({ link, text }) => {
@@ -148,11 +183,10 @@ export async function getServerSideProps({ req, locale }) {
       : content.fr.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact - My Service Canada Account - Contact',
+      title: 'Request Review Decison - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -161,7 +195,7 @@ export async function getServerSideProps({ req, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Contactez-nous - Mon dossier Service Canada',
+      title: 'Demande de revision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -221,7 +255,7 @@ export async function getServerSideProps({ req, locale }) {
   }
 }
 
-ContactLanding.propTypes = {
+DecisionReviews.propTypes = {
   /**
    * current locale in the address
    */
@@ -245,12 +279,8 @@ ContactLanding.propTypes = {
   meta: PropTypes.object,
 
   /*
-   * BreadCrumb Items
+   * Modal Function
    */
-  breadCrumbItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-    })
-  ),
+
+  openModal: PropTypes.func,
 }

@@ -24,7 +24,6 @@
     "proxystart": "kubectl port-forward $(kubectl get pods -n squidproxy | awk '{print $1}' | grep squidproxy) 3128:3128 -n squidproxy"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.6",
     "@cypress/request": "^3.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -39,7 +38,7 @@
     "lodash.throttle": "^4.1.1",
     "markdown-to-jsx": "^7.2.1",
     "next": "^13.5.6",
-    "next-auth": "^4.24.3",
+    "next-auth": "^4.24.5",
     "next-i18next": "^13.3.0",
     "pino": "^8.16.1",
     "pino-pretty": "^10.2.3",

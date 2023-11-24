@@ -15,6 +15,7 @@ import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
+import { ErrorPage } from '../components/ErrorPage'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -35,10 +36,36 @@ export default function Profile(props) {
     }
   }, [throttledOnClickEvent])
 
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
+      />
+    )
+  }
+
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="my-dashboard-heading" title={props.content.pageName} />
-      <p className="text-lg mt-2">{props.content.heading}</p>
+      <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
       {props.content.list.map((program, index) => {
         return (
           <ProfileTasks
