@@ -1,9 +1,10 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getDecisionReviewsContent() {
-  const query = require('../queries/decision-reviews.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`
+  )
+  const response = await query.json()
 
   const appealFragment = findFragmentByScId(
     response,

@@ -1,8 +1,8 @@
-import clientQuery from '../client'
-
 export async function getContactUsContent() {
-  const query = require('../queries/contact-us.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`
+  )
+  const response = await query.json()
 
   const introFragment = findFragmentByScId(response, 'contact-us-intro')
 

@@ -60,7 +60,7 @@ describe('Validate dashboard page', () => {
 
   it('Validate the EI,CPP and OAS card sections in FR', () => {
     dashboardPo.FrenchButton().click()
-    cy.wait(1000)
+    cy.wait(3000)
     for (let i = 0; i < dashboardData.length; i++) {
       const CardName = dashboardData[i].CardNameFR
       dashboardPo.ExpandCard(CardName)
