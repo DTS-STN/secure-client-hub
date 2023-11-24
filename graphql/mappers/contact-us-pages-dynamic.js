@@ -1,8 +1,8 @@
-import clientQuery from '../client'
-
 export async function getContactUsPage(id) {
-  const query = require('../queries/contact-us-pages-dynamic.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsDynamicV1`
+  )
+  const response = await query.json()
 
   const queryData = response.data.schPageV1List.items.find(
     (page) => page.scId === id
