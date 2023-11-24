@@ -2,7 +2,8 @@ import { buildLink } from '../../lib/links'
 
 export async function getSecuritySettingsContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 

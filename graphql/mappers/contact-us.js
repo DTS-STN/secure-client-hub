@@ -1,6 +1,7 @@
 export async function getContactUsContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 

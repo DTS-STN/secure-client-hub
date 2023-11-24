@@ -1,6 +1,7 @@
 export async function getPrivacyConditionContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 

@@ -1,6 +1,7 @@
 export async function getBetaPopupExitContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpExitV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpExitV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 

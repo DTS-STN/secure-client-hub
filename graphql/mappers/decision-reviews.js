@@ -2,7 +2,8 @@ import { buildLink } from '../../lib/links'
 
 export async function getDecisionReviewsContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 

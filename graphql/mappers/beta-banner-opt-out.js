@@ -2,7 +2,8 @@ import { buildLink } from '../../lib/links'
 
 export async function getBetaBannerContent() {
   const queryOptOut = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`,
+    { next: { revalidate: 1200 } }
   )
   const queryDictionary = await fetch(
     `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDictionaryV1`

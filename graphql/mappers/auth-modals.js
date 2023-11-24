@@ -1,6 +1,7 @@
 export async function getAuthModalsContent() {
   const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`,
+    { next: { revalidate: 1200 } }
   )
   const response = await query.json()
 
