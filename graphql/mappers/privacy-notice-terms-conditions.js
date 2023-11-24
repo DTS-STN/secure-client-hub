@@ -1,8 +1,8 @@
-import clientQuery from '../client'
-
 export async function getPrivacyConditionContent() {
-  const query = require('../queries/privacy-notice-terms-conditions.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`
+  )
+  const response = await query.json()
 
   const alertFragment = findFragmentByScId(
     response,

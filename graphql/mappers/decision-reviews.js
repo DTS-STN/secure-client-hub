@@ -1,9 +1,10 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getDecisionReviewsContent() {
-  const query = require('../queries/decision-reviews.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`
+  )
+  const response = await query.json()
 
   const appealFragment = findFragmentByScId(
     response,
@@ -49,10 +50,7 @@ export async function getDecisionReviewsContent() {
             id: appealFragment.scFragments[0].scId,
             text: appealFragment.scFragments[0].scLinkTextEn,
             areaLabel: appealFragment.scFragments[0].scLinkTextAssistiveEn,
-            link: buildLink(
-              appealFragment.scFragments[0].schURLType,
-              appealFragment.scFragments[0].scDestinationURLEn
-            ),
+            link: appealFragment.scFragments[0].scDestinationURLEn,
             betaPopUp: askFragment.scFragments[0].schBetaPopUp,
           },
         },

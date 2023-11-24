@@ -168,4 +168,9 @@ export default {
   error500TextLink: '• Try refreshing the page or try again later',
   error503TextLink: '• Try again later',
   errorPageType: 'Error',
+
+  //Maintenance page
+  maintenanceTitle: 'This service is currently unavailable',
+  maintenanceText:
+    'Due to system maintenance, the service you are trying to access is temporarly unavailable. We apologize for the inconvenience.',
 }

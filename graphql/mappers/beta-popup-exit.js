@@ -1,10 +1,10 @@
-import clientQuery from '../client'
-
 export async function getBetaPopupExitContent() {
-  const query = require('../queries/beta-popup-exit.graphql')
-  const res = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpExitV1`
+  )
+  const response = await query.json()
 
-  const content = res.data.schContentV1ByPath.item || {}
+  const content = response.data.schContentV1ByPath.item || {}
   const fallbackContent = {
     scId: 'beta-popup-exit',
     scHeadingEn: 'Exiting beta version',

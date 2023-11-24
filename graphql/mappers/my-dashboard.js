@@ -1,10 +1,10 @@
-import { getFragmentQueryDocument } from '@apollo/client/utilities'
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
 
 export async function getMyDashboardContent() {
-  const query = require('../queries/my-dashboard.graphql')
-  const response = await clientQuery(query)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV1`
+  )
+  const response = await query.json()
 
   const mappedHome = {
     en: {

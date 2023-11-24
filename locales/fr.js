@@ -162,4 +162,9 @@ export default {
   error500TextLink: '• Actualisez la page ou réessayez plus tard',
   error503TextLink: '• Réessayez plus tard',
   errorPageType: 'Erreur',
+
+  //Maintenance page
+  maintenanceTitle: 'Le service est actuellement indisponible',
+  maintenanceText:
+    "En raison des maintenances des systèmes, le service auquel vous tentez d'accéder n'est pas disponible pour le moment. Nous nous excusons de cet inconvénient.",
 }

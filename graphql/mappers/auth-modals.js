@@ -1,12 +1,12 @@
-import clientQuery from '../client'
-
 export async function getAuthModalsContent() {
-  const queryAuthModals = require('../queries/auth-modals.graphql')
-  const authModals = await clientQuery(queryAuthModals)
+  const query = await fetch(
+    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`
+  )
+  const response = await query.json()
 
-  const resSignedOutContent = authModals.data.youHaveBeenSignedOut.item || {}
+  const resSignedOutContent = response.data.youHaveBeenSignedOut.item || {}
 
-  const resStaySignedIn = authModals.data.staySignedIn.item || {}
+  const resStaySignedIn = response.data.staySignedIn.item || {}
 
   const mappedPopupSignedOut = {
     en: {
