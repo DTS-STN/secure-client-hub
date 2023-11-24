@@ -49,10 +49,7 @@ export async function getDecisionReviewsContent() {
             id: appealFragment.scFragments[0].scId,
             text: appealFragment.scFragments[0].scLinkTextEn,
             areaLabel: appealFragment.scFragments[0].scLinkTextAssistiveEn,
-            link: buildLink(
-              appealFragment.scFragments[0].schURLType,
-              appealFragment.scFragments[0].scDestinationURLEn
-            ),
+            link: appealFragment.scFragments[0].scDestinationURLEn,
             betaPopUp: askFragment.scFragments[0].schBetaPopUp,
           },
         },
