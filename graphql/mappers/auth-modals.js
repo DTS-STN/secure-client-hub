@@ -1,9 +1,27 @@
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-auth-modals`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
+
 export async function getAuthModalsContent() {
-  const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`,
-    { next: { revalidate: 1200 } }
-  )
-  const response = await query.json()
+  const response = await getCachedContent()
 
   const resSignedOutContent = response.data.youHaveBeenSignedOut.item || {}
 
