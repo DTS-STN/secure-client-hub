@@ -82,7 +82,7 @@ resources:
     cpu: 200m
     memory: 1024Mi
   limits:
-    cpu: 1000m
+    cpu: 1500m
     memory: 2048Mi
 healthChecks:
     livenessDelay: 120
@@ -108,6 +108,6 @@ autoscaling:
   name: service-canada-client-hub
   minReplicas: 2
   maxReplicas: 40
-  targetCPUUtilization: 70
+  targetCPUUtilization: 65
   labels:
     app.kubernetes.io/name: service-canada-client-hub
