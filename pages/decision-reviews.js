@@ -125,7 +125,7 @@ export default function DecisionReviews(props) {
           onClick={(e) => {
             if (props.content.content[1].button.betaPopUp) {
               e.preventDefault()
-              props.openModal(props.content.content[0].button.link, 'betaModal')
+              props.openModal(props.content.content[1].button.link, 'betaModal')
             }
           }}
         ></Button>

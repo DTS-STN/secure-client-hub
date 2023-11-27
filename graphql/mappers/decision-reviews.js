@@ -52,10 +52,10 @@ export async function getDecisionReviewsContent() {
             text: appealFragment.scFragments[0].scLinkTextEn,
             areaLabel: appealFragment.scFragments[0].scLinkTextAssistiveEn,
             link: buildLink(
-              askFragment.scFragments[0].schURLType,
-              askFragment.scFragments[0].scDestinationURLEn
+              appealFragment.scFragments[0].schURLType,
+              appealFragment.scFragments[0].scDestinationURLEn
             ),
-            betaPopUp: askFragment.scFragments[0].schBetaPopUp,
+            betaPopUp: appealFragment.scFragments[0].schBetaPopUp,
           },
         },
       ],
@@ -98,7 +98,7 @@ export async function getDecisionReviewsContent() {
               appealFragment.scFragments[0].schURLType,
               appealFragment.scFragments[0].scDestinationURLFr
             ),
-            betaPopUp: askFragment.scFragments[0].schBetaPopUp,
+            betaPopUp: appealFragment.scFragments[0].schBetaPopUp,
           },
         },
       ],
