@@ -1,8 +1,27 @@
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-contact-landing-page`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
+
 export async function getContactUsContent() {
-  const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`
-  )
-  const response = await query.json()
+  const response = await getCachedContent()
 
   const introFragment = findFragmentByScId(response, 'contact-us-intro')
 
