@@ -1,14 +1,48 @@
 import { buildLink } from '../../lib/links'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedBannerContent() {
+  return cachified({
+    key: `content-opt-out-banner`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
+
+function getCachedDictionaryContent() {
+  return cachified({
+    key: `content-aem-dictionary`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDictionaryV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getBetaBannerContent() {
-  const queryOptOut = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`
-  )
-  const queryDictionary = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDictionaryV1`
-  )
-  const resOptOut = await queryOptOut.json()
-  const resDictionary = await queryDictionary.json()
+  const resOptOut = await getCachedBannerContent()
+  const resDictionary = await getCachedDictionaryContent()
   const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 

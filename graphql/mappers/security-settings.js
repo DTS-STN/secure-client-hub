@@ -1,10 +1,28 @@
 import { buildLink } from '../../lib/links'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-security-settings`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getSecuritySettingsContent() {
-  const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`
-  )
-  const response = await query.json()
+  const response = await getCachedContent()
 
   const enLookingForFragment = findFragmentByScId(
     response,
