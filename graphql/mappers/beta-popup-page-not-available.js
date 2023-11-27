@@ -1,8 +1,27 @@
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-beta-popup-not-available`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpPageNotAvailableV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
+
 export async function getBetaPopupNotAvailableContent() {
-  const query = await fetch(
-    `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpPageNotAvailableV1`
-  )
-  const response = await query.json()
+  const response = await getCachedContent()
 
   const content = response.data.schContentV1ByPath.item
   const fallbackContent = {
