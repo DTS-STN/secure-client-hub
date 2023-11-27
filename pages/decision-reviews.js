@@ -64,7 +64,7 @@ export default function DecisionReviews(props) {
         title={props.content.heading}
         className="mb-2"
       />
-      <section id="">
+      <section id="step1">
         <Markdown
           options={{
             overrides: {
@@ -97,7 +97,7 @@ export default function DecisionReviews(props) {
           }
         }}
       ></Button>
-      <section id="">
+      <section id="step2">
         <Markdown
           options={{
             overrides: {
@@ -117,20 +117,18 @@ export default function DecisionReviews(props) {
         >
           {props.content.content[1].content}
         </Markdown>
-        <button
-          className="flex flex-row text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4"
+        <Button
           id={props.content.content[1].button.id}
-          data-testid={props.content.content[1].button.id}
-          alt={props.content.content[1].button.areaLabel}
-        >
-          <a
-            target="_blank"
-            href={props.content.content[1].button.link}
-            rel="noreferrer noopener"
-          >
-            {props.content.content[1].button.text}
-          </a>
-        </button>
+          style="primary"
+          text={props.content.content[1].button.text}
+          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          onClick={(e) => {
+            if (props.content.content[1].button.betaPopUp) {
+              e.preventDefault()
+              props.openModal(props.content.content[1].button.link, 'betaModal')
+            }
+          }}
+        ></Button>
       </section>
     </div>
   )
