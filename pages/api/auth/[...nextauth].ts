@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth'
+import { NextAuthOptions } from 'next-auth'
 
 import { getLogger } from '../../../logging/log-util'
 
@@ -6,10 +7,7 @@ import { getLogger } from '../../../logging/log-util'
 const logger = getLogger('next-auth')
 logger.level = 'warn'
 
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
-export default NextAuth({
-  // https://next-auth.js.org/configuration/providers/oauth
+export const authOptions: NextAuthOptions = {
   providers: [
     {
       id: 'ecasProvider',
@@ -31,8 +29,14 @@ export default NextAuth({
         token_endpoint_auth_signing_alg: 'RS256',
         id_token_signed_response_alg: 'RS512',
       },
+      token: {
+        url: process.env.AUTH_ECAS_TOKEN,
+        params: {
+          scope: 'openid profile',
+        },
+      },
       jwks: {
-        keys: [JSON.parse(process.env.AUTH_PRIVATE)],
+        keys: [JSON.parse(process.env.AUTH_PRIVATE ?? '{}')],
       },
       userinfo: process.env.AUTH_ECAS_USERINFO,
       idToken: true,
@@ -46,11 +50,14 @@ export default NextAuth({
   ],
   theme: {
     colorScheme: 'light',
+    logo: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg',
   },
-  session: { jwt: true },
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
-    async jwt({ token, user, account }) {
-      return token
+    async jwt({ token, account }) {
+      return { ...token, ...account }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -77,4 +84,5 @@ export default NextAuth({
   pages: {
     signIn: '/auth/login/',
   },
-})
+}
+export default NextAuth(authOptions)
