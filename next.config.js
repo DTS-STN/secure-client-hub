@@ -74,8 +74,8 @@ const securityHeaders = [
 ]
 
 module.exports = {
-  env: {
-    LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+  publicRuntimeConfig: {
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL ?? 'info',
   },
   reactStrictMode: true,
   //

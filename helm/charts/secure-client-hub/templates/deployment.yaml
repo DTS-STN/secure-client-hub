@@ -43,14 +43,14 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ .Values.livenessPath }}
+              path: {{ .Values.healthChecks.livenessPath }}
               port: http
-            initialDelaySeconds: {{ .Values.livenessDelay }}
+            initialDelaySeconds: {{ .Values.healthChecks.livenessDelay }}
           readinessProbe:
             httpGet:
-              path: {{ .Values.readinessPath }}
+              path: {{ .Values.healthChecks.readinessPath }}
               port: http
-            initialDelaySeconds: {{ .Values.readinessDelay }}
+            initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
