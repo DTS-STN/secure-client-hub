@@ -25,7 +25,7 @@ extraEnv:
   - name: OTEL_ENVIRONMENT
     value: {{ .Environment.Name }}
   - name: AEM_GRAPHQL_ENDPOINT
-    value: {{ env "AEM_GRAPHQL_ENDPOINT" }}
+    value: {{ env "AEM_GRAPHQL_ENDPOINT" | quote }}
   - name: MSCA_BASE_URL
     value: {{ env "MSCA_BASE_URL" }}
   - name: MSCA_EQ_BASE_URL
@@ -36,8 +36,6 @@ extraEnv:
   - name: AUTH_DISABLED
     value: {{ env "AUTH_DISABLED" | quote }}
   {{- end }}
-  - name: AEM_GRAPHQL_ENDPOINT
-    value: {{ env "AEM_GRAPHQL_ENDPOINT" | quote }}
   - name: NEXTAUTH_URL
     value: {{ env "NEXTAUTH_URL" }}
   - name: CLIENT_ID
