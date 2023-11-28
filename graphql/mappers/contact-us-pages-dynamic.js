@@ -135,7 +135,6 @@ export async function getContactUsPage(id) {
                   id: row.scId,
                   title: row.scTitleFr,
                   label: row.scTitleFr,
-                  title: row.scTitleFr,
                   color: row.scBackgroundColour,
                   items: row.scItems.map((contentItem) => {
                     if (contentItem.scContentFr) {
