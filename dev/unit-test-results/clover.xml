@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1701182494219" clover="3.2.0">
-  <project timestamp="1701182494219" name="All files">
-    <metrics statements="547" coveredstatements="288" conditionals="708" coveredconditionals="321" methods="206" coveredmethods="85" elements="1461" coveredelements="694" complexity="0" loc="547" ncloc="547" packages="8" files="50" classes="50"/>
+<coverage generated="1701192913818" clover="3.2.0">
+  <project timestamp="1701192913818" name="All files">
+    <metrics statements="535" coveredstatements="288" conditionals="704" coveredconditionals="321" methods="200" coveredmethods="85" elements="1439" coveredelements="694" complexity="0" loc="535" ncloc="535" packages="7" files="49" classes="49"/>
     <package name="components">
       <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="145" methods="71" coveredmethods="37"/>
       <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
@@ -574,24 +574,6 @@
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="pages.api.auth">
-      <metrics statements="12" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
-      <file name="[...nextauth].js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/auth/[...nextauth].js">
-        <metrics statements="12" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages.auth">
