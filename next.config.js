@@ -1,3 +1,5 @@
+// @ts-check
+
 const REWRITES = [
   {
     source: '/contactez-nous',
@@ -73,9 +75,15 @@ const securityHeaders = [
   },
 ]
 
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = {
   env: {
-    LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL ?? 'info',
+  },
+  eslint: {
+    dirs: ['.'], //or ['pages', 'hooks']
   },
   reactStrictMode: true,
   //
@@ -118,3 +126,5 @@ module.exports = {
     return REWRITES
   },
 }
+
+module.exports = nextConfig
