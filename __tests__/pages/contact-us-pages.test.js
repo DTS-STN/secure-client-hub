@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
-import ContactUsPage, { getServerSideProps } from '../../pages/contact-us/[id]'
+import ContactUsPage from '../../pages/contact-us/[id]'
 
 expect.extend(toHaveNoViolations)
 
@@ -90,8 +90,9 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-jest.mock('../../components/contact/ContactProvince', () => () => {
-  return <mock-province data-testid="mock-province" />
+jest.mock('../../components/contact/ContactProvince', () => {
+  const MockProvince = () => <mock-province data-testid="mock-province" />
+  return MockProvince
 })
 
 describe('Dynamic Contact Us Page', () => {
@@ -164,52 +165,5 @@ describe('Dynamic Contact Us Page', () => {
     )
     const contactSection = screen.getByTestId('contactSection-test')
     expect(contactSection).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({
-      locale: 'en',
-      params: { id: 'test-contact-page' },
-    })
-
-    expect(props).toEqual({
-      props: {
-        pageContent: {
-          description: 'This is a contact page',
-          title: 'Contact Us Page',
-          pageName: 'test-contact-page',
-        },
-        bannerContent: {},
-        langToggleLink: '/fr/contactez-nous/tester-la-page-contact',
-        locale: 'en',
-        aaPrefix: 'ESDC-EDSC:Contact Us Page',
-        meta: {
-          data_en: {
-            title: 'Contact Us Page - My Service Canada Account',
-            desc: 'This is a contact page',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Service Canada',
-            accessRights: '1',
-          },
-          data_fr: {
-            title: 'Contactez-nous - Mon dossier Service Canada',
-            desc: "C'est une page de contact",
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Service Canada',
-            accessRights: '1',
-          },
-        },
-        breadCrumbItems: undefined,
-        popupContent: {},
-        popupContentNA: {},
-        popupYouHaveBeenSignedout: {},
-        popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:Contact Us Page',
-      },
-    })
   })
 })

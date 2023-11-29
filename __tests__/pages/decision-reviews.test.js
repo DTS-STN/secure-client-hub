@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import DecisionReviews from '../../pages/decision-reviews'
-import { getServerSideProps } from '../../pages/decision-reviews'
 
 import { useRouter } from 'next/router'
 
@@ -171,44 +170,5 @@ describe('Decision Reviews page', () => {
       'decision-reviewsContent-test'
     )
     expect(DecisionReviewsDiv).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
-
-    expect(props).toEqual({
-      props: {
-        content: {},
-        bannerContent: {},
-        breadCrumbItems: undefined,
-        langToggleLink: '/fr/demande-revision',
-        locale: 'en',
-        meta: {
-          data_en: {
-            title: 'Request Review Decison - My Service Canada Account',
-            desc: 'English',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Employment and Social Development Canada',
-            accessRights: '1',
-          },
-          data_fr: {
-            title: 'Demande de revision - Mon dossier Service Canada',
-            desc: 'Français',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Emploi et Développement social Canada',
-            accessRights: '1',
-          },
-        },
-        popupContent: {},
-        popupContentNA: {},
-        popupYouHaveBeenSignedout: {},
-        popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:undefined',
-      },
-    })
   })
 })

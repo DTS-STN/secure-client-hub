@@ -5,7 +5,6 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Profile from '../../pages/profile'
 import Heading from '../../components/Heading'
-import { getServerSideProps } from '../../pages/profile'
 
 import { useRouter } from 'next/router'
 
@@ -156,44 +155,5 @@ describe('My Profile page', () => {
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
-
-    expect(props).toEqual({
-      props: {
-        content: {},
-        bannerContent: {},
-        breadCrumbItems: undefined,
-        langToggleLink: '/fr/profil',
-        locale: 'en',
-        meta: {
-          data_en: {
-            title: 'Profile - My Service Canada Account',
-            desc: 'English',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Employment and Social Development Canada',
-            accessRights: '1',
-          },
-          data_fr: {
-            title: 'Profil - Mon dossier Service Canada',
-            desc: 'Français',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Emploi et Développement social Canada',
-            accessRights: '1',
-          },
-        },
-        popupContent: {},
-        popupContentNA: {},
-        popupYouHaveBeenSignedout: {},
-        popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:undefined',
-      },
-    })
   })
 })

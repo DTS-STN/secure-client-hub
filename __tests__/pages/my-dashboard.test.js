@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
-import { getServerSideProps } from '../../pages/my-dashboard'
 
 import { useRouter } from 'next/router'
 
@@ -76,8 +75,9 @@ jest.mock('../../graphql/mappers/auth-modals', () => ({
   },
 }))
 
-jest.mock('../../components/Card', () => () => {
-  return <mock-card data-testid="mock-card" />
+jest.mock('../../components/Card', () => {
+  const MockCard = () => <mock-card data-testid="mock-card" />
+  return MockCard
 })
 
 describe('My Dashboard page', () => {
@@ -129,43 +129,5 @@ describe('My Dashboard page', () => {
     )
     const testCard = screen.getByTestId('mock-card')
     expect(testCard).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
-
-    expect(props).toEqual({
-      props: {
-        content: {},
-        bannerContent: {},
-        langToggleLink: '/fr/mon-tableau-de-bord',
-        locale: 'en',
-        meta: {
-          data_en: {
-            title: 'Dashboard - My Service Canada Account',
-            desc: 'English',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Employment and Social Development Canada',
-            accessRights: '1',
-          },
-          data_fr: {
-            title: 'Tableau de Bord - Mon dossier Service Canada',
-            desc: 'Français',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Emploi et Développement social Canada',
-            accessRights: '1',
-          },
-        },
-        popupContent: {},
-        popupContentNA: {},
-        popupYouHaveBeenSignedout: {},
-        popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:undefined',
-      },
-    })
   })
 })

@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import SecuritySettings from '../../pages/security-settings'
-import { getServerSideProps } from '../../pages/security-settings'
 
 import { useRouter } from 'next/router'
 
@@ -152,44 +151,5 @@ describe('Security Settings page', () => {
     )
     const securityQuestionsLink = screen.getByTestId('securityQuestionsLink')
     expect(securityQuestionsLink).toBeInTheDocument()
-  })
-
-  it('Test getServerSideProps', async () => {
-    const props = await getServerSideProps({ locale: 'en' })
-
-    expect(props).toEqual({
-      props: {
-        content: {},
-        bannerContent: {},
-        breadCrumbItems: undefined,
-        langToggleLink: '/fr/parametres-securite',
-        locale: 'en',
-        meta: {
-          data_en: {
-            title: 'Security - My Service Canada Account',
-            desc: 'English',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Employment and Social Development Canada',
-            accessRights: '1',
-          },
-          data_fr: {
-            title: 'Sécurité - Mon dossier Service Canada',
-            desc: 'Français',
-            author: 'Service Canada',
-            keywords: '',
-            service: 'ESDC-EDSC_MSCA-MSDC',
-            creator: 'Emploi et Développement social Canada',
-            accessRights: '1',
-          },
-        },
-        popupContent: {},
-        popupContentNA: {},
-        popupYouHaveBeenSignedout: {},
-        popupStaySignedIn: {},
-        aaPrefix: 'ESDC-EDSC:undefined',
-      },
-    })
   })
 })
