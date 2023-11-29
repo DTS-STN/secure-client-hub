@@ -4,7 +4,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MyDashboard from '../../pages/my-dashboard'
-
 import { useRouter } from 'next/router'
 
 // mocks useRouter to be able to use component' router.asPath
@@ -21,58 +20,6 @@ jest.mock('../../lib/auth', () => ({
     return true
   },
   Redirect: jest.fn(),
-}))
-
-// mocks home mapper
-jest.mock('../../graphql/mappers/my-dashboard', () => ({
-  getMyDashboardContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../lib/auth', () => ({
-  AuthIsDisabled: () => {
-    return new Promise(function (resolve, reject) {
-      resolve(true)
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
-  getBetaBannerContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
-  getBetaPopupExitContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
-  getBetaPopupNotAvailableContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/auth-modals', () => ({
-  getAuthModalsContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({
-        mappedPopupStaySignedIn: { en: {}, fr: {} },
-        mappedPopupSignedOut: { en: {}, fr: {} },
-      })
-    })
-  },
 }))
 
 jest.mock('../../components/Card', () => {

@@ -24,58 +24,6 @@ jest.mock('../../lib/auth', () => ({
   Redirect: jest.fn(),
 }))
 
-// mocks profile mapper
-jest.mock('../../graphql/mappers/profile', () => ({
-  getProfileContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../lib/auth', () => ({
-  AuthIsDisabled: () => {
-    return new Promise(function (resolve, reject) {
-      resolve(true)
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-banner-opt-out', () => ({
-  getBetaBannerContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-exit', () => ({
-  getBetaPopupExitContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/beta-popup-page-not-available', () => ({
-  getBetaPopupNotAvailableContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({ en: {}, fr: {} })
-    })
-  },
-}))
-
-jest.mock('../../graphql/mappers/auth-modals', () => ({
-  getAuthModalsContent: () => {
-    return new Promise(function (resolve, reject) {
-      resolve({
-        mappedPopupStaySignedIn: { en: {}, fr: {} },
-        mappedPopupSignedOut: { en: {}, fr: {} },
-      })
-    })
-  },
-}))
-
 jest.mock('../../components/Heading')
 // return props.title from Heading mock
 Heading.mockImplementation((props) => props.title)
