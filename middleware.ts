@@ -9,9 +9,6 @@ export async function middleware(req: NextRequest) {
   const { locale, pathname } = nextUrl
   const logger = getLogger('middleware')
 
-  console.log(process.env.ENVIRONMENT)
-
-  logger.trace(`Environment: [${process.env.NODE_ENV}]`)
   logger.trace(`Incoming request for [${url}]`)
 
   if (
