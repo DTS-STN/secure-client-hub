@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -283,15 +283,7 @@
 <a name='L218'></a><a href='#L218'>218</a>
 <a name='L219'></a><a href='#L219'>219</a>
 <a name='L220'></a><a href='#L220'>220</a>
-<a name='L221'></a><a href='#L221'>221</a>
-<a name='L222'></a><a href='#L222'>222</a>
-<a name='L223'></a><a href='#L223'>223</a>
-<a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a>
-<a name='L226'></a><a href='#L226'>226</a>
-<a name='L227'></a><a href='#L227'>227</a>
-<a name='L228'></a><a href='#L228'>228</a>
-<a name='L229'></a><a href='#L229'>229</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L221'></a><a href='#L221'>221</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,13 +302,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -413,14 +404,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -538,11 +522,8 @@ export function Header(props) {
     menuProps,
     breadCrumbItems,
     topnavProps,
-    useParentContainer,
     dataGcAnalyticsCustomClickInstitutionVariable,
   } = props
-&nbsp;
-  const containerClass = useParentContainer ? <span class="branch-0 cbranch-no" title="branch not covered" >'' </span>: 'ds-container'
 &nbsp;
   return (
     &lt;div className="font-display" id={id} data-testid="header"&gt;
@@ -554,9 +535,7 @@ export function Header(props) {
         displayAlternateLink={topnavProps.displayAlternateLink}
       /&gt;
       &lt;header&gt;
-        &lt;div
-          className={`${containerClass} flex flex-col sm:flex-row md:pb-3.5`}
-        &gt;
+        &lt;div className={`sch-container flex flex-col sm:flex-row md:pb-3.5`}&gt;
           &lt;div className="flex flex-row sm:pt-3"&gt;
             &lt;div className="pt-1.5"&gt;
               &lt;Image
@@ -566,7 +545,11 @@ export function Header(props) {
                     : <span class="branch-1 cbranch-no" title="branch not covered" >'md:max-h-[35px] max-h-[20px]'</span>
                 } md:max-w-[360px] max-w-[206px]`}
                 src={lang === 'en' ? logoFile : <span class="branch-1 cbranch-no" title="branch not covered" >logoFileFR}</span>
-                alt="Government of Canada"
+                alt={
+                  lang === 'en'
+                    ? 'Government of Canada'
+                    : <span class="branch-1 cbranch-no" title="branch not covered" >'Governement du Canada'</span>
+                }
                 width={819}
                 height={76}
               /&gt;
@@ -607,7 +590,7 @@ export function Header(props) {
           /&gt;
         )}
         {breadCrumbItems &amp;&amp; (
-          &lt;div className={containerClass}&gt;
+          &lt;div className="sch-container"&gt;
             &lt;Breadcrumb items={breadCrumbItems} /&gt;
           &lt;/div&gt;
         )}
@@ -619,7 +602,6 @@ export function Header(props) {
 Header.defaultProps = {
   lang: 'en',
   id: Math.random(),
-  useParentContainer: false,
   searchProps: {
     onChange: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
     onSubmit: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
@@ -659,11 +641,6 @@ Header.propTypes = {
   linkPath: PropTypes.string,
 &nbsp;
   /**
-   * useParentContainer: bool to choose whether to use the partent container or header's container
-   **/
-  useParentContainer: PropTypes.bool,
-&nbsp;
-  /**
    * Search Props:
    *
    * onChange: can add function for when typing in the search bar
@@ -699,7 +676,6 @@ Header.propTypes = {
       })
     ),
     hasNoMenu: PropTypes.bool,
-    useParentContainer: PropTypes.bool,
   }),
 &nbsp;
   /**
@@ -754,7 +730,7 @@ Header.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-22T21:26:54.415Z
+                at 2023-11-30T20:51:44.663Z
             </div>
         <script src="../prettify.js"></script>
         <script>

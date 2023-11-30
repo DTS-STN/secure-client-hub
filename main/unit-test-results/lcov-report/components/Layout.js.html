@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/42</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
@@ -355,10 +355,7 @@
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
 <a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -402,10 +399,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -586,8 +579,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -652,7 +648,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
-import { LayoutContainer } from '@dts-stn/service-canada-design-system'
 import { useState, cloneElement } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
@@ -712,6 +707,8 @@ export default function <span class="fstat-no" title="function not covered" >Lay
           bannerText={props.bannerContent.bannerText || ''}
           bannerLink={props.bannerContent.bannerLink || ''}
           bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
+          bannerSummaryTitle={props.bannerContent.bannerSummaryTitle || ''}
+          bannerSummaryContent={props.bannerContent.bannerSummaryContent || ''}
           bannerButtonText={props.bannerContent.bannerButtonText || ''}
           bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
           id={props.bannerContent.id || ''}
@@ -796,14 +793,8 @@ export default function <span class="fstat-no" title="function not covered" >Lay
           onSubmit: function <span class="fstat-no" title="function not covered" >noRefCheck(</span>) {},
         }}
       /&gt;
-      &lt;main id="mainContent"&gt;
-        {display.fullscreen ? (
-          props.children
-        ) : (
-          &lt;LayoutContainer&gt;
-            {cloneElement(props.children, { openModal, closeModal })}
-          &lt;/LayoutContainer&gt;
-        )}
+      &lt;main id="mainContent" className="sch-container grid gap-[30px]"&gt;
+        {cloneElement(props.children, { openModal, closeModal })}
       &lt;/main&gt;
       &lt;MultiModal
         openModalWithLink={openModalWithLink}
@@ -848,8 +839,12 @@ Layout.defaultProps = {
   bannerContent: {
     bannerBoldText: '',
     bannerText: '',
+&nbsp;
     bannerLink: '',
     bannerLinkHref: '',
+&nbsp;
+    bannerSummaryTitle: '',
+    bannerSummaryContent: '',
     bannerButtonText: '',
     bannerButtonLink: '',
     icon: '',
@@ -899,11 +894,14 @@ Layout.propTypes = {
   bannerContent: PropTypes.shape({
     bannerBoldText: PropTypes.string.isRequired,
     bannerText: PropTypes.string.isRequired,
+&nbsp;
     bannerLink: PropTypes.string.isRequired,
     bannerLinkHref: PropTypes.string.isRequired,
+&nbsp;
+    bannerSummaryTitle: PropTypes.string.isRequired,
+    bannerSummaryContent: PropTypes.string.isRequired,
     bannerButtonText: PropTypes.string.isRequired,
     bannerButtonLink: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
   }),
   /*
    * popupContent
@@ -938,10 +936,6 @@ Layout.propTypes = {
      * Toggle use of DS footer (default false)
      */
     hideFooter: PropTypes.bool,
-    /*
-     * Toggle the LayoutContainer from Design System (default on/true)
-     */
-    fullscreen: PropTypes.bool,
   }),
   breadCrumbItems: PropTypes.array,
 }
@@ -952,7 +946,7 @@ Layout.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-22T21:26:54.415Z
+                at 2023-11-30T20:51:44.663Z
             </div>
         <script src="../prettify.js"></script>
         <script>
