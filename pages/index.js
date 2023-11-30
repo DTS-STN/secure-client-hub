@@ -6,7 +6,7 @@ export default function Index(props) {
   return (
     <div
       role="main"
-      className="mx-auto px-6 my-5  p-12 h-screen bg-cover bg-center bg-splash-page"
+      className="mx-auto px-6 p-12 h-screen bg-cover bg-center bg-splash-page"
     >
       <MetaData language="en" data={props.meta}></MetaData>
       <div className="flex flex-col justify-center items-center m-auto">
