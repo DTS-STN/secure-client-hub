@@ -20,7 +20,7 @@ extraEnv:
           key: example-secret-password         
 */}}
 extraEnv:
-  - name: NODE_ENV
+  - name: ENVIRONMENT
     value: {{ env "ENVIRONMENT" | default "development" }}
   - name: LOGGING_LEVEL
     value: {{ env "LOGGING_LEVEL" | default "error" }}
