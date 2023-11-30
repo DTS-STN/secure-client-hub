@@ -107,7 +107,7 @@ module.exports = {
       },
       backgroundImage: () => ({
         'footer-parliament-image': 'url(../public/landscape.png)',
-        // 'splash-page': 'url(../public/sp-bg-1.jpg)',
+        'splash-page': 'url(../public/sp-bg-1.jpg)',
       }),
       boxShadow: {
         card: '0px 2px 8px rgba(0, 0, 0, 0.25)',
