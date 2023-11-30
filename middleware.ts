@@ -9,6 +9,7 @@ export async function middleware(req: NextRequest) {
   const { locale, pathname } = nextUrl
   const logger = getLogger('middleware')
 
+  logger.trace(`Environment: [${process.env.NODE_ENV}]`)
   logger.trace(`Incoming request for [${url}]`)
 
   if (
@@ -26,6 +27,11 @@ export async function middleware(req: NextRequest) {
   //Redirect for index page as it's meant to be bilingual so we don't want users navigating to /en or /fr
   if ((locale === 'en' || locale === 'fr') && pathname === '/') {
     return NextResponse.redirect(new URL(`/`, url))
+  }
+
+  //Redirect for index page as we don't want users navigating to this page on prod
+  if (pathname === '/' && process.env.NODE_ENV === 'production') {
+    return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
   }
 
   return NextResponse.next()

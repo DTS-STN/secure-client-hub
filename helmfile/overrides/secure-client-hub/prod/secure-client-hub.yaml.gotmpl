@@ -20,6 +20,8 @@ extraEnv:
           key: example-secret-password         
 */}}
 extraEnv:
+  - name: NODE_ENV
+    value: {{ env "NODE_ENV" | default "production" }}
   - name: LOGGING_LEVEL
     value: {{ env "LOGGING_LEVEL" | default "error" }}
   - name: OTEL_ENVIRONMENT
