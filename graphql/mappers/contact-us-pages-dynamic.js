@@ -1,8 +1,27 @@
-import clientQuery from '../client'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-dynamic-contact-us`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsDynamicV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getContactUsPage(id) {
-  const query = require('../queries/contact-us-pages-dynamic.graphql')
-  const response = await clientQuery(query)
+  const response = await getCachedContent()
 
   const queryData = response.data.schPageV1List.items.find(
     (page) => page.scId === id
@@ -52,6 +71,7 @@ export async function getContactUsPage(id) {
                               id: destination.scId,
                               poBox: destination.scPostalBoxEn,
                               postal: destination.scPostalCode,
+                              station: destination.scPostalStationEn,
                               program: destination.scProgramEn,
                               province: destination.scProvTerrAbbrEnum,
                               recipient: destination.scRecipientEn,
@@ -115,7 +135,6 @@ export async function getContactUsPage(id) {
                   id: row.scId,
                   title: row.scTitleFr,
                   label: row.scTitleFr,
-                  title: row.scTitleFr,
                   color: row.scBackgroundColour,
                   items: row.scItems.map((contentItem) => {
                     if (contentItem.scContentFr) {
@@ -131,6 +150,7 @@ export async function getContactUsPage(id) {
                               id: destination.scId,
                               poBox: destination.scPostalBoxFr,
                               postal: destination.scPostalCode,
+                              station: destination.scPostalStationFr,
                               program: destination.scProgramFr,
                               province: destination.scProvTerrAbbrEnum,
                               recipient: destination.scRecipientFr,

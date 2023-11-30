@@ -7,9 +7,9 @@ COPY . .
 FROM base AS build
 
 # Build envs
-ARG LOGGING_LEVEL
+ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
-ARG AEM_GRAPHQL_ENDPOINT
+ARG AEM_GRAPHQL_ENDPOINT=https://www.canada.ca/graphql/execute.json/decd-endc/
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 ARG AUTH_ECAS_BASE_URL
 ENV AUTH_ECAS_BASE_URL=$AUTH_ECAS_BASE_URL
@@ -51,12 +51,12 @@ COPY --from=build --chown=${user}:${group} /build/next.config.js ./
 COPY --from=build --chown=${user}:${group} /build/package*.json ./
 COPY --from=build --chown=${user}:${group} /build/.next ./.next
 COPY --from=build --chown=${user}:${group} /build/public ./public
-COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
+# COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
 
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
 # Runtime envs -- will default to build args if no env values are specified at docker run
-ARG LOGGING_LEVEL
+ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT

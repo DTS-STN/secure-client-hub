@@ -1,11 +1,48 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedBannerContent() {
+  return cachified({
+    key: `content-opt-out-banner`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaBannerOptOutV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
+
+function getCachedDictionaryContent() {
+  return cachified({
+    key: `content-aem-dictionary`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDictionaryV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getBetaBannerContent() {
-  const queryOptOut = require('../queries/beta-banner-opt-out.graphql')
-  const queryDictionary = require('../queries/dictionary.graphql')
-  const resOptOut = await clientQuery(queryOptOut)
-  const resDictionary = await clientQuery(queryDictionary)
+  const resOptOut = await getCachedBannerContent()
+  const resDictionary = await getCachedDictionaryContent()
   const resOptOutContent = resOptOut.data.schContentV1ByPath.item || {}
   const resDictionaryContent = resDictionary.data.dictionaryV1List.items || {}
 

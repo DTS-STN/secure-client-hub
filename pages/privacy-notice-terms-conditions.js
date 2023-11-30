@@ -10,6 +10,8 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
@@ -53,7 +55,11 @@ export default function PrivacyCondition(props) {
             ? 'en/privacy-notice-terms-conditions'
             : 'fr/avis-confidentialite-modalites'
         }
-        accountPageLink="/"
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
       />
     )
   }
@@ -86,18 +92,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl text-gray-darker font-display font-bold mt-10 mb-3',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3',
+                    'list-[lower-latin] [&>li>ol]:list-[lower-latin] [&>li>ol>li]:list-[lower-roman] [&>li>ol>li>ol]:list-[lower-roman] ml-4 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
               a: {
@@ -117,18 +124,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-latin] ml-2 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
             },
@@ -141,18 +149,19 @@ export default function PrivacyCondition(props) {
             overrides: {
               h2: {
                 props: {
-                  className: 'text-3xl font-display font-bold mt-10 mb-3',
+                  className:
+                    'text-3xl font-display font-bold mt-10 mb-3 text-gray-darker',
                 },
               },
               p: {
                 props: {
-                  className: 'mb-3',
+                  className: 'mb-3 text-gray-darker',
                 },
               },
               ol: {
                 props: {
                   className:
-                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3',
+                    'break-all xs:break-normal list-[lower-decimal] [&>li>ol]:list-[lower-latin] [&>li>ol>li>ol]:list-[lower-roman] ml-2 sm:mx-8 mb-3 text-gray-darker',
                 },
               },
               a: {
@@ -182,8 +191,11 @@ export default function PrivacyCondition(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('privacy-notice-terms-and-conditions')

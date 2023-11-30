@@ -28,5 +28,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/`, url))
   }
 
+  //Redirect for index page as we don't want users navigating to this page on prod
+  if (pathname === '/' && process.env.ENVIRONMENT === 'production') {
+    return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
+  }
+
   return NextResponse.next()
 }

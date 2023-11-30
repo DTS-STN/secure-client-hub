@@ -1,12 +1,31 @@
-import clientQuery from '../client'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-auth-modals`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getAuthModalsContent() {
-  const queryAuthModals = require('../queries/auth-modals.graphql')
-  const authModals = await clientQuery(queryAuthModals)
+  const response = await getCachedContent()
 
-  const resSignedOutContent = authModals.data.youHaveBeenSignedOut.item || {}
+  const resSignedOutContent = response.data.youHaveBeenSignedOut.item || {}
 
-  const resStaySignedIn = authModals.data.staySignedIn.item || {}
+  const resStaySignedIn = response.data.staySignedIn.item || {}
 
   const mappedPopupSignedOut = {
     en: {

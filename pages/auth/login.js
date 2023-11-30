@@ -15,15 +15,20 @@ export default function Login(props) {
       //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
       if (props.authDisabled) {
         setTimeout(() => {
-          router.push('/my-dashboard')
+          props.locale === 'en'
+            ? router.push('/en/my-dashboard')
+            : router.push('/fr/mon-tableau-de-bord')
         }, 3000)
         return
       }
       signIn('ecasProvider', {
-        callbackUrl: `${window.location.origin}/my-dashboard`,
+        callbackUrl:
+          props.locale === 'en'
+            ? `${window.location.origin}/en/my-dashboard`
+            : `${window.location.origin}/fr/mon-tableau-de-bord`,
       })
     }
-  }, [router.isReady, props.authDisabled, router])
+  }, [router.isReady, props.authDisabled, router, props.locale])
 
   return (
     <div role="main">

@@ -1,10 +1,29 @@
-import clientQuery from '../client'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-beta-popup-not-available`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpPageNotAvailableV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getBetaPopupNotAvailableContent() {
-  const query = require('../queries/beta-popup-page-not-available.graphql')
-  const res = await clientQuery(query)
+  const response = await getCachedContent()
 
-  const content = res.data.schContentV1ByPath.item
+  const content = response.data.schContentV1ByPath.item
   const fallbackContent = {
     scId: 'beta-popup-page-not-available',
     scHeadingEn: 'Exiting beta version',

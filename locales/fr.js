@@ -151,7 +151,7 @@ export default {
     "Le serveur Web auquel vous tentez d'accéder est actuellement surchargé ou pourrait être temporairement hors service à des fins d'entretien. Nous nous excusons de cet inconvénient. ",
   errorPageNextText: 'Que faire?',
   errorTextLinkCommon: '• Accéder à la ',
-  errorTextLinkCommon_2: "page d'accueil de Service Canada",
+  errorTextLinkCommon_2: "page d'accueil de Mon dossier Service Canada",
   errorTextLinkCommonLink:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   errorAuthTextLinkCommon: '• Accéder au ',
@@ -162,4 +162,9 @@ export default {
   error500TextLink: '• Actualisez la page ou réessayez plus tard',
   error503TextLink: '• Réessayez plus tard',
   errorPageType: 'Erreur',
+
+  //Maintenance page
+  maintenanceTitle: 'Le service est actuellement indisponible',
+  maintenanceText:
+    "En raison des maintenances des systèmes, le service auquel vous tentez d'accéder n'est pas disponible pour le moment. Nous nous excusons de cet inconvénient.",
 }

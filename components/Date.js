@@ -4,7 +4,11 @@ export function Date(props) {
   const { id, label, date } = props
   const dateFormatted = date ? date.split('T')[0] : 'NA'
   return (
-    <dl id={id} data-testid={id} className="mt-8 py-2 font-body">
+    <dl
+      id={id}
+      data-testid={id}
+      className="mt-8 py-2 font-body text-gray-darker"
+    >
       <dt className="inline">{label}</dt>
       <dd className="inline">
         {dateFormatted === 'NA' ? (

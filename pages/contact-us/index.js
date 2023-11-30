@@ -9,6 +9,9 @@ import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
+import { ErrorPage } from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { getLogger } from '../../logging/log-util'
@@ -31,10 +34,38 @@ export default function ContactLanding(props) {
     }
   }, [throttledOnClickEvent])
 
+  const errorCode =
+    props.content?.err ||
+    props.bannerContent?.err ||
+    props.popupContent?.err ||
+    props.popupContentNA?.err ||
+    props.authModals?.err
+  if (errorCode !== undefined) {
+    return (
+      <ErrorPage
+        lang={props.locale !== undefined ? props.locale : 'en'}
+        errType={errorCode}
+        isAuth={false}
+        homePageLink={
+          props.locale === 'en'
+            ? 'en/privacy-notice-terms-conditions'
+            : 'fr/avis-confidentialite-modalites'
+        }
+        accountPageLink={
+          props?.locale === 'en'
+            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
+            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
+        }
+      />
+    )
+  }
+
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl">{props.content.subHeading}</p>
+      <p className="mt-3 mb-8 text-xl text-gray-darker">
+        {props.content.subHeading}
+      </p>
       <ul className="list-disc" data-cy="contact-task-list">
         {props.content.links.map((link) => {
           return (
@@ -50,7 +81,7 @@ export default function ContactLanding(props) {
               >
                 {link.linkTitle}
               </Link>
-              <p className="text-xl">{link.linkDescription}</p>
+              <p className="text-xl text-gray-darker">{link.linkDescription}</p>
             </li>
           )
         })}
@@ -59,8 +90,11 @@ export default function ContactLanding(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('contact-us')

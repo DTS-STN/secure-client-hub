@@ -1,9 +1,28 @@
-import clientQuery from '../client'
 import { buildLink } from '../../lib/links'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-profile`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getProfileContent() {
-  const query = require('../queries/profile.graphql')
-  const response = await clientQuery(query)
+  const response = await getCachedContent()
 
   // LookingFor Fragment
   const enLookingForFragment = findFragmentByScId(

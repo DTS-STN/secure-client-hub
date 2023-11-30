@@ -15,7 +15,7 @@ export default function PhaseBanner(props) {
       <div className="sch-container py-4 " data-cy="topBanner">
         <div className="pb-4 md:pb-0" role="alert">
           <div className="pb-2 md:pb-6">
-            <p className=" text-xl" data-cy="learnMoreAbtBeta">
+            <p className=" text-xl text-gray-darker" data-cy="learnMoreAbtBeta">
               <span className="font-bold">{props.bannerBoldText || ''} </span>
               {props.bannerText}
             </p>

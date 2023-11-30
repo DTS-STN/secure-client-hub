@@ -1,10 +1,29 @@
-import clientQuery from '../client'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-exit-beta-modal`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchBetaPopUpExitV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getBetaPopupExitContent() {
-  const query = require('../queries/beta-popup-exit.graphql')
-  const res = await clientQuery(query)
+  const response = await getCachedContent()
 
-  const content = res.data.schContentV1ByPath.item || {}
+  const content = response.data.schContentV1ByPath.item || {}
   const fallbackContent = {
     scId: 'beta-popup-exit',
     scHeadingEn: 'Exiting beta version',

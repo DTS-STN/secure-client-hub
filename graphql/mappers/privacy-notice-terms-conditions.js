@@ -1,8 +1,27 @@
-import clientQuery from '../client'
+import { cachified } from 'cachified'
+import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+
+function getCachedContent() {
+  return cachified({
+    key: `content-privacy-and-toc`,
+    cache,
+    async getFreshValue() {
+      const response = await fetch(
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`
+      )
+
+      if (!response.ok) {
+        return null
+      }
+
+      return response.json()
+    },
+    ttl,
+  })
+}
 
 export async function getPrivacyConditionContent() {
-  const query = require('../queries/privacy-notice-terms-conditions.graphql')
-  const response = await clientQuery(query)
+  const response = await getCachedContent()
 
   const alertFragment = findFragmentByScId(
     response,

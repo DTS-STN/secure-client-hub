@@ -31,6 +31,10 @@ const REWRITES = [
     source: '/avis-confidentialite-modalites',
     destination: '/privacy-notice-terms-conditions',
   },
+  {
+    source: '/demande-revision',
+    destination: '/decision-reviews',
+  },
 ]
 
 const securityHeaders = [
@@ -70,8 +74,9 @@ const securityHeaders = [
 ]
 
 module.exports = {
-  env: {
-    LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+  publicRuntimeConfig: {
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL ?? 'info',
+    ENVIRONMENT: process.env.ENVIRONMENT,
   },
   reactStrictMode: true,
   //
