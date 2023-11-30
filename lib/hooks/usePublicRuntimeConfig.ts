@@ -7,14 +7,14 @@ import { publicRuntimeConfigSchema } from '../schemas/public-runtime-config-sche
 export const usePublicRuntimeConfig = () => {
   const config = getConfig()
 
-  const { LOGGING_LEVEL, NODE_ENV } = config?.publicRuntimeConfig ?? {}
+  const { LOGGING_LEVEL, ENVIRONMENT } = config?.publicRuntimeConfig ?? {}
 
   return useMemo(
     () =>
       publicRuntimeConfigSchema.validateSync({
         LOGGING_LEVEL,
-        NODE_ENV,
+        ENVIRONMENT,
       }),
-    [LOGGING_LEVEL, NODE_ENV]
+    [LOGGING_LEVEL, ENVIRONMENT]
   )
 }

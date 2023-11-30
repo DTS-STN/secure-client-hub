@@ -21,7 +21,7 @@ extraEnv:
 */}}
 extraEnv:
   - name: NODE_ENV
-    value: {{ env "NODE_ENV" | default "development" }}
+    value: {{ env "ENVIRONMENT" | default "development" }}
   - name: LOGGING_LEVEL
     value: {{ env "LOGGING_LEVEL" | default "error" }}
   - name: OTEL_ENVIRONMENT

@@ -9,6 +9,8 @@ export async function middleware(req: NextRequest) {
   const { locale, pathname } = nextUrl
   const logger = getLogger('middleware')
 
+  console.log(process.env.ENVIRONMENT)
+
   logger.trace(`Environment: [${process.env.NODE_ENV}]`)
   logger.trace(`Incoming request for [${url}]`)
 
@@ -30,7 +32,7 @@ export async function middleware(req: NextRequest) {
   }
 
   //Redirect for index page as we don't want users navigating to this page on prod
-  if (pathname === '/' && process.env.NODE_ENV === 'production') {
+  if (pathname === '/' && process.env.ENVIRONMENT === 'production') {
     return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
   }
 
