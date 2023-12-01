@@ -40,7 +40,12 @@ export default function MetaData(props) {
         <meta name="dcterms.service" content={d.service} />
         {/* eslint-disable */}
 
-        <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
+        {process.env.ENVIRONMENT === 'production' ? (
+          <script src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"></script>
+        ) : (
+          <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
+        )}
+
         {/*eslint-enable */}
       </Head>
     </>
