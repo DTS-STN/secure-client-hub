@@ -32,7 +32,6 @@ spec:
         {{- range .hosts }}
         - {{ . | quote }}
         {{- end }}
-      secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
   rules:
