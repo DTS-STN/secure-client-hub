@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1701377504643" clover="3.2.0">
-  <project timestamp="1701377504643" name="All files">
+<coverage generated="1701439933621" clover="3.2.0">
+  <project timestamp="1701439933621" name="All files">
     <metrics statements="551" coveredstatements="215" conditionals="704" coveredconditionals="208" methods="200" coveredmethods="78" elements="1455" coveredelements="501" complexity="0" loc="551" ncloc="551" packages="7" files="49" classes="49"/>
     <package name="components">
       <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="145" methods="71" coveredmethods="37"/>
@@ -381,10 +381,10 @@
       <file name="index.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/index.js">
         <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
       </file>
       <file name="maintenance.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/maintenance.js">
         <metrics statements="5" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="1"/>
