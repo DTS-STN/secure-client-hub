@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         id_token_encrypted_response_alg: 'RSA-OAEP-256',
         id_token_encrypted_response_enc: 'A256GCM',
         token_endpoint_auth_signing_alg: 'RS256',
-        id_token_signed_response_alg: 'RS512',
+        id_token_signed_response_alg: 'RS256',
       },
       token: {
         url: process.env.AUTH_ECAS_TOKEN,
