@@ -116,6 +116,7 @@ ingress:
     tls:
       - hosts:
           - {{ requiredEnv "BASE_DOMAIN" | lower }}
+        secretName: {{ requiredEnv "TLS_SECRET_NAME" | lower }}
     hosts:
     - host: {{ requiredEnv "BASE_DOMAIN" | lower }}
       paths:
