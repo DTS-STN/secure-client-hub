@@ -52,6 +52,8 @@ extraEnv:
     value: {{ env "AUTH_ECAS_USERINFO" }}
   - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
     value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
+  - name: AUTH_ECAS_REFRESH_ENDPOINT
+    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
