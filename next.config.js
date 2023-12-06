@@ -69,7 +69,7 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self' *.omtrdc.net *.2o7.net; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com; connect-src 'self' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com https://srv241-s2.lab.hrdc-drhc.gc.ca; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' 'unsafe-inline' https://*.demdex.net; img-src 'self' data: https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com;",
+      "default-src 'self' *.omtrdc.net *.2o7.net https://assets.adobedtm.com; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net; connect-src 'self' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net https://srv241-s2.lab.hrdc-drhc.gc.ca; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' https://*.demdex.net *.omtrdc.net *.2o7.net https://assets.adobedtm.com; img-src 'self' data: https: https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net;",
   },
 ]
 
