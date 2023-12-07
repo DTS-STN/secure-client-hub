@@ -76,7 +76,7 @@ describe('Validate Profile page', () => {
 
   it('Validate the "Security Settings" click navigates to Security Settings Page', () => {
     cy.wait(3000)
-    profilePo.LookingForSecurityLink().click({ froce: true })
+    profilePo.LookingForSecurityLink().click({ force: true })
     securityPo.SecurityUrlEN()
     securityPo.SecurityHeaderEN()
   })
