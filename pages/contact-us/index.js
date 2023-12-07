@@ -9,6 +9,8 @@ import { getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import { ErrorPage } from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
@@ -88,8 +90,11 @@ export default function ContactLanding(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect(locale)
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('contact-us')
@@ -156,7 +161,7 @@ export async function getServerSideProps({ req, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -165,7 +170,7 @@ export async function getServerSideProps({ req, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },

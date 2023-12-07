@@ -4,7 +4,10 @@ import MetaData from '../components/MetaData'
 
 export default function Index(props) {
   return (
-    <div role="main" className="container mx-auto px-6 my-5 bg-slate-300 p-12">
+    <div
+      role="main"
+      className="mx-auto px-6 p-12 h-screen bg-cover bg-center bg-splash-page"
+    >
       <MetaData language="en" data={props.meta}></MetaData>
       <div className="flex flex-col justify-center items-center m-auto">
         <div className="z-10 bg-white h-auto w-[18.75rem] xl:w-[31.25rem]">
@@ -86,7 +89,7 @@ export async function getServerSideProps({ locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -95,7 +98,7 @@ export async function getServerSideProps({ locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },

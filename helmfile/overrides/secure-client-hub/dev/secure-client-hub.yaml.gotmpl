@@ -20,10 +20,56 @@ extraEnv:
           key: example-secret-password         
 */}}
 extraEnv:
+  - name: ENVIRONMENT
+    value: {{ env "ENVIRONMENT" | default "development" }}
   - name: LOGGING_LEVEL
     value: {{ env "LOGGING_LEVEL" | default "error" }}
   - name: OTEL_ENVIRONMENT
     value: {{ .Environment.Name }}
+  - name: AEM_GRAPHQL_ENDPOINT
+    value: {{ env "AEM_GRAPHQL_ENDPOINT" | quote }}
+  - name: MSCA_BASE_URL
+    value: {{ env "MSCA_BASE_URL" }}
+  - name: MSCA_EQ_BASE_URL
+    value: {{ env "MSCA_EQ_BASE_URL" }}
+  - name: MSCA_ECAS_RASC_BASE_URL
+    value: {{ env "MSCA_ECAS_RASC_BASE_URL" }}
+  {{- if env "AUTH_DISABLED" }}
+  - name: AUTH_DISABLED
+    value: {{ env "AUTH_DISABLED" | quote }}
+  {{- end }}
+  - name: NEXTAUTH_URL
+    value: {{ env "NEXTAUTH_URL" }}
+  - name: CLIENT_ID
+    value: {{ env "CLIENT_ID" }}
+  - name: AUTH_ECAS_BASE_URL
+    value: {{ env "AUTH_ECAS_BASE_URL" }}
+  - name: AUTH_ECAS_WELL_KNOWN
+    value: {{ env "AUTH_ECAS_WELL_KNOWN" }}
+  - name: AUTH_ECAS_AUTHORIZATION
+    value: {{ env "AUTH_ECAS_AUTHORIZATION" }}
+  - name: AUTH_ECAS_USERINFO
+    value: {{ env "AUTH_ECAS_USERINFO" }}
+  - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
+    value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
+  - name: AUTH_ECAS_REFRESH_ENDPOINT
+    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
+  - name: AUTH_PRIVATE
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: AUTH_PRIVATE
+  - name: CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: CLIENT_SECRET
+  - name: NEXTAUTH_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: NEXTAUTH_SECRET
+  {{- if env "OTEL_API_KEY" }}
   - name: OTEL_API_KEY
     valueFrom:
       secretKeyRef:
@@ -40,6 +86,7 @@ extraEnv:
   - name: OTEL_TRACES_ENDPOINT
     value: https://dynatrace.dev-dp.admin.dts-stn.com/e/21a07aef-852b-4d9b-aa87-ee5f8b79f8c9/api/v2/otlp/v1/traces
   {{ end }}
+  {{- end }}
 deployment: 
   labels: 
     branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
@@ -67,19 +114,24 @@ ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 8k
+      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     tls:
       - hosts:
           - {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
-        secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
     hosts:
     - host: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
       paths:
         - path: /
           pathType: ImplementationSpecific
+replicaCount: 2
 resources:
   requests:
     cpu: 200m
-    memory: 512Mi
+    memory: 1024Mi
+  limits:
+    cpu: 1500m
+    memory: 2048Mi
 healthChecks:
     livenessDelay: 15
     readinessDelay: 15
@@ -98,4 +150,17 @@ secrets:
     labels: 
       app.kubernetes.io/name: service-canada-client-hub
     stringData:
+  {{- if env "OTEL_API_KEY" }}
       OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
+  {{- end }}
+      AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
+      CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
+      NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
+autoscaling:
+  enabled: true
+  name: service-canada-client-hub
+  minReplicas: 2
+  maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
+  targetCPUUtilization: 65
+  labels:
+    app.kubernetes.io/name: service-canada-client-hub

@@ -13,7 +13,7 @@ releases:
   - name: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}
     chart: ../helm/charts/{{ requiredEnv "PROJECT" }}
     values:
-      - overrides/{{ requiredEnv "PROJECT" }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
+      - overrides/{{ requiredEnv "PROJECT" }}/{{ .Environment.Name | lower }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
     labels:
         category: dts
         app: {{ requiredEnv "PROJECT" }}

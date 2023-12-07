@@ -13,6 +13,8 @@ import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
 import { getLogger } from '../../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import { ErrorPage } from '../../components/ErrorPage'
 import React from 'react'
 import { useEffect, useCallback, useMemo } from 'react'
@@ -97,8 +99,11 @@ export default function ContactUsPage(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale, params }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect(locale)
+export async function getServerSideProps({ req, res, locale, params }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger(params.id)
@@ -187,7 +192,7 @@ export async function getServerSideProps({ req, locale, params }) {
       desc: pageContent.en.description,
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Service Canada',
       accessRights: '1',
     },
@@ -196,7 +201,7 @@ export async function getServerSideProps({ req, locale, params }) {
       desc: pageContent.fr.description,
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Service Canada',
       accessRights: '1',
     },
