@@ -73,6 +73,7 @@ export default function SecuritySettings(props) {
         data-testid="securityQuestionsLink"
         aria-label={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
+        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
       >
         {props.content.securityQuestions.linkTitle.text}
       </Link>
