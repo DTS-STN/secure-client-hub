@@ -32,6 +32,7 @@ export default function Button(props) {
     <button
       className={`flex flex-row ${style} py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${props.className} `}
       onClick={props.onClick}
+      data-gc-analytics-customclick={`${props.refPageAA}:${props.text}`}
       type={props.type}
       id={props.id}
       disabled={props.disabled}
@@ -75,6 +76,7 @@ export default function Button(props) {
       onClick={props.onClick}
       id={props.id}
       disabled={props.disabled}
+      data-gc-analytics-customclick={`${props.refPageAA}:${props.id}`}
       role="button"
     >
       {props.icon && !props.iconEnd ? (
