@@ -352,7 +352,10 @@
 <a name='L287'></a><a href='#L287'>287</a>
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -446,7 +449,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -479,9 +481,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -729,19 +735,21 @@ export default function DecisionReviews(props) {
         &gt;
           {props.content.content[0].content}
         &lt;/Markdown&gt;
+        &lt;Button
+          id={props.content.content[0].button.id}
+          style="primary"
+          text={props.content.content[0].button.text}
+          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >            if (props.content.content[0].button.betaPopUp) {</span>
+<span class="cstat-no" title="statement not covered" >              e.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >              props.openModal(props.content.content[0].button.link, 'betaModal')</span>
+            }
+          }}
+          refPageAA={props.aaPrefix}
+        &gt;&lt;/Button&gt;
       &lt;/section&gt;
-      &lt;Button
-        id={props.content.content[0].button.id}
-        style="primary"
-        text={props.content.content[0].button.text}
-        className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-        onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >          if (props.content.content[0].button.betaPopUp) {</span>
-<span class="cstat-no" title="statement not covered" >            e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >            props.openModal(props.content.content[0].button.link, 'betaModal')</span>
-          }
-        }}
-      &gt;&lt;/Button&gt;
+&nbsp;
       &lt;section id="step2"&gt;
         &lt;Markdown
           options={{
@@ -766,13 +774,14 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
           onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >            if (props.content.content[1].button.betaPopUp) {</span>
 <span class="cstat-no" title="statement not covered" >              e.preventDefault()</span>
 <span class="cstat-no" title="statement not covered" >              props.openModal(props.content.content[1].button.link, 'betaModal')</span>
             }
           }}
+          refPageAA={props.aaPrefix}
         &gt;&lt;/Button&gt;
       &lt;/section&gt;
     &lt;/div&gt;
@@ -836,7 +845,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -845,7 +854,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -937,7 +946,7 @@ DecisionReviews.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-05T20:14:06.824Z
+                at 2023-12-12T21:24:13.689Z
             </div>
         <script src="../prettify.js"></script>
         <script>
