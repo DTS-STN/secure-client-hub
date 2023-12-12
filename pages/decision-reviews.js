@@ -86,19 +86,21 @@ export default function DecisionReviews(props) {
         >
           {props.content.content[0].content}
         </Markdown>
+        <Button
+          id={props.content.content[0].button.id}
+          style="primary"
+          text={props.content.content[0].button.text}
+          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          onClick={(e) => {
+            if (props.content.content[0].button.betaPopUp) {
+              e.preventDefault()
+              props.openModal(props.content.content[0].button.link, 'betaModal')
+            }
+          }}
+          refPageAA={props.aaPrefix}
+        ></Button>
       </section>
-      <Button
-        id={props.content.content[0].button.id}
-        style="primary"
-        text={props.content.content[0].button.text}
-        className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-        onClick={(e) => {
-          if (props.content.content[0].button.betaPopUp) {
-            e.preventDefault()
-            props.openModal(props.content.content[0].button.link, 'betaModal')
-          }
-        }}
-      ></Button>
+
       <section id="step2">
         <Markdown
           options={{
@@ -123,13 +125,14 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
           onClick={(e) => {
             if (props.content.content[1].button.betaPopUp) {
               e.preventDefault()
               props.openModal(props.content.content[1].button.link, 'betaModal')
             }
           }}
+          refPageAA={props.aaPrefix}
         ></Button>
       </section>
     </div>
