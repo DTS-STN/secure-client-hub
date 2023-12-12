@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1702396456709" clover="3.2.0">
-  <project timestamp="1702396456709" name="All files">
+<coverage generated="1702401031359" clover="3.2.0">
+  <project timestamp="1702401031359" name="All files">
     <metrics statements="551" coveredstatements="215" conditionals="704" coveredconditionals="207" methods="200" coveredmethods="78" elements="1455" coveredelements="500" complexity="0" loc="551" ncloc="551" packages="7" files="49" classes="49"/>
     <package name="components">
       <metrics statements="187" coveredstatements="110" conditionals="281" coveredconditionals="144" methods="71" coveredmethods="37"/>
@@ -47,10 +47,10 @@
       </file>
       <file name="Collapse.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Collapse.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
       </file>
       <file name="ContextualAlert.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ContextualAlert.js">
         <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="7" methods="1" coveredmethods="1"/>

@@ -135,14 +135,14 @@ BRH:1
 end_of_record
 TN:
 SF:components/Collapse.js
-FN:3,Collapse
+FN:4,Collapse
 FNF:1
 FNH:1
 FNDA:2,Collapse
-DA:4,2
 DA:5,2
-DA:25,2
+DA:6,2
 DA:29,2
+DA:33,2
 LF:4
 LH:4
 BRF:0
