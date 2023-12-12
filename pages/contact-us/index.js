@@ -78,6 +78,7 @@ export default function ContactLanding(props) {
                 href={`/${props.locale}/${
                   props.content.pageName
                 }/${link.linkDestination.split('/').pop()}`}
+                data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
               >
                 {link.linkTitle}
               </Link>
@@ -161,7 +162,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -170,7 +171,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },

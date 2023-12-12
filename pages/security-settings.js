@@ -73,6 +73,7 @@ export default function SecuritySettings(props) {
         data-testid="securityQuestionsLink"
         aria-label={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
+        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
       >
         {props.content.securityQuestions.linkTitle.text}
       </Link>
@@ -164,7 +165,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -173,7 +174,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
