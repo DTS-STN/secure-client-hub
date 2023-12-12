@@ -78,7 +78,7 @@ export default function ContactLanding(props) {
                 href={`/${props.locale}/${
                   props.content.pageName
                 }/${link.linkDestination.split('/').pop()}`}
-                data-gc-analytics-customclick={`ESDC-EDSC:${link.linkTitle}`}
+                data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
               >
                 {link.linkTitle}
               </Link>
