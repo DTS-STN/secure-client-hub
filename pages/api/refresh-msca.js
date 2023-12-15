@@ -3,12 +3,7 @@
  *
  */
 
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-} from '../../lib/auth'
+import { AuthIsDisabled, AuthIsValid, ValidateSession } from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -43,7 +38,6 @@ export default async function handler(req, res) {
       } else {
         res.status(302).json({ success: sessionValid, id: id })
       }
-      //if validateSession endpoint returns false, redirect to /auth/login
     } else {
       res.status(500).json({ success: false })
       logger.error('Authentication is not valid')
