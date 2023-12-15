@@ -1,5 +1,6 @@
 import Markdown from 'markdown-to-jsx'
 import ContactSectionRow from './ContactSectionRow'
+import { programs } from '../../lib/programs'
 
 export default function ContactSection({ title, intro, id, details }) {
   return (
@@ -30,6 +31,7 @@ export default function ContactSection({ title, intro, id, details }) {
             highlight: x.color,
             button: x.items[0].button,
             buttonURL: x.items[0].link,
+            refPageAA: `Contact ${programs(id.split('-')[0])}`,
           })
         )}
       </dl>

@@ -97,6 +97,7 @@ export default function DecisionReviews(props) {
               props.openModal(props.content.content[0].button.link, 'betaModal')
             }
           }}
+          refPageAA={props.aaPrefix}
         ></Button>
       </section>
 
@@ -131,6 +132,7 @@ export default function DecisionReviews(props) {
               props.openModal(props.content.content[1].button.link, 'betaModal')
             }
           }}
+          refPageAA={props.aaPrefix}
         ></Button>
       </section>
     </div>
