@@ -52,6 +52,8 @@ extraEnv:
     value: {{ env "AUTH_ECAS_USERINFO" }}
   - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
     value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
+  - name: AUTH_ECAS_REFRESH_ENDPOINT
+    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -109,13 +111,15 @@ service:
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
 ingress:
-    enabled: false
+    enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 8k
+      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     tls:
       - hosts:
           - {{ requiredEnv "BASE_DOMAIN" | lower }}
-        secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+        secretName: {{ requiredEnv "TLS_SECRET_NAME" | lower }}
     hosts:
     - host: {{ requiredEnv "BASE_DOMAIN" | lower }}
       paths:
@@ -157,7 +161,7 @@ autoscaling:
   enabled: true
   name: service-canada-client-hub
   minReplicas: 2
-  maxReplicas: 40
+  maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
   targetCPUUtilization: 65
   labels:
     app.kubernetes.io/name: service-canada-client-hub

@@ -48,7 +48,7 @@ describe('Layout with default text', () => {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -57,7 +57,7 @@ describe('Layout with default text', () => {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -81,7 +81,7 @@ describe('Layout with default text', () => {
         locale="en"
         meta={meta}
         display={display}
-        children={aaChildrenProps}
+        // children={aaChildrenProps}
         popupContentNA={popupContentNA}
       />
     )
@@ -94,7 +94,7 @@ describe('Layout with default text', () => {
         locale="en"
         meta={meta}
         display={display}
-        children={aaChildrenProps}
+        // children={aaChildrenProps}
         popupContentNA={popupContentNA}
       />
     )
@@ -117,7 +117,7 @@ describe('Layout with default text', () => {
         locale="en"
         meta={meta}
         display={display}
-        children={aaChildrenProps}
+        // children={aaChildrenProps}
         popupContentNA={popupContentNA}
       />
     )

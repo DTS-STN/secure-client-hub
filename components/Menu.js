@@ -56,9 +56,9 @@ export function Menu(props) {
           <button
             id="dropdownNavbarLink"
             onClick={() => setShowDropdown((e) => !e)}
-            data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:${
-              showDropdown ? 'Menu Contract' : 'Expand Menu'
-            }`}
+            // data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:${
+            //   showDropdown ? 'Menu Contract' : 'Expand Menu'
+            // }`}
             aria-haspopup="true"
             data-testid="menuButton"
             aria-expanded={showDropdown}
