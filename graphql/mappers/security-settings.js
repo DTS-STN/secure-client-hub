@@ -45,7 +45,6 @@ export async function getSecuritySettingsContent() {
     response,
     'security-settings-main-content'
   ).scFragments.find((element) => element.scId === 'security-questions')
-  console.log(securityQuestions)
 
   const mappedSecurity = {
     en: {
