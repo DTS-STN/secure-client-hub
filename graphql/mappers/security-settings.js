@@ -45,6 +45,7 @@ export async function getSecuritySettingsContent() {
     response,
     'security-settings-main-content'
   ).scFragments.find((element) => element.scId === 'security-questions')
+  console.log(securityQuestions)
 
   const mappedSecurity = {
     en: {
@@ -76,6 +77,7 @@ export async function getSecuritySettingsContent() {
             securityQuestions.scDestinationURLEn
           ),
         },
+        schBetaPopUp: securityQuestions.schBetaPopUp,
         subTitle: securityQuestions.scDescriptionEn.json[0].content[0].value,
       },
     },
@@ -108,6 +110,7 @@ export async function getSecuritySettingsContent() {
             securityQuestions.scDestinationURLFr
           ),
         },
+        popUpBeta: securityQuestions.schBetaPopUp,
         subTitle: securityQuestions.scDescriptionFr.json[0].content[0].value,
       },
     },

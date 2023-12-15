@@ -16,6 +16,7 @@ import { getServerSession } from 'next-auth/next'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { ErrorPage } from '../components/ErrorPage'
+import Button from '../components/Button'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
@@ -67,16 +68,23 @@ export default function SecuritySettings(props) {
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
-      <Link
-        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+      <Button
         id="securityQuestionsLink"
-        data-testid="securityQuestionsLink"
-        aria-label={props.content.securityQuestions.linkTitle.text}
-        href={props.content.securityQuestions.linkTitle.link}
+        style="link"
+        text={props.content.securityQuestions.linkTitle.text}
+        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
         data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-      >
-        {props.content.securityQuestions.linkTitle.text}
-      </Link>
+        onClick={(e) => {
+          if (props.content.securityQuestions.schBetaPopUp) {
+            e.preventDefault()
+            props.openModal(
+              props.content.securityQuestions.linkTitle.link,
+              'betaModal'
+            )
+          }
+        }}
+      ></Button>
+
       <p className="mb-8 text-xl text-gray-darker">
         {props.content.securityQuestions.subTitle}
       </p>
