@@ -23,6 +23,7 @@ export function Breadcrumb(props) {
                     </span>
                   )}
                   <Link
+                    data-cy={'breadcrumb-' + item.text}
                     href={item.link}
                     className="font-body hover:text-blue-hover focus:text-blue-hover underline"
                   >
