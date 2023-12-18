@@ -22,7 +22,7 @@ export default function ContactLanding(props) {
   const [response, setResponse] = useState()
   const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
     []
