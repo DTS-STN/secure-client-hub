@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Date } from '../components/Date'
 import Heading from '../components/Heading'
@@ -19,12 +19,18 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
 import { ErrorPage } from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    []
+  )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 15000, { trailing: false }),
     [onClickEvent]
@@ -32,11 +38,15 @@ export default function PrivacyCondition(props) {
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 302) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
