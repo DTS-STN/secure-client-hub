@@ -28,7 +28,7 @@ export default function ContactLanding(props) {
     []
   )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
+    () => throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 
