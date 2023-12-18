@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">34.14% </span>
+                <span class="strong">37.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/41</span>
+                <span class='fraction'>17/45</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.6% </span>
+                <span class="strong">20.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/51</span>
+                <span class='fraction'>11/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35% </span>
+                <span class="strong">37.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/40</span>
+                <span class='fraction'>17/45</span>
             </div>
         
             
@@ -415,7 +415,18 @@
 <a name='L350'></a><a href='#L350'>350</a>
 <a name='L351'></a><a href='#L351'>351</a>
 <a name='L352'></a><a href='#L352'>352</a>
-<a name='L353'></a><a href='#L353'>353</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -439,16 +450,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -767,7 +787,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useCallback, useMemo } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Date } from '../components/Date'
 import Heading from '../components/Heading'
@@ -788,24 +808,34 @@ import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
 import { ErrorPage } from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 &nbsp;
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 &nbsp;
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >fetch('/api/refresh-msca'),</span> [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+<span class="fstat-no" title="function not covered" >    as</span>ync () =&gt; <span class="cstat-no" title="statement not covered" >setResponse(await fetch('/api/refresh-msca')),</span>
+    []
+  )
   const throttledOnClickEvent = useMemo(
-    () =&gt; throttle(onClickEvent, 15000, { trailing: false }),
+    () =&gt; throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 &nbsp;
   useEffect(() =&gt; {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (response?.status === 401) {
+<span class="cstat-no" title="statement not covered" >      router.push(`/${props.locale}/auth/logout`)</span>
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () =&gt; {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 &nbsp;
   const errorCode =
     props.content?.err ||
@@ -1126,7 +1156,7 @@ PrivacyCondition.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-18T16:01:42.411Z
+                at 2023-12-18T16:55:04.019Z
             </div>
         <script src="../prettify.js"></script>
         <script>
