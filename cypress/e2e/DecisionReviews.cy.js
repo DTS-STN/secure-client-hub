@@ -9,7 +9,7 @@ describe('Validate Request a review of a decision page', () => {
     cy.checkA11y()
   })
 
-  it('The heading and button for Ask Service Canada to reconsider has href EN', () => {
+  it('Heading is visile and Ask Service Canada to reconsider has href EN', () => {
     cy.get('#DecisionReviews-heading').as('pageHeading')
     cy.url().should('contains', '/decision-reviews')
     cy.get('#DecisionReviews-heading')
@@ -21,7 +21,7 @@ describe('Validate Request a review of a decision page', () => {
       .should('have.attr', 'href')
       .and('contain', '/sc/msca-mdsc/portal-portail/pro/reqr-demr/?Lang=eng')
   })
-  it('The heading and button for Ask Service Canada to reconsider has href FR', () => {
+  it('Heading is visible and Ask Service Canada to reconsider has href FR', () => {
     cy.get('[data-cy="lang1"]').click()
     cy.get('[data-cy="lang1"] > span').should('have.text', 'English')
     cy.get('#DecisionReviews-heading')
@@ -55,5 +55,9 @@ describe('Validate Request a review of a decision page', () => {
         'contain',
         '/sc/msca-mdsc/portal-portail/pro/sstgdis-tssdgsr/?Lang=fra'
       )
+  })
+  it('The breadcrumb returns user to dashboard', () => {
+    cy.get('[data-cy="breadcrumb-My dashboard"]').click()
+    cy.url().should('include', '/my-dashboard')
   })
 })
