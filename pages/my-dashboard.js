@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -19,25 +19,35 @@ import React from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
 import { ErrorPage } from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    []
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
+    () => throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
