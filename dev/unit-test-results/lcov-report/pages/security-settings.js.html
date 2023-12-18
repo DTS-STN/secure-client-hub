@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">27.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/40</span>
+                <span class='fraction'>12/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.68% </span>
+                <span class="strong">15.09% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/51</span>
+                <span class='fraction'>8/53</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.76% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/13</span>
+                <span class='fraction'>4/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.76% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/39</span>
+                <span class='fraction'>12/42</span>
             </div>
         
             
@@ -328,7 +328,16 @@
 <a name='L263'></a><a href='#L263'>263</a>
 <a name='L264'></a><a href='#L264'>264</a>
 <a name='L265'></a><a href='#L265'>265</a>
-<a name='L266'></a><a href='#L266'>266</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -400,6 +409,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -611,6 +627,7 @@ import { getServerSession } from 'next-auth/next'
 import { useEffect, useCallback, useMemo } from 'react'
 import throttle from 'lodash.throttle'
 import { ErrorPage } from '../components/ErrorPage'
+import Button from '../components/Button'
 &nbsp;
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
@@ -662,16 +679,23 @@ export default function SecuritySettings(props) {
       &lt;p className="mt-3 mb-8 text-xl text-gray-darker"&gt;
         {props.content.subHeading}
       &lt;/p&gt;
-      &lt;Link
-        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+      &lt;Button
         id="securityQuestionsLink"
-        data-testid="securityQuestionsLink"
-        aria-label={props.content.securityQuestions.linkTitle.text}
-        href={props.content.securityQuestions.linkTitle.link}
+        style="link"
+        text={props.content.securityQuestions.linkTitle.text}
+        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
         data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-      &gt;
-        {props.content.securityQuestions.linkTitle.text}
-      &lt;/Link&gt;
+        onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >          if (props.content.securityQuestions.schBetaPopUp) {</span>
+<span class="cstat-no" title="statement not covered" >            e.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >            props.openModal(</span>
+              props.content.securityQuestions.linkTitle.link,
+              'betaModal'
+            )
+          }
+        }}
+      &gt;&lt;/Button&gt;
+&nbsp;
       &lt;p className="mb-8 text-xl text-gray-darker"&gt;
         {props.content.securityQuestions.subTitle}
       &lt;/p&gt;
@@ -865,7 +889,7 @@ SecuritySettings.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-16T00:34:05.483Z
+                at 2023-12-18T16:01:42.411Z
             </div>
         <script src="../prettify.js"></script>
         <script>
