@@ -37,7 +37,7 @@ export default function SecuritySettings(props) {
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
     //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 302) {
+    if (response?.status === 401) {
       router.push(`/${props.locale}/auth/logout`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup

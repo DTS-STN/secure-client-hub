@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       if (sessionValid) {
         res.status(200).json({ success: sessionValid, id: id })
       } else {
-        res.status(302).json({ success: sessionValid, id: id })
+        res.status(401).json({ success: sessionValid, id: id })
       }
     } else {
       res.status(500).json({ success: false })

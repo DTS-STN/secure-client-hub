@@ -34,7 +34,7 @@ export default function ContactLanding(props) {
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
-    if (response?.status === 302) {
+    if (response?.status === 401) {
       router.push(`/${props.locale}/auth/logout`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup
