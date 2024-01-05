@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@cypress/request": "^3.0.1",
-    "@fortawesome/fontawesome-svg-core": "^6.5.0",
-    "@fortawesome/free-regular-svg-icons": "^6.5.0",
-    "@fortawesome/free-solid-svg-icons": "^6.5.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@opentelemetry/api": "^1.7.0",
     "@opentelemetry/exporter-metrics-otlp-proto": "^0.46.0",
