@@ -5,7 +5,7 @@ import { Menu } from './Menu'
 import Image from 'next/image'
 import logoFile from '../public/sig-blk-en.svg'
 import logoFileFR from '../public/sig-blk-fr.svg'
-import { Language } from './Language'
+import Language from './Language'
 import { Breadcrumb } from './Breadcrumb'
 
 export function Header(props) {

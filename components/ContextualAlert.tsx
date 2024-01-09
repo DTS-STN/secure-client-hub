@@ -1,21 +1,30 @@
-import PropTypes from 'prop-types'
+import { ReactNode } from 'react'
 import Image from 'next/image'
 import success_img from '../public/success_img.svg'
 import warning_img from '../public/warning_img.svg'
 import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
 
-export default function ContextualAlert(props) {
-  const {
-    message_heading,
-    message_body,
-    id,
-    type,
-    alert_icon_id,
-    alert_icon_alt_text,
-    whiteBG,
-  } = props
-  let alert_type =
+interface ContextualAlertProps {
+  id: string
+  type: 'warning' | 'info' | 'success' | 'danger'
+  alert_icon_id: string
+  alert_icon_alt_text: string
+  message_heading: string | ReactNode
+  message_body: string | ReactNode | ReactNode[]
+  whiteBG?: boolean
+}
+
+const ContextualAlert = ({
+  id,
+  type,
+  alert_icon_id,
+  alert_icon_alt_text,
+  message_heading,
+  message_body,
+  whiteBG,
+}: ContextualAlertProps) => {
+  const alert_type =
     type === 'warning'
       ? warning_img
       : type === 'danger'
@@ -23,7 +32,7 @@ export default function ContextualAlert(props) {
       : type === 'info'
       ? info_img
       : success_img
-  let alert_color =
+  const alert_color =
     type === 'warning'
       ? 'border-orange-dark'
       : type === 'danger'
@@ -32,7 +41,7 @@ export default function ContextualAlert(props) {
       ? 'border-brighter-blue-dark'
       : 'border-green-50a'
 
-  let white_BG = whiteBG ? 'bg-white' : ' '
+  const white_BG = whiteBG ? 'bg-white' : ' '
 
   return (
     <div id={id} className={`relative min-w-72 pl-4 sm:pl-6 ${white_BG}`}>
@@ -63,42 +72,4 @@ export default function ContextualAlert(props) {
   )
 }
 
-ContextualAlert.propTypes = {
-  /**
-   * component id
-   */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * alert type
-   */
-  type: PropTypes.oneOf(['warning', 'info', 'success', 'danger']).isRequired,
-
-  /**
-   * id for the alert icon
-   */
-  alert_icon_id: PropTypes.string.isRequired,
-
-  /**
-   * Alternate text for the alert icon
-   */
-  alert_icon_alt_text: PropTypes.string.isRequired,
-
-  /**
-   * heading text
-   */
-  message_heading: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * body text
-   */
-  message_body: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]).isRequired,
-
-  /**
-   * If true the background will be white, default is transparent.
-   */
-  whiteBG: PropTypes.bool,
-}
+export default ContextualAlert
