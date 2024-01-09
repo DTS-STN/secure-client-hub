@@ -77,8 +77,9 @@ export const authOptions: NextAuthOptions = {
     warn(code) {
       logger.warn(code)
     },
-    debug(code) {
-      logger.error(code)
+    debug(code, metadata) {
+      logger.debug(code)
+      logger.debug(metadata)
     },
   },
   pages: {
