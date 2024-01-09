@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import Image from 'next/image'
 
 interface ButtonProps {
@@ -18,7 +18,22 @@ interface ButtonProps {
   refPageAA?: string
 }
 
-const Button: FC<ButtonProps> = (props) => {
+const Button = ({
+  id,
+  style,
+  text,
+  icon,
+  iconAltText,
+  iconEnd,
+  href,
+  type,
+  onClick,
+  disabled,
+  className,
+  attributes,
+  children,
+  refPageAA,
+}: ButtonProps) => {
   const primary =
     'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus'
   const secondary =
@@ -30,91 +45,89 @@ const Button: FC<ButtonProps> = (props) => {
   const link =
     'text-blue-default hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a'
 
-  const style =
-    props.style === 'primary'
+  const buttonStyle =
+    style === 'primary'
       ? primary
-      : props.style === 'secondary'
+      : style === 'secondary'
       ? secondary
-      : props.style === 'supertask'
+      : style === 'supertask'
       ? supertask
-      : props.style === 'danger'
+      : style === 'danger'
       ? danger
-      : props.style === 'link'
+      : style === 'link'
       ? link
       : ''
 
-  return props.href === 'no ref' ? (
+  return href === 'no ref' ? (
     <button
-      className={`flex flex-row ${style} ${
-        props.disabled ? 'cursor-not-allowed' : ''
-      } py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${
-        props.className
-      } `}
-      onClick={props.onClick}
-      data-gc-analytics-customclick={`${props.refPageAA}:${props.text}`}
-      type={props.type}
-      id={props.id}
-      disabled={props.disabled}
-      {...props.attributes}
-      data-testid={props.id}
+      className={`flex flex-row ${buttonStyle} ${
+        disabled ? 'cursor-not-allowed' : ''
+      } py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${className} `}
+      onClick={onClick}
+      data-gc-analytics-customclick={`${refPageAA}:${text}`}
+      type={type}
+      id={id}
+      disabled={disabled}
+      {...attributes}
+      data-testid={id}
     >
-      {props.icon && !props.iconEnd ? (
+      {icon && !iconEnd ? (
         <span className="grid place-items-center h-8 w-8">
           <Image
             width={8}
             height={8}
             className="pr-2 rounded"
-            src={props.icon}
-            alt={props.iconAltText}
+            src={icon}
+            alt={iconAltText}
           />
         </span>
       ) : undefined}
-      {props.text}
-      {props.children}
-      {props.icon && props.iconEnd ? (
+      {text}
+      {children}
+      {icon && iconEnd ? (
         <span className="grid place-items-center h-8 w-8">
           <Image
             width={8}
             height={8}
             className="pl-2 rounded"
-            src={props.icon}
-            alt={props.iconAltText}
+            src={icon}
+            alt={iconAltText}
           />
         </span>
       ) : undefined}
     </button>
   ) : (
     <a
-      href={props.href}
-      className={`flex flex-row ${props.disabled ? 'cursor-not-allowed' : ''} ${
-        props.style !== 'none'
+      href={href}
+      className={`flex flex-row ${disabled ? 'cursor-not-allowed' : ''} ${
+        style !== 'none'
           ? `font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a`
           : ''
-      } focus:ring focus:ring-offset-4 ${props.className} `}
-      onClick={props.onClick}
-      id={props.id}
-      data-gc-analytics-customclick={`${props.refPageAA}:${props.id}`}
+      } focus:ring focus:ring-offset-4 ${className} `}
+      onClick={onClick}
+      id={id}
+      data-gc-analytics-customclick={`${refPageAA}:${id}`}
       role="button"
     >
-      {props.icon && !props.iconEnd ? (
+      {icon && !iconEnd ? (
         <Image
           className="pr-2 rounded"
           width={8}
           height={8}
-          src={props.icon}
-          alt={props.iconAltText}
+          src={icon}
+          alt={iconAltText}
         />
       ) : undefined}
-      {props.text}
-      {props.children}
-      {props.icon && props.iconEnd ? (
+      {text}
+      {children}
+      {icon && iconEnd ? (
         <div className="grid place-items-center">
           <Image
             className="rounded pl-5 pb-3"
             width={8}
             height={8}
-            src={props.icon}
-            alt={props.iconAltText}
+            src={icon}
+            alt={iconAltText}
           />
         </div>
       ) : undefined}
