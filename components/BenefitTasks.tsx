@@ -102,16 +102,9 @@ const BenefitTasks = ({
 BenefitTasks.defaultprops = {
   taskList: [
     {
-      title: '',
-      dataCy: '',
       tasks: [
         {
-          title: '',
-          areaLabel: '',
-          link: '',
           icon: 'question-circle', // To ensure a value is used for FontAwesome icons
-          betaPopUp: '',
-          id: '',
         },
       ],
     },
