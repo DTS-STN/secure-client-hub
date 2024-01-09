@@ -4,7 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import { Breadcrumb } from '../../components/Breadcrumb'
+import Breadcrumb from '../../components/Breadcrumb'
 
 expect.extend(toHaveNoViolations)
 
