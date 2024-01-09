@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704820640368" clover="3.2.0">
-  <project timestamp="1704820640368" name="All files">
-    <metrics statements="572" coveredstatements="211" conditionals="677" coveredconditionals="178" methods="195" coveredmethods="72" elements="1444" coveredelements="461" complexity="0" loc="572" ncloc="572" packages="7" files="43" classes="43"/>
+<coverage generated="1704833739545" clover="3.2.0">
+  <project timestamp="1704833739545" name="All files">
+    <metrics statements="565" coveredstatements="207" conditionals="667" coveredconditionals="175" methods="192" coveredmethods="70" elements="1424" coveredelements="452" complexity="0" loc="565" ncloc="565" packages="7" files="42" classes="42"/>
     <package name="components">
-      <metrics statements="165" coveredstatements="88" conditionals="236" coveredconditionals="109" methods="65" coveredmethods="31"/>
-      <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
-        <metrics statements="7" coveredstatements="4" conditionals="10" coveredconditionals="3" methods="3" coveredmethods="2"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="76" count="2" type="stmt"/>
-      </file>
+      <metrics statements="158" coveredstatements="84" conditionals="226" coveredconditionals="106" methods="62" coveredmethods="29"/>
       <file name="Breadcrumb.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Breadcrumb.js">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="10" count="6" type="stmt"/>
