@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import Image from 'next/image'
 
 interface ButtonProps {
@@ -14,7 +14,7 @@ interface ButtonProps {
   disabled?: boolean
   className?: string
   attributes?: { [key: string]: string }
-  children?: string | React.ReactElement | React.ReactElement[]
+  children?: ReactNode | ReactNode[] | string
   refPageAA?: string
 }
 
