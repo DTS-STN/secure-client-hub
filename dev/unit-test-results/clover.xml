@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704820631324" clover="3.2.0">
-  <project timestamp="1704820631324" name="All files">
-    <metrics statements="582" coveredstatements="221" conditionals="681" coveredconditionals="182" methods="198" coveredmethods="75" elements="1461" coveredelements="478" complexity="0" loc="582" ncloc="582" packages="7" files="46" classes="46"/>
+<coverage generated="1704820640368" clover="3.2.0">
+  <project timestamp="1704820640368" name="All files">
+    <metrics statements="572" coveredstatements="211" conditionals="677" coveredconditionals="178" methods="195" coveredmethods="72" elements="1444" coveredelements="461" complexity="0" loc="572" ncloc="572" packages="7" files="43" classes="43"/>
     <package name="components">
-      <metrics statements="175" coveredstatements="98" conditionals="240" coveredconditionals="113" methods="68" coveredmethods="34"/>
-      <file name="BackToButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="9" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-      </file>
+      <metrics statements="165" coveredstatements="88" conditionals="236" coveredconditionals="109" methods="65" coveredmethods="31"/>
       <file name="BenefitTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BenefitTasks.js">
         <metrics statements="7" coveredstatements="4" conditionals="10" coveredconditionals="3" methods="3" coveredmethods="2"/>
         <line num="7" count="2" type="stmt"/>
@@ -44,20 +39,6 @@
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-      </file>
-      <file name="Collapse.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Collapse.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-      </file>
-      <file name="Date.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Date.js">
-        <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="6" count="4" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
       </file>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
