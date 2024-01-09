@@ -6,7 +6,7 @@ interface Tasks {
   title: string
   areaLabel: string
   link: string
-  icon: string | 'question-circle'
+  icon: string
   betaPopUp: boolean
   id: string
 }
@@ -99,4 +99,22 @@ const BenefitTasks = ({
   )
 }
 
+BenefitTasks.defaultprops = {
+  taskList: [
+    {
+      title: '',
+      dataCy: '',
+      tasks: [
+        {
+          title: '',
+          areaLabel: '',
+          link: '',
+          icon: 'question-circle', // To ensure a value is used for FontAwesome icons
+          betaPopUp: '',
+          id: '',
+        },
+      ],
+    },
+  ],
+}
 export default BenefitTasks
