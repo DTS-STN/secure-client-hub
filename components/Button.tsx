@@ -1,8 +1,24 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
 import Image from 'next/image'
 
-export default function Button(props) {
-  //Styling for buttons and links
+interface ButtonProps {
+  id: string
+  style?: 'supertask' | 'primary' | 'secondary' | 'danger' | 'link' | 'none'
+  text: string
+  icon?: string
+  iconAltText: string
+  iconEnd?: boolean
+  href?: string
+  type?: 'submit' | 'reset' | 'button'
+  onClick?: () => void
+  disabled?: boolean
+  className?: string
+  attributes?: { [key: string]: string }
+  children?: string | React.ReactElement | React.ReactElement[]
+  refPageAA?: string
+}
+
+const Button: FC<ButtonProps> = (props) => {
   const primary =
     'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus'
   const secondary =
@@ -27,18 +43,20 @@ export default function Button(props) {
       ? link
       : ''
 
-  //   const style = "btn-" + props.styling;
   return props.href === 'no ref' ? (
     <button
-      className={`flex flex-row ${style} py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${props.className} `}
+      className={`flex flex-row ${style} ${
+        props.disabled ? 'cursor-not-allowed' : ''
+      } py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${
+        props.className
+      } `}
       onClick={props.onClick}
       data-gc-analytics-customclick={`${props.refPageAA}:${props.text}`}
       type={props.type}
       id={props.id}
       disabled={props.disabled}
       {...props.attributes}
-      data-testid={props?.id}
-      alt={props.iconAltText}
+      data-testid={props.id}
     >
       {props.icon && !props.iconEnd ? (
         <span className="grid place-items-center h-8 w-8">
@@ -68,14 +86,13 @@ export default function Button(props) {
   ) : (
     <a
       href={props.href}
-      className={`flex flex-row ${
+      className={`flex flex-row ${props.disabled ? 'cursor-not-allowed' : ''} ${
         props.style !== 'none'
           ? `font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a`
           : ''
       } focus:ring focus:ring-offset-4 ${props.className} `}
       onClick={props.onClick}
       id={props.id}
-      disabled={props.disabled}
       data-gc-analytics-customclick={`${props.refPageAA}:${props.id}`}
       role="button"
     >
@@ -110,85 +127,7 @@ Button.defaultProps = {
   style: 'supertask',
   text: 'default',
   href: 'no ref',
+  iconAltText: 'default',
 }
 
-Button.propTypes = {
-  /**
-   * Identify which button being clicked
-   */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * User must input one of the follow button styles to apply
-   * to their button. To apply the link style, the user must
-   * also add a value to the href prop
-   */
-  style: PropTypes.oneOf([
-    'supertask',
-    'primary',
-    'secondary',
-    'danger',
-    'link',
-    'none',
-  ]),
-
-  /**
-   * The text that the button will display
-   */
-  text: PropTypes.string.isRequired,
-
-  /**
-   * This will add a img inside the button when needed
-   */
-  icon: PropTypes.string,
-
-  /**
-   * Alt text for icon added to button
-   */
-  iconAltText: PropTypes.string,
-
-  /**
-   * This is for placing an icon at the end of the component
-   */
-  iconEnd: PropTypes.bool,
-
-  /**
-   * Use when button redirects to a new page.
-   * Automatically applies the Link styling
-   */
-  href: PropTypes.string,
-
-  /**
-   * the type of the button
-   */
-  type: PropTypes.oneOf(['submit', 'reset', 'button']),
-
-  /**
-   * Callback for a click event on the button
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * bool to disable a button
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * css overrides for button
-   */
-  className: PropTypes.string,
-
-  /**
-   * additional attributes for button
-   */
-  attributes: PropTypes.object,
-
-  /**
-   * any other elements you want to add to the button
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
-}
+export default Button
