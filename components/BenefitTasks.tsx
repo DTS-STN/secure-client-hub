@@ -1,9 +1,37 @@
-import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
 
-export default function BenefitTasks(props) {
+interface Tasks {
+  title: string
+  areaLabel: string
+  link: string
+  icon: string | 'question-circle'
+  betaPopUp: boolean
+  id: string
+}
+
+interface TaskListProps {
+  title: string
+  dataCy: string
+  tasks: Tasks[]
+}
+
+interface BenefitTasksProps {
+  taskList: TaskListProps
+  openModal: (link: string, modalType: string) => void
+  dataCy?: string
+  refPageAA?: string
+  acronym?: string
+}
+
+const BenefitTasks = ({
+  taskList,
+  openModal,
+  dataCy,
+  refPageAA,
+  acronym,
+}: BenefitTasksProps) => {
   const newTabTaskExceptions = [
     'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
     'https://www.canada.ca/fr/services/prestations/ae/declarations-assurance-emploi.html',
@@ -18,14 +46,14 @@ export default function BenefitTasks(props) {
 
   return (
     <div className="inline-block w-full" data-testid="benefitTasks-test">
-      <h3 className="font-bold text-xl " data-cy={props.dataCy}>
-        {props.taskList.title}
+      <h3 className="font-bold text-xl " data-cy={dataCy}>
+        {taskList.title}
       </h3>
       <ul
         className="w-full pb-8 md:pb-12 pt-3 pl-2 space-y-4"
         data-cy="taskList"
       >
-        {props.taskList.tasks.map((task, index) => {
+        {taskList.tasks.map((task, index) => {
           return (
             <li key={index} className="font-bold " data-cy="task-link">
               <Link
@@ -46,16 +74,14 @@ export default function BenefitTasks(props) {
                     !newTabTaskExceptions.includes(task.link)
                   ) {
                     e.preventDefault()
-                    props.openModal(task.link, 'betaModal')
+                    openModal(task.link, 'betaModal')
                   }
                 }}
-                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
               >
                 <FontAwesomeIcon
-                  icon={
-                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
-                  }
+                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
                   className="pr-4 text-2xl w-8"
                 />
                 <span
@@ -73,19 +99,4 @@ export default function BenefitTasks(props) {
   )
 }
 
-BenefitTasks.propTypes = {
-  taskList: PropTypes.shape({
-    title: PropTypes.string,
-    dataCy: PropTypes.string,
-    tasks: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        areaLabel: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        icon: PropTypes.string.isRequired,
-        betaPopUp: PropTypes.bool,
-      })
-    ),
-  }),
-  openModal: PropTypes.func,
-}
+export default BenefitTasks
