@@ -7,7 +7,10 @@ export default function Card(props) {
 
   return (
     <div className="border rounded border-gray-300 shadow my-6" data-cy="cards">
-      <h2 className="py-4 md:py-8 md:mt-2 px-3 sm:px-8 md:px-15 text-4xl font-display font-bold text-gray-darker">
+      <h2
+        className="py-4 md:py-8 md:mt-2 px-3 sm:px-8 md:px-15 text-4xl font-display font-bold text-gray-darker"
+        data-cy="cardtitle"
+      >
         {props.cardTitle}
       </h2>
       <ViewMoreLessButton

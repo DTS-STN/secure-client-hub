@@ -53,3 +53,7 @@ function callback(violations) {
     })
   })
 }
+
+Cypress.Commands.add('changeLang', () => {
+  cy.get('[data-cy="lang1"] > span').click()
+})
