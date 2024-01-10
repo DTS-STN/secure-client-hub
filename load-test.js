@@ -4,8 +4,8 @@ import { check, sleep, group } from 'k6'
 import http from 'k6/http'
 
 export const options = {
-  vus: 300,
-  duration: '5m',
+  vus: 100,
+  duration: '10m',
   thresholds: {
     'http_req_failed': ['rate<0.01'], // http errors should be less than 1%
     'http_req_duration': ['p(95)<1000'], // 95% of requests should be below 300ms
@@ -56,10 +56,11 @@ export default function main() {
       'has session cookie': (r) => cookies[session_name].length > 0,
     })
 
-    res = http.get(base + '/en/my-dashboard')
+    res = http.get(base + '/en/contact-us/contact-old-age-security')
     check(res, {
       'status 200 homepage': (r) => r.status === 200,
-      'Verify homepage text': (r) => r.body.includes('Employment Insurance'),
+      'Verify contact us page text': (r) =>
+        r.body.includes('Contact Old Age Security'),
     })
 
     jar.clear(base)

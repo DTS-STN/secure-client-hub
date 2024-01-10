@@ -79,14 +79,14 @@ ingress:
 replicaCount: 2
 resources:
   requests:
-    cpu: 200m
-    memory: 1024Mi
+    cpu: 100m
+    memory: 256Mi
   limits:
-    cpu: 1500m
-    memory: 2048Mi
+    cpu: 1100m
+    memory: 1512Mi
 healthChecks:
-    livenessDelay: 120
-    readinessDelay: 120
+    livenessDelay: 60
+    readinessDelay: 60
     livenessPath: /api/livez
     readinessPath: /api/readyz
 port: 3000
