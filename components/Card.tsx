@@ -29,7 +29,7 @@ const Card = ({
       </h2>
       <ViewMoreLessButton
         id={programUniqueId + 'test-card-button-'}
-        dataTestId={programUniqueId?.toString() + 'dataTestId'}
+        dataTestid={programUniqueId?.toString() + 'dataTestId'}
         dataCy="viewMoreLessButton"
         onClick={() => {
           const newOpenState = !isOpen

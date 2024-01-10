@@ -10,7 +10,7 @@ interface ViewMoreLessButtonProps {
   icon: boolean
   onClick: () => void
   id: string
-  dataTestId: string
+  dataTestid: string
   ariaExpanded: boolean
   className: string
   dataCy: string
@@ -24,7 +24,7 @@ const ViewMoreLessButton = ({
   icon,
   onClick,
   id,
-  dataTestId,
+  dataTestid,
   ariaExpanded,
   className,
   dataCy,
@@ -41,7 +41,7 @@ const ViewMoreLessButton = ({
       data-cy={dataCy}
       onClick={onClick}
       id={id}
-      data-testid={dataTestId}
+      data-testid={dataTestid}
       aria-expanded={ariaExpanded}
       aria-label={ariaLabel}
     >
