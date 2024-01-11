@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
 import logo from '../public/wmms-blk.svg'
 
-interface links {
+interface Links {
   id: string
   text: string
   href: string
@@ -19,11 +19,10 @@ interface FooterProps {
   btnLink: string
   error: boolean
   contactLink: string
-  brandLinks: links[]
+  brandLinks: Links[]
   target: string
 }
 
-// export function Footer(props) {
 const Footer = ({
   id,
   lang,
