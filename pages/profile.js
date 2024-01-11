@@ -17,7 +17,7 @@ import React from 'react'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 
 export default function Profile(props) {
