@@ -16,10 +16,17 @@ export default function MostReqTasks(props) {
       >
         {props.taskListMR.title}
       </h3>
-      <ul className="w-full gap-x-0 grid md:grid-cols-2 pl-3 sm:pl-8 md:pl-15 pt-4  md:pt-5 pb-6 ">
+      <ul
+        className="w-full gap-x-0 grid md:grid-cols-2 pl-3 sm:pl-8 md:pl-15 pt-4  md:pt-5 pb-6 "
+        data-cy="most-req-links"
+      >
         {props.taskListMR.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-bold justify-center py-2">
+            <li
+              key={index}
+              className="font-bold justify-center py-2"
+              data-cy="most-req-tasklink"
+            >
               <Link
                 href={task.link}
                 passHref
