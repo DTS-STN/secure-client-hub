@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types'
+interface DateProps {
+  id?: string
+  label?: string
+  date?: string
+}
 
-export function Date(props) {
-  const { id, label, date } = props
+const Date = ({ id, label, date }: DateProps) => {
   const dateFormatted = date ? date.split('T')[0] : 'NA'
   return (
     <dl
@@ -21,19 +24,4 @@ export function Date(props) {
   )
 }
 
-Date.propTypes = {
-  /**
-   * component id
-   */
-  id: PropTypes.string,
-
-  /**
-   * Text to show before date, defaults to "Date Modified: "
-   */
-  label: PropTypes.string,
-
-  /**
-   * Date string in format yyyyMMdd
-   */
-  date: PropTypes.string,
-}
+export default Date
