@@ -19,7 +19,6 @@ const Card = ({
   refPageAA,
   children,
 }: CardProps) => {
-  // export default function Card(props) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
