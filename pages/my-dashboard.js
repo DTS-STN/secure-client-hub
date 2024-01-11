@@ -15,10 +15,9 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import React from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 
 export default function MyDashboard(props) {

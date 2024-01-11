@@ -14,7 +14,7 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import throttle from 'lodash.throttle'
 import Markdown from 'markdown-to-jsx'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
 import { useRouter } from 'next/router'
 
