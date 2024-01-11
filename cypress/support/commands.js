@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -55,5 +56,5 @@ function callback(violations) {
 }
 
 Cypress.Commands.add('changeLang', () => {
-  cy.get('[data-cy="lang1"] > span').click()
+  cy.get('[data-cy="lang1"]').click()
 })
