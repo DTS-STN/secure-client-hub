@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704834365753" clover="3.2.0">
-  <project timestamp="1704834365753" name="All files">
-    <metrics statements="553" coveredstatements="195" conditionals="633" coveredconditionals="159" methods="189" coveredmethods="67" elements="1375" coveredelements="421" complexity="0" loc="553" ncloc="553" packages="7" files="40" classes="40"/>
+<coverage generated="1704993582173" clover="3.2.0">
+  <project timestamp="1704993582174" name="All files">
+    <metrics statements="546" coveredstatements="190" conditionals="627" coveredconditionals="154" methods="186" coveredmethods="65" elements="1359" coveredelements="409" complexity="0" loc="546" ncloc="546" packages="7" files="38" classes="38"/>
     <package name="components">
-      <metrics statements="146" coveredstatements="72" conditionals="192" coveredconditionals="90" methods="59" coveredmethods="26"/>
-      <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
-        <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-      </file>
+      <metrics statements="139" coveredstatements="67" conditionals="186" coveredconditionals="85" methods="56" coveredmethods="24"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
@@ -198,11 +190,6 @@
         <line num="14" count="5" type="stmt"/>
         <line num="61" count="3" type="stmt"/>
         <line num="69" count="3" type="stmt"/>
-      </file>
-      <file name="ViewMoreLessButton.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ViewMoreLessButton.js">
-        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
-        <line num="9" count="5" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
       </file>
     </package>
     <package name="components.contact">
