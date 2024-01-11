@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705002167110" clover="3.2.0">
-  <project timestamp="1705002167110" name="All files">
-    <metrics statements="538" coveredstatements="181" conditionals="587" coveredconditionals="119" methods="186" coveredmethods="64" elements="1311" coveredelements="364" complexity="0" loc="538" ncloc="538" packages="7" files="38" classes="38"/>
+<coverage generated="1705002430722" clover="3.2.0">
+  <project timestamp="1705002430722" name="All files">
+    <metrics statements="533" coveredstatements="178" conditionals="585" coveredconditionals="118" methods="184" coveredmethods="63" elements="1302" coveredelements="359" complexity="0" loc="533" ncloc="533" packages="7" files="37" classes="37"/>
     <package name="components">
-      <metrics statements="131" coveredstatements="58" conditionals="146" coveredconditionals="50" methods="56" coveredmethods="23"/>
-      <file name="Card.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.js">
-        <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-      </file>
+      <metrics statements="126" coveredstatements="55" conditionals="144" coveredconditionals="49" methods="54" coveredmethods="22"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
