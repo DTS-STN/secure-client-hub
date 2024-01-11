@@ -18,7 +18,7 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 
 export default function PrivacyCondition(props) {

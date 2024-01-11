@@ -1,36 +1,48 @@
-import PropTypes from 'prop-types'
 import Heading from './Heading'
 import EN from '../locales/en'
 import FR from '../locales/fr'
 import Link from 'next/link'
 
-export function ErrorPage(props) {
-  const { isAuth, errType, lang, homePageLink, accountPageLink } = props
+interface ErrorPageProps {
+  isAuth: boolean
+  errType: '404' | '500' | '503'
+  lang: 'en' | 'fr' | 'bi'
+  homePageLink: string
+  accountPageLink: string
+}
+
+const ErrorPage = ({
+  isAuth,
+  errType,
+  lang,
+  homePageLink,
+  accountPageLink,
+}: ErrorPageProps) => {
   let biClassName = ''
-  let language = lang === 'en' ? [EN] : lang === 'fr' ? [FR] : [EN, FR]
+  const language = lang === 'en' ? [EN] : lang === 'fr' ? [FR] : [EN, FR]
   if (lang === 'bi') {
     biClassName = 'grid gap-10 grid-cols-1 sm:grid-cols-2 sm:gap-6'
   }
-  let errorHeadingEN =
+  const errorHeadingEN =
     errType === '404'
       ? EN.errorPageHeadingTitle404
       : errType === '500'
       ? EN.errorPageHeadingTitle500
       : EN.errorPageHeadingTitle503
-  let errorHeadingFR =
+  const errorHeadingFR =
     errType === '404'
       ? FR.errorPageHeadingTitle404
       : errType === '500'
       ? FR.errorPageHeadingTitle500
       : FR.errorPageHeadingTitle503
 
-  let errorTextEN =
+  const errorTextEN =
     errType === '404'
       ? EN.errorPageErrorText404
       : errType === '500'
       ? EN.errorPageErrorText500
       : EN.errorPageErrorText503
-  let errorTextFR =
+  const errorTextFR =
     errType === '404'
       ? FR.errorPageErrorText404
       : errType === '500'
@@ -40,7 +52,7 @@ export function ErrorPage(props) {
     <div className={`${biClassName} container`}>
       {language.map((val, index) => {
         return (
-          <div key={(val + index).toString()}>
+          <div key={(val.languageSelection + index).toString()}>
             <Heading
               id={'pageHead' + index + errType}
               title={val === EN ? errorHeadingEN : errorHeadingFR}
@@ -113,37 +125,4 @@ ErrorPage.defaultProps = {
   lang: 'en',
 }
 
-ErrorPage.propTypes = {
-  /**
-   * Select the language for the page. If bi is selected
-   * bilingual version of error pages will be used
-   */
-  lang: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf(['en', 'fr', 'bi']),
-  ]).isRequired,
-
-  /**
-   * Select the type of error page you want to use
-   */
-  errType: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf(['404', '500', '503']),
-  ]).isRequired,
-
-  /**
-   * To indicate if the user is authenticated or not
-   * Will display authenticated version of pages if user is authenticated
-   */
-  isAuth: PropTypes.bool.isRequired,
-
-  /**
-   * Add your path to the Service Canada Home Page (not authenticated user)
-   */
-  homePageLink: PropTypes.string,
-
-  /**
-   * Add your path Logged in users account dashboard (authenticated user)
-   */
-  accountPageLink: PropTypes.string,
-}
+export default ErrorPage
