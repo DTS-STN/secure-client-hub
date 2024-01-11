@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705005394304" clover="3.2.0">
-  <project timestamp="1705005394304" name="All files">
-    <metrics statements="533" coveredstatements="178" conditionals="585" coveredconditionals="118" methods="184" coveredmethods="63" elements="1302" coveredelements="359" complexity="0" loc="533" ncloc="533" packages="7" files="37" classes="37"/>
+<coverage generated="1705005582996" clover="3.2.0">
+  <project timestamp="1705005582996" name="All files">
+    <metrics statements="531" coveredstatements="176" conditionals="585" coveredconditionals="118" methods="183" coveredmethods="62" elements="1299" coveredelements="356" complexity="0" loc="531" ncloc="531" packages="7" files="36" classes="36"/>
     <package name="components">
-      <metrics statements="126" coveredstatements="55" conditionals="144" coveredconditionals="49" methods="54" coveredmethods="22"/>
+      <metrics statements="124" coveredstatements="53" conditionals="144" coveredconditionals="49" methods="53" coveredmethods="21"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
@@ -16,11 +16,6 @@
         <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
-      </file>
-      <file name="ExitBeta.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ExitBeta.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
       </file>
       <file name="Footer.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Footer.js">
         <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="8" methods="2" coveredmethods="2"/>
