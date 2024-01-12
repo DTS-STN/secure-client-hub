@@ -25,7 +25,7 @@ const PageLink = ({
   refPageAA,
   dashId,
 }: PageLinkProps) => {
-  const linkID = linkText.replace(/\s+/g, '')
+  const linkID = linkText ? linkText.replace(/\s+/g, '') : linkText
 
   return (
     <div className="pt-2 md:pt-4 my-8 border-t border-gray-light ">
