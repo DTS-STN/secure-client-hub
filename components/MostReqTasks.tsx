@@ -1,26 +1,54 @@
-import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
 
-export default function MostReqTasks(props) {
-  const newTabTaskExceptions = [
+interface Task {
+  title: string
+  areaLabel: string
+  link: string
+  icon: string
+  betaPopUp?: boolean
+  id: string
+}
+
+interface TaskList {
+  title: string
+  tasks: Task[]
+}
+
+interface MostReqTasksProps {
+  dataCy?: string
+  taskListMR: TaskList
+  openModal?: (link: string, modalType: string) => void
+  refPageAA: string
+  acronym: string
+}
+
+const MostReqTasks = ({
+  dataCy,
+  taskListMR,
+  openModal,
+  refPageAA,
+  acronym,
+}: MostReqTasksProps) => {
+  const newTabTaskExceptions: string[] = [
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
+
   return (
     <div className="h-full">
       <h3
         className="font-bold text-xl text-white pt-6 pl-3 sm:pl-8 md:pl-15 "
-        data-cy={props.dataCy}
+        data-cy={dataCy}
       >
-        {props.taskListMR.title}
+        {taskListMR.title}
       </h3>
       <ul
         className="w-full gap-x-0 grid md:grid-cols-2 pl-3 sm:pl-8 md:pl-15 pt-4  md:pt-5 pb-6 "
         data-cy="most-req-links"
       >
-        {props.taskListMR.tasks.map((task, index) => {
+        {taskListMR.tasks.map((task, index) => {
           return (
             <li
               key={index}
@@ -41,16 +69,14 @@ export default function MostReqTasks(props) {
                 onClick={(e) => {
                   if (task.betaPopUp) {
                     e.preventDefault()
-                    props.openModal(task.link, 'betaModal')
+                    openModal?.(task.link, 'betaModal')
                   }
                 }}
-                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
               >
                 <FontAwesomeIcon
-                  icon={
-                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
-                  }
+                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
                   className="pr-4 text-2xl w-8"
                 />
                 <span
@@ -68,20 +94,16 @@ export default function MostReqTasks(props) {
   )
 }
 
-MostReqTasks.propTypes = {
-  dataCy: PropTypes.string,
-  taskListMR: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-
-    tasks: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        areaLabel: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        icon: PropTypes.string.isRequired,
-        betaPopUp: PropTypes.bool,
-      })
-    ),
-  }),
-  openModal: PropTypes.func,
+MostReqTasks.defaultprops = {
+  taskListMR: [
+    {
+      tasks: [
+        {
+          icon: 'question-circle', // To ensure a value is used for FontAwesome icons
+        },
+      ],
+    },
+  ],
 }
+
+export default MostReqTasks
