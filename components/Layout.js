@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState, cloneElement } from 'react'
 import { Header } from './Header'
-import { Footer } from './Footer'
+import Footer from './Footer'
 import MetaData from './MetaData'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'

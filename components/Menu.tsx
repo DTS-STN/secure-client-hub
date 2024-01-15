@@ -1,26 +1,37 @@
 import { useRef, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 
-/**
- * Menu component
- */
-export function Menu(props) {
-  const {
-    menuList,
-    lang,
-    onSignOut,
-    dataGcAnalyticsCustomClickInstitutionVariable,
-  } = props
+interface MenuItem {
+  id: string
+  key: string
+  value: string
+  path: string
+  showIcon: boolean
+  onSignOut: () => void
+}
 
-  const [showDropdown, setShowDropdown] = useState(false)
-  const dropdown = useRef(null)
+interface MenuProps {
+  lang: string
+  dataGcAnalyticsCustomClickInstitutionVariable: string
+  menuList: MenuItem[]
+}
+
+const Menu = ({
+  lang,
+  dataGcAnalyticsCustomClickInstitutionVariable,
+  menuList,
+}: MenuProps) => {
+  const [showDropdown, setShowDropdown] = useState<boolean>(false)
+  const dropdown = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Hide dropdown when click outside
     if (!showDropdown) return
-    function handleClick(event) {
-      if (dropdown.current && !dropdown.current.contains(event.target)) {
+    function handleClick(event: MouseEvent) {
+      if (
+        dropdown.current &&
+        !dropdown.current.contains(event.target as Node)
+      ) {
         setShowDropdown(false)
       }
     }
@@ -30,7 +41,7 @@ export function Menu(props) {
 
   useEffect(() => {
     if (!showDropdown) return
-    function handleEsc(event) {
+    function handleEsc(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setShowDropdown(false)
       }
@@ -56,9 +67,6 @@ export function Menu(props) {
           <button
             id="dropdownNavbarLink"
             onClick={() => setShowDropdown((e) => !e)}
-            // data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:${
-            //   showDropdown ? 'Menu Contract' : 'Expand Menu'
-            // }`}
             aria-haspopup="true"
             data-testid="menuButton"
             aria-expanded={showDropdown}
@@ -107,44 +115,42 @@ export function Menu(props) {
               className="sm:absolute sm:w-[260px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] rounded-b-[5px] text-deep-blue-dark bg-white z-10"
               aria-labelledby="dropdownLargeButton"
             >
-              {menuList
-                ? menuList.map((element, index) => {
-                    return (
-                      <div key={element.key}>
-                        <Link
-                          className={`${
-                            index === 0 ? 'border-none' : 'border-t-2'
-                          } font-body flex items-center h-[55px] px-4 hover:text-blue-hover focus:outline-none ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:border-none`}
-                          onClick={
-                            element.showIcon
-                              ? onSignOut
-                              : () => setShowDropdown((e) => !e)
-                          }
-                          href={element.path}
-                          aria-label={element.value}
-                          data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
+              {menuList.map((element, index) => {
+                return (
+                  <div key={element.key}>
+                    <Link
+                      className={`${
+                        index === 0 ? 'border-none' : 'border-t-2'
+                      } font-body flex items-center h-[55px] px-4 hover:text-blue-hover focus:outline-none ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:border-none`}
+                      onClick={
+                        element.showIcon
+                          ? element.onSignOut
+                          : () => setShowDropdown((e) => !e)
+                      }
+                      href={element.path}
+                      aria-label={element.value}
+                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
+                    >
+                      {element.showIcon && (
+                        <svg
+                          width="18"
+                          height="15"
+                          viewBox="0 0 18 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-3"
                         >
-                          {element.showIcon && (
-                            <svg
-                              width="18"
-                              height="15"
-                              viewBox="0 0 18 15"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="mr-3"
-                            >
-                              <path
-                                d="M13.1665 3.33333L11.9915 4.50833L14.1415 6.66667H5.6665V8.33333H14.1415L11.9915 10.4833L13.1665 11.6667L17.3332 7.5L13.1665 3.33333ZM2.33317 1.66667H8.99984V0H2.33317C1.4165 0 0.666504 0.75 0.666504 1.66667V13.3333C0.666504 14.25 1.4165 15 2.33317 15H8.99984V13.3333H2.33317V1.66667Z"
-                                fill="#284162"
-                              />
-                            </svg>
-                          )}
-                          {element.value}
-                        </Link>
-                      </div>
-                    )
-                  })
-                : null}
+                          <path
+                            d="M13.1665 3.33333L11.9915 4.50833L14.1415 6.66667H5.6665V8.33333H14.1415L11.9915 10.4833L13.1665 11.6667L17.3332 7.5L13.1665 3.33333ZM2.33317 1.66667H8.99984V0H2.33317C1.4165 0 0.666504 0.75 0.666504 1.66667V13.3333C0.666504 14.25 1.4165 15 2.33317 15H8.99984V13.3333H2.33317V1.66667Z"
+                            fill="#284162"
+                          />
+                        </svg>
+                      )}
+                      {element.value}
+                    </Link>
+                  </div>
+                )
+              })}
             </div>
           )}
         </div>
@@ -153,53 +159,4 @@ export function Menu(props) {
   )
 }
 
-Menu.defaultProps = {
-  lang: 'en',
-  onClick: () => {},
-  menuList: [
-    { key: 'dashKey', value: 'My dashboard', path: '/', showIcon: false },
-    {
-      key: 'securityKey',
-      value: 'Security Settings',
-      path: '/',
-      showIcon: false,
-    },
-    { key: 'profileKey', value: 'Profile', path: '/', showIcon: false },
-    {
-      key: 'craAccountKey',
-      value: 'Switch to CRA My Account',
-      path: '/',
-      showIcon: false,
-    },
-    { key: 'outKey', value: 'Sign out', path: '/', showIcon: true },
-  ],
-}
-
-Menu.propTypes = {
-  /**
-   * Language code.
-   */
-  lang: PropTypes.string.isRequired,
-
-  /**
-   * Adobe Analytics Prefix
-   */
-  dataGcAnalyticsCustomClickInstitutionVariable: PropTypes.string,
-
-  /**
-   * set to true for Storybook demos only
-   */
-  demoBuffer: PropTypes.bool,
-
-  /**
-   * List of menu items to display in dropdown with links
-   */
-  menuList: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string,
-      value: PropTypes.string,
-      path: PropTypes.string,
-      component: PropTypes.elementType,
-    })
-  ),
-}
+export default Menu
