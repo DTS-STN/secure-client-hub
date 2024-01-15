@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { TopNav } from './TopNav'
-import { Menu } from './Menu'
+import Menu from './Menu'
 import Image from 'next/image'
 import logoFile from '../public/sig-blk-en.svg'
 import logoFileFR from '../public/sig-blk-fr.svg'
