@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705435322069" clover="3.2.0">
-  <project timestamp="1705435322069" name="All files">
-    <metrics statements="479" coveredstatements="137" conditionals="519" coveredconditionals="84" methods="157" coveredmethods="45" elements="1155" coveredelements="266" complexity="0" loc="479" ncloc="479" packages="7" files="28" classes="28"/>
+<coverage generated="1705435330306" clover="3.2.0">
+  <project timestamp="1705435330306" name="All files">
+    <metrics statements="473" coveredstatements="134" conditionals="515" coveredconditionals="82" methods="154" coveredmethods="43" elements="1142" coveredelements="259" complexity="0" loc="473" ncloc="473" packages="7" files="27" classes="27"/>
     <package name="components">
-      <metrics statements="72" coveredstatements="14" conditionals="78" coveredconditionals="15" methods="27" coveredmethods="4"/>
+      <metrics statements="66" coveredstatements="11" conditionals="74" coveredconditionals="13" methods="24" coveredmethods="2"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
@@ -77,15 +77,6 @@
         <line num="111" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
-      </file>
-      <file name="ProfileTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ProfileTasks.js">
-        <metrics statements="6" coveredstatements="3" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
       </file>
       <file name="TopNav.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/TopNav.js">
         <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
