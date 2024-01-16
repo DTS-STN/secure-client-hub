@@ -1,9 +1,5 @@
 /// <reference types="cypress" />
 
-const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
-const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
-const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
-
 describe('Validate Profile page', () => {
   beforeEach(() => {
     cy.visit('/profile')

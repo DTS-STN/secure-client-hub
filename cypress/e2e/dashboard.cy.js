@@ -321,9 +321,8 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  // this test is skipped until the content is updated to /fr/profil without the e
   // FR Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
-  it.skip('Iterates through EI, CPP and OAS task lists for Profile page FR', () => {
+  it('Iterates through EI, CPP and OAS task lists for Profile page FR', () => {
     // 2 = EI, 3 = CPP and 4 = OAS
     const EICPPOAS = [2, 3, 4]
 
