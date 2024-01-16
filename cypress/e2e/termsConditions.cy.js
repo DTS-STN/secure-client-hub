@@ -4,15 +4,27 @@ const termsConditionsPo = require('../e2e/PageObjects/termsAndConditionsPO.cy')
 const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
 const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 
-beforeEach(() => {
-  cy.visit('/privacy-notice-terms-conditions')
-})
-
 describe('Validate Terms and Conditions Page', () => {
-  it('validate the "Terms and Conditions" click on dashboard page goes to Terms and Conditions page', () => {
+  beforeEach(() => {
+    cy.visit('/privacy-notice-terms-conditions')
+  })
+
+  it.only('validate the "Privacy" click on dashboard page goes to Terms and Conditions page', () => {
     cy.visit('/my-dashboard')
-    dashboardPo.TermsAndConditionsLink().click()
-    termsConditionsPo.ValidateTermsAndConditionsUrl()
+    cy.get('#footerLink1').click()
+    cy.location('pathname', { timeout: 10000 }).should(
+      'equal',
+      '/en/privacy-notice-terms-conditions'
+    )
+  })
+
+  it.only('validate the "terms and cond.." click on dashboard page goes to Terms and Conditions page', () => {
+    cy.visit('/my-dashboard')
+    cy.get('#footerLink0').click()
+    cy.location('pathname', { timeout: 10000 }).should(
+      'equal',
+      '/en/privacy-notice-terms-conditions'
+    )
   })
 
   it('Validate "Terms and Conditions" URL and header in EN', () => {
