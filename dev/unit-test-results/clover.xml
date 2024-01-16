@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705418487882" clover="3.2.0">
-  <project timestamp="1705418487882" name="All files">
-    <metrics statements="488" coveredstatements="144" conditionals="531" coveredconditionals="90" methods="161" coveredmethods="48" elements="1180" coveredelements="282" complexity="0" loc="488" ncloc="488" packages="7" files="30" classes="30"/>
+<coverage generated="1705418499350" clover="3.2.0">
+  <project timestamp="1705418499350" name="All files">
+    <metrics statements="484" coveredstatements="142" conditionals="523" coveredconditionals="86" methods="159" coveredmethods="47" elements="1166" coveredelements="275" complexity="0" loc="484" ncloc="484" packages="7" files="29" classes="29"/>
     <package name="components">
-      <metrics statements="81" coveredstatements="21" conditionals="90" coveredconditionals="21" methods="31" coveredmethods="7"/>
+      <metrics statements="77" coveredstatements="19" conditionals="82" coveredconditionals="17" methods="29" coveredmethods="6"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
@@ -77,13 +77,6 @@
         <line num="111" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
-      </file>
-      <file name="PhaseBanner.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PhaseBanner.js">
-        <metrics statements="4" coveredstatements="2" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
       </file>
       <file name="ProfileTasks.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ProfileTasks.js">
         <metrics statements="6" coveredstatements="3" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
