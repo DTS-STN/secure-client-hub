@@ -94,7 +94,7 @@ const MostReqTasks = ({
   )
 }
 
-MostReqTasks.defaultprops = {
+MostReqTasks.defaultProps = {
   taskListMR: [
     {
       tasks: [
