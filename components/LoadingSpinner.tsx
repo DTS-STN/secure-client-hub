@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types'
+interface LoadingSpinnerProps {
+  text: string
+}
 
 const Spoke = () => {
   return (
@@ -19,8 +21,7 @@ const Spoke = () => {
     </svg>
   )
 }
-
-export default function LoadingSpinner(props) {
+const LoadingSpinner = ({ text }: LoadingSpinnerProps) => {
   return (
     <div
       className="loading-spinners flex flex-col md:flex-row align-middle"
@@ -37,15 +38,10 @@ export default function LoadingSpinner(props) {
         <Spoke />
       </div>
       <div className={'text-center text-xl font-display md:pl-2'}>
-        <span>{props.text}</span>
+        <span>{text}</span>
       </div>
     </div>
   )
 }
 
-LoadingSpinner.propTypes = {
-  /**
-   * text
-   */
-  text: PropTypes.string,
-}
+export default LoadingSpinner

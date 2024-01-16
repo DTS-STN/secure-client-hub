@@ -15,9 +15,15 @@ describe('PageLink', () => {
   const { container } = render(
     <PageLink
       lookingForText="title"
-      accessText="accessText"
       linkText="Link text"
+      accessText="accessText"
+      href=""
+      dataCy=""
+      buttonHref=""
+      buttonId=""
       buttonLinkText="buttonLinkText"
+      refPageAA=""
+      dashId=""
     />
   )
   it('renders PageLink', () => {
@@ -32,7 +38,20 @@ describe('PageLink', () => {
   })
 
   it('has no a11y violations', async () => {
-    render(<PageLink />)
+    render(
+      <PageLink
+        lookingForText="title"
+        linkText="Link text"
+        accessText="accessText"
+        href=""
+        dataCy=""
+        buttonHref=""
+        buttonId=""
+        buttonLinkText="buttonLinkText"
+        refPageAA=""
+        dashId=""
+      />
+    )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
