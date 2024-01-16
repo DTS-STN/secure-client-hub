@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, MouseEventHandler } from 'react'
 import Image from 'next/image'
 
 interface ButtonProps {
@@ -10,7 +10,7 @@ interface ButtonProps {
   iconEnd?: boolean
   href?: string
   type?: 'submit' | 'reset' | 'button'
-  onClick?: () => void
+  onClick: MouseEventHandler<HTMLElement>
   disabled?: boolean
   className?: string
   attributes?: { [key: string]: string }
