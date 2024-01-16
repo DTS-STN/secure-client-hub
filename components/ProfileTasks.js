@@ -6,7 +6,10 @@ import { icon } from '../lib/loadIcons'
 export default function ProfileTasks(props) {
   return (
     <div data-cy="task-list" className="mt-10 mb-12">
-      <h2 className="text-4xl font-bold text-gray-darker">
+      <h2
+        className="text-4xl font-bold text-gray-darker"
+        data-cy="program-title"
+      >
         {props.programTitle}
       </h2>
       <ul

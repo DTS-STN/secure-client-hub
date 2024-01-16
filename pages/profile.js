@@ -76,22 +76,25 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.pageName} />
+      <Heading id="profile-heading" title={props.content.pageName} />
       <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
-      {props.content.list.map((program, index) => {
-        return (
-          <ProfileTasks
-            key={index}
-            acronym={acronym(program.title)}
-            programTitle={program.title}
-            tasks={program.tasks}
-            data-testid="profile-task-group-list"
-            openModal={props.openModal}
-            data-cy="task"
-            refPageAA={props.aaPrefix}
-          />
-        )
-      })}
+      <div data-cy="profile-lists">
+        {props.content.list.map((program, index) => {
+          return (
+            <ProfileTasks
+              key={index}
+              acronym={acronym(program.title)}
+              programTitle={program.title}
+              tasks={program.tasks}
+              data-testid="profile-task-group-list"
+              openModal={props.openModal}
+              data-cy="task"
+              refPageAA={props.aaPrefix}
+            />
+          )
+        })}
+      </div>
+
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
