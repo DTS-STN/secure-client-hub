@@ -1,63 +1,82 @@
 /// <reference types="cypress" />
-const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
-const termsConditionsPo = require('../e2e/PageObjects/termsAndConditionsPO.cy')
-const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
-const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
 
 describe('Validate Terms and Conditions Page', () => {
   beforeEach(() => {
     cy.visit('/privacy-notice-terms-conditions')
   })
 
-  it.only('validate the "Privacy" click on dashboard page goes to Terms and Conditions page', () => {
+  it('Terms and conditions and Privacy has no detectable a11y violations on load', () => {
+    cy.injectAxe()
+    cy.checkA11y()
+  })
+
+  it('validate the "Privacy" click on dashboard page goes to T&C page EN', () => {
     cy.visit('/my-dashboard')
     cy.get('#footerLink1').click()
     cy.location('pathname', { timeout: 10000 }).should(
       'equal',
       '/en/privacy-notice-terms-conditions'
     )
+    cy.get('#PrivacyCondition-heading')
+      .should('be.visible')
+      .and('have.text', 'Privacy notice and terms and conditions')
+    cy.get('#privacy-notice').should('be.visible')
+    cy.get('#digital-identity-verification--consent').should('be.visible')
+    cy.get('#system-requirements').should('be.visible')
+    cy.get('[data-cy="breadcrumb-My dashboard"]')
+      .should('be.visible')
+      .and('have.text', 'My dashboard')
+      .and('have.attr', 'href', '/en/my-dashboard')
   })
 
-  it.only('validate the "terms and cond.." click on dashboard page goes to Terms and Conditions page', () => {
+  it('validate the "Privacy" click on dashboard page goes to T&C page FR', () => {
+    cy.visit('/my-dashboard')
+    cy.changeLang().should('have.text', 'English')
+    cy.url().should('contains', '/fr/mon-tableau-de-bord')
+    cy.get('#footerLink1').click()
+    cy.location('pathname', { timeout: 10000 }).should(
+      'equal',
+      '/fr/avis-confidentialite-modalites'
+    )
+    cy.get('#PrivacyCondition-heading')
+      .should('be.visible')
+      .and('have.text', 'Avis de confidentialité et modalités')
+    cy.get('#avis-de-confidentialite').should('be.visible')
+    cy.get('#verification-de-lidentite-numerique---consentement').should(
+      'be.visible'
+    )
+    cy.get('#exigences-du-systeme').should('be.visible')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]')
+      .should('be.visible')
+      .and('have.text', 'Mon tableau de bord')
+      .and('have.attr', 'href', '/fr/mon-tableau-de-bord')
+  })
+
+  it('validate the "terms and conditions" click on dashboard page goes to T&C page EN', () => {
     cy.visit('/my-dashboard')
     cy.get('#footerLink0').click()
     cy.location('pathname', { timeout: 10000 }).should(
       'equal',
       '/en/privacy-notice-terms-conditions'
     )
+    cy.get('#termsAndConditions').should('be.visible')
+    cy.get('#terms-and-conditions-of-use').should('be.visible')
   })
 
-  it('Validate "Terms and Conditions" URL and header in EN', () => {
-    termsConditionsPo.ValidateTermsAndConditionsUrl()
-    termsConditionsPo.ValidateTermsConditionsHeaderEN()
-  })
-
-  it('Validate"Terms and Conditions" and header in FR', () => {
-    dashboardPo.FrenchButton().click()
-    termsConditionsPo.ValidateTermsConditionsUrlFR()
-    termsConditionsPo.ValidateTermsConditionsHeaderFR()
-  })
-
-  it('Validate the breadcrumbs on "Terms and Conditions" Page', () => {
-    securityPo.breadcrumbsLink1().should('be.visible')
-    securityPo.breadcrumbsLink1().click()
-    dashboardPo.ValidateDashboardUrl()
-    cy.go('back')
-    termsConditionsPo.ValidateTermsAndConditionsUrl()
-    termsConditionsPo.ValidateTermsConditionsHeaderEN()
+  it('validate the "terms and conditions" click on dashboard page goes to T&C page FR', () => {
+    cy.visit('/my-dashboard')
+    cy.changeLang().should('have.text', 'English')
+    cy.url().should('contains', '/fr/mon-tableau-de-bord')
+    cy.get('#footerLink0').click()
+    cy.location('pathname', { timeout: 10000 }).should(
+      'equal',
+      '/fr/avis-confidentialite-modalites'
+    )
+    cy.get('#conditions-dutilisation').should('be.visible')
+    cy.get('#termesEtConditions').should('be.visible')
   })
 
   it('Validate the "Back to Dashboard" click navigates to dashboard page', () => {
-    profilePo.BackToDashboardButton().click()
-    dashboardPo.ValidateDashboardUrl()
-    dashboardPo.ValidateDashboardHeaderEN()
-  })
-
-  it('Validate the Information section is present on Terms and conditions page', () => {
-    termsConditionsPo.ValidateinformationSection()
-  })
-  it.skip('Terms and conditions and Privacy has no detectable a11y violations on load', () => {
-    cy.injectAxe()
-    cy.checkA11y()
+    cy.get('#back-to-dashboard-button').should('be.visible')
   })
 })
