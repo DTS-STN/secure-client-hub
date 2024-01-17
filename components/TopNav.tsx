@@ -1,16 +1,18 @@
-import PropTypes from 'prop-types'
-/**
- * TopNav component
- */
-export function TopNav(props) {
-  const {
-    lang,
-    skipToMainPath,
-    skipToAboutPath,
-    switchToBasicPath,
-    displayAlternateLink,
-  } = props
+interface TopNavProps {
+  lang: string
+  skipToMainPath: string
+  skipToAboutPath: string
+  switchToBasicPath: string
+  displayAlternateLink: boolean
+}
 
+export const TopNav = ({
+  lang,
+  skipToMainPath,
+  skipToAboutPath,
+  switchToBasicPath,
+  displayAlternateLink,
+}: TopNavProps) => {
   return (
     <>
       {/* Top navigation accessible only when using a keyboard to navigate the page */}
@@ -64,31 +66,4 @@ TopNav.defaultProps = {
   skipToMainPath: '/',
   skipToAboutPath: '/',
   switchToBasicPath: '/',
-}
-
-TopNav.propTypes = {
-  /**
-   * Language code.
-   */
-  lang: PropTypes.string.isRequired,
-
-  /**
-   * Bool to display or not the alternate page link
-   */
-  displayAlternateLink: PropTypes.bool.isRequired,
-
-  /**
-   * href anchor, which navigates to the H1 of the page
-   */
-  skipToMainPath: PropTypes.string.isRequired,
-
-  /**
-   * href anchor, which navigates to the Footer Id
-   */
-  skipToAboutPath: PropTypes.string.isRequired,
-
-  /**
-   * href path, which redirects to the alternate HTML only page
-   */
-  switchToBasicPath: PropTypes.string.isRequired,
 }

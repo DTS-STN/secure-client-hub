@@ -99,7 +99,7 @@ const BenefitTasks = ({
   )
 }
 
-BenefitTasks.defaultprops = {
+BenefitTasks.defaultProps = {
   taskList: [
     {
       tasks: [

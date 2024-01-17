@@ -1,23 +1,47 @@
-import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
 
-export default function ProfileTasks(props) {
+interface Task {
+  title: string
+  areaLabel: string
+  link: string
+  icon: string
+  betaPopUp: boolean
+  id: string
+}
+
+interface ProfileTasksProps {
+  dataCy?: string
+  openModal: (link: string, modalType: string) => void
+  programTitle: string
+  tasks: Task[]
+  refPageAA: string
+  acronym: string
+}
+
+const ProfileTasks = ({
+  dataCy,
+  openModal,
+  programTitle,
+  tasks,
+  refPageAA,
+  acronym,
+}: ProfileTasksProps) => {
   return (
-    <div data-cy="task-list" className="mt-10 mb-12">
+    <div data-cy={dataCy} className="mt-10 mb-12">
       <h2
         className="text-4xl font-bold text-gray-darker"
         data-cy="program-title"
       >
-        {props.programTitle}
+        {programTitle}
       </h2>
       <ul
         className="w-full grid md:grid-cols-1 items-center pt-3"
         data-cy="task"
-        aria-label={props.programTitle}
+        aria-label={programTitle}
       >
-        {props.tasks.map((task, index) => {
+        {tasks.map((task, index) => {
           return (
             <li key={index} className="font-bold justify-center py-3">
               <Link
@@ -28,15 +52,13 @@ export default function ProfileTasks(props) {
                 onClick={(e) => {
                   if (task.betaPopUp) {
                     e.preventDefault()
-                    props.openModal(task.link, 'betaModal')
+                    openModal(task.link, 'betaModal')
                   }
                 }}
-                data-gc-analytics-customclick={`${props.refPageAA} ${props.acronym}:${task.id}`}
+                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
               >
                 <FontAwesomeIcon
-                  icon={
-                    icon[task.icon] ? icon[task.icon] : icon['question-circle']
-                  }
+                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
                   className="pr-4 text-2xl w-8"
                 />
                 <span
@@ -55,17 +77,17 @@ export default function ProfileTasks(props) {
   )
 }
 
-ProfileTasks.propTypes = {
-  dataCy: PropTypes.string,
-  openModal: PropTypes.func,
-  programTitle: PropTypes.string,
-  tasks: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      areaLabel: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      icon: PropTypes.string.isRequired,
-      betaPopUp: PropTypes.bool.isRequired,
-    })
-  ),
+ProfileTasks.defaultProps = {
+  tasks: [
+    {
+      id: '',
+      icon: 'question-circle', // To ensure a value is used for FontAwesome icons,
+      title: '',
+      areaLabel: '',
+      link: '',
+      betaPopUp: true,
+    },
+  ],
 }
+
+export default ProfileTasks
