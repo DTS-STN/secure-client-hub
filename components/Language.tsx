@@ -8,7 +8,6 @@ interface LanguageProps {
   dataTestId?: string
   dataCy?: string
   ariaLabel?: string
-  locale?: string
   dataGcAnalyticsCustomClick?: string
   text?: string
 }
@@ -21,7 +20,6 @@ const Language = ({
   dataTestId,
   dataCy,
   ariaLabel,
-  locale,
   dataGcAnalyticsCustomClick,
   text,
 }: LanguageProps) => {
@@ -36,7 +34,7 @@ const Language = ({
           data-cy={dataCy || id}
           lang={lang === 'en' ? 'fr' : 'en'}
           aria-label={ariaLabel || (lang === 'en' ? 'Français' : 'English')}
-          locale={locale}
+          locale={false}
           data-gc-analytics-customclick={`${dataGcAnalyticsCustomClick}:${
             lang === 'en' ? 'Français' : 'English'
           }`}
@@ -53,7 +51,7 @@ const Language = ({
           data-cy={dataCy || id}
           lang={lang === 'en' ? 'fr' : 'en'}
           aria-label={ariaLabel || text}
-          locale={locale}
+          locale={false}
           data-gc-analytics-customclick={`${dataGcAnalyticsCustomClick}:${
             lang === 'en' ? 'Français' : 'English'
           }`}
