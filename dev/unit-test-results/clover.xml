@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705440345328" clover="3.2.0">
-  <project timestamp="1705440345328" name="All files">
-    <metrics statements="473" coveredstatements="134" conditionals="515" coveredconditionals="82" methods="154" coveredmethods="43" elements="1142" coveredelements="259" complexity="0" loc="473" ncloc="473" packages="7" files="27" classes="27"/>
+<coverage generated="1705506988420" clover="3.2.0">
+  <project timestamp="1705506988420" name="All files">
+    <metrics statements="469" coveredstatements="130" conditionals="507" coveredconditionals="77" methods="153" coveredmethods="42" elements="1129" coveredelements="249" complexity="0" loc="469" ncloc="469" packages="7" files="26" classes="26"/>
     <package name="components">
-      <metrics statements="66" coveredstatements="11" conditionals="74" coveredconditionals="13" methods="24" coveredmethods="2"/>
+      <metrics statements="62" coveredstatements="7" conditionals="66" coveredconditionals="8" methods="23" coveredmethods="1"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
         <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
@@ -77,13 +77,6 @@
         <line num="111" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
-      </file>
-      <file name="TopNav.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/TopNav.js">
-        <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
-        <line num="12" count="5" type="stmt"/>
-        <line num="14" count="5" type="stmt"/>
-        <line num="61" count="3" type="stmt"/>
-        <line num="69" count="3" type="stmt"/>
       </file>
     </package>
     <package name="components.contact">
