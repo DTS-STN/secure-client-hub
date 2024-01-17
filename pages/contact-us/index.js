@@ -71,7 +71,7 @@ export default function ContactLanding(props) {
 
   return (
     <div id="contactContent" data-testid="contactContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <Heading id="contact-us-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>

@@ -73,7 +73,7 @@ export default function SecuritySettings(props) {
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <Heading id="security-settings-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>

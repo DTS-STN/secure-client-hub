@@ -30,7 +30,12 @@ const ProfileTasks = ({
 }: ProfileTasksProps) => {
   return (
     <div data-cy={dataCy} className="mt-10 mb-12">
-      <h2 className="text-4xl font-bold text-gray-darker">{programTitle}</h2>
+      <h2
+        className="text-4xl font-bold text-gray-darker"
+        data-cy="program-title"
+      >
+        {programTitle}
+      </h2>
       <ul
         className="w-full grid md:grid-cols-1 items-center pt-3"
         data-cy="task"
