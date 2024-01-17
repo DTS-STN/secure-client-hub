@@ -13,10 +13,8 @@ describe('Validate Terms and Conditions Page', () => {
   it('validate the "Privacy" click on dashboard page goes to T&C page EN', () => {
     cy.visit('/my-dashboard')
     cy.get('#footerLink1').click()
-    cy.location('pathname', { timeout: 10000 }).should(
-      'equal',
-      '/en/privacy-notice-terms-conditions'
-    )
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/en/privacy-notice-terms-conditions')
     cy.get('#PrivacyCondition-heading')
       .should('be.visible')
       .and('have.text', 'Privacy notice and terms and conditions')
