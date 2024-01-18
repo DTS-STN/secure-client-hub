@@ -82,11 +82,11 @@ resources:
     cpu: 50m
     memory: 100Mi
   limits:
-    cpu: 800m
+    cpu: 900m
     memory: 180Mi
 healthChecks:
-    livenessDelay: 60
-    readinessDelay: 60
+    livenessDelay: 5
+    readinessDelay: 5
     livenessPath: /api/livez
     readinessPath: /api/readyz
 port: 3000
@@ -108,6 +108,6 @@ autoscaling:
   name: service-canada-client-hub
   minReplicas: 2
   maxReplicas: 40
-  targetCPUUtilization: 50
+  targetCPUUtilization: 80
   labels:
     app.kubernetes.io/name: service-canada-client-hub
