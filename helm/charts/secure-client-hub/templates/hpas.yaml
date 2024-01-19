@@ -43,10 +43,7 @@ spec:
       stabilizationWindowSeconds: 0
       policies:
         - type: Percent
-          value: 90
-          periodSeconds: 15
-        - type: Pods
-          value: 4
+          value: 100
           periodSeconds: 15
       selectPolicy: Max
 {{- end -}}
