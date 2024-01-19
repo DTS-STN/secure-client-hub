@@ -43,7 +43,7 @@ spec:
       stabilizationWindowSeconds: 0
       policies:
         - type: Percent
-          value: 100
+          value: 6000
           periodSeconds: 15
       selectPolicy: Max
 {{- end -}}
