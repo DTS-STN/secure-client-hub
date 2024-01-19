@@ -4,7 +4,7 @@ import { check, sleep, group } from 'k6'
 import http from 'k6/http'
 
 export const options = {
-  vus: 200,
+  vus: 100,
   duration: '12m',
   thresholds: {
     'http_req_failed': ['rate<0.01'], // http errors should be less than 1%

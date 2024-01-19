@@ -79,11 +79,11 @@ ingress:
 replicaCount: 2
 resources:
   requests:
-    cpu: 50m
+    cpu: 200m
     memory: 100Mi
-  limits:
-    cpu: 600m
-    memory: 180Mi
+  #limits:
+  #  cpu: 600m
+  #  memory: 180Mi
 healthChecks:
     livenessDelay: 5
     readinessDelay: 5
