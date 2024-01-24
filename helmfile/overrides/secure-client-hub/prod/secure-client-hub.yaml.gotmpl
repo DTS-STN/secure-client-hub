@@ -125,14 +125,14 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-replicaCount: 2
+replicaCount: 4
 resources:
   requests:
-    cpu: 200m
-    memory: 1024Mi
+    cpu: 300m
+    memory: 200Mi
   limits:
-    cpu: 1500m
-    memory: 2048Mi
+    cpu: 1700m
+    memory: 350Mi
 healthChecks:
     livenessDelay: 15
     readinessDelay: 15
@@ -160,8 +160,8 @@ secrets:
 autoscaling:
   enabled: true
   name: service-canada-client-hub
-  minReplicas: 2
+  minReplicas: 4
   maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
-  targetCPUUtilization: 65
+  targetCPUUtilization: 85
   labels:
     app.kubernetes.io/name: service-canada-client-hub
