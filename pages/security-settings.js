@@ -78,20 +78,14 @@ export default function SecuritySettings(props) {
         {props.content.subHeading}
       </p>
       <Button
+        data-testid="securityQuestionsLink"
+        href={props.content.securityQuestions.linkTitle.link}
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
         className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
-        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-        onClick={(e) => {
-          if (props.content.securityQuestions.schBetaPopUp) {
-            e.preventDefault()
-            props.openModal(
-              props.content.securityQuestions.linkTitle.link,
-              'betaModal'
-            )
-          }
-        }}
+        refPageAA={props.aaPrefix}
+        onClick={(e) => {}}
       ></Button>
 
       <p className="mb-8 text-xl text-gray-darker">
