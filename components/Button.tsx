@@ -98,6 +98,7 @@ const Button = ({
     </button>
   ) : (
     <a
+      data-testid={id}
       href={href}
       className={`flex flex-row ${disabled ? 'cursor-not-allowed' : ''} ${
         style !== 'none'
@@ -107,7 +108,6 @@ const Button = ({
       onClick={onClick}
       id={id}
       data-gc-analytics-customclick={`${refPageAA}:${id}`}
-      role="button"
     >
       {icon && !iconEnd ? (
         <Image

@@ -10,11 +10,11 @@ describe('Validate Security Settings page', () => {
     cy.checkA11y()
   })
   // skippin due to issue with href
-  it.skip('Validate Security Settings Page and Questions link EN', () => {
+  it('Validate Security Settings Page and Questions link EN', () => {
     cy.get('[data-testid ="securityContent-test"]>h1')
       .should('be.visible')
       .and('have.text', 'Security settings')
-    cy.get('[data-testid="securityQuestionsLink"]')
+      cy.get('#securityQuestionsLink')
       .should('have.attr', 'href')
       .and('contain', '/rascl_ii/SCL/SQE.aspx?Lang=eng')
     cy.get('[data-cy="breadcrumb-My dashboard"]')
@@ -24,13 +24,13 @@ describe('Validate Security Settings page', () => {
     cy.url().should('contains', '/my-dashboard')
   })
 
-  it.skip('Validate Security Settings Page  and Questions link FR', () => {
+  it('Validate Security Settings Page  and Questions link FR', () => {
     cy.get('[data-cy="lang1"] > span').click()
     cy.url().should('contains', '/fr/parametres-securite')
     cy.get('[data-testid ="securityContent-test"]>h1')
       .should('be.visible')
       .and('have.text', 'Paramètres de sécurité')
-    cy.get('[data-testid="securityQuestionsLink"]')
+      cy.get('#securityQuestionsLink')
       .should('have.attr', 'href')
       .and('contain', '/rascl_ii/SCL/SQE.aspx?Lang=fra')
     cy.get('[data-cy="breadcrumb-Mon tableau de bord"]')
