@@ -1,11 +1,31 @@
-import PropTypes from 'prop-types'
 import Heading from './../components/Heading'
 import EN from '../locales/en'
 import FR from '../locales/fr'
 import Link from 'next/link'
+import { GetServerSideProps } from 'next'
 
-export default function Maintenance(props) {
-  let language = props.locale === 'en' ? EN : FR
+interface Data {
+  title: string
+  desc: string
+  author: string
+  keywords: string
+  service: string
+  creator: string
+  accessRights: string
+}
+
+interface MaintenanceProps {
+  locale: string
+  hidebanner: boolean
+  langToggleLink: string
+  meta: {
+    data_en: Data
+    data_fr: Data
+  }
+}
+
+const Maintenance = (props: MaintenanceProps) => {
+  const language = props.locale === 'en' ? EN : FR
   return (
     <div className="container">
       <div data-testid={'pageHead-maintenance'}>
@@ -45,7 +65,7 @@ export default function Maintenance(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/maintenance' : '/en/maintenance'
 
@@ -78,10 +98,4 @@ export async function getServerSideProps({ req, locale }) {
     },
   }
 }
-
-Maintenance.propTypes = {
-  /**
-   * current locale in the address
-   */
-  locale: PropTypes.string,
-}
+export default Maintenance
