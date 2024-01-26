@@ -96,14 +96,10 @@ const Index = (props: IndexProps) => {
   )
 }
 
-// Index.getLayout = function PageLayout(page) {
-//   return <>{page}</>
-// }
 Index.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-// export async function getServerSideProps({ locale }) {
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
