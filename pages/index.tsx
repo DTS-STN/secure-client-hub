@@ -1,8 +1,27 @@
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
+import { GetServerSideProps } from 'next'
 
-export default function Index(props) {
+interface Data {
+  title: string
+  desc: string
+  author: string
+  keywords: string
+  service: string
+  creator: string
+  accessRights: string
+}
+
+interface IndexProps {
+  locale: string
+  meta: {
+    data_en: Data
+    data_fr: Data
+  }
+}
+
+const Index = (props: IndexProps) => {
   return (
     <div
       role="main"
@@ -77,11 +96,11 @@ export default function Index(props) {
   )
 }
 
-Index.getLayout = function PageLayout(page) {
+Index.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -111,3 +130,4 @@ export async function getServerSideProps({ locale }) {
     },
   }
 }
+export default Index
