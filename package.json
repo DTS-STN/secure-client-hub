@@ -33,7 +33,7 @@
     "@opentelemetry/exporter-metrics-otlp-proto": "^0.46.0",
     "@opentelemetry/sdk-node": "^0.46.0",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
+    "@typescript-eslint/parser": "^6.18.0",
     "axios": "^1.6.4",
     "babel-plugin-macros": "^3.1.0",
     "cachified": "^3.5.4",
