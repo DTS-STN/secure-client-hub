@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706284987653" clover="3.2.0">
-  <project timestamp="1706284987654" name="All files">
-    <metrics statements="457" coveredstatements="123" conditionals="489" coveredconditionals="65" methods="147" coveredmethods="40" elements="1093" coveredelements="228" complexity="0" loc="457" ncloc="457" packages="7" files="24" classes="24"/>
+<coverage generated="1706537439204" clover="3.2.0">
+  <project timestamp="1706537439205" name="All files">
+    <metrics statements="452" coveredstatements="121" conditionals="489" coveredconditionals="65" methods="144" coveredmethods="39" elements="1085" coveredelements="225" complexity="0" loc="452" ncloc="452" packages="7" files="23" classes="23"/>
     <package name="components">
       <metrics statements="58" coveredstatements="3" conditionals="54" coveredconditionals="0" methods="19" coveredmethods="0"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
@@ -111,7 +111,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="238" coveredstatements="83" conditionals="271" coveredconditionals="49" methods="76" coveredmethods="25"/>
+      <metrics statements="233" coveredstatements="81" conditionals="271" coveredconditionals="49" methods="73" coveredmethods="24"/>
       <file name="404.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.js">
         <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
@@ -181,14 +181,6 @@
         <line num="202" count="0" type="stmt"/>
         <line num="223" count="0" type="stmt"/>
         <line num="273" count="1" type="stmt"/>
-      </file>
-      <file name="index.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/index.js">
-        <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
       </file>
       <file name="my-dashboard.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/my-dashboard.js">
         <metrics statements="45" coveredstatements="17" conditionals="49" coveredconditionals="7" methods="13" coveredmethods="5"/>
