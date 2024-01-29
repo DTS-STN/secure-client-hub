@@ -30,7 +30,7 @@ interface Custom500Props {
 const Custom500 = (props: Custom500Props) => {
   return (
     <ErrorPage
-      lang={props.lang === 'en' ? 'en' : props.lang === 'fr' ? 'fr' : 'bi'}
+      lang={props.lang === 'bi' ? 'bi' : props.lang === 'fr' ? 'fr' : 'en'}
       errType="500"
       isAuth={!props.isAuth}
       homePageLink={
