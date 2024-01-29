@@ -30,7 +30,7 @@ interface Custom404Props {
 const Custom404 = (props: Custom404Props) => {
   return (
     <ErrorPage
-      lang={props.lang === 'en' ? 'en' : props.lang === 'fr' ? 'fr' : 'bi'}
+      lang={props.lang === 'bi' ? 'bi' : props.lang === 'fr' ? 'fr' : 'en'}
       errType="404"
       isAuth={!props.isAuth}
       homePageLink={
