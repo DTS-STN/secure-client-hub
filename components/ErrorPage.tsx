@@ -6,7 +6,7 @@ import Link from 'next/link'
 interface ErrorPageProps {
   isAuth: boolean
   errType: '404' | '500' | '503'
-  lang: 'en' | 'fr' | 'bi'
+  lang: string
   homePageLink: string
   accountPageLink: string
 }
