@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706638130753" clover="3.2.0">
-  <project timestamp="1706638130754" name="All files">
-    <metrics statements="451" coveredstatements="120" conditionals="483" coveredconditionals="62" methods="143" coveredmethods="38" elements="1077" coveredelements="220" complexity="0" loc="451" ncloc="451" packages="7" files="22" classes="22"/>
+<coverage generated="1706651570176" clover="3.2.0">
+  <project timestamp="1706651570177" name="All files">
+    <metrics statements="450" coveredstatements="119" conditionals="477" coveredconditionals="59" methods="142" coveredmethods="37" elements="1069" coveredelements="215" complexity="0" loc="450" ncloc="450" packages="7" files="21" classes="21"/>
     <package name="components">
       <metrics statements="58" coveredstatements="3" conditionals="54" coveredconditionals="0" methods="19" coveredmethods="0"/>
       <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
@@ -111,11 +111,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="232" coveredstatements="80" conditionals="265" coveredconditionals="46" methods="72" coveredmethods="23"/>
-      <file name="500.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/500.js">
-        <metrics statements="1" coveredstatements="1" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
-      </file>
+      <metrics statements="231" coveredstatements="79" conditionals="259" coveredconditionals="43" methods="71" coveredmethods="22"/>
       <file name="_app.js" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.js">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
