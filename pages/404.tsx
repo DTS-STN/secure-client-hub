@@ -30,7 +30,7 @@ interface Custom404Props {
 const Custom404 = (props: Custom404Props) => {
   return (
     <ErrorPage
-      lang={props.lang === 'bi' ? 'bi' : props.lang === 'fr' ? 'fr' : 'en'}
+      lang={props.lang}
       errType="404"
       isAuth={!props.isAuth}
       homePageLink={
@@ -85,7 +85,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
   return {
     props: {
-      locale: locale ? locale : 'en',
+      locale,
+      lang: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
