@@ -2,18 +2,42 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import ErrorPage from '../components/ErrorPage'
 import { getLogger } from '../logging/log-util'
+import { GetStaticProps } from 'next'
 
-function Custom500(props) {
+interface Data {
+  title: string
+  desc: string
+  author: string
+  keywords: string
+  service: string
+  creator: string
+  accessRights: string
+}
+
+interface Custom500Props {
+  lang: string
+  bannerContent: string
+  popupContent: string
+  isAuth: boolean
+  locale: string
+  langToggleLink: string
+  meta: {
+    data_en: Data
+    data_fr: Data
+  }
+}
+
+const Custom500 = (props: Custom500Props) => {
   return (
     <ErrorPage
-      lang={props.lang ? props.lang : props.locale}
+      lang={props.lang}
       errType="500"
-      isAuth={!props?.isAuth}
+      isAuth={!props.isAuth}
       homePageLink={
-        props?.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
+        props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
       }
       accountPageLink={
-        props?.locale === 'en'
+        props.locale === 'en'
           ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
           : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
       }
@@ -22,7 +46,7 @@ function Custom500(props) {
 }
 
 /* istanbul ignore next */
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger(`500 error page`)
   logger.level = 'error'
@@ -61,7 +85,8 @@ export async function getStaticProps({ locale }) {
   }
   return {
     props: {
-      locale: locale ? locale : 'en',
+      locale,
+      lang: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
       bannerContent: bannerContent.en,
       popupContent: popupContent.en,
