@@ -1,57 +1,82 @@
 /// <reference types="cypress" />
-const contactUsPo = require('../e2e/PageObjects/ContactUsPO.cy')
-const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
-const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
-const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
-import ContactUsEIdata from '../fixtures/ContactUsEIdata.json'
-
-beforeEach(() => {
-  cy.visit('/contact-us/contact-employment-insurance')
-})
 
 describe('Validate EI Contact Us Landing page', () => {
+
+  beforeEach(() => {
+    cy.visit('/contact-us/contact-employment-insurance')
+  })
+
   it('Contact us EI has no detectable a11y violations on load', () => {
     cy.injectAxe()
     cy.checkA11y()
   })
-  it('Validate EI Contact us URL and header in EN', () => {
-    EIcontactUs.ValidateEIContactUsUrl()
-    EIcontactUs.ValidateEIContactUsHeaderEN()
+
+  it('Navigate to the EI contact us page from Contact index page', () => {
+    cy.visit('/contact-us')
+    cy.get('[data-testid="ei-contact-us"]').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/en/contact-us/contact-employment-insurance')
   })
 
-  it('Validate EI Contact us URL and header in FR', () => {
-    dashboardPo.FrenchButton().click()
-    EIcontactUs.ValidateEIContactUsUrlFR()
-    EIcontactUs.ValidateEIContactUsHeaderFR()
+  it('Validate EI Contact Us header and page items in EN and FR', () => {
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact Employment Insurance')
+    cy.get('[data-cy="breadcrumb-Contact us"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-My dashboard"]').should('be.visible')
+    cy.changeLang().should('have.text', 'English')
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous/communiquer-assurance-emploi')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-Contactez-nous"]').should('be.visible').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous')
+    cy.get('[data-testid="ei-contact-us"]').click()
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Communiquer avec l\'assurance-emploi')
+
   })
 
-  it('Validate the breadcrumbs on EI contact us Page', () => {
-    securityPo.breadcrumbsLink1().should('be.visible')
-    securityPo.breadcrumbsLink2().should('be.visible')
-    securityPo.breadcrumbsLink1().click()
-    dashboardPo.ValidateDashboardUrl()
-    cy.go('back')
-    securityPo.breadcrumbsLink2().click()
-    contactUsPo.ValidateContactUsUrl()
+  it('Validate the "On this Page" section and links EN', () => {
+    cy.get('#onthispage').find('a')
+      .should('be.visible')
+      .and('have.length', '4')
+      .and('not.have.length', 0)
+      .and('not.have.attr', 'href', '#undefined')
   })
 
-  it('Validate the "On this Page" section', () => {
-    EIcontactUs.ValidateOnthisPageLinks()
+  it('Validate Phone section on EI contact Us page', () => {
+       cy.get('[data-cy="tableLink1"]').should('be.visible').click()
+       cy.url().should('contains', 'ei-contact-telephone')
+       cy.get('#ei-contact-telephone').should('be.visible')
+       cy.get('#ei-contact-telephone > [data-cy="section1"]').should('be.visible')
+       cy.get('#ei-contact-telephone > [data-cy="section2"]').should('be.visible')
   })
 
-  it('Validate Table of Content Links on EI contact Us page', () => {
-    EIcontactUs.ValidateEachtableOfContentLink()
+  it('Validate Callback section on EI contact Us page', () => {
+    cy.get('#onthispage').find('[data-cy="tableLink2"]')
+      .should('be.visible')
+      .click()
+    cy.url().should('contains', '/en/contact-us/contact-employment-insurance#ei-contact-callback')
+    cy.get('#ei-contact-callback').should('be.visible')
+    cy.get('#ei-contact-callback > [data-cy="section1"]').should('be.visible')
+    cy.get('#ei-contact-callback > [data-cy="section2"]').should('be.visible')
+})
+
+  it('Validate In Person section on EI contact Us page', () => {
+    cy.get('[data-cy="tableLink3"]').click()
+    cy.url().should('contains', 'ei-contact-in-person')
+    cy.get('#ei-contact-in-person').should('be.visible')
+    cy.get('#ei-contact-in-person > [data-cy="section1"]').should('be.visible')
+    cy.get('#ei-contact-in-person > [data-cy="section2"]').should('be.visible')
+})
+  it('Validate Mail section on EI contact Us page', () => {
+    cy.get('[data-cy="tableLink4"]').click()
+    cy.url().should('contains', 'ei-contact-mail')
+    cy.get('#ei-contact-mail').should('be.visible')
+    cy.get('[data-cy="provinceCards"]').should('have.length', '13')
+    cy.get('[data-cy="summary"]').each(($list) => {
+      cy.wrap($list).click()
+      cy.get('[data-cy="mail-addys"]')
+       .should('be.visible')
+    })
   })
 
-  it('Validate each section on EI contact Us page', () => {
-    EIcontactUs.ValidateEachSectionEIContactUs()
-  })
-
-  // it('Validate Mail section on EI contact Us page', () => {
-  //   EIcontactUs.ValidateMailCardsEIContactUs()
-  // })
-
-  it('Validate Telephone section on EI contact Us page', () => {
-    EIcontactUs.ValidateEachSectionContent()
-  })
 })

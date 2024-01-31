@@ -15,29 +15,39 @@ import { getLogger } from '../../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { ErrorPage } from '../../components/ErrorPage'
+import ErrorPage from '../../components/ErrorPage'
 import React from 'react'
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
+import { useRouter } from 'next/router'
 
 export default function ContactUsPage(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    []
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
+    () => throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -71,7 +81,7 @@ export default function ContactUsPage(props) {
       data-testid="contactUsPage-test"
       data-cy="ContactUsContent"
     >
-      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
+      <Heading id={'contact-us-heading'} title={props.pageContent.title} />
       <div
         className="py-5"
         data-testid={`${
@@ -79,7 +89,7 @@ export default function ContactUsPage(props) {
         }`}
       />
       <TableContents
-        id="cppContent"
+        id="onthispage"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}

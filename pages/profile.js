@@ -14,29 +14,39 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    []
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
+    () => throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -66,35 +76,36 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.pageName} />
+      <Heading id="profile-heading" title={props.content.pageName} />
       <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
-      {props.content.list.map((program, index) => {
-        return (
-          <ProfileTasks
-            key={index}
-            acronym={acronym(program.title)}
-            programTitle={program.title}
-            tasks={program.tasks}
-            data-testid="profile-task-group-list"
-            openModal={props.openModal}
-            data-cy="task"
-            refPageAA={props.aaPrefix}
-          />
-        )
-      })}
+      <div data-cy="profile-lists">
+        {props.content.list.map((program, index) => {
+          return (
+            <ProfileTasks
+              key={index}
+              acronym={acronym(program.title)}
+              programTitle={program.title}
+              tasks={program.tasks}
+              data-testid="profile-task-group-list"
+              openModal={props.openModal}
+              data-cy="task"
+              refPageAA={props.aaPrefix}
+            />
+          )
+        })}
+      </div>
+
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={props.content.backToDashboard.id}
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )

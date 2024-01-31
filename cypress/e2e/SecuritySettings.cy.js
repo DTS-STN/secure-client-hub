@@ -1,135 +1,84 @@
 /// <reference types="cypress" />
-const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
-const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
-const profilePo = require('../e2e/PageObjects/ProfilePO.cy')
-
-beforeEach(() => {
-  cy.visit('/security-settings')
-})
 
 describe('Validate Security Settings page', () => {
-  it('Validate Security Settings Page header in English', () => {
-    securityPo.SecurityHeaderEN()
-  })
-
-  it('Validate French button click goes to fr/Security-settings page', () => {
-    dashboardPo.FrenchButton().click()
-    securityPo.SecurityUrlFR()
-  })
-
-  it('Validate Security Settings Page header in French', () => {
-    dashboardPo.FrenchButton().click()
-    securityPo.SecurityHeaderFR()
-  })
-
-  it('Validate that user can select "Security settings" from Menu dropdown options', () => {
-    cy.visit('/my-dashboard')
-    dashboardPo.Menu().click()
-    dashboardPo.SecuritySettingsMenu().click()
-    securityPo.SecurityUrlEN()
-    securityPo.SecurityHeaderEN()
-  })
-
-  it('validate that user is navigated to /fr/security-settings page from /fr/dashboard', () => {
-    cy.visit('/my-dashboard')
-    dashboardPo.FrenchButton().click()
-    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
-    dashboardPo.Menu().click()
-    dashboardPo.SecuritySettingsMenu().click()
-    securityPo.SecurityUrlFR()
-    securityPo.SecurityHeaderFR()
-  })
-
-  it('validate the "My dashboard" click goes to dashboard page', () => {
-    securityPo.breadcrumbs().click()
-    dashboardPo.ValidateDashboardUrl()
-    dashboardPo.ValidateDashboardHeaderEN()
-  })
-
-  it('validate the "Mon tableau de bord" click goes from Security to "/fr/home"page', () => {
-    dashboardPo.FrenchButton().click()
-    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
-    securityPo.breadcrumbs().click()
-    dashboardPo.ValidateDashboardUrlFR()
-    dashboardPo.ValidateDashboardHeaderFR()
-  })
-
-  it('validate the breadcrumbs are present on Security settings page', () => {
-    securityPo
-      .breadcrumbs()
-      .should('be.visible')
-      .and('have.text', 'My dashboard')
-    dashboardPo.FrenchButton().click()
-    securityPo
-      .breadcrumbs()
-      .should('be.visible')
-      .and('have.text', 'Mon tableau de bord')
-  })
-
-  it('Validate that the "Looking for" section is present on Security Settings Page', () => {
-    profilePo.LookingFor().should('be.visible')
-    securityPo.LookingForProfileLinkEn().should('be.visible')
-    profilePo.BackToDashboardButton().should('be.visible')
-  })
-
-  it('Validate the "Back to Dashboard" click navigates to dashboard page', () => {
-    profilePo.BackToDashboardButton().click()
-    dashboardPo.ValidateDashboardUrl()
-    dashboardPo.ValidateDashboardHeaderEN()
-  })
-
-  it('Validate the "Profile" click navigates to Profile Page', () => {
-    securityPo.LookingForProfileLinkEn().click({ force: true })
-    profilePo.ProfileUrlEN()
-    profilePo.ProfileHeaderEN()
-  })
-
-  it('Validate the "Looking for Profile Settings" and button text text in English', () => {
-    profilePo.LookingFor().should('have.text', 'Looking for profile settings?')
-    profilePo
-      .BackToDashboardButton()
-      .should('have.text', 'Back to my dashboard')
-  })
-
-  it('Validate the "Looking for Profile Settings text" and button text in French', () => {
-    dashboardPo.FrenchButton().click()
-    profilePo
-      .LookingFor()
-      .should('have.text', 'Vous recherchez les paramètres de votre profil?')
-    profilePo
-      .BackToDashboardButton()
-      .should('have.text', 'Retour à mon tableau de bord')
-  })
-
-  it('Validate the "Vous recherchez les paramètres de sécurité?" click navigates to /fr/security-settings Page', () => {
-    dashboardPo.FrenchButton().click()
-    securityPo.LookingForProfileLinkFR().click()
-    profilePo.ProfileUrlFR()
-    profilePo.ProfileHeaderFR()
-  })
-
-  it('Validate the "Retour à mon tableau de bord" click navigates to /fr/home Page', () => {
-    dashboardPo.FrenchButton().click()
-    cy.get('#mainSiteNav').should('have.text', 'Mon dossier Service Canada')
-    profilePo.BackToDashboardButton().click()
-    dashboardPo.ValidateDashboardUrlFR()
-    dashboardPo.ValidateDashboardHeaderFR()
-  })
-
-  it('Validate the "Security Questions" Link in English and French', () => {
-    securityPo
-      .SecurityQuestionsLink()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
-    dashboardPo.FrenchButton().click()
-    securityPo
-      .SecurityQuestionsLink()
-      .should('be.visible')
-      .and('not.have.attr', 'href', '#undefined')
+  beforeEach(() => {
+    cy.visit('/security-settings')
   })
 
   it('Security settings has no detectable a11y violations on load', () => {
     cy.injectAxe()
     cy.checkA11y()
+  })
+  // skippin due to issue with href
+  it('Validate Security Settings Page and Questions link EN', () => {
+    cy.get('[data-testid ="securityContent-test"]>h1')
+      .should('be.visible')
+      .and('have.text', 'Security settings')
+      cy.get('#securityQuestionsLink')
+      .should('have.attr', 'href')
+      .and('contain', '/SCL/SQE.aspx?Lang=eng')
+    cy.get('[data-cy="breadcrumb-My dashboard"]')
+      .should('be.visible')
+      .and('have.text', 'My dashboard')
+      .click()
+    cy.url().should('contains', '/my-dashboard')
+  })
+
+  it('Validate Security Settings Page  and Questions link FR', () => {
+    cy.get('[data-cy="lang1"] > span').click()
+    cy.url().should('contains', '/fr/parametres-securite')
+    cy.get('[data-testid ="securityContent-test"]>h1')
+      .should('be.visible')
+      .and('have.text', 'Paramètres de sécurité')
+      cy.get('#securityQuestionsLink')
+      .should('have.attr', 'href')
+      .and('contain', '/SCL/SQE.aspx?Lang=fra')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]')
+      .should('be.visible')
+      .and('have.text', 'Mon tableau de bord')
+      .click()
+    cy.url().should('contains', '/fr/mon-tableau-de-bord')
+  })
+
+  it('Validate that the "Looking for" section is present on Security Settings Page EN/FR', () => {
+    cy.get("[data-cy ='looking-for']").should('be.visible')
+    cy.get('[data-cy="access-profile-page-link"]').should(
+      'have.attr',
+      'href',
+      '/en/profile'
+    )
+    cy.get('#back-to-dashboard-button')
+      .should('be.visible')
+      .and('have.text', 'Back to my dashboard')
+    cy.get('[data-cy="lang1"] > span').click()
+    cy.get('[data-cy="looking-for"]')
+      .should('be.visible')
+      .and('have.text', 'Vous recherchez les paramètres de votre profil?')
+    cy.get('[data-cy="access-profile-page-link"]').should(
+      'have.attr',
+      'href',
+      '/fr/profil'
+    )
+    cy.get('#back-to-dashboard-button')
+      .should('be.visible')
+      .and('have.text', 'Retour à mon tableau de bord')
+  })
+
+  it('Validate the "Profile" click navigates to Profile Page EN', () => {
+    cy.get('[data-cy="access-profile-page-link"]').click({ force: true })
+    cy.url().should('contains', '/profile')
+    cy.get('[data-testid ="profileContent-test"]>h1')
+      .should('be.visible')
+      .and('have.text', 'Profile')
+  })
+
+  it('Validate the "Profil" click navigates to Profile Page FR', () => {
+    cy.get('[data-cy="lang1"] > span').click()
+    cy.url().should('contains', '/fr/parametres-securite')
+    cy.get('[data-cy="access-profile-page-link"]').click({ force: true })
+    cy.url().should('contains', '/profil')
+    cy.get('[data-testid ="profileContent-test"]>h1')
+      .should('be.visible')
+      .and('have.text', 'Profil')
   })
 })

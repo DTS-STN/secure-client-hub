@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import Link from 'next/link'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
@@ -13,27 +12,38 @@ import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
+import { useRouter } from 'next/router'
+import Button from '../components/Button'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    []
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
+    () => throttle(onClickEvent, 60000, { trailing: false }),
     [onClickEvent]
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -63,20 +73,21 @@ export default function SecuritySettings(props) {
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <Heading id="security-settings-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
-      <Link
-        className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
-        id="securityQuestionsLink"
+      <Button
         data-testid="securityQuestionsLink"
-        aria-label={props.content.securityQuestions.linkTitle.text}
         href={props.content.securityQuestions.linkTitle.link}
-        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-      >
-        {props.content.securityQuestions.linkTitle.text}
-      </Link>
+        id="securityQuestionsLink"
+        style="link"
+        text={props.content.securityQuestions.linkTitle.text}
+        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
+        refPageAA={props.aaPrefix}
+        onClick={(e) => {}}
+      ></Button>
+
       <p className="mb-8 text-xl text-gray-darker">
         {props.content.securityQuestions.subTitle}
       </p>
@@ -85,14 +96,12 @@ export default function SecuritySettings(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={t.backToDashboard.id}
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
