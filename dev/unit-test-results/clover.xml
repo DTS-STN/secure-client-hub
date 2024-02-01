@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706651570176" clover="3.2.0">
-  <project timestamp="1706651570177" name="All files">
-    <metrics statements="450" coveredstatements="119" conditionals="477" coveredconditionals="59" methods="142" coveredmethods="37" elements="1069" coveredelements="215" complexity="0" loc="450" ncloc="450" packages="7" files="21" classes="21"/>
+<coverage generated="1706805432257" clover="3.2.0">
+  <project timestamp="1706805432257" name="All files">
+    <metrics statements="440" coveredstatements="119" conditionals="475" coveredconditionals="59" methods="138" coveredmethods="37" elements="1053" coveredelements="215" complexity="0" loc="440" ncloc="440" packages="7" files="20" classes="20"/>
     <package name="components">
-      <metrics statements="58" coveredstatements="3" conditionals="54" coveredconditionals="0" methods="19" coveredmethods="0"/>
-      <file name="ErrorBoundary.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ErrorBoundary.js">
-        <metrics statements="10" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-      </file>
+      <metrics statements="48" coveredstatements="3" conditionals="52" coveredconditionals="0" methods="15" coveredmethods="0"/>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
         <metrics statements="14" coveredstatements="2" conditionals="44" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
