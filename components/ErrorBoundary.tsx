@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import { Component, ErrorInfo, ReactNode } from 'react'
 import { getLogger } from '../logging/log-util'
 import ErrorPage from './ErrorPage'
 
