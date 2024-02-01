@@ -21,7 +21,6 @@ interface ContactProvinceRowProps {
 }
 
 const ap = (x: string | undefined, append: string): string => {
-  console.log(x)
   return x ? x + append : ''
 }
 
@@ -38,7 +37,7 @@ const ContactProvinceRow = ({ label, items, id }: ContactProvinceRowProps) => {
               <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
                 <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
               </strong>
-              (
+
               <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
                 x.program,
                 '\n\n'
@@ -49,7 +48,6 @@ const ContactProvinceRow = ({ label, items, id }: ContactProvinceRowProps) => {
                 x.postal,
                 ' \n\n'
               )} ${ap(x.country, ' ')}`}</Markdown>
-              )
             </div>
           ))}
         </div>

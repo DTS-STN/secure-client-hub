@@ -2,12 +2,34 @@ import Markdown from 'markdown-to-jsx'
 import ContactSectionRow from './ContactSectionRow'
 import { programs } from '../../lib/programs'
 
-export default function ContactSection({ title, intro, id, details }) {
+interface Item {
+  content: string
+  id: string
+  icon: string
+  button: boolean
+  highlight?: boolean
+  link: string
+}
+
+interface Detail {
+  id: string
+  color: undefined
+  items: Item[]
+}
+
+interface ContactSectionProps {
+  title: string
+  intro: string
+  id: string
+  i: number
+  details: Detail[]
+}
+
+const ContactSection = ({ title, intro, id, details }: ContactSectionProps) => {
   return (
     <div
       data-cy="sections"
       className="max-w-3xl mt-4"
-      name={id}
       id={id}
       data-testid="contactSection-test"
     >
@@ -39,3 +61,4 @@ export default function ContactSection({ title, intro, id, details }) {
     </div>
   )
 }
+export default ContactSection

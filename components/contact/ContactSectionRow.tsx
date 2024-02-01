@@ -1,9 +1,29 @@
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { icon } from '../../lib/loadIcons'
 
-function ContactSectionRow(props) {
+interface DetailItem {
+  link: string
+  content: string
+}
+
+interface ContactSectionRowProps {
+  label?: string
+  detail?: string
+  index: number
+  highlight?: boolean
+  iconFeature?: string
+  button?: boolean
+  buttonURL?: string
+  buttonId?: string
+  items: DetailItem[]
+  refPageAA: string
+  id: string
+}
+
+function ContactSectionRow(props: ContactSectionRowProps) {
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
@@ -14,16 +34,9 @@ function ContactSectionRow(props) {
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
-  const {
-    label,
-    detail,
-    index,
-    highlight,
-    iconFeature,
-    button,
-    buttonURL,
-    buttonId,
-  } = props
+
+  const { label, detail, index, highlight, iconFeature, button, buttonId } =
+    props
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
@@ -73,7 +86,7 @@ function ContactSectionRow(props) {
                 <FontAwesomeIcon
                   className="pr-2 pt-1"
                   style={{ color: '#2572B4' }}
-                  icon={icon[iconFeature]}
+                  icon={icon[iconFeature as keyof typeof icon]}
                 />
               )}
 
