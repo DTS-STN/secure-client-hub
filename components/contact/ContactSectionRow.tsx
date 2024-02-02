@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { icon } from '../../lib/loadIcons'
 
 interface DetailItem {
