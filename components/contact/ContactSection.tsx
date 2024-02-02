@@ -13,7 +13,7 @@ interface Item {
 
 interface Detail {
   id: string
-  color: undefined
+  color: boolean
   items: Item[]
 }
 
