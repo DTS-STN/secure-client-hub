@@ -22,7 +22,18 @@ interface ContactSectionRowProps {
   id: string
 }
 
-function ContactSectionRow(props: ContactSectionRowProps) {
+const ContactSectionRow = ({
+  label,
+  detail,
+  index,
+  highlight,
+  iconFeature,
+  button,
+  buttonId,
+  items,
+  refPageAA,
+  id,
+}: ContactSectionRowProps) => {
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
@@ -33,9 +44,6 @@ function ContactSectionRow(props: ContactSectionRowProps) {
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
-
-  const { label, detail, index, highlight, iconFeature, button, buttonId } =
-    props
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
@@ -50,7 +58,7 @@ function ContactSectionRow(props: ContactSectionRowProps) {
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {props.items.map((detail, index) => {
+        {items.map((detail, index) => {
           return button ? (
             <a
               key={index}
@@ -66,7 +74,7 @@ function ContactSectionRow(props: ContactSectionRowProps) {
                   ? 'noopener noreferrer'
                   : undefined
               }
-              data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+              data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
             >
               {detail.content}
 
