@@ -1,12 +1,30 @@
 import Markdown from 'markdown-to-jsx'
-import Collapse from '../../components/Collapse'
+import Collapse from '../Collapse'
 import { Fragment } from 'react'
 
-const ap = (x, append) => {
+interface Item {
+  content: string
+  recipient: string
+  program: string
+  poBox: string
+  station: string
+  city: string
+  province: string
+  postal: string
+  country: string
+}
+
+interface ContactProvinceRowProps {
+  label: string
+  items: Item[]
+  id: string
+}
+
+const ap = (x: string | undefined, append: string): string => {
   return x ? x + append : ''
 }
 
-const ContactProvinceRow = ({ label, items, id }) => {
+const ContactProvinceRow = ({ label, items, id }: ContactProvinceRowProps) => {
   return items.length > 0 ? (
     <div className="py-2" key={id} data-cy="provinceCards">
       <Collapse title={label} id={id} dataTestId={`dataTest`}>
@@ -19,18 +37,17 @@ const ContactProvinceRow = ({ label, items, id }) => {
               <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
                 <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
               </strong>
-              {x && (
-                <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
-                  x.program,
-                  '\n\n'
-                )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
-                  ' ',
-                  '\n\n'
-                )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
-                  x.postal,
-                  ' \n\n'
-                )} ${ap(x.country, ' ')}`}</Markdown>
-              )}
+
+              <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
+                x.program,
+                '\n\n'
+              )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
+                ' ',
+                '\n\n'
+              )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
+                x.postal,
+                ' \n\n'
+              )} ${ap(x.country, ' ')}`}</Markdown>
             </div>
           ))}
         </div>

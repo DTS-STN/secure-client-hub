@@ -3,7 +3,37 @@ import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
 
-function ContactSectionRow(props) {
+interface DetailItem {
+  link: string
+  content: string
+}
+
+interface ContactSectionRowProps {
+  label?: string
+  detail?: string
+  index: number
+  highlight?: boolean
+  iconFeature?: string
+  button?: boolean
+  buttonURL?: string
+  buttonId?: string
+  items: DetailItem[]
+  refPageAA: string
+  id: string
+}
+
+const ContactSectionRow = ({
+  label,
+  detail,
+  index,
+  highlight,
+  iconFeature,
+  button,
+  buttonId,
+  items,
+  refPageAA,
+  id,
+}: ContactSectionRowProps) => {
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
@@ -14,16 +44,6 @@ function ContactSectionRow(props) {
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
-  const {
-    label,
-    detail,
-    index,
-    highlight,
-    iconFeature,
-    button,
-    buttonURL,
-    buttonId,
-  } = props
   return label && detail ? (
     <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
       <dt
@@ -38,7 +58,7 @@ function ContactSectionRow(props) {
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {props.items.map((detail, index) => {
+        {items.map((detail, index) => {
           return button ? (
             <a
               key={index}
@@ -54,7 +74,7 @@ function ContactSectionRow(props) {
                   ? 'noopener noreferrer'
                   : undefined
               }
-              data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:${props.id}`}
+              data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
             >
               {detail.content}
 
@@ -73,7 +93,7 @@ function ContactSectionRow(props) {
                 <FontAwesomeIcon
                   className="pr-2 pt-1"
                   style={{ color: '#2572B4' }}
-                  icon={icon[iconFeature]}
+                  icon={icon[iconFeature as keyof typeof icon]}
                 />
               )}
 

@@ -1,7 +1,32 @@
 import Markdown from 'markdown-to-jsx'
 import ContactProvinceRow from './ContactProvinceRow'
 
-const ContactProvince = ({ title, intro, id, i, details }) => {
+interface Item {
+  content: string
+  recipient: string
+  program: string
+  poBox: string
+  station: string
+  city: string
+  province: string
+  postal: string
+  country: string
+}
+
+interface ContactProvinceProps {
+  title: string
+  intro: string
+  id: string
+  i: number
+  details: { label: string; id: string; items: Item[] }[]
+}
+
+const ContactProvince = ({
+  title,
+  intro,
+  id,
+  details,
+}: ContactProvinceProps) => {
   return (
     <div className="max-w-4xl pb-2 md:pb-4" id={id}>
       <h2 className="py-4 md:py-6 text-4xl text-gray-darker font-display font-bold">
