@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706805432257" clover="3.2.0">
-  <project timestamp="1706805432257" name="All files">
-    <metrics statements="440" coveredstatements="119" conditionals="475" coveredconditionals="59" methods="138" coveredmethods="37" elements="1053" coveredelements="215" complexity="0" loc="440" ncloc="440" packages="7" files="20" classes="20"/>
+<coverage generated="1706891666494" clover="3.2.0">
+  <project timestamp="1706891666495" name="All files">
+    <metrics statements="425" coveredstatements="111" conditionals="453" coveredconditionals="57" methods="128" coveredmethods="34" elements="1006" coveredelements="202" complexity="0" loc="425" ncloc="425" packages="6" files="16" classes="16"/>
     <package name="components">
       <metrics statements="48" coveredstatements="3" conditionals="52" coveredconditionals="0" methods="15" coveredmethods="0"/>
       <file name="Layout.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Layout.js">
@@ -57,36 +57,6 @@
         <line num="111" count="0" type="stmt"/>
         <line num="114" count="0" type="stmt"/>
         <line num="131" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="components.contact">
-      <metrics statements="15" coveredstatements="8" conditionals="22" coveredconditionals="2" methods="10" coveredmethods="3"/>
-      <file name="ContactProvince.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvince.js">
-        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-      </file>
-      <file name="ContactProvinceRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactProvinceRow.js">
-        <metrics statements="5" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="15" count="0" type="stmt"/>
-      </file>
-      <file name="ContactSection.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSection.js">
-        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="6" count="5" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-      </file>
-      <file name="ContactSectionRow.js" path="/home/runner/work/secure-client-hub/secure-client-hub/components/contact/ContactSectionRow.js">
-        <metrics statements="4" coveredstatements="3" conditionals="16" coveredconditionals="2" methods="2" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="27" count="2" type="cond" truecount="2" falsecount="2"/>
-        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
     </package>
     <package name="components.sessionModals">
