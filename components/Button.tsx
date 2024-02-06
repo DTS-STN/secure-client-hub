@@ -35,7 +35,7 @@ const Button = ({
   refPageAA,
 }: ButtonProps) => {
   const primary =
-    'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus'
+    'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus rounded'
   const secondary =
     'text-blue-60b text-xl bg-gray-30a hover:bg-gray-50a active:bg-gray-60  focus:bg-gray-60  focus:ring-deep-blue-60f focus:ring-bg-gray-50a'
   const supertask =
@@ -101,10 +101,12 @@ const Button = ({
       data-testid={id}
       href={href}
       className={`flex flex-row ${disabled ? 'cursor-not-allowed' : ''} ${
-        style !== 'none'
-          ? `font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a`
-          : ''
-      } focus:ring focus:ring-offset-4 ${className} `}
+        style === 'link'
+          ? `font-display text-xl leading-[23px] text-blue-default hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f focus:underline visited:text-purple-50a`
+          : style === 'none'
+          ? ''
+          : buttonStyle
+      } py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${className} `}
       onClick={onClick}
       id={id}
       data-gc-analytics-customclick={`${refPageAA}:${id}`}
