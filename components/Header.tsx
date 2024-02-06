@@ -1,4 +1,3 @@
-import React from 'react'
 import { TopNav } from './TopNav'
 import Menu from './Menu'
 import Image from 'next/image'

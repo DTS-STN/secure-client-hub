@@ -87,7 +87,6 @@ export default function Profile(props) {
               programTitle={program.title}
               tasks={program.tasks}
               data-testid="profile-task-group-list"
-              openModal={props.openModal}
               data-cy="task"
               refPageAA={props.aaPrefix}
             />
