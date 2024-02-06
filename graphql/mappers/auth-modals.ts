@@ -130,8 +130,8 @@ export async function getAuthModalsContent() {
       staySignedInLinktext: resStaySignedIn?.scFragments.filter(
         (fragment) => fragment.scId === 'stay-signed-in'
       )[0].scLinkTextEn,
-      bannerContent: resStaySignedIn?.scContentEn.json[0].content.map(
-        (paragraph) => paragraph.value
+      bannerContent: resStaySignedIn?.scContentEn.json.map((data) =>
+        data.content.map((paragraph) => paragraph.value)
       ),
       bannerMinutesAnd: 'minutes and',
       bannerSeconds: 'seconds',
@@ -144,8 +144,8 @@ export async function getAuthModalsContent() {
       staySignedInLinktext: resStaySignedIn?.scFragments.filter(
         (fragment) => fragment.scId === 'stay-signed-in'
       )[0].scLinkTextFr,
-      bannerContent: resStaySignedIn?.scContentFr.json[0].content.map(
-        (paragraph) => paragraph.value
+      bannerContent: resStaySignedIn?.scContentFr.json.map((data) =>
+        data.content.map((paragraph) => paragraph.value)
       ),
       bannerMinutesAnd: 'minutes et',
       bannerSeconds: 'secondes',

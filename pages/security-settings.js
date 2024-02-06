@@ -83,9 +83,8 @@ export default function SecuritySettings(props) {
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
+        className="font-body text-20px pr-0 pl-0 w-fit underline"
         refPageAA={props.aaPrefix}
-        onClick={(e) => {}}
       ></Button>
 
       <p className="mb-8 text-xl text-gray-darker">
