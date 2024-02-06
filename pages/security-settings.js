@@ -83,7 +83,7 @@ export default function SecuritySettings(props) {
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 w-fit"
+        className="font-body text-20px pr-0 pl-0 w-fit underline"
         refPageAA={props.aaPrefix}
       ></Button>
 

@@ -102,7 +102,7 @@ const Button = ({
       href={href}
       className={`flex flex-row ${disabled ? 'cursor-not-allowed' : ''} ${
         style === 'link'
-          ? `font-display text-xl leading-[23px] text-blue-default hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f focus:underline visited:text-purple-50a`
+          ? `font-body text-xl leading-[23px] text-deep-blue-dark hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f focus:underline visited:text-purple-50a`
           : style === 'none'
           ? ''
           : buttonStyle

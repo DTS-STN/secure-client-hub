@@ -65,7 +65,7 @@ const ContactSectionRow = ({
               id={'test-card-button-' + buttonId}
               data-cy="contact-us-button"
               href={detail.link}
-              className="font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
+              className="font-display text-xl leading-[23px] text-deep-blue-dark rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
               target={
                 newTabTaskExceptions.includes(detail.link) ? '_blank' : '_self'
               }
