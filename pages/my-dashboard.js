@@ -15,10 +15,9 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import React from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 
 export default function MyDashboard(props) {
@@ -97,7 +96,6 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={props.openModal}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -113,7 +111,6 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={props.openModal}
                       refPageAA={props.aaPrefix}
                     />
                   </div>

@@ -14,7 +14,7 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import throttle from 'lodash.throttle'
 import Markdown from 'markdown-to-jsx'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
 import { useRouter } from 'next/router'
 
@@ -99,13 +99,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[0].button.id}
           style="primary"
           text={props.content.content[0].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={(e) => {
-            if (props.content.content[0].button.betaPopUp) {
-              e.preventDefault()
-              props.openModal(props.content.content[0].button.link, 'betaModal')
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[0].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
       </section>
@@ -134,13 +129,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={(e) => {
-            if (props.content.content[1].button.betaPopUp) {
-              e.preventDefault()
-              props.openModal(props.content.content[1].button.link, 'betaModal')
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[1].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
       </section>
@@ -292,10 +282,4 @@ DecisionReviews.propTypes = {
    */
 
   meta: PropTypes.object,
-
-  /*
-   * Modal Function
-   */
-
-  openModal: PropTypes.func,
 }

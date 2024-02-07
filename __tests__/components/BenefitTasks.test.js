@@ -32,7 +32,6 @@ describe('BenefitTasks', () => {
         acronym={'test'}
         taskList={taskListTest}
         dataCy="task-group-list-test"
-        openModal={() => {}}
         refPageAA={'test'}
       />
     )
@@ -46,7 +45,6 @@ describe('BenefitTasks', () => {
         acronym={'test'}
         taskList={taskListTest}
         dataCy="task-group-list-test"
-        openModal={() => {}}
         refPageAA={'test'}
       />
     )

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import Link from 'next/link'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
@@ -15,7 +14,7 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 import Button from '../components/Button'
 
@@ -74,25 +73,18 @@ export default function SecuritySettings(props) {
 
   return (
     <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.heading} />
+      <Heading id="security-settings-heading" title={props.content.heading} />
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
       <Button
+        data-testid="securityQuestionsLink"
+        href={props.content.securityQuestions.linkTitle.link}
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
-        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-        onClick={(e) => {
-          if (props.content.securityQuestions.schBetaPopUp) {
-            e.preventDefault()
-            props.openModal(
-              props.content.securityQuestions.linkTitle.link,
-              'betaModal'
-            )
-          }
-        }}
+        className="font-body text-20px pr-0 pl-0 w-fit underline"
+        refPageAA={props.aaPrefix}
       ></Button>
 
       <p className="mb-8 text-xl text-gray-darker">
@@ -103,14 +95,12 @@ export default function SecuritySettings(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={t.backToDashboard.id}
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )

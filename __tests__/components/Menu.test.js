@@ -4,7 +4,7 @@
 import { render, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import { Menu } from '../../components/Menu'
+import Menu from '../../components/Menu'
 
 expect.extend(toHaveNoViolations)
 

@@ -15,7 +15,7 @@ import { getLogger } from '../../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { ErrorPage } from '../../components/ErrorPage'
+import ErrorPage from '../../components/ErrorPage'
 import React from 'react'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
@@ -81,7 +81,7 @@ export default function ContactUsPage(props) {
       data-testid="contactUsPage-test"
       data-cy="ContactUsContent"
     >
-      <Heading id="my-dashboard-heading" title={props.pageContent.title} />
+      <Heading id={'contact-us-heading'} title={props.pageContent.title} />
       <div
         className="py-5"
         data-testid={`${
@@ -89,7 +89,7 @@ export default function ContactUsPage(props) {
         }`}
       />
       <TableContents
-        id="cppContent"
+        id="onthispage"
         sectionList={props.pageContent.items.map((item, i) => {
           return { name: item.title, link: `#${item.id}` }
         })}

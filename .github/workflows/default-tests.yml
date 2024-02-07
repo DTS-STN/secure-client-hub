@@ -60,10 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🔔
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
@@ -80,7 +80,7 @@ jobs:
           AUTH_DISABLED: true
 
       - name: Cypress end-to-end 🧪
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         env:
           CI: true
           NODE_ENV: production
@@ -99,6 +99,7 @@ jobs:
         with:
           install: false
           start: npm run start:next
+          browser: chrome
 
       - name: Merge test results into one
         run: npm run report:merge

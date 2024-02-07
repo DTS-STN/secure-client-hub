@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Date } from '../components/Date'
+import Date from '../components/Date'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
@@ -18,7 +18,7 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 
 export default function PrivacyCondition(props) {
