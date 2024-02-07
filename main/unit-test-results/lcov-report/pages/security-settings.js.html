@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.91% </span>
+                <span class="strong">34.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/47</span>
+                <span class='fraction'>15/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.36% </span>
+                <span class="strong">16.98% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/55</span>
+                <span class='fraction'>9/53</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">30.76% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/14</span>
+                <span class='fraction'>4/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.91% </span>
+                <span class="strong">34.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/47</span>
+                <span class='fraction'>15/44</span>
             </div>
         
             
@@ -336,18 +336,7 @@
 <a name='L271'></a><a href='#L271'>271</a>
 <a name='L272'></a><a href='#L272'>272</a>
 <a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a>
-<a name='L275'></a><a href='#L275'>275</a>
-<a name='L276'></a><a href='#L276'>276</a>
-<a name='L277'></a><a href='#L277'>277</a>
-<a name='L278'></a><a href='#L278'>278</a>
-<a name='L279'></a><a href='#L279'>279</a>
-<a name='L280'></a><a href='#L280'>280</a>
-<a name='L281'></a><a href='#L281'>281</a>
-<a name='L282'></a><a href='#L282'>282</a>
-<a name='L283'></a><a href='#L283'>283</a>
-<a name='L284'></a><a href='#L284'>284</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L274'></a><a href='#L274'>274</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -427,15 +416,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -630,7 +610,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
-import Link from 'next/link'
 import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
@@ -646,7 +625,7 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 import Button from '../components/Button'
 &nbsp;
@@ -705,25 +684,18 @@ export default function SecuritySettings(props) {
 &nbsp;
   return (
     &lt;div id="securityContent" data-testid="securityContent-test"&gt;
-      &lt;Heading id="my-dashboard-heading" title={props.content.heading} /&gt;
+      &lt;Heading id="security-settings-heading" title={props.content.heading} /&gt;
       &lt;p className="mt-3 mb-8 text-xl text-gray-darker"&gt;
         {props.content.subHeading}
       &lt;/p&gt;
       &lt;Button
+        data-testid="securityQuestionsLink"
+        href={props.content.securityQuestions.linkTitle.link}
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
-        data-gc-analytics-customclick={`ESDC-EDSC:${props.aaPrefix}:securityQuestions`}
-        onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >          if (props.content.securityQuestions.schBetaPopUp) {</span>
-<span class="cstat-no" title="statement not covered" >            e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >            props.openModal(</span>
-              props.content.securityQuestions.linkTitle.link,
-              'betaModal'
-            )
-          }
-        }}
+        className="font-body text-20px pr-0 pl-0 w-fit underline"
+        refPageAA={props.aaPrefix}
       &gt;&lt;/Button&gt;
 &nbsp;
       &lt;p className="mb-8 text-xl text-gray-darker"&gt;
@@ -734,14 +706,12 @@ export default function SecuritySettings(props) {
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={t.backToDashboard.id}
         dataCy="access-profile-page-link"
         buttonHref={t.url_dashboard}
         buttonId="back-to-dashboard-button"
         buttonLinkText={t.backToDashboard}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       &gt;&lt;/PageLink&gt;
     &lt;/div&gt;
   )
@@ -919,7 +889,7 @@ SecuritySettings.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-18T22:14:40.608Z
+                at 2024-02-07T19:42:15.718Z
             </div>
         <script src="../prettify.js"></script>
         <script>

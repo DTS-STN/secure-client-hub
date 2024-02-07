@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.61% </span>
+                <span class="strong">34.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/49</span>
+                <span class='fraction'>15/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.98% </span>
+                <span class="strong">18.36% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/53</span>
+                <span class='fraction'>9/49</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.66% </span>
+                <span class="strong">30.76% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/15</span>
+                <span class='fraction'>4/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.61% </span>
+                <span class="strong">34.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/49</span>
+                <span class='fraction'>15/43</span>
             </div>
         
             
@@ -348,23 +348,7 @@
 <a name='L283'></a><a href='#L283'>283</a>
 <a name='L284'></a><a href='#L284'>284</a>
 <a name='L285'></a><a href='#L285'>285</a>
-<a name='L286'></a><a href='#L286'>286</a>
-<a name='L287'></a><a href='#L287'>287</a>
-<a name='L288'></a><a href='#L288'>288</a>
-<a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a>
-<a name='L296'></a><a href='#L296'>296</a>
-<a name='L297'></a><a href='#L297'>297</a>
-<a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a>
-<a name='L302'></a><a href='#L302'>302</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L286'></a><a href='#L286'>286</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -467,9 +451,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -498,13 +479,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -659,12 +633,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Heading from '../components/Heading'
@@ -681,7 +649,7 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import throttle from 'lodash.throttle'
 import Markdown from 'markdown-to-jsx'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
 import { useRouter } from 'next/router'
 &nbsp;
@@ -766,13 +734,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[0].button.id}
           style="primary"
           text={props.content.content[0].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >            if (props.content.content[0].button.betaPopUp) {</span>
-<span class="cstat-no" title="statement not covered" >              e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >              props.openModal(props.content.content[0].button.link, 'betaModal')</span>
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[0].button.link}
           refPageAA={props.aaPrefix}
         &gt;&lt;/Button&gt;
       &lt;/section&gt;
@@ -801,13 +764,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >            if (props.content.content[1].button.betaPopUp) {</span>
-<span class="cstat-no" title="statement not covered" >              e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >              props.openModal(props.content.content[1].button.link, 'betaModal')</span>
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[1].button.link}
           refPageAA={props.aaPrefix}
         &gt;&lt;/Button&gt;
       &lt;/section&gt;
@@ -959,12 +917,6 @@ DecisionReviews.propTypes = {
    */
 &nbsp;
   meta: PropTypes.object,
-&nbsp;
-  /*
-   * Modal Function
-   */
-&nbsp;
-  openModal: PropTypes.func,
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -973,7 +925,7 @@ DecisionReviews.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-18T22:14:40.608Z
+                at 2024-02-07T19:42:15.718Z
             </div>
         <script src="../prettify.js"></script>
         <script>
