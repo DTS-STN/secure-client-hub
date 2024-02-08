@@ -132,6 +132,15 @@ const getCachedContent = () => {
   })
 }
 
+/**
+ * Awaited: Recursively unwraps the "awaited type" of a type.
+ * ReturnType: Obtain the return type of a function type
+ */
+export type GetContactUsPageReturnType = Awaited<
+  ReturnType<typeof getContactUsPage>
+>
+
+
 export async function getContactUsPage(id: string) {
   const response = await getCachedContent()
   const queryData = response?.data.schPageV1List.items.find(

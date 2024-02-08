@@ -2,21 +2,19 @@ import Link from 'next/link'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
-import en from '../../locales/en'
-import fr from '../../locales/fr'
-import { getContactUsContent } from '../../graphql/mappers/contact-us'
+import { GetContactUsContentReturnType, getContactUsContent } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import ErrorPage from '../../components/ErrorPage'
+// import ErrorPage from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
-import { getLogger } from '../../logging/log-util'
+// import { getLogger } from '../../logging/log-util'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-import Breadcrumb from '../../components/Breadcrumb'
+import { BreadcrumbItem } from '../../components/Breadcrumb'
 
 interface Data {
   title: string
@@ -28,41 +26,18 @@ interface Data {
   accessRights: string
 }
 
-interface LinkItem {
-  locale: string
-  linkId: string
-  linkTitle: string
-  linkDestination: string
-  linkDescription: string
-}
-
-type breadCrumbItem = {
-  text: string
-  link: string
-}
-
 interface ContactLandingProps {
   locale: string
-  content: {
-    heading: string
-    subHeading: string
-    links: LinkItem[]
-    err?: string 
-    pageName: string
-    en: string
-    fr: string
-    }
-  popupStaySignedIn: { err?: string}
-  bannerContent?:  { err?: string}
-  popupContent?: { err?: string }
-  popupContentNA?: { err?: string }
-  authModals?: { err?: string }
-  errType: "404" | "500" | "503"
+    /**
+   * Intersection Types
+   * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
+   */
+  content: GetContactUsContentReturnType['en'] &
+    GetContactUsContentReturnType['fr']
   meta: {
     data_en: Data
     data_fr: Data
     }
-     breadCrumbItems: breadCrumbItem[]
 }
 
 
@@ -95,35 +70,9 @@ const ContactLanding = (props: ContactLandingProps) => {
     }
   }, [throttledOnClickEvent, response, router, props.locale])
 
-  const errorCode =
-    props.content.err ||
-    props.bannerContent?.err ||
-    props.popupContent?.err ||
-    props.popupContentNA?.err ||
-    props.authModals?.err
-  if (errorCode !== undefined) {
-    return (
-      <ErrorPage
-        lang={props.locale === 'en' ? 'en' : 'fr'}
-        errType={errorCode}
-        isAuth={false}
-        homePageLink={
-          props.locale === 'en'
-            ? 'en/privacy-notice-terms-conditions'
-            : 'fr/avis-confidentialite-modalites'
-        }
-        accountPageLink={
-          props.locale === 'en'
-            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
-            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
-        }
-      />
-    )
-  }
-
   return (
     <div id="contactContent" data-testid="contactContent-test">
-      <Heading id="contact-us-heading" title={props.content.heading} />
+      <Heading id="contact-us-heading" title={props.content.heading ?? ''} />
       <p className="mt-3 mb-8 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
@@ -138,7 +87,7 @@ const ContactLanding = (props: ContactLandingProps) => {
                 aria-label={link.linkTitle}
                 href={`/${props.locale}/${
                   props.content.pageName
-                }/${link.linkDestination.split('/').pop()}`}
+                }/${(link.linkDestination ?? '').split('/').pop()}`}
                 data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
               >
                 {link.linkTitle}
@@ -151,58 +100,31 @@ const ContactLanding = (props: ContactLandingProps) => {
     </div>
   )
 }
-export const getServerSideProps: GetServerSideProps = async ({ req, res, locale }) => {
+export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) {
     return Redirect(locale)
+  }
 
-  //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger('contact-us')
-  logger.level = 'error'
-
-  const content = await getContactUsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-   
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    }
-  )
-
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
+  const content = await getContactUsContent()
+  const bannerContent = await getBetaBannerContent()
+  const popupContent = await getBetaPopupExitContent()
+  const popupContentNA = await getBetaPopupNotAvailableContent()
+  const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
-  const langToggleLink: string =
+  const langToggleLink =
     locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
-
- // const t: typeof en = locale === 'en' ? en : fr
-
-  const breadCrumbItems: {text: string, link: string} [] = 
-    locale === 'en'
-    ? content.en.breadcrumb?.map(({ link, text }) => {
-        return { text, link: '/' + locale + '/' + link }
-      })
-    : content.fr.breadcrumb?.map(({ link, text }) => {
-        return { text, link: '/' + locale + '/' + link }
-      })
   
- 
+      const breadCrumbItems: BreadcrumbItem[] =
+      (locale === 'en'
+        ? content.en.breadcrumb?.map(({ link, text }) => {
+            return { text, link: '/' + locale + '/' + link }
+          })
+        : content.fr.breadcrumb?.map(({ link, text }) => {
+            return { text, link: '/' + locale + '/' + link }
+          })) ?? []
 
 
 
@@ -230,52 +152,27 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, locale 
 
   return {
     props: {
-      locale,
+      locale: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
-      content:
-        content.err !== undefined
-          ? content
-          : locale === 'en'
-          ? content.en
-          : content.fr,
+      content: {
+        ...(locale === 'en' ? content.en : content.fr),
+        breadCrumbItems,
+      },
       meta,
       breadCrumbItems,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
-      aaPrefix:
-        content?.err !== undefined
-          ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
-      popupStaySignedIn:
-        authModals.err !== undefined
-          ? authModals
-          : locale === 'en'
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
+      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      popupStaySignedIn: locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
-      popupYouHaveBeenSignedout:
-        authModals?.err !== undefined
-          ? authModals
-          : locale === 'en'
+      popupYouHaveBeenSignedout: locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },
   }
-}
+}) satisfies GetServerSideProps<ContactLandingProps>
+// https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 
 export default ContactLanding

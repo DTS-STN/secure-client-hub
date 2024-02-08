@@ -1,81 +1,47 @@
-import PropTypes from 'prop-types'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
 import { Fragment } from 'react'
-import en from '../../locales/en'
-import fr from '../../locales/fr'
 import ContactSection from '../../components/contact/ContactSection'
 import ContactProvince from '../../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
-import { getContactUsPage } from '../../graphql/mappers/contact-us-pages-dynamic'
-import { getLogger } from '../../logging/log-util'
+import { GetContactUsPageReturnType, getContactUsPage} from '../../graphql/mappers/contact-us-pages-dynamic'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import ErrorPage from '../../components/ErrorPage'
 import React from 'react'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
-interface PageContentItem {
+
+interface Data {
   title: string
-  id: string
-  layout: string
+  desc: string
+  author: string
+  keywords: string
+  service: string
+  creator: string
+  accessRights: string
 }
 
-interface PageContent {
-  title: string
-  items: PageContentItem[]
-  breadcrumb?: { link: string; text: string }[]
-  err?: string
-}
-
-interface BetaContent extends PageContent {
-  err?: string
-}
-
-interface AuthModalContent {
-  err?: string
-  mappedPopupStaySignedIn: {
-    en: string
-    fr: string
-  };
-  mappedPopupSignedOut: {
-    en: string
-    fr: string
-  };
-}
- interface ProgramUniqueId {
-  i: number
-  item: PageContent
- }
 
 interface ContactUsPageProps {
-  title: string
-  intro: string
-  id: string
-  i: number
-  programUniqueId: ProgramUniqueId []
   locale: string
-  content: PageContent
-  breadCrumbItems?: { text: string; link: string }[]
-  pageContent: PageContent | BetaContent
-  bannerContent: BetaContent
-  popupContent: BetaContent
-  popupContentNA: BetaContent
-  authModals: AuthModalContent
-  aaPrefix?: string
+  pageContent: GetContactUsPageReturnType['en'] &
+    GetContactUsPageReturnType['fr']
+  meta: {
+    data_en: Data
+    data_fr: Data
+  }
 }
-
 
 const ContactUsPage = (props: ContactUsPageProps) => {
   /* istanbul ignore next */
- // const t = props.locale === 'en' ? en : fr
+
   const [response, setResponse] = useState<Response | undefined>()
   const router = useRouter()
 
@@ -85,7 +51,9 @@ const ContactUsPage = (props: ContactUsPageProps) => {
     []
   )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
+    () => {
+      return throttle(onClickEvent, 60000, { trailing: false })
+    },
     [onClickEvent]
   )
 
@@ -100,32 +68,6 @@ const ContactUsPage = (props: ContactUsPageProps) => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
   }, [throttledOnClickEvent, response, router, props.locale])
-
-  const errorCode =
-    props.content.err ||
-    props.bannerContent.err ||
-    props.popupContent.err ||
-    props.popupContentNA.err ||
-    props.authModals.err
-  if (errorCode !== undefined) {
-    return (
-      <ErrorPage
-      lang={props.locale === 'en' ? 'en' : 'fr'}
-        errType={errorCode}
-        isAuth={false}
-        homePageLink={
-          props.locale === 'en'
-            ? 'en/privacy-notice-terms-conditions'
-            : 'fr/avis-confidentialite-modalites'
-        }
-        accountPageLink={
-          props.locale === 'en'
-            ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
-            : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
-        }
-      />
-    )
-  }
 
   return (
     <div
@@ -161,47 +103,24 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   )
 }
 
-
-export const getServerSideProps: GetServerSideProps = async({ req, res, locale, params }) => {
+export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) {
     return Redirect(locale)
+  }
+   
+  const pageContent = await getContactUsPage()
 
-  //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger(params.id)
-  logger.level = 'error'
+  const bannerContent = await getBetaBannerContent()
 
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
+  const popupContent = await getBetaPopupExitContent()
+  
+  const popupContentNA = await getBetaPopupNotAvailableContent()
 
-  /*
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-   */
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    }
-  )
-
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-
+  const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
-
-
   /*
     For some reason when using dynamic routes, the locale gets set to the default (und) after trying to switch back to English from French.
     The below fixes this issue by setting the locale to English if it is undefined, which is what the middleware is doing on all
@@ -210,11 +129,6 @@ export const getServerSideProps: GetServerSideProps = async({ req, res, locale, 
   if (locale === 'und') {
     locale = 'en'
   }
-
-  const pageContent = await getContactUsPage(params.id).catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
 
   //Redirect to 404 page if user navigates to non-existent page
   if (!pageContent) {
@@ -233,10 +147,10 @@ export const getServerSideProps: GetServerSideProps = async({ req, res, locale, 
 
   const breadCrumbItems =
     locale === 'en'
-      ? pageContent.en.breadcrumb?.map(({ link, text }) => {
+      ? pageContent.en.breadcrumb.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-      : pageContent.fr.breadcrumb?.map(({ link, text }) => {
+      : pageContent.fr.breadcrumb.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
 
@@ -264,52 +178,33 @@ export const getServerSideProps: GetServerSideProps = async({ req, res, locale, 
 
   return {
     props: {
-      locale,
+      locale: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
-      pageContent:
-        pageContent?.err !== undefined
-          ? pageContent
-          : locale === 'en'
-          ? pageContent.en
-          : pageContent.fr,
+      pageContent:{
+        ...(locale === 'en' ? pageContent.en : pageContent.fr),
+        breadCrumbItems,
+      },
       meta,
       breadCrumbItems,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
+      bannerContent: locale === 'en'
           ? bannerContent.en
           : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
+      popupContent: locale === 'en'
           ? popupContent.en
           : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
+      popupContentNA: locale === 'en'
           ? popupContentNA.en
           : popupContentNA.fr,
-      aaPrefix:
-        pageContent?.err !== undefined
-          ? ''
-          : `ESDC-EDSC:${pageContent.en?.heading || pageContent.en?.title}`,
-      popupStaySignedIn:
-        authModals?.err !== undefined
-          ? authModals
-          : locale === 'en'
+      aaPrefix: `ESDC-EDSC:${pageContent.en.id || pageContent.en.title}`,
+      popupStaySignedIn: locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
-      popupYouHaveBeenSignedout:
-        authModals?.err !== undefined
-          ? authModals
-          : locale === 'en'
+      popupYouHaveBeenSignedout: locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },
   }
-}
+}) satisfies GetServerSideProps<ContactUsPageProps>
+// https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 
 export default ContactUsPage
