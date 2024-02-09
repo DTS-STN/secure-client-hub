@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: `404 - My Service Canada Account`,
+      title: `We couldn't find that web page - 404 - My Service Canada Account`,
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       accessRights: '1',
     },
     data_fr: {
-      title: `404 - Mon dossier Service Canada`,
+      title: `Nous ne pouvons trouver cette page Web - 404 - Mon dossier Service Canada`,
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

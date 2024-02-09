@@ -191,7 +191,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Request Review Decison - My Service Canada Account',
+      title: 'Request a review of a decision - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -200,7 +200,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Demande de revision - Mon dossier Service Canada',
+      title: 'Faire une demande de révision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
