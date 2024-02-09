@@ -1,24 +1,28 @@
 /**This and the login tests currently only test that the page is accessible and reachable.
 It does not test the authentication functionality currently since those endpoints are on prem only at this time. **/
 
-beforeEach(() => {
-  cy.visit('/my-dashboard')
-})
+
 
 describe('Validate logout scenario and page', () => {
+
+  beforeEach(() => {
+    cy.visit('/my-dashboard')
+  })
+
   it('should click Sign-out from the menu item go to /auth/logout', () => {
     cy.intercept('POST', 'api/auth/signout').as('signout')
-
+  
+    cy.url().should('contain', '/my-dashboard')
     cy.get('[data-testid="menuButton"]').click()
     cy.get('[id="dropdownNavbar"]>div:nth-child(5)').click()
-
+    cy.location('pathname').should('include', '/en/auth/logout')
     cy.wait('@signout')
       .its('response')
       .then((response) => {
         const { statusCode } = response
         expect(statusCode).to.eq(200)
       })
-    cy.url().should('eq', 'http://localhost:3000/en/auth/logout')
+     
   })
 
   it('should show the loading spinner + text then return to index page once logged out', () => {
