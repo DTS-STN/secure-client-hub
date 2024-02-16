@@ -12,6 +12,7 @@ export interface ContactSectionDetailItem {
 }
 
 export interface ContactSectionDetail {
+  title: string
   id: string
   color?: boolean
   items: ContactSectionDetailItem[]
@@ -46,19 +47,25 @@ export const ContactSection = ({
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <dl className=" border-y-2 divide-y-2 " data-cy="section2" key={id}>
-        {details.map((x) =>
-          ContactSectionRow({
-            ...x,
-            detail: x.items[0].content,
-            buttonId: x.items[0].id,
-            iconFeature: x.items[0].icon,
-            highlight: x.color,
-            button: x.items[0].button && x.items[0].button.length > 0,
-            buttonURL: x.items[0].link,
-            refPageAA: `Contact ${programs(id.split('-')[0])}`,
-          })
-        )}
+      <dl className=" border-y-2 divide-y-2 " data-cy="section2">
+        {details.map((x) => {
+          const button = x.items[0].button && x.items[0].button.length > 0
+          return (
+            <ContactSectionRow
+              key={x.id}
+              id={x.id}
+              title={x.title}
+              items={x.items}
+              detail={x.items[0].content}
+              buttonId={x.items[0].id}
+              iconFeature={x.items[0].icon}
+              highlight={x.color}
+              button={button}
+              buttonURL={x.items[0].link}
+              refPageAA={`Contact ${programs(id.split('-')[0])}`}
+            />
+          )
+        })}
       </dl>
       <div className="mt-4 pb-6" />
     </div>
