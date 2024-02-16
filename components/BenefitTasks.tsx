@@ -19,7 +19,6 @@ interface TaskListProps {
 
 interface BenefitTasksProps {
   taskList: TaskListProps
-  openModal: (link: string, modalType: string) => void
   dataCy?: string
   refPageAA?: string
   acronym?: string
@@ -27,7 +26,6 @@ interface BenefitTasksProps {
 
 const BenefitTasks = ({
   taskList,
-  openModal,
   dataCy,
   refPageAA,
   acronym,
@@ -67,16 +65,6 @@ const BenefitTasks = ({
                     ? 'noopener noreferrer'
                     : undefined
                 }
-                onClick={(e) => {
-                  //check for exit beta popup flag and not a new tab link, else keep default anchor behavior
-                  if (
-                    task.betaPopUp &&
-                    !newTabTaskExceptions.includes(task.link)
-                  ) {
-                    e.preventDefault()
-                    openModal(task.link, 'betaModal')
-                  }
-                }}
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
               >

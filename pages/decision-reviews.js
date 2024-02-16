@@ -99,13 +99,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[0].button.id}
           style="primary"
           text={props.content.content[0].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={(e) => {
-            if (props.content.content[0].button.betaPopUp) {
-              e.preventDefault()
-              props.openModal(props.content.content[0].button.link, 'betaModal')
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[0].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
       </section>
@@ -134,13 +129,8 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
-          onClick={(e) => {
-            if (props.content.content[1].button.betaPopUp) {
-              e.preventDefault()
-              props.openModal(props.content.content[1].button.link, 'betaModal')
-            }
-          }}
+          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          href={props.content.content[1].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
       </section>
@@ -201,7 +191,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Request Review Decison - My Service Canada Account',
+      title: 'Request a review of a decision - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -210,7 +200,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Demande de revision - Mon dossier Service Canada',
+      title: 'Faire une demande de révision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -292,10 +282,4 @@ DecisionReviews.propTypes = {
    */
 
   meta: PropTypes.object,
-
-  /*
-   * Modal Function
-   */
-
-  openModal: PropTypes.func,
 }

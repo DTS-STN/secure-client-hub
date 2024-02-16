@@ -19,7 +19,7 @@ interface TaskList {
 interface MostReqTasksProps {
   dataCy?: string
   taskListMR: TaskList
-  openModal?: (link: string, modalType: string) => void
+
   refPageAA: string
   acronym: string
 }
@@ -27,7 +27,6 @@ interface MostReqTasksProps {
 const MostReqTasks = ({
   dataCy,
   taskListMR,
-  openModal,
   refPageAA,
   acronym,
 }: MostReqTasksProps) => {
@@ -66,12 +65,6 @@ const MostReqTasks = ({
                     ? 'noopener noreferrer'
                     : undefined
                 }
-                onClick={(e) => {
-                  if (task.betaPopUp) {
-                    e.preventDefault()
-                    openModal?.(task.link, 'betaModal')
-                  }
-                }}
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
               >
