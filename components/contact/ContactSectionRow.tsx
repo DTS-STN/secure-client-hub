@@ -3,29 +3,27 @@ import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
 
-interface DetailItem {
-  link: string
-  content: string
+export interface ContactSectionRowDetailItem {
+  link?: string
+  content?: string
 }
 
-interface ContactSectionRowProps {
-  label?: string
+export interface ContactSectionRowProps {
+  title?: string
   detail?: string
-  index: number
   highlight?: boolean
   iconFeature?: string
   button?: boolean
   buttonURL?: string
   buttonId?: string
-  items: DetailItem[]
+  items: ContactSectionRowDetailItem[]
   refPageAA: string
   id: string
 }
 
-const ContactSectionRow = ({
-  label,
+export const ContactSectionRow = ({
+  title,
   detail,
-  index,
   highlight,
   iconFeature,
   button,
@@ -44,14 +42,14 @@ const ContactSectionRow = ({
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
-  return label && detail ? (
-    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
+  return title && detail ? (
+    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`}>
       <dt
         className={`md:col-span-4 font-bold text-2xl text-gray-darker md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {label}
+        {title}
       </dt>
       <dd
         className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
@@ -67,10 +65,12 @@ const ContactSectionRow = ({
               href={detail.link}
               className="font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
               target={
-                newTabTaskExceptions.includes(detail.link) ? '_blank' : '_self'
+                detail.link && newTabTaskExceptions.includes(detail.link)
+                  ? '_blank'
+                  : '_self'
               }
               rel={
-                newTabTaskExceptions.includes(detail.link)
+                detail.link && newTabTaskExceptions.includes(detail.link)
                   ? 'noopener noreferrer'
                   : undefined
               }
@@ -97,15 +97,13 @@ const ContactSectionRow = ({
                 />
               )}
 
-              <Markdown>{detail.content}</Markdown>
+              {detail.content && <Markdown>{detail.content}</Markdown>}
             </div>
           )
         })}
       </dd>
     </div>
   ) : (
-    <Fragment key={index} />
+    <Fragment key={detail} />
   )
 }
-
-export default ContactSectionRow

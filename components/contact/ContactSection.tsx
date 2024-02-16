@@ -1,31 +1,35 @@
 import Markdown from 'markdown-to-jsx'
-import ContactSectionRow from './ContactSectionRow'
+import { ContactSectionRow } from './ContactSectionRow'
 import { programs } from '../../lib/programs'
 
-interface Item {
-  content: string
+export interface ContactSectionDetailItem {
+  content?: string
   id: string
-  icon: string
-  button: boolean
+  icon?: string
+  button?: string[]
   highlight?: boolean
-  link: string
+  link?: string
 }
 
-interface Detail {
+export interface ContactSectionDetail {
   id: string
-  color: boolean
-  items: Item[]
+  color?: boolean
+  items: ContactSectionDetailItem[]
 }
 
-interface ContactSectionProps {
+export interface ContactSectionProps {
   title: string
   intro: string
   id: string
-  i: number
-  details: Detail[]
+  details: ContactSectionDetail[]
 }
 
-const ContactSection = ({ title, intro, id, details }: ContactSectionProps) => {
+export const ContactSection = ({
+  title,
+  intro,
+  id,
+  details,
+}: ContactSectionProps) => {
   return (
     <div
       data-cy="sections"
@@ -42,23 +46,21 @@ const ContactSection = ({ title, intro, id, details }: ContactSectionProps) => {
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <dl className=" border-y-2 divide-y-2 " data-cy="section2">
-        {details.map((x, index) =>
+      <dl className=" border-y-2 divide-y-2 " data-cy="section2" key={id}>
+        {details.map((x) =>
           ContactSectionRow({
             ...x,
-            index,
             detail: x.items[0].content,
             buttonId: x.items[0].id,
             iconFeature: x.items[0].icon,
             highlight: x.color,
-            button: x.items[0].button,
+            button: x.items[0].button && x.items[0].button.length > 0,
             buttonURL: x.items[0].link,
             refPageAA: `Contact ${programs(id.split('-')[0])}`,
           })
         )}
       </dl>
-      <div className="mt-4  pb-6" />
+      <div className="mt-4 pb-6" />
     </div>
   )
 }
-export default ContactSection

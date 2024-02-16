@@ -140,7 +140,6 @@ export type GetContactUsPageReturnType = Awaited<
   ReturnType<typeof getContactUsPage>
 >
 
-
 export async function getContactUsPage(id: string) {
   const response = await getCachedContent()
   const queryData = response?.data.schPageV1List.items.find(
@@ -174,7 +173,7 @@ export async function getContactUsPage(id: string) {
                 return {
                   id: row.scId,
                   color: row.scBackgroundColour,
-                  label: row.scTitleEn,
+                  title: row.scTitleEn,
                   items: row.scItems.map((contentItem) => {
                     if (contentItem.scContentEn) {
                       //Return address nested in content
@@ -210,9 +209,7 @@ export async function getContactUsPage(id: string) {
                       //Return address unnested
                       return {
                         city: contentItem.scCityEn,
-                        country: contentItem.scCountryEn
-                          ? contentItem.scCountryEn.toUpperCase()
-                          : null,
+                        country: contentItem.scCountryEn?.toUpperCase(),
                         id: contentItem.scId,
                         poBox: contentItem.scPostalBoxEn,
                         postal: contentItem.scPostalCode,
@@ -253,8 +250,8 @@ export async function getContactUsPage(id: string) {
               details: fragment.schDetails.map((row) => {
                 return {
                   id: row.scId,
+
                   title: row.scTitleFr,
-                  label: row.scTitleFr,
                   color: row.scBackgroundColour,
                   items: row.scItems.map((contentItem) => {
                     if (contentItem.scContentFr) {
@@ -291,9 +288,7 @@ export async function getContactUsPage(id: string) {
                       //Return address unnested
                       return {
                         city: contentItem.scCityFr,
-                        country: contentItem.scCountryFr
-                          ? contentItem.scCountryFr.toUpperCase()
-                          : null,
+                        country: contentItem.scCountryFr?.toUpperCase(),
                         id: contentItem.scId,
                         poBox: contentItem.scPostalBoxFr,
                         postal: contentItem.scPostalCode,

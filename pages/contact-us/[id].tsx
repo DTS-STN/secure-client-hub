@@ -1,22 +1,29 @@
+import React, {
+  Fragment,
+  useEffect,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
-import { Fragment } from 'react'
-import ContactSection from '../../components/contact/ContactSection'
-import ContactProvince from '../../components/contact/ContactProvince'
+
+import { ContactSection } from '../../components/contact/ContactSection'
+import { ContactProvince } from '../../components/contact/ContactProvince'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
-import { GetContactUsPageReturnType, getContactUsPage} from '../../graphql/mappers/contact-us-pages-dynamic'
+import {
+  GetContactUsPageReturnType,
+  getContactUsPage,
+} from '../../graphql/mappers/contact-us-pages-dynamic'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import React from 'react'
-import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-
 
 interface Data {
   title: string
@@ -28,11 +35,10 @@ interface Data {
   accessRights: string
 }
 
-
 interface ContactUsPageProps {
   locale: string
-  pageContent: GetContactUsPageReturnType['en'] &
-    GetContactUsPageReturnType['fr']
+  pageContent: NonNullable<GetContactUsPageReturnType>['en'] &
+    NonNullable<GetContactUsPageReturnType>['fr']
   meta: {
     data_en: Data
     data_fr: Data
@@ -50,12 +56,9 @@ const ContactUsPage = (props: ContactUsPageProps) => {
     async () => setResponse(await fetch('/api/refresh-msca')),
     []
   )
-  const throttledOnClickEvent = useMemo(
-    () => {
-      return throttle(onClickEvent, 60000, { trailing: false })
-    },
-    [onClickEvent]
-  )
+  const throttledOnClickEvent = useMemo(() => {
+    return throttle(onClickEvent, 60000, { trailing: false })
+  }, [onClickEvent])
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
@@ -90,12 +93,22 @@ const ContactUsPage = (props: ContactUsPageProps) => {
         lang={props.locale}
       />
 
-      {props.pageContent.items.map((item, i) => (
-        <Fragment key={i}>
+      {props.pageContent.items.map((item) => (
+        <Fragment key={item.id}>
           {item.layout === 'provinces' ? (
-            <ContactProvince  {...item} i={i} />
+            <ContactProvince
+              id={item.id}
+              details={item.details}
+              intro={item.intro}
+              title={item.title}
+            />
           ) : (
-            <ContactSection programUniqueId={i} {...item} />
+            <ContactSection
+              id={item.id}
+              details={item.details}
+              intro={item.intro}
+              title={item.title}
+            />
           )}
         </Fragment>
       ))}
@@ -103,19 +116,28 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   )
 }
 
-export const getServerSideProps = (async ({ req, res, locale }) => {
+export const getServerSideProps = (async ({ req, res, locale, params }) => {
   const session = await getServerSession(req, res, authOptions)
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) {
     return Redirect(locale)
   }
-   
-  const pageContent = await getContactUsPage()
+
+  const id = params?.id
+  if (typeof id !== 'string' || id.trim().length === 0) {
+    return { notFound: true }
+  }
+  const pageContent = await getContactUsPage(id)
+
+  //Redirect to 404 page if user navigates to non-existent page
+  if (!pageContent) {
+    return { notFound: true }
+  }
 
   const bannerContent = await getBetaBannerContent()
 
   const popupContent = await getBetaPopupExitContent()
-  
+
   const popupContentNA = await getBetaPopupNotAvailableContent()
 
   const authModals = await getAuthModalsContent()
@@ -128,16 +150,6 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   */
   if (locale === 'und') {
     locale = 'en'
-  }
-
-  //Redirect to 404 page if user navigates to non-existent page
-  if (!pageContent) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
-    }
   }
 
   const langToggleLink =
@@ -180,26 +192,22 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
     props: {
       locale: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
-      pageContent:{
+      pageContent: {
         ...(locale === 'en' ? pageContent.en : pageContent.fr),
         breadCrumbItems,
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
-      popupContent: locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
-      popupContentNA: locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
+      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
+      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       aaPrefix: `ESDC-EDSC:${pageContent.en.id || pageContent.en.title}`,
-      popupStaySignedIn: locale === 'en'
+      popupStaySignedIn:
+        locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
-      popupYouHaveBeenSignedout: locale === 'en'
+      popupYouHaveBeenSignedout:
+        locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },
