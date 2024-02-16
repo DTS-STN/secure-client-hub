@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
 {{- if .Values.extraEnv }}
-{{ toYaml .Values.extraEnv | indent 10 }}
+{{ toYaml .Values.extraEnv | indent 12 }}
 {{- end }}
           ports:
             - name: http
@@ -53,6 +53,77 @@ spec:
             initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.oauth }}
+        - name: oauth-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+          imagePullPolicy: Always
+          env:
+{{- if .Values.oauth.extraEnv }}
+{{ toYaml .Values.oauth.extraEnv | indent 12 }}
+{{- end }}
+          args:
+            ## OAuth2 Proxy Config File
+            ## https://github.com/oauth2-proxy/oauth2-proxy
+
+            ## <addr>:<port> to listen on for HTTP/HTTPS clients
+            - --http_address = {{ .Values.oauth.args.httpAddress | quote }}
+
+            ## the url root path that this proxy should be nested under
+            - --proxy_prefix = {{ .Values.oauth.args.proxyPrefix | quote }}
+
+            ## the http url(s) of the upstream endpoint
+            - --upstreams = {{- toJson .Values.oauth.args.upstreams }}
+
+            ## email domains to allow authentication for
+            - --email_domains = {{- toJson .Values.oauth.args.emailDomains }}
+
+            ## bypass authentication for requests that match the method & path
+            - --skip_auth_routes = {{- toJson .Values.oauth.args.skipAuthRoutes }}
+
+            ## mark paths as API routes to get HTTP Status code 401 instead of redirect to login page
+            - --api_routes = {{- toJson .Values.oauth.args.apiRoutes }}
+
+            ## cookie settings
+            - --cookie_domains = {{- toJson .Values.oauth.args.cookieDomains }}
+
+            ## html page settings
+            - --banner = {{ .Values.oauth.args.banner | quote }}
+            - --custom_sign_in_logo = {{ .Values.oauth.args.customSignInLogo | quote }}
+            - --footer = {{ .Values.oauth.args.footer | quote }}
+            - --provider_display_name = {{ .Values.oauth.args.providerDisplayName | quote }}
+
+            ## disable logging of requests to ping endpoint
+            - --silence_ping_logging = {{ .Values.oauth.args.silencePingLogging | quote }}
+
+            ## will skip authentication for OPTIONS requests
+            - --skip_auth_preflight = {{ .Values.oauth.args.skipAuthPreflight | quote }}
+
+            ## OIDC settings
+            - --provider = {{ .Values.oauth.args.provider | quote }}
+            - --client_id = {{ .Values.oauth.args.clientID | quote }}
+            - --oidc_issuer_url = {{ .Values.oauth.args.oidcIssuerURL | quote }}
+            - --skip_jwt_bearer_tokens = {{ .Values.oauth.args.skipJWTBearerTokens | quote }}
+            - --skip_provider_button = {{ .Values.oauth.args.skipProviderButton | quote }}
+          ports:
+            - containerPort: {{ .Values.oauth.ports.containerPort }}
+              name: {{ .Values.oauth.ports.name }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.oauth.healthChecks.livenessPath }}
+              port: {{ .Values.oauth.healthChecks.livenessPort }}
+            initialDelaySeconds: {{ .Values.oauth.healthChecks.livenessDelay }}
+            timeoutSeconds: {{ .Values.oauth.healthChecks.livenessTimeout }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.oauth.healthChecks.readinessPath }}
+              port: {{ .Values.oauth.healthChecks.readinessPort }}
+            initialDelaySeconds: {{ .Values.oauth.healthChecks.readinessDelay }}
+            timeoutSeconds: {{ .Values.oauth.healthChecks.readinessTimeout }}
+            periodSeconds: {{ .Values.oauth.healthChecks.readinessPeriodSeconds }}
+            successThreshold: {{ .Values.oauth.healthChecks.readinessSuccessThreshold }}
+          resources:
+            {{- toYaml .Values.oauth.resources | nindent 12 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
