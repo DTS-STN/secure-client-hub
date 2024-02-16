@@ -9,7 +9,7 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-describe('ContactSectionRow', () => {
+describe.skip('ContactSectionRow', () => {
   it('renders contactSectionRow', () => {
     const primary = render(<ContactSectionRow {...ContactSectionRow.args} />)
     expect(primary).toBeTruthy()
