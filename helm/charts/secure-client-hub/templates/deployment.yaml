@@ -65,19 +65,19 @@ spec:
             - --proxy-prefix={{ .Values.oauth.args.proxyPrefix | quote }}
 
             ## the http url(s) of the upstream endpoint
-            - --upstreams={{ join "','" .Values.oauth.args.upstreams | squote }}
+            - --upstream={{ join "','" .Values.oauth.args.upstreams | squote }}
 
             ## email domains to allow authentication for
-            - --email-domains={{ join "','" .Values.oauth.args.emailDomains | squote  }}
+            - --email-domain={{ join "','" .Values.oauth.args.emailDomains | squote  }}
 
             ## bypass authentication for requests that match the method & path
-            - --skip-auth-routes={{ join "','" .Values.oauth.args.skipAuthRoutes | squote }}
+            - --skip-auth-route={{ join "','" .Values.oauth.args.skipAuthRoutes | squote }}
 
             ## mark paths as API routes to get HTTP Status code 401 instead of redirect to login page
-            - --api-routes = {{ join "','" .Values.oauth.args.apiRoutes | squote  }}
+            - --api-route = {{ join "','" .Values.oauth.args.apiRoutes | squote  }}
 
             ## cookie settings
-            - --cookie-domains = {{ join "','" .Values.oauth.args.cookieDomains | squote  }}
+            - --cookie-domain = {{ join "','" .Values.oauth.args.cookieDomains | squote  }}
 
             ## html page settings
             - --banner = {{ .Values.oauth.args.banner | quote }}
