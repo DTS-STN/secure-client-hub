@@ -74,29 +74,29 @@ spec:
             - --skip-auth-route={{ join "','" .Values.oauth.args.skipAuthRoutes | squote }}
 
             ## mark paths as API routes to get HTTP Status code 401 instead of redirect to login page
-            - --api-route = {{ join "','" .Values.oauth.args.apiRoutes | squote  }}
+            - --api-route={{ join "','" .Values.oauth.args.apiRoutes | squote  }}
 
             ## cookie settings
-            - --cookie-domain = {{ join "','" .Values.oauth.args.cookieDomains | squote  }}
+            - --cookie-domain={{ join "','" .Values.oauth.args.cookieDomains | squote  }}
 
             ## html page settings
-            - --banner = {{ .Values.oauth.args.banner | quote }}
-            - --custom-sign-in-logo = {{ .Values.oauth.args.customSignInLogo | quote }}
-            - --footer = {{ .Values.oauth.args.footer | quote }}
-            - --provider-display-name = {{ .Values.oauth.args.providerDisplayName | quote }}
+            - --banner={{ .Values.oauth.args.banner | quote }}
+            - --custom-sign-in-logo={{ .Values.oauth.args.customSignInLogo | quote }}
+            - --footer={{ .Values.oauth.args.footer | quote }}
+            - --provider-display-name={{ .Values.oauth.args.providerDisplayName | quote }}
 
             ## disable logging of requests to ping endpoint
-            - --silence-ping-logging = {{ .Values.oauth.args.silencePingLogging | quote }}
+            - --silence-ping-logging={{ .Values.oauth.args.silencePingLogging | quote }}
 
             ## will skip authentication for OPTIONS requests
-            - --skip-auth-preflight = {{ .Values.oauth.args.skipAuthPreflight | quote }}
+            - --skip-auth-preflight={{ .Values.oauth.args.skipAuthPreflight | quote }}
 
             ## OIDC settings
-            - --provider = {{ .Values.oauth.args.provider | quote }}
-            - --client-id = {{ .Values.oauth.args.clientID | quote }}
-            - --oidc-issuer-url = {{ .Values.oauth.args.oidcIssuerURL | quote }}
-            - --skip-jwt-bearer-tokens = {{ .Values.oauth.args.skipJWTBearerTokens | quote }}
-            - --skip-provider-button = {{ .Values.oauth.args.skipProviderButton | quote }}
+            - --provider={{ .Values.oauth.args.provider | quote }}
+            - --client-id={{ .Values.oauth.args.clientID | quote }}
+            - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL | quote }}
+            - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens | quote }}
+            - --skip-provider-button={{ .Values.oauth.args.skipProviderButton | quote }}
           name: oauth-proxy
           image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
           imagePullPolicy: Always
