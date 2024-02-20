@@ -62,16 +62,16 @@ spec:
             - --http-address={{ .Values.oauth.args.httpAddress | quote }}
 
             ## the url root path that this proxy should be nested under
-            - --proxy-prefix = {{ .Values.oauth.args.proxyPrefix | quote }}
+            - --proxy-prefix={{ .Values.oauth.args.proxyPrefix | quote }}
 
             ## the http url(s) of the upstream endpoint
-            - --upstreams = {{- toJson .Values.oauth.args.upstreams }}
+            - --upstreams={{- toJson .Values.oauth.args.upstreams }}
 
             ## email domains to allow authentication for
-            - --email-domains = {{- toJson .Values.oauth.args.emailDomains }}
+            - --email-domains={{- toJson .Values.oauth.args.emailDomains }}
 
             ## bypass authentication for requests that match the method & path
-            - --skip-auth-routes = {{- toJson .Values.oauth.args.skipAuthRoutes }}
+            - --skip-auth-routes={{- toJson .Values.oauth.args.skipAuthRoutes }}
 
             ## mark paths as API routes to get HTTP Status code 401 instead of redirect to login page
             - --api-routes = {{- toJson .Values.oauth.args.apiRoutes }}
