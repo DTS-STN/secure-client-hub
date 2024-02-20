@@ -54,19 +54,12 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         {{- if .Values.oauth }}
-        - name: oauth-proxy
-          image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
-          imagePullPolicy: Always
-          env:
-{{- if .Values.oauth.extraEnv }}
-{{ toYaml .Values.oauth.extraEnv | indent 12 }}
-{{- end }}
-          args:
+        - args:
             ## OAuth2 Proxy Config File
             ## https://github.com/oauth2-proxy/oauth2-proxy
 
             ## <addr>:<port> to listen on for HTTP/HTTPS clients
-            - --http-address = {{ .Values.oauth.args.httpAddress | quote }}
+            - --http-address={{ .Values.oauth.args.httpAddress | quote }}
 
             ## the url root path that this proxy should be nested under
             - --proxy-prefix = {{ .Values.oauth.args.proxyPrefix | quote }}
@@ -104,6 +97,14 @@ spec:
             - --oidc-issuer-url = {{ .Values.oauth.args.oidcIssuerURL | quote }}
             - --skip-jwt-bearer-tokens = {{ .Values.oauth.args.skipJWTBearerTokens | quote }}
             - --skip-provider-button = {{ .Values.oauth.args.skipProviderButton | quote }}
+          name: oauth-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+          imagePullPolicy: Always
+          env:
+{{- if .Values.oauth.extraEnv }}
+{{ toYaml .Values.oauth.extraEnv | indent 12 }}
+{{- end }}
+          
           ports:
             - containerPort: {{ .Values.oauth.ports.containerPort }}
               name: {{ .Values.oauth.ports.name }}
