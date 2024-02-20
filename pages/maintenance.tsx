@@ -71,7 +71,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const meta = {
     data_en: {
-      title: 'Maintenance - My Service Canada Account',
+      title:
+        'This service is currently unavailable - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -80,7 +81,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Entretien - Mon dossier Service Canada',
+      title:
+        'Le service est actuellement indisponible - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

@@ -83,9 +83,8 @@ export default function SecuritySettings(props) {
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 focus:ring-0 focus:ring-offset-0"
+        className="font-body text-20px pr-0 pl-0 w-fit underline"
         refPageAA={props.aaPrefix}
-        onClick={(e) => {}}
       ></Button>
 
       <p className="mb-8 text-xl text-gray-darker">
@@ -170,7 +169,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Security - My Service Canada Account',
+      title: 'Security settings - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -179,7 +178,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Sécurité - Mon dossier Service Canada',
+      title: 'Paramètres de sécurité - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

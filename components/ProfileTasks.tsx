@@ -13,7 +13,6 @@ interface Task {
 
 interface ProfileTasksProps {
   dataCy?: string
-  openModal: (link: string, modalType: string) => void
   programTitle: string
   tasks: Task[]
   refPageAA: string
@@ -22,7 +21,6 @@ interface ProfileTasksProps {
 
 const ProfileTasks = ({
   dataCy,
-  openModal,
   programTitle,
   tasks,
   refPageAA,
@@ -49,12 +47,6 @@ const ProfileTasks = ({
                 passHref
                 className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
                 data-cy="task-link"
-                onClick={(e) => {
-                  if (task.betaPopUp) {
-                    e.preventDefault()
-                    openModal(task.link, 'betaModal')
-                  }
-                }}
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
               >
                 <FontAwesomeIcon

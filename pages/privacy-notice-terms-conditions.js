@@ -268,7 +268,8 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Privacy and Conditions - My Service Canada Account',
+      title:
+        'Privacy notice and terms and conditions - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -277,7 +278,8 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Confidentialité et conditions - Mon dossier Service Canada',
+      title:
+        'Avis de confidentialité et modalités - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

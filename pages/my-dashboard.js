@@ -96,7 +96,6 @@ export default function MyDashboard(props) {
               <MostReqTasks
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={props.openModal}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
@@ -112,7 +111,6 @@ export default function MyDashboard(props) {
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={props.openModal}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
@@ -171,7 +169,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Dashboard - My Service Canada Account',
+      title: 'My dashboard - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -180,7 +178,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Tableau de Bord - Mon dossier Service Canada',
+      title: 'Mon tableau de bord - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

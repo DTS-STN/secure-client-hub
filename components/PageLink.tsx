@@ -42,7 +42,7 @@ const PageLink = ({
           id={`link-for-${linkID}`}
           data-cy={dataCy}
           data-gc-analytics-customclick={`${refPageAA}:${linkID}`}
-          className="text-blue-default hover:text-blue-hover visited:text-purple-medium underline"
+          className="text-deep-blue-dark hover:text-blue-hover visited:text-purple-medium underline"
         >
           {linkText}
         </Link>
