@@ -48,22 +48,22 @@ export const ContactSection = ({
         <Markdown>{intro}</Markdown>
       </div>
       <dl className=" border-y-2 divide-y-2 " data-cy="section2">
-        {details.map((sectiondetail) => {
+        {details.map((sectionDetail) => {
           const button =
-            sectiondetail.items[0]?.button &&
-            sectiondetail.items[0].button.length > 0
+            sectionDetail.items[0]?.button &&
+            sectionDetail.items[0].button.length > 0
           return (
             <ContactSectionRow
-              key={sectiondetail.id}
-              id={sectiondetail.id}
-              title={sectiondetail.title}
-              items={sectiondetail.items}
-              detail={sectiondetail.items[0]?.content}
-              buttonId={sectiondetail.items[0]?.id}
-              iconFeature={sectiondetail.items[0]?.icon}
-              highlight={sectiondetail.color}
+              key={sectionDetail.id}
+              id={sectionDetail.id}
+              title={sectionDetail.title}
+              items={sectionDetail.items}
+              detail={sectionDetail.items[0]?.content}
+              buttonId={sectionDetail.items[0]?.id}
+              iconFeature={sectionDetail.items[0]?.icon}
+              highlight={sectionDetail.color}
               button={button}
-              buttonURL={sectiondetail.items[0]?.link}
+              buttonURL={sectionDetail.items[0]?.link}
               refPageAA={`Contact ${programs(id.split('-')[0])}`}
             />
           )
