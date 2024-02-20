@@ -250,7 +250,6 @@ export async function getContactUsPage(id: string) {
               details: fragment.schDetails.map((row) => {
                 return {
                   id: row.scId,
-
                   title: row.scTitleFr,
                   color: row.scBackgroundColour,
                   items: row.scItems.map((contentItem) => {

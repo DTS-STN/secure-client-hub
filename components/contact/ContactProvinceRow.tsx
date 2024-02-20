@@ -19,8 +19,8 @@ export interface ContactProvinceRowProps {
   id: string
 }
 
-const ap = (x: string | undefined, append: string): string => {
-  return x ? x + append : ''
+const ap = (addresscontent: string | undefined, append: string): string => {
+  return addresscontent ? addresscontent + append : ''
 }
 
 export const ContactProvinceRow = ({
@@ -36,25 +36,25 @@ export const ContactProvinceRow = ({
             className="grid text-xl grid-cols-2"
             data-cy="mailContactDetails"
           >
-            {items.map((x, i) => (
+            {items.map((rowitem, i) => (
               <div
                 className="col-span-2 md:col-span-1 py-3 select-text cursor-default"
                 key={i}
               >
                 <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
-                  <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
+                  <Markdown>{`${ap(rowitem.content, ' ')}`}</Markdown>
                 </strong>
 
-                <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
-                  x.program,
+                <Markdown>{`${ap(rowitem.recipient, '\n\n')}${ap(
+                  rowitem.program,
                   '\n\n'
-                )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
+                )}${ap(rowitem.poBox, ' ')} ${ap(rowitem.station, ' ')} ${ap(
                   ' ',
                   '\n\n'
-                )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
-                  x.postal,
+                )} ${ap(rowitem.city, ' ')} ${ap(rowitem.province, ' ')} ${ap(
+                  rowitem.postal,
                   ' \n\n'
-                )} ${ap(x.country, ' ')}`}</Markdown>
+                )} ${ap(rowitem.country, ' ')}`}</Markdown>
               </div>
             ))}
           </div>

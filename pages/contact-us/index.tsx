@@ -2,16 +2,17 @@ import Link from 'next/link'
 import Heading from '../../components/Heading'
 import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
-import { GetContactUsContentReturnType, getContactUsContent } from '../../graphql/mappers/contact-us'
+import {
+  GetContactUsContentReturnType,
+  getContactUsContent,
+} from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-// import ErrorPage from '../../components/ErrorPage'
 import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
-// import { getLogger } from '../../logging/log-util'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
@@ -28,7 +29,7 @@ interface Data {
 
 interface ContactLandingProps {
   locale: string
-    /**
+  /**
    * Intersection Types
    * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
    */
@@ -37,15 +38,10 @@ interface ContactLandingProps {
   meta: {
     data_en: Data
     data_fr: Data
-    }
+  }
 }
 
-
-
-
 const ContactLanding = (props: ContactLandingProps) => {
- // const language = props.locale === 'en' ? en : fr
- // const t = props.locale === 'en' ? en : fr
   const [response, setResponse] = useState<Response | undefined>()
   const router = useRouter()
 
@@ -85,9 +81,11 @@ const ContactLanding = (props: ContactLandingProps) => {
                 id={link.linkId}
                 data-testid={link.linkId}
                 aria-label={link.linkTitle}
-                href={`/${props.locale}/${
-                  props.content.pageName
-                }/${(link.linkDestination ?? '').split('/').pop()}`}
+                href={`/${props.locale}/${props.content.pageName}/${(
+                  link.linkDestination ?? ''
+                )
+                  .split('/')
+                  .pop()}`}
                 data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
               >
                 {link.linkTitle}
@@ -116,17 +114,15 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
-  
-      const breadCrumbItems: BreadcrumbItem[] =
-      (locale === 'en'
-        ? content.en.breadcrumb?.map(({ link, text }) => {
-            return { text, link: '/' + locale + '/' + link }
-          })
-        : content.fr.breadcrumb?.map(({ link, text }) => {
-            return { text, link: '/' + locale + '/' + link }
-          })) ?? []
 
-
+  const breadCrumbItems: BreadcrumbItem[] =
+    (locale === 'en'
+      ? content.en.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })
+      : content.fr.breadcrumb?.map(({ link, text }) => {
+          return { text, link: '/' + locale + '/' + link }
+        })) ?? []
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -164,10 +160,12 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       aaPrefix: `ESDC-EDSC:${content.en.heading}`,
-      popupStaySignedIn: locale === 'en'
+      popupStaySignedIn:
+        locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
           : authModals.mappedPopupStaySignedIn.fr,
-      popupYouHaveBeenSignedout: locale === 'en'
+      popupYouHaveBeenSignedout:
+        locale === 'en'
           ? authModals.mappedPopupSignedOut.en
           : authModals.mappedPopupSignedOut.fr,
     },

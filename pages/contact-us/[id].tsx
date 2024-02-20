@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useEffect,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import { Fragment, useEffect, useCallback, useMemo, useState } from 'react'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
 
@@ -92,7 +86,6 @@ const ContactUsPage = (props: ContactUsPageProps) => {
         })}
         lang={props.locale}
       />
-
       {props.pageContent.items.map((item) => (
         <Fragment key={item.id}>
           {item.layout === 'provinces' ? (
