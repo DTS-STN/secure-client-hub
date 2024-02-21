@@ -59,7 +59,7 @@ spec:
             ## https://github.com/oauth2-proxy/oauth2-proxy
 
             ## <addr>:<port> to listen on for HTTP/HTTPS clients
-            - --http-address={{ .Values.oauth.args.httpAddress | quote }}
+            - --http-address={{ .Values.oauth.args.httpAddress }}
 
             ## the url root path that this proxy should be nested under
             - --proxy-prefix={{ .Values.oauth.args.proxyPrefix | quote }}
