@@ -94,7 +94,7 @@ spec:
             ## OIDC settings
             - --provider={{ .Values.oauth.args.provider }}
             - --client-id={{ .Values.oauth.args.clientID | quote }}
-            - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL | quote }}
+            - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL }}
             - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens }}
             - --skip-provider-button={{ .Values.oauth.args.skipProviderButton  }}
           name: oauth-proxy
