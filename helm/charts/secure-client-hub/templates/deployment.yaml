@@ -62,7 +62,7 @@ spec:
             - --http-address={{ .Values.oauth.args.httpAddress }}
 
             ## the url root path that this proxy should be nested under
-            - --proxy-prefix={{ .Values.oauth.args.proxyPrefix | quote }}
+            - --proxy-prefix={{ .Values.oauth.args.proxyPrefix }}
 
             ## the http url(s) of the upstream endpoint
             - --upstream={{ range $i, $value := .Values.oauth.args.upstreams }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
@@ -80,10 +80,10 @@ spec:
             - --cookie-domain={{ range $i, $value := .Values.oauth.args.cookieDomains }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
 
             ## html page settings
-            - --banner={{ .Values.oauth.args.banner | quote }}
+            - --banner={{ .Values.oauth.args.banner }}
             - --custom-sign-in-logo={{ .Values.oauth.args.customSignInLogo }}
-            - --footer={{ .Values.oauth.args.footer | quote }}
-            - --provider-display-name={{ .Values.oauth.args.providerDisplayName | quote }}
+            - --footer={{ .Values.oauth.args.footer }}
+            - --provider-display-name={{ .Values.oauth.args.providerDisplayName }}
 
             ## disable logging of requests to ping endpoint
             - --silence-ping-logging={{ .Values.oauth.args.silencePingLogging }}
@@ -93,7 +93,7 @@ spec:
 
             ## OIDC settings
             - --provider={{ .Values.oauth.args.provider }}
-            - --client-id={{ .Values.oauth.args.clientID | quote }}
+            - --client-id={{ .Values.oauth.args.clientID }}
             - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL }}
             - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens }}
             - --skip-provider-button={{ .Values.oauth.args.skipProviderButton  }}
