@@ -81,7 +81,7 @@ spec:
 
             ## html page settings
             - --banner={{ .Values.oauth.args.banner | quote }}
-            - --custom-sign-in-logo={{ .Values.oauth.args.customSignInLogo | quote }}
+            - --custom-sign-in-logo={{ .Values.oauth.args.customSignInLogo }}
             - --footer={{ .Values.oauth.args.footer | quote }}
             - --provider-display-name={{ .Values.oauth.args.providerDisplayName | quote }}
 
