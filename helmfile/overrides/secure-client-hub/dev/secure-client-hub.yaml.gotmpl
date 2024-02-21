@@ -181,7 +181,7 @@ autoscaling:
 {{- if env "OAUTH_ENABLED" }}
 oauth:
   ports:
-    containerPort: 4018
+    containerPort: 4180
     name: oauth-proxy
   args:
     httpAddress: "0.0.0.0:4180"
