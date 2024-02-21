@@ -92,7 +92,7 @@ spec:
             - --skip-auth-preflight={{ .Values.oauth.args.skipAuthPreflight }}
 
             ## OIDC settings
-            - --provider={{ .Values.oauth.args.provider | quote }}
+            - --provider={{ .Values.oauth.args.provider }}
             - --client-id={{ .Values.oauth.args.clientID | quote }}
             - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL | quote }}
             - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens }}
