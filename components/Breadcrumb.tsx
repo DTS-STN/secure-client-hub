@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../lib/loadIcons'
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   text: string
   link: string
 }
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   id?: string
   items?: BreadcrumbItem[]
 }

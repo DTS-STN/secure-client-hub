@@ -3,29 +3,27 @@ import Markdown from 'markdown-to-jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
 
-interface DetailItem {
-  link: string
-  content: string
+export interface ContactSectionRowDetailItem {
+  link?: string
+  content?: string
 }
 
-interface ContactSectionRowProps {
-  label?: string
+export interface ContactSectionRowProps {
+  title?: string
   detail?: string
-  index: number
   highlight?: boolean
   iconFeature?: string
   button?: boolean
   buttonURL?: string
   buttonId?: string
-  items: DetailItem[]
+  items: ContactSectionRowDetailItem[]
   refPageAA: string
   id: string
 }
 
-const ContactSectionRow = ({
-  label,
-  detail,
-  index,
+export const ContactSectionRow = ({
+  title,
+
   highlight,
   iconFeature,
   button,
@@ -44,68 +42,65 @@ const ContactSectionRow = ({
     'https://protege-secure.pca-cal.ca/en/Account/Authorize',
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
-  return label && detail ? (
-    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`} key={index}>
+  return (
+    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`}>
       <dt
         className={`md:col-span-4 font-bold text-2xl text-gray-darker md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {label}
+        {title}
       </dt>
       <dd
         className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
-        {items.map((detail, index) => {
-          return button ? (
-            <a
-              key={index}
-              id={'test-card-button-' + buttonId}
-              data-cy="contact-us-button"
-              href={detail.link}
-              className="font-display text-xl leading-[23px] text-deep-blue-dark rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
-              target={
-                newTabTaskExceptions.includes(detail.link) ? '_blank' : '_self'
-              }
-              rel={
-                newTabTaskExceptions.includes(detail.link)
-                  ? 'noopener noreferrer'
-                  : undefined
-              }
-              data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
-            >
-              {detail.content}
+        {items.map((item) => {
+          return (
+            <Fragment key={item.content}>
+              {button ? (
+                <a
+                  id={'test-card-button-' + buttonId}
+                  data-cy="contact-us-button"
+                  href={item.link}
+                  className="font-display text-xl leading-[23px] text-blue-default rounded py-1.5 px-3.5 hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a"
+                  target={
+                    item.link && newTabTaskExceptions.includes(item.link)
+                      ? '_blank'
+                      : '_self'
+                  }
+                  rel={
+                    item.link && newTabTaskExceptions.includes(item.link)
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
+                >
+                  {item.content}
 
-              <FontAwesomeIcon
-                className="ml-2"
-                width="14"
-                icon={icon['arrow-up-right-from-square']}
-              ></FontAwesomeIcon>
-            </a>
-          ) : (
-            <div
-              key={index}
-              className="flex align-baseline text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4"
-            >
-              {iconFeature && (
-                <FontAwesomeIcon
-                  className="pr-2 pt-1"
-                  style={{ color: '#2572B4' }}
-                  icon={icon[iconFeature as keyof typeof icon]}
-                />
+                  <FontAwesomeIcon
+                    className="ml-2"
+                    width="14"
+                    icon={icon['arrow-up-right-from-square']}
+                  ></FontAwesomeIcon>
+                </a>
+              ) : (
+                <div className="flex align-baseline text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4">
+                  {iconFeature && (
+                    <FontAwesomeIcon
+                      className="pr-2 pt-1"
+                      style={{ color: '#2572B4' }}
+                      icon={icon[iconFeature as keyof typeof icon]}
+                    />
+                  )}
+                  {item.content && <Markdown>{item.content}</Markdown>}
+                </div>
               )}
-
-              <Markdown>{detail.content}</Markdown>
-            </div>
+            </Fragment>
           )
         })}
       </dd>
     </div>
-  ) : (
-    <Fragment key={index} />
   )
 }
-
-export default ContactSectionRow

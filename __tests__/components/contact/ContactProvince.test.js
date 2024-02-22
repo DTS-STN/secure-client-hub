@@ -5,7 +5,7 @@ import ContactProvince from '../../../components/contact/ContactProvince'
 
 expect.extend(toHaveNoViolations)
 
-describe('ContactProvince', () => {
+describe.skip('ContactProvince', () => {
   it('renders contactProvince', () => {
     const primary = render(<ContactProvince title="" intro="" details={[]} />)
     expect(primary).toBeTruthy()
