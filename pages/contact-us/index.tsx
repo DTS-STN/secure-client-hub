@@ -127,7 +127,7 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact - My Service Canada Account - Contact',
+      title: 'Contact us - My Service Canada Account - Contact',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
