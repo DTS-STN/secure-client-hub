@@ -66,7 +66,7 @@ const BenefitTasks = ({
                     : undefined
                 }
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
-                className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover"
+                className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover rounded-sm focus:outline-1 focus:outline-blue-hover"
               >
                 <FontAwesomeIcon
                   icon={icon[task.icon as keyof typeof FontAwesomeIcon]}

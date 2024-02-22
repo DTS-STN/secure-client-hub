@@ -66,7 +66,7 @@ const MostReqTasks = ({
                     : undefined
                 }
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
-                className="flex items-center underline pl-2 text-white hover:text-gray-50a  focus:outline-1 focus:outline-white"
+                className="flex items-center underline pl-2 text-white hover:text-gray-50a rounded-sm focus:outline-1 focus:outline-white"
               >
                 <FontAwesomeIcon
                   icon={icon[task.icon as keyof typeof FontAwesomeIcon]}

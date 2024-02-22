@@ -41,11 +41,11 @@ const ProfileTasks = ({
       >
         {tasks.map((task, index) => {
           return (
-            <li key={index} className="font-bold justify-center py-3">
+            <li key={index} className="flex font-bold py-3">
               <Link
                 href={task.link}
                 passHref
-                className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                className="flex px-1 items-center underline text-deep-blue-dark hover:text-blue-hover rounded-sm focus:outline-1 focus:outline-blue-hover visited:text-purple-50a"
                 data-cy="task-link"
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
               >
