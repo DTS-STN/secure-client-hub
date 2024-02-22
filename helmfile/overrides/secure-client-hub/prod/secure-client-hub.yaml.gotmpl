@@ -110,6 +110,9 @@ service:
     prometheus.io/scrape: "true"
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
+  {{- if env "SERVICE_TARGETPORT" }}
+  targetPort: {{ env "SERVICE_TARGETPORT" }}
+  {{- end }}
 ingress:
     enabled: true
     annotations: 

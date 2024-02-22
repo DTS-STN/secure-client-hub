@@ -110,7 +110,9 @@ service:
     prometheus.io/scrape: "true"
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
-  targetPort: {{ env "SERVICE_TARGETPORT" | default "http" }}
+  {{- if env "SERVICE_TARGETPORT" }}
+  targetPort: {{ env "SERVICE_TARGETPORT" }}
+  {{- end }}
 ingress:
     enabled: true
     annotations: 
@@ -161,9 +163,6 @@ secrets:
     labels:
       app.kubernetes.io/name: service-canada-client-hub
     stringData:
-    #{{- if env "OAUTH_PROXY_CLIENT_ID" }}
-    #    OAUTH_PROXY_CLIENT_ID: {{ env "OAUTH_PROXY_CLIENT_ID" }}
-    #{{- end }}
     {{- if env "OAUTH_PROXY_CLIENT_SECRET" }}
         OAUTH_PROXY_CLIENT_SECRET: {{ env "OAUTH_PROXY_CLIENT_SECRET" }}
     {{- end }}
@@ -209,11 +208,6 @@ oauth:
     skipJWTBearerTokens: true
     skipProviderButton: false
   extraEnv:
-    #- name: OAUTH2_PROXY_CLIENT_ID
-    #  valueFrom:
-    #    secretKeyRef:
-    #      name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
-    #      key: OAUTH_PROXY_CLIENT_ID
     - name: OAUTH2_PROXY_CLIENT_SECRET
       valueFrom:
         secretKeyRef:
