@@ -37,7 +37,7 @@ const mockContactProvinceProps = {
   title: 'test-title',
 } satisfies ContactProvinceProps
 
-describe.skip('ContactProvince', () => {
+describe('ContactProvince', () => {
   it('renders contactProvince', () => {
     const primary = render(<ContactProvince {...mockContactProvinceProps} />)
     expect(primary).toBeTruthy()
