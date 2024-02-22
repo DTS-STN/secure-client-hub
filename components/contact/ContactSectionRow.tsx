@@ -23,7 +23,6 @@ export interface ContactSectionRowProps {
 
 export const ContactSectionRow = ({
   title,
-
   highlight,
   iconFeature,
   button,
