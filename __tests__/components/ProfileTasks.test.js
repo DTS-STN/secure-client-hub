@@ -5,6 +5,13 @@ import ProfileTasks from '../../components/ProfileTasks'
 
 expect.extend(toHaveNoViolations)
 
+// mock for icons
+jest.mock('@fortawesome/react-fontawesome', () => ({
+  FontAwesomeIcon: () => {
+    return <svg />
+  },
+}))
+
 describe('ProfileTasks', () => {
   const { container } = render(
     <ProfileTasks
