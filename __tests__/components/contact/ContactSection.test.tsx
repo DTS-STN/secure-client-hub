@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import {
   ContactSection,
@@ -39,7 +39,7 @@ describe('ContactSection', () => {
         details={[]}
         intro=""
         title="Test title"
-      />
+      />,
     )
     expect(primary).toBeTruthy()
   })
@@ -51,7 +51,7 @@ describe('ContactSection', () => {
         details={[]}
         intro=""
         title="test title"
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

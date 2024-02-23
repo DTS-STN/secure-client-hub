@@ -42,9 +42,6 @@ const customJestConfig: Config = {
   testEnvironment: 'jsdom',
   setupFiles: ['<rootDir>/__mocks__/utils.mock.ts'],
   preset: 'ts-jest',
-  setupFilesAfterEnv: [
-    '@testing-library/jest-dom/extend-expect',
-    '@testing-library/react',
-  ],
+  setupFilesAfterEnv: ['@testing-library/react'],
 }
 export default createJestConfig(customJestConfig)
