@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import ViewMoreLessButton from '../../components/ViewMoreLessButton'
 
@@ -16,7 +16,7 @@ describe('ViewMoreLessButton', () => {
         onClick={() => {
           return true
         }}
-      />
+      />,
     )
     const btn = screen.getByTestId('vmlb')
     expect(btn).toBeInTheDocument()
@@ -32,7 +32,7 @@ describe('ViewMoreLessButton', () => {
         onClick={() => {
           return true
         }}
-      />
+      />,
     )
 
     const img = screen.getByTestId('vmlb').children[0] //get the img for the icon
@@ -48,7 +48,7 @@ describe('ViewMoreLessButton', () => {
         onClick={() => {
           return true
         }}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

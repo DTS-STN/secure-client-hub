@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { useRouter } from 'next/router'
 // import  { ContactUsPage } from '../../pages/contact-us/[id]'
@@ -67,7 +67,7 @@ describe.skip('Dynamic Contact Us Page', () => {
         pageContent={content}
         popupContent={popupContent}
         meta={meta}
-      />
+      />,
     )
     const contactUsDiv = screen.getByTestId('contactUsPage-test')
     expect(contactUsDiv).toBeInTheDocument
@@ -80,7 +80,7 @@ describe.skip('Dynamic Contact Us Page', () => {
         pageContent={content}
         popupContent={popupContent}
         meta={meta}
-      />
+      />,
     )
     const tocTable = screen.getByTestId('tableOfContents-test')
     expect(tocTable).toBeInTheDocument()
@@ -93,7 +93,7 @@ describe.skip('Dynamic Contact Us Page', () => {
         pageContent={content}
         popupContent={popupContent}
         meta={meta}
-      />
+      />,
     )
     const contactSection = screen.getByTestId('contactSection-test')
     expect(contactSection).toBeInTheDocument()

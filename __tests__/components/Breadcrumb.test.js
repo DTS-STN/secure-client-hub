@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Breadcrumb from '../../components/Breadcrumb'
 
@@ -21,7 +21,7 @@ describe('BreadCrumb', () => {
       <Breadcrumb
         id="breadcrumbID"
         items={[{ text: 'Canada.ca', link: '/' }]}
-      />
+      />,
     )
     expect(primary).toBeTruthy()
   })
@@ -36,7 +36,7 @@ describe('BreadCrumb', () => {
           { text: 'Link2', link: '/' },
           { text: 'Link3', link: '/' },
         ]}
-      />
+      />,
     )
     expect(withItems).toBeTruthy()
   })
@@ -52,7 +52,7 @@ describe('BreadCrumb', () => {
           { text: 'Max length of breadcrumb 28', link: '/' },
           { text: 'Link3', link: '/' },
         ]}
-      />
+      />,
     )
     expect(withItemsWithLongText).toBeTruthy()
   })
@@ -62,7 +62,7 @@ describe('BreadCrumb', () => {
       <Breadcrumb
         id="breadcrumbID"
         items={[{ text: 'Canada.ca', link: '/' }]}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

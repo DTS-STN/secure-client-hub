@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Card from '../../components/Card'
 
@@ -13,7 +13,7 @@ describe('Card', () => {
         viewMoreLessCaption={`Card Caption`}
         locale="en"
         programUniqueId={'test'}
-      />
+      />,
     )
     const title = screen.getByText('Card Title')
     const caption = screen.getByText('Card Caption')
@@ -28,7 +28,7 @@ describe('Card', () => {
         viewMoreLessCaption={`Card Caption`}
         locale="en"
         programUniqueId={'test'}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

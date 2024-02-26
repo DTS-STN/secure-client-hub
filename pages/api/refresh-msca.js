@@ -5,7 +5,7 @@
 
 import { AuthIsDisabled, AuthIsValid, ValidateSession } from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
-import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
 

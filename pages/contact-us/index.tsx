@@ -77,7 +77,7 @@ const ContactLanding = (props: ContactLandingProps) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
-                className="underline text-blue-primary font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+                className="underline text-blue-primary font-body text-20px hover:text-blue-hover rounded-sm focus:text-blue-hover focus:outline-1 focus:outline-blue-hover visited:text-purple-50a"
                 id={link.linkId}
                 data-testid={link.linkId}
                 aria-label={link.linkTitle}
@@ -127,7 +127,7 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Contact - My Service Canada Account - Contact',
+      title: 'Contact us - My Service Canada Account - Contact',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',

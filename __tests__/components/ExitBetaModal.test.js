@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import ExitBeta from '../../components/ExitBeta'
 
@@ -20,7 +20,7 @@ describe('Exit Beta Modal', () => {
           id: 'Test Secondary Id',
           text: 'Test Secondary Text',
         }}
-      />
+      />,
     )
     const title = screen.getByText('Test Title')
     const description = screen.getByText('Test Description')
@@ -45,7 +45,7 @@ describe('Exit Beta Modal', () => {
           id: 'Test Secondary Id',
           text: 'Test Secondary Text',
         }}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
