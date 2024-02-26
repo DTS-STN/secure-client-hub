@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import {
   ContactProvince,
@@ -45,7 +45,7 @@ describe('ContactProvince', () => {
 
   it('has no a11y violations', async () => {
     const { container } = render(
-      <ContactProvince {...mockContactProvinceProps} />
+      <ContactProvince {...mockContactProvinceProps} />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
