@@ -66,10 +66,7 @@ export default function Layout(props) {
           bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
-          refPageAA={
-            props.children.props.content?.heading ||
-            props.children.props.pageContent?.title
-          }
+          refPageAA={props.refPageAA}
           openModal={openModal}
           closeModal={closeModal}
         ></PhaseBanner>

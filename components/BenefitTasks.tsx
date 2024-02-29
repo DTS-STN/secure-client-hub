@@ -1,6 +1,6 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-// import { icon } from '../lib/loadIcons'
+import { icon } from '../lib/loadIcons'
 
 interface Tasks {
   title: string
@@ -35,9 +35,11 @@ const BenefitTasks = ({
     'https://www.canada.ca/fr/services/prestations/ae/declarations-assurance-emploi.html',
     'https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/apply.html#gc-document-nav',
     'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/104e.html',
+    'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/104f.html',
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=en-CA',
     'https://srv270.hrdc-drhc.gc.ca/AW/introduction?GoCTemplateCulture=fr-CA',
     'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/107e.html',
+    'http://www.servicecanada.gc.ca/cgi-bin/op-so/msca/redirection.asp?linkmsca=/107f.html',
     'https://estimateursv-oasestimator.service.canada.ca/en',
     'https://estimateursv-oasestimator.service.canada.ca/fr',
   ]
@@ -72,15 +74,20 @@ const BenefitTasks = ({
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
               >
-                {/* <FontAwesomeIcon
-                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
-                  className="pr-4 text-2xl w-8"
-                /> */}
                 <span
                   aria-label={task.areaLabel}
-                  className="text-xl font-normal"
+                  className="static text-xl font-normal"
                 >
                   {task.title}
+                  <span>
+                    {newTabTaskExceptions.includes(task.link) ? (
+                      <FontAwesomeIcon
+                        className="absolute ml-1.5 pt-0.5"
+                        width="14"
+                        icon={icon['arrow-up-right-from-square']}
+                      ></FontAwesomeIcon>
+                    ) : null}
+                  </span>
                 </span>
               </Link>
             </li>

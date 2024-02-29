@@ -1,6 +1,6 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-// import { icon } from '../lib/loadIcons'
+import { icon } from '../lib/loadIcons'
 
 interface Task {
   title: string
@@ -70,9 +70,18 @@ const MostReqTasks = ({
               >
                 <span
                   aria-label={task.areaLabel}
-                  className="text-xl font-normal"
+                  className="static text-xl font-normal"
                 >
                   {task.title}
+                  <span>
+                    {newTabTaskExceptions.includes(task.link) ? (
+                      <FontAwesomeIcon
+                        className="absolute ml-1.5 pt-0.5"
+                        width="14"
+                        icon={icon['arrow-up-right-from-square']}
+                      ></FontAwesomeIcon>
+                    ) : null}
+                  </span>
                 </span>
               </Link>
             </li>

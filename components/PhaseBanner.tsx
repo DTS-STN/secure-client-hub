@@ -48,10 +48,10 @@ const PhaseBanner = ({
             <a
               data-cy="send-feedback"
               href={bannerLinkHref}
-              className="text-xl text-deep-blue-60d hover:text-blue-hover focus:underline focus:text-blue-hover"
+              className="text-xl text-deep-blue-60d hover:text-blue-hover focus:text-blue-hover focus:underline"
               target={bannerButtonExternalLink ? '_blank' : undefined}
               rel={bannerButtonExternalLink ? 'noopener noreferrer' : undefined}
-              data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
+              data-gc-analytics-customclick={`${refPageAA}:${bannerLink}`}
             >
               <span className="mr-2 underline">{bannerLink}</span>
               {bannerButtonExternalLink && (
@@ -64,22 +64,20 @@ const PhaseBanner = ({
             </a>
           </div>
 
-          <div className="md:flex sm:flex-row md:justify-between">
+          <div className="sm:flex-row md:flex md:justify-between">
             <details
               key={id}
               id={id}
-              className="mb-5px text-gray-darker text-20px font-body"
+              className="mb-5px font-body text-20px text-gray-darker"
               data-testid="learn-more"
             >
               <summary
                 key={`summary-${id}`}
-                className=" text-deep-blue-60d hover:text-blue-hover hover:underline focus:underline focus:text-blue-hover px-0.5 py-5px cursor-pointer select-none outline-none"
+                className=" cursor-pointer select-none px-0.5 py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline focus:text-blue-hover focus:underline"
               >
                 {bannerSummaryTitle}
               </summary>
-              <div
-                data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
-              >
+              <div data-gc-analytics-customclick={`${refPageAA}:${id}`}>
                 <Markdown
                   options={{
                     overrides: {
@@ -105,7 +103,8 @@ const PhaseBanner = ({
               id="bannerButton"
               style="primary"
               text={bannerButtonText}
-              className="whitespace-nowrap max-h-11 my-auto w-full justify-center px-auto xs:w-auto mt-4 sm:mt-0 "
+              refPageAA={`${refPageAA}`}
+              className="px-auto my-auto mt-4 max-h-11 w-full justify-center whitespace-nowrap xs:w-auto sm:mt-0 "
               onClick={(e) => {
                 e.preventDefault()
                 openModal(bannerButtonLink, 'betaBannerModal')
