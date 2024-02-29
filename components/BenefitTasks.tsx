@@ -1,12 +1,12 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { icon } from '../lib/loadIcons'
+// import { icon } from '../lib/loadIcons'
 
 interface Tasks {
   title: string
   areaLabel: string
   link: string
-  icon: string
+  icon?: string
   betaPopUp: boolean
   id: string
 }
@@ -44,16 +44,20 @@ const BenefitTasks = ({
 
   return (
     <div className="inline-block w-full" data-testid="benefitTasks-test">
-      <h3 className="font-bold text-xl " data-cy={dataCy}>
+      <h3 className="text-xl font-bold " data-cy={dataCy}>
         {taskList.title}
       </h3>
       <ul
-        className="w-full pb-8 md:pb-12 pt-3 pl-2 space-y-4"
+        className="w-full space-y-4 pb-8 pl-6 pt-3 md:pb-12 md:pl-8 lg:pl-10"
         data-cy="taskList"
       >
         {taskList.tasks.map((task, index) => {
           return (
-            <li key={index} className="font-bold " data-cy="task-link">
+            <li
+              key={index}
+              className="list-disc font-bold text-deep-blue-dark"
+              data-cy="task-link"
+            >
               <Link
                 href={task.link}
                 passHref
@@ -66,15 +70,15 @@ const BenefitTasks = ({
                     : undefined
                 }
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
-                className="flex items-center underline py-1 text-deep-blue-dark hover:text-blue-hover rounded-sm focus:outline-1 focus:outline-blue-hover"
+                className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
               >
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
                   className="pr-4 text-2xl w-8"
-                />
+                /> */}
                 <span
                   aria-label={task.areaLabel}
-                  className="font-normal text-xl"
+                  className="text-xl font-normal"
                 >
                   {task.title}
                 </span>

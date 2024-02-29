@@ -1,12 +1,12 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { icon } from '../lib/loadIcons'
+// import { icon } from '../lib/loadIcons'
 
 interface Task {
   title: string
   areaLabel: string
   link: string
-  icon: string
+  icon?: string
   betaPopUp?: boolean
   id: string
 }
@@ -38,20 +38,20 @@ const MostReqTasks = ({
   return (
     <div className="h-full">
       <h3
-        className="font-bold text-xl text-white pt-6 pl-3 sm:pl-8 md:pl-15 "
+        className="pl-3 pt-6 text-xl font-bold text-white sm:pl-8 md:pl-15 "
         data-cy={dataCy}
       >
         {taskListMR.title}
       </h3>
       <ul
-        className="w-full gap-x-0 grid md:grid-cols-2 pl-3 sm:pl-8 md:pl-15 pt-4  md:pt-5 pb-6 "
+        className="flex w-full list-outside list-disc flex-col pb-5 pl-8 pt-2 text-white sm:px-12 md:px-20 md:pt-4"
         data-cy="most-req-links"
       >
         {taskListMR.tasks.map((task, index) => {
           return (
             <li
               key={index}
-              className="font-bold justify-center py-2"
+              className="justify-center py-2 font-bold"
               data-cy="most-req-tasklink"
             >
               <Link
@@ -66,15 +66,11 @@ const MostReqTasks = ({
                     : undefined
                 }
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
-                className="flex items-center underline pl-2 text-white hover:text-gray-50a rounded-sm focus:outline-1 focus:outline-white"
+                className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
               >
-                <FontAwesomeIcon
-                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
-                  className="pr-4 text-2xl w-8"
-                />
                 <span
                   aria-label={task.areaLabel}
-                  className="font-normal text-xl"
+                  className="text-xl font-normal"
                 >
                   {task.title}
                 </span>
