@@ -148,10 +148,10 @@ export default function Layout(props) {
         openModal={openModal}
         closeModal={closeModal}
         popupContentNA={props.popupContentNA}
-        aaPrefix={props.aaPrefix}
         t={t}
         popupStaySignedIn={props.popupStaySignedIn}
         popupContent={props.popupContent}
+        refPageAA={props.refPageAA}
       />
 
       <Footer

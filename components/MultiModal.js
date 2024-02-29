@@ -17,6 +17,7 @@ export default function MultiModal(props) {
     aaPrefix,
     popupStaySignedIn,
     popupContent,
+    refPageAA,
   } = props
 
   const [timer, setTimer] = useState({ seconds: 0, minutes: 0 })
@@ -71,7 +72,7 @@ export default function MultiModal(props) {
           popupDescription={popupContentNA.popupDescription}
           popupPrimaryBtn={popupContentNA.popupPrimaryBtn}
           popupSecondaryBtn={popupContentNA.popupSecondaryBtn}
-          refPageAA={aaPrefix}
+          refPageAA={`${refPageAA}`}
         />
       )
       contentLabel = popupContentNA.popupTitle
@@ -87,7 +88,7 @@ export default function MultiModal(props) {
           popupDescription={popupContent.popupDescription}
           popupPrimaryBtn={popupContent.popupPrimaryBtn}
           popupSecondaryBtn={popupContent.popupSecondaryBtn}
-          refPageAA={aaPrefix}
+          refPageAA={`${refPageAA}`}
         />
       )
       contentLabel = popupContent.popupTitle
@@ -115,7 +116,7 @@ export default function MultiModal(props) {
     <>
       <div ref={clicker} />
       <Modal
-        className="flex justify-center bg-black/75 h-full"
+        className="flex h-full justify-center bg-black/75"
         isOpen={openModalWithLink.context != null}
         onRequestClose={closeModal}
         contentLabel={contentLabel}

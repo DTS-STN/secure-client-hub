@@ -19,7 +19,6 @@ interface TaskList {
 interface MostReqTasksProps {
   dataCy?: string
   taskListMR: TaskList
-
   refPageAA: string
   acronym: string
 }
