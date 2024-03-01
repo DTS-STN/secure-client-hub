@@ -80,7 +80,6 @@ export default function Profile(props) {
       <p className="mt-2 text-lg text-gray-darker">{props.content.heading}</p>
       <div data-cy="profile-lists">
         {props.content.list.map((program, index) => {
-          console.log(index)
           return (
             <ProfileTasks
               key={index}
