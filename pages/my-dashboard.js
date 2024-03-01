@@ -94,6 +94,7 @@ export default function MyDashboard(props) {
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
+                locale={props.locale}
                 taskListMR={mostReq}
                 dataCy="most-requested"
                 acronym={acronym(card.title)}
@@ -108,6 +109,7 @@ export default function MyDashboard(props) {
                 return (
                   <div key={index} data-cy="Task">
                     <BenefitTasks
+                      locale={props.locale}
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"

@@ -18,6 +18,7 @@ interface TaskListProps {
 }
 
 interface BenefitTasksProps {
+  locale: string
   taskList: TaskListProps
   dataCy?: string
   refPageAA?: string
@@ -25,6 +26,7 @@ interface BenefitTasksProps {
 }
 
 const BenefitTasks = ({
+  locale,
   taskList,
   dataCy,
   refPageAA,
@@ -86,6 +88,15 @@ const BenefitTasks = ({
                         width="14"
                         icon={icon['arrow-up-right-from-square']}
                       ></FontAwesomeIcon>
+                    ) : null}
+                  </span>
+                  <span>
+                    {newTabTaskExceptions.includes(task.link) ? (
+                      <span className="sr-only">
+                        {locale === 'fr'
+                          ? "S'ouvre dans un nouvel onglet"
+                          : 'Opens in a new tab'}
+                      </span>
                     ) : null}
                   </span>
                 </span>

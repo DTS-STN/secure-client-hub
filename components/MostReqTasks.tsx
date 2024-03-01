@@ -17,6 +17,7 @@ interface TaskList {
 }
 
 interface MostReqTasksProps {
+  locale: string
   dataCy?: string
   taskListMR: TaskList
   refPageAA: string
@@ -24,6 +25,7 @@ interface MostReqTasksProps {
 }
 
 const MostReqTasks = ({
+  locale,
   dataCy,
   taskListMR,
   refPageAA,
@@ -81,6 +83,15 @@ const MostReqTasks = ({
                       ></FontAwesomeIcon>
                     ) : null}
                   </span>
+                  <span>
+                    {newTabTaskExceptions.includes(task.link) ? (
+                      <span className="sr-only">
+                        {locale === 'fr'
+                          ? "S'ouvre dans un nouvel onglet"
+                          : 'Opens in a new tab'}
+                      </span>
+                    ) : null}
+                  </span>
                 </span>
               </Link>
             </li>
@@ -92,6 +103,7 @@ const MostReqTasks = ({
 }
 
 MostReqTasks.defaultProps = {
+  locale: 'en',
   taskListMR: [
     {
       tasks: [
