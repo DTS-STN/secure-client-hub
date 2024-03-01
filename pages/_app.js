@@ -29,6 +29,7 @@ export default function MyApp({ Component, pageProps }) {
         popupContent={pageProps.popupContent}
         display={display}
         popupStaySignedIn={pageProps.popupStaySignedIn}
+        refPageAA={pageProps.aaPrefix}
       >
         <Component {...pageProps} />
       </Layout>
