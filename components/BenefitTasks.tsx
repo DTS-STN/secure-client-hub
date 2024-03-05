@@ -52,7 +52,7 @@ const BenefitTasks = ({
         {taskList.title}
       </h3>
       <ul
-        className="w-full space-y-4 pb-8 pl-6 pt-3 md:pb-12 md:pl-8 lg:pl-10"
+        className="w-full space-y-4 px-6 pb-8 pt-3 md:pb-12 md:pl-8 lg:pl-10"
         data-cy="taskList"
       >
         {taskList.tasks.map((task, index) => {
