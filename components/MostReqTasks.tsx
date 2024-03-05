@@ -45,7 +45,7 @@ const MostReqTasks = ({
         {taskListMR.title}
       </h3>
       <ul
-        className="flex w-full list-outside list-disc flex-col pb-5 pl-8 pt-2 text-white sm:px-12 md:px-20 md:pt-4"
+        className="flex list-outside list-disc flex-col px-8 pb-5 pt-2 text-white sm:px-12 md:px-20 md:pt-4"
         data-cy="most-req-links"
       >
         {taskListMR.tasks.map((task, index) => {
