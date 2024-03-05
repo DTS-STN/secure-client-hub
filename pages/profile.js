@@ -10,31 +10,43 @@ import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-p
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    [],
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
-    [onClickEvent]
+    () => throttle(onClickEvent, 60000, { trailing: false }),
+    [onClickEvent],
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -64,42 +76,45 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.pageName} />
-      <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
-      {props.content.list.map((program, index) => {
-        return (
-          <ProfileTasks
-            key={index}
-            acronym={acronym(program.title)}
-            programTitle={program.title}
-            tasks={program.tasks}
-            data-testid="profile-task-group-list"
-            openModal={props.openModal}
-            data-cy="task"
-            refPageAA={props.aaPrefix}
-          />
-        )
-      })}
+      <Heading id="profile-heading" title={props.content.pageName} />
+      <p className="mt-2 text-lg text-gray-darker">{props.content.heading}</p>
+      <div data-cy="profile-lists">
+        {props.content.list.map((program, index) => {
+          return (
+            <ProfileTasks
+              key={index}
+              acronym={acronym(program.title)}
+              programTitle={program.title}
+              tasks={program.tasks}
+              data-testid="profile-task-group-list"
+              data-cy="task"
+              refPageAA={props.aaPrefix}
+            />
+          )
+        })}
+      </div>
+
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={props.content.backToDashboard.id}
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('profile')
@@ -126,7 +141,7 @@ export async function getServerSideProps({ req, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -155,7 +170,7 @@ export async function getServerSideProps({ req, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -164,7 +179,7 @@ export async function getServerSideProps({ req, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -178,44 +193,44 @@ export async function getServerSideProps({ req, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC:${content.en?.pageName || content.en?.title}`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

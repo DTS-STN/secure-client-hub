@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState, cloneElement } from 'react'
-import { Header } from './Header'
-import { Footer } from './Footer'
+import Header from './Header'
+import Footer from './Footer'
 import MetaData from './MetaData'
 import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
@@ -66,10 +66,7 @@ export default function Layout(props) {
           bannerButtonExternalLink
           icon={props.bannerContent.icon || ''}
           popupContent={props.popupContent || ''}
-          refPageAA={
-            props.children.props.content?.heading ||
-            props.children.props.pageContent?.title
-          }
+          refPageAA={props.refPageAA}
           openModal={openModal}
           closeModal={closeModal}
         ></PhaseBanner>
@@ -79,7 +76,6 @@ export default function Layout(props) {
         dataTestId="topnav"
         id="header"
         linkPath={props.langToggleLink}
-        locale={false}
         lang={props.locale}
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
@@ -152,10 +148,10 @@ export default function Layout(props) {
         openModal={openModal}
         closeModal={closeModal}
         popupContentNA={props.popupContentNA}
-        aaPrefix={props.aaPrefix}
         t={t}
         popupStaySignedIn={props.popupStaySignedIn}
         popupContent={props.popupContent}
+        refPageAA={props.refPageAA}
       />
 
       <Footer

@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
@@ -35,12 +37,14 @@ Logout.getLayout = function PageLayout(page) {
 }
 
 export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
   logger.level = 'error'
 
   const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req).catch((error) => {
+    ? await getLogoutURL(req, session).catch((error) => {
         logger.error(error)
         res.statusCode = 500
         throw error
@@ -54,7 +58,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -63,7 +67,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },

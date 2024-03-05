@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Heading from '../../components/Heading'
 
@@ -16,7 +16,7 @@ describe('Heading', () => {
         locale="en"
         id={'id'}
         dataTestId={'data test ID'}
-      />
+      />,
     )
     const title = screen.getByText('title')
     const fromText = screen.getByText('from Text')
@@ -34,7 +34,7 @@ describe('Heading', () => {
         locale="en"
         id={'id'}
         dataTestId={'data test ID'}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

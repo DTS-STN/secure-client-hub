@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
 {{- if .Values.extraEnv }}
-{{ toYaml .Values.extraEnv | indent 10 }}
+{{ toYaml .Values.extraEnv | indent 12 }}
 {{- end }}
           ports:
             - name: http
@@ -43,16 +43,88 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ .Values.livenessPath }}
+              path: {{ .Values.healthChecks.livenessPath }}
               port: http
-            initialDelaySeconds: {{ .Values.livenessDelay }}
+            initialDelaySeconds: {{ .Values.healthChecks.livenessDelay }}
           readinessProbe:
             httpGet:
-              path: {{ .Values.readinessPath }}
+              path: {{ .Values.healthChecks.readinessPath }}
               port: http
-            initialDelaySeconds: {{ .Values.readinessDelay }}
+            initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.oauth }}
+        - args:
+            ## OAuth2 Proxy Config File
+            ## https://github.com/oauth2-proxy/oauth2-proxy
+
+            ## <addr>:<port> to listen on for HTTP/HTTPS clients
+            - --http-address={{ .Values.oauth.args.httpAddress }}
+
+            ## the url root path that this proxy should be nested under
+            - --proxy-prefix={{ .Values.oauth.args.proxyPrefix }}
+
+            ## the http url(s) of the upstream endpoint
+            - --upstream={{ range $i, $value := .Values.oauth.args.upstreams }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+
+            ## email domains to allow authentication for
+            - --email-domain={{ range $i, $value := .Values.oauth.args.emailDomains }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+
+            ## bypass authentication for requests that match the method & path
+            - --skip-auth-route={{ range $i, $value := .Values.oauth.args.skipAuthRoutes }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+
+            ## mark paths as API routes to get HTTP Status code 401 instead of redirect to login page
+            - --api-route={{ range $i, $value := .Values.oauth.args.apiRoutes }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+
+            ## cookie settings
+            - --cookie-domain={{ range $i, $value := .Values.oauth.args.cookieDomains }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+
+            ## html page settings
+            - --banner={{ .Values.oauth.args.banner }}
+            - --custom-sign-in-logo={{ .Values.oauth.args.customSignInLogo }}
+            - --footer={{ .Values.oauth.args.footer }}
+            - --provider-display-name={{ .Values.oauth.args.providerDisplayName }}
+
+            ## disable logging of requests to ping endpoint
+            - --silence-ping-logging={{ .Values.oauth.args.silencePingLogging }}
+
+            ## will skip authentication for OPTIONS requests
+            - --skip-auth-preflight={{ .Values.oauth.args.skipAuthPreflight }}
+
+            ## OIDC settings
+            - --provider={{ .Values.oauth.args.provider }}
+            - --client-id={{ .Values.oauth.args.clientID }}
+            - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL }}
+            - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens }}
+            - --skip-provider-button={{ .Values.oauth.args.skipProviderButton  }}
+          name: oauth-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+          imagePullPolicy: Always
+          env:
+{{- if .Values.oauth.extraEnv }}
+{{ toYaml .Values.oauth.extraEnv | indent 12 }}
+{{- end }}
+          
+          ports:
+            - containerPort: {{ .Values.oauth.ports.containerPort }}
+              name: {{ .Values.oauth.ports.name }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.oauth.healthChecks.livenessPath }}
+              port: {{ .Values.oauth.healthChecks.livenessPort }}
+            initialDelaySeconds: {{ .Values.oauth.healthChecks.livenessDelay }}
+            timeoutSeconds: {{ .Values.oauth.healthChecks.livenessTimeout }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.oauth.healthChecks.readinessPath }}
+              port: {{ .Values.oauth.healthChecks.readinessPort }}
+            initialDelaySeconds: {{ .Values.oauth.healthChecks.readinessDelay }}
+            timeoutSeconds: {{ .Values.oauth.healthChecks.readinessTimeout }}
+            periodSeconds: {{ .Values.oauth.healthChecks.readinessPeriodSeconds }}
+            successThreshold: {{ .Values.oauth.healthChecks.readinessSuccessThreshold }}
+          resources:
+            {{- toYaml .Values.oauth.resources | nindent 12 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

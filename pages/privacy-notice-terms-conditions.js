@@ -1,6 +1,6 @@
-import { useEffect, useCallback, useMemo } from 'react'
+import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Date } from '../components/Date'
+import Date from '../components/Date'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
@@ -10,31 +10,43 @@ import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
 import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import throttle from 'lodash.throttle'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
+import { useRouter } from 'next/router'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    [],
+  )
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
-    [onClickEvent]
+    () => throttle(onClickEvent, 60000, { trailing: false }),
+    [onClickEvent],
   )
 
   useEffect(() => {
     window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
     }
-  }, [throttledOnClickEvent])
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -67,7 +79,7 @@ export default function PrivacyCondition(props) {
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
       ? /(?=## Terms and conditions of use|1\. \*\*Your credentials\*\*)/
-      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/
+      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/,
   )
 
   return (
@@ -189,8 +201,11 @@ export default function PrivacyCondition(props) {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
-  if (!AuthIsDisabled() && !(await AuthIsValid(req))) return Redirect()
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('privacy-notice-terms-and-conditions')
@@ -217,7 +232,7 @@ export async function getServerSideProps({ req, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -253,20 +268,22 @@ export async function getServerSideProps({ req, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Privacy and Conditions - My Service Canada Account',
+      title:
+        'Privacy notice and terms and conditions - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
     data_fr: {
-      title: 'Confidentialité et conditions - Mon dossier Service Canada',
+      title:
+        'Avis de confidentialité et modalités - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -280,28 +297,28 @@ export async function getServerSideProps({ req, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -310,14 +327,14 @@ export async function getServerSideProps({ req, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

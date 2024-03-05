@@ -3,7 +3,7 @@
  */
 
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { TopNav } from '../../components/TopNav'
 
@@ -18,10 +18,10 @@ describe('TopNav', () => {
         skipToAboutPath="#wb-info"
         switchToBasicPath="/basic-en.html"
         displayAlternateLink={false}
-      />
+      />,
     )
     expect(screen.getByText('Skip to main content')).toHaveTextContent(
-      'Skip to main content'
+      'Skip to main content',
     )
   })
 
@@ -33,10 +33,10 @@ describe('TopNav', () => {
         skipToAboutPath="#wb-info"
         switchToBasicPath="/basic-fr.html"
         displayAlternateLink={false}
-      />
+      />,
     )
     expect(screen.getByText('Passer au contenu principal')).toHaveTextContent(
-      'Passer au contenu principal'
+      'Passer au contenu principal',
     )
   })
 
@@ -48,7 +48,7 @@ describe('TopNav', () => {
         skipToAboutPath="#wb-info"
         switchToBasicPath="/basic-fr.html"
         displayAlternateLink={false}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

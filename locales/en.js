@@ -13,7 +13,7 @@ export default {
   //
   // Header Menu
   menuItems: {
-    dashboard: 'My Dashboard',
+    dashboard: 'My dashboard',
     security: 'Security settings',
     profile: 'Profile',
     contactUs: 'Contact us',

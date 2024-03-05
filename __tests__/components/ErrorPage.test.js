@@ -3,8 +3,8 @@
  */
 
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import { ErrorPage } from '../../components/ErrorPage.js'
+import '@testing-library/jest-dom'
+import ErrorPage from '../../components/ErrorPage'
 import { axe, toHaveNoViolations } from 'jest-axe'
 
 expect.extend(toHaveNoViolations)
