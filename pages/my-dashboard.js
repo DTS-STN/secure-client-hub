@@ -29,11 +29,11 @@ export default function MyDashboard(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -94,6 +94,7 @@ export default function MyDashboard(props) {
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
+                locale={props.locale}
                 taskListMR={mostReq}
                 dataCy="most-requested"
                 acronym={acronym(card.title)}
@@ -101,13 +102,14 @@ export default function MyDashboard(props) {
               />
             </div>
             <div
-              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
+              className="gap-x-[60px] pl-3 pt-8 sm:pl-8 md:columns-2 md:px-15"
               data-cy="task-list"
             >
               {tasks.map((taskList, index) => {
                 return (
                   <div key={index} data-cy="Task">
                     <BenefitTasks
+                      locale={props.locale}
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
@@ -151,7 +153,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -169,7 +171,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Dashboard - My Service Canada Account',
+      title: 'My dashboard - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -178,7 +180,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Tableau de Bord - Mon dossier Service Canada',
+      title: 'Mon tableau de bord - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -196,27 +198,27 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -225,14 +227,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

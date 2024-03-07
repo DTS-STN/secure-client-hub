@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 
 import { getLogger } from '../../../logging/log-util'
 

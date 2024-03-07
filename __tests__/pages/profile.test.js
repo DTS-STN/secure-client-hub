@@ -8,6 +8,13 @@ import Heading from '../../components/Heading'
 
 import { useRouter } from 'next/router'
 
+// mock for icons
+jest.mock('@fortawesome/react-fontawesome', () => ({
+  FontAwesomeIcon: () => {
+    return <svg />
+  },
+}))
+
 // mocks useRouter to be able to use component' router.asPath
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
@@ -79,7 +86,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
@@ -99,7 +106,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()

@@ -33,22 +33,22 @@ const Maintenance = (props: MaintenanceProps) => {
           id={'pageHead-maintenance'}
           title={language.maintenanceTitle}
         />
-        <p className="text-20px text-gray-darker mt-2">
+        <p className="mt-2 text-20px text-gray-darker">
           {language.maintenanceText}
         </p>
         <br />
-        <p className="font-bold text-gray-darker sm:text-black text-[20px]">
+        <p className="text-[20px] font-bold text-gray-darker sm:text-black">
           {language.errorPageNextText}
         </p>
         <h2 className="sr-only">{language.errorPageNextText}</h2>
         <ul id={'maintenace-next-list'}>
-          <li className={'text-20px text-gray-darker pl-3'}>
+          <li className={'pl-3 text-20px text-gray-darker'}>
             {language.error503TextLink}
           </li>
-          <li className="text-20px text-gray-darker pl-3">
+          <li className="pl-3 text-20px text-gray-darker">
             {language.errorTextLinkCommon}
             <Link
-              className="underline text-deep-blue-dark font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+              className="font-body text-20px text-deep-blue-dark underline hover:text-blue-hover focus:text-blue-hover"
               id="accountpage-maintenance"
               href={
                 props.locale === 'en'
@@ -71,7 +71,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const meta = {
     data_en: {
-      title: 'Maintenance - My Service Canada Account',
+      title:
+        'This service is currently unavailable - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -80,7 +81,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Entretien - Mon dossier Service Canada',
+      title:
+        'Le service est actuellement indisponible - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

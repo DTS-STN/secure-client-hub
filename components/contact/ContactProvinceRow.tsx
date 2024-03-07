@@ -1,61 +1,65 @@
 import Markdown from 'markdown-to-jsx'
 import Collapse from '../Collapse'
-import { Fragment } from 'react'
 
-interface Item {
-  content: string
-  recipient: string
-  program: string
-  poBox: string
-  station: string
-  city: string
-  province: string
-  postal: string
-  country: string
+export interface ContactProvinceRowItem {
+  content?: string
+  recipient?: string
+  program?: string
+  poBox?: string
+  station?: string
+  city?: string
+  province?: string
+  postal?: string
+  country?: string
 }
 
-interface ContactProvinceRowProps {
-  label: string
-  items: Item[]
+export interface ContactProvinceRowProps {
+  title: string
+  items: ContactProvinceRowItem[]
   id: string
 }
 
-const ap = (x: string | undefined, append: string): string => {
-  return x ? x + append : ''
+const ap = (addressContent: string | undefined, append: string): string => {
+  return addressContent ? addressContent + append : ''
 }
 
-const ContactProvinceRow = ({ label, items, id }: ContactProvinceRowProps) => {
-  return items.length > 0 ? (
-    <div className="py-2" key={id} data-cy="provinceCards">
-      <Collapse title={label} id={id} dataTestId={`dataTest`}>
-        <div className="grid text-xl grid-cols-2" data-cy="mailContactDetails">
-          {items.map((x, i) => (
-            <div
-              className="col-span-2 md:col-span-1 py-3 select-text cursor-default"
-              key={i}
-            >
-              <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
-                <Markdown>{`${ap(x.content, ' ')}`}</Markdown>
-              </strong>
+export const ContactProvinceRow = ({
+  title,
+  items,
+  id,
+}: ContactProvinceRowProps) => {
+  return (
+    items.length > 0 && (
+      <div className="py-2" key={id} data-cy="provinceCards">
+        <Collapse title={title} id={id} dataTestId={`dataTest`}>
+          <div
+            className="grid grid-cols-2 text-xl"
+            data-cy="mailContactDetails"
+          >
+            {items.map((rowItem, i) => (
+              <div
+                className="col-span-2 cursor-default select-text py-3 md:col-span-1"
+                key={i}
+              >
+                <strong className="prose prose-p:font-display prose-p:text-xl prose-strong:font-display prose-strong:text-xl">
+                  <Markdown>{`${ap(rowItem.content, ' ')}`}</Markdown>
+                </strong>
 
-              <Markdown>{`${ap(x.recipient, '\n\n')}${ap(
-                x.program,
-                '\n\n'
-              )}${ap(x.poBox, ' ')} ${ap(x.station, ' ')} ${ap(
-                ' ',
-                '\n\n'
-              )} ${ap(x.city, ' ')} ${ap(x.province, ' ')} ${ap(
-                x.postal,
-                ' \n\n'
-              )} ${ap(x.country, ' ')}`}</Markdown>
-            </div>
-          ))}
-        </div>
-      </Collapse>
-    </div>
-  ) : (
-    <Fragment />
+                <Markdown>{`${ap(rowItem.recipient, '\n\n')}${ap(
+                  rowItem.program,
+                  '\n\n',
+                )}${ap(rowItem.poBox, ' ')} ${ap(rowItem.station, ' ')} ${ap(
+                  ' ',
+                  '\n\n',
+                )} ${ap(rowItem.city, ' ')} ${ap(rowItem.province, ' ')} ${ap(
+                  rowItem.postal,
+                  ' \n\n',
+                )} ${ap(rowItem.country, ' ')}`}</Markdown>
+              </div>
+            ))}
+          </div>
+        </Collapse>
+      </div>
+    )
   )
 }
-
-export default ContactProvinceRow

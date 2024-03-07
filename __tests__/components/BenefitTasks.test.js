@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 import { axe, toHaveNoViolations } from 'jest-axe'
 import BenefitTasks from '../../components/BenefitTasks'
@@ -33,7 +33,7 @@ describe('BenefitTasks', () => {
         taskList={taskListTest}
         dataCy="task-group-list-test"
         refPageAA={'test'}
-      />
+      />,
     )
     const testid = screen.getByTestId('benefitTasks-test')
     expect(testid).toBeInTheDocument()
@@ -46,7 +46,7 @@ describe('BenefitTasks', () => {
         taskList={taskListTest}
         dataCy="task-group-list-test"
         refPageAA={'test'}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()

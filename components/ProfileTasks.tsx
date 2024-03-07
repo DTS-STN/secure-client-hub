@@ -1,13 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { icon } from '../lib/loadIcons'
 
 interface Task {
   title: string
   areaLabel: string
   link: string
-  icon: string
-  betaPopUp: boolean
+  icon?: string
+  betaPopUp?: boolean
   id: string
 }
 
@@ -27,7 +25,7 @@ const ProfileTasks = ({
   acronym,
 }: ProfileTasksProps) => {
   return (
-    <div data-cy={dataCy} className="mt-10 mb-12">
+    <div data-cy={dataCy} className="mb-12 mt-10">
       <h2
         className="text-4xl font-bold text-gray-darker"
         data-cy="program-title"
@@ -35,27 +33,23 @@ const ProfileTasks = ({
         {programTitle}
       </h2>
       <ul
-        className="w-full grid md:grid-cols-1 items-center pt-3"
+        className="grid w-full items-center pl-5 pt-3 xs:pl-6 md:grid-cols-1"
         data-cy="task"
         aria-label={programTitle}
       >
         {tasks.map((task, index) => {
           return (
-            <li key={index} className="font-bold justify-center py-3">
+            <li key={index} className="flex py-3 font-bold">
               <Link
                 href={task.link}
                 passHref
-                className="flex items-center underline text-deep-blue-dark hover:text-blue-hover"
+                className="list-item list-outside list-disc items-center rounded-sm px-1 text-deep-blue-dark underline visited:text-purple-50a hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
                 data-cy="task-link"
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
               >
-                <FontAwesomeIcon
-                  icon={icon[task.icon as keyof typeof FontAwesomeIcon]}
-                  className="pr-4 text-2xl w-8"
-                />
                 <span
                   aria-label={task.areaLabel}
-                  className="font-normal text-xl"
+                  className="text-xl font-normal"
                   data-cy="task-item"
                 >
                   {task.title}

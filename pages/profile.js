@@ -29,11 +29,11 @@ export default function Profile(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Profile(props) {
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="profile-heading" title={props.content.pageName} />
-      <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
+      <p className="mt-2 text-lg text-gray-darker">{props.content.heading}</p>
       <div data-cy="profile-lists">
         {props.content.list.map((program, index) => {
           return (
@@ -141,7 +141,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -193,44 +193,44 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC:${content.en?.pageName || content.en?.title}`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

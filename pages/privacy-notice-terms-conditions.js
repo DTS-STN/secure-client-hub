@@ -29,11 +29,11 @@ export default function PrivacyCondition(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function PrivacyCondition(props) {
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
       ? /(?=## Terms and conditions of use|1\. \*\*Your credentials\*\*)/
-      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/
+      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/,
   )
 
   return (
@@ -232,7 +232,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -268,7 +268,8 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Privacy and Conditions - My Service Canada Account',
+      title:
+        'Privacy notice and terms and conditions - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -277,7 +278,8 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Confidentialité et conditions - Mon dossier Service Canada',
+      title:
+        'Avis de confidentialité et modalités - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -295,28 +297,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -325,14 +327,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
