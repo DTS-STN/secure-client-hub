@@ -26,11 +26,11 @@ export default function SecuritySettings(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function SecuritySettings(props) {
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="security-settings-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl text-gray-darker">
+      <p className="mb-8 mt-3 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
       <Button
@@ -83,7 +83,7 @@ export default function SecuritySettings(props) {
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 w-fit underline"
+        className="w-fit pl-0 pr-0 font-body text-20px underline"
         refPageAA={props.aaPrefix}
       ></Button>
 
@@ -133,7 +133,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -169,7 +169,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Security - My Service Canada Account',
+      title: 'Security settings - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -178,7 +178,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Sécurité - Mon dossier Service Canada',
+      title: 'Paramètres de sécurité - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -196,28 +196,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -226,14 +226,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
@@ -268,6 +268,6 @@ SecuritySettings.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
-    })
+    }),
   ),
 }

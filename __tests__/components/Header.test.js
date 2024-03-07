@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Header from '../../components/Header'
 

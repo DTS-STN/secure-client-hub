@@ -26,11 +26,11 @@ export default function DecisionReviews(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function DecisionReviews(props) {
           id={props.content.content[0].button.id}
           style="primary"
           text={props.content.content[0].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          className="px-auto my-auto mt-4 w-fit justify-center whitespace-normal text-center sm:mt-0 md:max-h-11"
           href={props.content.content[0].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
@@ -129,7 +129,7 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          className="px-auto my-auto mt-4 w-fit justify-center whitespace-normal text-center sm:mt-0 md:max-h-11"
           href={props.content.content[1].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
@@ -169,7 +169,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -191,7 +191,7 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Request Review Decison - My Service Canada Account',
+      title: 'Request a review of a decision - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -200,7 +200,7 @@ export async function getServerSideProps({ req, res, locale }) {
       accessRights: '1',
     },
     data_fr: {
-      title: 'Demande de revision - Mon dossier Service Canada',
+      title: 'Faire une demande de révision - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -218,28 +218,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -248,14 +248,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

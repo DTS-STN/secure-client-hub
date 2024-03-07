@@ -32,13 +32,13 @@ const ExitBeta = ({
 }: ExitBetaProps) => {
   return (
     <div
-      className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
+      className="m-8 h-fit rounded bg-white p-4 sm:mx-24 sm:mt-24 md:p-16"
       data-cy="exitBeta"
       id={popupId}
     >
       <div className="flex justify-between">
         <div
-          className="text-3xl font-display font-bold"
+          className="font-display text-3xl font-bold"
           role="heading"
           aria-level={1}
         >
@@ -49,26 +49,28 @@ const ExitBeta = ({
           type="button"
           aria-label={closeModalAria}
           onClick={closeModal}
-          data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:Close`}
+          data-gc-analytics-customclick={`${refPageAA}:modal-Close`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={icon['xmark']} size="xl" />
         </button>
       </div>
-      <p className="text-xl font-display py-4 mr-10">{popupDescription}</p>
-      <div className="md:flex mt-8 md:space-x-12">
+      <p className="mr-10 py-4 font-display text-xl">{popupDescription}</p>
+      <div className="mt-8 md:flex md:space-x-12">
         <Button
-          className="whitespace-nowrap my-auto w-full justify-center md:w-fit py-2 px-4"
+          className="my-auto w-full justify-center whitespace-nowrap px-4 py-2 md:w-fit"
           id={popupSecondaryBtn.id}
           style="secondary"
           onClick={closeModal}
           text={popupSecondaryBtn.text}
+          refPageAA={`${refPageAA}-modal`}
         />
         {/* Using anchor tag due to ref errors
         continueLink is always external so NextJS routing can be ignored */}
         <a
           href={continueLink}
           id={popupPrimaryBtn.id}
-          className="flex justify-center text-xl py-2 px-4 mt-6 bg-deep-blue-medium text-white rounded focus:ring-offset-4 focus:ring-4 focus:ring-deep-blue-focus focus:bg-deep-blue-focus hover:bg-deep-blue-light md:mt-auto"
+          data-gc-analytics-customclick={`${refPageAA}:modal-${popupPrimaryBtn.id}`}
+          className="mt-6 flex justify-center rounded bg-deep-blue-medium px-4 py-2 text-xl text-white hover:bg-deep-blue-light focus:bg-deep-blue-focus focus:ring-4 focus:ring-deep-blue-focus focus:ring-offset-4 md:mt-auto"
         >
           {popupPrimaryBtn.text}
         </a>

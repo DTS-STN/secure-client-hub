@@ -1,27 +1,17 @@
 import Markdown from 'markdown-to-jsx'
-import ContactProvinceRow from './ContactProvinceRow'
+import {
+  ContactProvinceRow,
+  ContactProvinceRowProps,
+} from './ContactProvinceRow'
 
-interface Item {
-  content: string
-  recipient: string
-  program: string
-  poBox: string
-  station: string
-  city: string
-  province: string
-  postal: string
-  country: string
-}
-
-interface ContactProvinceProps {
+export interface ContactProvinceProps {
   title: string
   intro: string
   id: string
-  i: number
-  details: { label: string; id: string; items: Item[] }[]
+  details: ContactProvinceRowProps[]
 }
 
-const ContactProvince = ({
+export const ContactProvince = ({
   title,
   intro,
   id,
@@ -29,22 +19,25 @@ const ContactProvince = ({
 }: ContactProvinceProps) => {
   return (
     <div className="max-w-4xl pb-2 md:pb-4" id={id}>
-      <h2 className="py-4 md:py-6 text-4xl text-gray-darker font-display font-bold">
+      <h2 className="py-4 font-display text-4xl font-bold text-gray-darker md:py-6">
         {title}
       </h2>
-      <div className="[&_ul]:list-inside [&_ul]:ml-4 [&_ul]:list-disc pb-4 text-xl text-gray-darker">
+      <div className="pb-4 text-xl text-gray-darker [&_ul]:ml-4 [&_ul]:list-inside [&_ul]:list-disc">
         <Markdown>{intro}</Markdown>
       </div>
       {/* Ensure provinces are sorted alphabetically regardless of language */}
       {details
         .sort(function (a, b) {
-          return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
+          return a.title.toLowerCase().localeCompare(b.title.toLowerCase())
         })
-        .map((item, i) => (
-          <ContactProvinceRow {...item} key={i} />
+        .map((item) => (
+          <ContactProvinceRow
+            key={item.id}
+            id={item.id}
+            items={item.items}
+            title={item.title}
+          />
         ))}
     </div>
   )
 }
-
-export default ContactProvince

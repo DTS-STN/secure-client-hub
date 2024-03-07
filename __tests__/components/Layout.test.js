@@ -1,7 +1,7 @@
 //Skipping tests for now as they need a full re-write
 
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
@@ -83,7 +83,7 @@ describe('Layout with default text', () => {
         display={display}
         // children={aaChildrenProps}
         popupContentNA={popupContentNA}
-      />
+      />,
     )
     expect(screen.getByAltText('Government of Canada')).toBeInTheDocument()
   })
@@ -96,7 +96,7 @@ describe('Layout with default text', () => {
         display={display}
         // children={aaChildrenProps}
         popupContentNA={popupContentNA}
-      />
+      />,
     )
     expect(screen.getByRole('main')).toBeInTheDocument()
   })
@@ -119,7 +119,7 @@ describe('Layout with default text', () => {
         display={display}
         // children={aaChildrenProps}
         popupContentNA={popupContentNA}
-      />
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
