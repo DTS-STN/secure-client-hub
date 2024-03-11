@@ -4,6 +4,8 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
+
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
@@ -71,6 +73,26 @@ export default function MyDashboard(props) {
       />
     )
   }
+
+  /* Place-holder for Alert content */
+  const alertContent = [
+    {
+      id: 'alertId',
+      type: 'danger',
+      message_heading: 'message_heading - danger alert',
+      message_body: 'message_body  you need to do something right now',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+    {
+      id: 'alertId',
+      type: 'info',
+      message_heading: 'message_heading',
+      message_body: 'message_body',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+  ]
   return (
     <div
       className="pb-2"
@@ -78,6 +100,23 @@ export default function MyDashboard(props) {
       data-testid="myDashboardContent-test"
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
+
+      {alertContent
+        ? alertContent.map((alert, index) => {
+            return (
+              <ul className="my-2" key={index}>
+                <ContextualAlert
+                  id={alert.id}
+                  type={alert.type}
+                  message_heading={alert.message_heading}
+                  message_body={alert.message_body}
+                  alert_icon_alt_text={alert.alert_icon_alt_text}
+                  alert_icon_id={alert.alert_icon_id}
+                />
+              </ul>
+            )
+          })
+        : null}
 
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
@@ -201,6 +240,7 @@ export async function getServerSideProps({ req, res, locale }) {
             ? content.en
             : content.fr,
       meta,
+
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent

@@ -1,4 +1,5 @@
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
+import CollapseAlert from '../components/CollapseAlert'
 import { useState } from 'react'
 import { ReactNode } from 'react'
 
@@ -20,11 +21,32 @@ const Card = ({
   children,
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [alertIsOpen, setAlertIsOpen] = useState(true)
+
+  /* Place-holder for Alert content */
+  const alertContent = [
+    {
+      id: 'alertId',
+      type: 'danger',
+      message_heading: 'message_heading - danger alert',
+      message_body: 'message_body  you need to do something right now',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+    {
+      id: 'alertId',
+      type: 'info',
+      message_heading: 'message_heading',
+      message_body: 'message_body',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+  ]
 
   return (
-    <div className="border rounded border-gray-300 shadow my-6" data-cy="cards">
+    <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">
       <h2
-        className="py-4 md:py-8 md:mt-2 px-3 sm:px-8 md:px-15 text-4xl font-display font-bold text-gray-darker"
+        className="px-3 py-4 font-display text-4xl font-bold text-gray-darker sm:px-8 md:mt-2 md:px-15 md:py-8"
         data-cy="cardtitle"
       >
         {cardTitle}
@@ -40,14 +62,38 @@ const Card = ({
         ariaExpanded={isOpen}
         icon={isOpen}
         caption={viewMoreLessCaption}
-        className="pb-6 md:pb-8 md:pt-4 px-3 sm:px-8 md:px-15 w-full"
+        className="w-full px-3 pb-6 sm:px-8 md:px-15 md:pb-8 md:pt-4"
         acronym={acronym}
         refPageAA={refPageAA}
         ariaLabel={`${cardTitle} - ${viewMoreLessCaption}`}
       />
       {!isOpen ? null : (
-        <div className="pb-6" data-cy="sectionList">
-          {children}
+        <div>
+          <div className="">
+            {alertContent.map((alert, index) => {
+              return (
+                <ul className="my-2 w-full sm:px-8 md:px-15" key={index}>
+                  <CollapseAlert
+                    onClick={() => {
+                      const newOpenStateA = !alertIsOpen
+                      setAlertIsOpen(newOpenStateA)
+                    }}
+                    ariaExpanded={alertIsOpen}
+                    icon={alertIsOpen}
+                    id={alert.id}
+                    type={alert.type}
+                    messageHeading={alert.message_heading}
+                    messageBody={alert.message_body}
+                    alert_icon_alt_text={alert.alert_icon_alt_text}
+                    alert_icon_id={alert.alert_icon_id}
+                  />
+                </ul>
+              )
+            })}
+          </div>
+          <div className="pb-6" data-cy="sectionList">
+            {children}
+          </div>
         </div>
       )}
     </div>
