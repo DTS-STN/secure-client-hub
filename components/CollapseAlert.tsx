@@ -1,10 +1,12 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import Image from 'next/image'
 import success_img from '../public/success_img.svg'
 import warning_img from '../public/warning_img.svg'
 import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
-import AlertSection from '../components/AlertSection'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 export interface CollapseAlertProps {
   icon: boolean
@@ -24,34 +26,17 @@ export interface CollapseAlertProps {
 const CollapseAlert = ({
   id,
   type,
-  //   sectionIcon,
+  sectionIcon,
   alert_icon_id,
   alert_icon_alt_text,
-
-  //   messageHeading,
-  //   messageBody,
+  onClick,
+  messageHeading,
+  messageBody,
   whiteBG,
   className,
 }: CollapseAlertProps) => {
-  const [alertIsOpen, setAlertIsOpen] = useState(false)
-  const alertContent = [
-    {
-      id: 'alertId',
-      type: 'danger',
-      messageHeading: 'message_heading - danger alert',
-      messageBody: 'message_body  you need to do something right now',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-    {
-      id: 'alertId',
-      type: 'info',
-      messageHeading: 'message_heading',
-      messageBody: 'message_body',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-  ]
+  //   const [alertIsOpen, setAlertIsOpen] = useState(false)
+
   const alert_type =
     type === 'warning'
       ? warning_img
@@ -73,42 +58,48 @@ const CollapseAlert = ({
 
   return (
     <div id={id} className={`relative pl-4 sm:pl-6 ${white_BG} ${className}`}>
-      <ul>
-        <div
-          data-testid="alert-icon"
-          className="absolute left-1.5 top-3 bg-white  py-1 sm:left-3.5"
-        >
-          <Image
-            src={alert_type}
-            width={28}
-            height={28}
-            alt={alert_icon_alt_text}
-            id={alert_icon_id}
-          ></Image>
-        </div>
+      <div
+        data-testid="alert-icon"
+        className="absolute left-1.5 top-3 bg-white  py-1 sm:left-3.5"
+      >
+        <Image
+          src={alert_type}
+          width={28}
+          height={28}
+          alt={alert_icon_alt_text}
+          id={alert_icon_id}
+        ></Image>
+      </div>
 
-        <li
-          className={`overflow-auto border-l-[6px] ${alert_color} space-y-4 pb-4 pl-6 leading-8`}
-        >
-          {alertContent.map((alert, index) => {
-            return (
-              <AlertSection
-                key={index}
-                id={alert.id}
-                onClick={() => {
-                  const newOpenStateA = !alertIsOpen
-                  setAlertIsOpen(newOpenStateA)
-                }}
-                sectionIcon={alertIsOpen}
-                //  onClick={() => { }}
-                //  sectionIcon={sectionIcon}
-                messageHeading={alert.messageHeading}
-                messageBody={alert.messageBody}
-              />
-            )
-          })}
-        </li>
-      </ul>
+      <div
+        className={`overflow-auto border-l-[6px] ${alert_color} space-y-4 pb-2 pl-6 leading-8`}
+        onClick={onClick}
+      >
+        <details className="my-2  border-spacing-1 border border-gray-40 ">
+          <summary className=" ml-2 flex list-none justify-between py-2 font-display text-2xl font-bold leading-[26px] text-gray-darker ">
+            {messageHeading}
+            <span>
+              {sectionIcon ? (
+                <FontAwesomeIcon
+                  icon={faChevronUp}
+                  className={`px-3 text-lg text-gray-500`}
+                  // data-gc-analytics-customclick={`${refPageAA} ${acronym}:Contract`}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className={`px-3 text-lg text-gray-500`}
+                  // data-gc-analytics-customclick={`${refPageAA} ${acronym}:Expand`}
+                />
+              )}
+            </span>
+          </summary>
+
+          <p className="border-t border-gray-40 py-1 pl-2 font-body text-20px text-gray-darker ">
+            {messageBody}
+          </p>
+        </details>
+      </div>
     </div>
   )
 }

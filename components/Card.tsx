@@ -22,7 +22,7 @@ const Card = ({
   children,
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [alertIsOpen, setAlertIsOpen] = useState(true)
+  const [alertIsOpen, setAlertIsOpen] = useState(false)
 
   /* Place-holder for Alert content */
   const alertContent = [
@@ -36,7 +36,7 @@ const Card = ({
     },
     {
       id: 'alertId',
-      type: 'info',
+      type: 'danger',
       message_heading: 'message_heading',
       message_body: 'message_body',
       alert_icon_alt_text: '',
