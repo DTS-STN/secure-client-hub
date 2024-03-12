@@ -117,8 +117,7 @@ const Card = ({
                       const newOpenStateA = !alertIsOpen
                       setAlertIsOpen(newOpenStateA)
                     }}
-                    ariaExpanded={alertIsOpen}
-                    icon={alertIsOpen}
+                    sectionIcon={alertIsOpen}
                     id={alert.id}
                     type={alert.type}
                     messageHeading={alert.message_heading}

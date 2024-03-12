@@ -1,16 +1,14 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import Image from 'next/image'
 import success_img from '../public/success_img.svg'
 import warning_img from '../public/warning_img.svg'
 import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import AlertSection from '../components/AlertSection'
 
 export interface CollapseAlertProps {
   icon: boolean
-  onClick: () => void
+  sectionIcon: boolean
   id: string
   type: 'warning' | 'info' | 'success' | 'danger'
   alert_icon_id: string
@@ -19,20 +17,23 @@ export interface CollapseAlertProps {
   messageBody: string | ReactNode | ReactNode[]
   whiteBG?: boolean
   className?: string
+  ariaExpanded: boolean
+  onClick: () => void
 }
 
 const CollapseAlert = ({
-  onClick,
-  icon,
   id,
   type,
+  //   sectionIcon,
   alert_icon_id,
   alert_icon_alt_text,
+
   //   messageHeading,
   //   messageBody,
   whiteBG,
   className,
 }: CollapseAlertProps) => {
+  const [alertIsOpen, setAlertIsOpen] = useState(false)
   const alertContent = [
     {
       id: 'alertId',
@@ -91,35 +92,19 @@ const CollapseAlert = ({
         >
           {alertContent.map((alert, index) => {
             return (
-              <details
-                className="my-2  border-spacing-1 border"
+              <AlertSection
                 key={index}
-                onClick={onClick}
-                open
-              >
-                <summary className=" ml-1 flex list-none justify-between border-b font-display text-2xl font-bold leading-[26px] text-gray-darker ">
-                  {alert.messageHeading}
-                  <span onClick={onClick}>
-                    {icon ? (
-                      <FontAwesomeIcon
-                        icon={faChevronUp}
-                        className={`px-3 text-lg`}
-                        // data-gc-analytics-customclick={`${refPageAA} ${acronym}:Contract`}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className={`px-3 text-lg text-gray-500`}
-                        // data-gc-analytics-customclick={`${refPageAA} ${acronym}:Expand`}
-                      />
-                    )}
-                  </span>
-                </summary>
-
-                <p className="ml-0.5 py-1 font-body text-20px text-gray-darker">
-                  {alert.messageBody}
-                </p>
-              </details>
+                id={alert.id}
+                onClick={() => {
+                  const newOpenStateA = !alertIsOpen
+                  setAlertIsOpen(newOpenStateA)
+                }}
+                sectionIcon={alertIsOpen}
+                //  onClick={() => { }}
+                //  sectionIcon={sectionIcon}
+                messageHeading={alert.messageHeading}
+                messageBody={alert.messageBody}
+              />
             )
           })}
         </li>
