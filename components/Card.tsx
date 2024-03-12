@@ -1,7 +1,8 @@
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
 import CollapseAlert from '../components/CollapseAlert'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ReactNode } from 'react'
+import { z } from 'zod'
 
 interface CardProps {
   cardTitle: string
@@ -42,6 +43,44 @@ const Card = ({
       alert_icon_id: '',
     },
   ]
+  const CardState = z
+    .string()
+    .toLowerCase()
+    .transform((x) => x === 'true')
+    .pipe(z.boolean())
+  let reactDevBufferSet = false
+
+  /**
+   * init Effect
+   *
+   * In dev mode (npm run dev) React will prerender and render
+   * useEffects on page. This renders the page twice in dev mode,
+   * which erases the state.
+   *
+   * The reactDevBufferSet ensures it will only trigger once.
+   *
+   * This doesn't occur outside of dev.
+   *
+   * TODO: Moving the state out of the individual Cards and into
+   * a unified state/context may fix this this load issue.
+   */
+  useEffect(() => {
+    if (!reactDevBufferSet) {
+      reactDevBufferSet = true // eslint-disable-line
+      if (programUniqueId !== undefined) {
+        const sessionItem = sessionStorage.getItem(programUniqueId)
+
+        setIsOpen(sessionItem !== null ? CardState.parse(sessionItem) : false)
+      }
+    }
+  }, [])
+
+  // on change Effect
+  useEffect(() => {
+    if (programUniqueId !== undefined) {
+      sessionStorage.setItem(programUniqueId, String(isOpen))
+    }
+  }, [isOpen, programUniqueId])
 
   return (
     <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">

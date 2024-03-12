@@ -192,6 +192,7 @@ describe('Validate dashboard page', () => {
       cy.location('pathname', { timeout: 10000 }).should('equal', '/en/profile')
       cy.get('#back-to-dashboard-button').should('exist').click()
       cy.location('pathname').should('equal', '/en/my-dashboard')
+      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
       // cy.url().should('contains', '/en/my-dashboard')
     })
   })
@@ -218,6 +219,7 @@ describe('Validate dashboard page', () => {
       cy.url().should('contains', '/fr/profil')
       cy.get('#back-to-dashboard-button').should('exist').click()
       cy.location('pathname').should('equal', '/fr/mon-tableau-de-bord')
+      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
     })
   })
 
@@ -240,6 +242,7 @@ describe('Validate dashboard page', () => {
       )
       cy.get('[data-cy="breadcrumb-My dashboard"]').should('exist').click()
       cy.location('pathname').should('include', '/en/my-dashboard')
+      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
     })
   })
 
@@ -266,6 +269,7 @@ describe('Validate dashboard page', () => {
         .should('exist')
         .click()
       cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
+      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
     })
   })
 
