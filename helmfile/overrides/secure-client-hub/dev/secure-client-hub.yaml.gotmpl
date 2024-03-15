@@ -237,3 +237,10 @@ oauth:
     readinessPeriodSeconds: 10
     readinessSuccessThreshold: 1
 {{- end }}
+
+maintenance:
+  enabled: {{ env "MAINTENANCE_ENABLED" | default false }}
+  oauth:
+    args:
+      upstreams:
+        - "http://localhost:80/"

@@ -168,3 +168,10 @@ autoscaling:
   targetCPUUtilization: 85
   labels:
     app.kubernetes.io/name: service-canada-client-hub
+
+maintenance:
+  enabled: {{ env "MAINTENANCE_ENABLED" | default false }}
+  oauth:
+    args:
+      upstreams:
+        - "http://localhost:80/"

@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fullname" . }}
+  name: {{ include "fullname" . }}{{ if .Values.maintenance.enabled }}-{{ .Values.maintenance.name }}{{ end }}
   labels:
-    app.kubernetes.io/name: {{ include "name" . }}
+    app.kubernetes.io/name: {{ include "name" . }}{{ if .Values.maintenance.enabled }}-{{ .Values.maintenance.name }} {{ end }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-  {{ with .Values.deployment.labels }}
-    {{ toYaml . | nindent 4 }}
-  {{ end }} 
-  {{ with .Values.deployment.annotations }}
+  {{- with .Values.deployment.labels }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }} 
+  {{- with .Values.deployment.annotations }}
   annotations:
-    {{ toYaml . | nindent 4 }}
-  {{ end }}   
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -26,34 +26,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-{{- if .Values.extraEnv }}
-{{ toYaml .Values.extraEnv | indent 12 }}
-{{- end }}
-          ports:
-            - name: http
-              {{ if .Values.port }}
-              containerPort: {{ .Values.port }}
-              {{ else }}
-              containerPort: 3000
-              {{ end }}
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.livenessPath }}
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.livenessDelay }}
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.healthChecks.readinessPath }}
-              port: http
-            initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.oauth }}
+      {{- if .Values.oauth }}
         - args:
             ## OAuth2 Proxy Config File
             ## https://github.com/oauth2-proxy/oauth2-proxy
@@ -65,7 +38,11 @@ spec:
             - --proxy-prefix={{ .Values.oauth.args.proxyPrefix }}
 
             ## the http url(s) of the upstream endpoint
+            {{- if .Values.maintenance.enabled }}
+            - --upstream={{ range $i, $value := .Values.maintenance.oauth.args.upstreams }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+            {{- else }}
             - --upstream={{ range $i, $value := .Values.oauth.args.upstreams }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
+            {{- end }}
 
             ## email domains to allow authentication for
             - --email-domain={{ range $i, $value := .Values.oauth.args.emailDomains }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
@@ -104,7 +81,6 @@ spec:
 {{- if .Values.oauth.extraEnv }}
 {{ toYaml .Values.oauth.extraEnv | indent 12 }}
 {{- end }}
-          
           ports:
             - containerPort: {{ .Values.oauth.ports.containerPort }}
               name: {{ .Values.oauth.ports.name }}
@@ -125,7 +101,50 @@ spec:
           resources:
             {{- toYaml .Values.oauth.resources | nindent 12 }}
         {{- end }}
+{{- if .Values.maintenance.enabled }}
+        - name: nginx
+          image: nginx:1.24.0
+          ports:
+            - containerPort: {{ .Values.maintenance.container.port }}
+          volumeMounts:
+            # Because no subPath is specified, all keys in configmap will
+            # be mounted as files at the specified mountPath
+            - name: {{ .Values.maintenance.volume.name }}
+              mountPath: /usr/share/nginx/html/maintenance/
+            - name: {{ .Values.maintenance.volume.name }}
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+        - name: {{ .Values.maintenance.volume.name }}
+          configMap:
+            name: {{ .Values.maintenance.configMap.name }}
+{{- else }}
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{- if .Values.extraEnv }}
+{{ toYaml .Values.extraEnv | indent 12 }}
+{{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.livenessPath }}
+              port: http
+            initialDelaySeconds: {{ .Values.healthChecks.livenessDelay }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthChecks.readinessPath }}
+              port: http
+            initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

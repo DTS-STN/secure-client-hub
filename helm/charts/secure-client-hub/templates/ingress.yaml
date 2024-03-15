@@ -6,6 +6,29 @@
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
   {{- end }}
 {{- end }}
+{{- if .Values.maintenance.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.org/rewrites: serviceName={{ .Values.maintenance.configMap.name }} rewrite=/;
+  name: {{ .Values.maintenance.configMap.name }}
+spec:
+  rules:
+  - host: {{ .host | quote }}
+    http:
+      paths:
+      # Can also set this up only for specific paths
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.maintenance.configMap.name }}
+            port:
+              number: {{ .Values.maintenance.service.port }}
+      # Can still have other paths defined
+{{- else }}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -15,7 +38,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }}{{ if .Values.maintenance.enabled }}-{{ .Values.maintenance.name }}{{ end }}
   labels:
   {{- with .Values.ingress.annotations }}
   annotations:
@@ -57,4 +80,5 @@ spec:
               {{- end }}
           {{- end }}
     {{- end }}
+{{- end }}
 {{- end }}

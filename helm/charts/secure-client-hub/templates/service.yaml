@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: {{ include "name" . }}
+    app.kubernetes.io/name: {{ include "name" . }}{{ if .Values.maintenance.enabled }}-{{ .Values.maintenance.name }}{{ end }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
@@ -19,10 +19,17 @@ spec:
   loadBalancerIP: {{ .Values.loadBalancerIP }}
   {{- end }}
   ports:
+{{- if .Values.maintenance.enabled }}
+    - port: {{ .Values.maintenance.service.port }}
+      targetPort: {{ .Values.maintenance.service.targetPort }}
+      protocol: {{ .Values.maintenance.service.protocol }}
+      name: {{ .Values.maintenance.service.name }}
+{{- else }}
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort | default "http" }}
       protocol: TCP
       name: http
+{{- end }}
   selector:
-    app.kubernetes.io/name: {{ include "name" . }}
+    app.kubernetes.io/name: {{ include "name" . }}{{ if .Values.maintenance.enabled }}-{{ .Values.maintenance.name }}{{ end }}
     app.kubernetes.io/instance: {{ .Release.Name }}
