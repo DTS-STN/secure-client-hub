@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import Image from 'next/image'
 import success_img from '../public/success_img.svg'
 import warning_img from '../public/warning_img.svg'
@@ -20,22 +20,19 @@ export interface CollapseAlertProps {
   whiteBG?: boolean
   className?: string
   ariaExpanded: boolean
-  onClick: () => void
 }
 
 const CollapseAlert = ({
   id,
   type,
-  sectionIcon,
   alert_icon_id,
   alert_icon_alt_text,
-  onClick,
   messageHeading,
   messageBody,
   whiteBG,
   className,
 }: CollapseAlertProps) => {
-  //   const [alertIsOpen, setAlertIsOpen] = useState(false)
+  const [alertIsOpen, setAlertIsOpen] = useState(false)
 
   const alert_type =
     type === 'warning'
@@ -73,13 +70,16 @@ const CollapseAlert = ({
 
       <div
         className={`overflow-auto border-l-[6px] ${alert_color} space-y-4 pb-2 pl-6 leading-8`}
-        onClick={onClick}
+        onClick={() => {
+          const newOpenStateA = !alertIsOpen
+          setAlertIsOpen(newOpenStateA)
+        }}
       >
         <details className="my-2  border-spacing-1 border border-gray-40 ">
           <summary className=" ml-2 flex list-none justify-between py-2 font-display text-2xl font-bold leading-[26px] text-gray-darker ">
             {messageHeading}
             <span>
-              {sectionIcon ? (
+              {!alertIsOpen ? (
                 <FontAwesomeIcon
                   icon={faChevronUp}
                   className={`px-3 text-lg text-gray-500`}

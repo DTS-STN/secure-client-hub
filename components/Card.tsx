@@ -22,7 +22,6 @@ const Card = ({
   children,
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [alertIsOpen, setAlertIsOpen] = useState(false)
 
   /* Place-holder for Alert content */
   const alertContent = [
@@ -113,11 +112,6 @@ const Card = ({
               return (
                 <ul className="my-2 w-full sm:px-8 md:px-15" key={index}>
                   <CollapseAlert
-                    onClick={() => {
-                      const newOpenStateA = !alertIsOpen
-                      setAlertIsOpen(newOpenStateA)
-                    }}
-                    sectionIcon={alertIsOpen}
                     id={alert.id}
                     type={alert.type}
                     messageHeading={alert.message_heading}
