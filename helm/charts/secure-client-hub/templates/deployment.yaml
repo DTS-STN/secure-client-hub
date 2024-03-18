@@ -26,7 +26,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-      {{- if .Values.oauth }}
+      {{- if .Values.oauth.enabled }}
         - args:
             ## OAuth2 Proxy Config File
             ## https://github.com/oauth2-proxy/oauth2-proxy

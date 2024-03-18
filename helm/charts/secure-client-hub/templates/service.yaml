@@ -19,7 +19,12 @@ spec:
   loadBalancerIP: {{ .Values.loadBalancerIP }}
   {{- end }}
   ports:
-{{- if .Values.maintenance.enabled }}
+{{- if .Values.oauth.enabled }}
+    - port: {{ .Values.maintenance.service.port }}
+      targetPort: {{ .Values.maintenance.service.targetPort }}
+      protocol: {{ .Values.maintenance.service.protocol }}
+      name: {{ .Values.maintenance.service.name }}
+{{- else if .Values.maintenance.enabled }}
     - port: {{ .Values.maintenance.service.port }}
       targetPort: {{ .Values.maintenance.service.targetPort }}
       protocol: {{ .Values.maintenance.service.protocol }}
