@@ -7,7 +7,7 @@ import info_img from '../public/info_img.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
-
+// import data from '../lib/data.json'
 export interface CollapseAlertProps {
   icon: boolean
   sectionIcon: boolean
@@ -15,8 +15,8 @@ export interface CollapseAlertProps {
   type: 'warning' | 'info' | 'success' | 'danger'
   alert_icon_id: string
   alert_icon_alt_text: string
-  messageHeading: string | ReactNode
-  messageBody: string | ReactNode | ReactNode[]
+  alertHeading: string | ReactNode
+  alertBody: string | ReactNode | ReactNode[]
   whiteBG?: boolean
   className?: string
   ariaExpanded: boolean
@@ -27,8 +27,8 @@ const CollapseAlert = ({
   type,
   alert_icon_id,
   alert_icon_alt_text,
-  messageHeading,
-  messageBody,
+  alertHeading,
+  alertBody,
   whiteBG,
   className,
 }: CollapseAlertProps) => {
@@ -77,7 +77,7 @@ const CollapseAlert = ({
       >
         <details className="my-2  border-spacing-1 border border-gray-40 ">
           <summary className=" ml-2 flex list-none justify-between py-2 font-display text-2xl font-bold leading-[26px] text-gray-darker ">
-            {messageHeading}
+            {alertHeading}
             <span>
               {!alertIsOpen ? (
                 <FontAwesomeIcon
@@ -96,7 +96,7 @@ const CollapseAlert = ({
           </summary>
 
           <p className="border-t border-gray-40 py-1 pl-2 font-body text-20px text-gray-darker ">
-            {messageBody}
+            {alertBody}
           </p>
         </details>
       </div>

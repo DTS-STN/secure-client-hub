@@ -28,16 +28,16 @@ const Card = ({
     {
       id: 'alertId',
       type: 'danger',
-      message_heading: 'message_heading - danger alert',
-      message_body: 'message_body  you need to do something right now',
+      alertHeading: 'message_heading - danger alert',
+      alertBody: 'message_body  you need to do something right now',
       alert_icon_alt_text: '',
       alert_icon_id: '',
     },
     {
       id: 'alertId',
-      type: 'danger',
-      message_heading: 'message_heading',
-      message_body: 'message_body',
+      type: 'info',
+      alertHeading: 'message_heading -  alert',
+      alertBody: 'message_body  you need to do something right now',
       alert_icon_alt_text: '',
       alert_icon_id: '',
     },
@@ -114,8 +114,8 @@ const Card = ({
                   <CollapseAlert
                     id={alert.id}
                     type={alert.type}
-                    messageHeading={alert.message_heading}
-                    messageBody={alert.message_body}
+                    alertHeading={alert.alertHeading}
+                    alertBody={alert.alertBody}
                     alert_icon_alt_text={alert.alert_icon_alt_text}
                     alert_icon_id={alert.alert_icon_id}
                   />
