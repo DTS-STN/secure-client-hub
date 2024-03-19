@@ -10,7 +10,12 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
@@ -19,6 +24,7 @@ import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
+import { getToken } from 'next-auth/jwt'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -26,17 +32,24 @@ export default function MyDashboard(props) {
   const [response, setResponse] = useState()
   const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
+  const validationResponse = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
     [],
   )
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent],
+    () => throttle(validationResponse, 60000, { trailing: false }),
+    [validationResponse],
+  )
+  //Event listener for visibility change events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const throttledVisiblityChangeEvent = useMemo(
+    () => throttle(validationResponse, 15000, { trailing: false }),
+    [validationResponse],
   )
 
+  //If session is valid, add event listeners to check for valid sessions on click and visibility change events
   useEffect(() => {
+    window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
     window.addEventListener('click', throttledOnClickEvent)
     //If validateSession call indicates an invalid MSCA session, redirect to logout
     if (response?.status === 401) {
@@ -45,8 +58,18 @@ export default function MyDashboard(props) {
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
+      window.removeEventListener(
+        'visiblitychange',
+        throttledVisiblityChangeEvent,
+      )
     }
-  }, [throttledOnClickEvent, response, router, props.locale])
+  }, [
+    throttledOnClickEvent,
+    throttledVisiblityChangeEvent,
+    response,
+    router,
+    props.locale,
+  ])
 
   const errorCode =
     props.content?.err ||
@@ -128,9 +151,26 @@ export default function MyDashboard(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sub,
+    )
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('my-dashboard')

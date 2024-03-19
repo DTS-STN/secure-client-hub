@@ -9,7 +9,12 @@ import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { useEffect, useCallback, useMemo, useState } from 'react'
@@ -17,23 +22,31 @@ import throttle from 'lodash.throttle'
 import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
 import Button from '../components/Button'
+import { getToken } from 'next-auth/jwt'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
   const [response, setResponse] = useState()
   const router = useRouter()
 
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
+  const validationResponse = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    () => throttle(validationResponse, 60000, { trailing: false }),
+    [validationResponse],
+  )
+  //Event listener for visibility change events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const throttledVisiblityChangeEvent = useMemo(
+    () => throttle(validationResponse, 15000, { trailing: false }),
+    [validationResponse],
   )
 
+  //If session is valid, add event listeners to check for valid sessions on click and visibility change events
   useEffect(() => {
+    window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
     window.addEventListener('click', throttledOnClickEvent)
     //If validateSession call indicates an invalid MSCA session, redirect to logout
     if (response?.status === 401) {
@@ -42,8 +55,18 @@ export default function SecuritySettings(props) {
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
       window.removeEventListener('click', throttledOnClickEvent)
+      window.removeEventListener(
+        'visiblitychange',
+        throttledVisiblityChangeEvent,
+      )
     }
-  }, [throttledOnClickEvent, response, router, props.locale])
+  }, [
+    throttledOnClickEvent,
+    throttledVisiblityChangeEvent,
+    response,
+    router,
+    props.locale,
+  ])
 
   const errorCode =
     props.content?.err ||
@@ -74,7 +97,7 @@ export default function SecuritySettings(props) {
   return (
     <div id="securityContent" data-testid="securityContent-test">
       <Heading id="security-settings-heading" title={props.content.heading} />
-      <p className="mt-3 mb-8 text-xl text-gray-darker">
+      <p className="mb-8 mt-3 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
       <Button
@@ -83,7 +106,7 @@ export default function SecuritySettings(props) {
         id="securityQuestionsLink"
         style="link"
         text={props.content.securityQuestions.linkTitle.text}
-        className="font-body text-20px pr-0 pl-0 w-fit underline"
+        className="w-fit pl-0 pr-0 font-body text-20px underline"
         refPageAA={props.aaPrefix}
       ></Button>
 
@@ -108,9 +131,23 @@ export default function SecuritySettings(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(process.env.CLIENT_ID, token.sub)
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('security-settings')
@@ -133,7 +170,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -196,28 +233,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -226,14 +263,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
@@ -268,6 +305,6 @@ SecuritySettings.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
-    })
+    }),
   ),
 }
