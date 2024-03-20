@@ -179,6 +179,7 @@ autoscaling:
     app.kubernetes.io/name: service-canada-client-hub
 {{- if env "OAUTH_ENABLED" }}
 oauth:
+  enabled: {{ env "OAUTH_ENABLED" }}
   ports:
     containerPort: 4180
     name: oauth-proxy
@@ -237,3 +238,10 @@ oauth:
     readinessPeriodSeconds: 10
     readinessSuccessThreshold: 1
 {{- end }}
+
+maintenance:
+  enabled: {{ env "MAINTENANCE_ENABLED" | default false }}
+  oauth:
+    args:
+      upstreams:
+        - "http://localhost:80/"
