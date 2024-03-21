@@ -33,27 +33,27 @@ export const ContactProvinceRow = ({
       <div className="py-2" key={id} data-cy="provinceCards">
         <Collapse title={title} id={id} dataTestId={`dataTest`}>
           <div
-            className="grid text-xl grid-cols-2"
+            className="grid grid-cols-2 text-xl"
             data-cy="mailContactDetails"
           >
             {items.map((rowItem, i) => (
               <div
-                className="col-span-2 md:col-span-1 py-3 select-text cursor-default"
+                className="col-span-2 cursor-default select-text py-3 md:col-span-1"
                 key={i}
               >
-                <strong className="prose prose-strong:text-xl prose-strong:font-display prose-p:text-xl prose-p:font-display">
-                  <Markdown>{`${ap(rowItem.content, ' ')}`}</Markdown>
-                </strong>
-
+                {' '}
+                <h3 className="prose prose-h3:font-display prose-h3:text-xl prose-p:font-display prose-p:text-xl">
+                  <Markdown className="font-bold">{`${ap(rowItem.content, ' ')}`}</Markdown>
+                </h3>
                 <Markdown>{`${ap(rowItem.recipient, '\n\n')}${ap(
                   rowItem.program,
-                  '\n\n'
+                  '\n\n',
                 )}${ap(rowItem.poBox, ' ')} ${ap(rowItem.station, ' ')} ${ap(
                   ' ',
-                  '\n\n'
+                  '\n\n',
                 )} ${ap(rowItem.city, ' ')} ${ap(rowItem.province, ' ')} ${ap(
                   rowItem.postal,
-                  ' \n\n'
+                  ' \n\n',
                 )} ${ap(rowItem.country, ' ')}`}</Markdown>
               </div>
             ))}
