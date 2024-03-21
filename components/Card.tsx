@@ -28,16 +28,27 @@ const Card = ({
     {
       id: 'alertId',
       type: 'danger',
-      alertHeading: 'message_heading - danger alert',
-      alertBody: 'message_body  you need to do something right now',
+      alertHeading: 'Upcoming interruption: Employment Insurance',
+      alertBody:
+        'Ontario Residents : This service won’t be available from Saturday, October 29 at 4:00 am to Sunday, October 30 at 10:00 am (EDT) due to system maintenance.',
       alert_icon_alt_text: '',
       alert_icon_id: '',
     },
     {
       id: 'alertId',
-      type: 'info',
-      alertHeading: 'message_heading -  alert',
-      alertBody: 'message_body  you need to do something right now',
+      type: 'warning',
+      alertHeading: 'Possible interruption: EI letters',
+      alertBody:
+        'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+    {
+      id: 'alertId',
+      type: 'information',
+      alertHeading: 'Possible interruption: EI letters',
+      alertBody:
+        'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
       alert_icon_alt_text: '',
       alert_icon_id: '',
     },
@@ -116,8 +127,8 @@ const Card = ({
                     type={alert.type}
                     alertHeading={alert.alertHeading}
                     alertBody={alert.alertBody}
-                    alert_icon_alt_text={alert.alert_icon_alt_text}
-                    alert_icon_id={alert.alert_icon_id}
+                    alert_icon_alt_text={alert.alert_icon_alt_text + alert.type}
+                    alert_icon_id={alert.type + ' icon'}
                   />
                 </ul>
               )

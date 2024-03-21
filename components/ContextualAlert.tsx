@@ -65,7 +65,7 @@ const ContextualAlert = ({
       <div
         className={`overflow-auto border-l-[6px] ${alert_color} py-4 pl-6 leading-8`}
       >
-        <div className="ml-1 font-display text-2xl font-bold leading-[26px] text-gray-darker">
+        <div className="ml-1 font-display text-2xl font-bold leading-[26px] text-deep-blue-60d">
           {message_heading}
         </div>
 

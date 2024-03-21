@@ -114,7 +114,7 @@ export async function getMyDashboardContent() {
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
-          console.log(fragment.schAlerts)
+          // console.log(fragment.schAlerts)
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,

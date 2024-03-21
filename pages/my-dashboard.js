@@ -4,7 +4,7 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
-import ContextualAlert from '../components/ContextualAlert'
+import CollapseAlert from '../components/CollapseAlert'
 
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
@@ -78,17 +78,10 @@ export default function MyDashboard(props) {
   const alertContent = [
     {
       id: 'alertId',
-      type: 'danger',
-      message_heading: 'message_heading - danger alert',
-      message_body: 'message_body  you need to do something right now',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-    {
-      id: 'alertId',
-      type: 'info',
-      message_heading: 'message_heading',
-      message_body: 'message_body',
+      type: 'information',
+      alertHeading: 'Other coverage for families with young children',
+      alertBody:
+        "If you're a parent or guardian of a child under the age of 12, and you do not have access to dental insurance, you may already be eligible for the [Canada Dental Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/dental-benefit.html/?target=_blank). This benefit is available until June 30, 2024.",
       alert_icon_alt_text: '',
       alert_icon_id: '',
     },
@@ -101,22 +94,20 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
-      {alertContent
-        ? alertContent.map((alert, index) => {
-            return (
-              <ul className="my-2" key={index}>
-                <ContextualAlert
-                  id={alert.id}
-                  type={alert.type}
-                  message_heading={alert.message_heading}
-                  message_body={alert.message_body}
-                  alert_icon_alt_text={alert.alert_icon_alt_text}
-                  alert_icon_id={alert.alert_icon_id}
-                />
-              </ul>
-            )
-          })
-        : null}
+      {alertContent.map((alert, index) => {
+        return (
+          <ul className="mt-6 w-full sm:px-8 md:px-15" key={index}>
+            <CollapseAlert
+              id={alert.id}
+              type={alert.type}
+              alertHeading={alert.alertHeading}
+              alertBody={alert.alertBody}
+              alert_icon_alt_text={alert.alert_icon_alt_text + alert.type}
+              alert_icon_id={alert.type + ' icon'}
+            />
+          </ul>
+        )
+      })}
 
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
