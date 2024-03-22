@@ -63,6 +63,7 @@ const BenefitTasks = ({
               data-cy="task-link"
             >
               <Link
+                aria-label={`${taskList.title} - ${task.id}`}
                 href={task.link}
                 passHref
                 target={
@@ -76,10 +77,7 @@ const BenefitTasks = ({
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
               >
-                <span
-                  aria-label={task.areaLabel}
-                  className="static text-xl font-normal"
-                >
+                <span className="static text-xl font-normal">
                   {task.title}
                   <span>
                     {newTabTaskExceptions.includes(task.link) ? (

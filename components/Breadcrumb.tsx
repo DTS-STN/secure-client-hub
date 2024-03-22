@@ -14,14 +14,14 @@ export interface BreadcrumbProps {
 
 const Breadcrumb = ({ id, items }: BreadcrumbProps) => {
   return (
-    <nav className="py-6" aria-label="breadcrumbs" id={id}>
-      <ul className="block text-deep-blue-dark text-base font-body leading-[23px]">
+    <nav className="py-6" aria-label="Breadcrumb-Fil d’ariane" id={id}>
+      <ul className="block font-body text-base leading-[23px] text-deep-blue-dark">
         {items
           ? items.map((item, key) => {
               return (
-                <li key={key} className="inline-block w-100 pb-4 sm:pb-0">
+                <li key={key} className="w-100 inline-block pb-4 sm:pb-0">
                   {key !== 0 && (
-                    <span className="inline-block mx-2 px-2">
+                    <span className="mx-2 inline-block px-2">
                       <FontAwesomeIcon
                         icon={icon['chevron-right']}
                         className="text-sm"
@@ -31,7 +31,7 @@ const Breadcrumb = ({ id, items }: BreadcrumbProps) => {
                   <Link
                     data-cy={'breadcrumb-' + item.text}
                     href={item.link}
-                    className="font-body hover:text-blue-hover focus:text-blue-hover underline"
+                    className="font-body underline hover:text-blue-hover focus:text-blue-hover"
                   >
                     {item.text}
                   </Link>
