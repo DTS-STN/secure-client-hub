@@ -63,7 +63,14 @@ const BenefitTasks = ({
               data-cy="task-link"
             >
               <Link
-                aria-label={`${taskList.title} - ${task.id}`}
+                aria-label={`${taskList.title} - ${task.title} - 
+                ${
+                  newTabTaskExceptions.includes(task.link)
+                    ? locale === 'fr'
+                      ? "S'ouvre dans un nouvel onglet"
+                      : 'Opens in a new tab'
+                    : ''
+                }`}
                 href={task.link}
                 passHref
                 target={
@@ -86,15 +93,6 @@ const BenefitTasks = ({
                         width="14"
                         icon={icon['arrow-up-right-from-square']}
                       ></FontAwesomeIcon>
-                    ) : null}
-                  </span>
-                  <span>
-                    {newTabTaskExceptions.includes(task.link) ? (
-                      <span className="sr-only">
-                        {locale === 'fr'
-                          ? "S'ouvre dans un nouvel onglet"
-                          : 'Opens in a new tab'}
-                      </span>
                     ) : null}
                   </span>
                 </span>

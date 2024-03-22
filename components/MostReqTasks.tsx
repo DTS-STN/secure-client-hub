@@ -56,7 +56,14 @@ const MostReqTasks = ({
               data-cy="most-req-tasklink"
             >
               <Link
-                aria-label={`${taskListMR.title} - ${task.id}`}
+                aria-label={`${taskListMR.title} - ${task.title} -
+                ${
+                  newTabTaskExceptions.includes(task.link)
+                    ? locale === 'fr'
+                      ? "S'ouvre dans un nouvel onglet"
+                      : 'Opens in a new tab'
+                    : ''
+                }`}
                 href={task.link}
                 passHref
                 target={
@@ -79,15 +86,6 @@ const MostReqTasks = ({
                         width="14"
                         icon={icon['arrow-up-right-from-square']}
                       ></FontAwesomeIcon>
-                    ) : null}
-                  </span>
-                  <span>
-                    {newTabTaskExceptions.includes(task.link) ? (
-                      <span className="sr-only">
-                        {locale === 'fr'
-                          ? "S'ouvre dans un nouvel onglet"
-                          : 'Opens in a new tab'}
-                      </span>
                     ) : null}
                   </span>
                 </span>
