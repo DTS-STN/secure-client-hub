@@ -98,17 +98,31 @@ const getCachedContent = () => {
 
 export async function getMyDashboardContent() {
   const response = await getCachedContent()
+  // const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
+  // const cardAlertContent = response?.data.schPageV1ByPath.item.scFragments
+
+  // const fallbackContent = {
+  //   scId: 'dental-plan',
+  //   scHeadingEn: 'Exiting beta version',
+  //   scHeadingFr: 'Vous quittez la version bêta',
+  //   scContentEn:
+  //     'Alert Content EN... You are now returning to My Service Canada Account home page.',
+  //   scContentFr:
+  //     "Alert content FR...Nous vous redirigeons vers la page d’accueil de Mon dossier Service Canada.",
+  //   scAlertType: "warning",
+  // }
 
   const mappedHome = {
     en: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
-      // pageAlerts: response?.data.schPageV1ByPath.item.schAlerts.map((pageAlert) => {
+      // pageAlerts: pageAlertContent?.map((pageAlert) => {
+      //   console.log(pageAlert)
       //   return {
-      //     id: pageAlert.scId,
-      //     alertHeading: pageAlert.scHeadingEn,
-      //     alertBody: pageAlert.scContentEn?.markdown,
-      //     type: pageAlert.scAlertType,
+      //     id: pageAlert.scId ?? fallbackContent.scId,
+      //     alertHeading: pageAlert.scHeadingEn ?? fallbackContent.scHeadingEn,
+      //     alertBody: pageAlert.scContentEn?.markdown ?? fallbackContent.scContentEn,
+      //     type: pageAlert.scAlertType ?? fallbackContent.scAlertType,
       //   }
       // }),
       cards: response?.data.schPageV1ByPath.item.scFragments
@@ -158,12 +172,12 @@ export async function getMyDashboardContent() {
     fr: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
-      // pageAlerts: response?.data.schPageV1ByPath.item.schAlerts.map((pageAlert) => {
+      // pageAlerts: pageAlertContent?.map((pageAlert) => {
       //   return {
-      //     id: pageAlert.scId,
-      //     alertHeading: pageAlert.scHeadingFr,
-      //     alertBody: pageAlert.scContentFr?.markdown,
-      //     type: pageAlert.scAlertType,
+      //     id: pageAlert.scId ?? fallbackContent.scId,
+      //     alertHeading: pageAlert.scHeadingFr ?? fallbackContent.scHeadingFr,
+      //     alertBody: pageAlert.scContentFr?.markdown ?? fallbackContent.scContentFr,
+      //     type: pageAlert.scAlertType ?? fallbackContent.scAlertType,
       //   }
       // }),
       cards: response?.data.schPageV1ByPath.item.scFragments

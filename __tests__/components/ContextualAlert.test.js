@@ -13,9 +13,9 @@ describe('ContextualAlert', () => {
       id="alert_icon_id"
       alert_icon_id="icon-id"
       alert_icon_alt_text="alt"
-      type="info"
-      message_heading="Information"
-      message_body="You may wish to print this page..."
+      type="informatin"
+      alertHeading="Information"
+      alertBody="You may wish to print this page..."
     />,
   )
   it('renders this Contectual Alert component', () => {
@@ -37,8 +37,8 @@ describe('ContextualAlert', () => {
         alert_icon_id="icon-id"
         alert_icon_alt_text="alt"
         type="info"
-        message_heading="Information"
-        message_body="You may wish to print this page..."
+        alertHeading="Information"
+        alertBody="You may wish to print this page..."
       />,
     )
     const results = await axe(container)
