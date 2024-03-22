@@ -48,7 +48,7 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(() => {
     return throttle(onClickEvent, 60000, { trailing: false })
@@ -97,6 +97,7 @@ const ContactUsPage = (props: ContactUsPageProps) => {
             />
           ) : (
             <ContactSection
+              lang={props.locale}
               id={item.id}
               details={item.details}
               intro={item.intro}
