@@ -16,6 +16,8 @@ import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '../../lib/loadIcons'
 
 interface Data {
   title: string
@@ -44,6 +46,11 @@ interface ContactLandingProps {
 const ContactLanding = (props: ContactLandingProps) => {
   const [response, setResponse] = useState<Response | undefined>()
   const router = useRouter()
+
+  const newTabExceptions: string[] = [
+    'https://www.canada.ca/en/employment-social-development/corporate/contact/sin.html',
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
+  ]
 
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
@@ -87,8 +94,36 @@ const ContactLanding = (props: ContactLandingProps) => {
                   .split('/')
                   .pop()}`}
                 data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
+                target={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? '_blank'
+                    : '_self'
+                }
+                rel={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
               >
                 {link.linkTitle}
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <FontAwesomeIcon
+                      className="absolute ml-1.5 pt-0.5"
+                      width="14"
+                      icon={icon['arrow-up-right-from-square']}
+                    ></FontAwesomeIcon>
+                  ) : null}
+                </span>
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <span className="sr-only">
+                      {props.locale === 'fr'
+                        ? "S'ouvre dans un nouvel onglet"
+                        : 'Opens in a new tab'}
+                    </span>
+                  ) : null}
+                </span>
               </Link>
               <p className="text-xl text-gray-darker">{link.linkDescription}</p>
             </li>
@@ -112,6 +147,10 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
+  if (locale === 'und') {
+    locale = 'en'
+  }
+
   const langToggleLink =
     locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
