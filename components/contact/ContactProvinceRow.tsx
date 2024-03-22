@@ -41,7 +41,6 @@ export const ContactProvinceRow = ({
                 className="col-span-2 cursor-default select-text py-3 md:col-span-1"
                 key={i}
               >
-                {' '}
                 <h3 className="prose prose-h3:font-display prose-h3:text-xl prose-p:font-display prose-p:text-xl">
                   <Markdown className="font-bold">{`${ap(rowItem.content, ' ')}`}</Markdown>
                 </h3>
