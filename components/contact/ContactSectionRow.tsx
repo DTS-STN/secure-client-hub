@@ -33,7 +33,7 @@ export const ContactSectionRow = ({
   refPageAA,
   id,
 }: ContactSectionRowProps) => {
-  const locale = lang.trim() === 'fr' ? 'fr' : 'en'
+  const locale = lang === 'fr' ? 'fr' : 'en'
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
