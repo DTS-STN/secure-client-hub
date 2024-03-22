@@ -42,7 +42,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchPrivacyNoticeTermsConditionsV1`,
       )
       if (!response.ok) return null
       return (await response.json()) as GetSchPrivacyNoticeTermsConditionsV1
@@ -56,12 +56,12 @@ export async function getPrivacyConditionContent() {
 
   const alertFragment = findFragmentByScId(
     response,
-    'privacy-terms-conditions-alert'
+    'privacy-terms-conditions-alert',
   )
 
   const privacyTermsConditionsFragment = findFragmentByScId(
     response,
-    'privacy-terms-conditions-content'
+    'privacy-terms-conditions-content',
   )
 
   const mappedPrivacyConditions = {
@@ -76,12 +76,12 @@ export async function getPrivacyConditionContent() {
               text: level.scTitleEn,
               id: level.scId,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
       alert: {
-        type: 'info',
+        type: 'information',
         text: alertFragment?.scContentEn?.markdown,
       },
       content: privacyTermsConditionsFragment?.scContentEn?.markdown,
@@ -97,12 +97,12 @@ export async function getPrivacyConditionContent() {
               text: level.scTitleFr,
               id: level.scId,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
       alert: {
-        type: 'info',
+        type: 'information',
         text: alertFragment?.scContentFr?.markdown,
       },
       content: privacyTermsConditionsFragment?.scContentFr?.markdown,
@@ -113,11 +113,11 @@ export async function getPrivacyConditionContent() {
 
 const findFragmentByScId = (
   res: GetSchPrivacyNoticeTermsConditionsV1 | null,
-  id: string
+  id: string,
 ) => {
   return (
     res?.data.schPageV1ByPath.item.scFragments.find(
-      (element) => element.scId === id
+      (element) => element.scId === id,
     ) ?? null
   )
 }

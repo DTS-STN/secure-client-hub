@@ -29,11 +29,11 @@ export default function PrivacyCondition(props) {
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function PrivacyCondition(props) {
   const [privacy, ...termsAndConditions] = pageContent.split(
     props.locale === 'en'
       ? /(?=## Terms and conditions of use|1\. \*\*Your credentials\*\*)/
-      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/
+      : /(?=## Conditions d’utilisation|1\. \*\*Vos identifiants\*\*)/,
   )
 
   return (
@@ -93,8 +93,10 @@ export default function PrivacyCondition(props) {
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
         message_body={props.content.alert.text}
-        alert_icon_alt_text="info icon"
-        alert_icon_id="info-icon"
+        alert_icon_alt_text={`${props.content.alert.type} ${
+          props.locale === 'fr' ? 'Icônes' : 'icon'
+        }`}
+        alert_icon_id="alert-icon-id"
       />
       <section id={t.footerPrivacyAnchor}>
         <Markdown
@@ -232,7 +234,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -297,28 +299,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -327,14 +329,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }
