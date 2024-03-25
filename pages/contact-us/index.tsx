@@ -16,6 +16,8 @@ import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '../../lib/loadIcons'
 
 interface Data {
   title: string
@@ -45,14 +47,19 @@ const ContactLanding = (props: ContactLandingProps) => {
   const [response, setResponse] = useState<Response | undefined>()
   const router = useRouter()
 
+  const newTabExceptions: string[] = [
+    'https://www.canada.ca/en/employment-social-development/corporate/contact/sin.html',
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
+  ]
+
   //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
   const onClickEvent = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
-    []
+    [],
   )
   const throttledOnClickEvent = useMemo(
     () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
+    [onClickEvent],
   )
 
   useEffect(() => {
@@ -69,7 +76,7 @@ const ContactLanding = (props: ContactLandingProps) => {
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="contact-us-heading" title={props.content.heading ?? ''} />
-      <p className="mt-3 mb-8 text-xl text-gray-darker">
+      <p className="mb-8 mt-3 text-xl text-gray-darker">
         {props.content.subHeading}
       </p>
       <ul className="list-disc" data-cy="contact-task-list">
@@ -77,7 +84,7 @@ const ContactLanding = (props: ContactLandingProps) => {
           return (
             <li className="mb-6 ml-5" key={link.linkId}>
               <Link
-                className="underline text-blue-primary font-body text-20px hover:text-blue-hover rounded-sm focus:text-blue-hover focus:outline-1 focus:outline-blue-hover visited:text-purple-50a"
+                className="rounded-sm font-body text-20px text-blue-primary underline visited:text-purple-50a hover:text-blue-hover focus:text-blue-hover focus:outline-1 focus:outline-blue-hover"
                 id={link.linkId}
                 data-testid={link.linkId}
                 aria-label={link.linkTitle}
@@ -87,8 +94,36 @@ const ContactLanding = (props: ContactLandingProps) => {
                   .split('/')
                   .pop()}`}
                 data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
+                target={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? '_blank'
+                    : '_self'
+                }
+                rel={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
               >
                 {link.linkTitle}
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <FontAwesomeIcon
+                      className="absolute ml-1.5 pt-0.5"
+                      width="14"
+                      icon={icon['arrow-up-right-from-square']}
+                    ></FontAwesomeIcon>
+                  ) : null}
+                </span>
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <span className="sr-only">
+                      {props.locale === 'fr'
+                        ? "S'ouvre dans un nouvel onglet"
+                        : 'Opens in a new tab'}
+                    </span>
+                  ) : null}
+                </span>
               </Link>
               <p className="text-xl text-gray-darker">{link.linkDescription}</p>
             </li>
@@ -112,6 +147,10 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
+  if (locale === 'und') {
+    locale = 'en'
+  }
+
   const langToggleLink =
     locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
