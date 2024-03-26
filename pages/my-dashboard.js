@@ -1,4 +1,3 @@
-import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
@@ -20,56 +19,13 @@ import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
-import { useRouter } from 'next/router'
 import { getToken } from 'next-auth/jwt'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [response, setResponse] = useState()
-  const router = useRouter()
-
-  const validationResponse = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    [],
-  )
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const throttledOnClickEvent = useMemo(
-    () => throttle(validationResponse, 60000, { trailing: false }),
-    [validationResponse],
-  )
-  //Event listener for visibility change events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const throttledVisiblityChangeEvent = useMemo(
-    () => throttle(validationResponse, 15000, { trailing: false }),
-    [validationResponse],
-  )
-
-  //If session is valid, add event listeners to check for valid sessions on click and visibility change events
-  useEffect(() => {
-    window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
-    window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-      window.removeEventListener(
-        'visiblitychange',
-        throttledVisiblityChangeEvent,
-      )
-    }
-  }, [
-    throttledOnClickEvent,
-    throttledVisiblityChangeEvent,
-    response,
-    router,
-    props.locale,
-  ])
 
   const errorCode =
     props.content?.err ||

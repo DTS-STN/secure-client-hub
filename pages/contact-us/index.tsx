@@ -16,9 +16,6 @@ import {
 } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { useEffect, useCallback, useMemo, useState } from 'react'
-import throttle from 'lodash.throttle'
-import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -50,52 +47,10 @@ interface ContactLandingProps {
 }
 
 const ContactLanding = (props: ContactLandingProps) => {
-  const [response, setResponse] = useState<Response | undefined>()
-  const router = useRouter()
-
   const newTabExceptions: string[] = [
     'https://www.canada.ca/en/employment-social-development/corporate/contact/sin.html',
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
   ]
-
-  const validationResponse = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    [],
-  )
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const throttledOnClickEvent = useMemo(
-    () => throttle(validationResponse, 60000, { trailing: false }),
-    [validationResponse],
-  )
-  //Event listener for visibility change events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const throttledVisiblityChangeEvent = useMemo(
-    () => throttle(validationResponse, 15000, { trailing: false }),
-    [validationResponse],
-  )
-
-  //If session is valid, add event listeners to check for valid sessions on click and visibility change events
-  useEffect(() => {
-    window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
-    window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-      window.removeEventListener(
-        'visiblitychange',
-        throttledVisiblityChangeEvent,
-      )
-    }
-  }, [
-    throttledOnClickEvent,
-    throttledVisiblityChangeEvent,
-    response,
-    router,
-    props.locale,
-  ])
 
   return (
     <div id="contactContent" data-testid="contactContent-test">
