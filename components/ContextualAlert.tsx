@@ -7,7 +7,7 @@ import info_img from '../public/info_img.svg'
 
 interface ContextualAlertProps {
   id: string
-  type: 'warning' | 'info' | 'success' | 'danger'
+  type: 'warning' | 'information' | 'success' | 'danger'
   alert_icon_id: string
   alert_icon_alt_text: string
   message_heading: string | ReactNode
@@ -28,18 +28,18 @@ const ContextualAlert = ({
     type === 'warning'
       ? warning_img
       : type === 'danger'
-      ? danger_img
-      : type === 'info'
-      ? info_img
-      : success_img
+        ? danger_img
+        : type === 'information'
+          ? info_img
+          : success_img
   const alert_color =
     type === 'warning'
       ? 'border-orange-dark'
       : type === 'danger'
-      ? 'border-red-50b'
-      : type === 'info'
-      ? 'border-brighter-blue-dark'
-      : 'border-green-50a'
+        ? 'border-red-50b'
+        : type === 'information'
+          ? 'border-brighter-blue-dark'
+          : 'border-green-50a'
 
   const white_BG = whiteBG ? 'bg-white' : ' '
 
@@ -47,7 +47,7 @@ const ContextualAlert = ({
     <div id={id} className={`relative min-w-72 pl-4 sm:pl-6 ${white_BG}`}>
       <div
         data-testid="alert-icon"
-        className="absolute top-3 left-1.5 sm:left-3.5  bg-white py-1"
+        className="absolute left-1.5 top-3 bg-white  py-1 sm:left-3.5"
       >
         <Image
           src={alert_type}
@@ -58,13 +58,13 @@ const ContextualAlert = ({
         ></Image>
       </div>
       <div
-        className={`overflow-auto border-l-[6px] ${alert_color} pl-6 py-4 leading-8`}
+        className={`overflow-auto border-l-[6px] ${alert_color} py-4 pl-6 leading-8`}
       >
-        <div className="text-2xl leading-[26px] font-bold font-display text-gray-darker ml-1">
+        <div className="ml-1 font-display text-2xl font-bold leading-[26px] text-gray-darker">
           {message_heading}
         </div>
 
-        <p className="font-body text-20px text-gray-darker ml-0.5">
+        <p className="ml-0.5 font-body text-20px text-gray-darker">
           {message_body}
         </p>
       </div>
