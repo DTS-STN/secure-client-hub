@@ -116,8 +116,10 @@ export default function PrivacyCondition(props) {
         id="PrivacyCondition-alert"
         type={props.content.alert.type}
         message_body={props.content.alert.text}
-        alert_icon_alt_text="info icon"
-        alert_icon_id="info-icon"
+        alert_icon_alt_text={`${props.content.alert.type} ${
+          props.locale === 'fr' ? 'Icônes' : 'icon'
+        }`}
+        alert_icon_id="alert-icon-id"
       />
       <section id={t.footerPrivacyAnchor}>
         <Markdown

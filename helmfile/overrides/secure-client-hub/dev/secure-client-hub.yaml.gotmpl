@@ -117,7 +117,7 @@ ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-buffer-size: 8k
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 32k
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     tls:
       - hosts:
@@ -179,6 +179,7 @@ autoscaling:
     app.kubernetes.io/name: service-canada-client-hub
 {{- if env "OAUTH_ENABLED" }}
 oauth:
+  enabled: {{ env "OAUTH_ENABLED" }}
   ports:
     containerPort: 4180
     name: oauth-proxy
