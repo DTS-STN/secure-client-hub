@@ -13,7 +13,7 @@ describe('ContextualAlert', () => {
       id="alert_icon_id"
       alert_icon_id="icon-id"
       alert_icon_alt_text="alt"
-      type="informatin"
+      type="information"
       alertHeading="Information"
       alertBody="You may wish to print this page..."
     />,
@@ -36,7 +36,7 @@ describe('ContextualAlert', () => {
         id="alert_icon_id"
         alert_icon_id="icon-id"
         alert_icon_alt_text="alt"
-        type="info"
+        type="information"
         alertHeading="Information"
         alertBody="You may wish to print this page..."
       />,
