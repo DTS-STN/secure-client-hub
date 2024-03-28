@@ -215,7 +215,6 @@ export default function Layout(props) {
         btnLink="#top"
         id="page-footer"
       />
-      <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
 }
