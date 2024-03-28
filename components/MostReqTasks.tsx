@@ -56,6 +56,14 @@ const MostReqTasks = ({
               data-cy="most-req-tasklink"
             >
               <Link
+                aria-label={`${taskListMR.title} - ${task.title} -
+                ${
+                  newTabTaskExceptions.includes(task.link)
+                    ? locale === 'fr'
+                      ? "S'ouvre dans un nouvel onglet"
+                      : 'Opens in a new tab'
+                    : ''
+                }`}
                 href={task.link}
                 passHref
                 target={
@@ -69,10 +77,7 @@ const MostReqTasks = ({
                 data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
               >
-                <span
-                  aria-label={task.areaLabel}
-                  className="static text-xl font-normal"
-                >
+                <span className="static text-xl font-normal">
                   {task.title}
                   <span>
                     {newTabTaskExceptions.includes(task.link) ? (
@@ -81,15 +86,6 @@ const MostReqTasks = ({
                         width="14"
                         icon={icon['arrow-up-right-from-square']}
                       ></FontAwesomeIcon>
-                    ) : null}
-                  </span>
-                  <span>
-                    {newTabTaskExceptions.includes(task.link) ? (
-                      <span className="sr-only">
-                        {locale === 'fr'
-                          ? "S'ouvre dans un nouvel onglet"
-                          : 'Opens in a new tab'}
-                      </span>
                     ) : null}
                   </span>
                 </span>

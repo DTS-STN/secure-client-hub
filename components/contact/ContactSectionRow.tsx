@@ -19,9 +19,11 @@ export interface ContactSectionRowProps {
   items: ContactSectionRowDetailItem[]
   refPageAA: string
   id: string
+  lang: string
 }
 
 export const ContactSectionRow = ({
+  lang,
   title,
   highlight,
   iconFeature,
@@ -31,6 +33,7 @@ export const ContactSectionRow = ({
   refPageAA,
   id,
 }: ContactSectionRowProps) => {
+  const locale = lang === 'fr' ? 'fr' : 'en'
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
@@ -42,16 +45,16 @@ export const ContactSectionRow = ({
     'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-12 py-2 ${''}`}>
+    <div className={`grid grid-cols-1 py-2 md:grid-cols-12 ${''}`}>
       <dt
-        className={`md:col-span-4 font-bold text-2xl text-gray-darker md:pl-3 ${
+        className={`text-2xl font-bold text-gray-darker md:col-span-4 md:pl-3 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
         {title}
       </dt>
       <dd
-        className={`md:col-span-8 prose max-w-none prose-p:font-body prose-p:text-xl prose-p:my-0  ${
+        className={`prose max-w-none prose-p:my-0 prose-p:font-body prose-p:text-xl md:col-span-8  ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
@@ -63,7 +66,15 @@ export const ContactSectionRow = ({
                   id={'test-card-button-' + buttonId}
                   data-cy="contact-us-button"
                   href={item.link}
-                  className="font-display text-xl leading-[23px] text-blue-default rounded-sm py-1.5 px-3.5 hover:text-blue-hover underline active:text-blue-hover focus:outline-1 focus:outline-blue-hover visited:text-purple-50a"
+                  className="rounded-sm px-3.5 py-1.5 font-display text-xl leading-[23px] text-blue-default underline visited:text-purple-50a hover:text-blue-hover focus:outline-1 focus:outline-blue-hover active:text-blue-hover"
+                  aria-label={` ${item.content} -
+                  ${
+                    item.link && newTabTaskExceptions.includes(item.link)
+                      ? locale === 'fr'
+                        ? "S'ouvre dans un nouvel onglet"
+                        : 'Opens in a new tab'
+                      : "S'ouvre dans un nouvel onglet"
+                  }`}
                   target={
                     item.link && newTabTaskExceptions.includes(item.link)
                       ? '_blank'
@@ -85,7 +96,7 @@ export const ContactSectionRow = ({
                   ></FontAwesomeIcon>
                 </a>
               ) : (
-                <div className="flex align-baseline text-xl px-2 prose prose-li:marker:text-black prose-p:font-body prose-ul:my-0 prose-li:font-body even:pt-4">
+                <div className="prose flex px-2 align-baseline text-xl even:pt-4 prose-p:font-body prose-ul:my-0 prose-li:font-body prose-li:marker:text-black">
                   {iconFeature && (
                     <FontAwesomeIcon
                       className="pr-2 pt-1"

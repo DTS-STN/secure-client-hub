@@ -19,6 +19,7 @@ export interface ContactSectionDetail {
 }
 
 export interface ContactSectionProps {
+  lang: string
   title: string
   intro: string
   id: string
@@ -26,6 +27,7 @@ export interface ContactSectionProps {
 }
 
 export const ContactSection = ({
+  lang,
   title,
   intro,
   id,
@@ -34,26 +36,27 @@ export const ContactSection = ({
   return (
     <div
       data-cy="sections"
-      className="max-w-3xl mt-4"
+      className="mt-4 max-w-3xl"
       id={id}
       data-testid="contactSection-test"
     >
-      <h2 className="py-2 text-32px md:pt-6 md:text-4xl font-display font-bold text-gray-darker">
+      <h2 className="py-2 font-display text-32px font-bold text-gray-darker md:pt-6 md:text-4xl">
         {title}
       </h2>
       <div
-        className="pb-4 prose max-w-none prose-p:text-xl prose-p:mb-2 prose-p:font-body prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black"
+        className="prose max-w-none pb-4 prose-p:mb-2 prose-p:font-body prose-p:text-xl prose-ul:my-0 prose-ul:ml-2 prose-li:font-body prose-li:text-xl prose-li:marker:text-black"
         data-cy="section1"
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <dl className=" border-y-2 divide-y-2 " data-cy="section2">
+      <dl className=" divide-y-2 border-y-2 " data-cy="section2">
         {details.map((sectionDetail) => {
           const button =
             sectionDetail.items[0]?.button &&
             sectionDetail.items[0].button.length > 0
           return (
             <ContactSectionRow
+              lang={lang}
               key={sectionDetail.id}
               id={sectionDetail.id}
               title={sectionDetail.title}
