@@ -6,7 +6,7 @@ import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
 import Markdown from 'markdown-to-jsx'
 
-interface ContextualAlertProps {
+export interface ContextualAlertProps {
   id: string
   type: string
   alert_icon_id: string

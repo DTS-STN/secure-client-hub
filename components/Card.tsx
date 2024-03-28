@@ -4,6 +4,12 @@ import { useEffect, useState } from 'react'
 import { ReactNode } from 'react'
 import { z } from 'zod'
 
+interface AlertProps {
+  id: string
+  type: string
+  alertHeading: string
+  alertBody: string
+}
 interface CardProps {
   cardTitle: string
   viewMoreLessCaption: string
@@ -12,9 +18,11 @@ interface CardProps {
   refPageAA: string
   children: ReactNode
   locale: string
+  cardAlert: AlertProps[]
 }
 
 const Card = ({
+  cardAlert,
   locale,
   cardTitle,
   viewMoreLessCaption,
@@ -26,35 +34,26 @@ const Card = ({
   const [isOpen, setIsOpen] = useState(false)
 
   /* Place-holder for Alert content */
-  const alertContent = [
-    {
-      id: 'alertId',
-      type: 'danger',
-      alertHeading: 'Upcoming interruption: Employment Insurance',
-      alertBody:
-        'Ontario Residents : This service won’t be available from Saturday, October 29 at 4:00 am to Sunday, October 30 at 10:00 am (EDT) due to system maintenance.',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-    {
-      id: 'alertId',
-      type: 'warning',
-      alertHeading: 'Possible interruption: EI letters',
-      alertBody:
-        'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-    {
-      id: 'alertId',
-      type: 'information',
-      alertHeading: 'Possible interruption: EI letters',
-      alertBody:
-        'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-  ]
+  // const alertContent = [
+  //   {
+  //     id: 'alertId',
+  //     type: 'danger',
+  //     alertHeading: 'Upcoming interruption: Employment Insurance',
+  //     alertBody:
+  //       'Ontario Residents : This service won’t be available from Saturday, October 29 at 4:00 am to Sunday, October 30 at 10:00 am (EDT) due to system maintenance.',
+  //     alert_icon_alt_text: '',
+  //     alert_icon_id: '',
+  //   },
+  //   {
+  //     id: 'alertId',
+  //     type: 'warning',
+  //     alertHeading: 'Possible interruption: EI letters',
+  //     alertBody:
+  //       'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
+  //     alert_icon_alt_text: '',
+  //     alert_icon_id: '',
+  //   },
+  // ]
   const CardState = z
     .string()
     .toLowerCase()
@@ -121,7 +120,7 @@ const Card = ({
       {!isOpen ? null : (
         <div>
           <div className="">
-            {alertContent.map((alert, index) => {
+            {cardAlert.map((alert, index) => {
               return (
                 <ul
                   className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15"
@@ -148,6 +147,19 @@ const Card = ({
       )}
     </div>
   )
+}
+
+Card.defaultProps = {
+  cardAlert: [
+    {
+      id: '',
+      type: '',
+      alertHeading: '',
+      alertBody: '',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+  ],
 }
 
 export default Card

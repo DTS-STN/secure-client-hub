@@ -87,7 +87,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV1`,
+        `${process.env.AEM_GRAPHQL_ENDPOINTS}getSchMyDashboardV2`,
       )
       if (!response.ok) return null
       return (await response.json()) as GetSchMyDashboardV1
@@ -98,49 +98,36 @@ const getCachedContent = () => {
 
 export async function getMyDashboardContent() {
   const response = await getCachedContent()
-  // const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
-  // const cardAlertContent = response?.data.schPageV1ByPath.item.scFragments
-
-  // const fallbackContent = {
-  //   scId: 'dental-plan',
-  //   scHeadingEn: 'Exiting beta version',
-  //   scHeadingFr: 'Vous quittez la version bêta',
-  //   scContentEn:
-  //     'Alert Content EN... You are now returning to My Service Canada Account home page.',
-  //   scContentFr:
-  //     "Alert content FR...Nous vous redirigeons vers la page d’accueil de Mon dossier Service Canada.",
-  //   scAlertType: "warning",
-  // }
+  const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
 
   const mappedHome = {
     en: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
-      // pageAlerts: pageAlertContent?.map((pageAlert) => {
-      //   console.log(pageAlert)
-      //   return {
-      //     id: pageAlert.scId ?? fallbackContent.scId,
-      //     alertHeading: pageAlert.scHeadingEn ?? fallbackContent.scHeadingEn,
-      //     alertBody: pageAlert.scContentEn?.markdown ?? fallbackContent.scContentEn,
-      //     type: pageAlert.scAlertType ?? fallbackContent.scAlertType,
-      //   }
-      // }),
+      pageAlerts: pageAlertContent?.map((pageAlert) => {
+        return {
+          id: pageAlert.scId,
+          alertHeading: pageAlert.scHeadingEn,
+          alertBody: pageAlert.scContentEn?.markdown,
+          type: pageAlert.scAlertType,
+        }
+      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
-          // console.log(fragment.schAlerts)
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
-            // cardAlerts: fragment.schAlerts?.map((alert) => {
-            //   return {
-            //     id: alert.scId,
-            //     alertHeading: alert.scHeadingEn,
-            //     alertBody: alert.scContentEn?.markdown,
-            //     type: alert.scAlertType,
-            //   }
-            // }),
+            cardAlerts: fragment.schAlerts?.map((alert) => {
+              console.log(fragment.schAlerts)
+              return {
+                id: alert.scId,
+                alertHeading: alert.scHeadingEn,
+                alertBody: alert.scContentEn?.markdown,
+                type: alert.scAlertType,
+              }
+            }),
 
             lists: fragment.schLists.map((list) => {
               return {
