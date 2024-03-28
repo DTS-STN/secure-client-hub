@@ -42,7 +42,7 @@ describe('My Dashboard page', () => {
         cardAlerts: [
           {
             id: 'test',
-            type: 'title',
+            type: 'information',
             alertHeading: 'heading',
             alertBody: 'body',
           },
@@ -51,7 +51,12 @@ describe('My Dashboard page', () => {
       },
     ],
     pageAlerts: [
-      { id: 'test', type: 'title', alertHeading: 'heading', alertBody: 'body' },
+      {
+        id: 'test',
+        type: 'information',
+        alertHeading: 'heading',
+        alertBody: 'body',
+      },
     ],
   }
   const popupContent = {}
