@@ -89,15 +89,17 @@ export default function PrivacyCondition(props) {
         title={props.content.heading}
         className="mb-2"
       />
-      <ContextualAlert
-        id="PrivacyCondition-alert"
-        type={props.content.alert.type}
-        alertBody={props.content.alert.text}
-        alert_icon_alt_text={`${props.content.alert.type} ${
-          props.locale === 'fr' ? 'Icônes' : 'icon'
-        }`}
-        alert_icon_id="alert-icon-id"
-      />
+      <ul>
+        <ContextualAlert
+          id="PrivacyCondition-alert"
+          type={props.content.alert.type}
+          alertBody={props.content.alert.text}
+          alert_icon_alt_text={`${props.content.alert.type} ${
+            props.locale === 'fr' ? 'Icônes' : 'icon'
+          }`}
+          alert_icon_id="alert-icon-id"
+        />
+      </ul>
       <section id={t.footerPrivacyAnchor}>
         <Markdown
           options={{
