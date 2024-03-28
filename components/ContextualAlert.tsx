@@ -48,7 +48,7 @@ const ContextualAlert = ({
   const white_BG = whiteBG ? 'bg-white' : ' '
 
   return (
-    <div
+    <li
       id={id}
       className={`relative min-w-72 pl-4 sm:pl-6 ${white_BG} ${className}`}
     >
@@ -103,7 +103,7 @@ const ContextualAlert = ({
           </Markdown>
         </div>
       </div>
-    </div>
+    </li>
   )
 }
 
