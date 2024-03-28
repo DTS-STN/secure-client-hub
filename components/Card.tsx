@@ -33,27 +33,6 @@ const Card = ({
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  /* Place-holder for Alert content */
-  // const alertContent = [
-  //   {
-  //     id: 'alertId',
-  //     type: 'danger',
-  //     alertHeading: 'Upcoming interruption: Employment Insurance',
-  //     alertBody:
-  //       'Ontario Residents : This service won’t be available from Saturday, October 29 at 4:00 am to Sunday, October 30 at 10:00 am (EDT) due to system maintenance.',
-  //     alert_icon_alt_text: '',
-  //     alert_icon_id: '',
-  //   },
-  //   {
-  //     id: 'alertId',
-  //     type: 'warning',
-  //     alertHeading: 'Possible interruption: EI letters',
-  //     alertBody:
-  //       'Due to an update to our systems, you may not be able to view your EI Letters on Saturday November 26 from 2 am to 6 am (EST)',
-  //     alert_icon_alt_text: '',
-  //     alert_icon_id: '',
-  //   },
-  // ]
   const CardState = z
     .string()
     .toLowerCase()
@@ -119,27 +98,23 @@ const Card = ({
       />
       {!isOpen ? null : (
         <div>
-          <div className="">
-            {cardAlert.map((alert, index) => {
-              return (
-                <ul
-                  className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15"
-                  key={index}
-                >
-                  <ContextualAlert
-                    id={alert.id}
-                    type={alert.type}
-                    alertHeading={alert.alertHeading}
-                    alertBody={alert.alertBody}
-                    alert_icon_alt_text={`${alert.type} ${
-                      locale === 'fr' ? 'Icônes' : 'icon'
-                    }`}
-                    alert_icon_id="alert-icon-id"
-                  />
-                </ul>
-              )
-            })}
-          </div>
+          {cardAlert.map((alert, index) => {
+            const alertType = alert.type[0].split('/').pop()
+            return (
+              <ul className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15" key={index}>
+                <ContextualAlert
+                  id={alert.id}
+                  type={alertType}
+                  alertHeading={alert.alertHeading}
+                  alertBody={alert.alertBody}
+                  alert_icon_alt_text={`${alert.type} ${
+                    locale === 'fr' ? 'Icônes' : 'icon'
+                  }`}
+                  alert_icon_id="alert-icon-id"
+                />
+              </ul>
+            )
+          })}
           <div className="pb-6" data-cy="sectionList">
             {children}
           </div>

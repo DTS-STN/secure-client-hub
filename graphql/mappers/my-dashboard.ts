@@ -120,7 +120,6 @@ export async function getMyDashboardContent() {
             title: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
             cardAlerts: fragment.schAlerts?.map((alert) => {
-              console.log(fragment.schAlerts)
               return {
                 id: alert.scId,
                 alertHeading: alert.scHeadingEn,
@@ -128,7 +127,6 @@ export async function getMyDashboardContent() {
                 type: alert.scAlertType,
               }
             }),
-
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
@@ -159,14 +157,14 @@ export async function getMyDashboardContent() {
     fr: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
-      // pageAlerts: pageAlertContent?.map((pageAlert) => {
-      //   return {
-      //     id: pageAlert.scId ?? fallbackContent.scId,
-      //     alertHeading: pageAlert.scHeadingFr ?? fallbackContent.scHeadingFr,
-      //     alertBody: pageAlert.scContentFr?.markdown ?? fallbackContent.scContentFr,
-      //     type: pageAlert.scAlertType ?? fallbackContent.scAlertType,
-      //   }
-      // }),
+      pageAlerts: pageAlertContent?.map((pageAlert) => {
+        return {
+          id: pageAlert.scId,
+          alertHeading: pageAlert.scHeadingFr,
+          alertBody: pageAlert.scContentFr?.markdown,
+          type: pageAlert.scAlertType,
+        }
+      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
@@ -174,15 +172,15 @@ export async function getMyDashboardContent() {
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
-            // cardAlerts: fragment.schAlerts.map((alert) => {
-            //   return {
-            //     id: alert.scId,
-            //     alertHeading: alert.scHeadingFr,
-            //     alertBody: alert.scContentFr?.markdown,
-            //     type: alert.scAlertType,
-            //   }
-            // }),
             dropdownText: fragment.schTasks[0].scLinkTextFr,
+            cardAlerts: fragment.schAlerts?.map((alert) => {
+              return {
+                id: alert.scId,
+                alertHeading: alert.scHeadingFr,
+                alertBody: alert.scContentFr?.markdown,
+                type: alert.scAlertType,
+              }
+            }),
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,

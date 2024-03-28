@@ -8,7 +8,7 @@ import Markdown from 'markdown-to-jsx'
 
 export interface ContextualAlertProps {
   id: string
-  type: string
+  type?: string
   alert_icon_id: string
   alert_icon_alt_text: string
   alertHeading: string | ReactNode
@@ -35,6 +35,7 @@ const ContextualAlert = ({
         : type === 'information'
           ? info_img
           : success_img
+
   const alert_color =
     type === 'warning'
       ? 'border-orange-dark'
@@ -70,7 +71,7 @@ const ContextualAlert = ({
           {alertHeading}
         </div>
 
-        <p className="ml-0.5 font-body text-20px text-gray-darker">
+        <div className="ml-0.5 font-body text-20px text-gray-darker">
           <Markdown
             options={{
               overrides: {
@@ -100,7 +101,7 @@ const ContextualAlert = ({
           >
             {alertBody}
           </Markdown>
-        </p>
+        </div>
       </div>
     </div>
   )

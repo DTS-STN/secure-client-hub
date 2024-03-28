@@ -73,19 +73,6 @@ export default function MyDashboard(props) {
       />
     )
   }
-
-  /* Place-holder for Alert content */
-  // const alertContent = [
-  //   {
-  //     id: 'alertId',
-  //     type: 'information',
-  //     alertHeading: 'Other coverage for families with young children',
-  //     alertBody:
-  //       "If you're a parent or guardian of a child under the age of 12, and you do not have access to dental insurance, you may already be eligible for the [Canada Dental Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/dental-benefit.html/?target=_blank). This benefit is available until June 30, 2024.",
-  //     alert_icon_alt_text: '',
-  //     alert_icon_id: '',
-  //   },
-  // ]
   return (
     <div
       className="pb-2"
@@ -95,11 +82,12 @@ export default function MyDashboard(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
       {props.content.pageAlerts.map((alert, index) => {
+        const alertType = alert.type[0].split('/').pop()
         return (
           <ul className="mt-6 w-full sm:px-8 md:px-15" key={index}>
             <ContextualAlert
               id={alert.id}
-              type={alert.type}
+              type={alertType}
               alertHeading={alert.alertHeading}
               alertBody={alert.alertBody}
               alert_icon_alt_text={alert.alert_icon_alt_text + alert.type}
@@ -112,7 +100,6 @@ export default function MyDashboard(props) {
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
-        console.log(card)
         return (
           <Card
             key={card.id}
