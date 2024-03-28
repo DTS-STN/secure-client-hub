@@ -90,8 +90,10 @@ export default function MyDashboard(props) {
               type={alertType}
               alertHeading={alert.alertHeading}
               alertBody={alert.alertBody}
-              alert_icon_alt_text={alert.alert_icon_alt_text + alert.type}
-              alert_icon_id={alert.type + ' icon'}
+              alert_icon_id={` alert-icon ${alert.id}`}
+              alert_icon_alt_text={`${alertType} ${
+                props.locale === 'fr' ? 'Icône' : 'icon'
+              }`}
             />
           </ul>
         )

@@ -107,10 +107,10 @@ const Card = ({
                   type={alertType}
                   alertHeading={alert.alertHeading}
                   alertBody={alert.alertBody}
-                  alert_icon_alt_text={`${alert.type} ${
+                  alert_icon_alt_text={`${alertType} ${
                     locale === 'fr' ? 'Icônes' : 'icon'
                   }`}
-                  alert_icon_id="alert-icon-id"
+                  alert_icon_id={` alert-icon ${alert.id}`}
                 />
               </ul>
             )
