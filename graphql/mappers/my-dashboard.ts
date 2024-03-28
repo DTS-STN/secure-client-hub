@@ -2,7 +2,7 @@ import { buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchMyDashboardV1 {
+interface GetSchMyDashboardV2 {
   data: {
     schPageV1ByPath: {
       item: {
@@ -87,10 +87,10 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINTS}getSchMyDashboardV2`,
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV2`,
       )
       if (!response.ok) return null
-      return (await response.json()) as GetSchMyDashboardV1
+      return (await response.json()) as GetSchMyDashboardV2
     },
     ttl,
   })
