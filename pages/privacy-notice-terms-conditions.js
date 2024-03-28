@@ -9,7 +9,12 @@ import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-te
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BackToButton from '../components/BackToButton'
@@ -20,9 +25,11 @@ import React from 'react'
 import throttle from 'lodash.throttle'
 import ErrorPage from '../components/ErrorPage'
 import { useRouter } from 'next/router'
+import { getToken } from 'next-auth/jwt'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+  
   const [response, setResponse] = useState()
   const router = useRouter()
 
@@ -207,9 +214,23 @@ export default function PrivacyCondition(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(process.env.CLIENT_ID, token.sub)
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('privacy-notice-terms-and-conditions')

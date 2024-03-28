@@ -1,4 +1,3 @@
-import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Heading from '../components/Heading'
 import en from '../locales/en'
@@ -7,43 +6,23 @@ import { getDecisionReviewsContent } from '../graphql/mappers/decision-reviews'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import throttle from 'lodash.throttle'
 import Markdown from 'markdown-to-jsx'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
-import { useRouter } from 'next/router'
+import { getToken } from 'next-auth/jwt'
 
 export default function DecisionReviews(props) {
   const t = props.locale === 'en' ? en : fr
-  const [response, setResponse] = useState()
-  const router = useRouter()
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    []
-  )
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent]
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -99,7 +78,7 @@ export default function DecisionReviews(props) {
           id={props.content.content[0].button.id}
           style="primary"
           text={props.content.content[0].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          className="px-auto my-auto mt-4 w-fit justify-center whitespace-normal text-center sm:mt-0 md:max-h-11"
           href={props.content.content[0].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
@@ -129,7 +108,7 @@ export default function DecisionReviews(props) {
           id={props.content.content[1].button.id}
           style="primary"
           text={props.content.content[1].button.text}
-          className="whitespace-normal md:max-h-11 my-auto w-fit justify-center px-auto mt-4 sm:mt-0 text-center"
+          className="px-auto my-auto mt-4 w-fit justify-center whitespace-normal text-center sm:mt-0 md:max-h-11"
           href={props.content.content[1].button.link}
           refPageAA={props.aaPrefix}
         ></Button>
@@ -140,9 +119,23 @@ export default function DecisionReviews(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(process.env.CLIENT_ID, token.sub)
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('decision-reviews')
@@ -169,7 +162,7 @@ export async function getServerSideProps({ req, res, locale }) {
     (error) => {
       logger.error(error)
       return { err: '500' }
-    }
+    },
   )
 
   const authModals = await getAuthModalsContent().catch((error) => {
@@ -218,28 +211,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent
           : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
+            ? bannerContent.en
+            : bannerContent.fr,
       popupContent:
         popupContent?.err !== undefined
           ? popupContent
           : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
+            ? popupContent.en
+            : popupContent.fr,
       popupContentNA:
         popupContentNA?.err !== undefined
           ? popupContentNA
           : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
@@ -248,14 +241,14 @@ export async function getServerSideProps({ req, res, locale }) {
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

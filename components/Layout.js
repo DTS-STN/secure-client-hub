@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, cloneElement } from 'react'
+import { useState, useCallback, useMemo, useEffect, cloneElement } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import MetaData from './MetaData'
@@ -8,10 +8,14 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import MultiModal from './MultiModal'
 import { lato, notoSans } from '../utils/fonts'
+import { useRouter } from 'next/router'
+import throttle from 'lodash.throttle'
 
 export default function Layout(props) {
   const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
+  const [response, setResponse] = useState()
+  const router = useRouter()
   const defaultBreadcrumbs = []
   const contactLink =
     props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
@@ -40,6 +44,45 @@ export default function Layout(props) {
       }
     })
   }
+
+  const validationResponse = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    [],
+  )
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const throttledOnClickEvent = useMemo(
+    () => throttle(validationResponse, 60000, { trailing: false }),
+    [validationResponse],
+  )
+  //Event listener for visibility change events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
+  const throttledVisiblityChangeEvent = useMemo(
+    () => throttle(validationResponse, 15000, { trailing: false }),
+    [validationResponse],
+  )
+
+  //If session is valid, add event listeners to check for valid sessions on click and visibility change events
+  useEffect(() => {
+    window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
+    window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+      window.removeEventListener(
+        'visiblitychange',
+        throttledVisiblityChangeEvent,
+      )
+    }
+  }, [
+    throttledOnClickEvent,
+    throttledVisiblityChangeEvent,
+    response,
+    router,
+    props.locale,
+  ])
 
   return (
     <>
@@ -172,7 +215,6 @@ export default function Layout(props) {
         btnLink="#top"
         id="page-footer"
       />
-      <script type="text/javascript">_satellite.pageBottom();</script>
     </>
   )
 }
