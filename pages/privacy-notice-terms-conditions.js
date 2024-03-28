@@ -29,6 +29,31 @@ import { getToken } from 'next-auth/jwt'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
+  
+  const [response, setResponse] = useState()
+  const router = useRouter()
+
+  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
+  const onClickEvent = useCallback(
+    async () => setResponse(await fetch('/api/refresh-msca')),
+    [],
+  )
+  const throttledOnClickEvent = useMemo(
+    () => throttle(onClickEvent, 60000, { trailing: false }),
+    [onClickEvent],
+  )
+
+  useEffect(() => {
+    window.addEventListener('click', throttledOnClickEvent)
+    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    if (response?.status === 401) {
+      router.push(`/${props.locale}/auth/logout`)
+    }
+    //Remove event on unmount to prevent a memory leak with the cleanup
+    return () => {
+      window.removeEventListener('click', throttledOnClickEvent)
+    }
+  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -71,15 +96,17 @@ export default function PrivacyCondition(props) {
         title={props.content.heading}
         className="mb-2"
       />
-      <ContextualAlert
-        id="PrivacyCondition-alert"
-        type={props.content.alert.type}
-        message_body={props.content.alert.text}
-        alert_icon_alt_text={`${props.content.alert.type} ${
-          props.locale === 'fr' ? 'Icônes' : 'icon'
-        }`}
-        alert_icon_id="alert-icon-id"
-      />
+      <ul>
+        <ContextualAlert
+          id="PrivacyCondition-alert"
+          type={props.content.alert.type}
+          alertBody={props.content.alert.text}
+          alert_icon_alt_text={`${props.content.alert.type} ${
+            props.locale === 'fr' ? 'Icônes' : 'icon'
+          }`}
+          alert_icon_id="alert-icon-id"
+        />
+      </ul>
       <section id={t.footerPrivacyAnchor}>
         <Markdown
           options={{

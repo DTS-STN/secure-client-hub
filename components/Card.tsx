@@ -1,8 +1,15 @@
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
+import ContextualAlert from '../components/ContextualAlert'
 import { useEffect, useState } from 'react'
 import { ReactNode } from 'react'
 import { z } from 'zod'
 
+interface AlertProps {
+  id: string
+  type: string
+  alertHeading: string
+  alertBody: string
+}
 interface CardProps {
   cardTitle: string
   viewMoreLessCaption: string
@@ -10,9 +17,13 @@ interface CardProps {
   acronym: string
   refPageAA: string
   children: ReactNode
+  locale: string
+  cardAlert: AlertProps[]
 }
 
 const Card = ({
+  cardAlert,
+  locale,
   cardTitle,
   viewMoreLessCaption,
   programUniqueId,
@@ -21,6 +32,7 @@ const Card = ({
   children,
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
+
   const CardState = z
     .string()
     .toLowerCase()
@@ -85,12 +97,44 @@ const Card = ({
         ariaLabel={`${cardTitle} - ${viewMoreLessCaption}`}
       />
       {!isOpen ? null : (
-        <div className="pb-6" data-cy="sectionList">
-          {children}
+        <div>
+          {cardAlert.map((alert, index) => {
+            const alertType = alert.type[0].split('/').pop()
+            return (
+              <ul className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15" key={index}>
+                <ContextualAlert
+                  id={alert.id}
+                  type={alertType}
+                  alertHeading={alert.alertHeading}
+                  alertBody={alert.alertBody}
+                  alert_icon_alt_text={`${alertType} ${
+                    locale === 'fr' ? 'Icônes' : 'icon'
+                  }`}
+                  alert_icon_id={` alert-icon ${alert.id}`}
+                />
+              </ul>
+            )
+          })}
+          <div className="pb-6" data-cy="sectionList">
+            {children}
+          </div>
         </div>
       )}
     </div>
   )
+}
+
+Card.defaultProps = {
+  cardAlert: [
+    {
+      id: '',
+      type: '',
+      alertHeading: '',
+      alertBody: '',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+  ],
 }
 
 export default Card

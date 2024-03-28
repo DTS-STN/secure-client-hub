@@ -2,7 +2,7 @@ import { buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchMyDashboardV1 {
+interface GetSchMyDashboardV2 {
   data: {
     schPageV1ByPath: {
       item: {
@@ -17,6 +17,18 @@ interface GetSchMyDashboardV1 {
         scOwner: Array<string>
         scDateModifiedOverwrite: string
         scAudience: null
+        schAlerts?: Array<{
+          scId?: string
+          scHeadingEn?: string
+          scHeadingFr?: string
+          scContentEn?: {
+            markdown: string
+          }
+          scContentFr?: {
+            markdown: string
+          }
+          scAlertType?: Array<string>
+        }>
         scFragments: Array<{
           scId: string
           scTitleEn: null
@@ -27,6 +39,18 @@ interface GetSchMyDashboardV1 {
             scId: string
             scTitleEn: string
             scTitleFr: string
+            schAlerts?: Array<{
+              scId: string
+              scHeadingEn: string
+              scHeadingFr: string
+              scContentEn?: {
+                markdown: string
+              }
+              scContentFr?: {
+                markdown: string
+              }
+              scAlertType?: Array<string>
+            }>
             schTasks: Array<{
               scId: string
               scLinkTextEn: string
@@ -63,10 +87,10 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV2`,
       )
       if (!response.ok) return null
-      return (await response.json()) as GetSchMyDashboardV1
+      return (await response.json()) as GetSchMyDashboardV2
     },
     ttl,
   })
@@ -74,11 +98,20 @@ const getCachedContent = () => {
 
 export async function getMyDashboardContent() {
   const response = await getCachedContent()
+  const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
 
   const mappedHome = {
     en: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageAlerts: pageAlertContent?.map((pageAlert) => {
+        return {
+          id: pageAlert.scId,
+          alertHeading: pageAlert.scHeadingEn,
+          alertBody: pageAlert.scContentEn?.markdown,
+          type: pageAlert.scAlertType,
+        }
+      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
@@ -86,6 +119,14 @@ export async function getMyDashboardContent() {
             id: fragment.scId,
             title: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
+            cardAlerts: fragment.schAlerts?.map((alert) => {
+              return {
+                id: alert.scId,
+                alertHeading: alert.scHeadingEn,
+                alertBody: alert.scContentEn?.markdown,
+                type: alert.scAlertType,
+              }
+            }),
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
@@ -106,16 +147,24 @@ export async function getMyDashboardContent() {
         .filter((e) => e),
       exitBeta: {
         title: response?.data.schPageV1ByPath.item.scFragments.find(
-          ({ scId }) => scId === 'exit-beta-version'
+          ({ scId }) => scId === 'exit-beta-version',
         )?.scTitleEn,
         link: response?.data.schPageV1ByPath.item.scFragments.find(
-          ({ scId }) => scId === 'exit-beta-version'
+          ({ scId }) => scId === 'exit-beta-version',
         )?.scDestinationURLEn,
       },
     },
     fr: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageAlerts: pageAlertContent?.map((pageAlert) => {
+        return {
+          id: pageAlert.scId,
+          alertHeading: pageAlert.scHeadingFr,
+          alertBody: pageAlert.scContentFr?.markdown,
+          type: pageAlert.scAlertType,
+        }
+      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
@@ -124,6 +173,14 @@ export async function getMyDashboardContent() {
             id: fragment.scId,
             title: fragment.scTitleFr,
             dropdownText: fragment.schTasks[0].scLinkTextFr,
+            cardAlerts: fragment.schAlerts?.map((alert) => {
+              return {
+                id: alert.scId,
+                alertHeading: alert.scHeadingFr,
+                alertBody: alert.scContentFr?.markdown,
+                type: alert.scAlertType,
+              }
+            }),
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,
@@ -144,10 +201,10 @@ export async function getMyDashboardContent() {
         .filter((e) => e),
       exitBeta: {
         title: response?.data.schPageV1ByPath.item.scFragments.find(
-          ({ scId }) => scId === 'exit-beta-version'
+          ({ scId }) => scId === 'exit-beta-version',
         )?.scTitleFr,
         link: response?.data.schPageV1ByPath.item.scFragments.find(
-          ({ scId }) => scId === 'exit-beta-version'
+          ({ scId }) => scId === 'exit-beta-version',
         )?.scDestinationURLFr,
       },
     },
