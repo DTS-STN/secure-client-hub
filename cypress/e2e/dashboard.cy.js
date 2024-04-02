@@ -39,8 +39,8 @@ describe('Validate dashboard page', () => {
     cy.get('[data-testid="myDashboardContent-test"]')
       .children('[data-cy="cards"]')
       .should('be.visible')
-      .and('have.length', 5)
-    cy.get('[data-cy="cardtitle"]').should('be.visible').and('have.length', 5)
+      .and('have.length', 6)
+    cy.get('[data-cy="cardtitle"]').should('be.visible').and('have.length', 6)
   })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
@@ -50,6 +50,7 @@ describe('Validate dashboard page', () => {
   // EN This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links EN', () => {
     const cardTitles = [
+      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security',
@@ -81,6 +82,7 @@ describe('Validate dashboard page', () => {
   // FR This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links FR', () => {
     const cardTitles = [
+      'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
       'Sécurité de la vieillesse',
@@ -113,8 +115,8 @@ describe('Validate dashboard page', () => {
 
   // EN Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for title and links for EN', () => {
-    // 4 = EI, 4 = CPP and 5 = OAS
-    const EICPPOAS = [3, 4, 5]
+    // 4 = EI, 5 = CPP and 6 = OAS
+    const EICPPOAS = [4, 5, 6]
 
     cy.wrap(EICPPOAS).each((index) => {
       console.log(EICPPOAS)
@@ -146,8 +148,8 @@ describe('Validate dashboard page', () => {
 
   // FR Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for title and links for FR', () => {
-     // 4 = EI, 4 = CPP and 5 = OAS
-     const EICPPOAS = [3, 4, 5]
+     // 4 = EI, 5 = CPP and 6 = OAS
+     const EICPPOAS = [4, 5, 6]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
     cy.wrap(EICPPOAS).each((index) => {
@@ -179,8 +181,8 @@ describe('Validate dashboard page', () => {
 
   // EN Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page EN', () => {
-    // 4 = EI, 4 = CPP and 5 = OAS
-    const EICPPOAS = [3, 4, 5]
+    // 4 = EI, 5 = CPP and 6 = OAS
+    const EICPPOAS = [4, 5, 6]
     cy.wrap(EICPPOAS).each((index) => {
       cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
       cy.get('[data-cy="most-requested"]').should('be.visible')
@@ -200,8 +202,8 @@ describe('Validate dashboard page', () => {
 
   // FR Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page FR', () => {
-    // 4 = EI, 4 = CPP and 5 = OAS
-    const EICPPOAS = [3, 4, 5]
+    // 4 = EI, 5 = CPP and 6 = OAS
+    const EICPPOAS = [4, 5, 6]
 
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -226,9 +228,9 @@ describe('Validate dashboard page', () => {
 
   // EN Tests the Links for Decision Review page in CPP and OAS
   it('Iterates through CPP and OAS tasks for Decision Review page EN', () => {
-    // 4 = EI, 4 = CPP and 5 = OAS
-    const EICPPOAS = [4, 5]
-    cy.wrap(EICPPOAS).each((index) => {
+    // 5 = CPP and 6 = OAS
+    const CPPOAS = [5, 6]
+    cy.wrap(CPPOAS).each((index) => {
       cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
       cy.get('[data-cy="most-requested"]').should('be.visible')
       cy.get(` [data-cy="task-list"]`)
@@ -249,11 +251,11 @@ describe('Validate dashboard page', () => {
 
   // FR Tests the Links for Decision Review page in CPP and OAS
   it('Iterates through CPP and OAS tasks for Decision Review page FR', () => {
-    // 4 = EI, 4 = CPP and 5 = OAS
-    const EICPPOAS = [4, 5]
+    // 5 = CPP and 6 = OAS
+    const CPPOAS = [5, 6]
     cy.changeLang().should('have.text', 'English')
     cy.url().should('contains', '/fr/mon-tableau-de-bord')
-    cy.wrap(EICPPOAS).each((index) => {
+    cy.wrap(CPPOAS).each((index) => {
       cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
       cy.get('[data-cy="most-requested"]').should('be.visible')
       cy.get(` [data-cy="task-list"]`)
