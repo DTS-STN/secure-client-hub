@@ -100,9 +100,6 @@ spec:
             {{- if .Values.oauth.args.sessionCookieMinimal }}
             - --session-cookie-minimal={{ .Values.oauth.args.sessionCookieMinimal }}
             {{- end }}
-            {{- if .Values.oauth.args.scope }}
-            - --scope={{ range $i, $value := .Values.oauth.args.scope }}{{ if ne $i 0 }},{{ end }}{{ $value | quote }}{{ end }}
-            {{- end }}
           name: oauth-proxy
           image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
           imagePullPolicy: Always
