@@ -211,11 +211,6 @@ oauth:
     {{- if env "OAUTH_SESSION_COOKIE" }}
     sessionCookieMinimal: true
     {{- end }}
-    {{- if env "OAUTH_SCOPE" }}
-    scope:
-      - "openid"
-      - "email"
-    {{- end }}
   extraEnv:
     - name: OAUTH2_PROXY_CLIENT_SECRET
       valueFrom:
