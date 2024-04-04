@@ -100,8 +100,8 @@ describe('My Dashboard page', () => {
         popupContentNA={popupContent}
       />,
     )
-    const testCard = screen.getByTestId('mock-card')
-    expect(testCard).toBeInTheDocument()
+    const testCard = screen.getAllByTestId('mock-card')
+    expect(testCard[0]).toBeInTheDocument()
   })
 
   it('should contain an alert', () => {
