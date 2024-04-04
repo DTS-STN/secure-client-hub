@@ -1,52 +1,33 @@
-import { useEffect, useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
+
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
-import { useRouter } from 'next/router'
+import { getToken } from 'next-auth/jwt'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [response, setResponse] = useState()
-  const router = useRouter()
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    [],
-  )
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent],
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -79,6 +60,75 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
+      {props.content.pageAlerts.map((alert, index) => {
+        const alertType = alert.type[0].split('/').pop()
+        return (
+          <ul className="mt-6 w-full sm:px-8 md:px-15" key={index}>
+            <ContextualAlert
+              id={alert.id}
+              type={alertType}
+              alertHeading={alert.alertHeading}
+              alertBody={alert.alertBody}
+              alert_icon_id={` alert-icon ${alert.id}`}
+              alert_icon_alt_text={`${alertType} ${
+                props.locale === 'fr' ? 'Icône' : 'icon'
+              }`}
+            />
+          </ul>
+        )
+      })}
+      <Card
+        key={'canadian-dental-care-plan'}
+        programUniqueId={'canadian-dental-care-plan'}
+        locale={props.locale}
+        cardTitle={
+          props.locale === 'en'
+            ? 'Canadian Dental Care Plan'
+            : 'Régime canadien de soins dentaires'
+        }
+        viewMoreLessCaption={
+          props.locale === 'en'
+            ? 'Personal information'
+            : 'Informations personnelles'
+        }
+        acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
+        refPageAA={`ESDC-EDSC:${props.content.heading}`}
+        hasAlert={false}
+      >
+        <div className="bg-deep-blue-60d" data-cy="most-requested-section">
+          <MostReqTasks
+            locale={props.locale}
+            taskListMR={{
+              title: props.locale === 'en' ? 'Most requested' : 'En demande',
+              tasks: [
+                {
+                  id:
+                    props.locale === 'en'
+                      ? 'cdcp-view-my-letters'
+                      : 'RCSD-consulter-mes-lettres',
+                  title:
+                    props.locale === 'en'
+                      ? 'View my letters'
+                      : 'Consulter mes lettres',
+                  areaLabel:
+                    props.locale === 'en'
+                      ? 'View my Canada Dental Care Plan Letters'
+                      : 'Voir mes lettres du Régime de soins dentaires du Canada',
+                  link:
+                    props.locale === 'en'
+                      ? 'https://cdcp-staging.dev-dp-internal.dts-stn.com/en/letters'
+                      : 'https://cdcp-staging.dev-dp-internal.dts-stn.com/fr/letters',
+                  icon: '',
+                  betaPopUp: true,
+                },
+              ],
+            }}
+            dataCy="most-requested"
+            acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
+            refPageAA={`ESDC-EDSC:${props.content.heading}`}
+          />
+        </div>
+      </Card>
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -91,6 +141,7 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={card.dropdownText}
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
+            cardAlert={card.cardAlerts}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
@@ -128,9 +179,26 @@ export default function MyDashboard(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sub,
+    )
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('my-dashboard')
@@ -201,6 +269,7 @@ export async function getServerSideProps({ req, res, locale }) {
             ? content.en
             : content.fr,
       meta,
+
       bannerContent:
         bannerContent?.err !== undefined
           ? bannerContent

@@ -14,7 +14,7 @@ export interface BreadcrumbProps {
 
 const Breadcrumb = ({ id, items }: BreadcrumbProps) => {
   return (
-    <nav className="py-6" aria-label="breadcrumbs" id={id}>
+    <nav className="py-6" aria-label="Breadcrumb-Fil d’ariane" id={id}>
       <ul className="block font-body text-base leading-[23px] text-deep-blue-dark">
         {items
           ? items.map((item, key) => {
