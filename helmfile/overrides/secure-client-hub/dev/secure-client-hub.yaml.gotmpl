@@ -117,7 +117,7 @@ ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-buffer-size: {{ env "PROXY_BUFFER_SIZE" | default "8k" }}
+      nginx.ingress.kubernetes.io/proxy-buffer-size: {{ env "OAUTH_PROXY_BUFFER_SIZE" | default "8k" }}
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     tls:
       - hosts:
@@ -208,7 +208,7 @@ oauth:
     oidcIssuerURL: https://login.microsoftonline.com/9ed55846-8a81-4246-acd8-b1a01abfc0d1/v2.0
     skipJWTBearerTokens: true
     skipProviderButton: false
-    {{- if env "OAUTH_SESSION_COOKIE" }}
+    {{- if env "OAUTH_SESSION_COOKIE_MINIMAL" }}
     sessionCookieMinimal: true
     {{- end }}
   extraEnv:
