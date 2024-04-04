@@ -74,10 +74,11 @@ const PhaseBanner = ({
               <summary
                 key={`summary-${id}`}
                 className=" cursor-pointer select-none px-0.5 py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline focus:text-blue-hover focus:underline"
+                data-gc-analytics-customclick={`${refPageAA}:${id}`}
               >
                 {bannerSummaryTitle}
               </summary>
-              <div data-gc-analytics-customclick={`${refPageAA}:${id}`}>
+              <div>
                 <Markdown
                   options={{
                     overrides: {
