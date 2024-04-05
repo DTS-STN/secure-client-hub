@@ -338,4 +338,24 @@ describe('Validate dashboard page', () => {
       '/fr/contactez-nous'
     )
   })
+  it('Validate the state of the card after the page reloads', () => {
+    const cardTitles = [
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      cy.get('@currentCard').within(() => {
+      Cypress.session.clearCurrentSessionData()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'false')
+        cy.get('[data-cy="viewMoreLessButton"]').click()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'true')
+        cy.reload()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'true')
+      })
+    })
+  })
+  
 })
