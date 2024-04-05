@@ -132,6 +132,9 @@ export default function Layout(props) {
         dataGcAnalyticsCustomClickInstitutionVariable={
           props.children.props.aaPrefix
         }
+        dataGcAnalyticsCustomClickMenuVariable={
+          props.dataGcAnalyticsCustomClickMenuVariable
+        }
         menuProps={{
           legacyBehavior: true,
           menuList: [
