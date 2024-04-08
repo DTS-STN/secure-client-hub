@@ -123,6 +123,7 @@ export default function Layout(props) {
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
+        refPageAA={props.refPageAA}
         topnavProps={{
           skipToMainPath: '#mainContent',
           skipToAboutPath: '#page-footer',
