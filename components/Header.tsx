@@ -45,6 +45,7 @@ interface HeaderProps {
   menuProps: MenuProps
   topnavProps: TopNavProps
   breadCrumbItems: BreadcrumbItemProps[]
+  refPageAA: string
   dataGcAnalyticsCustomClickInstitutionVariable: string
   dataGcAnalyticsCustomClickMenuVariable: string
 }
@@ -55,6 +56,7 @@ const Header = ({
   linkPath,
   menuProps,
   breadCrumbItems,
+  refPageAA,
   topnavProps,
   dataGcAnalyticsCustomClickInstitutionVariable,
   dataGcAnalyticsCustomClickMenuVariable,
@@ -117,7 +119,9 @@ const Header = ({
           dataGcAnalyticsCustomClick={dataGcAnalyticsCustomClickMenuVariable}
         />
         <div className="sch-container">
-          <Breadcrumb items={breadCrumbItems} />
+          <Breadcrumb items={breadCrumbItems}
+            refPageAA={refPageAA}
+        />
         </div>
       </header>
     </div>
