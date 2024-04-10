@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
+import OasCard from '../components/OasCard'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 
@@ -173,6 +174,7 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
+      <OasCard locale="en"></OasCard>
     </div>
   )
 }
