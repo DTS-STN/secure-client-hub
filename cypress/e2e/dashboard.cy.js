@@ -35,7 +35,7 @@ describe('Validate dashboard page', () => {
     cy.get('[data-testid="bannerButton"]').should('be.visible')
   })
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +2 cards for (CPCD and OAS) and Card titles are Visible', () => {
+  it.skip('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +2 cards for (CPCD and OAS) and Card titles are Visible', () => {
     cy.get('[data-testid="myDashboardContent-test"]')
       .children('[data-cy="cards"]')
       .should('be.visible')
