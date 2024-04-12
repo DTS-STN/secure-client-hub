@@ -86,7 +86,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
@@ -106,7 +106,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()

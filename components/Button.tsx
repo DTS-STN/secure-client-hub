@@ -49,20 +49,20 @@ const Button = ({
     style === 'primary'
       ? primary
       : style === 'secondary'
-      ? secondary
-      : style === 'supertask'
-      ? supertask
-      : style === 'danger'
-      ? danger
-      : style === 'link'
-      ? link
-      : ''
+        ? secondary
+        : style === 'supertask'
+          ? supertask
+          : style === 'danger'
+            ? danger
+            : style === 'link'
+              ? link
+              : ''
 
   return href === 'no ref' ? (
     <button
       className={`flex flex-row ${buttonStyle} ${
         disabled ? 'cursor-not-allowed' : ''
-      } py-1.5 px-3.5 rounded focus:ring focus:ring-offset-4 ${className} `}
+      } rounded px-3.5 py-1.5 focus:ring focus:ring-offset-4 ${className} `}
       onClick={onClick}
       data-gc-analytics-customclick={`${refPageAA}:${text}`}
       type={type}
@@ -72,11 +72,11 @@ const Button = ({
       data-testid={id}
     >
       {icon && !iconEnd ? (
-        <span className="grid place-items-center h-8 w-8">
+        <span className="grid h-8 w-8 place-items-center">
           <Image
             width={8}
             height={8}
-            className="pr-2 rounded"
+            className="rounded pr-2"
             src={icon}
             alt={iconAltText}
           />
@@ -85,11 +85,11 @@ const Button = ({
       {text}
       {children}
       {icon && iconEnd ? (
-        <span className="grid place-items-center h-8 w-8">
+        <span className="grid h-8 w-8 place-items-center">
           <Image
             width={8}
             height={8}
-            className="pl-2 rounded"
+            className="rounded pl-2"
             src={icon}
             alt={iconAltText}
           />
@@ -102,18 +102,18 @@ const Button = ({
       href={href}
       className={`flex flex-row ${disabled ? 'cursor-not-allowed' : ''} ${
         style === 'link'
-          ? `font-body text-xl leading-[23px] text-deep-blue-dark hover:text-blue-hover rounded-sm active:text-blue-hover focus:outline-1 focus:outline-blue-hover visited:text-purple-50a`
+          ? `rounded-sm font-body text-xl leading-[23px] text-deep-blue-dark visited:text-purple-50a hover:text-blue-hover focus:outline-1 focus:outline-blue-hover active:text-blue-hover`
           : style === 'none'
-          ? ''
-          : buttonStyle
-      } py-1.5 px-3.5 ${className} `}
+            ? ''
+            : buttonStyle
+      } px-3.5 py-1.5 ${className} `}
       onClick={onClick}
       id={id}
       data-gc-analytics-customclick={`${refPageAA}:${id}`}
     >
       {icon && !iconEnd ? (
         <Image
-          className="pr-2 rounded"
+          className="rounded pr-2"
           width={8}
           height={8}
           src={icon}
@@ -125,7 +125,7 @@ const Button = ({
       {icon && iconEnd ? (
         <div className="grid place-items-center">
           <Image
-            className="rounded pl-5 pb-3"
+            className="rounded pb-3 pl-5"
             width={8}
             height={8}
             src={icon}

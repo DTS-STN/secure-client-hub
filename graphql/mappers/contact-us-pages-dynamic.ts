@@ -122,7 +122,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsDynamicV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsDynamicV1`,
       )
 
       if (!response.ok) return null
@@ -143,7 +143,7 @@ export type GetContactUsPageReturnType = Awaited<
 export async function getContactUsPage(id: string) {
   const response = await getCachedContent()
   const queryData = response?.data.schPageV1List.items.find(
-    ({ scId }) => scId === id
+    ({ scId }) => scId === id,
   )
 
   // Fail fast if a non-existent page is queried
@@ -202,7 +202,7 @@ export async function getContactUsPage(id: string) {
                                 button: destination.scButtonType,
                               }
                             }
-                          }
+                          },
                         )[0] ?? {}),
                       }
                     } else {
@@ -280,7 +280,7 @@ export async function getContactUsPage(id: string) {
                                 button: destination.scButtonType,
                               }
                             }
-                          }
+                          },
                         )[0] ?? {}),
                       }
                     } else {

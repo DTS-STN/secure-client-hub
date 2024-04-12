@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
         process.env.CLIENT_ID,
-        token.sub
+        token.sub,
       )
       if (sessionValid) {
         res.status(200).json({ success: sessionValid, id: id })
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     //return unimplemented
     res.status(501).json({ success: false })
     logger.error(
-      'Something went wrong when trying reach the MSCA refresh endpoint'
+      'Something went wrong when trying reach the MSCA refresh endpoint',
     )
   }
 }
