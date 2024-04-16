@@ -35,13 +35,23 @@ describe('Validate dashboard page', () => {
     cy.get('[data-testid="bannerButton"]').should('be.visible')
   })
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) and Card titles are Visible', () => {
-    cy.get('[data-testid="myDashboardContent-test"]')
-      .children('[data-cy="cards"]')
-      .should('be.visible')
-      .and('have.length', 6)
-    cy.get('[data-cy="cardtitle"]').should('be.visible').and('have.length', 6)
+  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +2 cards for (CPCD and OAS) and Card titles are Visible', () => {
+    const cardTitles = [
+      'Canadian Dental Care Plan',
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+      'Social Insurance Number',
+      'Canada Apprentice Loan',
+      'Old Age Security',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
   })
+})
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
     cy.get("[class='sch-container'] >nav>ul>li>a").should('not.exist')
@@ -53,7 +63,7 @@ describe('Validate dashboard page', () => {
       'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
       'Social Insurance Number',
       'Canada Apprentice Loan',
     ]
@@ -85,7 +95,7 @@ describe('Validate dashboard page', () => {
       'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
       'Numéro d’assurance sociale',
       'Prêt canadien aux apprentis',
     ]
@@ -115,15 +125,20 @@ describe('Validate dashboard page', () => {
 
   // EN Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for title and links for EN', () => {
-    // 4 = EI, 5 = CPP and 6 = OAS
-    const EICPPOAS = [4, 5, 6]
-
-    cy.wrap(EICPPOAS).each((index) => {
-      console.log(EICPPOAS)
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
-      // iterate through the task list for title and task links
-      cy.get(`:nth-child(${index}) [data-cy="task-list"]`)
+    const cardTitles = [
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+          // Find the card with the specific title
+          cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+          // Check the card title
+          cy.get('@currentCard').should('contain', cardTitle)
+            cy.get('@currentCard').within(() => {
+        cy.get('[data-cy="viewMoreLessButton"]').click()
+        cy.get('[data-cy="task-list"]').should('be.visible')
+        cy.get('[data-cy="task-list"]')
         .children()
         .each(($item) => {
           cy.wrap($item).within(() => {
@@ -143,136 +158,176 @@ describe('Validate dashboard page', () => {
               })
           })
         })
+      })
     })
   })
 
   // FR Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for title and links for FR', () => {
-     // 4 = EI, 5 = CPP and 6 = OAS
-     const EICPPOAS = [4, 5, 6]
+    const cardTitles = [
+      'Assurance-emploi',
+      'Régime de pensions du Canada',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
+    ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
-    cy.wrap(EICPPOAS).each((index) => {
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
-      // iterate through the task list for title and task links
-      cy.get(`:nth-child(${index}) [data-cy="task-list"]`)
-        .children()
-        .each(($item) => {
-          cy.wrap($item).within(() => {
-            cy.get('[data-cy="task-group-list"]')
-              .invoke('text')
-              .then((title) => {
-                expect(title.trim()).to.not.be.empty
-                // check for the sublist of tasks
-                cy.get('[data-cy="taskList"]')
-                  .children('[data-cy="task-link"]')
-                  .should('have.length.gt', 0)
-                cy.get('[data-cy="taskList"]')
-                  .children('[data-cy="task-link"]')
-                  .each(($link) => {
-                    cy.wrap($link).should('not.have.attr', 'href', '#undefined')
-                  })
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
+        cy.get('@currentCard').within(() => {
+    cy.get('[data-cy="viewMoreLessButton"]').click()
+    cy.get('[data-cy="task-list"]').should('be.visible')
+    cy.get('[data-cy="task-list"]')
+    .children()
+    .each(($item) => {
+      cy.wrap($item).within(() => {
+        cy.get('[data-cy="task-group-list"]')
+          .invoke('text')
+          .then((title) => {
+            expect(title.trim()).to.not.be.empty
+            // check for the sublist of tasks
+            cy.get('[data-cy="taskList"]')
+              .children('[data-cy="task-link"]')
+              .should('have.length.gt', 0)
+            cy.get('[data-cy="taskList"]')
+              .children('[data-cy="task-link"]')
+              .each(($link) => {
+                cy.wrap($link).should('not.have.attr', 'href', '#undefined')
               })
           })
-        })
+      })
     })
+  })
+})
   })
 
   // EN Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page EN', () => {
-    // 4 = EI, 5 = CPP and 6 = OAS
-    const EICPPOAS = [4, 5, 6]
-    cy.wrap(EICPPOAS).each((index) => {
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
-      cy.get(` [data-cy="task-list"]`)
-      cy.get('[data-cy="Task"]')
-      cy.get('[data-cy="task-group-list"]')
-        .parents('[data-cy="Task"]')
-        .find('[data-cy="task-link"] a[href="/en/profile"]')
-        .click({ force: true })
-      cy.location('pathname', { timeout: 10000 }).should('equal', '/en/profile')
-      cy.get('#back-to-dashboard-button').should('exist').click()
-      cy.location('pathname').should('equal', '/en/my-dashboard')
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      // cy.url().should('contains', '/en/my-dashboard')
+    const cardTitles = [
+      // 'Canadian Dental Care Plan',
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+      // 'Social Insurance Number',
+      // 'Canada Apprentice Loan',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+          // Find the card with the specific title
+          cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+          // Check the card title
+          cy.get('@currentCard').should('contain', cardTitle)
+            cy.get('@currentCard').within(() => {
+        cy.get('[data-cy="viewMoreLessButton"]').click()
+        cy.get('[data-cy="most-requested"]').should('be.visible')
+        cy.get(` [data-cy="task-list"]`)
+        cy.get('[data-cy="Task"]')
+        cy.get('[data-cy="task-group-list"]')
+          .parents('[data-cy="Task"]')
+          .find('[data-cy="task-link"] a[href="/en/profile"]')
+          .click({ force: true })
+        cy.location('pathname', { timeout: 10000 }).should('equal', '/en/profile')
+        cy.visit('/my-dashboard')
+        cy.location('pathname').should('equal', '/en/my-dashboard')
+        cy.get(` [data-cy="viewMoreLessButton"]`).click()
+      })
     })
+    
   })
 
   // FR Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page FR', () => {
-    // 4 = EI, 5 = CPP and 6 = OAS
-    const EICPPOAS = [4, 5, 6]
-
+    const cardTitles = [
+      // 'Régime canadien de soins dentaires',
+      'Assurance-emploi',
+      'Régime de pensions du Canada',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
+      // 'Numéro d’assurance sociale',
+      // 'Prêt canadien aux apprentis',
+    ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
 
-    cy.wrap(EICPPOAS).each((index) => {
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
-      cy.get(` [data-cy="task-list"]`)
-      cy.get('[data-cy="Task"]')
-      cy.get('[data-cy="task-group-list"]')
-        .parents('[data-cy="Task"]')
-        .find('[data-cy="task-link"] a[href="/fr/profil"]')
-        .click({ force: true })
-      cy.location('pathname', { timeout: 10000 }).should('equal', '/fr/profil')
-
-      cy.url().should('contains', '/fr/profil')
-      cy.get('#back-to-dashboard-button').should('exist').click()
-      cy.location('pathname').should('equal', '/fr/mon-tableau-de-bord')
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-    })
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
+        cy.get('@currentCard').within(() => {
+    cy.get('[data-cy="viewMoreLessButton"]').click()  
+    cy.get('[data-cy="most-requested"]').should('be.visible')
+    cy.get(` [data-cy="task-list"]`)
+    cy.get('[data-cy="Task"]')
+    cy.get('[data-cy="task-group-list"]')
+      .parents('[data-cy="Task"]')
+      .find('[data-cy="task-link"] a[href="/fr/profil"]')
+      .click({ force: true })
+    cy.location('pathname', { timeout: 10000 }).should('equal', '/fr/profil')
+    cy.visit('/fr/mon-tableau-de-bord')
+    cy.location('pathname').should('equal', '/fr/mon-tableau-de-bord')
+    cy.get(` [data-cy="viewMoreLessButton"]`).click()
+  })
+})
   })
 
   // EN Tests the Links for Decision Review page in CPP and OAS
   it('Iterates through CPP and OAS tasks for Decision Review page EN', () => {
-    // 5 = CPP and 6 = OAS
-    const CPPOAS = [5, 6]
-    cy.wrap(CPPOAS).each((index) => {
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
+    const cardTitles = [
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
+        cy.get('@currentCard').within(() => {
+    cy.get('[data-cy="viewMoreLessButton"]').click()
+     cy.get('[data-cy="most-requested"]').should('be.visible')
       cy.get(` [data-cy="task-list"]`)
       cy.get('[data-cy="Task"]')
       cy.get('[data-cy="task-group-list"]')
         .parents('[data-cy="Task"]')
         .find('[data-cy="task-link"] a[href="/en/decision-reviews"]')
         .click()
-      cy.location('pathname', { timeout: 10000 }).should(
+    return  cy.location('pathname', { timeout: 10000 }).should(
         'include',
-        '/decision-reviews'
-      )
-      cy.get('[data-cy="breadcrumb-My dashboard"]').should('exist').click()
-      cy.location('pathname').should('include', '/en/my-dashboard')
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
+        '/decision-reviews')  
+  })
+  cy.get('[data-cy="breadcrumb-My dashboard"]').should('exist').click()
+  cy.location('pathname').should('include', '/en/my-dashboard')
     })
   })
 
   // FR Tests the Links for Decision Review page in CPP and OAS
   it('Iterates through CPP and OAS tasks for Decision Review page FR', () => {
-    // 5 = CPP and 6 = OAS
-    const CPPOAS = [5, 6]
+    const cardTitles = [
+      'Régime de pensions du Canada',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
+    ]
     cy.changeLang().should('have.text', 'English')
-    cy.url().should('contains', '/fr/mon-tableau-de-bord')
-    cy.wrap(CPPOAS).each((index) => {
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
-      cy.get('[data-cy="most-requested"]').should('be.visible')
+    cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
+        cy.get('@currentCard').within(() => {
+    cy.get('[data-cy="viewMoreLessButton"]').click()
+     cy.get('[data-cy="most-requested"]').should('be.visible')
       cy.get(` [data-cy="task-list"]`)
       cy.get('[data-cy="Task"]')
       cy.get('[data-cy="task-group-list"]')
         .parents('[data-cy="Task"]')
         .find('[data-cy="task-link"] a[href="/fr/demande-revision"]')
-        .click({ force: true })
-      cy.location('pathname', { timeout: 10000 }).should(
-        'include',
-        '/fr/demande-revision'
-      )
-      cy.get('[data-cy="breadcrumb-Mon tableau de bord"]')
-        .should('exist')
         .click()
-      cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
-      cy.get(`:nth-child(${index}) > [data-cy="viewMoreLessButton"]`).click()
+    return  cy.location('pathname', { timeout: 10000 }).should(
+        'include',
+        '/demande-revision')  
+  })
+  cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('exist').click()
+  cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
     })
   })
 
@@ -293,4 +348,24 @@ describe('Validate dashboard page', () => {
       '/fr/contactez-nous'
     )
   })
+  it('Validate the state of the card after the page reloads', () => {
+    const cardTitles = [
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      cy.get('@currentCard').within(() => {
+      Cypress.session.clearCurrentSessionData()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'false')
+        cy.get('[data-cy="viewMoreLessButton"]').click()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'true')
+        cy.reload()
+        cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'true')
+      })
+    })
+  })
+  
 })

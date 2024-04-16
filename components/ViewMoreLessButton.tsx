@@ -43,18 +43,19 @@ const ViewMoreLessButton = ({
       data-testid={dataTestid}
       aria-expanded={ariaExpanded}
       aria-label={ariaLabel}
+      data-gc-analytics-customclick={`${refPageAA}${acronym}:ViewMoreLessButton + expanded ${ariaExpanded}`}
     >
       <div className="flex sm:items-center">
         {icon ? (
           <FontAwesomeIcon
             icon={faCircleChevronUp}
-            className={`text-46px pr-3`}
-            data-gc-analytics-customclick={`${refPageAA} ${acronym}:Contract`}
+            className={`pr-3 text-46px`}
+            data-gc-analytics-customclick={`${refPageAA} ${acronym}:Collapse`}
           />
         ) : (
           <FontAwesomeIcon
             icon={faCircleChevronDown}
-            className={`text-46px pr-3`}
+            className={`pr-3 text-46px`}
             data-gc-analytics-customclick={`${refPageAA} ${acronym}:Expand`}
           />
         )}

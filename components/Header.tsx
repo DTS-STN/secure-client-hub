@@ -45,7 +45,9 @@ interface HeaderProps {
   menuProps: MenuProps
   topnavProps: TopNavProps
   breadCrumbItems: BreadcrumbItemProps[]
+  refPageAA: string
   dataGcAnalyticsCustomClickInstitutionVariable: string
+  dataGcAnalyticsCustomClickMenuVariable: string
 }
 
 const Header = ({
@@ -54,8 +56,10 @@ const Header = ({
   linkPath,
   menuProps,
   breadCrumbItems,
+  refPageAA,
   topnavProps,
   dataGcAnalyticsCustomClickInstitutionVariable,
+  dataGcAnalyticsCustomClickMenuVariable,
 }: HeaderProps) => {
   return (
     <div className="font-display" id={id} data-testid="header">
@@ -73,9 +77,9 @@ const Header = ({
               <Image
                 className={`${
                   lang === 'en'
-                    ? 'md:max-h-[34px] max-h-[19px]'
-                    : 'md:max-h-[35px] max-h-[20px]'
-                } md:max-w-[360px] max-w-[206px]`}
+                    ? 'max-h-[19px] md:max-h-[34px]'
+                    : 'max-h-[20px] md:max-h-[35px]'
+                } max-w-[206px] md:max-w-[360px]`}
                 src={lang === 'en' ? logoFile : logoFileFR}
                 alt={
                   lang === 'en'
@@ -86,7 +90,7 @@ const Header = ({
                 height={76}
               />
             </div>
-            <div className="sm:hidden ml-auto pb-2.5">
+            <div className="ml-auto pb-2.5 sm:hidden">
               <Language
                 id="lang2"
                 lang={lang}
@@ -98,7 +102,7 @@ const Header = ({
               />
             </div>
           </div>
-          <div className="pb-2.5 sm:pb-3.5 md:pb-0 hidden sm:ml-auto sm:flex sm:pt-2.5 md:ds-pt-4.5">
+          <div className="md:ds-pt-4.5 hidden pb-2.5 sm:ml-auto sm:flex sm:pb-3.5 sm:pt-2.5 md:pb-0">
             <Language
               id="lang1"
               lang={lang}
@@ -112,12 +116,12 @@ const Header = ({
         <Menu
           lang={lang}
           menuList={menuProps.menuList}
-          dataGcAnalyticsCustomClickInstitutionVariable={
-            dataGcAnalyticsCustomClickInstitutionVariable
-          }
+          dataGcAnalyticsCustomClick={dataGcAnalyticsCustomClickMenuVariable}
         />
         <div className="sch-container">
-          <Breadcrumb items={breadCrumbItems} />
+          <Breadcrumb items={breadCrumbItems}
+            refPageAA={refPageAA}
+        />
         </div>
       </header>
     </div>
