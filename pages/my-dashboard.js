@@ -99,8 +99,8 @@ export default function MyDashboard(props) {
         }
         viewMoreLessCaption={
           props.locale === 'en'
-            ? 'Personal information'
-            : 'Informations personnelles'
+            ? 'Most requested actions'
+            : 'Actions les plus demandées'
         }
         acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
         refPageAA={`ESDC-EDSC:${props.content.heading}`}
