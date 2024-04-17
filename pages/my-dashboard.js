@@ -4,7 +4,7 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
-
+import InfoMessage from '../components/InfoMessage'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
@@ -59,6 +59,17 @@ export default function MyDashboard(props) {
       data-testid="myDashboardContent-test"
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
+
+      <InfoMessage
+        id="dashboard-info-message"
+        label={t.dashboardInfo.label}
+        messageText={t.dashboardInfo.messageText}
+        messageLinkText={t.dashboardInfo.messageLinkText}
+        messageLinkHref={t.dashboardInfo.messageLinkHref}
+        icon="arrow-up-right-from-square"
+        refPageAA={`${props.aaPrefix}`}
+        locale={props.locale}
+      />
 
       {props.content.pageAlerts.map((alert, index) => {
         const alertType = alert.type[0].split('/').pop()

@@ -23,6 +23,16 @@ export default {
     title: 'Mon tableau de bord',
     profile: 'Profil',
   },
+  //
+  //Dashboard info message
+  dashboardInfo: {
+    label: 'Nouveau',
+    messageText:
+      'Mon dossier Service Canada a une nouvelle apparence. Pour en savoir plus, veuillez consulter les ',
+    messageLinkHref:
+      'https://alpha.service.canada.ca/fr/projets/tableau-de-bord',
+    messageLinkText: ' Laboratoires de Service Canada',
+  },
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Version bêta :',
