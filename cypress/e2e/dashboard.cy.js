@@ -35,13 +35,41 @@ describe('Validate dashboard page', () => {
     cy.get('[data-testid="bannerButton"]').should('be.visible')
   })
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) and Card titles are Visible', () => {
-    cy.get('[data-testid="myDashboardContent-test"]')
-      .children('[data-cy="cards"]')
-      .should('be.visible')
-      .and('have.length', 6)
-    cy.get('[data-cy="cardtitle"]').should('be.visible').and('have.length', 6)
+  it('Validate info message is present on Dashboard EN', () => {
+    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'New')
+    cy.get('[data-cy="info-message-text"]').should('be.visible')
+    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
   })
+
+  it('Validate info message is present on Dashboard FR', () => {
+    cy.changeLang().should('have.text', 'English')
+    cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
+    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'Nouveau')
+    cy.get('[data-cy="info-message-text"]').should('be.visible')
+    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
+  })
+ 
+
+  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +1 cards for (CPCD) and Card titles are Visible', () => {
+    const cardTitles = [
+      'Canadian Dental Care Plan',
+      'Employment Insurance',
+      'Canada Pension Plan',
+      'Old Age Security and Guaranteed Income Supplement',
+      'Social Insurance Number',
+      'Canada Apprentice Loan',
+    ]
+    cy.wrap(cardTitles).each((cardTitle) => {
+      // Find the card with the specific title
+      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      // Check the card title
+      cy.get('@currentCard').should('contain', cardTitle)
+  })
+  cy.get('[data-testid="myDashboardContent-test"]')
+  .children('[data-cy="cards"]')
+  .should('be.visible')
+  .and('have.length', 6)
+})
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
     cy.get("[class='sch-container'] >nav>ul>li>a").should('not.exist')
@@ -53,7 +81,7 @@ describe('Validate dashboard page', () => {
       'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
       'Social Insurance Number',
       'Canada Apprentice Loan',
     ]
@@ -85,7 +113,7 @@ describe('Validate dashboard page', () => {
       'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
       'Numéro d’assurance sociale',
       'Prêt canadien aux apprentis',
     ]
@@ -118,7 +146,7 @@ describe('Validate dashboard page', () => {
     const cardTitles = [
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
           // Find the card with the specific title
@@ -157,7 +185,7 @@ describe('Validate dashboard page', () => {
     const cardTitles = [
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -199,7 +227,7 @@ describe('Validate dashboard page', () => {
       // 'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
       // 'Social Insurance Number',
       // 'Canada Apprentice Loan',
     ]
@@ -232,7 +260,7 @@ describe('Validate dashboard page', () => {
       // 'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
       // 'Numéro d’assurance sociale',
       // 'Prêt canadien aux apprentis',
     ]
@@ -265,7 +293,7 @@ describe('Validate dashboard page', () => {
   it('Iterates through CPP and OAS tasks for Decision Review page EN', () => {
     const cardTitles = [
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
@@ -294,7 +322,7 @@ describe('Validate dashboard page', () => {
   it('Iterates through CPP and OAS tasks for Decision Review page FR', () => {
     const cardTitles = [
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse',
+      'Sécurité de la vieillesse et Supplément de revenu garanti',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -342,7 +370,7 @@ describe('Validate dashboard page', () => {
     const cardTitles = [
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security',
+      'Old Age Security and Guaranteed Income Supplement',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title

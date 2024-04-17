@@ -25,7 +25,15 @@ export default {
     title: 'My dashboard',
     profile: 'Profile',
   },
-
+  //
+  //Dashboard info message
+  dashboardInfo: {
+    label: 'New',
+    messageText:
+      "Your MSCA account now has a Dashboard view! If you'd like to learn more about our changes, please visit our ",
+    messageLinkHref: 'https://alpha.service.canada.ca/en/projects/dashboard',
+    messageLinkText: ' Service Canada Labs page',
+  },
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Beta version:',
