@@ -56,6 +56,7 @@ export default function MyApp({ Component, pageProps, router }) {
         display={display}
         popupStaySignedIn={pageProps.popupStaySignedIn}
         refPageAA={pageProps.aaPrefix}
+        dataGcAnalyticsCustomClickMenuVariable={pageProps.aaMenuPrefix}
       >
         <Component {...pageProps} />
       </Layout>
