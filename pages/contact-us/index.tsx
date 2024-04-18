@@ -194,6 +194,7 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      aaMenuPrefix: `ESDC-EDSC:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

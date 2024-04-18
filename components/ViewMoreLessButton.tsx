@@ -43,7 +43,7 @@ const ViewMoreLessButton = ({
       data-testid={dataTestid}
       aria-expanded={ariaExpanded}
       aria-label={ariaLabel}
-      data-gc-analytics-customclick={`${refPageAA}${acronym}:ViewMoreLessButton + expanded ${ariaExpanded}`}
+      data-gc-analytics-customclick={`${refPageAA}-${acronym}:ViewMoreLessButton + expanded ${ariaExpanded}`}
     >
       <div className="flex sm:items-center">
         {icon ? (

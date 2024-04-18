@@ -321,6 +321,7 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? ''
           : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix: content?.err !== undefined ? '' : `ESDC-EDSC:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
