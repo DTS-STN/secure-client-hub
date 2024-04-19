@@ -230,12 +230,12 @@ oauth:
     - name: HOSTALIAS_IP
       valueFrom:
         secretKeyRef:
-          name: msca-d-{{ requiredEnv "BRANCH" | lower }}
+          name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
           key: HOSTALIAS_IP
     - name: HOSTALIAS_HOSTNAME
       valueFrom:
         secretKeyRef:
-          name: msca-d-{{ requiredEnv "BRANCH" | lower }}
+          name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
           key: HOSTALIAS_HOSTNAME
 
   resources:
