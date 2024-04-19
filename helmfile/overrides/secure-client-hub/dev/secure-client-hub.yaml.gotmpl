@@ -159,6 +159,11 @@ secrets:
       AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
       CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
       NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
+      HOSTALIAS_IP: "{{ env "HOSTALIAS_IP" }}"
+      HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
+      HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
+
+
   msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
     labels:
       app.kubernetes.io/name: service-canada-client-hub
@@ -222,6 +227,17 @@ oauth:
         secretKeyRef:
           name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
           key: OAUTH_PROXY_COOKIE_SECRET
+    - name: HOSTALIAS_IP
+      valueFrom:
+        secretKeyRef:
+          name: msca-d-{{ requiredEnv "BRANCH" | lower }}
+          key: HOSTALIAS_IP
+    - name: HOSTALIAS_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: msca-d-{{ requiredEnv "BRANCH" | lower }}
+          key: HOSTALIAS_HOSTNAME
+
   resources:
     requests:
       cpu: 50m
@@ -241,3 +257,8 @@ oauth:
     readinessPeriodSeconds: 10
     readinessSuccessThreshold: 1
 {{- end }}
+hostAliases:
+  enabled: {{ env "HOSTALIAS_ENABLED" }}
+  ip: "{{ env "HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "HOSTALIAS_HOSTNAME" }}
