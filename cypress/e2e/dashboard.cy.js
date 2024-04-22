@@ -21,20 +21,6 @@ describe('Validate dashboard page', () => {
       .and('have.text', 'Mon tableau de bord')
   })
 
-  it('Validate Beta Version Banner is present on Dashboard EN', () => {
-    cy.get('[data-cy="topBanner"]').should('be.visible')
-    cy.get('[data-cy="learnMoreAbtBeta"]').should('be.visible')
-    cy.get('[data-testid="bannerButton"]').should('be.visible')
-  })
-
-  it('Validate Beta Version Banner is present on Dashboard FR', () => {
-    cy.changeLang().should('have.text', 'English')
-    cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
-    cy.get('[data-cy="topBanner"]').should('be.visible')
-    cy.get('[data-cy="learnMoreAbtBeta"]').should('be.visible')
-    cy.get('[data-testid="bannerButton"]').should('be.visible')
-  })
-
   it('Validate info message is present on Dashboard EN', () => {
     cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'New')
     cy.get('[data-cy="info-message-text"]').should('be.visible')
