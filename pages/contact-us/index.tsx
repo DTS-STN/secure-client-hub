@@ -1,13 +1,10 @@
 import Link from 'next/link'
 import Heading from '../../components/Heading'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import {
   GetContactUsContentReturnType,
   getContactUsContent,
 } from '../../graphql/mappers/contact-us'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import {
   AuthIsDisabled,
   AuthIsValid,
@@ -136,9 +133,6 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   }
 
   const content = await getContactUsContent()
-  const bannerContent = await getBetaBannerContent()
-  const popupContent = await getBetaPopupExitContent()
-  const popupContentNA = await getBetaPopupNotAvailableContent()
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
@@ -190,9 +184,6 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
       aaPrefix: `ESDC-EDSC:${content.en.heading}`,
       popupStaySignedIn:
         locale === 'en'

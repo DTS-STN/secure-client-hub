@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, useCallback, useMemo, useEffect, cloneElement } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import MetaData from './MetaData'
@@ -191,25 +191,6 @@ Layout.defaultProps = {
   langToggleLink: '',
   locale: 'en',
   meta: '',
-  popupContent: {
-    scId: '',
-    scHeadingEn: '',
-    scHeadingFr: '',
-    scContentEn: '',
-    scContentFr: '',
-    scFragments: [
-      {
-        scId: '',
-        scLinkTextEn: '',
-        scLinkTextFr: '',
-      },
-      {
-        scId: '',
-        scLinkTextEn: '',
-        scLinkTextFr: '',
-      },
-    ],
-  },
 }
 
 Layout.propTypes = {
@@ -225,37 +206,6 @@ Layout.propTypes = {
    * Title of the page
    */
   title: PropTypes.string,
-  /*
-   * bannerContent
-   */
-  bannerContent: PropTypes.shape({
-    bannerBoldText: PropTypes.string.isRequired,
-    bannerText: PropTypes.string.isRequired,
-
-    bannerLink: PropTypes.string.isRequired,
-    bannerLinkHref: PropTypes.string.isRequired,
-
-    bannerSummaryTitle: PropTypes.string.isRequired,
-    bannerSummaryContent: PropTypes.string.isRequired,
-    bannerButtonText: PropTypes.string.isRequired,
-    bannerButtonLink: PropTypes.string.isRequired,
-  }),
-  /*
-   * popupContent
-   */
-  popupContent: PropTypes.shape({
-    popupId: PropTypes.string.isRequired,
-    popupTitle: PropTypes.string.isRequired,
-    popupDescription: PropTypes.string.isRequired,
-    popupPrimaryBtn: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-    popupSecondaryBtn: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-  }),
   /*
    * Link of the page in opposite language
    */
