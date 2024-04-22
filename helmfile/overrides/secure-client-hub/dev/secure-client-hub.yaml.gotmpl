@@ -257,8 +257,10 @@ oauth:
     readinessPeriodSeconds: 10
     readinessSuccessThreshold: 1
 {{- end }}
+{{- if env "HOSTALIAS_ENABLED" }}
 hostAliases:
   enabled: {{ env "HOSTALIAS_ENABLED" }}
   ip: "{{ env "HOSTALIAS_IP" }}"
   hostnames:
     - {{ env "HOSTALIAS_HOSTNAME" }}
+{{- end }}

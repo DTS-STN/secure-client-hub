@@ -168,3 +168,10 @@ autoscaling:
   targetCPUUtilization: 85
   labels:
     app.kubernetes.io/name: service-canada-client-hub
+{{- if env "HOSTALIAS_ENABLED" }}
+hostAliases:
+  enabled: {{ env "HOSTALIAS_ENABLED" }}
+  ip: "{{ env "HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "HOSTALIAS_HOSTNAME" }}
+{{- end }}
