@@ -48,9 +48,9 @@ RUN addgroup \
 
 WORKDIR ${home}
 
-COPY --from=build --chown=${user}:${group} /build/certs/env.crt /usr/locale/share/ca-certificates/env.crt
+COPY --from=build --chown=${user}:${group} /build/certs/env.crt /usr/local/share/ca-certificates/env.crt
 
-RUN chmod 644 /usr/locale/share/ca-certificates/env.crt && apk update && apk add ca-certificates curl && rm -rf /var/cache/apk/*  &&  update-ca-certificates
+RUN chmod 644 /usr/local/share/ca-certificates/env.crt && apk update && apk add ca-certificates curl && rm -rf /var/cache/apk/*  &&  update-ca-certificates
 
 USER ${user}
 
