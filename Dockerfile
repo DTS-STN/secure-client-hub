@@ -26,7 +26,7 @@ ENV NODE_ENV=production
 WORKDIR /build
 COPY --from=base /base ./
 
-RUN mkdir -p /build/certs && echo ${HOSTALIAS_CERT} | sed 's/\\n/\n/g' | xargs > /build/certs/env.crt && chmod 644 /build/certs/env.crt && npm run build
+RUN mkdir -p /usr/local/share/ca-certificates/ && echo ${HOSTALIAS_CERT} | sed 's/\\n/\n/g' | xargs > /usr/local/share/ca-certificates/env.crt && chmod 644 /usr/local/share/ca-certificates/env.crt && npm run build
 
 FROM node:20-alpine3.18 AS production
 ENV NODE_ENV=production
@@ -48,9 +48,9 @@ RUN addgroup \
 
 WORKDIR ${home}
 
-COPY --from=build --chown=${user}:${group} /build/certs/env.crt /usr/local/share/ca-certificates/env.crt
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt /usr/local/share/ca-certificates/env.crt
 
-RUN chmod 644 /usr/local/share/ca-certificates/env.crt && apk update && apk add ca-certificates curl && rm -rf /var/cache/apk/*  &&  update-ca-certificates
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && update-ca-certificates
 
 USER ${user}
 
