@@ -5,13 +5,13 @@ import Button from '../../components/Button'
 const CountDown = (props) => {
   return (
     <div
-      className="m-8 sm:mx-24 sm:mt-24 p-4 md:p-16 bg-white rounded h-fit"
+      className="m-8 h-fit rounded bg-white p-4 sm:mx-24 sm:mt-24 md:p-16"
       data-cy="countDownModal"
       id={props.id}
     >
       <div className="flex justify-between pb-5">
         <div
-          className="text-3xl font-display font-bold"
+          className="font-display text-3xl font-bold"
           role="heading"
           aria-level="1"
         >
@@ -22,14 +22,14 @@ const CountDown = (props) => {
           type="button"
           aria-label={'Close Modal'}
           onClick={props.closeModal}
-          data-gc-analytics-customclick={`ESDC-EDSC:${props.refPageAA}:Close-Fermer`}
+          data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${props.refPageAA}:Close-Fermer`}
         >
           <FontAwesomeIcon aria-hidden="true" icon={icon['xmark']} size="xl" />
         </button>
       </div>
 
       <div className="flex">
-        <div className="flex-none flex items-top justify-center pr-3">
+        <div className="items-top flex flex-none justify-center pr-3">
           <FontAwesomeIcon
             icon={icon['triangle-exclamation']}
             size="lg"
@@ -38,7 +38,7 @@ const CountDown = (props) => {
         </div>
         <div className="flex-auto">
           <p className="mr-6">{props.bannerContent[0]}</p>
-          <p className="font-bold mr-6">
+          <p className="mr-6 font-bold">
             {props.minutes || props.seconds
               ? `${props.bannerContent[1]} ${props.minutes} ${props.bannerMinutesAnd} ${props.seconds} ${props.bannerSeconds}.`
               : ''}
@@ -46,7 +46,7 @@ const CountDown = (props) => {
         </div>
       </div>
 
-      <div className="flex md:space-x-12 pt-10">
+      <div className="flex pt-10 md:space-x-12">
         <Button
           dataTestid="sign-out"
           text={props.signOutLinkText}
