@@ -171,7 +171,9 @@ export async function getServerSideProps({ req, res, locale }) {
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.pageName || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.pageName || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

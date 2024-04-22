@@ -179,7 +179,8 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
       },
       meta,
       breadCrumbItems,
-      aaPrefix: `ESDC-EDSC:${pageContent.en.id || pageContent.en.title}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${pageContent.en.id || pageContent.en.title}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

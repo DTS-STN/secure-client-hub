@@ -85,7 +85,7 @@ export const ContactSectionRow = ({
                       ? 'noopener noreferrer'
                       : undefined
                   }
-                  data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
+                  data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${refPageAA}:${id}`}
                 >
                   {item.content}
 
