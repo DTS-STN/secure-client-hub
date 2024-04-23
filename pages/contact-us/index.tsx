@@ -72,7 +72,7 @@ const ContactLanding = (props: ContactLandingProps) => {
                 )
                   .split('/')
                   .pop()}`}
-                data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
+                data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:Contact Us:${link.linkTitle}`}
                 target={
                   newTabExceptions.includes(link.linkDestination ?? '')
                     ? '_blank'
@@ -193,7 +193,8 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
       popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
       popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${content.en.heading}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
