@@ -86,7 +86,7 @@ const IdleTimeout = ({
               type="button"
               aria-label={'Close Modal'}
               onClick={handleOnIdleContinueSession}
-              data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:Close-Fermer`}
+              data-gc-analytics-customclick={`${refPageAA}:Close-Fermer`}
             >
               <FontAwesomeIcon
                 aria-hidden="true"
@@ -120,6 +120,7 @@ const IdleTimeout = ({
               onClick={handleOnIdle}
               style="secondary"
               className="mr-3"
+              refPageAA={refPageAA}
             />
             <Button
               id="stay-signed-in"
@@ -127,6 +128,7 @@ const IdleTimeout = ({
               onClick={handleOnIdleContinueSession}
               style="primary"
               className="mr-3"
+              refPageAA={refPageAA}
             />
           </div>
         </div>
