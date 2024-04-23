@@ -103,7 +103,7 @@ export default function MyDashboard(props) {
             : 'Actions les plus demandées'
         }
         acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-        refPageAA={`ESDC-EDSC:${props.content.heading}`}
+        refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
         hasAlert={false}
       >
         <div className="bg-deep-blue-60d" data-cy="most-requested-section">
@@ -136,7 +136,7 @@ export default function MyDashboard(props) {
             }}
             dataCy="most-requested"
             acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-            refPageAA={`ESDC-EDSC:${props.content.heading}`}
+            refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
           />
         </div>
       </Card>
@@ -302,8 +302,9 @@ export async function getServerSideProps({ req, res, locale }) {
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
-      aaMenuPrefix: content?.err !== undefined ? '' : `ESDC-EDSC:Nav Menu`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
