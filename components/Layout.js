@@ -141,7 +141,7 @@ export default function Layout(props) {
           menuList: [
             {
               key: 'dashKey',
-              id: 'dash',
+              id: 'my-dashboard',
               value: t.menuItems.dashboard,
               path: `${
                 props.locale === 'en'
