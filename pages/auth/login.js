@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
-import { AuthIsDisabled } from '../../lib/auth'
+import { AuthIsDisabled, AddMscaUser } from '../../lib/auth'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 
@@ -9,11 +9,12 @@ export default function Login(props) {
   const router = useRouter()
 
   //signIn('ecasProvider')
-  useEffect(() => {
+  useEffect( () => {
     if (!router.isReady) return
     if (!router.query.error) {
       //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
-      if (props.authDisabled) {
+      if (props.authDisabled || !props.userAdded ) {
+        
         setTimeout(() => {
           props.locale === 'en'
             ? router.push('/en/my-dashboard')
@@ -21,6 +22,7 @@ export default function Login(props) {
         }, 3000)
         return
       }
+
       signIn('ecasProvider', {
         callbackUrl:
           props.locale === 'en'
@@ -53,6 +55,14 @@ export async function getServerSideProps({ req, res, locale }) {
   //Temporary for testing purposes until auth flow is publicly accessible
   const authDisabled = AuthIsDisabled() ? true : false
 
+  const spid = req.headers["uid"]
+  const pid = req.headers["scan-isci-pid"]
+
+  let userAdded = false;
+  if (!authDisabled) {
+    userAdded = await AddMscaUser(pid, spid);
+  }
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -80,6 +90,7 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       meta,
       authDisabled: authDisabled ?? true,
+      userAdded,
     },
   }
 }
