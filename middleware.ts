@@ -20,10 +20,10 @@ export async function middleware(req: NextRequest) {
   }
 
   //Redirect from splash page if Lang parameter is supplied when redirecting from MSCA
-  if (pathname === '/&Lang=fra') {
+  if (pathname === '/?Lang=fra') {
     return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
   }
-  if (pathname === '/&Lang=eng') {
+  if (pathname === '/?Lang=eng') {
     return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
   }
 
