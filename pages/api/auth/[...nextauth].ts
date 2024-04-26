@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
 
 import { getLogger } from '../../../logging/log-util'
+import axios from 'axios'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
@@ -28,6 +30,9 @@ export const authOptions: NextAuthOptions = {
         id_token_encrypted_response_enc: 'A256GCM',
         token_endpoint_auth_signing_alg: 'RS256',
         id_token_signed_response_alg: 'RS512',
+        userinfo_encrypted_response_alg: 'RSA-OAEP-256',
+        userinfo_encrypted_response_enc: 'A256GCM',
+        userinfo_signed_response_alg: 'RS512',
       },
       token: {
         url: process.env.AUTH_ECAS_TOKEN,
@@ -38,12 +43,33 @@ export const authOptions: NextAuthOptions = {
       jwks: {
         keys: [JSON.parse(process.env.AUTH_PRIVATE ?? '{}')],
       },
-      userinfo: process.env.AUTH_ECAS_USERINFO,
+      userinfo: {
+        async request(context) {
+          console.log(`Bearer ${context.tokens.access_token}`)
+          const res = await axios
+            .get(process.env.AUTH_ECAS_USERINFO as string, {
+              headers: {
+                Authorization: `Bearer ${context.tokens.access_token}`,
+              },
+              proxy: {
+                protocol: 'http',
+                host: 'localhost',
+                port: 3128,
+              },
+            })
+            .then((response) => response)
+            .catch((error) => logger.error(error))
+          return res?.data
+        },
+      },
       idToken: true,
       checks: ['state', 'nonce'],
-      profile(profile) {
+      profile: (profile) => {
+        console.log('\n\n\nStart profile:\n')
+        console.log(profile)
+        console.log('\nEnd profile\n\n\n')
         return {
-          id: profile.sid,
+          ...profile,
         }
       },
     },
@@ -57,8 +83,12 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    async jwt({ token, account }) {
-      return { ...token, ...account }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async jwt({ token, account, user, profile }) {
+      if (profile) {
+        token.user = profile
+      }
+      return token
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
