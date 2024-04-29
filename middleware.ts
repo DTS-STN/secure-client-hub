@@ -19,6 +19,15 @@ export async function middleware(req: NextRequest) {
     return
   }
 
+  //Redirect from splash page if Lang parameter is supplied when redirecting from MSCA
+  if (pathname === '/?Lang=fra') {
+    return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
+  }
+  if (pathname === '/?Lang=eng') {
+    return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
+  }
+
+  //Redirect rule that makes English appear as the default language instead of und
   if (locale === 'und' && !pathname.endsWith('/')) {
     return NextResponse.redirect(new URL(`/en${pathname}`, url))
   }

@@ -4,11 +4,8 @@ import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
-
+import InfoMessage from '../components/InfoMessage'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
@@ -60,6 +57,17 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
+      <InfoMessage
+        id="dashboard-info-message"
+        label={t.dashboardInfo.label}
+        messageText={t.dashboardInfo.messageText}
+        messageLinkText={t.dashboardInfo.messageLinkText}
+        messageLinkHref={t.dashboardInfo.messageLinkHref}
+        icon="arrow-up-right-from-square"
+        refPageAA={`${props.aaPrefix}`}
+        locale={props.locale}
+      />
+
       {props.content.pageAlerts.map((alert, index) => {
         const alertType = alert.type[0].split('/').pop()
         return (
@@ -88,11 +96,11 @@ export default function MyDashboard(props) {
         }
         viewMoreLessCaption={
           props.locale === 'en'
-            ? 'Personal information'
-            : 'Informations personnelles'
+            ? 'Most requested actions'
+            : 'Actions les plus demandées'
         }
         acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-        refPageAA={`ESDC-EDSC:${props.content.heading}`}
+        refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
         hasAlert={false}
       >
         <div className="bg-deep-blue-60d" data-cy="most-requested-section">
@@ -125,7 +133,7 @@ export default function MyDashboard(props) {
             }}
             dataCy="most-requested"
             acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-            refPageAA={`ESDC-EDSC:${props.content.heading}`}
+            refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
           />
         </div>
       </Card>
@@ -208,21 +216,6 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    },
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
@@ -269,30 +262,12 @@ export async function getServerSideProps({ req, res, locale }) {
             ? content.en
             : content.fr,
       meta,
-
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-            ? bannerContent.en
-            : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-            ? popupContent.en
-            : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-            ? popupContentNA.en
-            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
-      aaMenuPrefix: content?.err !== undefined ? '' : `ESDC-EDSC:Nav Menu`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

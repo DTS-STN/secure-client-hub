@@ -4,9 +4,6 @@ import Heading from '../../components/Heading'
 
 import { ContactSection } from '../../components/contact/ContactSection'
 import { ContactProvince } from '../../components/contact/ContactProvince'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import {
   GetContactUsPageReturnType,
@@ -124,12 +121,6 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
     return { notFound: true }
   }
 
-  const bannerContent = await getBetaBannerContent()
-
-  const popupContent = await getBetaPopupExitContent()
-
-  const popupContentNA = await getBetaPopupNotAvailableContent()
-
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
@@ -188,10 +179,8 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en.id || pageContent.en.title}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${pageContent.en.id || pageContent.en.title}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

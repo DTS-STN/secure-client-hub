@@ -25,7 +25,15 @@ export default {
     title: 'My dashboard',
     profile: 'Profile',
   },
-
+  //
+  //Dashboard info message
+  dashboardInfo: {
+    label: 'New',
+    messageText:
+      "Your MSCA account now has a Dashboard view! If you'd like to learn more about our changes, please visit our ",
+    messageLinkHref: 'https://alpha.service.canada.ca/en/projects/dashboard',
+    messageLinkText: ' Service Canada Labs page',
+  },
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Beta version:',
@@ -173,4 +181,16 @@ export default {
   maintenanceTitle: 'This service is currently unavailable',
   maintenanceText:
     'Due to system maintenance, the service you are trying to access is temporarly unavailable. We apologize for the inconvenience.',
+
+  //Timeout modal
+  bannerHeading: 'Stay signed in?',
+  signOutLinkText: 'Sign out',
+  staySignedInLinkText: 'Stay signed in',
+  bannerContent: {
+    notActive:
+      'You have not been active for a while so we will sign you out to keep your information secure.',
+    signOut: 'You will be signed out in ',
+  },
+  bannerMinutesAnd: ' minutes and',
+  bannerSeconds: 'seconds',
 }
