@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getToken } from 'next-auth/jwt'
 import { AuthIsDisabled, AuthIsValid, ValidateSession } from '../../lib/auth'
-
+import { AddMscaUser } from '../../lib/add-msca-user'
 export default function Login(props) {
   const router = useRouter()
 
@@ -15,6 +15,8 @@ export default function Login(props) {
   useEffect(() => {
     if (!router.isReady) return
     if (!router.query.error) {
+      logger.error(props.AuthIsDisabled + 'blabla')
+      console.log(props.AuthIsDisabled + 'blabla')
       //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
       if (props.authDisabled) {
         setTimeout(() => {
@@ -30,6 +32,8 @@ export default function Login(props) {
             ? `${window.location.origin}/en/my-dashboard`
             : `${window.location.origin}/fr/mon-tableau-de-bord`,
       })
+      const { data: session } = useSession()
+      AddMscaUser(session.user.name, session.sub)
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
 
@@ -55,6 +59,8 @@ Login.getLayout = function PageLayout(page) {
 export async function getServerSideProps({ req, res, locale }) {
   //Temporary for testing purposes until auth flow is publicly accessible
   const authDisabled = AuthIsDisabled() ? true : false
+console.log(authDisabled + 'bla')
+
 
   const session = await getServerSession(req, res, authOptions)
   const token = await getToken({ req })

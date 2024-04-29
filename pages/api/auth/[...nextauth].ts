@@ -90,6 +90,11 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     },
+    async session({ session, token }) {
+      session.user = { name : token.name }
+      session.id = token.sub
+      return session
+    },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
       if (url.startsWith('/')) return `${baseUrl}${url}`
