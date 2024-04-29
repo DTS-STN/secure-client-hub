@@ -15,12 +15,12 @@ describe('Validate logout scenario and page', () => {
     cy.url().should('contain', '/my-dashboard')
     cy.get('[data-testid="menuButton"]').click()
     cy.get('[id="dropdownNavbar"]>div:nth-child(5)').click()
-    cy.location('pathname').should('include', '/en/auth/logout')
     cy.wait('@signout')
       .its('response')
       .then((response) => {
         const { statusCode } = response
         expect(statusCode).to.eq(200)
+        cy.location('pathname').should('include', '/en/auth/logout')
       })
      
   })
