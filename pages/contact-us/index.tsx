@@ -8,14 +8,17 @@ import {
 } from '../../graphql/mappers/contact-us'
 import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  Redirect,
+  ValidateSession,
+} from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { useEffect, useCallback, useMemo, useState } from 'react'
-import throttle from 'lodash.throttle'
-import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
+import { getToken } from 'next-auth/jwt'
 
 interface Data {
   title: string
@@ -42,30 +45,6 @@ interface ContactLandingProps {
 }
 
 const ContactLanding = (props: ContactLandingProps) => {
-  const [response, setResponse] = useState<Response | undefined>()
-  const router = useRouter()
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    [],
-  )
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent],
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent, response, router, props.locale])
-
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="contact-us-heading" title={props.content.heading ?? ''} />
@@ -100,9 +79,37 @@ const ContactLanding = (props: ContactLandingProps) => {
 }
 export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sub,
+    )
+    if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
+      return {
+        redirect: {
+          destination: `/${locale}/auth/login`,
+          permanent: false,
+        },
+      }
+    }
   }
 
   const content = await getContactUsContent()

@@ -7,43 +7,23 @@ import { getDecisionReviewsContent } from '../graphql/mappers/decision-reviews'
 import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  Redirect,
+  ValidateSession,
+} from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
-import throttle from 'lodash.throttle'
 import Markdown from 'markdown-to-jsx'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
-import { useRouter } from 'next/router'
+import { getToken } from 'next-auth/jwt'
 
 export default function DecisionReviews(props) {
   const t = props.locale === 'en' ? en : fr
-  const [response, setResponse] = useState()
-  const router = useRouter()
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 1 minute
-  const onClickEvent = useCallback(
-    async () => setResponse(await fetch('/api/refresh-msca')),
-    [],
-  )
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 60000, { trailing: false }),
-    [onClickEvent],
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
-    if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
-    }
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent, response, router, props.locale])
 
   const errorCode =
     props.content?.err ||
@@ -140,9 +120,38 @@ export default function DecisionReviews(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sub,
+    )
+    if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
+      return {
+        redirect: {
+          destination: `/${locale}/auth/login`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('decision-reviews')
