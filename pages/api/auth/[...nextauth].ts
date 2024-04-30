@@ -67,17 +67,17 @@ export const authOptions: NextAuthOptions = {
             })
             .then((response) => response)
             .catch((error) => logger.error(error))
-          const result = decryptJwe(
-            res?.data.userinfo_token,
-            process.env.AUTH_PRIVATE,
-          )
-          console.log(result)
           return res?.data
         },
       },
       idToken: true,
       checks: ['state', 'nonce'],
       profile: (profile) => {
+        const result = decryptJwe(
+          profile.userinfo_token as string,
+          process.env.AUTH_PRIVATE as string,
+        )
+        console.log(result)
         console.log('\n\n\nStart profile:\n')
         console.log(profile)
         console.log('\nEnd profile\n\n\n')
@@ -97,11 +97,8 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async jwt({ token, account, user, profile }) {
-      if (profile) {
-        token.user = profile
-      }
-      return token
+    async jwt({ token, account, user }) {
+      return { ...token, ...account, ...user }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
