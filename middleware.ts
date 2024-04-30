@@ -6,7 +6,7 @@ const PUBLIC_FILE = /\.(.*)$/
 
 export async function middleware(req: NextRequest) {
   const { nextUrl, url } = req
-  const { locale, pathname } = nextUrl
+  const { locale, pathname, searchParams } = nextUrl
   const logger = getLogger('middleware')
 
   logger.trace(`Incoming request for [${url}]`)
@@ -20,11 +20,11 @@ export async function middleware(req: NextRequest) {
   }
 
   //Redirect from splash page if Lang parameter is supplied when redirecting from MSCA
-  if (pathname === '/?Lang=fra') {
-    return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
-  }
-  if (pathname === '/?Lang=eng') {
-    return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
+  switch (searchParams.get('Lang')) {
+    case 'fra':
+      return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
+    case 'eng':
+      return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
   }
 
   //Redirect rule that makes English appear as the default language instead of und
