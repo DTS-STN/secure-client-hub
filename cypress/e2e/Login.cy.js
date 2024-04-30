@@ -10,13 +10,30 @@ describe('Validate login page', () => {
     cy.injectAxe()
     cy.checkA11y()
   })
-  it('Lands on login page and displays loading spinner', () => {
+ 
+  it('Logs in, checks the loading spinner and redirects to dashboard', () => {
+    // Create a Promise and capture a reference to its resolve
+    // function so that we can resolve it when we want to:
+    let sendResponse
+    const trigger = new Promise((resolve) => {
+      sendResponse = resolve
+    })
+    // Intercept requests to the URL and does not let the response occur until the Promise is resolved
+    cy.intercept('POST', 'api/auth/signin', async (request) => {
+      await trigger
+      request.reply()
+    })
+    cy.visit('/auth/login/')
+    // Verify the loading spinner and text
     cy.get('[data-cy="loading-spinner"]')
       .should('be.visible')
       .and('have.text', 'Loading / Chargement en cours ...')
-  })
-  it('Redirects to dashboard', () => {
-    cy.wait(2000)
-    cy.url().should('contains', '/my-dashboard')
+      .then(() => {
+        // all the resolve function of the above Promise
+        sendResponse()
+        // Return to dashboard page 
+        cy.location('pathname').should('include', '/my-dashboard')
+      })
+      cy.get('[data-cy="loading-spinner"]').should('not.exist')
   })
 })
