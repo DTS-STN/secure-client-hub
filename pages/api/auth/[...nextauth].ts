@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
-
 import { getLogger } from '../../../logging/log-util'
 import axios from 'axios'
+import * as jose from 'jose'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
 logger.level = 'warn'
+
+async function decryptJwe(jwe: string, jwk: any) {
+  const key = await jose.importJWK({ ...jwk }, 'RSA-OAEP')
+  const decryptResult = await jose.compactDecrypt(jwe, key, {
+    keyManagementAlgorithms: ['RSA-OAEP-256'],
+  })
+  return decryptResult.plaintext.toString()
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -59,6 +67,11 @@ export const authOptions: NextAuthOptions = {
             })
             .then((response) => response)
             .catch((error) => logger.error(error))
+          const result = decryptJwe(
+            res?.data.userinfo_token,
+            process.env.AUTH_PRIVATE,
+          )
+          console.log(result)
           return res?.data
         },
       },
@@ -69,7 +82,7 @@ export const authOptions: NextAuthOptions = {
         console.log(profile)
         console.log('\nEnd profile\n\n\n')
         return {
-          ...profile,
+          id: profile.sid,
         }
       },
     },
