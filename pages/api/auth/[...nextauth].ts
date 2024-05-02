@@ -9,12 +9,18 @@ import * as jose from 'jose'
 const logger = getLogger('next-auth')
 logger.level = 'warn'
 
+/*Adds the signing algorithm to the end of the private key. Necessary to decrypt the userinfo_token.
+ * Simply adding this to the end of the environment variable breaks the idToken decryption so this is a workaround.
+ * May need to look at regenerating the keyset at a later date.*/
+const jwk = JSON.parse(process.env.AUTH_PRIVATE ?? '{}')
+jwk.alg = 'RS256'
+
 async function decryptJwe(jwe: string, jwk: any) {
-  const key = await jose.importJWK({ ...jwk }, 'RSA-OAEP')
+  const key = await jose.importJWK({ ...jwk })
   const decryptResult = await jose.compactDecrypt(jwe, key, {
     keyManagementAlgorithms: ['RSA-OAEP-256'],
   })
-  return decryptResult.plaintext.toString()
+  return jose.decodeJwt(decryptResult.plaintext.toString())
 }
 
 export const authOptions: NextAuthOptions = {
@@ -38,9 +44,6 @@ export const authOptions: NextAuthOptions = {
         id_token_encrypted_response_enc: 'A256GCM',
         token_endpoint_auth_signing_alg: 'RS256',
         id_token_signed_response_alg: 'RS512',
-        userinfo_encrypted_response_alg: 'RSA-OAEP-256',
-        userinfo_encrypted_response_enc: 'A256GCM',
-        userinfo_signed_response_alg: 'RS512',
       },
       token: {
         url: process.env.AUTH_ECAS_TOKEN,
@@ -53,36 +56,41 @@ export const authOptions: NextAuthOptions = {
       },
       userinfo: {
         async request(context) {
-          console.log(`Bearer ${context.tokens.access_token}`)
-          const res = await axios
-            .get(process.env.AUTH_ECAS_USERINFO as string, {
-              headers: {
-                Authorization: `Bearer ${context.tokens.access_token}`,
-              },
-              proxy: {
-                protocol: 'http',
-                host: 'localhost',
-                port: 3128,
-              },
-            })
-            .then((response) => response)
-            .catch((error) => logger.error(error))
+          //Necessary to test locally until we no longer need the proxy. Will use request without proxy on deployed app
+          const res =
+            process.env.AUTH_ON_PROXY &&
+            process.env.AUTH_ON_PROXY.toLowerCase() === 'true'
+              ? await axios
+                  .get(process.env.AUTH_ECAS_USERINFO as string, {
+                    headers: {
+                      Authorization: `Bearer ${context.tokens.access_token}`,
+                    },
+                    proxy: {
+                      protocol: 'http',
+                      host: 'localhost',
+                      port: 3128,
+                    },
+                  })
+                  .then((response) => response)
+                  .catch((error) => logger.error(error))
+              : await axios
+                  .get(process.env.AUTH_ECAS_USERINFO as string, {
+                    headers: {
+                      Authorization: `Bearer ${context.tokens.access_token}`,
+                    },
+                  })
+                  .then((response) => response)
+                  .catch((error) => logger.error(error))
           return res?.data
         },
       },
       idToken: true,
       checks: ['state', 'nonce'],
-      profile: (profile) => {
-        const result = decryptJwe(
-          profile.userinfo_token as string,
-          process.env.AUTH_PRIVATE as string,
-        )
-        console.log(result)
-        console.log('\n\n\nStart profile:\n')
-        console.log(profile)
-        console.log('\nEnd profile\n\n\n')
+      profile: async (profile) => {
+        profile = await decryptJwe(profile.userinfo_token, jwk)
         return {
-          id: profile.sid,
+          id: profile.sub,
+          ...profile,
         }
       },
     },
@@ -97,8 +105,8 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async jwt({ token, account, user }) {
-      return { ...token, ...account, ...user }
+    async jwt({ token, user, account }) {
+      return { ...token, ...user, ...account }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -107,6 +115,9 @@ export const authOptions: NextAuthOptions = {
       else if (new URL(url).origin === baseUrl) return url
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
+    },
+    async session({ session }) {
+      return { ...session }
     },
   },
   logger: {
