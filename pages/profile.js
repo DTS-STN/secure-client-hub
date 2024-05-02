@@ -11,6 +11,7 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
+  getIdToken,
 } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -18,7 +19,6 @@ import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
-import { getToken } from 'next-auth/jwt'
 
 export default function Profile(props) {
   /* istanbul ignore next */
@@ -88,14 +88,18 @@ export default function Profile(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
+  const token = await getIdToken(req)
+
   //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
-    const sessionValid = await ValidateSession(process.env.CLIENT_ID, token.sub)
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sid,
+    )
     if (!sessionValid) {
       return {
         redirect: {
