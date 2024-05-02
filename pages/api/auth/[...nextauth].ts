@@ -104,7 +104,6 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async jwt({ token, user, account }) {
       return { ...token, ...user, ...account }
     },
