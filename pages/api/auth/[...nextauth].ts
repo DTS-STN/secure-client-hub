@@ -24,6 +24,12 @@ const httpsAgent = process.env.AUTH_DISABLED
       ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
     })
 
+//Temporary to test
+if (!process.env.AUTH_DISABLED) {
+  const cert = fs.readFileSync('/usr/local/share/ca-certificates/env.crt')
+  console.log(cert)
+}
+
 async function decryptJwe(jwe: string, jwk: any) {
   const key = await jose.importJWK({ ...jwk })
   const decryptResult = await jose.compactDecrypt(jwe, key, {
