@@ -4,6 +4,8 @@ import type { NextAuthOptions } from 'next-auth'
 import { getLogger } from '../../../logging/log-util'
 import axios from 'axios'
 import * as jose from 'jose'
+import https from 'https'
+import fs from 'fs'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
@@ -14,6 +16,13 @@ logger.level = 'warn'
  * May need to look at regenerating the keyset at a later date.*/
 const jwk = JSON.parse(process.env.AUTH_PRIVATE ?? '{}')
 jwk.alg = 'RS256'
+
+//Create httpsAgent to read in cert to make BRZ call
+const httpsAgent = process.env.AUTH_DISABLED
+  ? new https.Agent()
+  : new https.Agent({
+      ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
+    })
 
 async function decryptJwe(jwe: string, jwk: any) {
   const key = await jose.importJWK({ ...jwk })
@@ -101,6 +110,7 @@ export const authOptions: NextAuthOptions = {
                 'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
                 'Content-Type': 'application/json',
               },
+              httpsAgent: httpsAgent,
             },
           )
           .then((response) => response)
