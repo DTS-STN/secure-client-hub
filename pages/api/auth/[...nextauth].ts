@@ -88,6 +88,24 @@ export const authOptions: NextAuthOptions = {
       checks: ['state', 'nonce'],
       profile: async (profile) => {
         profile = await decryptJwe(profile.userinfo_token, jwk)
+        //Make call to msca-ng API to update last login date
+        const response = await axios
+          .post(
+            `${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}`,
+            {
+              pid: profile.sin,
+              spid: profile.uid,
+            },
+            {
+              headers: {
+                'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then((response) => response)
+          .catch((error) => logger.error(error))
+        console.log(response)
         return {
           id: profile.sub,
           ...profile,
