@@ -3,11 +3,15 @@
  *
  */
 
-import { AuthIsDisabled, AuthIsValid, ValidateSession } from '../../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  getIdToken,
+} from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { getToken } from 'next-auth/jwt'
 
 // Including crypto module
 const crypto = require('crypto')
@@ -18,7 +22,7 @@ logger.level = 'error'
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
+  const token = await getIdToken(req)
   //Generate a random id for each request to ensure unique responses/no caching
   const id = crypto.randomBytes(20).toString('hex')
 
@@ -31,7 +35,7 @@ export default async function handler(req, res) {
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
         process.env.CLIENT_ID,
-        token.sub,
+        token.sid,
       )
       if (sessionValid) {
         res.status(200).json({ success: sessionValid, id: id })

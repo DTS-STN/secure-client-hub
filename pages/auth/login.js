@@ -5,8 +5,12 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { getToken } from 'next-auth/jwt'
-import { AuthIsDisabled, AuthIsValid, ValidateSession } from '../../lib/auth'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  getIdToken,
+} from '../../lib/auth'
 
 export default function Login(props) {
   const router = useRouter()
@@ -57,13 +61,13 @@ export async function getServerSideProps({ req, res, locale }) {
   const authDisabled = AuthIsDisabled() ? true : false
 
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
+  const token = await getIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (sessionValid) {
       return {
