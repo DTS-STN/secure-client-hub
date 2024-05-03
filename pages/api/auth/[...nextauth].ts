@@ -17,13 +17,6 @@ logger.level = 'warn'
 const jwk = JSON.parse(process.env.AUTH_PRIVATE ?? '{}')
 jwk.alg = 'RS256'
 
-//Create httpsAgent to read in cert to make BRZ call
-const httpsAgent = process.env.AUTH_DISABLED
-  ? new https.Agent()
-  : new https.Agent({
-      ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
-    })
-
 async function decryptJwe(jwe: string, jwk: any) {
   const key = await jose.importJWK({ ...jwk })
   const decryptResult = await jose.compactDecrypt(jwe, key, {
@@ -110,12 +103,14 @@ export const authOptions: NextAuthOptions = {
                 'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
                 'Content-Type': 'application/json',
               },
-              httpsAgent: httpsAgent,
+              httpsAgent: new https.Agent({
+                ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
+              }),
             },
           )
           .then((response) => response)
           .catch((error) => logger.error(error))
-        console.log(response)
+        logger.debug(response)
         return {
           id: profile.sub,
           ...profile,
