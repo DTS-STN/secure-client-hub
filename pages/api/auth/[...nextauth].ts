@@ -91,7 +91,7 @@ export const authOptions: NextAuthOptions = {
         //Make call to msca-ng API to update last login date
         const response = await axios
           .post(
-            `${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}`,
+            `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}`,
             {
               pid: profile.sin,
               spid: profile.uid,
