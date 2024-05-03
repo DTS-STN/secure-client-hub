@@ -76,6 +76,16 @@ extraEnv:
       secretKeyRef:
         name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
         key: MSCA_NG_CREDS
+  - name: HOSTALIAS_IP
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_IP
+  - name: HOSTALIAS_HOSTNAME
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_HOSTNAME
   {{- if env "OTEL_API_KEY" }}
   - name: OTEL_API_KEY
     valueFrom:
@@ -171,7 +181,6 @@ secrets:
       HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
       MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
 
-
   msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
     labels:
       app.kubernetes.io/name: service-canada-client-hub
@@ -235,16 +244,6 @@ oauth:
         secretKeyRef:
           name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
           key: OAUTH_PROXY_COOKIE_SECRET
-    - name: HOSTALIAS_IP
-      valueFrom:
-        secretKeyRef:
-          name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-          key: HOSTALIAS_IP
-    - name: HOSTALIAS_HOSTNAME
-      valueFrom:
-        secretKeyRef:
-          name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-          key: HOSTALIAS_HOSTNAME
 
   resources:
     requests:
