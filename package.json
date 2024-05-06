@@ -38,6 +38,7 @@
     "babel-plugin-macros": "^3.1.0",
     "cachified": "^3.5.4",
     "cross-env": "^7.0.3",
+    "jose": "^5.2.4",
     "lodash.throttle": "^4.1.1",
     "lru-cache": "^10.2.0",
     "markdown-to-jsx": "^7.4.7",

@@ -10,6 +10,7 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
+  getIdToken,
 } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -17,7 +18,6 @@ import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
-import { getToken } from 'next-auth/jwt'
 
 interface Data {
   title: string
@@ -111,16 +111,17 @@ const ContactLanding = (props: ContactLandingProps) => {
 }
 export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
+
+  const token = await getIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
       return {
