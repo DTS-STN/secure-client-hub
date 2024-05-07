@@ -1,3 +1,5 @@
+// @ts-check
+
 const REWRITES = [
   {
     source: '/contactez-nous',
@@ -69,13 +71,20 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca *.bdm.dshp-phdn.net; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://assets.adobedtm.com; connect-src 'self' https://canada.demdex.net https://dpm.demdex.net https://assets.adobedtm.com https://srv241-s2.lab.hrdc-drhc.gc.ca; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' 'unsafe-inline' https://assets.adobedtm.com; img-src 'self' data: https:",
+      "default-src 'self' *.omtrdc.net *.2o7.net https://assets.adobedtm.com; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://srv113-i.lab.hrdc-drhc.gc.ca; object-src 'none'; script-src-elem 'self' 'unsafe-inline' https://assets.adobedtm.com; script-src 'self' 'unsafe-eval' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net; connect-src 'self' https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net https://srv241-s2.lab.hrdc-drhc.gc.ca; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; frame-src 'self' https://*.demdex.net *.omtrdc.net *.2o7.net https://assets.adobedtm.com; img-src 'self' data: https: https://*.demdex.net https://cm.everesttech.net https://assets.adobedtm.com *.omtrdc.net *.2o7.net;",
   },
 ]
 
-module.exports = {
-  env: {
-    LOGGING_LEVEL: process.env.LOGGING_LEVEL,
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = {
+  publicRuntimeConfig: {
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL ?? 'info',
+    ENVIRONMENT: process.env.ENVIRONMENT,
+  },
+  eslint: {
+    dirs: ['.'], //or ['pages', 'hooks']
   },
   reactStrictMode: true,
   //
@@ -118,3 +127,5 @@ module.exports = {
     return REWRITES
   },
 }
+
+module.exports = nextConfig

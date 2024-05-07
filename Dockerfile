@@ -7,9 +7,11 @@ COPY . .
 FROM base AS build
 
 # Build envs
-ARG LOGGING_LEVEL
+ARG HOSTALIAS_CERT
+ENV HOSTALIAS_CERT=$HOSTALIAS_CERT
+ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
-ARG AEM_GRAPHQL_ENDPOINT
+ARG AEM_GRAPHQL_ENDPOINT=https://www.canada.ca/graphql/execute.json/decd-endc/
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT
 ARG AUTH_ECAS_BASE_URL
 ENV AUTH_ECAS_BASE_URL=$AUTH_ECAS_BASE_URL
@@ -23,7 +25,8 @@ ENV MSCA_ECAS_RASC_BASE_URL=$MSCA_ECAS_RASC_BASE_URL
 ENV NODE_ENV=production
 WORKDIR /build
 COPY --from=base /base ./
-RUN npm run build
+
+RUN mkdir -p /usr/local/share/ca-certificates/ && echo ${HOSTALIAS_CERT} | sed 's/\\n/\n/g' | xargs > /usr/local/share/ca-certificates/env.crt && chmod 644 /usr/local/share/ca-certificates/env.crt && npm run build
 
 FROM node:20-alpine3.18 AS production
 ENV NODE_ENV=production
@@ -45,18 +48,22 @@ RUN addgroup \
 
 WORKDIR ${home}
 
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt /usr/local/share/ca-certificates/env.crt
+
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && update-ca-certificates
+
 USER ${user}
 
 COPY --from=build --chown=${user}:${group} /build/next.config.js ./
 COPY --from=build --chown=${user}:${group} /build/package*.json ./
 COPY --from=build --chown=${user}:${group} /build/.next ./.next
 COPY --from=build --chown=${user}:${group} /build/public ./public
-COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
+# COPY --from=build --chown=${user}:${group} /build/certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem ./certs/
 
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
 # Runtime envs -- will default to build args if no env values are specified at docker run
-ARG LOGGING_LEVEL
+ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT
 ENV AEM_GRAPHQL_ENDPOINT=$AEM_GRAPHQL_ENDPOINT

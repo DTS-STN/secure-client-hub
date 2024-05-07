@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import { render, screen, waitFor } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import { Language } from '../../components/Language'
+import Language from '../../components/Language'
 
 expect.extend(toHaveNoViolations)
 
@@ -25,7 +25,7 @@ describe('Language', () => {
 
   it("renders 'EN' without problems", async () => {
     const englishAbbr = render(
-      <Language id="enAbbr" lang="fr" path="/en" abbr="EN" />
+      <Language id="enAbbr" lang="fr" path="/en" abbr="EN" />,
     )
     await waitFor(() => expect(englishAbbr).toBeTruthy())
     expect(screen.getByText('EN')).toBeInTheDocument

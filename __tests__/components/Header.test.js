@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import { Header } from '../../components/Header'
+import Header from '../../components/Header'
 
 expect.extend(toHaveNoViolations)
 
@@ -62,6 +62,7 @@ describe('Header', () => {
       { text: 'Max length of breadcrumb 28', link: '/' },
       { text: 'Link3', link: '/' },
     ],
+    refPageAA: 'dashboard',
   }
   test('renders Header component with default props', () => {
     render(<Header {...defaultProps} />)

@@ -1,0 +1,273 @@
+{{/* THIS EXAMPLE DEPLOYS SUCCESSFULLY TO DTS CLOUD */}}
+{{/* READ THE COMMENTS TO MAKE ANY MODIFICATIONS FOR YOUR APPLICATION */}}
+
+{{/* EXAMPLE OF HOW TO INCLUDE ENVIRONMENT VARIABLES */}} 
+{{/*
+extraEnv:
+    - name: EXAMPLE_STATIC_ENVIRONMENT_VARIABLE
+      value: "hardcodedvalue"
+    - name: EXAMPLE_DYNAMIC_ENVIRONMENT_VARIABLE
+      value: dynamicvalue-{{ .Environment.Name }}
+    - name: EXAMPLE_SECRET_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: web-example-secret
+          key: renamed-example-username
+    - name: EXAMPLE_SECRET_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: web-example-secret
+          key: example-secret-password         
+*/}}
+extraEnv:
+  - name: ENVIRONMENT
+    value: {{ env "ENVIRONMENT" | default "development" }}
+  - name: LOGGING_LEVEL
+    value: {{ env "LOGGING_LEVEL" | default "error" }}
+  - name: OTEL_ENVIRONMENT
+    value: {{ .Environment.Name }}
+  - name: AEM_GRAPHQL_ENDPOINT
+    value: {{ env "AEM_GRAPHQL_ENDPOINT" | quote }}
+  - name: MSCA_BASE_URL
+    value: {{ env "MSCA_BASE_URL" }}
+  - name: MSCA_EQ_BASE_URL
+    value: {{ env "MSCA_EQ_BASE_URL" }}
+  - name: MSCA_ECAS_RASC_BASE_URL
+    value: {{ env "MSCA_ECAS_RASC_BASE_URL" }}
+  {{- if env "AUTH_DISABLED" }}
+  - name: AUTH_DISABLED
+    value: {{ env "AUTH_DISABLED" | quote }}
+  {{- end }}
+  - name: NEXTAUTH_URL
+    value: {{ env "NEXTAUTH_URL" }}
+  - name: CLIENT_ID
+    value: {{ env "CLIENT_ID" }}
+  - name: AUTH_ECAS_BASE_URL
+    value: {{ env "AUTH_ECAS_BASE_URL" }}
+  - name: AUTH_ECAS_WELL_KNOWN
+    value: {{ env "AUTH_ECAS_WELL_KNOWN" }}
+  - name: AUTH_ECAS_AUTHORIZATION
+    value: {{ env "AUTH_ECAS_AUTHORIZATION" }}
+  - name: AUTH_ECAS_USERINFO
+    value: {{ env "AUTH_ECAS_USERINFO" }}
+  - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
+    value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
+  - name: AUTH_ECAS_REFRESH_ENDPOINT
+    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
+  - name: MSCA_NG_USER_ENDPOINT
+    value: {{ env "MSCA_NG_USER_ENDPOINT" }}
+  - name: AUTH_PRIVATE
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: AUTH_PRIVATE
+  - name: CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: CLIENT_SECRET
+  - name: NEXTAUTH_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: NEXTAUTH_SECRET
+  - name: MSCA_NG_CREDS
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: MSCA_NG_CREDS
+  - name: HOSTALIAS_IP
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_IP
+  - name: HOSTALIAS_HOSTNAME
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_HOSTNAME
+  {{- if env "OTEL_API_KEY" }}
+  - name: OTEL_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: OTEL_API_KEY
+  {{ if (eq .Environment.Name "prod") }}
+  - name: OTEL_METRICS_ENDPOINT
+    value: https://dynatrace.prod-dp.admin.dts-stn.com/e/676a0299-9802-4933-99d4-481318a557db/api/v2/otlp/v1/metrics
+  - name: OTEL_TRACES_ENDPOINT
+    value: https://dynatrace.prod-dp.admin.dts-stn.com/e/676a0299-9802-4933-99d4-481318a557db/api/v2/otlp/v1/traces
+    {{ else }}
+  - name: OTEL_METRICS_ENDPOINT
+    value: https://dynatrace.dev-dp.admin.dts-stn.com/e/21a07aef-852b-4d9b-aa87-ee5f8b79f8c9/api/v2/otlp/v1/metrics
+  - name: OTEL_TRACES_ENDPOINT
+    value: https://dynatrace.dev-dp.admin.dts-stn.com/e/21a07aef-852b-4d9b-aa87-ee5f8b79f8c9/api/v2/otlp/v1/traces
+  {{ end }}
+  {{- end }}
+deployment: 
+  labels: 
+    branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
+    classification: "{{ requiredEnv "APP_LABEL_CLASSIFICATION" | replace " " "-" }}"
+    csd-id: "{{ requiredEnv "APP_LABEL_CSD_ID" | replace " " "-" }}"
+    department: "{{ requiredEnv "APP_LABEL_DEPARTMENT" | replace " " "-" }}"
+    directorate: "{{ requiredEnv "APP_LABEL_DIRECTORATE" | replace " " "-" }}"
+    division: "{{ requiredEnv "APP_LABEL_DIVISION" | replace " " "-" }}"
+    environment: "{{ requiredEnv "BRANCH" | replace " " "-" }}"
+    immutable: "{{ requiredEnv "APP_LABEL_IMMUTABLE" | replace " " "-" }}"
+    product-owner: "{{ requiredEnv "APP_LABEL_PRODUCT_OWNER" | replace " " "-" }}"
+    project-id: "{{ requiredEnv "APP_LABEL_PROJECT_ID" | replace " " "-" }}"
+    project-name: "{{ requiredEnv "PROJECT" | replace " " "-" }}"
+    section: "{{ requiredEnv "APP_LABEL_SECTION" | replace " " "-" }}"
+image:
+  repository: {{ requiredEnv "CLOUD_ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}
+  tag: "{{ env "DOCKER_TAG" | default "latest" }}" 
+  pullPolicy: Always
+service:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /api/metrics
+    prometheus.io/port: "3000"
+  {{- if env "SERVICE_TARGETPORT" }}
+  targetPort: {{ env "SERVICE_TARGETPORT" }}
+  {{- end }}
+ingress:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-buffer-size: {{ env "OAUTH_PROXY_BUFFER_SIZE" | default "8k" }}
+      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    tls:
+      - hosts:
+          - {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+    hosts:
+    - host: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+replicaCount: 2
+resources:
+  requests:
+    cpu: 300m
+    memory: 200Mi
+  limits:
+    cpu: 1700m
+    memory: 350Mi
+healthChecks:
+    livenessDelay: 15
+    readinessDelay: 15
+    livenessPath: /api/livez
+    readinessPath: /api/readyz
+port: 3000
+persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    volumeMount:
+        path: /mnt/example
+    storageClass: dtsstorageclass
+    size: 2Gi
+secrets: 
+  secure-client-hub-{{ requiredEnv "BRANCH" | lower }}:
+    labels: 
+      app.kubernetes.io/name: service-canada-client-hub
+    stringData:
+  {{- if env "OTEL_API_KEY" }}
+      OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
+  {{- end }}
+      AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
+      CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
+      NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
+      HOSTALIAS_IP: "{{ env "HOSTALIAS_IP" }}"
+      HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
+      HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
+      MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
+
+  msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
+    labels:
+      app.kubernetes.io/name: service-canada-client-hub
+    stringData:
+    {{- if env "OAUTH_PROXY_CLIENT_SECRET" }}
+        OAUTH_PROXY_CLIENT_SECRET: {{ env "OAUTH_PROXY_CLIENT_SECRET" }}
+    {{- end }}
+    {{- if env "OAUTH_PROXY_COOKIE_SECRET" }}
+        OAUTH_PROXY_COOKIE_SECRET: {{ env "OAUTH_PROXY_COOKIE_SECRET" }}
+    {{- end }}
+autoscaling:
+  enabled: true
+  name: service-canada-client-hub
+  minReplicas: 2
+  maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
+  targetCPUUtilization: 85
+  labels:
+    app.kubernetes.io/name: service-canada-client-hub
+{{- if env "OAUTH_ENABLED" }}
+oauth:
+  enabled: {{ env "OAUTH_ENABLED" }}
+  ports:
+    containerPort: 4180
+    name: oauth-proxy
+  args:
+    httpAddress: "0.0.0.0:4180"
+    proxyPrefix: /oauth
+    upstreams:
+      - "http://localhost:3000/" 
+    emailDomains: 
+      - "*"
+    skipAuthRoutes:
+      - "GET=^/api/livez"
+      - "GET=^/api/readyz"
+    apiRoutes:
+      - "^/api"
+    cookieDomains: 
+      - {{ requiredEnv "OAUTH_COOKIE_DOMAIN" | lower }}
+    banner: "<strong style='display:block'>Authorized personnel only</strong><span>Please sign in to access site.</span>"
+    customSignInLogo: "https://www.canada.ca/etc/designs/canada/wet-boew/assets/favicon-mobile.png"
+    footer: "-"
+    providerDisplayName: "ESDC Azure AD"
+    silencePingLogging: "true"
+    skipAuthPreflight: "true"
+    provider: oidc
+    clientID: {{ env "OAUTH_PROXY_CLIENT_ID" }}
+    oidcIssuerURL: https://login.microsoftonline.com/9ed55846-8a81-4246-acd8-b1a01abfc0d1/v2.0
+    skipJWTBearerTokens: true
+    skipProviderButton: false
+    {{- if env "OAUTH_SESSION_COOKIE_MINIMAL" }}
+    sessionCookieMinimal: true
+    {{- end }}
+  extraEnv:
+    - name: OAUTH2_PROXY_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
+          key: OAUTH_PROXY_CLIENT_SECRET
+    - name: OAUTH2_PROXY_COOKIE_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
+          key: OAUTH_PROXY_COOKIE_SECRET
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
+  healthChecks:
+    livenessDelay: 0
+    readinessDelay: 0
+    livenessTimeout: 1
+    readinessTimeout: 5
+    livenessPath: /ping
+    readinessPath: /ping
+    livenessPort: oauth-proxy
+    readinessPort: oauth-proxy
+    readinessPeriodSeconds: 10
+    readinessSuccessThreshold: 1
+{{- end }}
+{{- if env "HOSTALIAS_ENABLED" }}
+hostAliases:
+  enabled: {{ env "HOSTALIAS_ENABLED" }}
+  ip: "{{ env "HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "HOSTALIAS_HOSTNAME" }}
+{{- end }}

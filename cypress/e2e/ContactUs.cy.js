@@ -1,44 +1,48 @@
 /// <reference types="cypress" />
-const contactUsPo = require('../e2e/PageObjects/ContactUsPO.cy')
-const dashboardPo = require('../e2e/PageObjects/dashboardPO.cy')
-const securityPo = require('../e2e/PageObjects/securitySettingsPO.cy')
-const EIcontactUs = require('../e2e/PageObjects/EIContactUsPo.cy')
-
-beforeEach(() => {
-  cy.visit('/contact-us')
-})
 
 describe('Validate Contact Us Landing page', () => {
+  beforeEach(() => {
+    cy.visit('/contact-us')
+  })
+
   it('Contact us has no detectable a11y violations on load', () => {
     cy.injectAxe()
     cy.checkA11y()
   })
+
   it('Validate Contact us URL and header in EN and FR', () => {
-    contactUsPo.ValidateContactUsUrl()
-    contactUsPo.ValidateContactUsHeaderEN()
-    dashboardPo.FrenchButton().click()
-    contactUsPo.ValidateContactUsUrlFR()
-    contactUsPo.ValidateContactUsHeaderFR()
+    cy.url().should('contains', '/contact-us')
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact us')
+    cy.changeLang().should('have.text', 'English')
+    cy.url().should('contains', '/fr/contactez-nous')
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contactez-nous')
   })
 
   it('Validate the links on Contact us page', () => {
-    contactUsPo.ValidateContactUsLinksNumber()
+    cy.get('[data-cy = "contact-task-list"]')
+    .find('a')
+    .should('be.visible')
+    .and('have.length', '3')
+    .and('not.have.length', 0)
+    .and('not.have.attr', 'href', '#undefined')
   })
 
-  it('validate the breadcrumbs are present on Contact us page', () => {
-    securityPo
-      .breadcrumbs()
+  it('validate the breadcrumbs are present on Contact us page EN and FR', () => {
+    cy.get('[data-cy="breadcrumb-My dashboard"]')
       .should('be.visible')
       .and('have.text', 'My dashboard')
-    dashboardPo.FrenchButton().click()
-    securityPo
-      .breadcrumbs()
+    cy.changeLang().should('have.text', 'English')
+    cy.url().should('contains', '/fr/contactez-nous')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]')
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
   })
 
-  it('Validate the EI link navigates to EI Contact us page', () => {
-    contactUsPo.EmploymentInsuranceLink().click()
-    EIcontactUs.ValidateEIContactUsUrl()
+  it('Validate menu navigates to Contact us page', () => {
+    cy.visit('/my-dashboard')
+    cy.get('[data-testid="menuButton"]').click()
+    cy.get(':nth-child(4) > .border-t-2').click()
+    cy.location('pathname', { timeout: 10000 })
+    .should('equal', '/en/contact-us')
   })
 })

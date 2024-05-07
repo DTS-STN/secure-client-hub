@@ -4,39 +4,25 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getProfileContent } from '../graphql/mappers/profile'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
-import { authOptions } from 'pages/api/auth/[...nextauth]'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+  getIdToken,
+} from '../lib/auth'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import ProfileTasks from './../components/ProfileTasks'
 import React from 'react'
-import { useEffect, useCallback, useMemo } from 'react'
-import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 
 export default function Profile(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
-    [onClickEvent]
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent])
 
   const errorCode =
     props.content?.err ||
@@ -66,35 +52,35 @@ export default function Profile(props) {
 
   return (
     <div id="homeContent" data-testid="profileContent-test">
-      <Heading id="my-dashboard-heading" title={props.content.pageName} />
-      <p className="text-lg text-gray-darker mt-2">{props.content.heading}</p>
-      {props.content.list.map((program, index) => {
-        return (
-          <ProfileTasks
-            key={index}
-            acronym={acronym(program.title)}
-            programTitle={program.title}
-            tasks={program.tasks}
-            data-testid="profile-task-group-list"
-            openModal={props.openModal}
-            data-cy="task"
-            refPageAA={props.aaPrefix}
-          />
-        )
-      })}
+      <Heading id="profile-heading" title={props.content.pageName} />
+      <p className="mt-2 text-lg text-gray-darker">{props.content.heading}</p>
+      <div data-cy="profile-lists">
+        {props.content.list.map((program, index) => {
+          return (
+            <ProfileTasks
+              key={index}
+              acronym={acronym(program.title)}
+              programTitle={program.title}
+              tasks={program.tasks}
+              data-testid="profile-task-group-list"
+              data-cy="task"
+              refPageAA={props.aaPrefix}
+            />
+          )
+        })}
+      </div>
+
       <PageLink
         lookingForText={props.content.lookingFor.title}
         accessText={props.content.lookingFor.subText[0]}
         linkText={props.content.lookingFor.subText[1]}
         href={props.content.lookingFor.link}
-        linkID={props.content.backToDashboard.id}
         dataCy="access-security-page-link"
         buttonHref={props.content.backToDashboard.btnLink}
         buttonId="back-to-dashboard-button"
         buttonLinkText={props.content.backToDashboard.btnText}
         refPageAA={props.aaPrefix}
         dashId={t.id_dashboard}
-        linkId={props.content.lookingFor.id}
       ></PageLink>
     </div>
   )
@@ -103,7 +89,26 @@ export default function Profile(props) {
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) return Redirect()
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
+
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sid,
+    )
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('profile')
@@ -113,25 +118,6 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  /*
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-   */
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    }
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
@@ -159,7 +145,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -168,7 +154,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -182,44 +168,28 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.pageName || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

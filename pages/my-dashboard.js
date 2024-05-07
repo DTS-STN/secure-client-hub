@@ -1,43 +1,30 @@
-import { useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
+import ContextualAlert from '../components/ContextualAlert'
+import InfoMessage from '../components/InfoMessage'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import { AuthIsDisabled, AuthIsValid, Redirect } from '../lib/auth'
-import { authOptions } from 'pages/api/auth/[...nextauth]'
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+  getIdToken,
+} from '../lib/auth'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
-import React from 'react'
-import throttle from 'lodash.throttle'
 import { acronym } from '../lib/acronym'
-import { ErrorPage } from '../components/ErrorPage'
+import ErrorPage from '../components/ErrorPage'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  //Event listener for click events that revalidates MSCA session, throttled using lodash to only trigger every 15 seconds
-  const onClickEvent = useCallback(() => fetch('/api/refresh-msca'), [])
-  const throttledOnClickEvent = useMemo(
-    () => throttle(onClickEvent, 15000, { trailing: false }),
-    [onClickEvent]
-  )
-
-  useEffect(() => {
-    window.addEventListener('click', throttledOnClickEvent)
-    //Remove event on unmount to prevent a memory leak with the cleanup
-    return () => {
-      window.removeEventListener('click', throttledOnClickEvent)
-    }
-  }, [throttledOnClickEvent])
 
   const errorCode =
     props.content?.err ||
@@ -70,6 +57,86 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
+      <InfoMessage
+        id="dashboard-info-message"
+        label={t.dashboardInfo.label}
+        messageText={t.dashboardInfo.messageText}
+        messageLinkText={t.dashboardInfo.messageLinkText}
+        messageLinkHref={t.dashboardInfo.messageLinkHref}
+        icon="arrow-up-right-from-square"
+        refPageAA={`${props.aaPrefix}`}
+        locale={props.locale}
+      />
+
+      {props.content.pageAlerts.map((alert, index) => {
+        const alertType = alert.type[0].split('/').pop()
+        return (
+          <ul className="mt-6 w-full sm:px-8 md:px-15" key={index}>
+            <ContextualAlert
+              id={alert.id}
+              type={alertType}
+              alertHeading={alert.alertHeading}
+              alertBody={alert.alertBody}
+              alert_icon_id={` alert-icon ${alert.id}`}
+              alert_icon_alt_text={`${alertType} ${
+                props.locale === 'fr' ? 'Icône' : 'icon'
+              }`}
+            />
+          </ul>
+        )
+      })}
+      <Card
+        key={'canadian-dental-care-plan'}
+        programUniqueId={'canadian-dental-care-plan'}
+        locale={props.locale}
+        cardTitle={
+          props.locale === 'en'
+            ? 'Canadian Dental Care Plan'
+            : 'Régime canadien de soins dentaires'
+        }
+        viewMoreLessCaption={
+          props.locale === 'en'
+            ? 'Most requested actions'
+            : 'Actions les plus demandées'
+        }
+        acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
+        refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
+        hasAlert={false}
+      >
+        <div className="bg-deep-blue-60d" data-cy="most-requested-section">
+          <MostReqTasks
+            locale={props.locale}
+            taskListMR={{
+              title: props.locale === 'en' ? 'Most requested' : 'En demande',
+              tasks: [
+                {
+                  id:
+                    props.locale === 'en'
+                      ? 'cdcp-view-my-letters'
+                      : 'RCSD-consulter-mes-lettres',
+                  title:
+                    props.locale === 'en'
+                      ? 'View my letters'
+                      : 'Consulter mes lettres',
+                  areaLabel:
+                    props.locale === 'en'
+                      ? 'View my Canada Dental Care Plan Letters'
+                      : 'Voir mes lettres du Régime de soins dentaires du Canada',
+                  link:
+                    props.locale === 'en'
+                      ? 'https://cdcp-staging.dev-dp-internal.dts-stn.com/en/letters'
+                      : 'https://cdcp-staging.dev-dp-internal.dts-stn.com/fr/letters',
+                  icon: '',
+                  betaPopUp: true,
+                },
+              ],
+            }}
+            dataCy="most-requested"
+            acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
+            refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
+          />
+        </div>
+      </Card>
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -82,28 +149,29 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={card.dropdownText}
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
+            cardAlert={card.cardAlerts}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
+                locale={props.locale}
                 taskListMR={mostReq}
                 dataCy="most-requested"
-                openModal={props.openModal}
                 acronym={acronym(card.title)}
                 refPageAA={props.aaPrefix}
               />
             </div>
             <div
-              className="md:columns-2 gap-x-[60px] pl-3 sm:pl-8 md:px-15 pt-8"
+              className="gap-x-[60px] pl-3 pt-8 sm:pl-8 md:columns-2 md:px-15"
               data-cy="task-list"
             >
               {tasks.map((taskList, index) => {
                 return (
                   <div key={index} data-cy="Task">
                     <BenefitTasks
+                      locale={props.locale}
                       acronym={acronym(card.title)}
                       taskList={taskList}
                       dataCy="task-group-list"
-                      openModal={props.openModal}
                       refPageAA={props.aaPrefix}
                     />
                   </div>
@@ -120,7 +188,26 @@ export default function MyDashboard(props) {
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session))) return Redirect()
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
+
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sid,
+    )
+    if (!sessionValid) {
+      return {
+        redirect: {
+          destination: `/${locale}/auth/logout`,
+          permanent: false,
+        },
+      }
+    }
+  }
 
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('my-dashboard')
@@ -130,21 +217,6 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    }
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
@@ -161,20 +233,20 @@ export async function getServerSideProps({ req, res, locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Dashboard - My Service Canada Account',
+      title: 'My dashboard - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
     data_fr: {
-      title: 'Tableau de Bord - Mon dossier Service Canada',
+      title: 'Mon tableau de bord - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },
@@ -188,43 +260,27 @@ export async function getServerSideProps({ req, res, locale }) {
         content?.err !== undefined
           ? content
           : locale === 'en'
-          ? content.en
-          : content.fr,
+            ? content.en
+            : content.fr,
       meta,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-          ? bannerContent.en
-          : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-          ? popupContent.en
-          : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-          ? popupContentNA.en
-          : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn.en
+            : authModals.mappedPopupStaySignedIn.fr,
       popupYouHaveBeenSignedout:
         authModals?.err !== undefined
           ? authModals
           : locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut.en
+            : authModals.mappedPopupSignedOut.fr,
     },
   }
 }

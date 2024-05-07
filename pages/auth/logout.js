@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
-import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
@@ -48,17 +48,13 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  const token = await getToken({ req })
-  const provider = token.provider
-
-  const logoutURL =
-    !AuthIsDisabled() && provider !== 'credentials'
-      ? await getLogoutURL(req).catch((error) => {
-          logger.error(error)
-          res.statusCode = 500
-          throw error
-        })
-      : '/'
+  const logoutURL = !AuthIsDisabled()
+    ? await getLogoutURL(req, session).catch((error) => {
+        logger.error(error)
+        res.statusCode = 500
+        throw error
+      })
+    : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -67,7 +63,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
     },
@@ -76,7 +72,7 @@ export async function getServerSideProps({ req, res, locale }) {
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
-      service: 'ESDC-EDSC_MSCA-MSDC',
+      service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
     },

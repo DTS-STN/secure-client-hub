@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import ContextualAlert from '../../components/ContextualAlert'
 
@@ -13,10 +13,10 @@ describe('ContextualAlert', () => {
       id="alert_icon_id"
       alert_icon_id="icon-id"
       alert_icon_alt_text="alt"
-      type="info"
-      message_heading="Information"
-      message_body="You may wish to print this page..."
-    />
+      type="information"
+      alertHeading="Information"
+      alertBody="You may wish to print this page..."
+    />,
   )
   it('renders this Contectual Alert component', () => {
     const message_heading = screen.getByText('Information')
@@ -36,10 +36,10 @@ describe('ContextualAlert', () => {
         id="alert_icon_id"
         alert_icon_id="icon-id"
         alert_icon_alt_text="alt"
-        type="info"
-        message_heading="Information"
-        message_body="You may wish to print this page..."
-      />
+        type="information"
+        alertHeading="Information"
+        alertBody="You may wish to print this page..."
+      />,
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
