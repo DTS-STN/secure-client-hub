@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { signIn, getProviders } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
@@ -63,8 +63,6 @@ export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
   const token = await getIdToken(req)
 
-  const providers = await getProviders()
-
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (
     !AuthIsDisabled() &&
@@ -113,7 +111,6 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       meta,
       authDisabled: authDisabled ?? true,
-      providers: providers ?? [],
     },
   }
 }
