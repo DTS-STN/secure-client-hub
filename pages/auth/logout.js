@@ -12,7 +12,7 @@ export default function Logout(props) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
-      if (props.provider === 'credentials') {
+      if (props.provider === 'credentialsProvider') {
         await signOut({ callbackUrl: props.logoutURL })
       } else {
         await signOut({ redirect: false })
@@ -48,13 +48,17 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req, session).catch((error) => {
-        logger.error(error)
-        res.statusCode = 500
-        throw error
-      })
-    : '/'
+  const token = await getToken({ req })
+  const provider = token.provider
+
+  const logoutURL =
+    !AuthIsDisabled() && provider !== 'credentialsProvider'
+      ? await getLogoutURL(req, session).catch((error) => {
+          logger.error(error)
+          res.statusCode = 500
+          throw error
+        })
+      : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {

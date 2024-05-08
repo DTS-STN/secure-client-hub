@@ -96,7 +96,11 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
   const token = await getIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  if (
+    !AuthIsDisabled() &&
+    (await AuthIsValid(req, session)) &&
+    token?.provider !== 'credentialsProvider'
+  ) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
       token?.sid,

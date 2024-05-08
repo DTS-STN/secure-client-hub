@@ -4,8 +4,10 @@ import type { NextAuthOptions } from 'next-auth'
 import { getLogger } from '../../../logging/log-util'
 import axios from 'axios'
 import * as jose from 'jose'
-import https from 'https'
-import fs from 'fs'
+// import https from 'https'
+// import fs from 'fs'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { users } from '../../../lib/users'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
@@ -27,6 +29,36 @@ async function decryptJwe(jwe: string, jwk: any) {
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    CredentialsProvider({
+      id: 'credentialsProvider',
+      type: 'credentials',
+      // The name to display on the sign in form (e.g. 'Sign in with...')
+      name: 'Credentials',
+      // The credentials is used to generate a suitable form on the sign in page.
+      // You can specify whatever fields you are expecting to be submitted.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
+      credentials: {
+        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
+      },
+
+      async authorize(credentials) {
+        //Find user based on credentials used to login
+        const user = users.find(
+          (user) =>
+            user.username === credentials?.username &&
+            user.password === credentials.password,
+        )
+
+        // If no error and we have user data, return it
+        if (user) {
+          return user
+        }
+        // Return null if user data could not be retrieved
+        return null
+      },
+    }),
     {
       id: 'ecasProvider',
       name: 'ECAS',
@@ -91,6 +123,7 @@ export const authOptions: NextAuthOptions = {
       profile: async (profile) => {
         profile = await decryptJwe(profile.userinfo_token, jwk)
         //Make call to msca-ng API to update last login date
+        /** Hitting this endpoint when not running in the container causes the auth to break, commented out for now
         const response = await axios
           .post(
             `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}`,
@@ -111,6 +144,7 @@ export const authOptions: NextAuthOptions = {
           .then((response) => response)
           .catch((error) => logger.error(error))
         logger.debug(response)
+        */
         return {
           id: profile.sub,
           ...profile,
@@ -154,9 +188,6 @@ export const authOptions: NextAuthOptions = {
       logger.debug(code)
       logger.debug(metadata)
     },
-  },
-  pages: {
-    signIn: '/auth/login/',
   },
 }
 export default NextAuth(authOptions)
