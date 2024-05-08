@@ -32,15 +32,22 @@ export default async function handler(req, res) {
       //Service unavailable when auth is disabled
       res.status(503).json({ success: false })
     } else if (await AuthIsValid(req, session)) {
-      //If auth session is valid, make GET request to validateSession endpoint
-      const sessionValid = await ValidateSession(
-        process.env.CLIENT_ID,
-        token.sid,
-      )
-      if (sessionValid) {
-        res.status(200).json({ success: sessionValid, id: id })
-      } else {
-        res.status(401).json({ success: sessionValid, id: id })
+      //Return true reponse if using credentials provider
+      if (token.provider === 'credentialsProvider') {
+        res.status(200).json({ success: true, id: id })
+      }
+      //If using credentials provider, don't make call to validateSession endpoint
+      if (token.provider !== 'credentialsProvider') {
+        //If auth session is valid, make GET request to validateSession endpoint
+        const sessionValid = await ValidateSession(
+          process.env.CLIENT_ID,
+          token.sid,
+        )
+        if (sessionValid) {
+          res.status(200).json({ success: sessionValid, id: id })
+        } else {
+          res.status(401).json({ success: sessionValid, id: id })
+        }
       }
     } else {
       res.status(500).json({ success: false })

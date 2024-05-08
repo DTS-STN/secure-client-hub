@@ -2,6 +2,8 @@ import Image from 'next/legacy/image'
 import Link from 'next/link'
 import MetaData from '../components/MetaData'
 import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from './api/auth/[...nextauth]'
 
 interface Data {
   title: string
@@ -100,7 +102,22 @@ Index.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  locale,
+}) => {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: `/${locale}/my-dashboard`,
+        permanent: false,
+      },
+    }
+  }
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {

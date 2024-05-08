@@ -64,7 +64,11 @@ export async function getServerSideProps({ req, res, locale }) {
   const token = await getIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  if (
+    !AuthIsDisabled() &&
+    (await AuthIsValid(req, session)) &&
+    token?.provider !== 'credentialsProvider'
+  ) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
       token?.sid,

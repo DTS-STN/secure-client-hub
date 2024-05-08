@@ -18,6 +18,7 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith('/_next') ||
     pathname.includes('/api/') ||
+    pathname.startsWith('favicon.ico') ||
     PUBLIC_FILE.test(pathname)
   ) {
     return
