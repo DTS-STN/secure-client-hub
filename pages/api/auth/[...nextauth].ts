@@ -25,6 +25,16 @@ async function decryptJwe(jwe: string, jwk: any) {
   return jose.decodeJwt(decryptResult.plaintext.toString())
 }
 
+//Create httpsAgent to read in cert to make BRZ call
+const httpsAgent =
+  process.env.AUTH_DISABLED === 'true'
+    ? new https.Agent()
+    : new https.Agent({
+        ca: fs.readFileSync(
+          process.env.MSCA_NG_CERT_LOCATION as fs.PathOrFileDescriptor,
+        ),
+      })
+
 export const authOptions: NextAuthOptions = {
   providers: [
     {
@@ -103,9 +113,7 @@ export const authOptions: NextAuthOptions = {
                 'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
                 'Content-Type': 'application/json',
               },
-              httpsAgent: new https.Agent({
-                ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
-              }),
+              httpsAgent: httpsAgent,
             },
           )
           .then((response) => response)
