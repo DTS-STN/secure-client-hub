@@ -31,7 +31,7 @@ const httpsAgent =
     ? new https.Agent()
     : new https.Agent({
         ca: fs.readFileSync(
-          process.env.MSCA_NG_CERT_LOCATION as fs.PathOrFileDescriptor,
+          '/usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
         ),
       })
 
