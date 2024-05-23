@@ -66,6 +66,8 @@ tolerations: []
 
 affinity: {}
 
+containerPort: 3000
+
 autoscaling:
   enabled: false
 
@@ -74,3 +76,18 @@ oauth:
 
 hostAliases:
   enabled: false
+
+maintenance:
+  enabled: false
+  name: maintenance
+  container:
+    port: 80
+  service:
+    port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+  configMap:
+    name: maintenance-page
+  volume:
+    name: config-volume

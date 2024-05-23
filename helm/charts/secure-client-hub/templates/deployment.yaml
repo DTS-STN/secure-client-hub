@@ -34,6 +34,25 @@ spec:
         {{- end }}
       {{- end }}
       containers:
+{{- if .Values.maintenance.enabled }}
+        - name: {{ .Chart.Name }}
+          image: nginx:1.24.0
+          ports:
+            - containerPort: {{ .Values.maintenance.container.port }}
+              name: {{ .Values.maintenance.port.name }}
+          volumeMounts:
+            # Because no subPath is specified, all keys in configmap will
+            # be mounted as files at the specified mountPath
+            - name: {{ .Values.maintenance.volume.name }}
+              mountPath: /usr/share/nginx/html/maintenance/
+            - name: {{ .Values.maintenance.volume.name }}
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+        - name: {{ .Values.maintenance.volume.name }}
+          configMap:
+            name: {{ .Values.maintenance.configMap.name }}
+{{- end -}}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
