@@ -17,13 +17,6 @@ logger.level = 'warn'
 const jwk = JSON.parse(process.env.AUTH_PRIVATE ?? '{}')
 jwk.alg = 'RS256'
 
-//Create httpsAgent to read in cert to make BRZ call
-const httpsAgent = process.env.AUTH_DISABLED
-  ? new https.Agent()
-  : new https.Agent({
-      ca: fs.readFileSync('/usr/local/share/ca-certificates/env.crt'),
-    })
-
 async function decryptJwe(jwe: string, jwk: any) {
   const key = await jose.importJWK({ ...jwk })
   const decryptResult = await jose.compactDecrypt(jwe, key, {
@@ -31,6 +24,16 @@ async function decryptJwe(jwe: string, jwk: any) {
   })
   return jose.decodeJwt(decryptResult.plaintext.toString())
 }
+
+//Create httpsAgent to read in cert to make BRZ call
+const httpsAgent =
+  process.env.AUTH_DISABLED === 'true'
+    ? new https.Agent()
+    : new https.Agent({
+        ca: fs.readFileSync(
+          '/usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
+        ),
+      })
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -97,8 +100,8 @@ export const authOptions: NextAuthOptions = {
       checks: ['state', 'nonce'],
       profile: async (profile) => {
         profile = await decryptJwe(profile.userinfo_token, jwk)
-        //Make call to msca-ng API to update last login date
-        const response = await axios
+        //Make call to msca-ng API to create user if it doesn't exist
+        axios
           .post(
             `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}`,
             {
@@ -113,9 +116,21 @@ export const authOptions: NextAuthOptions = {
               httpsAgent: httpsAgent,
             },
           )
-          .then((response) => response)
+          .then((response) => logger.debug(response))
           .catch((error) => logger.error(error))
-        console.log(response)
+
+        //Make call to msca-ng API to update last login date of user
+        axios({
+          method: 'post',
+          url: `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/${profile.uid}/logins`,
+          headers: {
+            'Authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
+            'Content-Type': 'application/json',
+          },
+          httpsAgent: httpsAgent,
+        })
+          .then((response) => logger.debug(response))
+          .catch((error) => logger.error(error))
         return {
           id: profile.sub,
           ...profile,

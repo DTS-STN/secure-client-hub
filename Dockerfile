@@ -35,6 +35,9 @@ ARG user=nodeuser
 ARG group=nodegroup
 ARG home=/srv/app
 
+ARG MSCA_NG_CERT_LOCATION=/usr/local/share/ca-certificates/env.crt
+ENV MSCA_NG_CERT_LOCATION=$MSCA_NG_CERT_LOCATION
+
 RUN addgroup \
     -S ${group} \
     --gid 1001 && \
@@ -48,7 +51,7 @@ RUN addgroup \
 
 WORKDIR ${home}
 
-COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt /usr/local/share/ca-certificates/env.crt
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
 
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && update-ca-certificates
 
