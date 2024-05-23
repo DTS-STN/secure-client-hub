@@ -34,12 +34,12 @@ spec:
         {{- end }}
       {{- end }}
       containers:
-{{- if .Values.maintenance.enabled }}
+      {{- if .Values.maintenance.enabled }}
         - name: {{ .Chart.Name }}
           image: nginx:1.24.0
           ports:
             - containerPort: {{ .Values.maintenance.container.port }}
-              name: {{ .Values.maintenance.port.name }}
+              name: {{ .Values.oauth.ports.name }}
           volumeMounts:
             # Because no subPath is specified, all keys in configmap will
             # be mounted as files at the specified mountPath
@@ -52,7 +52,7 @@ spec:
         - name: {{ .Values.maintenance.volume.name }}
           configMap:
             name: {{ .Values.maintenance.configMap.name }}
-{{- end -}}
+{{- end }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
