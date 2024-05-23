@@ -57,7 +57,7 @@
     "react-modal": "^3.16.1",
     "release-please": "^15.13.0",
     "yup": "^1.4.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.5"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
