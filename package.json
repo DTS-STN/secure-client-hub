@@ -50,14 +50,14 @@
     "prettier-plugin-tailwindcss": "^0.5.14",
     "prom-client": "^12.0.0",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-focus-on": "^3.9.3",
     "react-idle-timer": "^5.7.2",
     "react-modal": "^3.16.1",
     "release-please": "^15.13.0",
     "yup": "^1.4.0",
-    "zod": "^3.22.5"
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
