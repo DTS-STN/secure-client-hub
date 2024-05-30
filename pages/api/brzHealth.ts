@@ -71,10 +71,6 @@ export default async function handler(
     axios({
       method: 'get',
       url: `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_HEALTH_ENDPOINT}`,
-      headers: {
-        'Authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
-        'Content-Type': 'application/json',
-      },
       httpsAgent: httpsAgent,
     })
       .then((response) => {
