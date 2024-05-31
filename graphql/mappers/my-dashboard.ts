@@ -210,8 +210,7 @@ export async function getMyDashboardContent() {
               }
             }),
           }
-        })
-        .filter((e) => e),
+        }),
       exitBeta: {
         title: response?.data.schPageV1ByPath.item.scFragments.find(
           ({ scId }) => scId === 'exit-beta-version',
