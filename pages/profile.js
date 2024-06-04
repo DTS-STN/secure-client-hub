@@ -37,9 +37,7 @@ export default function Profile(props) {
         errType={errorCode}
         isAuth={false}
         homePageLink={
-          props.locale === 'en'
-            ? 'en/privacy-notice-terms-conditions'
-            : 'fr/avis-confidentialite-modalites'
+          props.locale === 'en' ? 'en/my-dashboard' : 'fr/mon-tableau-de-bord'
         }
         accountPageLink={
           props?.locale === 'en'
