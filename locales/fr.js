@@ -120,12 +120,17 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'À propos de Canada.ca',
 
+  footerTermsAndConditionURLtest:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndConditionURL:
-    '/fr/avis-confidentialite-modalites#termesEtConditions',
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndCondition: 'Avis',
   footerTermsAndConditionAnchor: 'termesEtConditions',
 
-  footerPrivacyURL: '/fr/avis-confidentialite-modalites/',
+  footerPrivacyURLtest:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=fra',
+  footerPrivacyURL:
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerPrivacy: 'Confidentialité',
   footerPrivacyAnchor: 'confidentialité',
 

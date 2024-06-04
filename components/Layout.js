@@ -145,24 +145,45 @@ export default function Layout(props) {
 
       <IdleTimeout locale={props.locale} refPageAA={props.refPageAA} />
 
-      <Footer
-        lang={!props.locale ? 'en' : props.locale}
-        brandLinks={[
-          {
-            href: t.footerTermsAndConditionURL,
-            id: 'linkTC',
-            text: t.footerTermsAndCondition,
-          },
-          {
-            href: t.footerPrivacyURL,
-            id: 'linkPR',
-            text: t.footerPrivacy,
-          },
-        ]}
-        contactLink={contactLink}
-        btnLink="#top"
-        id="page-footer"
-      />
+      {process.env.ENVIRONMENT === 'production' ? (
+        <Footer
+          lang={!props.locale ? 'en' : props.locale}
+          brandLinks={[
+            {
+              href: t.footerTermsAndConditionURL,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
+            },
+            {
+              href: t.footerPrivacyURL,
+              id: 'linkPR',
+              text: t.footerPrivacy,
+            },
+          ]}
+          contactLink={contactLink}
+          btnLink="#top"
+          id="page-footer"
+        />
+      ) : (
+        <Footer
+          lang={!props.locale ? 'en' : props.locale}
+          brandLinks={[
+            {
+              href: t.footerTermsAndConditionURLtest,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
+            },
+            {
+              href: t.footerPrivacyURLtest,
+              id: 'linkPR',
+              text: t.footerPrivacy,
+            },
+          ]}
+          contactLink={contactLink}
+          btnLink="#top"
+          id="page-footer"
+        />
+      )}
     </>
   )
 }
