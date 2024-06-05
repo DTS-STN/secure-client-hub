@@ -38,7 +38,6 @@ describe('Validate dashboard page', () => {
 
   it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
     const cardTitles = [
-      // 'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
