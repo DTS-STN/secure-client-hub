@@ -36,9 +36,8 @@ describe('Validate dashboard page', () => {
   })
  
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +1 cards for (CPCD) and Card titles are Visible', () => {
+  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
     const cardTitles = [
-      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -54,7 +53,7 @@ describe('Validate dashboard page', () => {
   cy.get('[data-testid="myDashboardContent-test"]')
   .children('[data-cy="cards"]')
   .should('be.visible')
-  .and('have.length', 6)
+  .and('have.length', 5)
 })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
@@ -64,7 +63,6 @@ describe('Validate dashboard page', () => {
   // EN This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links EN', () => {
     const cardTitles = [
-      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -96,7 +94,6 @@ describe('Validate dashboard page', () => {
   // FR This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links FR', () => {
     const cardTitles = [
-      'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
       'Sécurité de la vieillesse et Supplément de revenu garanti',
