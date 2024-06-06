@@ -27,27 +27,27 @@ const ErrorPage = ({
     errType === '404'
       ? EN.errorPageHeadingTitle404
       : errType === '500'
-      ? EN.errorPageHeadingTitle500
-      : EN.errorPageHeadingTitle503
+        ? EN.errorPageHeadingTitle500
+        : EN.errorPageHeadingTitle503
   const errorHeadingFR =
     errType === '404'
       ? FR.errorPageHeadingTitle404
       : errType === '500'
-      ? FR.errorPageHeadingTitle500
-      : FR.errorPageHeadingTitle503
+        ? FR.errorPageHeadingTitle500
+        : FR.errorPageHeadingTitle503
 
   const errorTextEN =
     errType === '404'
       ? EN.errorPageErrorText404
       : errType === '500'
-      ? EN.errorPageErrorText500
-      : EN.errorPageErrorText503
+        ? EN.errorPageErrorText500
+        : EN.errorPageErrorText503
   const errorTextFR =
     errType === '404'
       ? FR.errorPageErrorText404
       : errType === '500'
-      ? FR.errorPageErrorText500
-      : FR.errorPageErrorText503
+        ? FR.errorPageErrorText500
+        : FR.errorPageErrorText503
   return (
     <div className={`${biClassName} container`}>
       {language.map((val, index) => {
@@ -57,11 +57,10 @@ const ErrorPage = ({
               id={'pageHead' + index + errType}
               title={val === EN ? errorHeadingEN : errorHeadingFR}
             />
-            <p className="text-20px text-gray-darker mt-2">
+            <p className="mt-2 pb-6 text-20px text-gray-darker">
               {val === EN ? errorTextEN : errorTextFR}
             </p>
-            <br />
-            <p className="font-bold text-gray-darker sm:text-black text-[20px]">
+            <p className="text-[20px] font-bold text-gray-darker sm:text-black">
               {val.errorPageNextText}
             </p>
             <h2 className="sr-only">{`What's Next Links`}</h2>
@@ -71,24 +70,24 @@ const ErrorPage = ({
                 className={
                   errType === '404'
                     ? 'hidden'
-                    : 'text-20px text-gray-darker pl-3'
+                    : 'pl-3 text-20px text-gray-darker'
                 }
               >
                 {errType === '500'
                   ? val.error500TextLink
                   : errType === '503'
-                  ? val.error503TextLink
-                  : null}
+                    ? val.error503TextLink
+                    : null}
               </li>
               <li
                 key={'errorLink2' + index.toString()}
-                className="text-20px text-gray-darker pl-3"
+                className="pl-3 text-20px text-gray-darker"
               >
                 {!isAuth
                   ? val.errorTextLinkCommon
                   : val.errorAuthTextLinkCommon}
                 <Link
-                  className="underline text-deep-blue-dark font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+                  className="font-body text-20px text-deep-blue-dark underline hover:text-blue-hover focus:text-blue-hover"
                   id={
                     !isAuth
                       ? 'homePage' + errType + lang + index
@@ -99,16 +98,14 @@ const ErrorPage = ({
                   {!isAuth
                     ? val.errorTextLinkCommon_2
                     : errType === '404'
-                    ? val.errorAuthTextLinkCommon_2
-                    : val.errorTextLinkCommon_2}
+                      ? val.errorAuthTextLinkCommon_2
+                      : val.errorTextLinkCommon_2}
                 </Link>
               </li>
             </ul>
-            <br />
-            <br />
             <p
               data-testid="errorType"
-              className="font-bold text-gray-darker text-[14px] pb-2"
+              className="mt-10 pb-2 text-[14px] font-bold text-gray-darker"
             >
               {val.errorPageType} {errType}
             </p>

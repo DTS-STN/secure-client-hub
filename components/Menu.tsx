@@ -12,15 +12,11 @@ interface MenuItem {
 
 interface MenuProps {
   lang: string
-  dataGcAnalyticsCustomClickInstitutionVariable: string
+  dataGcAnalyticsCustomClick: string
   menuList: MenuItem[]
 }
 
-const Menu = ({
-  lang,
-  dataGcAnalyticsCustomClickInstitutionVariable,
-  menuList,
-}: MenuProps) => {
+const Menu = ({ lang, dataGcAnalyticsCustomClick, menuList }: MenuProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
 
@@ -52,8 +48,8 @@ const Menu = ({
 
   return (
     <div className="w-full bg-blue-primary">
-      <nav className="sch-container sch-container-menu sm:flex items-center justify-between sm:h-[60px]">
-        <div className="h-[60px] flex items-center text-white font-display font-bold text-[19px] leading-[21px] md:text-2xl mx-15px md:m-0 ">
+      <nav className="sch-container sch-container-menu items-center justify-between sm:flex sm:h-[60px]">
+        <div className="mx-15px flex h-[60px] items-center font-display text-[19px] font-bold leading-[21px] text-white md:m-0 md:text-2xl ">
           <span id="mainSiteNav">
             {lang === 'fr'
               ? 'Mon dossier Service Canada'
@@ -61,7 +57,7 @@ const Menu = ({
           </span>
         </div>
         <div
-          className="w-full sm:w-[260px] h-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a"
+          className="h-full w-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
           ref={dropdown}
         >
           <button
@@ -70,7 +66,7 @@ const Menu = ({
             aria-haspopup="true"
             data-testid="menuButton"
             aria-expanded={showDropdown}
-            className="flex justify-between w-full h-full font-bold font-body items-center py-0.5 pl-4 text-blue-primary ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:outline-none focus:mb-1"
+            className="flex h-full w-full items-center justify-between rounded-sm py-0.5 pl-4 font-body font-bold text-blue-primary ring-blue-hover ring-offset-2 focus:mb-1 focus:outline-none focus:ring-2"
           >
             <span className="flex items-center">
               <svg
@@ -89,7 +85,7 @@ const Menu = ({
               {lang === 'fr' ? 'Compte' : 'Account'}
             </span>
             <svg
-              className="w-4 h-4 mx-4"
+              className="mx-4 h-4 w-4"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +108,7 @@ const Menu = ({
           {showDropdown && (
             <div
               id="dropdownNavbar"
-              className="sm:absolute sm:w-[260px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] rounded-b-[5px] text-deep-blue-dark bg-white z-10"
+              className="z-10 rounded-b-[5px] bg-white text-deep-blue-dark drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] sm:absolute sm:w-[260px]"
               aria-labelledby="dropdownLargeButton"
             >
               {menuList.map((element, index) => {
@@ -121,7 +117,7 @@ const Menu = ({
                     <Link
                       className={`${
                         index === 0 ? 'border-none' : 'border-t-2'
-                      } font-body flex items-center h-[55px] px-4 hover:text-blue-hover focus:outline-none ring-offset-2 focus:ring-2 ring-blue-hover rounded-sm focus:border-none`}
+                      } flex h-[55px] items-center rounded-sm px-4 font-body ring-blue-hover ring-offset-2 hover:text-blue-hover focus:border-none focus:outline-none focus:ring-2`}
                       onClick={
                         element.showIcon
                           ? element.onSignOut
@@ -129,7 +125,7 @@ const Menu = ({
                       }
                       href={element.path}
                       aria-label={element.value}
-                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
+                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClick}:${element.id}`}
                     >
                       {element.showIcon && (
                         <svg

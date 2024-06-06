@@ -5,24 +5,21 @@ import ContextualAlert from '../components/ContextualAlert'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getPrivacyConditionContent } from '../graphql/mappers/privacy-notice-terms-conditions'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
 import { getLogger } from '../logging/log-util'
 import {
   AuthIsDisabled,
   AuthIsValid,
-  Redirect,
   ValidateSession,
+  Redirect,
+  getIdToken,
 } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import BackToButton from '../components/BackToButton'
 import Markdown from 'markdown-to-jsx'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import React from 'react'
 import ErrorPage from '../components/ErrorPage'
-import { getToken } from 'next-auth/jwt'
 
 export default function PrivacyCondition(props) {
   const t = props.locale === 'en' ? en : fr
@@ -68,13 +65,17 @@ export default function PrivacyCondition(props) {
         title={props.content.heading}
         className="mb-2"
       />
-      <ContextualAlert
-        id="PrivacyCondition-alert"
-        type={props.content.alert.type}
-        message_body={props.content.alert.text}
-        alert_icon_alt_text="info icon"
-        alert_icon_id="info-icon"
-      />
+      <ul>
+        <ContextualAlert
+          id="PrivacyCondition-alert"
+          type={props.content.alert.type}
+          alertBody={props.content.alert.text}
+          alert_icon_alt_text={`${props.content.alert.type} ${
+            props.locale === 'fr' ? 'Icônes' : 'icon'
+          }`}
+          alert_icon_id="alert-icon-id"
+        />
+      </ul>
       <section id={t.footerPrivacyAnchor}>
         <Markdown
           options={{
@@ -99,6 +100,8 @@ export default function PrivacyCondition(props) {
               a: {
                 props: {
                   className: 'underline text-deep-blue-dark cursor-pointer',
+                  rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
+                  target: '_blank',
                 },
               },
             },
@@ -156,6 +159,8 @@ export default function PrivacyCondition(props) {
               a: {
                 props: {
                   className: 'underline text-deep-blue-dark cursor-pointer',
+                  rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
+                  target: '_blank',
                 },
               },
             },
@@ -182,16 +187,17 @@ export default function PrivacyCondition(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
       // Clear all session cookies
@@ -223,41 +229,11 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  /*
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-   */
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    },
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
     return { err: '500' }
   })
-
-  /* 
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-      logger.error(error)
-      // res.statusCode = 500
-      throw error
-    })
-  */
 
   /* istanbul ignore next */
   const langToggleLink =
@@ -309,28 +285,12 @@ export async function getServerSideProps({ req, res, locale }) {
             : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-            ? bannerContent.en
-            : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-            ? popupContent.en
-            : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-            ? popupContentNA.en
-            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

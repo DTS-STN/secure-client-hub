@@ -43,19 +43,19 @@ const ViewMoreLessButton = ({
       data-testid={dataTestid}
       aria-expanded={ariaExpanded}
       aria-label={ariaLabel}
+      // this AA tag is set to the oposite of what the actual aria-label value is because when AA pulls the value, it's on the current state not the state after the click so it looks backwards.
+      data-gc-analytics-customclick={`${refPageAA} - ${acronym}:ViewMoreLessButton ${ariaExpanded === false ? 'open' : 'close'}`}
     >
       <div className="flex sm:items-center">
         {icon ? (
           <FontAwesomeIcon
             icon={faCircleChevronUp}
-            className={`text-46px pr-3`}
-            data-gc-analytics-customclick={`${refPageAA} ${acronym}:Contract`}
+            className={`pr-3 text-46px`}
           />
         ) : (
           <FontAwesomeIcon
             icon={faCircleChevronDown}
-            className={`text-46px pr-3`}
-            data-gc-analytics-customclick={`${refPageAA} ${acronym}:Expand`}
+            className={`pr-3 text-46px`}
           />
         )}
         <span className="text-left">{caption}</span>

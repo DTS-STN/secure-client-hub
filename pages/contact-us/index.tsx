@@ -1,24 +1,23 @@
 import Link from 'next/link'
 import Heading from '../../components/Heading'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import {
   GetContactUsContentReturnType,
   getContactUsContent,
 } from '../../graphql/mappers/contact-us'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import {
   AuthIsDisabled,
   AuthIsValid,
-  Redirect,
   ValidateSession,
+  Redirect,
+  getIdToken,
 } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
-import { getToken } from 'next-auth/jwt'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { icon } from '../../lib/loadIcons'
 
 interface Data {
   title: string
@@ -45,6 +44,11 @@ interface ContactLandingProps {
 }
 
 const ContactLanding = (props: ContactLandingProps) => {
+  const newTabExceptions: string[] = [
+    'https://www.canada.ca/en/employment-social-development/corporate/contact/sin.html',
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
+  ]
+
   return (
     <div id="contactContent" data-testid="contactContent-test">
       <Heading id="contact-us-heading" title={props.content.heading ?? ''} />
@@ -65,9 +69,37 @@ const ContactLanding = (props: ContactLandingProps) => {
                 )
                   .split('/')
                   .pop()}`}
-                data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
+                data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:Contact Us:${link.linkTitle}`}
+                target={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? '_blank'
+                    : '_self'
+                }
+                rel={
+                  newTabExceptions.includes(link.linkDestination ?? '')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
               >
                 {link.linkTitle}
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <FontAwesomeIcon
+                      className="absolute ml-1.5 pt-0.5"
+                      width="14"
+                      icon={icon['arrow-up-right-from-square']}
+                    ></FontAwesomeIcon>
+                  ) : null}
+                </span>
+                <span>
+                  {newTabExceptions.includes(link.linkDestination ?? '') ? (
+                    <span className="sr-only">
+                      {props.locale === 'fr'
+                        ? "S'ouvre dans un nouvel onglet"
+                        : 'Opens in a new tab'}
+                    </span>
+                  ) : null}
+                </span>
               </Link>
               <p className="text-xl text-gray-darker">{link.linkDescription}</p>
             </li>
@@ -79,16 +111,17 @@ const ContactLanding = (props: ContactLandingProps) => {
 }
 export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
       // Clear all session cookies
@@ -113,12 +146,13 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   }
 
   const content = await getContactUsContent()
-  const bannerContent = await getBetaBannerContent()
-  const popupContent = await getBetaPopupExitContent()
-  const popupContentNA = await getBetaPopupNotAvailableContent()
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
+  if (locale === 'und') {
+    locale = 'en'
+  }
+
   const langToggleLink =
     locale === 'en' ? '/fr/contactez-nous' : '/en/contact-us'
 
@@ -163,10 +197,8 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${content.en.heading}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

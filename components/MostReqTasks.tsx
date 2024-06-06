@@ -44,60 +44,115 @@ const MostReqTasks = ({
       >
         {taskListMR.title}
       </h3>
-      <ul
-        className="flex list-outside list-disc flex-col px-8 pb-5 pt-2 text-white sm:px-12 md:px-20 md:pt-4"
-        data-cy="most-req-links"
-      >
-        {taskListMR.tasks.map((task, index) => {
-          return (
-            <li
-              key={index}
-              className="justify-center py-2 font-bold"
-              data-cy="most-req-tasklink"
-            >
-              <Link
-                href={task.link}
-                passHref
-                target={
-                  newTabTaskExceptions.includes(task.link) ? '_blank' : '_self'
-                }
-                rel={
-                  newTabTaskExceptions.includes(task.link)
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
-                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
-                className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
+
+      {taskListMR.tasks.length > 3 ? (
+        <ul
+          className="grid list-outside list-disc grid-cols-1 px-9 pb-5 pt-2
+                     text-white xs:gap-x-5 sm:auto-cols-fr sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3 sm:px-14 md:px-[100px] md:pt-4"
+          data-cy="most-req-links"
+        >
+          {taskListMR.tasks.map((task, index) => {
+            return (
+              <li
+                key={index}
+                className="justify-center py-2 font-bold"
+                data-cy="most-req-tasklink"
               >
-                <span
-                  aria-label={task.areaLabel}
-                  className="static text-xl font-normal"
+                <Link
+                  aria-label={`${taskListMR.title} - ${task.title} -
+                             ${
+                               newTabTaskExceptions.includes(task.link)
+                                 ? locale === 'fr'
+                                   ? "S'ouvre dans un nouvel onglet"
+                                   : 'Opens in a new tab'
+                                 : ''
+                             }`}
+                  href={task.link}
+                  passHref
+                  target={
+                    newTabTaskExceptions.includes(task.link)
+                      ? '_blank'
+                      : '_self'
+                  }
+                  rel={
+                    newTabTaskExceptions.includes(task.link)
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
+                  className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
                 >
-                  {task.title}
-                  <span>
-                    {newTabTaskExceptions.includes(task.link) ? (
-                      <FontAwesomeIcon
-                        className="absolute ml-1.5 pt-0.5"
-                        width="14"
-                        icon={icon['arrow-up-right-from-square']}
-                      ></FontAwesomeIcon>
-                    ) : null}
+                  <span className="static text-xl font-normal">
+                    {task.title}
+                    <span>
+                      {newTabTaskExceptions.includes(task.link) ? (
+                        <FontAwesomeIcon
+                          className="absolute ml-1.5 pt-0.5"
+                          width="14"
+                          icon={icon['arrow-up-right-from-square']}
+                        ></FontAwesomeIcon>
+                      ) : null}
+                    </span>
                   </span>
-                  <span>
-                    {newTabTaskExceptions.includes(task.link) ? (
-                      <span className="sr-only">
-                        {locale === 'fr'
-                          ? "S'ouvre dans un nouvel onglet"
-                          : 'Opens in a new tab'}
-                      </span>
-                    ) : null}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <ul
+          className="grid list-outside list-disc grid-cols-1  px-9 pb-5 pt-2 text-white sm:px-14 md:px-[100px] md:pt-4"
+          data-cy="most-req-links"
+        >
+          {taskListMR.tasks.map((task, index) => {
+            return (
+              <li
+                key={index}
+                className="justify-center py-2 font-bold"
+                data-cy="most-req-tasklink"
+              >
+                <Link
+                  aria-label={`${taskListMR.title} - ${task.title} -
+                            ${
+                              newTabTaskExceptions.includes(task.link)
+                                ? locale === 'fr'
+                                  ? "S'ouvre dans un nouvel onglet"
+                                  : 'Opens in a new tab'
+                                : ''
+                            }`}
+                  href={task.link}
+                  passHref
+                  target={
+                    newTabTaskExceptions.includes(task.link)
+                      ? '_blank'
+                      : '_self'
+                  }
+                  rel={
+                    newTabTaskExceptions.includes(task.link)
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
+                  className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
+                >
+                  <span className="static text-xl font-normal">
+                    {task.title}
+                    <span>
+                      {newTabTaskExceptions.includes(task.link) ? (
+                        <FontAwesomeIcon
+                          className="absolute ml-1.5 pt-0.5"
+                          width="14"
+                          icon={icon['arrow-up-right-from-square']}
+                        ></FontAwesomeIcon>
+                      ) : null}
+                    </span>
                   </span>
-                </span>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      )}
     </div>
   )
 }
