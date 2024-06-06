@@ -53,7 +53,7 @@ WORKDIR ${home}
 
 COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
 
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && update-ca-certificates
+RUN apk update && apk add ca-certificates curl && rm -rf /var/cache/apk/* && update-ca-certificates
 
 USER ${user}
 
