@@ -85,58 +85,6 @@ export default function MyDashboard(props) {
           </ul>
         )
       })}
-      <Card
-        key={'canadian-dental-care-plan'}
-        programUniqueId={'canadian-dental-care-plan'}
-        locale={props.locale}
-        cardTitle={
-          props.locale === 'en'
-            ? 'Canadian Dental Care Plan'
-            : 'Régime canadien de soins dentaires'
-        }
-        viewMoreLessCaption={
-          props.locale === 'en'
-            ? 'Most requested actions'
-            : 'Actions les plus demandées'
-        }
-        acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-        refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
-        hasAlert={false}
-      >
-        <div className="bg-deep-blue-60d" data-cy="most-requested-section">
-          <MostReqTasks
-            locale={props.locale}
-            taskListMR={{
-              title: props.locale === 'en' ? 'Most requested' : 'En demande',
-              tasks: [
-                {
-                  id:
-                    props.locale === 'en'
-                      ? 'cdcp-view-my-letters'
-                      : 'RCSD-consulter-mes-lettres',
-                  title:
-                    props.locale === 'en'
-                      ? 'View my letters'
-                      : 'Consulter mes lettres',
-                  areaLabel:
-                    props.locale === 'en'
-                      ? 'View my Canada Dental Care Plan Letters'
-                      : 'Voir mes lettres du Régime de soins dentaires du Canada',
-                  link:
-                    props.locale === 'en'
-                      ? 'https://cdcp-staging.dev-dp-internal.dts-stn.com/en/letters'
-                      : 'https://cdcp-staging.dev-dp-internal.dts-stn.com/fr/letters',
-                  icon: '',
-                  betaPopUp: true,
-                },
-              ],
-            }}
-            dataCy="most-requested"
-            acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-            refPageAA={`ESDC-EDSC_MSCA-MSDC-SCH:${props.content.heading}`}
-          />
-        </div>
-      </Card>
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -193,16 +141,28 @@ export async function getServerSideProps({ req, res, locale }) {
 
   const token = await getIdToken(req)
 
-  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
       token?.sid,
     )
     if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/logout`,
+          destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }

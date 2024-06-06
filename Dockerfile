@@ -1,4 +1,4 @@
-FROM node:20-alpine3.18 AS base
+FROM node:20-alpine3.20 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
@@ -28,7 +28,7 @@ COPY --from=base /base ./
 
 RUN mkdir -p /usr/local/share/ca-certificates/ && echo ${HOSTALIAS_CERT} | sed 's/\\n/\n/g' | xargs > /usr/local/share/ca-certificates/env.crt && chmod 644 /usr/local/share/ca-certificates/env.crt && npm run build
 
-FROM node:20-alpine3.18 AS production
+FROM node:20-alpine3.20 AS production
 ENV NODE_ENV=production
 
 ARG user=nodeuser
