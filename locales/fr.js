@@ -28,7 +28,7 @@ export default {
   dashboardInfo: {
     label: 'Nouveau',
     messageText:
-      'Mon dossier Service Canada a une nouvelle apparence. Pour en savoir plus, veuillez consulter les ',
+      'Mon dossier Service Canada a un nouveau tableau de bord. Pour en savoir plus, veuillez consulter les ',
     messageLinkHref:
       'https://alpha.service.canada.ca/fr/projets/tableau-de-bord',
     messageLinkText: ' Laboratoires de Service Canada',
