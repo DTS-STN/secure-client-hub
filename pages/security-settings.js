@@ -88,16 +88,28 @@ export async function getServerSideProps({ req, res, locale }) {
 
   const token = await getIdToken(req)
 
-  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
       token?.sid,
     )
     if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/logout`,
+          destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }

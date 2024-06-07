@@ -9,6 +9,7 @@ import { lato, notoSans } from '../utils/fonts'
 import { useRouter } from 'next/router'
 import throttle from 'lodash.throttle'
 import IdleTimeout from './IdleTimeout'
+import { signOut } from 'next-auth/react'
 
 export default function Layout(props) {
   const t = props.locale === 'en' ? en : fr
@@ -37,9 +38,10 @@ export default function Layout(props) {
   useEffect(() => {
     window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
     window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
     if (response?.status === 401) {
-      router.push(`/${props.locale}/auth/logout`)
+      signOut()
+      router.push(`/${props.locale}/auth/login`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {

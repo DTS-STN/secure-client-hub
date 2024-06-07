@@ -30,7 +30,7 @@ export default {
   dashboardInfo: {
     label: 'New',
     messageText:
-      "Your MSCA account now has a Dashboard view! If you'd like to learn more about our changes, please visit our ",
+      "My Service Canada Account now has a dashboard. If you'd like to learn more about our changes, please visit the ",
     messageLinkHref: 'https://alpha.service.canada.ca/en/projects/dashboard',
     messageLinkText: ' Service Canada Labs page',
   },
