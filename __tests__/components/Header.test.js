@@ -62,7 +62,6 @@ describe('Header', () => {
       { text: 'Max length of breadcrumb 28', link: '/' },
       { text: 'Link3', link: '/' },
     ],
-    refPageAA: 'dashboard',
   }
   test('renders Header component with default props', () => {
     render(<Header {...defaultProps} />)

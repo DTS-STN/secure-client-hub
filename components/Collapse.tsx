@@ -20,7 +20,7 @@ const Collapse = ({ id, title, children, dataTestId }: CollapseProps) => {
         data-cy="summary"
         key={`summary-${id}`}
         className=" cursor-pointer select-none rounded border border-gray-40 px-15px py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline"
-        data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${programs(
+        data-gc-analytics-customclick={`ESDC-EDSC:${programs(
           id?.split('-')[0],
         )}:${title}`}
       >

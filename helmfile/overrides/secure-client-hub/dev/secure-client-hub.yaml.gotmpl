@@ -54,8 +54,6 @@ extraEnv:
     value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
   - name: AUTH_ECAS_REFRESH_ENDPOINT
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
-  - name: MSCA_NG_USER_ENDPOINT
-    value: {{ env "MSCA_NG_USER_ENDPOINT" }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -71,21 +69,6 @@ extraEnv:
       secretKeyRef:
         name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
         key: NEXTAUTH_SECRET
-  - name: MSCA_NG_CREDS
-    valueFrom:
-      secretKeyRef:
-        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-        key: MSCA_NG_CREDS
-  - name: HOSTALIAS_IP
-    valueFrom:
-      secretKeyRef:
-        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-        key: HOSTALIAS_IP
-  - name: HOSTALIAS_HOSTNAME
-    valueFrom:
-      secretKeyRef:
-        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-        key: HOSTALIAS_HOSTNAME
   {{- if env "OTEL_API_KEY" }}
   - name: OTEL_API_KEY
     valueFrom:
@@ -134,7 +117,7 @@ ingress:
     enabled: true
     annotations: 
       kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/proxy-buffer-size: {{ env "OAUTH_PROXY_BUFFER_SIZE" | default "8k" }}
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 8k
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     tls:
       - hosts:
@@ -176,11 +159,6 @@ secrets:
       AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
       CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
       NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
-      HOSTALIAS_IP: "{{ env "HOSTALIAS_IP" }}"
-      HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
-      HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
-      MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
-
   msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
     labels:
       app.kubernetes.io/name: service-canada-client-hub
@@ -201,7 +179,6 @@ autoscaling:
     app.kubernetes.io/name: service-canada-client-hub
 {{- if env "OAUTH_ENABLED" }}
 oauth:
-  enabled: {{ env "OAUTH_ENABLED" }}
   ports:
     containerPort: 4180
     name: oauth-proxy
@@ -230,9 +207,6 @@ oauth:
     oidcIssuerURL: https://login.microsoftonline.com/9ed55846-8a81-4246-acd8-b1a01abfc0d1/v2.0
     skipJWTBearerTokens: true
     skipProviderButton: false
-    {{- if env "OAUTH_SESSION_COOKIE_MINIMAL" }}
-    sessionCookieMinimal: true
-    {{- end }}
   extraEnv:
     - name: OAUTH2_PROXY_CLIENT_SECRET
       valueFrom:
@@ -244,7 +218,6 @@ oauth:
         secretKeyRef:
           name: msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}
           key: OAUTH_PROXY_COOKIE_SECRET
-
   resources:
     requests:
       cpu: 50m
@@ -263,11 +236,4 @@ oauth:
     readinessPort: oauth-proxy
     readinessPeriodSeconds: 10
     readinessSuccessThreshold: 1
-{{- end }}
-{{- if env "HOSTALIAS_ENABLED" }}
-hostAliases:
-  enabled: {{ env "HOSTALIAS_ENABLED" }}
-  ip: "{{ env "HOSTALIAS_IP" }}"
-  hostnames:
-    - {{ env "HOSTALIAS_HOSTNAME" }}
 {{- end }}

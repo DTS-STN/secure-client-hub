@@ -63,14 +63,6 @@ const BenefitTasks = ({
               data-cy="task-link"
             >
               <Link
-                aria-label={`${taskList.title} - ${task.title} - 
-                ${
-                  newTabTaskExceptions.includes(task.link)
-                    ? locale === 'fr'
-                      ? "S'ouvre dans un nouvel onglet"
-                      : 'Opens in a new tab'
-                    : ''
-                }`}
                 href={task.link}
                 passHref
                 target={
@@ -81,10 +73,13 @@ const BenefitTasks = ({
                     ? 'noopener noreferrer'
                     : undefined
                 }
-                data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskList.title}:${task.id}`}
+                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
               >
-                <span className="static text-xl font-normal">
+                <span
+                  aria-label={task.areaLabel}
+                  className="static text-xl font-normal"
+                >
                   {task.title}
                   <span>
                     {newTabTaskExceptions.includes(task.link) ? (
@@ -93,6 +88,15 @@ const BenefitTasks = ({
                         width="14"
                         icon={icon['arrow-up-right-from-square']}
                       ></FontAwesomeIcon>
+                    ) : null}
+                  </span>
+                  <span>
+                    {newTabTaskExceptions.includes(task.link) ? (
+                      <span className="sr-only">
+                        {locale === 'fr'
+                          ? "S'ouvre dans un nouvel onglet"
+                          : 'Opens in a new tab'}
+                      </span>
                     ) : null}
                   </span>
                 </span>

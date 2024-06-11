@@ -25,14 +25,6 @@ spec:
         app.kubernetes.io/name: {{ include "name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      {{- if .Values.hostAliases.enabled }}
-      hostAliases:
-      - ip: "{{ .Values.hostAliases.ip }}"
-        hostnames:
-        {{- range .Values.hostAliases.hostnames }}
-        - {{ . | quote }}
-        {{- end }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -61,7 +53,7 @@ spec:
             initialDelaySeconds: {{ .Values.healthChecks.readinessDelay }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.oauth.enabled }}
+        {{- if .Values.oauth }}
         - args:
             ## OAuth2 Proxy Config File
             ## https://github.com/oauth2-proxy/oauth2-proxy
@@ -105,9 +97,6 @@ spec:
             - --oidc-issuer-url={{ .Values.oauth.args.oidcIssuerURL }}
             - --skip-jwt-bearer-tokens={{ .Values.oauth.args.skipJWTBearerTokens }}
             - --skip-provider-button={{ .Values.oauth.args.skipProviderButton  }}
-            {{- if .Values.oauth.args.sessionCookieMinimal }}
-            - --session-cookie-minimal={{ .Values.oauth.args.sessionCookieMinimal }}
-            {{- end }}
           name: oauth-proxy
           image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
           imagePullPolicy: Always

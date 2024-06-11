@@ -43,9 +43,6 @@ yarn-error.log*
 .env
 .env.local
 
-#cert
-env.crt
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts

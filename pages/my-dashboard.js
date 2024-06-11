@@ -3,17 +3,17 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
-import ContextualAlert from '../components/ContextualAlert'
-import InfoMessage from '../components/InfoMessage'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
   AuthIsDisabled,
   AuthIsValid,
-  ValidateSession,
   Redirect,
-  getIdToken,
+  ValidateSession,
 } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -21,6 +21,7 @@ import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
+import { getToken } from 'next-auth/jwt'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -57,34 +58,6 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
-      <InfoMessage
-        id="dashboard-info-message"
-        label={t.dashboardInfo.label}
-        messageText={t.dashboardInfo.messageText}
-        messageLinkText={t.dashboardInfo.messageLinkText}
-        messageLinkHref={t.dashboardInfo.messageLinkHref}
-        icon="arrow-up-right-from-square"
-        refPageAA={`${props.aaPrefix}`}
-        locale={props.locale}
-      />
-
-      {props.content.pageAlerts.map((alert, index) => {
-        const alertType = alert.type[0].split('/').pop()
-        return (
-          <ul className="mt-6 w-full sm:px-8 md:px-15" key={index}>
-            <ContextualAlert
-              id={alert.id}
-              type={alertType}
-              alertHeading={alert.alertHeading}
-              alertBody={alert.alertBody}
-              alert_icon_id={` alert-icon ${alert.id}`}
-              alert_icon_alt_text={`${alertType} ${
-                props.locale === 'fr' ? 'Icône' : 'icon'
-              }`}
-            />
-          </ul>
-        )
-      })}
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -97,7 +70,6 @@ export default function MyDashboard(props) {
             viewMoreLessCaption={card.dropdownText}
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
-            cardAlert={card.cardAlerts}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
@@ -135,17 +107,16 @@ export default function MyDashboard(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
+  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  const token = await getIdToken(req)
-
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
+  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sid,
+      token?.sub,
     )
     if (!sessionValid) {
       // Clear all session cookies
@@ -177,6 +148,21 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    return { err: '500' }
+  })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    return { err: '500' }
+  })
+
+  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
+    (error) => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
@@ -223,12 +209,28 @@ export async function getServerSideProps({ req, res, locale }) {
             ? content.en
             : content.fr,
       meta,
+      bannerContent:
+        bannerContent?.err !== undefined
+          ? bannerContent
+          : locale === 'en'
+            ? bannerContent.en
+            : bannerContent.fr,
+      popupContent:
+        popupContent?.err !== undefined
+          ? popupContent
+          : locale === 'en'
+            ? popupContent.en
+            : popupContent.fr,
+      popupContentNA:
+        popupContentNA?.err !== undefined
+          ? popupContentNA
+          : locale === 'en'
+            ? popupContentNA.en
+            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
-      aaMenuPrefix:
-        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
+          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

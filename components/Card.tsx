@@ -1,15 +1,7 @@
 import ViewMoreLessButton from '../components/ViewMoreLessButton'
-import ContextualAlert from '../components/ContextualAlert'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ReactNode } from 'react'
-import { z } from 'zod'
 
-interface AlertProps {
-  id: string
-  type: string
-  alertHeading: string
-  alertBody: string
-}
 interface CardProps {
   cardTitle: string
   viewMoreLessCaption: string
@@ -17,15 +9,9 @@ interface CardProps {
   acronym: string
   refPageAA: string
   children: ReactNode
-  locale: string
-  cardAlert?: AlertProps[]
-  hasAlert?: boolean
 }
 
 const Card = ({
-  cardAlert,
-  hasAlert,
-  locale,
   cardTitle,
   viewMoreLessCaption,
   programUniqueId,
@@ -34,45 +20,6 @@ const Card = ({
   children,
 }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  const CardState = z
-    .string()
-    .toLowerCase()
-    .transform((x) => x === 'true')
-    .pipe(z.boolean())
-  let reactDevBufferSet = false
-
-  /**
-   * init Effect
-   *
-   * In dev mode (npm run dev) React will prerender and render
-   * useEffects on page. This renders the page twice in dev mode,
-   * which erases the state.
-   *
-   * The reactDevBufferSet ensures it will only trigger once.
-   *
-   * This doesn't occur outside of dev.
-   *
-   * TODO: Moving the state out of the individual Cards and into
-   * a unified state/context may fix this this load issue.
-   */
-  useEffect(() => {
-    if (!reactDevBufferSet) {
-      reactDevBufferSet = true // eslint-disable-line
-      if (programUniqueId !== undefined) {
-        const sessionItem = sessionStorage.getItem(programUniqueId)
-
-        setIsOpen(sessionItem !== null ? CardState.parse(sessionItem) : false)
-      }
-    }
-  }, [])
-
-  // on change Effect
-  useEffect(() => {
-    if (programUniqueId !== undefined) {
-      sessionStorage.setItem(programUniqueId, String(isOpen))
-    }
-  }, [isOpen, programUniqueId])
 
   return (
     <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">
@@ -99,49 +46,12 @@ const Card = ({
         ariaLabel={`${cardTitle} - ${viewMoreLessCaption}`}
       />
       {!isOpen ? null : (
-        <div>
-          {hasAlert &&
-            cardAlert?.map((alert, index) => {
-              const alertType = alert.type[0].split('/').pop()
-              return (
-                <ul
-                  className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15"
-                  key={index}
-                >
-                  <ContextualAlert
-                    id={alert.id}
-                    type={alertType}
-                    alertHeading={alert.alertHeading}
-                    alertBody={alert.alertBody}
-                    alert_icon_alt_text={`${alertType} ${
-                      locale === 'fr' ? 'Icônes' : 'icon'
-                    }`}
-                    alert_icon_id={` alert-icon ${alert.id}`}
-                  />
-                </ul>
-              )
-            })}
-          <div className="pb-6" data-cy="sectionList">
-            {children}
-          </div>
+        <div className="pb-6" data-cy="sectionList">
+          {children}
         </div>
       )}
     </div>
   )
-}
-
-Card.defaultProps = {
-  cardAlert: [
-    {
-      id: '',
-      type: '',
-      alertHeading: '',
-      alertBody: '',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-  ],
-  hasAlert: true,
 }
 
 export default Card

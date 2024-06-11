@@ -2,7 +2,7 @@ import { buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchMyDashboardV2 {
+interface GetSchMyDashboardV1 {
   data: {
     schPageV1ByPath: {
       item: {
@@ -17,18 +17,6 @@ interface GetSchMyDashboardV2 {
         scOwner: Array<string>
         scDateModifiedOverwrite: string
         scAudience: null
-        schAlerts?: Array<{
-          scId?: string
-          scHeadingEn?: string
-          scHeadingFr?: string
-          scContentEn?: {
-            markdown: string
-          }
-          scContentFr?: {
-            markdown: string
-          }
-          scAlertType?: Array<string>
-        }>
         scFragments: Array<{
           scId: string
           scTitleEn: null
@@ -39,18 +27,6 @@ interface GetSchMyDashboardV2 {
             scId: string
             scTitleEn: string
             scTitleFr: string
-            schAlerts?: Array<{
-              scId: string
-              scHeadingEn: string
-              scHeadingFr: string
-              scContentEn?: {
-                markdown: string
-              }
-              scContentFr?: {
-                markdown: string
-              }
-              scAlertType?: Array<string>
-            }>
             schTasks: Array<{
               scId: string
               scLinkTextEn: string
@@ -70,8 +46,6 @@ interface GetSchMyDashboardV2 {
                 schURLType?: string
                 scDestinationURLEn: string
                 scDestinationURLFr: string
-                scDestinationURL3En?: string | null
-                scDestinationURL3Fr?: string | null
                 scIconCSS: string
                 schBetaPopUp: boolean
               }>
@@ -89,10 +63,10 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV2`,
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV1`,
       )
       if (!response.ok) return null
-      return (await response.json()) as GetSchMyDashboardV2
+      return (await response.json()) as GetSchMyDashboardV1
     },
     ttl,
   })
@@ -100,20 +74,11 @@ const getCachedContent = () => {
 
 export async function getMyDashboardContent() {
   const response = await getCachedContent()
-  const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
 
   const mappedHome = {
     en: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
-      pageAlerts: pageAlertContent?.map((pageAlert) => {
-        return {
-          id: pageAlert.scId,
-          alertHeading: pageAlert.scHeadingEn,
-          alertBody: pageAlert.scContentEn?.markdown,
-          type: pageAlert.scAlertType,
-        }
-      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
@@ -121,14 +86,6 @@ export async function getMyDashboardContent() {
             id: fragment.scId,
             title: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
-            cardAlerts: fragment.schAlerts?.map((alert) => {
-              return {
-                id: alert.scId,
-                alertHeading: alert.scHeadingEn,
-                alertBody: alert.scContentEn?.markdown,
-                type: alert.scAlertType,
-              }
-            }),
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
@@ -137,13 +94,7 @@ export async function getMyDashboardContent() {
                     id: item.scId,
                     title: item.scLinkTextEn,
                     areaLabel: item.scLinkTextAssistiveEn,
-                    link: buildLink(
-                      item.schURLType,
-                      process.env.ENVIRONMENT === 'development' &&
-                        item.scDestinationURL3En !== null
-                        ? item.scDestinationURL3En
-                        : item.scDestinationURLEn,
-                    ),
+                    link: buildLink(item.schURLType, item.scDestinationURLEn),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }
@@ -164,14 +115,6 @@ export async function getMyDashboardContent() {
     fr: {
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
-      pageAlerts: pageAlertContent?.map((pageAlert) => {
-        return {
-          id: pageAlert.scId,
-          alertHeading: pageAlert.scHeadingFr,
-          alertBody: pageAlert.scContentFr?.markdown,
-          type: pageAlert.scAlertType,
-        }
-      }),
       cards: response?.data.schPageV1ByPath.item.scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
@@ -180,14 +123,6 @@ export async function getMyDashboardContent() {
             id: fragment.scId,
             title: fragment.scTitleFr,
             dropdownText: fragment.schTasks[0].scLinkTextFr,
-            cardAlerts: fragment.schAlerts?.map((alert) => {
-              return {
-                id: alert.scId,
-                alertHeading: alert.scHeadingFr,
-                alertBody: alert.scContentFr?.markdown,
-                type: alert.scAlertType,
-              }
-            }),
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,
@@ -196,13 +131,7 @@ export async function getMyDashboardContent() {
                     id: item.scId,
                     title: item.scLinkTextFr,
                     areaLabel: item.scLinkTextAssistiveFr,
-                    link: buildLink(
-                      item.schURLType,
-                      process.env.ENVIRONMENT === 'development' &&
-                        item.scDestinationURL3Fr !== null
-                        ? item.scDestinationURL3Fr
-                        : item.scDestinationURLFr,
-                    ),
+                    link: buildLink(item.schURLType, item.scDestinationURLFr),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }

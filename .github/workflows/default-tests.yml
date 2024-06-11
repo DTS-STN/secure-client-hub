@@ -48,8 +48,7 @@ jobs:
         run: npm run test:coverage -- -u
         env:
           CI: true
-          AUTH_DISABLED: true
-          
+
       - name: Store Results
         uses: actions/upload-artifact@v3
         with:

@@ -19,11 +19,9 @@ export interface ContactSectionRowProps {
   items: ContactSectionRowDetailItem[]
   refPageAA: string
   id: string
-  lang: string
 }
 
 export const ContactSectionRow = ({
-  lang,
   title,
   highlight,
   iconFeature,
@@ -33,7 +31,6 @@ export const ContactSectionRow = ({
   refPageAA,
   id,
 }: ContactSectionRowProps) => {
-  const locale = lang === 'fr' ? 'fr' : 'en'
   const newTabTaskExceptions = [
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=eng',
     'https://www.servicecanada.gc.ca/tbsc-fsco/sc-hme.jsp?lang=fra',
@@ -67,14 +64,6 @@ export const ContactSectionRow = ({
                   data-cy="contact-us-button"
                   href={item.link}
                   className="rounded-sm px-3.5 py-1.5 font-display text-xl leading-[23px] text-blue-default underline visited:text-purple-50a hover:text-blue-hover focus:outline-1 focus:outline-blue-hover active:text-blue-hover"
-                  aria-label={` ${item.content} -
-                  ${
-                    item.link && newTabTaskExceptions.includes(item.link)
-                      ? locale === 'fr'
-                        ? "S'ouvre dans un nouvel onglet"
-                        : 'Opens in a new tab'
-                      : "S'ouvre dans un nouvel onglet"
-                  }`}
                   target={
                     item.link && newTabTaskExceptions.includes(item.link)
                       ? '_blank'
@@ -85,7 +74,7 @@ export const ContactSectionRow = ({
                       ? 'noopener noreferrer'
                       : undefined
                   }
-                  data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${refPageAA}:${id}`}
+                  data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
                 >
                   {item.content}
 

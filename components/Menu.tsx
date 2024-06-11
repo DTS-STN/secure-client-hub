@@ -12,11 +12,15 @@ interface MenuItem {
 
 interface MenuProps {
   lang: string
-  dataGcAnalyticsCustomClick: string
+  dataGcAnalyticsCustomClickInstitutionVariable: string
   menuList: MenuItem[]
 }
 
-const Menu = ({ lang, dataGcAnalyticsCustomClick, menuList }: MenuProps) => {
+const Menu = ({
+  lang,
+  dataGcAnalyticsCustomClickInstitutionVariable,
+  menuList,
+}: MenuProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
 
@@ -125,7 +129,7 @@ const Menu = ({ lang, dataGcAnalyticsCustomClick, menuList }: MenuProps) => {
                       }
                       href={element.path}
                       aria-label={element.value}
-                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClick}:${element.id}`}
+                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
                     >
                       {element.showIcon && (
                         <svg

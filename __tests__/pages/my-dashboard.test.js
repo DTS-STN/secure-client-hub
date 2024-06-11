@@ -27,37 +27,11 @@ jest.mock('../../components/Card', () => {
   return MockCard
 })
 
-jest.mock('../../components/ContextualAlert', () => {
-  const MockAlert = () => <mock-alert data-testid="mock-alert" />
-  return MockAlert
-})
 describe('My Dashboard page', () => {
   const content = {
     heading: 'heading',
     paragraph: 'paragraph',
-    cards: [
-      {
-        id: 'test',
-        title: 'title',
-        cardAlerts: [
-          {
-            id: 'test',
-            type: 'information',
-            alertHeading: 'heading',
-            alertBody: 'body',
-          },
-        ],
-        lists: [],
-      },
-    ],
-    pageAlerts: [
-      {
-        id: 'test',
-        type: 'information',
-        alertHeading: 'heading',
-        alertBody: 'body',
-      },
-    ],
+    cards: [{ id: 'test', title: 'title', lists: [] }],
   }
   const popupContent = {}
 
@@ -100,19 +74,7 @@ describe('My Dashboard page', () => {
         popupContentNA={popupContent}
       />,
     )
-    const testCard = screen.getAllByTestId('mock-card')
-    expect(testCard[0]).toBeInTheDocument()
-  })
-
-  it('should contain an alert', () => {
-    render(
-      <MyDashboard
-        locale="en"
-        content={content}
-        popupContentNA={popupContent}
-      />,
-    )
-    const testAlert = screen.getByTestId('mock-alert')
-    expect(testAlert).toBeInTheDocument()
+    const testCard = screen.getByTestId('mock-card')
+    expect(testCard).toBeInTheDocument()
   })
 })

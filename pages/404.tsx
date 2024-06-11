@@ -1,3 +1,5 @@
+import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
+import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
 import ErrorPage from '../components/ErrorPage'
 import { getLogger } from '../logging/log-util'
 import { GetStaticProps } from 'next'
@@ -49,6 +51,16 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const logger = getLogger(`404 error page`)
   logger.level = 'error'
 
+  const bannerContent = await getBetaBannerContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
+  const popupContent = await getBetaPopupExitContent().catch((error) => {
+    logger.error(error)
+    // res.statusCode = 500
+    throw error
+  })
   const langToggleLink = locale === 'en' ? `/fr/404` : `/en/404`
   /* Place-holder Meta Data Props */
   const meta = {
@@ -76,6 +88,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       locale,
       lang: locale === 'en' ? 'en' : 'fr',
       langToggleLink,
+      bannerContent: bannerContent.en,
+      popupContent: popupContent.en,
       meta,
       isAuth: process.env.AUTH_DISABLED ?? true,
     },

@@ -10,12 +10,11 @@ export interface BreadcrumbItem {
 export interface BreadcrumbProps {
   id?: string
   items?: BreadcrumbItem[]
-  refPageAA: string
 }
 
-const Breadcrumb = ({ id, items, refPageAA }: BreadcrumbProps) => {
+const Breadcrumb = ({ id, items }: BreadcrumbProps) => {
   return (
-    <nav className="py-6" aria-label="Breadcrumb-Fil d’ariane" id={id}>
+    <nav className="py-6" aria-label="breadcrumbs" id={id}>
       <ul className="block font-body text-base leading-[23px] text-deep-blue-dark">
         {items
           ? items.map((item, key) => {
@@ -33,7 +32,6 @@ const Breadcrumb = ({ id, items, refPageAA }: BreadcrumbProps) => {
                     data-cy={'breadcrumb-' + item.text}
                     href={item.link}
                     className="font-body underline hover:text-blue-hover focus:text-blue-hover"
-                    data-gc-analytics-customclick={`${refPageAA}:${item.text}`}
                   >
                     {item.text}
                   </Link>

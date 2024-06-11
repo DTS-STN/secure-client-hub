@@ -19,7 +19,6 @@ export interface ContactSectionDetail {
 }
 
 export interface ContactSectionProps {
-  lang: string
   title: string
   intro: string
   id: string
@@ -27,7 +26,6 @@ export interface ContactSectionProps {
 }
 
 export const ContactSection = ({
-  lang,
   title,
   intro,
   id,
@@ -56,7 +54,6 @@ export const ContactSection = ({
             sectionDetail.items[0].button.length > 0
           return (
             <ContactSectionRow
-              lang={lang}
               key={sectionDetail.id}
               id={sectionDetail.id}
               title={sectionDetail.title}

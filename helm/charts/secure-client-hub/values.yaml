@@ -68,9 +68,3 @@ affinity: {}
 
 autoscaling:
   enabled: false
-
-oauth:
-  enabled: false
-
-hostAliases:
-  enabled: false

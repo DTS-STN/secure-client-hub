@@ -81,7 +81,7 @@ export async function getPrivacyConditionContent() {
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
       alert: {
-        type: 'information',
+        type: 'info',
         text: alertFragment?.scContentEn?.markdown,
       },
       content: privacyTermsConditionsFragment?.scContentEn?.markdown,
@@ -102,7 +102,7 @@ export async function getPrivacyConditionContent() {
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
       alert: {
-        type: 'information',
+        type: 'info',
         text: alertFragment?.scContentFr?.markdown,
       },
       content: privacyTermsConditionsFragment?.scContentFr?.markdown,
