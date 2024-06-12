@@ -99,6 +99,8 @@ export default function PrivacyCondition(props) {
               a: {
                 props: {
                   className: 'underline text-deep-blue-dark cursor-pointer',
+                  rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
+                  target: '_blank',
                 },
               },
             },
@@ -156,6 +158,8 @@ export default function PrivacyCondition(props) {
               a: {
                 props: {
                   className: 'underline text-deep-blue-dark cursor-pointer',
+                  rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
+                  target: '_blank',
                 },
               },
             },
