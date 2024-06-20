@@ -1,7 +1,8 @@
 
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 
 template: |
-  <!-- Optional: add a release summary here -->
-  $CHANGES
+  ## Changes
 
+  $CHANGES
 
