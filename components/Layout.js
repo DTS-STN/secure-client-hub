@@ -171,12 +171,12 @@ export default function Layout(props) {
           lang={!props.locale ? 'en' : props.locale}
           brandLinks={[
             {
-              href: t.footerTermsAndConditionURLtest,
+              href: t.footerTermsAndConditionDevURL,
               id: 'linkTC',
               text: t.footerTermsAndCondition,
             },
             {
-              href: t.footerPrivacyURLtest,
+              href: t.footerPrivacyDevURL,
               id: 'linkPR',
               text: t.footerPrivacy,
             },
