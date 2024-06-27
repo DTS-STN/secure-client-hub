@@ -34,7 +34,7 @@
     "@opentelemetry/sdk-node": "^0.51.1",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
-    "axios": "^1.7.0",
+    "axios": "^1.7.2",
     "babel-plugin-macros": "^3.1.0",
     "cachified": "^3.5.4",
     "cross-env": "^7.0.3",
