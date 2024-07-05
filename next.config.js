@@ -30,10 +30,6 @@ const REWRITES = [
     destination: '/contact-us/contact-canada-pension-plan',
   },
   {
-    source: '/avis-confidentialite-modalites',
-    destination: '/privacy-notice-terms-conditions',
-  },
-  {
     source: '/demande-revision',
     destination: '/decision-reviews',
   },

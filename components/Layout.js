@@ -199,25 +199,45 @@ export default function Layout(props) {
         refPageAA={props.refPageAA}
       />
 
-      <Footer
-        lang={!props.locale ? 'en' : props.locale}
-        brandLinks={[
-          {
-            href: t.footerTermsAndConditionURL,
-            id: 'linkTC',
-            text: t.footerTermsAndCondition,
-          },
-          {
-            href: t.footerPrivacyURL,
-            id: 'linkPR',
-            text: t.footerPrivacy,
-          },
-        ]}
-        contactLink={contactLink}
-        btnLink="#top"
-        id="page-footer"
-      />
-      <script type="text/javascript">_satellite.pageBottom();</script>
+      {process.env.ENVIRONMENT === 'production' ? (
+        <Footer
+          lang={!props.locale ? 'en' : props.locale}
+          brandLinks={[
+            {
+              href: t.footerTermsAndConditionURL,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
+            },
+            {
+              href: t.footerPrivacyURL,
+              id: 'linkPR',
+              text: t.footerPrivacy,
+            },
+          ]}
+          contactLink={contactLink}
+          btnLink="#top"
+          id="page-footer"
+        />
+      ) : (
+        <Footer
+          lang={!props.locale ? 'en' : props.locale}
+          brandLinks={[
+            {
+              href: t.footerTermsAndConditionDevURL,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
+            },
+            {
+              href: t.footerPrivacyDevURL,
+              id: 'linkPR',
+              text: t.footerPrivacy,
+            },
+          ]}
+          contactLink={contactLink}
+          btnLink="#top"
+          id="page-footer"
+        />
+      )}
     </>
   )
 }
