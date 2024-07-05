@@ -29,3 +29,5 @@
 User-Agent: *
 Allow: /
 Disallow: /api/
+Disallow: /en/*
+Disallow: /fr/*
