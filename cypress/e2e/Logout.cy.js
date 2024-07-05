@@ -33,7 +33,7 @@ describe('Validate logout scenario and page', () => {
         // all the resolve function of the above Promise
         sendResponse()
         // Assert that the loading spinner is removed from the DOM
-
+        
         cy.get('[data-cy="loading-spinner"]').should('not.exist')
         // Return to index page (this may change as noted at top)
         cy.url().should('eq', 'http://localhost:3000/')

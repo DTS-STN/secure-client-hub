@@ -3,9 +3,6 @@ import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
 import { ContactSection } from '../../components/contact/ContactSection'
 import { ContactProvince } from '../../components/contact/ContactProvince'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import {
   GetContactUsPageReturnType,
@@ -14,13 +11,13 @@ import {
 import {
   AuthIsDisabled,
   AuthIsValid,
-  Redirect,
   ValidateSession,
+  Redirect,
+  getIdToken,
 } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
-import { getToken } from 'next-auth/jwt'
 
 interface Data {
   title: string
@@ -44,6 +41,7 @@ interface ContactUsPageProps {
 
 const ContactUsPage = (props: ContactUsPageProps) => {
   /* istanbul ignore next */
+
   return (
     <div
       id="homeContent"
@@ -75,6 +73,7 @@ const ContactUsPage = (props: ContactUsPageProps) => {
             />
           ) : (
             <ContactSection
+              lang={props.locale}
               id={item.id}
               details={item.details}
               intro={item.intro}
@@ -89,16 +88,17 @@ const ContactUsPage = (props: ContactUsPageProps) => {
 
 export const getServerSideProps = (async ({ req, res, locale, params }) => {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is valid and clear cookies and redirect to login if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
       // Clear all session cookies
@@ -132,12 +132,6 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
   if (!pageContent) {
     return { notFound: true }
   }
-
-  const bannerContent = await getBetaBannerContent()
-
-  const popupContent = await getBetaPopupExitContent()
-
-  const popupContentNA = await getBetaPopupNotAvailableContent()
 
   const authModals = await getAuthModalsContent()
 
@@ -197,10 +191,8 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${pageContent.en.id || pageContent.en.title}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${pageContent.en.id || pageContent.en.title}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en

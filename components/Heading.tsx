@@ -18,12 +18,13 @@ const Heading = ({
   return (
     <>
       <h1
-        className={`border-b border-red-red50a pb-2 font-display text-34px font-bold text-gray-darker md:text-38px ${className}`}
+        className={`pb-2 font-display text-34px font-bold text-gray-darker md:text-38px ${className}`}
         id={id}
         data-testid={dataTestId}
       >
         {title}
       </h1>
+      <div className="mb-2 w-[72px] border-b-[6px] border-red-red50a"></div>
       {fromLink && fromText && (
         <p>
           <strong>From: </strong>

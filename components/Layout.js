@@ -1,50 +1,23 @@
 import PropTypes from 'prop-types'
-import { useState, useCallback, useMemo, useEffect, cloneElement } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import MetaData from './MetaData'
-import PhaseBanner from './PhaseBanner'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import MultiModal from './MultiModal'
 import { lato, notoSans } from '../utils/fonts'
-import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
+import throttle from 'lodash.throttle'
+import IdleTimeout from './IdleTimeout'
 import { signOut } from 'next-auth/react'
 
 export default function Layout(props) {
-  const display = props.display ?? {}
   const t = props.locale === 'en' ? en : fr
   const [response, setResponse] = useState()
   const router = useRouter()
   const defaultBreadcrumbs = []
   const contactLink =
     props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
-
-  const [openModalWithLink, setOpenModalWithLink] = useState({
-    activeLink: '/',
-    context: null,
-  })
-
-  const openModal = (link, context) => {
-    setOpenModalWithLink(() => {
-      return {
-        isOpen: true,
-        activeLink: link,
-        context,
-      }
-    })
-  }
-
-  const closeModal = () => {
-    setOpenModalWithLink(() => {
-      return {
-        isOpen: false,
-        activeLink: '/',
-        context: null,
-      }
-    })
-  }
 
   const validationResponse = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
@@ -65,7 +38,7 @@ export default function Layout(props) {
   useEffect(() => {
     window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
     window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, redirect to logout
+    //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
     if (response?.status === 401) {
       signOut()
       router.push(`/${props.locale}/auth/login`)
@@ -95,27 +68,6 @@ export default function Layout(props) {
         }
       `}</style>
       <MetaData language={props.locale} data={props.meta}></MetaData>
-      {props.display.hideBanner ? (
-        ''
-      ) : (
-        <PhaseBanner
-          bannerBoldText={props.bannerContent.bannerBoldText || ''}
-          bannerText={props.bannerContent.bannerText || ''}
-          bannerLink={props.bannerContent.bannerLink || ''}
-          bannerLinkHref={props.bannerContent.bannerLinkHref || ''}
-          bannerSummaryTitle={props.bannerContent.bannerSummaryTitle || ''}
-          bannerSummaryContent={props.bannerContent.bannerSummaryContent || ''}
-          bannerButtonText={props.bannerContent.bannerButtonText || ''}
-          bannerButtonLink={props.bannerContent.bannerButtonLink || ''}
-          id={props.bannerContent.id || ''}
-          bannerButtonExternalLink
-          icon={props.bannerContent.icon || ''}
-          popupContent={props.popupContent || ''}
-          refPageAA={props.refPageAA}
-          openModal={openModal}
-          closeModal={closeModal}
-        ></PhaseBanner>
-      )}
       <Header
         legacyBehavior
         dataTestId="topnav"
@@ -125,6 +77,7 @@ export default function Layout(props) {
         breadCrumbItems={
           props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
         }
+        refPageAA={props.refPageAA}
         topnavProps={{
           skipToMainPath: '#mainContent',
           skipToAboutPath: '#page-footer',
@@ -134,12 +87,15 @@ export default function Layout(props) {
         dataGcAnalyticsCustomClickInstitutionVariable={
           props.children.props.aaPrefix
         }
+        dataGcAnalyticsCustomClickMenuVariable={
+          props.dataGcAnalyticsCustomClickMenuVariable
+        }
         menuProps={{
           legacyBehavior: true,
           menuList: [
             {
               key: 'dashKey',
-              id: 'dash',
+              id: 'my-dashboard',
               value: t.menuItems.dashboard,
               path: `${
                 props.locale === 'en'
@@ -186,18 +142,10 @@ export default function Layout(props) {
         }}
       />
       <main id="mainContent" className="sch-container grid gap-[30px]">
-        {cloneElement(props.children, { openModal, closeModal })}
+        {props.children}
       </main>
-      <MultiModal
-        openModalWithLink={openModalWithLink}
-        openModal={openModal}
-        closeModal={closeModal}
-        popupContentNA={props.popupContentNA}
-        t={t}
-        popupStaySignedIn={props.popupStaySignedIn}
-        popupContent={props.popupContent}
-        refPageAA={props.refPageAA}
-      />
+
+      <IdleTimeout locale={props.locale} refPageAA={props.refPageAA} />
 
       {process.env.ENVIRONMENT === 'production' ? (
         <Footer
@@ -266,25 +214,6 @@ Layout.defaultProps = {
   langToggleLink: '',
   locale: 'en',
   meta: '',
-  popupContent: {
-    scId: '',
-    scHeadingEn: '',
-    scHeadingFr: '',
-    scContentEn: '',
-    scContentFr: '',
-    scFragments: [
-      {
-        scId: '',
-        scLinkTextEn: '',
-        scLinkTextFr: '',
-      },
-      {
-        scId: '',
-        scLinkTextEn: '',
-        scLinkTextFr: '',
-      },
-    ],
-  },
 }
 
 Layout.propTypes = {
@@ -300,37 +229,6 @@ Layout.propTypes = {
    * Title of the page
    */
   title: PropTypes.string,
-  /*
-   * bannerContent
-   */
-  bannerContent: PropTypes.shape({
-    bannerBoldText: PropTypes.string.isRequired,
-    bannerText: PropTypes.string.isRequired,
-
-    bannerLink: PropTypes.string.isRequired,
-    bannerLinkHref: PropTypes.string.isRequired,
-
-    bannerSummaryTitle: PropTypes.string.isRequired,
-    bannerSummaryContent: PropTypes.string.isRequired,
-    bannerButtonText: PropTypes.string.isRequired,
-    bannerButtonLink: PropTypes.string.isRequired,
-  }),
-  /*
-   * popupContent
-   */
-  popupContent: PropTypes.shape({
-    popupId: PropTypes.string.isRequired,
-    popupTitle: PropTypes.string.isRequired,
-    popupDescription: PropTypes.string.isRequired,
-    popupPrimaryBtn: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-    popupSecondaryBtn: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-    }),
-  }),
   /*
    * Link of the page in opposite language
    */
