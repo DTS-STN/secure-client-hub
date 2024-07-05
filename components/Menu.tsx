@@ -12,15 +12,11 @@ interface MenuItem {
 
 interface MenuProps {
   lang: string
-  dataGcAnalyticsCustomClickInstitutionVariable: string
+  dataGcAnalyticsCustomClick: string
   menuList: MenuItem[]
 }
 
-const Menu = ({
-  lang,
-  dataGcAnalyticsCustomClickInstitutionVariable,
-  menuList,
-}: MenuProps) => {
+const Menu = ({ lang, dataGcAnalyticsCustomClick, menuList }: MenuProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
 
@@ -53,7 +49,7 @@ const Menu = ({
   return (
     <div className="w-full bg-blue-primary">
       <nav className="sch-container sch-container-menu items-center justify-between sm:flex sm:h-[60px]">
-        <div className="mx-15px flex h-[60px] items-center font-display text-[19px] font-bold leading-[21px] text-white md:m-0 md:text-2xl ">
+        <div className="mx-15px flex h-[60px] items-center font-display text-[19px] font-bold leading-[21px] text-white md:m-0 md:text-2xl">
           <span id="mainSiteNav">
             {lang === 'fr'
               ? 'Mon dossier Service Canada'
@@ -129,7 +125,7 @@ const Menu = ({
                       }
                       href={element.path}
                       aria-label={element.value}
-                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClickInstitutionVariable}:Menu-${element.id}`}
+                      data-gc-analytics-customclick={`${dataGcAnalyticsCustomClick}:${element.id}`}
                     >
                       {element.showIcon && (
                         <svg

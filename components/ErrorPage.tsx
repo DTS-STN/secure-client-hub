@@ -57,10 +57,9 @@ const ErrorPage = ({
               id={'pageHead' + index + errType}
               title={val === EN ? errorHeadingEN : errorHeadingFR}
             />
-            <p className="mt-2 text-20px text-gray-darker">
+            <p className="mt-2 pb-6 text-20px text-gray-darker">
               {val === EN ? errorTextEN : errorTextFR}
             </p>
-            <br />
             <p className="text-[20px] font-bold text-gray-darker sm:text-black">
               {val.errorPageNextText}
             </p>
@@ -104,11 +103,9 @@ const ErrorPage = ({
                 </Link>
               </li>
             </ul>
-            <br />
-            <br />
             <p
               data-testid="errorType"
-              className="pb-2 text-[14px] font-bold text-gray-darker"
+              className="mt-10 pb-2 text-[14px] font-bold text-gray-darker"
             >
               {val.errorPageType} {errType}
             </p>

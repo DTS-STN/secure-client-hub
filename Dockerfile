@@ -1,4 +1,4 @@
-FROM node:20-alpine3.18 AS base
+FROM node:20-alpine3.20 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
@@ -7,6 +7,8 @@ COPY . .
 FROM base AS build
 
 # Build envs
+ARG HOSTALIAS_CERT
+ENV HOSTALIAS_CERT=$HOSTALIAS_CERT
 ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT=https://www.canada.ca/graphql/execute.json/decd-endc/
@@ -23,14 +25,18 @@ ENV MSCA_ECAS_RASC_BASE_URL=$MSCA_ECAS_RASC_BASE_URL
 ENV NODE_ENV=production
 WORKDIR /build
 COPY --from=base /base ./
-RUN npm run build
 
-FROM node:20-alpine3.18 AS production
+RUN mkdir -p /usr/local/share/ca-certificates/ && echo ${HOSTALIAS_CERT} | sed 's/\\n/\n/g' | xargs > /usr/local/share/ca-certificates/env.crt && chmod 644 /usr/local/share/ca-certificates/env.crt && npm run build
+
+FROM node:20-alpine3.20 AS production
 ENV NODE_ENV=production
 
 ARG user=nodeuser
 ARG group=nodegroup
 ARG home=/srv/app
+
+ARG MSCA_NG_CERT_LOCATION=/usr/local/share/ca-certificates/env.crt
+ENV MSCA_NG_CERT_LOCATION=$MSCA_NG_CERT_LOCATION
 
 RUN addgroup \
     -S ${group} \
@@ -44,6 +50,10 @@ RUN addgroup \
     ${user}
 
 WORKDIR ${home}
+
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
+
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && update-ca-certificates
 
 USER ${user}
 

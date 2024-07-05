@@ -53,7 +53,9 @@ extraEnv:
   - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
     value: {{ env "AUTH_ECAS_GLOBAL_LOGOUT_URL" }}
   - name: AUTH_ECAS_REFRESH_ENDPOINT
-    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
+    value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }}
+  - name: MSCA_NG_USER_ENDPOINT
+    value: {{ env "MSCA_NG_USER_ENDPOINT" }} 
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -69,6 +71,21 @@ extraEnv:
       secretKeyRef:
         name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
         key: NEXTAUTH_SECRET
+  - name: MSCA_NG_CREDS
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: MSCA_NG_CREDS
+  - name: HOSTALIAS_IP
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_IP
+  - name: HOSTALIAS_HOSTNAME
+    valueFrom:
+      secretKeyRef:
+        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
+        key: HOSTALIAS_HOSTNAME
   {{- if env "OTEL_API_KEY" }}
   - name: OTEL_API_KEY
     valueFrom:
@@ -160,6 +177,10 @@ secrets:
       AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
       CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
       NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
+      HOSTALIAS_IP: "{{ env "HOSTALIAS_IP" }}"
+      HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
+      HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
+      MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
 autoscaling:
   enabled: true
   name: service-canada-client-hub
@@ -168,3 +189,10 @@ autoscaling:
   targetCPUUtilization: 85
   labels:
     app.kubernetes.io/name: service-canada-client-hub
+{{- if env "HOSTALIAS_ENABLED" }}
+hostAliases:
+  enabled: {{ env "HOSTALIAS_ENABLED" }}
+  ip: "{{ env "HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "HOSTALIAS_HOSTNAME" }}
+{{- end }}
