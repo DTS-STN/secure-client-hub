@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import throttle from 'lodash.throttle'
 import IdleTimeout from './IdleTimeout'
 import { signOut } from 'next-auth/react'
+import getConfig from 'next/config'
 
 export default function Layout(props) {
   const t = props.locale === 'en' ? en : fr
@@ -144,48 +145,31 @@ export default function Layout(props) {
       <main id="mainContent" className="sch-container grid gap-[30px]">
         {props.children}
       </main>
-
       <IdleTimeout locale={props.locale} refPageAA={props.refPageAA} />
-
-      {process.env.ENVIRONMENT === 'production' ? (
-        <Footer
-          lang={!props.locale ? 'en' : props.locale}
-          brandLinks={[
-            {
-              href: t.footerTermsAndConditionURL,
-              id: 'linkTC',
-              text: t.footerTermsAndCondition,
-            },
-            {
-              href: t.footerPrivacyURL,
-              id: 'linkPR',
-              text: t.footerPrivacy,
-            },
-          ]}
-          contactLink={contactLink}
-          btnLink="#top"
-          id="page-footer"
-        />
-      ) : (
-        <Footer
-          lang={!props.locale ? 'en' : props.locale}
-          brandLinks={[
-            {
-              href: t.footerTermsAndConditionDevURL,
-              id: 'linkTC',
-              text: t.footerTermsAndCondition,
-            },
-            {
-              href: t.footerPrivacyDevURL,
-              id: 'linkPR',
-              text: t.footerPrivacy,
-            },
-          ]}
-          contactLink={contactLink}
-          btnLink="#top"
-          id="page-footer"
-        />
-      )}
+      <Footer
+        lang={!props.locale ? 'en' : props.locale}
+        brandLinks={[
+          {
+            href:
+              getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
+                ? t.footerTermsAndConditionURL
+                : t.footerTermsAndConditionDevURL,
+            id: 'linkTC',
+            text: t.footerTermsAndCondition,
+          },
+          {
+            href:
+              getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
+                ? t.footerPrivacyURL
+                : t.footerPrivacyDevURL,
+            id: 'linkPR',
+            text: t.footerPrivacy,
+          },
+        ]}
+        contactLink={contactLink}
+        btnLink="#top"
+        id="page-footer"
+      />
     </>
   )
 }
