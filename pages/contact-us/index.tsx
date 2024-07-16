@@ -64,11 +64,15 @@ const ContactLanding = (props: ContactLandingProps) => {
                 id={link.linkId}
                 data-testid={link.linkId}
                 aria-label={link.linkTitle}
-                href={`/${props.locale}/${props.content.pageName}/${(
-                  link.linkDestination ?? ''
-                )
-                  .split('/')
-                  .pop()}`}
+                href={
+                  link.linkDestination?.includes('http')
+                    ? link.linkDestination
+                    : `/${props.locale}/${props.content.pageName}/${(
+                        link.linkDestination ?? ''
+                      )
+                        .split('/')
+                        .pop()}`
+                }
                 data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:Contact Us:${link.linkTitle}`}
                 target={
                   newTabExceptions.includes(link.linkDestination ?? '')
