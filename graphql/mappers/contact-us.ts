@@ -74,7 +74,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`,
       )
       if (!response.ok) return null
       return (await response.json()) as GetSchContactUsV1
@@ -82,7 +82,7 @@ const getCachedContent = () => {
     ttl,
   })
 }
- 
+
 /**
  * Awaited: Recursively unwraps the "awaited type" of a type.
  * ReturnType: Obtain the return type of a function type
@@ -98,6 +98,7 @@ export async function getContactUsContent() {
   const eiContactFragment = findFragmentByScId(response, 'ei-contact-us')
   const oasContactFragment = findFragmentByScId(response, 'oas-contact-us')
   const cppContactFragment = findFragmentByScId(response, 'cpp-contact-us')
+  const sinContactFragment = findFragmentByScId(response, 'sin-contact-us')
 
   const mappedSecurity = {
     en: {
@@ -108,7 +109,7 @@ export async function getContactUsContent() {
               link: level.scPageNameEn,
               text: level.scTitleEn,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
@@ -144,6 +145,16 @@ export async function getContactUsContent() {
             : '',
           schBetaPopup: oasContactFragment?.schBetaPopUp,
         },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: sinContactFragment?.scDestinationURLEn,
+          linkDescription: sinContactFragment?.scDescriptionEn?.json
+            ? sinContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+          schBetaPopup: sinContactFragment?.schBetaPopUp,
+        },
       ],
     },
     fr: {
@@ -154,7 +165,7 @@ export async function getContactUsContent() {
               link: level.scPageNameFr,
               text: level.scTitleFr,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
@@ -190,6 +201,16 @@ export async function getContactUsContent() {
             : '',
           schBetaPopup: oasContactFragment?.schBetaPopUp,
         },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: sinContactFragment?.scDestinationURLFr,
+          linkDescription: sinContactFragment?.scDescriptionFr?.json
+            ? sinContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+          schBetaPopup: sinContactFragment?.schBetaPopUp,
+        },
       ],
     },
   }
@@ -199,7 +220,7 @@ export async function getContactUsContent() {
 const findFragmentByScId = (res: GetSchContactUsV1 | null, id: string) => {
   return (
     res?.data.schPageV1ByPath.item.scFragments.find(
-      ({ scId }) => scId === id
+      ({ scId }) => scId === id,
     ) ?? null
   )
 }

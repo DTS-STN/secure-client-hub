@@ -22,7 +22,7 @@ describe('Validate Contact Us Landing page', () => {
     cy.get('[data-cy = "contact-task-list"]')
     .find('a')
     .should('be.visible')
-    .and('have.length', '3')
+    .and('have.length', '4')
     .and('not.have.length', 0)
     .and('not.have.attr', 'href', '#undefined')
   })
