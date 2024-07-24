@@ -23,6 +23,16 @@ export default {
     title: 'Mon tableau de bord',
     profile: 'Profil',
   },
+  //
+  //Dashboard info message
+  dashboardInfo: {
+    label: 'Nouveau',
+    messageText:
+      'Mon dossier Service Canada a un nouveau tableau de bord. Pour en savoir plus, veuillez consulter les ',
+    messageLinkHref:
+      'https://alpha.service.canada.ca/fr/projets/tableau-de-bord',
+    messageLinkText: ' Laboratoires de Service Canada',
+  },
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Version bêta :',
@@ -110,12 +120,17 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'À propos de Canada.ca',
 
+  footerTermsAndConditionDevURL:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndConditionURL:
-    '/fr/avis-confidentialite-modalites#termesEtConditions',
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerTermsAndCondition: 'Avis',
   footerTermsAndConditionAnchor: 'termesEtConditions',
 
-  footerPrivacyURL: '/fr/avis-confidentialite-modalites/',
+  footerPrivacyDevURL:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=fra',
+  footerPrivacyURL:
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=fra',
   footerPrivacy: 'Confidentialité',
   footerPrivacyAnchor: 'confidentialité',
 
@@ -167,4 +182,16 @@ export default {
   maintenanceTitle: 'Le service est actuellement indisponible',
   maintenanceText:
     "En raison des maintenances des systèmes, le service auquel vous tentez d'accéder n'est pas disponible pour le moment. Nous nous excusons de cet inconvénient.",
+
+  //Timeout modal
+  bannerHeading: 'Rester connecté?',
+  signOutLinkText: 'Fermer la session',
+  staySignedInLinkText: 'Rester connecté',
+  bannerContent: {
+    notActive:
+      "Vous n'avez pas été actif depuis un certain temps. Nous allons donc vous déconnecter afin de protéger vos renseignements.",
+    signOut: 'Vous serez déconnecté dans ',
+  },
+  bannerMinutesAnd: ' minutes et',
+  bannerSeconds: 'secondes',
 }

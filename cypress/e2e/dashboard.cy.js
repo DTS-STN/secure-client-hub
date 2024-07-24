@@ -21,23 +21,23 @@ describe('Validate dashboard page', () => {
       .and('have.text', 'Mon tableau de bord')
   })
 
-  it('Validate Beta Version Banner is present on Dashboard EN', () => {
-    cy.get('[data-cy="topBanner"]').should('be.visible')
-    cy.get('[data-cy="learnMoreAbtBeta"]').should('be.visible')
-    cy.get('[data-testid="bannerButton"]').should('be.visible')
+  it('Validate info message is present on Dashboard EN', () => {
+    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'New')
+    cy.get('[data-cy="info-message-text"]').should('be.visible')
+    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
   })
 
-  it('Validate Beta Version Banner is present on Dashboard FR', () => {
+  it('Validate info message is present on Dashboard FR', () => {
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
-    cy.get('[data-cy="topBanner"]').should('be.visible')
-    cy.get('[data-cy="learnMoreAbtBeta"]').should('be.visible')
-    cy.get('[data-testid="bannerButton"]').should('be.visible')
+    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'Nouveau')
+    cy.get('[data-cy="info-message-text"]').should('be.visible')
+    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
   })
+ 
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) +2 cards for (CPCD and OAS) and Card titles are Visible', () => {
+  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
     const cardTitles = [
-      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -51,6 +51,10 @@ describe('Validate dashboard page', () => {
       // Check the card title
       cy.get('@currentCard').should('contain', cardTitle)
   })
+  cy.get('[data-testid="myDashboardContent-test"]')
+  .children('[data-cy="cards"]')
+  .should('be.visible')
+  .and('have.length', 5)
 })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
@@ -60,7 +64,6 @@ describe('Validate dashboard page', () => {
   // EN This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links EN', () => {
     const cardTitles = [
-      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -92,7 +95,6 @@ describe('Validate dashboard page', () => {
   // FR This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links FR', () => {
     const cardTitles = [
-      'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
       'Sécurité de la vieillesse et Supplément de revenu garanti',

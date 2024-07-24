@@ -13,21 +13,21 @@ const Collapse = ({ id, title, children, dataTestId }: CollapseProps) => {
     <details
       key={id}
       id={id}
-      className="mb-5px text-gray-darker text-20px font-body"
+      className="mb-5px font-body text-20px text-gray-darker"
       data-testid={`${id}-${dataTestId}`}
     >
       <summary
         data-cy="summary"
         key={`summary-${id}`}
-        className=" text-deep-blue-60d hover:text-blue-hover hover:underline border border-gray-40 rounded px-15px py-5px cursor-pointer select-none outline-none"
-        data-gc-analytics-customclick={`ESDC-EDSC:${programs(
-          id?.split('-')[0]
+        className="cursor-pointer select-none rounded border border-gray-40 px-15px py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline"
+        data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${programs(
+          id?.split('-')[0],
         )}:${title}`}
       >
         {title}
       </summary>
       <div
-        className="border border-gray-40 rounded-b px-18px py-5px cursor-pointer select-none outline-none"
+        className="cursor-pointer select-none rounded-b border border-gray-40 px-18px py-5px outline-none"
         data-cy="mail-addys"
       >
         {children}

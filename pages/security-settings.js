@@ -4,9 +4,6 @@ import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
@@ -14,12 +11,12 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
+  getIdToken,
 } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
-import { getToken } from 'next-auth/jwt'
 
 export default function SecuritySettings(props) {
   const t = props.locale === 'en' ? en : fr
@@ -37,9 +34,7 @@ export default function SecuritySettings(props) {
         errType={errorCode}
         isAuth={false}
         homePageLink={
-          props.locale === 'en'
-            ? 'en/privacy-notice-terms-conditions'
-            : 'fr/avis-confidentialite-modalites'
+          props.locale === 'en' ? 'en/my-dashboard' : 'fr/mon-tableau-de-bord'
         }
         accountPageLink={
           props?.locale === 'en'
@@ -87,18 +82,34 @@ export default function SecuritySettings(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
-    const sessionValid = await ValidateSession(process.env.CLIENT_ID, token.sub)
+    const sessionValid = await ValidateSession(
+      process.env.CLIENT_ID,
+      token?.sid,
+    )
     if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/logout`,
+          destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
@@ -113,36 +124,11 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    },
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
     return { err: '500' }
   })
-
-  /* 
-   * Uncomment this block to make Banner Popup Content display "Page Not Available"
-   * Comment "getBetaPopupExitContent()" block of code above.
-  
-    const popupContent = await getBetaPopupNotAvailableContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-    })
-  */
 
   /* istanbul ignore next */
   const langToggleLink =
@@ -193,28 +179,12 @@ export async function getServerSideProps({ req, res, locale }) {
             : content.fr,
       meta,
       breadCrumbItems,
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-            ? bannerContent.en
-            : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-            ? popupContent.en
-            : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-            ? popupContentNA.en
-            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

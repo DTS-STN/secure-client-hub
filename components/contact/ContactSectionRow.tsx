@@ -54,7 +54,7 @@ export const ContactSectionRow = ({
         {title}
       </dt>
       <dd
-        className={`prose max-w-none prose-p:my-0 prose-p:font-body prose-p:text-xl md:col-span-8  ${
+        className={`prose max-w-none prose-p:my-0 prose-p:font-body prose-p:text-xl md:col-span-8 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
@@ -85,7 +85,7 @@ export const ContactSectionRow = ({
                       ? 'noopener noreferrer'
                       : undefined
                   }
-                  data-gc-analytics-customclick={`ESDC-EDSC:${refPageAA}:${id}`}
+                  data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${refPageAA}:${id}`}
                 >
                   {item.content}
 

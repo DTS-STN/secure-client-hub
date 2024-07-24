@@ -25,7 +25,15 @@ export default {
     title: 'My dashboard',
     profile: 'Profile',
   },
-
+  //
+  //Dashboard info message
+  dashboardInfo: {
+    label: 'New',
+    messageText:
+      "My Service Canada Account now has a dashboard. If you'd like to learn more about our changes, please visit the ",
+    messageLinkHref: 'https://alpha.service.canada.ca/en/projects/dashboard',
+    messageLinkText: ' Service Canada Labs page',
+  },
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Beta version:',
@@ -117,12 +125,18 @@ export default {
   footerAboutURL: 'https://www.canada.ca/en/government/about.html',
   footerAbout: 'About Canada.ca',
 
+  footerTermsAndConditionDevURL:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=eng',
   footerTermsAndConditionURL:
-    '/privacy-notice-terms-conditions#termsAndConditions',
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=eng',
+
   footerTermsAndCondition: 'Terms and conditions',
   footerTermsAndConditionAnchor: 'termsAndConditions',
 
-  footerPrivacyURL: '/privacy-notice-terms-conditions',
+  footerPrivacyDevURL:
+    'https://srv241-s2.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_ii/SCL/TC.aspx?mode=ReadOnly&lang=eng',
+  footerPrivacyURL:
+    'https://srv136.services.gc.ca/ecas-seca/rascl/SCL/TC.aspx?mode=ReadOnly&lang=eng',
   footerPrivacy: 'Privacy',
   footerPrivacyAnchor: 'privacy',
 
@@ -173,4 +187,16 @@ export default {
   maintenanceTitle: 'This service is currently unavailable',
   maintenanceText:
     'Due to system maintenance, the service you are trying to access is temporarly unavailable. We apologize for the inconvenience.',
+
+  //Timeout modal
+  bannerHeading: 'Stay signed in?',
+  signOutLinkText: 'Sign out',
+  staySignedInLinkText: 'Stay signed in',
+  bannerContent: {
+    notActive:
+      'You have not been active for a while so we will sign you out to keep your information secure.',
+    signOut: 'You will be signed out in ',
+  },
+  bannerMinutesAnd: ' minutes and',
+  bannerSeconds: 'seconds',
 }

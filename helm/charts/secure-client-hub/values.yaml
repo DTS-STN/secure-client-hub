@@ -71,3 +71,6 @@ autoscaling:
 
 oauth:
   enabled: false
+
+hostAliases:
+  enabled: false

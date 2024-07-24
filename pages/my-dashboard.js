@@ -5,11 +5,8 @@ import Card from '../components/Card'
 import OasCard from '../components/OasCard'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
-
+import InfoMessage from '../components/InfoMessage'
 import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
-import { getBetaBannerContent } from '../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../graphql/mappers/beta-popup-exit'
-import { getBetaPopupNotAvailableContent } from '../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
@@ -17,6 +14,7 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
+  getIdToken,
 } from '../lib/auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -24,7 +22,6 @@ import BenefitTasks from './../components/BenefitTasks'
 import MostReqTasks from './../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
-import { getToken } from 'next-auth/jwt'
 
 export default function MyDashboard(props) {
   /* istanbul ignore next */
@@ -61,6 +58,17 @@ export default function MyDashboard(props) {
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
+      <InfoMessage
+        id="dashboard-info-message"
+        label={t.dashboardInfo.label}
+        messageText={t.dashboardInfo.messageText}
+        messageLinkText={t.dashboardInfo.messageLinkText}
+        messageLinkHref={t.dashboardInfo.messageLinkHref}
+        icon="arrow-up-right-from-square"
+        refPageAA={`${props.aaPrefix}`}
+        locale={props.locale}
+      />
+
       {props.content.pageAlerts.map((alert, index) => {
         const alertType = alert.type[0].split('/').pop()
         return (
@@ -78,58 +86,6 @@ export default function MyDashboard(props) {
           </ul>
         )
       })}
-      <Card
-        key={'canadian-dental-care-plan'}
-        programUniqueId={'canadian-dental-care-plan'}
-        locale={props.locale}
-        cardTitle={
-          props.locale === 'en'
-            ? 'Canadian Dental Care Plan'
-            : 'Régime canadien de soins dentaires'
-        }
-        viewMoreLessCaption={
-          props.locale === 'en'
-            ? 'Personal information'
-            : 'Informations personnelles'
-        }
-        acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-        refPageAA={`ESDC-EDSC:${props.content.heading}`}
-        hasAlert={false}
-      >
-        <div className="bg-deep-blue-60d" data-cy="most-requested-section">
-          <MostReqTasks
-            locale={props.locale}
-            taskListMR={{
-              title: props.locale === 'en' ? 'Most requested' : 'En demande',
-              tasks: [
-                {
-                  id:
-                    props.locale === 'en'
-                      ? 'cdcp-view-my-letters'
-                      : 'RCSD-consulter-mes-lettres',
-                  title:
-                    props.locale === 'en'
-                      ? 'View my letters'
-                      : 'Consulter mes lettres',
-                  areaLabel:
-                    props.locale === 'en'
-                      ? 'View my Canada Dental Care Plan Letters'
-                      : 'Voir mes lettres du Régime de soins dentaires du Canada',
-                  link:
-                    props.locale === 'en'
-                      ? 'https://cdcp-staging.dev-dp-internal.dts-stn.com/en/letters'
-                      : 'https://cdcp-staging.dev-dp-internal.dts-stn.com/fr/letters',
-                  icon: '',
-                  betaPopUp: true,
-                },
-              ],
-            }}
-            dataCy="most-requested"
-            acronym={props.locale === 'en' ? 'CDCP' : 'RCSD'}
-            refPageAA={`ESDC-EDSC:${props.content.heading}`}
-          />
-        </div>
-      </Card>
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
@@ -181,21 +137,34 @@ export default function MyDashboard(props) {
 
 export async function getServerSideProps({ req, res, locale }) {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/logout`,
+          destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
@@ -210,21 +179,6 @@ export async function getServerSideProps({ req, res, locale }) {
     logger.error(error)
     return { err: '500' }
   })
-  const bannerContent = await getBetaBannerContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-  const popupContent = await getBetaPopupExitContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
-
-  const popupContentNA = await getBetaPopupNotAvailableContent().catch(
-    (error) => {
-      logger.error(error)
-      return { err: '500' }
-    },
-  )
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
@@ -271,30 +225,12 @@ export async function getServerSideProps({ req, res, locale }) {
             ? content.en
             : content.fr,
       meta,
-
-      bannerContent:
-        bannerContent?.err !== undefined
-          ? bannerContent
-          : locale === 'en'
-            ? bannerContent.en
-            : bannerContent.fr,
-      popupContent:
-        popupContent?.err !== undefined
-          ? popupContent
-          : locale === 'en'
-            ? popupContent.en
-            : popupContent.fr,
-      popupContentNA:
-        popupContentNA?.err !== undefined
-          ? popupContentNA
-          : locale === 'en'
-            ? popupContentNA.en
-            : popupContentNA.fr,
       aaPrefix:
         content?.err !== undefined
           ? ''
-          : `ESDC-EDSC:${content.en?.heading || content.en?.title}`,
-      aaMenuPrefix: content?.err !== undefined ? '' : `ESDC-EDSC:Nav Menu`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+      aaMenuPrefix:
+        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         authModals?.err !== undefined
           ? authModals

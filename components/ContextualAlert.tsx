@@ -54,7 +54,7 @@ const ContextualAlert = ({
     >
       <div
         data-testid="alert-icon"
-        className="absolute left-1.5 top-3 bg-white  py-1 sm:left-3.5"
+        className="absolute left-1.5 top-3 bg-white py-1 sm:left-3.5"
       >
         <Image
           src={alert_type}
@@ -94,6 +94,8 @@ const ContextualAlert = ({
                 a: {
                   props: {
                     className: 'underline text-deep-blue-dark cursor-pointer',
+                    rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
+                    target: '_blank',
                   },
                 },
               },

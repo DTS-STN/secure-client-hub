@@ -1,18 +1,16 @@
 import Link from 'next/link'
 import Heading from '../../components/Heading'
-import { getBetaPopupNotAvailableContent } from '../../graphql/mappers/beta-popup-page-not-available'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
 import {
   GetContactUsContentReturnType,
   getContactUsContent,
 } from '../../graphql/mappers/contact-us'
-import { getBetaBannerContent } from '../../graphql/mappers/beta-banner-opt-out'
-import { getBetaPopupExitContent } from '../../graphql/mappers/beta-popup-exit'
 import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
   Redirect,
+  getIdToken,
 } from '../../lib/auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -20,7 +18,6 @@ import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
-import { getToken } from 'next-auth/jwt'
 
 interface Data {
   title: string
@@ -67,12 +64,16 @@ const ContactLanding = (props: ContactLandingProps) => {
                 id={link.linkId}
                 data-testid={link.linkId}
                 aria-label={link.linkTitle}
-                href={`/${props.locale}/${props.content.pageName}/${(
-                  link.linkDestination ?? ''
-                )
-                  .split('/')
-                  .pop()}`}
-                data-gc-analytics-customclick={`ESDC-EDSC:Contact Us:${link.linkTitle}`}
+                href={
+                  link.linkDestination?.includes('http')
+                    ? link.linkDestination
+                    : `/${props.locale}/${props.content.pageName}/${(
+                        link.linkDestination ?? ''
+                      )
+                        .split('/')
+                        .pop()}`
+                }
+                data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:Contact Us:${link.linkTitle}`}
                 target={
                   newTabExceptions.includes(link.linkDestination ?? '')
                     ? '_blank'
@@ -114,21 +115,34 @@ const ContactLanding = (props: ContactLandingProps) => {
 }
 export const getServerSideProps = (async ({ req, res, locale }) => {
   const session = await getServerSession(req, res, authOptions)
-  const token = await getToken({ req })
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return Redirect(locale)
 
-  //If Next-Auth session is valid, check to see if ECAS session is and redirect to logout if not
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID,
-      token?.sub,
+      token?.sid,
     )
     if (!sessionValid) {
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/logout`,
+          destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
@@ -136,9 +150,6 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
   }
 
   const content = await getContactUsContent()
-  const bannerContent = await getBetaBannerContent()
-  const popupContent = await getBetaPopupExitContent()
-  const popupContentNA = await getBetaPopupNotAvailableContent()
   const authModals = await getAuthModalsContent()
 
   /* istanbul ignore next */
@@ -190,10 +201,8 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       },
       meta,
       breadCrumbItems,
-      bannerContent: locale === 'en' ? bannerContent.en : bannerContent.fr,
-      popupContent: locale === 'en' ? popupContent.en : popupContent.fr,
-      popupContentNA: locale === 'en' ? popupContentNA.en : popupContentNA.fr,
-      aaPrefix: `ESDC-EDSC:${content.en.heading}`,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:${content.en.heading}`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
           ? authModals.mappedPopupStaySignedIn.en
