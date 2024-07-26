@@ -32,17 +32,62 @@ const OasCard = ({ locale }: OasCardProps) => {
                 {
                   id:
                     locale === 'en'
-                      ? 'Old-Age-Security'
-                      : 'Sécurité-de-la-vieillesse',
+                      ? 'Old-Age-Security-Account'
+                      : 'Sécurité-de-la-vieillesse-Account',
+                  title: locale === 'en' ? 'Account' : 'Compte',
+                  areaLabel: locale === 'en' ? 'Account' : 'Compte',
+                  link:
+                    locale === 'en'
+                      ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&appCode=CURAM-OAS&Lang=eng'
+                      : 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&appCode=CURAM-OAS&Lang=fra',
+                  icon: '',
+                  betaPopUp: false,
+                },
+                {
+                  id:
+                    locale === 'en'
+                      ? 'Old-Age-Security-Payments'
+                      : 'Sécurité-de-la-vieillesse-Payments',
+                  title: locale === 'en' ? 'Payments' : 'Paiements',
+                  areaLabel: locale === 'en' ? 'Payments' : 'Paiements',
+                  link:
+                    locale === 'en'
+                      ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2FPayments&appCode=CURAM-OAS&Lang=eng'
+                      : 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2FPayments&appCode=CURAM-OAS&Lang=fra',
+                  icon: '',
+                  betaPopUp: false,
+                },
+                {
+                  id:
+                    locale === 'en'
+                      ? 'Old-Age-Security-Tax-Info'
+                      : 'Sécurité-de-la-vieillesse-Tax-Info',
                   title:
                     locale === 'en'
-                      ? 'Old Age Security service centre'
-                      : 'Centre de services de la Sécurité de la vieillesse',
+                      ? 'Tax information'
+                      : 'Informations fiscales',
                   areaLabel:
                     locale === 'en'
-                      ? 'Old Age Security service centre'
-                      : 'Voir mes lettres du Régime de soins dentaires du Canada',
-                  link: locale === 'en' ? 'https://' : 'https://',
+                      ? 'Tax information'
+                      : 'Informations fiscales',
+                  link:
+                    locale === 'en'
+                      ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbdm-tax-information&appCode=CURAM-OAS&Lang=eng'
+                      : 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbdm-tax-information&appCode=CURAM-OAS&Lang=fra',
+                  icon: '',
+                  betaPopUp: false,
+                },
+                {
+                  id:
+                    locale === 'en'
+                      ? 'Old-Age-Security-Benefits'
+                      : 'Sécurité-de-la-vieillesse-Benefits',
+                  title: locale === 'en' ? 'Benefits' : 'Avantages',
+                  areaLabel: locale === 'en' ? 'Benefits' : 'Avantages',
+                  link:
+                    locale === 'en'
+                      ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbenefits&appCode=CURAM-OAS&Lang=eng'
+                      : 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbenefits&appCode=CURAM-OAS&Lang=fra',
                   icon: '',
                   betaPopUp: false,
                 },
