@@ -98,6 +98,7 @@ export async function getContactUsContent() {
   const eiContactFragment = findFragmentByScId(response, 'ei-contact-us')
   const oasContactFragment = findFragmentByScId(response, 'oas-contact-us')
   const cppContactFragment = findFragmentByScId(response, 'cpp-contact-us')
+  const sinContactFragment = findFragmentByScId(response, 'sin-contact-us')
 
   const mappedSecurity = {
     en: {
@@ -144,6 +145,16 @@ export async function getContactUsContent() {
             : '',
           schBetaPopup: oasContactFragment?.schBetaPopUp,
         },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: sinContactFragment?.scDestinationURLEn,
+          linkDescription: sinContactFragment?.scDescriptionEn?.json
+            ? sinContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+          schBetaPopup: sinContactFragment?.schBetaPopUp,
+        },
       ],
     },
     fr: {
@@ -189,6 +200,16 @@ export async function getContactUsContent() {
             ? oasContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
           schBetaPopup: oasContactFragment?.schBetaPopUp,
+        },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: sinContactFragment?.scDestinationURLFr,
+          linkDescription: sinContactFragment?.scDescriptionFr?.json
+            ? sinContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+          schBetaPopup: sinContactFragment?.schBetaPopUp,
         },
       ],
     },
