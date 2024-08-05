@@ -3,47 +3,63 @@
  *
  */
 
-import { Issuer } from 'openid-client';
+import {
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  getIdToken,
+} from '../../lib/auth'
+import { getLogger } from '../../logging/log-util'
+import { authOptions } from './auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
-const { http_proxy_agent } = getEnv();
+// Including crypto module
+const crypto = require('crypto')
+
 const fetchFn = getFetchFn(HTTP_PROXY_URL);
-const { jwkSet, serverMetadata } = await fetchServerMetadata(AUTH_RAOIDC_BASE_URL, fetchFn);
+function getMetadata() { async () => {await fetchServerMetadata(AUTH_RAOIDC_BASE_URL, fetchFn)};}
+const { jwkSet, serverMetadata } = getMetadata();
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('refresh-msca')
 logger.level = 'error'
 
 export default async function handler(req, res) {
-  const session = await generateSignInRequest(req, res, authOptions)
-  const token = await getIdToken(req)
-  //Generate a random id for each request to ensure unique responses/no caching
-  const id = crypto.randomBytes(20).toString('hex')
+ 
+}
 
-  if (req.method === 'GET') {
-    //Send request to ECAS to refresh MSCA session
-    if (AuthIsDisabled()) {
-      //Service unavailable when auth is disabled
-      res.status(503).json({ success: false })
-    } else if (await AuthIsValid(req, session)) {
-      //If auth session is valid, make GET request to validateSession endpoint
-      const sessionValid = await ValidateSession(
-        process.env.CLIENT_ID,
-        token.sid,
-      )
-      if (sessionValid) {
-        res.status(200).json({ success: sessionValid, id: id })
-      } else {
-        res.status(401).json({ success: sessionValid, id: id })
-      }
-    } else {
-      res.status(401).json({ success: false })
-      logger.error('Authentication is not valid')
-    }
-  } else {
-    //return unimplemented
-    res.status(501).json({ success: false })
-    logger.error(
-      'Something went wrong when trying reach the MSCA refresh endpoint',
-    )
+async function fetchServerMetadata(authServerUrl: string, fetchFn?: FetchFunction) {
+  const discoveryUrl = authServerUrl + '/.well-known/openid-configuration';
+  log.info('Fetching OIDC server metadata from [%s]', discoveryUrl);
+
+  // prettier-ignore
+  const discoveryResponse = fetchFn
+    ? await fetchFn(discoveryUrl)
+    : await fetch(discoveryUrl);
+
+  if (discoveryResponse.status !== 200) {
+    throw new Error('Error fetching server metadata: non-200 status');
   }
+
+  const serverMetadata = (await discoveryResponse.json()) as ServerMetadata;
+  validateServerMetadata(serverMetadata);
+  log.trace('Server metadata response: [%j]', serverMetadata);
+
+  const jwksUrl = serverMetadata?.jwks_uri;
+  log.info('Fetching OIDC server public keys from [%s]', jwksUrl);
+
+  // prettier-ignore
+  const jwksResponse = fetchFn
+    ? await fetchFn(serverMetadata.jwks_uri)
+    : await fetch(serverMetadata.jwks_uri);
+
+  if (jwksResponse.status !== 200) {
+    throw new Error('Error fetching server jwks: non-200 status');
+  }
+
+  const jwkSet = (await jwksResponse.json()) as JWKSet;
+  validateJwkSet(jwkSet);
+  log.trace('Server JWKS response: [%j]', jwkSet);
+
+  return { jwkSet, serverMetadata };
 }
