@@ -28,12 +28,7 @@ export default function Login(props) {
         }, 3000)
         return
       }
-      signIn('ecasProvider', {
-        callbackUrl:
-          props.locale === 'en'
-            ? `${window.location.origin}/en/my-dashboard`
-            : `${window.location.origin}/fr/mon-tableau-de-bord`,
-      })
+      fetch('/api/login-msca'); //TODO change to POST
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
 
