@@ -6,6 +6,7 @@ import axios from 'axios'
 import * as jose from 'jose'
 import https from 'https'
 import fs from 'fs'
+import KeycloakProvider from "next-auth/providers/keycloak";
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
@@ -31,12 +32,17 @@ const httpsAgent =
     ? new https.Agent()
     : new https.Agent({
         ca: fs.readFileSync(
-          '/usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
+          'certs/env.crt' as fs.PathOrFileDescriptor,
         ),
       })
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    KeycloakProvider({
+      clientId: 'DECD',
+      clientSecret: 'dnl8wzpUGAmVYxKtce6dyioAf8Yv2hpF',
+      issuer: 'http://localhost:8080/realms/myRealm2',
+    }),
     {
       id: 'ecasProvider',
       name: 'ECAS',
@@ -149,7 +155,8 @@ export const authOptions: NextAuthOptions = {
         }
       },
     },
-  ],
+  
+   ],
   theme: {
     colorScheme: 'light',
     logo: 'https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg',
