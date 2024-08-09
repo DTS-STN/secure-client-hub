@@ -112,10 +112,9 @@ export const authOptions: NextAuthOptions = {
         logger.error('2')
         logger.error(profile.uid)
         logger.error('end')
-        if (profile.sin === null || !sinRegex.test(profile.sin)) {
+        if (Boolean(profile.uid) === false || !sinRegex.test(profile.sin)) {
           logger.error('SIN is not valid')
         } else if (
-          profile.uid === null ||
           Boolean(profile.uid) === false ||
           !sinRegex.test(profile.uid)
         ) {
