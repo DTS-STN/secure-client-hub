@@ -103,6 +103,15 @@ export const authOptions: NextAuthOptions = {
 
         //Validate SIN and UID to ensure they are not null and are alphanumeric
         const sinRegex = /^[a-zA-Z0-9]+$/
+        logger.info('info')
+        logger.warn('warn')
+        logger.error('error')
+        logger.error('start')
+        logger.error('1')
+        logger.error(profile.sin)
+        logger.error('2')
+        logger.error(profile.uid)
+        logger.error('end')
         if (profile.sin === null || !sinRegex.test(profile.sin)) {
           logger.error('SIN is not valid')
         } else if (profile.uid === null || !sinRegex.test(profile.uid)) {
