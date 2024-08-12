@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
+import getRedisService from '../redis-service.ts';
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { getServerSession } from 'next-auth/next' 
 import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
+
 
 export default function Login(props) {
   const router = useRouter()
@@ -23,12 +24,24 @@ export default function Login(props) {
       if (props.authDisabled) {
         setTimeout(() => {
           props.locale === 'en'
-            ? router.push('/en/my-dashboard')
-            : router.push('/fr/mon-tableau-de-bord')
+          ? router.push('/en/my-dashboard')
+          : router.push('/fr/mon-tableau-de-bord')
         }, 3000)
         return
       }
-      fetch('/api/login-msca'); //TODO change to POST
+      const redirectUrl = process.env.BASE_URL + '/oauth-callback';
+      const response = fetch('/api/login-msca?redirect_url=' + redirectUrl) //TODO change to POST?
+      ({ authorizationUrl, jwksUrl, codeVerifier, nonce, state, client } = response.json());
+
+      const redisService = getRedisService();
+      redisService.set("jwksUrl", jwksUrl, 60);
+      redisService.set("client", client, 60);
+      redisService.set("codeVerifier", codeVerifier);
+      redisService.set("nonce", nonce);
+      redisService.set("state", state);
+      redisService.set('redirectUrl', redirectUrl);
+
+      router.push(authorizationUrl);
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
 
