@@ -100,6 +100,18 @@ export const authOptions: NextAuthOptions = {
       checks: ['state', 'nonce'],
       profile: async (profile) => {
         profile = await decryptJwe(profile.userinfo_token, jwk)
+
+        //Validate SIN and UID to ensure they are not null and are alphanumeric
+        const sinRegex = /^[a-zA-Z0-9]+$/
+        if (Boolean(profile.sin) === false || !sinRegex.test(profile.sin)) {
+          logger.error('SIN is not valid')
+        } else if (
+          Boolean(profile.uid) === false ||
+          !sinRegex.test(profile.uid)
+        ) {
+          logger.error('UID is not valid')
+        }
+
         //Make call to msca-ng API to create user if it doesn't exist
         axios
           .post(
