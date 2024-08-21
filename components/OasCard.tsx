@@ -4,6 +4,7 @@ import MostReqTasks from '../components/MostReqTasks'
 interface OasCardProps {
   locale: string
 }
+
 const OasCard = ({ locale }: OasCardProps) => {
   return (
     <div>
