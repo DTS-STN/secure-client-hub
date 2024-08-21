@@ -42,7 +42,7 @@
     "fast-glob": "^3.3.2",
     "jose": "^5.9.4",
     "lodash.throttle": "^4.1.1",
-    "lru-cache": "^10.2.2",
+    "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.4.7",
     "micromatch": "^4.0.8",
     "next": "^14.2.15",
