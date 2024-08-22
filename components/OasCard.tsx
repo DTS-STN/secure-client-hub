@@ -52,11 +52,11 @@ const OasCard = ({ locale }: OasCardProps) => {
                   title:
                     locale === 'en'
                       ? 'Payments (temporary)'
-                      : 'Paiements (temporaire)',
+                      : 'Paiements (provisoire)',
                   areaLabel:
                     locale === 'en'
                       ? 'Payments (temporary)'
-                      : 'Paiements (temporaire)',
+                      : 'Paiements (provisoire)',
                   link:
                     locale === 'en'
                       ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2FPayments&appCode=CURAM-OAS&Lang=eng'
@@ -72,11 +72,11 @@ const OasCard = ({ locale }: OasCardProps) => {
                   title:
                     locale === 'en'
                       ? 'Tax information (temporary)'
-                      : 'Informations fiscales (temporaire)',
+                      : 'Informations fiscales (provisoire)',
                   areaLabel:
                     locale === 'en'
                       ? 'Tax information (temporary)'
-                      : 'Informations fiscales (temporaire)',
+                      : 'Informations fiscales (provisoire)',
                   link:
                     locale === 'en'
                       ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbdm-tax-information&appCode=CURAM-OAS&Lang=eng'
@@ -92,11 +92,11 @@ const OasCard = ({ locale }: OasCardProps) => {
                   title:
                     locale === 'en'
                       ? 'Benefits (temporary)'
-                      : 'Avantages (temporaire)',
+                      : 'Avantages (provisoire)',
                   areaLabel:
                     locale === 'en'
                       ? 'Benefits (temporary)'
-                      : 'Avantages (temporaire)',
+                      : 'Avantages (provisoire)',
                   link:
                     locale === 'en'
                       ? 'https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Fbenefits&appCode=CURAM-OAS&Lang=eng'
