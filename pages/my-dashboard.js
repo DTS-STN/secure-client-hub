@@ -130,7 +130,7 @@ export default function MyDashboard(props) {
           </Card>
         )
       })}
-      <OasCard locale="en"></OasCard>
+      <OasCard locale={props.locale}></OasCard>
     </div>
   )
 }
