@@ -137,13 +137,7 @@ export async function getMyDashboardContent() {
                     id: item.scId,
                     title: item.scLinkTextEn,
                     areaLabel: item.scLinkTextAssistiveEn,
-                    link: buildLink(
-                      item.schURLType,
-                      process.env.ENVIRONMENT === 'development' &&
-                        item.scDestinationURL3En !== null
-                        ? item.scDestinationURL3En
-                        : item.scDestinationURLEn,
-                    ),
+                    link: buildLink(item.schURLType, item.scDestinationURLEn),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }
@@ -196,13 +190,7 @@ export async function getMyDashboardContent() {
                     id: item.scId,
                     title: item.scLinkTextFr,
                     areaLabel: item.scLinkTextAssistiveFr,
-                    link: buildLink(
-                      item.schURLType,
-                      process.env.ENVIRONMENT === 'development' &&
-                        item.scDestinationURL3Fr !== null
-                        ? item.scDestinationURL3Fr
-                        : item.scDestinationURLFr,
-                    ),
+                    link: buildLink(item.schURLType, item.scDestinationURLFr),
                     icon: item.scIconCSS,
                     betaPopUp: item.schBetaPopUp,
                   }
