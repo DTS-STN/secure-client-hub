@@ -70,8 +70,6 @@ interface GetSchMyDashboardV2 {
                 schURLType?: string
                 scDestinationURLEn: string
                 scDestinationURLFr: string
-                scDestinationURL3En?: string | null
-                scDestinationURL3Fr?: string | null
                 scIconCSS: string
                 schBetaPopUp: boolean
               }>
