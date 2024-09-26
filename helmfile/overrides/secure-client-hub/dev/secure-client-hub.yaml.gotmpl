@@ -145,6 +145,7 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
 replicaCount: 2
+nameOverride: "mscad-{{ requiredEnv "BRANCH" | lower }}"
 resources:
   requests:
     cpu: 300m
