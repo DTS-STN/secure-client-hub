@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 interface Content {
   title: string
@@ -57,16 +58,19 @@ const MetaData = ({ language, data }: MetaDataProps) => {
         <meta name="dcterms.creator" content={d.creator} />
         <meta name="dcterms.accessRights" content={d.accessRights} />
         <meta name="dcterms.service" content={d.service} />
-        {/* eslint-disable */}
-
-        {process.env.ENVIRONMENT === 'production' ? (
-          <script src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"></script>
-        ) : (
-          <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
-        )}
-
-        {/*eslint-enable */}
       </Head>
+
+      {process.env.ENVIRONMENT === 'production' ? (
+        <Script
+          strategy="afterInteractive"
+          src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"
+        />
+      ) : (
+        <Script
+          strategy="afterInteractive"
+          src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
+        />
+      )}
     </>
   )
 }
