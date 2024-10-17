@@ -62,12 +62,12 @@ const MetaData = ({ language, data }: MetaDataProps) => {
 
       {process.env.ENVIRONMENT === 'production' ? (
         <Script
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"
         />
       ) : (
         <Script
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
         />
       )}
