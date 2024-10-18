@@ -2,6 +2,11 @@
 
 describe('Validate Security Settings page', () => {
   beforeEach(() => {
+    cy.intercept({
+      method: 'GET',
+      hostname: 'assets.adobedtm.com',
+      path: /.*\/launch-.*/,
+    }).as('adobeAnalytics')
     cy.visit('/security-settings')
   })
 
@@ -80,5 +85,11 @@ describe('Validate Security Settings page', () => {
     cy.get('[data-testid ="profileContent-test"]>h1')
       .should('be.visible')
       .and('have.text', 'Profil')
+  })
+
+  it('Validate there is exactly one copy of the AA script and it was only loaded once', () => {
+    cy.get('@adobeAnalytics.all').its('length').should('eq', 1)
+    cy.get('script[src*="adobedtm"]').filter('[src*="launch-"]').as('analyticsScript')
+    cy.get('@analyticsScript').its('length').should('eq', 1)
   })
 })
