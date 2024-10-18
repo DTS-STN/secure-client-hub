@@ -2,6 +2,10 @@
 It does not test the authentication functionality currently since those endpoints are on prem only at this time. **/
 
 beforeEach(() => {
+  cy.intercept({
+    method: 'GET',
+    hostname: 'assets.adobedtm.com'
+  }).as('adobeAnalytics')
   cy.visit('/auth/login')
 })
 
@@ -35,5 +39,11 @@ describe('Validate login page', () => {
         cy.location('pathname').should('include', '/my-dashboard')
       })
       cy.get('[data-cy="loading-spinner"]').should('not.exist')
+  })
+
+  it('Validate there is exactly one copy of the AA script and it was only loaded once', () => {
+    cy.get('@adobeAnalytics.all').its('length').should('eq', 1)
+    cy.get('script[src*="adobedtm"]').as('analyticsScript')
+    cy.get('@analyticsScript').its('length').should('eq', 1)
   })
 })

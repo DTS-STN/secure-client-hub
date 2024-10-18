@@ -2,6 +2,10 @@
 
 describe('Validate Contact Us Landing page', () => {
   beforeEach(() => {
+    cy.intercept({
+      method: 'GET',
+      hostname: 'assets.adobedtm.com'
+    }).as('adobeAnalytics')
     cy.visit('/contact-us')
   })
 
@@ -44,5 +48,11 @@ describe('Validate Contact Us Landing page', () => {
     cy.get(':nth-child(4) > .border-t-2').click()
     cy.location('pathname', { timeout: 10000 })
     .should('equal', '/en/contact-us')
+  })
+
+  it('Validate there is exactly one copy of the AA script and it was only loaded once', () => {
+    cy.get('@adobeAnalytics.all').its('length').should('eq', 1)
+    cy.get('script[src*="adobedtm"]').as('analyticsScript')
+    cy.get('@analyticsScript').its('length').should('eq', 1)
   })
 })

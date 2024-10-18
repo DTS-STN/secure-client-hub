@@ -3,6 +3,10 @@
 describe('Validate EI Contact Us Landing page', () => {
 
   beforeEach(() => {
+    cy.intercept({
+      method: 'GET',
+      hostname: 'assets.adobedtm.com'
+    }).as('adobeAnalytics')
     cy.visit('/contact-us/contact-employment-insurance')
   })
 
@@ -77,6 +81,12 @@ describe('Validate EI Contact Us Landing page', () => {
       cy.get('[data-cy="mail-addys"]')
        .should('be.visible')
     })
+  })
+
+  it('Validate there is exactly one copy of the AA script and it was only loaded once', () => {
+    cy.get('@adobeAnalytics.all').its('length').should('eq', 1)
+    cy.get('script[src*="adobedtm"]').as('analyticsScript')
+    cy.get('@analyticsScript').its('length').should('eq', 1)
   })
 
 })
