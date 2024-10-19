@@ -41,7 +41,7 @@
     "cross-env": "^7.0.3",
     "jose": "^5.4.0",
     "lodash.throttle": "^4.1.1",
-    "lru-cache": "^10.2.2",
+    "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.4.7",
     "next": "^14.2.3",
     "next-auth": "^4.24.7",
