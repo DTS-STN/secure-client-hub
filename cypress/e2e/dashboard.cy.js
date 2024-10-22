@@ -53,7 +53,7 @@ describe('Validate dashboard page', () => {
   cy.get('[data-testid="myDashboardContent-test"]')
   .children('[data-cy="cards"]')
   .should('be.visible')
-  .and('have.length', 5)
+  .and('have.length', 6)
 })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
