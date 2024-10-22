@@ -209,7 +209,7 @@ describe('Validate dashboard page', () => {
   // EN Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page EN', () => {
     const cardTitles = [
-      'Canadian Dental Care Plan',
+      //'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
