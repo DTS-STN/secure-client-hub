@@ -41,8 +41,9 @@ describe('Validate dashboard page', () => {
   })
  
 
-  it('Validate 5 Cards (EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
+  it('Validate 6 Cards (CDCP, EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
     const cardTitles = [
+      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -58,7 +59,7 @@ describe('Validate dashboard page', () => {
   cy.get('[data-testid="myDashboardContent-test"]')
   .children('[data-cy="cards"]')
   .should('be.visible')
-  .and('have.length', 5)
+  .and('have.length', 6)
 })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
@@ -68,6 +69,7 @@ describe('Validate dashboard page', () => {
   // EN This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links EN', () => {
     const cardTitles = [
+      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
@@ -212,7 +214,7 @@ describe('Validate dashboard page', () => {
   // EN Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
   it('Iterates through EI, CPP and OAS task lists for Profile page EN', () => {
     const cardTitles = [
-      // 'Canadian Dental Care Plan',
+      //'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
       'Old Age Security and Guaranteed Income Supplement',
