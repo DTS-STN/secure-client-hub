@@ -80,6 +80,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       langToggleLink,
       meta,
       isAuth: process.env.AUTH_DISABLED ?? true,
+      aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:500 Error`,
+      aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
     },
   }
 }
