@@ -11,7 +11,7 @@ interface Content {
   creator: string
   accessRights: string
   service: string
-  statusCode: string
+  statusCode?: string
 }
 
 interface Data {
