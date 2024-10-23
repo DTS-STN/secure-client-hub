@@ -81,6 +81,10 @@ describe('Decision Reviews page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 
@@ -94,10 +98,10 @@ describe('Decision Reviews page', () => {
         meta={{}}
         breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
-      />
+      />,
     )
     const DecisionReviewsDiv = screen.getByTestId(
-      'decision-reviewsContent-test'
+      'decision-reviewsContent-test',
     )
     expect(DecisionReviewsDiv).toBeInTheDocument()
   })
@@ -112,10 +116,10 @@ describe('Decision Reviews page', () => {
         meta={{}}
         breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
-      />
+      />,
     )
     const DecisionReviewsDiv = screen.getByTestId(
-      'decision-reviewsContent-test'
+      'decision-reviewsContent-test',
     )
     expect(DecisionReviewsDiv).toBeInTheDocument()
   })

@@ -57,6 +57,10 @@ describe.skip('Dynamic Contact Us Page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 

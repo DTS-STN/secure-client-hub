@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Script from 'next/script'
+import { useEffect } from 'react'
 
 interface Content {
   title: string
@@ -9,6 +11,7 @@ interface Content {
   creator: string
   accessRights: string
   service: string
+  statusCode?: string
 }
 
 interface Data {
@@ -21,8 +24,46 @@ interface MetaDataProps {
   data: Data
 }
 
+// To help prevent double firing of adobe analytics pageLoad event
+let appPreviousLocationPathname = ''
+
+/* eslint-disable */
+// make typescript happy
+declare global {
+  interface Window {
+    adobeDataLayer: any
+  }
+}
+/* eslint-enable */
+
 const MetaData = ({ language, data }: MetaDataProps) => {
+  const router = useRouter()
   const d = language === 'en' ? data.data_en : data.data_fr
+  const isErrorPage = typeof d.statusCode !== 'undefined'
+  /** Web Analytics - taken from Google Analytics example
+   *  @see https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics
+   * */
+  useEffect(() => {
+    const handleRouteChange = () => {
+      // only push event if pathname is different
+      if (window.location.pathname !== appPreviousLocationPathname) {
+        window.adobeDataLayer?.push?.({ event: 'pageLoad' })
+        appPreviousLocationPathname = window.location.pathname
+      }
+    }
+    if (isErrorPage) {
+      // Suppress the pageLoad entirely on error pages
+      return
+    }
+
+    handleRouteChange()
+    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on('hashChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('hashChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <>
@@ -42,8 +83,12 @@ const MetaData = ({ language, data }: MetaDataProps) => {
             }
           `}
         </style>
+        {isErrorPage ? (
+          <title data-gc-analytics-error={d.statusCode}>{d.title}</title>
+        ) : (
+          <title>{d.title}</title>
+        )}
 
-        <title>{d.title}</title>
         <meta charSet="utf-8" />
         <meta name="description" content={d.desc} />
         <meta name="author" content={d.author} />

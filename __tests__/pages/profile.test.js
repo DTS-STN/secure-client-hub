@@ -69,6 +69,10 @@ describe('My Profile page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 
@@ -86,7 +90,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
@@ -106,7 +110,7 @@ describe('My Profile page', () => {
         popupContentNA={popupContent}
         breadCrumbItems={[]}
         langToggleLink={''}
-      />
+      />,
     )
     const profileDiv = screen.getByTestId('profileContent-test')
     expect(profileDiv).toBeInTheDocument()
