@@ -47,13 +47,18 @@ const MetaData = ({ language, data }: MetaDataProps) => {
     const handleRouteChange = () => {
       // only push event if pathname is different
       if (window.location.pathname !== appPreviousLocationPathname) {
-        window.adobeDataLayer?.push?.({ event: 'pageLoad' })
+        if (isErrorPage) {
+          window.adobeDataLayer?.push?.({
+            event: 'error',
+            error: {
+              name: d.statusCode,
+            },
+          })
+        } else {
+          window.adobeDataLayer?.push?.({ event: 'pageLoad' })
+        }
         appPreviousLocationPathname = window.location.pathname
       }
-    }
-    if (isErrorPage) {
-      // Suppress the pageLoad entirely on error pages
-      return
     }
 
     handleRouteChange()
