@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useEffect } from 'react'
 
@@ -37,6 +37,7 @@ declare global {
 /* eslint-enable */
 
 const MetaData = ({ language, data }: MetaDataProps) => {
+  const router = useRouter()
   const d = language === 'en' ? data.data_en : data.data_fr
   const isErrorPage = typeof d.statusCode !== 'undefined'
   /** Web Analytics - taken from Google Analytics example
