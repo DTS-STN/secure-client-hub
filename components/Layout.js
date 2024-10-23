@@ -6,6 +6,7 @@ import MetaData from './MetaData'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { lato, notoSans } from '../utils/fonts'
+import { useRouter } from 'next/router'
 import throttle from 'lodash.throttle'
 import IdleTimeout from './IdleTimeout'
 import { signOut } from 'next-auth/react'
@@ -14,6 +15,7 @@ import getConfig from 'next/config'
 export default function Layout(props) {
   const t = props.locale === 'en' ? en : fr
   const [response, setResponse] = useState()
+  const router = useRouter()
   const defaultBreadcrumbs = []
   const contactLink =
     props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
