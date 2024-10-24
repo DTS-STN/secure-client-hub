@@ -11,6 +11,8 @@ ARG HOSTALIAS_CERT
 ENV HOSTALIAS_CERT=$HOSTALIAS_CERT
 ARG HOSTALIAS_ROOT_CERT
 ENV HOSTALIAS_ROOT_CERT=$HOSTALIAS_ROOT_CERT
+ARG AUTH_ECAS_CA
+ENV AUTH_ECAS_CA=$AUTH_ECAS_CA
 ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT=https://www.canada.ca/graphql/execute.json/decd-endc/
@@ -35,6 +37,12 @@ xargs > \
 /usr/local/share/ca-certificates/env.crt && \
 chmod 644 /usr/local/share/ca-certificates/env.crt && \
 mkdir -p  /etc/ssl/certs/ && \
+echo ${AUTH_ECAS_CA} | \
+sed 's/\\n/\n/g' | \
+xargs > \
+/usr/local/share/ca-certificates/ecas_env.crt && \
+chmod 644 /usr/local/share/ca-certificates/ecas_env.crt && \
+mkdir -p  /etc/ssl/certs/ && \
 echo ${HOSTALIAS_ROOT_CERT} | \
 sed 's/\\n/\n/g' | \
 xargs > \
@@ -52,6 +60,9 @@ ARG home=/srv/app
 ARG MSCA_NG_CERT_LOCATION=/usr/local/share/ca-certificates/env.crt
 ENV MSCA_NG_CERT_LOCATION=$MSCA_NG_CERT_LOCATION
 
+ARG ECAS_CERT_LOCATION=/usr/local/share/ca-certificates/ecas_env.crt
+ENV ECAS_CERT_LOCATION=$ECAS_CERT_LOCATION
+
 RUN addgroup \
     -S ${group} \
     --gid 1001 && \
@@ -67,6 +78,7 @@ WORKDIR ${home}
 
 COPY --from=build /etc/ssl/certs/root.crt /etc/ssl/certs/root.crt
 COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/ecas_env.crt ${ECAS_CERT_LOCATION}
 
 RUN apk update && \
 apk add ca-certificates && \
