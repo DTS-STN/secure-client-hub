@@ -56,6 +56,8 @@ extraEnv:
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
   - name: MSCA_NG_USER_ENDPOINT
     value: {{ env "MSCA_NG_USER_ENDPOINT" }}
+  - name: AUTH_ECAS_CA
+    value: {{ env "AUTH_ECAS_CA" }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -180,6 +182,7 @@ secrets:
       HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
       HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
       MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
+      AUTH_ECAS_CA: {{ env "AUTH_ECAS_CA" }}
 
   msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
     labels:
