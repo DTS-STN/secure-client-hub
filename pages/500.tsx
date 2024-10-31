@@ -60,7 +60,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Employment and Social Development Canada',
       accessRights: '1',
-      statusCode: '500',
     },
     data_fr: {
       title: `Nous ne pouvons trouver cette page Web - 500 - Mon dossier Service Canada`,
@@ -70,7 +69,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       service: 'ESDC-EDSC_MSCA-MSDC-SCH',
       creator: 'Emploi et Développement social Canada',
       accessRights: '1',
-      statusCode: '500',
     },
   }
   return {
