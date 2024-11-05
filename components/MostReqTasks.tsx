@@ -4,9 +4,7 @@ import { icon } from '../lib/loadIcons'
 
 interface Task {
   title: string
-  areaLabel: string
   link: string
-  icon?: string
   betaPopUp?: boolean
   id: string
 }
@@ -25,10 +23,19 @@ interface MostReqTasksProps {
 }
 
 const MostReqTasks = ({
-  locale,
+  locale = 'en',
   dataCy,
-  taskListMR,
-  refPageAA,
+  taskListMR = {
+    tasks: [
+      {
+        title: 'mscaPlaceholder',
+        link: 'mscaPlaceholderHref',
+        id: Math.random().toString(),
+      },
+    ],
+    title: 'mscaPlaceholder',
+  },
+  refPageAA = 'mscaPlaceholder',
   acronym,
 }: MostReqTasksProps) => {
   const newTabTaskExceptions: string[] = [
@@ -39,7 +46,7 @@ const MostReqTasks = ({
   return (
     <div className="h-full">
       <h3
-        className="pl-3 pt-6 text-xl font-bold text-white sm:pl-8 md:pl-15 "
+        className="pl-3 pt-6 text-xl font-bold text-white sm:pl-8 md:pl-15"
         data-cy={dataCy}
       >
         {taskListMR.title}
@@ -47,8 +54,7 @@ const MostReqTasks = ({
 
       {taskListMR.tasks.length > 3 ? (
         <ul
-          className="grid list-outside list-disc grid-cols-1 px-9 pb-5 pt-2
-                     text-white xs:gap-x-5 sm:auto-cols-fr sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3 sm:px-14 md:px-[100px] md:pt-4"
+          className="grid list-outside list-disc grid-cols-1 px-9 pb-5 pt-2 text-white xs:gap-x-5 sm:auto-cols-fr sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3 sm:px-14 md:px-[100px] md:pt-4"
           data-cy="most-req-links"
         >
           {taskListMR.tasks.map((task, index) => {
@@ -80,7 +86,7 @@ const MostReqTasks = ({
                       : undefined
                   }
                   data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
-                  className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
+                  className="rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
                 >
                   <span className="static text-xl font-normal">
                     {task.title}
@@ -101,7 +107,7 @@ const MostReqTasks = ({
         </ul>
       ) : (
         <ul
-          className="grid list-outside list-disc grid-cols-1  px-9 pb-5 pt-2 text-white sm:px-14 md:px-[100px] md:pt-4"
+          className="grid list-outside list-disc grid-cols-1 px-9 pb-5 pt-2 text-white sm:px-14 md:px-[100px] md:pt-4"
           data-cy="most-req-links"
         >
           {taskListMR.tasks.map((task, index) => {
@@ -133,7 +139,7 @@ const MostReqTasks = ({
                       : undefined
                   }
                   data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
-                  className=" rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
+                  className="rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
                 >
                   <span className="static text-xl font-normal">
                     {task.title}
@@ -155,19 +161,6 @@ const MostReqTasks = ({
       )}
     </div>
   )
-}
-
-MostReqTasks.defaultProps = {
-  locale: 'en',
-  taskListMR: [
-    {
-      tasks: [
-        {
-          icon: 'question-circle', // To ensure a value is used for FontAwesome icons
-        },
-      ],
-    },
-  ],
 }
 
 export default MostReqTasks

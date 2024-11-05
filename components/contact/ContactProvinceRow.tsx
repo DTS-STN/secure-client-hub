@@ -26,7 +26,7 @@ const ap = (addressContent: string | undefined, append: string): string => {
 export const ContactProvinceRow = ({
   title,
   items,
-  id,
+  id = 'mscaPlaceholder',
 }: ContactProvinceRowProps) => {
   return (
     items.length > 0 && (

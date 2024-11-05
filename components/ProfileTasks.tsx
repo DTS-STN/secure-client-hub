@@ -4,7 +4,6 @@ interface Task {
   title: string
   areaLabel: string
   link: string
-  icon?: string
   betaPopUp?: boolean
   id: string
 }
@@ -20,8 +19,16 @@ interface ProfileTasksProps {
 const ProfileTasks = ({
   dataCy,
   programTitle,
-  tasks,
-  refPageAA,
+  tasks = [
+    {
+      id: 'mscaPlaceholder',
+      title: 'mscaPlaceholder',
+      areaLabel: 'mscaPlaceholder',
+      link: 'mscaPlaceholder',
+      betaPopUp: true,
+    },
+  ],
+  refPageAA = 'mscaPlaceholder',
   acronym,
 }: ProfileTasksProps) => {
   return (
@@ -61,19 +68,6 @@ const ProfileTasks = ({
       </ul>
     </div>
   )
-}
-
-ProfileTasks.defaultProps = {
-  tasks: [
-    {
-      id: '',
-      icon: 'question-circle', // To ensure a value is used for FontAwesome icons,
-      title: '',
-      areaLabel: '',
-      link: '',
-      betaPopUp: true,
-    },
-  ],
 }
 
 export default ProfileTasks

@@ -8,7 +8,12 @@ interface CollapseProps {
   dataTestId?: string
 }
 
-const Collapse = ({ id, title, children, dataTestId }: CollapseProps) => {
+const Collapse = ({
+  id = 'mscaPlaceholder',
+  title,
+  children,
+  dataTestId,
+}: CollapseProps) => {
   return (
     <details
       key={id}
@@ -19,9 +24,9 @@ const Collapse = ({ id, title, children, dataTestId }: CollapseProps) => {
       <summary
         data-cy="summary"
         key={`summary-${id}`}
-        className=" cursor-pointer select-none rounded border border-gray-40 px-15px py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline"
+        className="cursor-pointer select-none rounded border border-gray-40 px-15px py-5px text-deep-blue-60d outline-none hover:text-blue-hover hover:underline"
         data-gc-analytics-customclick={`ESDC-EDSC_MSCA-MSDC-SCH:${programs(
-          id?.split('-')[0],
+          id.split('-')[0],
         )}:${title}`}
       >
         {title}
@@ -34,9 +39,6 @@ const Collapse = ({ id, title, children, dataTestId }: CollapseProps) => {
       </div>
     </details>
   )
-}
-Collapse.defaultProps = {
-  id: 'defaultAccordion',
 }
 
 export default Collapse

@@ -51,13 +51,54 @@ interface HeaderProps {
 }
 
 const Header = ({
-  id,
-  lang,
+  id = 'mscaPlaceholder',
+  lang = 'en',
   linkPath,
-  menuProps,
+  menuProps = {
+    onSignOut: () => {},
+    menuList: [
+      {
+        id: 'dashId',
+        showIcon: false,
+        onSignOut: () => {},
+        key: 'dashKey',
+        value: 'My dashboard',
+        path: '/',
+      },
+      {
+        id: 'securityId',
+        showIcon: false,
+        onSignOut: () => {},
+        key: 'securityKey',
+        value: 'Security Settings',
+        path: '/',
+      },
+      {
+        id: 'profileId',
+        showIcon: false,
+        onSignOut: () => {},
+        key: 'profileKey',
+        value: 'Profile',
+        path: '/',
+      },
+      {
+        id: 'signOutId',
+        showIcon: true,
+        onSignOut: () => {},
+        key: 'outKey',
+        value: 'Sign out',
+        path: '/',
+      },
+    ],
+  },
   breadCrumbItems,
-  refPageAA,
-  topnavProps,
+  refPageAA = 'mscaPlaceholder',
+  topnavProps = {
+    skipToMainPath: '#wb-cont',
+    skipToAboutPath: '#wb-info',
+    switchToBasicPath: 'basic-en.html',
+    displayAlternateLink: false,
+  },
   dataGcAnalyticsCustomClickInstitutionVariable,
   dataGcAnalyticsCustomClickMenuVariable,
 }: HeaderProps) => {
@@ -119,37 +160,11 @@ const Header = ({
           dataGcAnalyticsCustomClick={dataGcAnalyticsCustomClickMenuVariable}
         />
         <div className="sch-container">
-          <Breadcrumb items={breadCrumbItems}
-            refPageAA={refPageAA}
-        />
+          <Breadcrumb items={breadCrumbItems} refPageAA={refPageAA} />
         </div>
       </header>
     </div>
   )
-}
-
-Header.defaultProps = {
-  lang: 'en',
-  id: Math.random(),
-  searchProps: {
-    onChange: () => {},
-    onSubmit: () => {},
-  },
-  menuProps: {
-    onSignOut: () => {},
-    menuList: [
-      { key: 'dashKey', value: 'My dashboard', path: '/' },
-      { key: 'securityKey', value: 'Security Settings', path: '/' },
-      { key: 'profileKey', value: 'Profile', path: '/' },
-      { key: 'outKey', value: 'Sign out', path: '/' },
-    ],
-  },
-  topnavProps: {
-    skipToMainPath: '#wb-cont',
-    skipToAboutPath: '#wb-info',
-    switchToBasicPath: 'basic-en.html',
-    displayAlternateLink: false,
-  },
 }
 
 export default Header

@@ -13,7 +13,11 @@ export interface BreadcrumbProps {
   refPageAA: string
 }
 
-const Breadcrumb = ({ id, items, refPageAA }: BreadcrumbProps) => {
+const Breadcrumb = ({
+  id, // TODO: Provide a default value once this is actually mapped in
+  items,
+  refPageAA = 'mscaPlaceholder',
+}: BreadcrumbProps) => {
   return (
     <nav className="py-6" aria-label="Breadcrumb-Fil d’ariane" id={id}>
       <ul className="block font-body text-base leading-[23px] text-deep-blue-dark">

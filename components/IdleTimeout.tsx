@@ -20,7 +20,7 @@ const IdleTimeout = ({
   promptBeforeIdle,
   timeout,
   locale,
-  refPageAA,
+  refPageAA = 'mscaPlaceholder',
 }: IdleTimeoutProps) => {
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)

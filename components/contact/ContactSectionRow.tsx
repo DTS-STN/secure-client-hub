@@ -30,8 +30,8 @@ export const ContactSectionRow = ({
   button,
   buttonId,
   items,
-  refPageAA,
-  id,
+  refPageAA = 'mscaPlaceholder',
+  id = 'mscaPlaceholder',
 }: ContactSectionRowProps) => {
   const locale = lang === 'fr' ? 'fr' : 'en'
   const newTabTaskExceptions = [
@@ -54,7 +54,7 @@ export const ContactSectionRow = ({
         {title}
       </dt>
       <dd
-        className={`prose max-w-none prose-p:my-0 prose-p:font-body prose-p:text-xl md:col-span-8  ${
+        className={`prose max-w-none prose-p:my-0 prose-p:font-body prose-p:text-xl md:col-span-8 ${
           highlight && 'bg-blue-100 py-2'
         }`}
       >
