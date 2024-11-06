@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import Card from '../components/Card'
+import OasCard from '../components/OasCard'
+import EiCard from '../components/EiCard'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import InfoMessage from '../components/InfoMessage'
@@ -85,6 +87,8 @@ export default function MyDashboard(props) {
           </ul>
         )
       })}
+      <OasCard locale={props.locale}></OasCard>
+      <EiCard locale={props.locale}></EiCard>
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
         var tasks = card.lists.slice(1, card.lists.length)
