@@ -12,8 +12,8 @@ const BackToButton = ({
   buttonHref,
   buttonId,
   buttonLinkText,
-  refPageAA,
-  id,
+  refPageAA = 'mscaPlaceholder',
+  id = 'mscaPlaceholder',
 }: BackToButtonProps) => {
   return (
     <>
@@ -21,7 +21,7 @@ const BackToButton = ({
         <Link
           href={buttonHref}
           id={buttonId}
-          className="inline-block my-4 py-2.5 px-3.5 font-display text-xl rounded bg-gray-30a text-deep-blue-60b hover:bg-gray-50a hover:cursor-pointer focus:ring focus:ring-offset-4 ring-deep-blue-60f"
+          className="my-4 inline-block rounded bg-gray-30a px-3.5 py-2.5 font-display text-xl text-deep-blue-60b ring-deep-blue-60f hover:cursor-pointer hover:bg-gray-50a focus:ring focus:ring-offset-4"
           data-gc-analytics-customclick={`${refPageAA}:${id}`}
         >
           {buttonLinkText}

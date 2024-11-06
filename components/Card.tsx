@@ -9,6 +9,8 @@ interface AlertProps {
   type: string
   alertHeading: string
   alertBody: string
+  alert_icon_alt_text: string
+  alert_icon_id: string
 }
 interface CardProps {
   cardTitle: string
@@ -23,7 +25,16 @@ interface CardProps {
 }
 
 const Card = ({
-  cardAlert,
+  cardAlert = [
+    {
+      id: '',
+      type: '',
+      alertHeading: '',
+      alertBody: '',
+      alert_icon_alt_text: '',
+      alert_icon_id: '',
+    },
+  ],
   hasAlert,
   locale,
   cardTitle,
@@ -101,7 +112,7 @@ const Card = ({
       {!isOpen ? null : (
         <div>
           {hasAlert &&
-            cardAlert?.map((alert, index) => {
+            cardAlert.map((alert, index) => {
               const alertType = alert.type[0].split('/').pop()
               return (
                 <ul
@@ -128,20 +139,6 @@ const Card = ({
       )}
     </div>
   )
-}
-
-Card.defaultProps = {
-  cardAlert: [
-    {
-      id: '',
-      type: '',
-      alertHeading: '',
-      alertBody: '',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
-    },
-  ],
-  hasAlert: true,
 }
 
 export default Card
