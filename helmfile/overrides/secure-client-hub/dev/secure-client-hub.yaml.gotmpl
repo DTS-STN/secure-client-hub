@@ -274,3 +274,10 @@ hostAliases:
   hostnames:
     - {{ env "HOSTALIAS_HOSTNAME" }}
 {{- end }}
+{{- if env "RAOIDC_HOSTALIAS_ENABLED" }}
+raoidcAlias:
+  enabled: {{ env "RAOIDC_HOSTALIAS_ENABLED" }}
+  ip: "{{ env "RAOIDC_HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "RAOIDC_HOSTALIAS_HOSTNAME" }}
+{{- end }}
