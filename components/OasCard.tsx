@@ -39,8 +39,8 @@ const OasCard = ({ locale }: OasCardProps) => {
                   areaLabel: locale === 'en' ? 'Account' : 'Compte',
                   link:
                     locale === 'en'
-                      ? 'https://srv2140-i4.services.gc.qat/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=eng&appCode=CURAM-OAS'
-                      : 'https://srv2140-i4.services.gc.qat/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=fra&appCode=CURAM-OAS',
+                      ? 'https://srv2140-p.services.gc.qat/ecas-seca/rascl/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&appCode=CURAM-OAS&Lang=eng'
+                      : 'https://srv2140-p.services.gc.qat/ecas-seca/rascl/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&appCode=CURAM-OAS&Lang=fra',
                   icon: '',
                   betaPopUp: false,
                 },
