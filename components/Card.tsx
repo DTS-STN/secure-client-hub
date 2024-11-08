@@ -35,7 +35,6 @@ const Card = ({
       alert_icon_id: '',
     },
   ],
-  hasAlert,
   locale,
   cardTitle,
   viewMoreLessCaption,
@@ -111,27 +110,23 @@ const Card = ({
       />
       {!isOpen ? null : (
         <div>
-          {hasAlert &&
-            cardAlert.map((alert, index) => {
-              const alertType = alert.type[0].split('/').pop()
-              return (
-                <ul
-                  className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15"
-                  key={index}
-                >
-                  <ContextualAlert
-                    id={alert.id}
-                    type={alertType}
-                    alertHeading={alert.alertHeading}
-                    alertBody={alert.alertBody}
-                    alert_icon_alt_text={`${alertType} ${
-                      locale === 'fr' ? 'Icônes' : 'icon'
-                    }`}
-                    alert_icon_id={` alert-icon ${alert.id}`}
-                  />
-                </ul>
-              )
-            })}
+          {cardAlert.map((alert, index) => {
+            const alertType = alert.type[0].split('/').pop()
+            return (
+              <ul className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15" key={index}>
+                <ContextualAlert
+                  id={alert.id}
+                  type={alertType}
+                  alertHeading={alert.alertHeading}
+                  alertBody={alert.alertBody}
+                  alert_icon_alt_text={`${alertType} ${
+                    locale === 'fr' ? 'Icônes' : 'icon'
+                  }`}
+                  alert_icon_id={` alert-icon ${alert.id}`}
+                />
+              </ul>
+            )
+          })}
           <div className="pb-6" data-cy="sectionList">
             {children}
           </div>
