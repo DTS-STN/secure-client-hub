@@ -10,17 +10,17 @@ interface Links {
   id: string
   text: string
   href: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 interface FooterProps {
   id: string
   lang: 'en' | 'fr' | 'und'
   btnLink: string
-  error: boolean
+  error?: boolean
   contactLink: string
   brandLinks: Links[]
-  target: string
+  target?: string
 }
 
 const Footer = ({

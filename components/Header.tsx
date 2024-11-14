@@ -12,7 +12,7 @@ interface SearchProps {
 }
 
 interface MenuProps {
-  onSignOut: () => void
+  onSignOut?: () => void
   menuList: MenuList[]
 }
 
@@ -21,8 +21,8 @@ interface MenuList {
   key: string
   value: string
   path: string
-  showIcon: boolean
-  onSignOut: () => void
+  showIcon?: boolean
+  onSignOut?: () => void
 }
 
 interface TopNavProps {
