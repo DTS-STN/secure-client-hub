@@ -117,6 +117,16 @@ export async function getContactUsContent() {
       subHeading: introFragment?.scContentEn?.json[0].content[0].value,
       links: [
         {
+          linkId: cdcpContactFragment?.scId,
+          linkTitle: cdcpContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: cdcpContactFragment?.scDestinationURLEn,
+          linkDescription: cdcpContactFragment?.scDescriptionEn?.json
+            ? cdcpContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
+        },
+        {
           linkId: eiContactFragment?.scId,
           linkTitle: eiContactFragment?.scLinkTextEn,
           linkAssistiveTitle: eiContactFragment?.scLinkTextAssistiveEn,
@@ -156,16 +166,6 @@ export async function getContactUsContent() {
             : '',
           schBetaPopup: sinContactFragment?.schBetaPopUp,
         },
-        {
-          linkId: cdcpContactFragment?.scId,
-          linkTitle: cdcpContactFragment?.scLinkTextEn,
-          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveEn,
-          linkDestination: cdcpContactFragment?.scDestinationURLEn,
-          linkDescription: cdcpContactFragment?.scDescriptionEn?.json
-            ? cdcpContactFragment.scDescriptionEn.json[0].content[0].value
-            : '',
-          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
-        },
       ],
     },
     fr: {
@@ -182,6 +182,16 @@ export async function getContactUsContent() {
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
       subHeading: introFragment?.scContentFr?.json[0].content[0].value,
       links: [
+        {
+          linkId: cdcpContactFragment?.scId,
+          linkTitle: cdcpContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: cdcpContactFragment?.scDestinationURLFr,
+          linkDescription: cdcpContactFragment?.scDescriptionFr?.json
+            ? cdcpContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
+        },
         {
           linkId: eiContactFragment?.scId,
           linkTitle: eiContactFragment?.scLinkTextFr,
@@ -221,16 +231,6 @@ export async function getContactUsContent() {
             ? sinContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
           schBetaPopup: sinContactFragment?.schBetaPopUp,
-        },
-        {
-          linkId: cdcpContactFragment?.scId,
-          linkTitle: cdcpContactFragment?.scLinkTextFr,
-          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveFr,
-          linkDestination: cdcpContactFragment?.scDestinationURLFr,
-          linkDescription: cdcpContactFragment?.scDescriptionFr?.json
-            ? cdcpContactFragment.scDescriptionFr.json[0].content[0].value
-            : '',
-          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
         },
       ],
     },
