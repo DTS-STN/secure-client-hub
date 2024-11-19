@@ -39,8 +39,6 @@ const MostReqTasks = ({
   acronym,
 }: MostReqTasksProps) => {
   const newTabTaskExceptions: string[] = [
-    'https://protege-secure.pca-cal.ca/en/Account/Authorize',
-    'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
 
   return (
