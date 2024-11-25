@@ -4,9 +4,7 @@ import { icon } from '../lib/loadIcons'
 
 interface Task {
   title: string
-  areaLabel: string
   link: string
-  icon?: string
   betaPopUp?: boolean
   id: string
 }
@@ -25,15 +23,22 @@ interface MostReqTasksProps {
 }
 
 const MostReqTasks = ({
-  locale,
+  locale = 'en',
   dataCy,
-  taskListMR,
-  refPageAA,
+  taskListMR = {
+    tasks: [
+      {
+        title: 'mscaPlaceholder',
+        link: 'mscaPlaceholderHref',
+        id: Math.random().toString(),
+      },
+    ],
+    title: 'mscaPlaceholder',
+  },
+  refPageAA = 'mscaPlaceholder',
   acronym,
 }: MostReqTasksProps) => {
   const newTabTaskExceptions: string[] = [
-    'https://protege-secure.pca-cal.ca/en/Account/Authorize',
-    'https://protege-secure.pca-cal.ca/fr/Compte/Autoriser',
   ]
 
   return (
@@ -154,19 +159,6 @@ const MostReqTasks = ({
       )}
     </div>
   )
-}
-
-MostReqTasks.defaultProps = {
-  locale: 'en',
-  taskListMR: [
-    {
-      tasks: [
-        {
-          icon: 'question-circle', // To ensure a value is used for FontAwesome icons
-        },
-      ],
-    },
-  ],
 }
 
 export default MostReqTasks

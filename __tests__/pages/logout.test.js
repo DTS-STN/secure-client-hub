@@ -43,6 +43,10 @@ describe('logout page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/auth/logout',
       asPath: '/auth/logout',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 

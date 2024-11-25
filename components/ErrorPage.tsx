@@ -14,9 +14,9 @@ interface ErrorPageProps {
 const ErrorPage = ({
   isAuth,
   errType,
-  lang,
-  homePageLink,
-  accountPageLink,
+  lang = 'en',
+  homePageLink = '/',
+  accountPageLink = '/',
 }: ErrorPageProps) => {
   let biClassName = ''
   const language = lang === 'en' ? [EN] : lang === 'fr' ? [FR] : [EN, FR]
@@ -114,12 +114,6 @@ const ErrorPage = ({
       })}
     </div>
   )
-}
-
-ErrorPage.defaultProps = {
-  accountPageLink: '/',
-  homePageLink: '/',
-  lang: 'en',
 }
 
 export default ErrorPage

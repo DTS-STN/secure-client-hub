@@ -6,7 +6,7 @@ interface ButtonProps {
   style?: 'supertask' | 'primary' | 'secondary' | 'danger' | 'link' | 'none'
   text: string
   icon?: string
-  iconAltText: string
+  iconAltText?: string
   iconEnd?: boolean
   href?: string
   type?: 'submit' | 'reset' | 'button'
@@ -19,20 +19,20 @@ interface ButtonProps {
 }
 
 const Button = ({
-  id,
-  style,
-  text,
+  id = 'mscaPlaceholder',
+  style = 'supertask',
+  text = 'mscaPlaceholder',
   icon,
-  iconAltText,
+  iconAltText = 'mscaPlaceholder',
   iconEnd,
-  href,
+  href = 'no ref',
   type,
   onClick,
   disabled,
   className,
   attributes,
   children,
-  refPageAA,
+  refPageAA = 'mscaPlaceholder',
 }: ButtonProps) => {
   const primary =
     'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed rounded focus:ring focus:ring-offset-4 focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus'
@@ -136,13 +136,4 @@ const Button = ({
     </a>
   )
 }
-
-Button.defaultProps = {
-  id: 'btn1',
-  style: 'supertask',
-  text: 'default',
-  href: 'no ref',
-  iconAltText: 'default',
-}
-
 export default Button

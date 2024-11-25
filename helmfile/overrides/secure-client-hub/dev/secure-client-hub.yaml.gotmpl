@@ -56,6 +56,8 @@ extraEnv:
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }} 
   - name: MSCA_NG_USER_ENDPOINT
     value: {{ env "MSCA_NG_USER_ENDPOINT" }}
+  - name: AUTH_ECAS_CA
+    value: {{ env "AUTH_ECAS_CA" }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -144,7 +146,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-replicaCount: 2
+replicaCount: 1
 resources:
   requests:
     cpu: 300m
@@ -180,6 +182,7 @@ secrets:
       HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
       HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
       MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
+      AUTH_ECAS_CA: {{ env "AUTH_ECAS_CA" }}
 
   msca-d-frontend-auth-{{ requiredEnv "BRANCH" | lower }}:
     labels:
@@ -194,7 +197,7 @@ secrets:
 autoscaling:
   enabled: true
   name: service-canada-client-hub
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
   targetCPUUtilization: 85
   labels:
@@ -270,4 +273,11 @@ hostAliases:
   ip: "{{ env "HOSTALIAS_IP" }}"
   hostnames:
     - {{ env "HOSTALIAS_HOSTNAME" }}
+{{- end }}
+{{- if env "RAOIDC_HOSTALIAS_ENABLED" }}
+raoidcAlias:
+  enabled: {{ env "RAOIDC_HOSTALIAS_ENABLED" }}
+  ip: "{{ env "RAOIDC_HOSTALIAS_IP" }}"
+  hostnames:
+    - {{ env "RAOIDC_HOSTALIAS_HOSTNAME" }}
 {{- end }}

@@ -1,4 +1,4 @@
-FROM node:20.16.0-alpine3.20 AS base
+FROM node:20.17.0-alpine3.20 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
@@ -11,6 +11,8 @@ ARG HOSTALIAS_CERT
 ENV HOSTALIAS_CERT=$HOSTALIAS_CERT
 ARG HOSTALIAS_ROOT_CERT
 ENV HOSTALIAS_ROOT_CERT=$HOSTALIAS_ROOT_CERT
+ARG AUTH_ECAS_CA
+ENV AUTH_ECAS_CA=$AUTH_ECAS_CA
 ARG LOGGING_LEVEL=info
 ENV LOGGING_LEVEL=$LOGGING_LEVEL
 ARG AEM_GRAPHQL_ENDPOINT=https://www.canada.ca/graphql/execute.json/decd-endc/
@@ -34,6 +36,11 @@ sed 's/\\n/\n/g' | \
 xargs > \
 /usr/local/share/ca-certificates/env.crt && \
 chmod 644 /usr/local/share/ca-certificates/env.crt && \
+echo ${AUTH_ECAS_CA} | \
+sed 's/\\n/\n/g' | \
+xargs > \
+/usr/local/share/ca-certificates/ecas_env.crt && \
+chmod 644 /usr/local/share/ca-certificates/ecas_env.crt && \
 mkdir -p  /etc/ssl/certs/ && \
 echo ${HOSTALIAS_ROOT_CERT} | \
 sed 's/\\n/\n/g' | \
@@ -42,7 +49,7 @@ xargs > \
 chmod 644  /etc/ssl/certs/root.crt && \
 npm run build
 
-FROM node:20.16.0-alpine3.20 AS production
+FROM node:20.17.0-alpine3.20 AS production
 ENV NODE_ENV=production
 
 ARG user=nodeuser
@@ -51,6 +58,9 @@ ARG home=/srv/app
 
 ARG MSCA_NG_CERT_LOCATION=/usr/local/share/ca-certificates/env.crt
 ENV MSCA_NG_CERT_LOCATION=$MSCA_NG_CERT_LOCATION
+
+ARG ECAS_CERT_LOCATION=/usr/local/share/ca-certificates/ecas_env.crt
+ENV ECAS_CERT_LOCATION=$ECAS_CERT_LOCATION
 
 RUN addgroup \
     -S ${group} \
@@ -67,6 +77,7 @@ WORKDIR ${home}
 
 COPY --from=build /etc/ssl/certs/root.crt /etc/ssl/certs/root.crt
 COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
+COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/ecas_env.crt ${ECAS_CERT_LOCATION}
 
 RUN apk update && \
 apk add ca-certificates && \
@@ -131,6 +142,8 @@ ENV AUTH_DISABLED=$AUTH_DISABLED
 
 ARG AUTH_ECAS_GLOBAL_LOGOUT_URL
 ENV AUTH_ECAS_GLOBAL_LOGOUT_URL=$AUTH_ECAS_GLOBAL_LOGOUT_URL
+
+ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ecas_env.crt
 # ECAS/next-auth env end
 
 ARG PORT=3000

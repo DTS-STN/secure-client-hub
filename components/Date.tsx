@@ -4,7 +4,7 @@ interface DateProps {
   date?: string
 }
 
-const Date = ({ id, label, date }: DateProps) => {
+const Date = ({ id = 'mscaPlaceholder', label, date }: DateProps) => {
   const dateFormatted = date ? date.split('T')[0] : 'NA'
   return (
     <dl

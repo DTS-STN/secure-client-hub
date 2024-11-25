@@ -7,20 +7,20 @@ interface TopNavProps {
 }
 
 export const TopNav = ({
-  lang,
-  skipToMainPath,
-  skipToAboutPath,
-  switchToBasicPath,
-  displayAlternateLink,
+  lang = 'en',
+  skipToMainPath = '/',
+  skipToAboutPath = '/',
+  switchToBasicPath = 'mscaPlaceholderHref',
+  displayAlternateLink = false,
 }: TopNavProps) => {
   return (
     <>
       {/* Top navigation accessible only when using a keyboard to navigate the page */}
       <nav role="navigation" aria-label="topNavigation">
         <ul id="TopNavLinks" className="z-10">
-          <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
+          <li className="absolute left-0 top-2 -z-50 box-border w-full text-center focus-within:z-50">
             <a
-              className="focus:bg-blue-primary font-bold p-1 text-white"
+              className="p-1 font-bold text-white focus:bg-blue-primary"
               href={skipToMainPath}
             >
               {lang === 'fr'
@@ -28,9 +28,9 @@ export const TopNav = ({
                 : 'Skip to main content'}
             </a>
           </li>
-          <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
+          <li className="absolute left-0 top-2 -z-50 box-border w-full text-center focus-within:z-50">
             <a
-              className="focus:bg-blue-primary font-bold p-1 text-white"
+              className="p-1 font-bold text-white focus:bg-blue-primary"
               href={skipToAboutPath}
             >
               {lang === 'fr'
@@ -40,9 +40,9 @@ export const TopNav = ({
           </li>
 
           {displayAlternateLink ? (
-            <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
+            <li className="absolute left-0 top-2 -z-50 box-border w-full text-center focus-within:z-50">
               <a
-                className="focus:bg-blue-primary font-bold p-1 text-white"
+                className="p-1 font-bold text-white focus:bg-blue-primary"
                 href={switchToBasicPath}
                 rel="alternate"
               >
@@ -58,12 +58,4 @@ export const TopNav = ({
       </nav>
     </>
   )
-}
-
-TopNav.defaultProps = {
-  lang: 'en',
-  displayAlternateLink: false,
-  skipToMainPath: '/',
-  skipToAboutPath: '/',
-  switchToBasicPath: '/',
 }

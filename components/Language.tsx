@@ -13,14 +13,14 @@ interface LanguageProps {
 }
 
 const Language = ({
-  id,
+  id = 'mscaPlaceholder',
   lang,
-  path,
+  path = '/',
   abbr,
   dataTestId,
   dataCy,
   ariaLabel,
-  dataGcAnalyticsCustomClick,
+  dataGcAnalyticsCustomClick = 'mscaPlaceholder',
   text,
 }: LanguageProps) => {
   return (
@@ -28,7 +28,7 @@ const Language = ({
       {abbr ? (
         <Link
           href={path}
-          className="underline uppercase text-deep-blue-dark font-medium font-body leading-[33px] hover:text-blue-hover focus:text-blue-hover focus-visible:text-blue-hover"
+          className="font-body font-medium uppercase leading-[33px] text-deep-blue-dark underline hover:text-blue-hover focus:text-blue-hover focus-visible:text-blue-hover"
           id={id}
           data-testid={dataTestId}
           data-cy={dataCy || id}
@@ -45,7 +45,7 @@ const Language = ({
       ) : (
         <Link
           href={path}
-          className="underline text-deep-blue-dark font-base font-body text-[16px] leading-[33px] hover:text-blue-hover focus:text-blue-hover focus-visible:text-blue-hover"
+          className="font-base font-body text-[16px] leading-[33px] text-deep-blue-dark underline hover:text-blue-hover focus:text-blue-hover focus-visible:text-blue-hover"
           id={id}
           data-testid={dataTestId}
           data-cy={dataCy || id}
@@ -63,9 +63,4 @@ const Language = ({
     </>
   )
 }
-
-Language.defaultProps = {
-  path: '/',
-}
-
 export default Language

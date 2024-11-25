@@ -47,6 +47,8 @@ const ContactLanding = (props: ContactLandingProps) => {
   const newTabExceptions: string[] = [
     'https://www.canada.ca/en/employment-social-development/corporate/contact/sin.html',
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
+    'https://www.canada.ca/en/services/benefits/dental/dental-care-plan/contact.html',
+    'https://www.canada.ca/fr/services/prestations/dentaire/regime-soins-dentaires/contactez.html',
   ]
 
   return (

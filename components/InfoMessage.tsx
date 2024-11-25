@@ -13,12 +13,12 @@ interface InfoMessageProps {
 
 const InfoMessage = ({
   locale,
-  label,
+  label = 'mscaPlaceholder',
   messageText,
   messageLinkText,
-  messageLinkHref,
+  messageLinkHref = 'mscaPlaceholder',
   icon,
-  refPageAA,
+  refPageAA = 'mscaPlaceholder',
 }: InfoMessageProps) => {
   return (
     <div

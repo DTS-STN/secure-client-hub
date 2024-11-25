@@ -69,6 +69,10 @@ describe('My Profile page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 

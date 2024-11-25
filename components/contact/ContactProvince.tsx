@@ -14,7 +14,7 @@ export interface ContactProvinceProps {
 export const ContactProvince = ({
   title,
   intro,
-  id,
+  id = 'mscaPlaceholder',
   details,
 }: ContactProvinceProps) => {
   return (
