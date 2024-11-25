@@ -32,6 +32,13 @@ spec:
         {{- range .Values.hostAliases.hostnames }}
         - {{ . | quote }}
         {{- end }}
+        {{- if .Values.raoidcAlias.enabled }}
+      - ip: "{{ .Values.raoidcAlias.ip }}"
+        hostnames:
+        {{- range .Values.raoidcAlias.hostnames }}
+        - {{ . | quote }}
+        {{- end }}
+      {{- end }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}

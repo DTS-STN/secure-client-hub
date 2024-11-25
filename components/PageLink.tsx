@@ -17,12 +17,12 @@ const PageLink = ({
   lookingForText,
   linkText,
   accessText,
-  href,
+  href = 'mscaPlaceholderHref',
   dataCy,
-  buttonHref,
+  buttonHref = 'mscaPlaceholderHref',
   buttonId,
   buttonLinkText,
-  refPageAA,
+  refPageAA = 'mscaPlaceholder',
   dashId,
 }: PageLinkProps) => {
   const linkID = linkText.replace(/\s+/g, '')

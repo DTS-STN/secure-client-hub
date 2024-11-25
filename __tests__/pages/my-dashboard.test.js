@@ -65,6 +65,10 @@ describe('My Dashboard page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 

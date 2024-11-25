@@ -29,8 +29,8 @@ const BenefitTasks = ({
   locale,
   taskList,
   dataCy,
-  refPageAA,
-  acronym,
+  refPageAA = 'mscaPlaceholder',
+  acronym = 'mscaPlaceholder',
 }: BenefitTasksProps) => {
   const newTabTaskExceptions = [
     'https://www.canada.ca/en/services/benefits/ei/employment-insurance-reporting.html',
@@ -103,17 +103,5 @@ const BenefitTasks = ({
       </ul>
     </div>
   )
-}
-
-BenefitTasks.defaultProps = {
-  taskList: [
-    {
-      tasks: [
-        {
-          icon: 'question-circle', // To ensure a value is used for FontAwesome icons
-        },
-      ],
-    },
-  ],
 }
 export default BenefitTasks

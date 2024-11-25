@@ -12,7 +12,7 @@ const Heading = ({
   fromLink,
   fromText,
   className,
-  id,
+  id = 'mscaPlaceholder',
   dataTestId,
 }: HeadingProps) => {
   return (

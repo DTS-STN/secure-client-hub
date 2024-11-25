@@ -16,7 +16,11 @@ interface MenuProps {
   menuList: MenuItem[]
 }
 
-const Menu = ({ lang, dataGcAnalyticsCustomClick, menuList }: MenuProps) => {
+const Menu = ({
+  lang,
+  dataGcAnalyticsCustomClick = 'mscaPlaceholder',
+  menuList,
+}: MenuProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
 

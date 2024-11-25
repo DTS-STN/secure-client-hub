@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 interface Content {
   title: string
@@ -43,6 +44,7 @@ const MetaData = ({ language, data }: MetaDataProps) => {
         </style>
 
         <title>{d.title}</title>
+
         <meta charSet="utf-8" />
         <meta name="description" content={d.desc} />
         <meta name="author" content={d.author} />
@@ -57,16 +59,22 @@ const MetaData = ({ language, data }: MetaDataProps) => {
         <meta name="dcterms.creator" content={d.creator} />
         <meta name="dcterms.accessRights" content={d.accessRights} />
         <meta name="dcterms.service" content={d.service} />
-        {/* eslint-disable */}
-
-        {process.env.ENVIRONMENT === 'production' ? (
-          <script src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"></script>
-        ) : (
-          <script src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"></script>
-        )}
-
-        {/*eslint-enable */}
       </Head>
+
+      {
+        // AA script must be loaded before the pageLoad event fires
+        process.env.ENVIRONMENT === 'production' ? (
+          <Script
+            strategy="beforeInteractive"
+            src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"
+          />
+        ) : (
+          <Script
+            strategy="beforeInteractive"
+            src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
+          />
+        )
+      }
     </>
   )
 }

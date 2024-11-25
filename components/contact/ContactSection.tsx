@@ -30,7 +30,7 @@ export const ContactSection = ({
   lang,
   title,
   intro,
-  id,
+  id = 'mscaPlaceholder',
   details,
 }: ContactSectionProps) => {
   return (
