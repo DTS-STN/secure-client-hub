@@ -50,6 +50,10 @@ describe('Security Settings page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 
@@ -63,7 +67,7 @@ describe('Security Settings page', () => {
         meta={{}}
         breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
-      />
+      />,
     )
     const SecuritySettingsDiv = screen.getByTestId('securityContent-test')
     expect(SecuritySettingsDiv).toBeInTheDocument()
@@ -79,7 +83,7 @@ describe('Security Settings page', () => {
         meta={{}}
         breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
-      />
+      />,
     )
     const SecuritySettingsDiv = screen.getByTestId('securityContent-test')
     expect(SecuritySettingsDiv).toBeInTheDocument()
@@ -95,7 +99,7 @@ describe('Security Settings page', () => {
         meta={{}}
         breadCrumbItems={content.breadcrumb}
         langToggleLink={''}
-      />
+      />,
     )
     const securityQuestionsLink = screen.getByTestId('securityQuestionsLink')
     expect(securityQuestionsLink).toBeInTheDocument()

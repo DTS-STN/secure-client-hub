@@ -22,14 +22,14 @@ const ViewMoreLessButton = ({
   caption,
   icon,
   onClick,
-  id,
+  id = 'mscaPlaceholder',
   dataTestid,
   ariaExpanded,
   className,
   dataCy,
-  ariaLabel,
-  refPageAA,
-  acronym,
+  ariaLabel = 'mscaPlaceholder',
+  refPageAA = 'mscaPlaceholder',
+  acronym = 'mscaPlaceholder',
 }: ViewMoreLessButtonProps) => {
   return (
     <button

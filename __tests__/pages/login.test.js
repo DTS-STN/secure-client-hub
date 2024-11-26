@@ -39,6 +39,10 @@ describe('login page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/auth/login',
       asPath: '/auth/login',
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
     }))
   })
 

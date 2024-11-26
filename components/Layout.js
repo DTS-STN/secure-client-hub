@@ -1,18 +1,44 @@
+import throttle from 'lodash.throttle'
+import { signOut } from 'next-auth/react'
+import getConfig from 'next/config'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import { useState, useCallback, useMemo, useEffect } from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import MetaData from './MetaData'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { lato, notoSans } from '../utils/fonts'
-import { useRouter } from 'next/router'
-import throttle from 'lodash.throttle'
+import Footer from './Footer'
+import Header from './Header'
 import IdleTimeout from './IdleTimeout'
-import { signOut } from 'next-auth/react'
-import getConfig from 'next/config'
+import MetaData from './MetaData'
 
-export default function Layout(props) {
+export default function Layout(
+  props = {
+    locale: 'en',
+    meta: '',
+    langToggleLink: '',
+    breadCrumbItems: [],
+    bannerContent: {
+      bannerBoldText: '',
+      bannerText: '',
+      bannerLink: '',
+      bannerLinkHref: '',
+      bannerSummaryTitle: '',
+      bannerSummaryContent: '',
+      bannerButtonText: '',
+      bannerButtonLink: '',
+      icon: '',
+    },
+    popupContentNA,
+    content,
+    popupContent,
+    display: { hideBanner: true },
+    popupStaySignedIn,
+    refPageAA,
+    dataGcAnalyticsCustomClickMenuVariable,
+    title: 'Service.Canada.ca',
+  },
+) {
   const t = props.locale === 'en' ? en : fr
   const [response, setResponse] = useState()
   const router = useRouter()
@@ -172,32 +198,6 @@ export default function Layout(props) {
       />
     </>
   )
-}
-
-/**
- * Setup default props
- */
-
-Layout.defaultProps = {
-  title: 'Service.Canada.ca',
-  bannerContent: {
-    bannerBoldText: '',
-    bannerText: '',
-
-    bannerLink: '',
-    bannerLinkHref: '',
-
-    bannerSummaryTitle: '',
-    bannerSummaryContent: '',
-    bannerButtonText: '',
-    bannerButtonLink: '',
-    icon: '',
-  },
-  breadCrumbItems: [],
-  display: { hideBanner: true },
-  langToggleLink: '',
-  locale: 'en',
-  meta: '',
 }
 
 Layout.propTypes = {

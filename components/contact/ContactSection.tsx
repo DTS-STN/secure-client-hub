@@ -30,7 +30,7 @@ export const ContactSection = ({
   lang,
   title,
   intro,
-  id,
+  id = 'mscaPlaceholder',
   details,
 }: ContactSectionProps) => {
   return (
@@ -49,7 +49,7 @@ export const ContactSection = ({
       >
         <Markdown>{intro}</Markdown>
       </div>
-      <dl className=" divide-y-2 border-y-2 " data-cy="section2">
+      <dl className="divide-y-2 border-y-2" data-cy="section2">
         {details.map((sectionDetail) => {
           const button =
             sectionDetail.items[0]?.button &&

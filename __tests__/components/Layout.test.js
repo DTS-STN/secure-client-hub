@@ -73,6 +73,10 @@ describe('Layout with default text', () => {
   useRouter.mockImplementation(() => ({
     pathname: '/',
     asPath: '/',
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+    },
   }))
 
   it.skip('Layout contains Symbol of GoC', () => {

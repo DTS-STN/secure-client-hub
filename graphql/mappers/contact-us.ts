@@ -99,6 +99,7 @@ export async function getContactUsContent() {
   const oasContactFragment = findFragmentByScId(response, 'oas-contact-us')
   const cppContactFragment = findFragmentByScId(response, 'cpp-contact-us')
   const sinContactFragment = findFragmentByScId(response, 'sin-contact-us')
+  const cdcpContactFragment = findFragmentByScId(response, 'cdcp-contact-us')
 
   const mappedSecurity = {
     en: {
@@ -115,6 +116,16 @@ export async function getContactUsContent() {
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
       subHeading: introFragment?.scContentEn?.json[0].content[0].value,
       links: [
+        {
+          linkId: cdcpContactFragment?.scId,
+          linkTitle: cdcpContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: cdcpContactFragment?.scDestinationURLEn,
+          linkDescription: cdcpContactFragment?.scDescriptionEn?.json
+            ? cdcpContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
+        },
         {
           linkId: eiContactFragment?.scId,
           linkTitle: eiContactFragment?.scLinkTextEn,
@@ -171,6 +182,16 @@ export async function getContactUsContent() {
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
       subHeading: introFragment?.scContentFr?.json[0].content[0].value,
       links: [
+        {
+          linkId: cdcpContactFragment?.scId,
+          linkTitle: cdcpContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: cdcpContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: cdcpContactFragment?.scDestinationURLFr,
+          linkDescription: cdcpContactFragment?.scDescriptionFr?.json
+            ? cdcpContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
+        },
         {
           linkId: eiContactFragment?.scId,
           linkTitle: eiContactFragment?.scLinkTextFr,

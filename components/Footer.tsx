@@ -24,12 +24,19 @@ interface FooterProps {
 }
 
 const Footer = ({
-  id,
-  lang,
+  id = 'mscaPlaceholder',
+  lang = 'en',
   btnLink,
   error,
-  contactLink,
-  brandLinks,
+  contactLink = 'https://www.canada.ca/en/contact.html',
+  brandLinks = [
+    {
+      href: 'mscaPlaceholderHref',
+      text: 'mscaPlaceholder',
+      onClick: () => {},
+      id: 'mscaPlaceholder',
+    },
+  ],
   target,
 }: FooterProps) => {
   const t = lang === 'en' ? en : fr
@@ -38,13 +45,13 @@ const Footer = ({
     <footer id={id} className="w-full" data-testid="footer">
       <div className="bg-blue-primary">
         <section
-          className={`sch-container h-[5.75rem] pb-5 flex flex-col items-start`}
+          className={`sch-container flex h-[5.75rem] flex-col items-start pb-5`}
         >
-          <h2 className="pt-[22px] pb-2 text-white font-body font-bold">
+          <h2 className="pb-2 pt-[22px] font-body font-bold text-white">
             {t.mscaFooterHeading}
           </h2>
           <Link
-            className="text-white font-body text-sm hover:text-white hover:underline focus:ring-1 focus:ring-white"
+            className="font-body text-sm text-white hover:text-white hover:underline focus:ring-1 focus:ring-white"
             data-cy="footerContactUsLink"
             id="footerContactUsLink"
             href={contactLink}
@@ -61,39 +68,39 @@ const Footer = ({
         <div
           className={`'min-h-[86px] ' ${
             error ? 'items-center' : ''
-          } flex justify-between sch-container`}
+          } sch-container flex justify-between`}
         >
           {error ? (
             <div>
               <a
                 id="top_btn"
                 href={btnLink}
-                className="sm:hidden float-left cursor-pointer text-sm"
+                className="float-left cursor-pointer text-sm sm:hidden"
               >
                 {t.topOfPage}
                 <FontAwesomeIcon
                   icon={icon['chevron-up']}
-                  className="text-sm sm:hidden pl-2"
+                  className="pl-2 text-sm sm:hidden"
                 />
               </a>
             </div>
           ) : (
-            <section className="md:flex-row flex items-center">
+            <section className="flex items-center md:flex-row">
               <nav role="navigation" aria-labelledby="accessibleSectionHeader2">
                 <h2 className="sr-only" id="accessibleSectionHeader2">
                   {t.aboutThisSite}
                 </h2>
-                <ul className="flex flex-col md:flex-row whitespace-nowrap pt-4">
+                <ul className="flex flex-col whitespace-nowrap pt-4 md:flex-row">
                   {brandLinks.map(({ href, text, onClick }, index) => {
                     return (
                       <li
                         key={index}
                         className={`${
                           index === 0 ? '' : 'md:list-disc'
-                        } pr-4 mb-[17px] list-inside list-none`}
+                        } mb-[17px] list-inside list-none pr-4`}
                       >
                         <Link
-                          className="text-deep-blue-dark font-body text-sm hover:underline"
+                          className="font-body text-sm text-deep-blue-dark hover:underline"
                           onClick={onClick}
                           id={'footerLink' + index}
                           href={href}
@@ -105,12 +112,12 @@ const Footer = ({
                       </li>
                     )
                   })}
-                  <li className="sm:hidden float-left cursor-pointer text-sm">
+                  <li className="float-left cursor-pointer text-sm sm:hidden">
                     <a id="top_btn" href={btnLink}>
                       {t.topOfPage}
                       <FontAwesomeIcon
                         icon={icon['chevron-up']}
-                        className="text-sm sm:hidden pl-2"
+                        className="pl-2 text-sm sm:hidden"
                       />
                     </a>
                   </li>
@@ -121,13 +128,13 @@ const Footer = ({
           <div
             className={`${
               error ? 'items-center' : 'items-end md:items-center'
-            } min-h-[96px] flex shrink-0 mr-[5px]`}
+            } mr-[5px] flex min-h-[96px] shrink-0`}
           >
             <Image
               className={`${
                 error
                   ? 'h-[40px] w-auto'
-                  : 'h-[25px] md:h-[40px] w-[105px] md:w-[164px]'
+                  : 'h-[25px] w-[105px] md:h-[40px] md:w-[164px]'
               } my-[15px]`}
               src={logo}
               alt={t.footerCanadaCaAltText}
@@ -139,18 +146,6 @@ const Footer = ({
       </div>
     </footer>
   )
-}
-
-Footer.defaultProps = {
-  lang: 'en',
-  contactLink: 'https://www.canada.ca/en/contact.html',
-  brandLinks: [
-    {
-      href: 'https://example.com/link1',
-      text: 'Link 1',
-      onClick: () => {},
-    },
-  ],
 }
 
 export default Footer

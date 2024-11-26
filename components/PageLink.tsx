@@ -17,36 +17,36 @@ const PageLink = ({
   lookingForText,
   linkText,
   accessText,
-  href,
+  href = 'mscaPlaceholderHref',
   dataCy,
-  buttonHref,
+  buttonHref = 'mscaPlaceholderHref',
   buttonId,
   buttonLinkText,
-  refPageAA,
+  refPageAA = 'mscaPlaceholder',
   dashId,
 }: PageLinkProps) => {
   const linkID = linkText.replace(/\s+/g, '')
 
   return (
-    <div className="pt-2 md:pt-4 my-8 border-t border-gray-light ">
+    <div className="my-8 border-t border-gray-light pt-2 md:pt-4">
       <h2
         data-cy="looking-for"
-        className="font-display font-bold text-gray-darker text-32px md:text-36px pb-2"
+        className="pb-2 font-display text-32px font-bold text-gray-darker md:text-36px"
       >
         {lookingForText}
       </h2>
-      <div className="pb-8  text-xl">
-        <span className=" text-gray-darker">{accessText}</span>
+      <div className="pb-8 text-xl">
+        <span className="text-gray-darker">{accessText}</span>
         <Link
           href={href}
           id={`link-for-${linkID}`}
           data-cy={dataCy}
           data-gc-analytics-customclick={`${refPageAA}:${linkID}`}
-          className="text-deep-blue-dark hover:text-blue-hover underline rounded-sm focus:outline-1 focus:outline-blue-hover visited:text-purple-50a"
+          className="rounded-sm text-deep-blue-dark underline visited:text-purple-50a hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
         >
           {linkText}
         </Link>
-        <span className=" text-gray-darker">.</span>
+        <span className="text-gray-darker">.</span>
       </div>
 
       <BackToButton
