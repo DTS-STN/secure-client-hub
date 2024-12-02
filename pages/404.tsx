@@ -71,6 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       accessRights: '1',
     },
   }
+
   return {
     props: {
       locale,
@@ -80,6 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       isAuth: process.env.AUTH_DISABLED ?? true,
       aaPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:404 Error`,
       aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
+      errType: '404',
     },
   }
 }

@@ -24,22 +24,19 @@ export default function MyApp({ Component, pageProps, router }) {
    *  @see https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics
    * */
   useEffect(() => {
-    const handleRouteChange = () => {
-      // only push event if pathname is different
-      if (window.location.pathname !== appPreviousLocationPathname) {
+    // only push event if pathname is different
+    if (window.location.pathname !== appPreviousLocationPathname) {
+      if (pageProps.errType !== undefined) {
+        window.adobeDataLayer?.push?.({
+          event: 'error',
+          error: pageProps.errType,
+        })
+      } else {
         window.adobeDataLayer?.push?.({ event: 'pageLoad' })
-        appPreviousLocationPathname = window.location.pathname
       }
+      appPreviousLocationPathname = window.location.pathname
     }
-
-    handleRouteChange()
-    router.events.on('routeChangeComplete', handleRouteChange)
-    router.events.on('hashChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-      router.events.off('hashChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+  }, [router.asPath, pageProps.errType])
 
   /* istanbul ignore next */
   return (
