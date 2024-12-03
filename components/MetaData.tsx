@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Script from 'next/script'
 
 interface Content {
   title: string
@@ -60,21 +59,6 @@ const MetaData = ({ language, data }: MetaDataProps) => {
         <meta name="dcterms.accessRights" content={d.accessRights} />
         <meta name="dcterms.service" content={d.service} />
       </Head>
-
-      {
-        // AA script must be loaded before the pageLoad event fires
-        process.env.ENVIRONMENT === 'production' ? (
-          <Script
-            strategy="beforeInteractive"
-            src="//assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-59d77766b86a.min.js"
-          />
-        ) : (
-          <Script
-            strategy="beforeInteractive"
-            src="https://assets.adobedtm.com/be5dfd287373/9b9cb7867b5b/launch-cad75bf2f0d2-staging.min.js"
-          />
-        )
-      }
     </>
   )
 }
