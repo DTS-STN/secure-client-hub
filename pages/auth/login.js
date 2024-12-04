@@ -2,16 +2,16 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
-import getRedisService from '../redis-service.ts';
+import getRedisService from '../api/redis-service.ts'
 import { authOptions } from '../../pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next' 
+import { getServerSession } from 'next-auth/next'
 import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
-
+import { NextResponse } from 'next/server'
 
 export default function Login(props) {
   const router = useRouter()
@@ -24,24 +24,13 @@ export default function Login(props) {
       if (props.authDisabled) {
         setTimeout(() => {
           props.locale === 'en'
-          ? router.push('/en/my-dashboard')
-          : router.push('/fr/mon-tableau-de-bord')
+            ? router.push('/en/my-dashboard')
+            : router.push('/fr/mon-tableau-de-bord')
         }, 3000)
         return
       }
-      const redirectUrl = process.env.BASE_URL + '/oauth-callback';
-      const response = fetch('/api/login-msca?redirect_url=' + redirectUrl) //TODO change to POST?
-      ({ authorizationUrl, jwksUrl, codeVerifier, nonce, state, client } = response.json());
 
-      const redisService = getRedisService();
-      redisService.set("jwksUrl", jwksUrl, 60);
-      redisService.set("client", client, 60);
-      redisService.set("codeVerifier", codeVerifier);
-      redisService.set("nonce", nonce);
-      redisService.set("state", state);
-      redisService.set('redirectUrl', redirectUrl);
-
-      router.push(authorizationUrl);
+      router.push(authorizationUrl)
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
 
@@ -87,6 +76,29 @@ export async function getServerSideProps({ req, res, locale }) {
       }
     }
   }
+
+  const getResponse = async () => {
+    const redirectUrl = '/oauth-callback'
+    const loginResponse = await fetch(
+      '/api/login-msca?redirect_url=' + redirectUrl,
+    )
+    //{ authorizationUrl, jwksUrl, codeVerifier, nonce, state, client } =
+    return await loginResponse.json()
+  } //TODO change to POST?
+
+  const retrieveRedisService = async () => {
+    return await getRedisService()
+  }
+
+  const redisService = retrieveRedisService()
+  const response = getResponse()
+
+  redisService.set('jwksUrl', response.jwksUrl)
+  redisService.set('client', client)
+  redisService.set('codeVerifier', codeVerifier)
+  redisService.set('nonce', nonce)
+  redisService.set('state', state)
+  redisService.set('redirectUrl', redirectUrl)
 
   /* Place-holder Meta Data Props */
   const meta = {
