@@ -16,77 +16,39 @@
  *
  * @see https://redis.io/docs/connect/clients/nodejs/
  */
-import { Redis } from 'ioredis';
-import moize from 'moize';
+import { createClient } from 'redis'
 
-import { getEnv } from '~/utils/env.server';
-import { getLogger } from '~/utils/logging.server';
+import moize from 'moize'
 
-const log = getLogger('redis-service.server');
+//import { getEnv } from '~/utils/env.server';
+import { getLogger } from '../../logging/log-util'
+
+const log = getLogger('redis-service.server')
 
 /**
  * Return a singleton instance (by means of memomization) of the redis service.
  */
-export const getRedisService = moize.promise(createRedisService, { onCacheAdd: () => log.info('Creating new redis service') });
+export const getRedisService = moize.promise(createRedisService, {
+  onCacheAdd: () => log.info('Creating new redis service'),
+})
 
 async function createRedisService() {
   // const env = getEnv();
 
-  const redisClient = new Redis();
+  const redisClient = createClient()
 
-  // prettier-ignore
-  // const redisClient = env.REDIS_SENTINEL_NAME
-  //   ? new Redis({
-  //     lazyConnect: true,
-  //     name: env.REDIS_SENTINEL_NAME,
-  //     sentinels: [
-  //       {
-  //         host: env.REDIS_SENTINEL_HOST,
-  //         port: env.REDIS_SENTINEL_PORT,
-  //       },
-  //     ],
-  //     username: env.REDIS_USERNAME,
-  //     password: env.REDIS_PASSWORD,
-  //   })
-  //   : new Redis({
-  //     lazyConnect: true,
-  //     host: env.REDIS_STANDALONE_HOST,
-  //     port: env.REDIS_STANDALONE_PORT,
-  //     username: env.REDIS_USERNAME,
-  //     password: env.REDIS_PASSWORD,
-  //   });
-
-  // // prettier-ignore
-  // const redisUrl = env.REDIS_SENTINEL_NAME
-  //   ? `sentinel://${env.REDIS_SENTINEL_HOST}:${env.REDIS_SENTINEL_PORT}`
-  //   : `redis://${env.REDIS_STANDALONE_HOST}:${env.REDIS_STANDALONE_PORT}`;
-
-  await redisClient
-    .on('connect', () => log.info(`Redis client initiating connection to [${redisUrl}]`))
-    .on('ready', () => log.info('Redis client is ready to use'))
-    .on('reconnecting', () => log.info(`Redis client is reconnecting to [${redisUrl}]`))
-    .on('error', (error: Error) => log.error(`Redis client error connecting to [${redisUrl}]: ${error.message}`))
-    .connect();
+  await redisClient.connect()
 
   return {
-    /**
-     * @see https://redis.io/commands/get/
-     */
     get: async (key: string) => {
-      const value = await redisClient.get(key);
-      return value ? JSON.parse(value) : null;
+      const value = await redisClient.get(key)
+      return value ? JSON.parse(value) : null
     },
-    /**
-     * @see https://redis.io/commands/set/
-     */
-    set: async (key: string, value: unknown, ttlSecs: number | string) => {
-      return redisClient.set(key, JSON.stringify(value), 'EX', ttlSecs);
+    set: async (key: string, value: unknown) => {
+      return redisClient.set(key, JSON.stringify(value))
     },
-    /**
-     * @see https://redis.io/commands/del/
-     */
     del: async (key: string) => {
-      return redisClient.del(key);
+      return redisClient.del(key)
     },
-  };
+  }
 }
