@@ -72,7 +72,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`,
       )
       if (!response.ok) return null
       return (await response.json()) as GetSchProfileV1
@@ -81,7 +81,7 @@ const getCachedContent = () => {
   })
 }
 
-export async function getProfileContent() {
+export async function getProfileContent(): Promise<ProfileContent> {
   const response = await getCachedContent()
 
   // LookingFor Fragment
@@ -95,7 +95,7 @@ export async function getProfileContent() {
   // BackToDashboard Fragment
   const backToDashboardFragment = findFragmentByScId(
     response,
-    'back-to-my-dashboard'
+    'back-to-my-dashboard',
   )
 
   // ProfileIntro Fragment
@@ -110,7 +110,7 @@ export async function getProfileContent() {
               link: level.scPageNameEn,
               text: level.scTitleEn,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scTitleEn,
       heading: profileIntroFragment?.scContentEn?.json[0].content[0].value,
@@ -162,7 +162,7 @@ export async function getProfileContent() {
               link: level.scPageNameFr,
               text: level.scTitleFr,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scTitleFr,
       heading: profileIntroFragment?.scContentFr?.json[0].content[0].value,
@@ -213,7 +213,97 @@ export async function getProfileContent() {
 const findFragmentByScId = (res: GetSchProfileV1 | null, id: string) => {
   return (
     res?.data.schPageV1ByPath.item.scFragments.find(
-      ({ scId }) => scId === id
+      ({ scId }) => scId === id,
     ) ?? null
   )
+}
+
+// TODO: Check which of these properties should actually be optional and switch to using a question mark instead
+export interface ProfileContent {
+  err?: string
+  en?:
+    | {
+        breadcrumb:
+          | {
+              link: string
+              text: string
+            }[]
+          | undefined
+        pageName: string | undefined
+        heading: string | undefined
+        list:
+          | (
+              | {
+                  id: string
+                  title: string | undefined
+                  tasks:
+                    | {
+                        id: string
+                        title: string
+                        areaLabel: string
+                        link: string
+                        icon: string
+                        betaPopUp: boolean
+                      }[]
+                    | undefined
+                }
+              | undefined
+            )[]
+          | undefined
+        lookingFor: {
+          title: string | undefined
+          subText: (string | undefined)[]
+          link: string
+          id: string
+        }
+        backToDashboard: {
+          id: string | undefined
+          btnText: string | undefined
+          btnLink: string | undefined
+        }
+        title?: string | undefined
+      }
+    | undefined
+  fr?: {
+    breadcrumb:
+      | {
+          link: string
+          text: string
+        }[]
+      | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    list:
+      | (
+          | {
+              id: string
+              title: string | undefined
+              tasks:
+                | {
+                    id: string
+                    title: string
+                    areaLabel: string
+                    link: string
+                    icon: string
+                    betaPopUp: boolean
+                  }[]
+                | undefined
+            }
+          | undefined
+        )[]
+      | undefined
+    lookingFor: {
+      title: string | undefined
+      subText: (string | undefined)[]
+      link: string
+      id: string
+    }
+    backToDashboard:
+      | {
+          id: string | undefined
+          btnText: string | undefined
+          btnLink: string | undefined
+        }
+      | undefined
+  }
 }

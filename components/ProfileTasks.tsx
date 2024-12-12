@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-interface Task {
+export interface Task {
   title: string
   areaLabel: string
   link: string
