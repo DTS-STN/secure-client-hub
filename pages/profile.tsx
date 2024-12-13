@@ -19,7 +19,7 @@ import {
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import ProfileTasks, { Task } from '../components/ProfileTasks'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
@@ -40,16 +40,7 @@ interface ProfilePageProps {
           },
           index: string,
         ) => React.JSX.Element,
-      ) =>
-        | string
-        | number
-        | bigint
-        | boolean
-        | React.ReactElement
-        | Iterable<React.ReactNode>
-        | React.ReactPortal
-        | null
-        | undefined
+      ) => ReactNode
     }
     lookingFor: {
       title: string
