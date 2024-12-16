@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import Heading from '../components/Heading'
-import en from '../locales/en'
-import fr from '../locales/fr'
-import { getDecisionReviewsContent } from '../graphql/mappers/decision-reviews'
+import {
+  DecisionReviewContent,
+  getDecisionReviewsContent,
+} from '../graphql/mappers/decision-reviews'
 import { getLogger } from '../logging/log-util'
 import {
   AuthIsDisabled,
@@ -11,18 +12,41 @@ import {
   Redirect,
   getIdToken,
 } from '../lib/auth'
-import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
+import {
+  AuthModalsContent,
+  getAuthModalsContent,
+} from '../graphql/mappers/auth-modals'
 import Markdown from 'markdown-to-jsx'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
+import { GetServerSidePropsContext } from 'next'
 
-export default function DecisionReviews(props) {
-  const t = props.locale === 'en' ? en : fr
-
+interface DecisionReviewProps {
+  locale: string | undefined
+  content: {
+    err?: '500' | '404' | '503'
+    heading: string
+    content: {
+      content: string
+      button: {
+        id: string
+        text: string
+        areaLabel: string | undefined
+        link: string
+      }
+    }[]
+  }
+  bannerContent?: { err?: '500' | '404' | '503' }
+  popupContent?: { err?: '500' | '404' | '503' }
+  popupContentNA?: { err?: '500' | '404' | '503' }
+  authModals?: { err?: '500' | '404' | '503' }
+  aaPrefix: string | undefined
+}
+export default function DecisionReviews(props: DecisionReviewProps) {
   const errorCode =
-    props.content?.err ||
+    props.content.err ||
     props.bannerContent?.err ||
     props.popupContent?.err ||
     props.popupContentNA?.err ||
@@ -114,7 +138,15 @@ export default function DecisionReviews(props) {
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({
+  req,
+  res,
+  locale,
+}: {
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
+  locale: string
+}) {
   const session = await getServerSession(req, res, authOptions)
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
@@ -156,12 +188,12 @@ export async function getServerSideProps({ req, res, locale }) {
 
   const content = await getDecisionReviewsContent().catch((error) => {
     logger.error(error)
-    return { err: '500' }
+    return { err: '500' } as DecisionReviewContent
   })
 
   const authModals = await getAuthModalsContent().catch((error) => {
     logger.error(error)
-    return { err: '500' }
+    return { err: '500' } as AuthModalsContent
   })
 
   /* istanbul ignore next */
@@ -169,10 +201,10 @@ export async function getServerSideProps({ req, res, locale }) {
     locale === 'en' ? '/fr/demande-revision' : '/en/decision-reviews'
   const breadCrumbItems =
     locale === 'en'
-      ? content.en.breadcrumb?.map(({ link, text }) => {
+      ? content.en?.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-      : content.fr.breadcrumb?.map(({ link, text }) => {
+      : content.fr?.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
   /* Place-holder Meta Data Props */
@@ -202,7 +234,7 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       langToggleLink,
       content:
-        content?.err !== undefined
+        content.err !== undefined
           ? content
           : locale === 'en'
             ? content.en
@@ -210,23 +242,23 @@ export async function getServerSideProps({ req, res, locale }) {
       meta,
       breadCrumbItems,
       aaPrefix:
-        content?.err !== undefined
+        content.err !== undefined
           ? ''
-          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading}`,
       aaMenuPrefix:
-        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
+        content.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupStaySignedIn.en
-            : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn?.en
+            : authModals.mappedPopupStaySignedIn?.fr,
       popupYouHaveBeenSignedout:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupSignedOut.en
-            : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut?.en
+            : authModals.mappedPopupSignedOut?.fr,
     },
   }
 }
