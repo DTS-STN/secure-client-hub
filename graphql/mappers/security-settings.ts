@@ -96,7 +96,7 @@ const getCachedContent = () => {
     cache,
     getFreshValue: async () => {
       const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`
+        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchSecuritySettingsV1`,
       )
       if (!response.ok) return null
       return (await response.json()) as GetSchSecuritySettingsV1
@@ -105,7 +105,7 @@ const getCachedContent = () => {
   })
 }
 
-export async function getSecuritySettingsContent() {
+export async function getSecuritySettingsContent(): Promise<SecuritySettingsContent> {
   const response = await getCachedContent()
 
   const enLookingForFragment =
@@ -124,7 +124,7 @@ export async function getSecuritySettingsContent() {
   const securityQuestions =
     findFragmentByScId(
       response,
-      'security-settings-main-content'
+      'security-settings-main-content',
     )?.scFragments?.find(({ scId }) => scId === 'security-questions') ?? null
 
   const mappedSecurity = {
@@ -136,7 +136,7 @@ export async function getSecuritySettingsContent() {
               link: level.scPageNameEn,
               text: level.scTitleEn,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
       heading: response?.data.schPageV1ByPath.item.scTitleEn,
@@ -144,7 +144,7 @@ export async function getSecuritySettingsContent() {
       lookingFor: {
         title: enLookingForFragment?.json[0].content[0].value,
         subText: enLookingForFragment?.json[1].content.map(
-          ({ value }) => value ?? null
+          ({ value }) => value ?? null,
         ),
         link: '/profile',
         id: 'profile',
@@ -154,7 +154,7 @@ export async function getSecuritySettingsContent() {
           text: securityQuestions?.scLinkTextEn,
           link: buildLink(
             securityQuestions?.schURLType,
-            securityQuestions?.scDestinationURLEn
+            securityQuestions?.scDestinationURLEn,
           ),
         },
         subTitle: securityQuestions?.scDescriptionEn.json[0].content[0].value,
@@ -168,7 +168,7 @@ export async function getSecuritySettingsContent() {
               link: level.scPageNameFr,
               text: level.scTitleFr,
             }
-          }
+          },
         ),
       pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
       heading: response?.data.schPageV1ByPath.item.scTitleFr,
@@ -186,7 +186,7 @@ export async function getSecuritySettingsContent() {
           text: securityQuestions?.scLinkTextFr,
           link: buildLink(
             securityQuestions?.schURLType,
-            securityQuestions?.scDestinationURLFr
+            securityQuestions?.scDestinationURLFr,
           ),
         },
         subTitle: securityQuestions?.scDescriptionFr.json[0].content[0].value,
@@ -198,11 +198,48 @@ export async function getSecuritySettingsContent() {
 
 const findFragmentByScId = (
   res: GetSchSecuritySettingsV1 | null,
-  id: string
+  id: string,
 ) => {
   return (
     res?.data.schPageV1ByPath.item.scFragments.find(
-      ({ scId }) => scId === id
+      ({ scId }) => scId === id,
     ) ?? null
   )
+}
+
+// TODO: Figure out which of these actually need to be optional
+export interface SecuritySettingsContent {
+  err?: string
+  en?: {
+    breadcrumb: { link: string; text: string }[] | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    subHeading: string | undefined
+    lookingFor: {
+      title: string | undefined
+      subText: (string | null)[] | undefined
+      link: string
+      id: string
+    }
+    securityQuestions: {
+      linkTitle: { text: string | undefined; link: string }
+      subTitle: string | undefined
+    }
+  }
+  fr?: {
+    breadcrumb: { link: string; text: string }[] | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    subHeading: string | undefined
+    lookingFor: {
+      title: string | undefined
+      subText: (string | null)[] | undefined
+      link: string
+      id: string
+    }
+    securityQuestions: {
+      linkTitle: { text: string | undefined; link: string }
+      subTitle: string | undefined
+    }
+  }
 }
