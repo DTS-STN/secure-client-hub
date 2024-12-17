@@ -186,15 +186,19 @@ export async function getServerSideProps({
   const logger = getLogger('decision-reviews')
   logger.level = 'error'
 
-  const content = await getDecisionReviewsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' } as DecisionReviewContent
-  })
+  const content = await getDecisionReviewsContent().catch(
+    (error): DecisionReviewContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' } as AuthModalsContent
-  })
+  const authModals = await getAuthModalsContent().catch(
+    (error): AuthModalsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   /* istanbul ignore next */
   const langToggleLink =
