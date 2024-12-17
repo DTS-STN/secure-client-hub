@@ -177,15 +177,17 @@ export async function getServerSideProps({
   const logger = getLogger('profile')
   logger.level = 'error'
 
-  const content = await getProfileContent().catch((error) => {
+  const content = await getProfileContent().catch((error): ProfileContent => {
     logger.error(error)
-    return { err: '500' } as ProfileContent
+    return { err: '500' }
   })
 
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' } as AuthModalsContent
-  })
+  const authModals = await getAuthModalsContent().catch(
+    (error): AuthModalsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/profil' : '/en/profile'
