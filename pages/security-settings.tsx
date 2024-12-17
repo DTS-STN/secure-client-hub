@@ -154,15 +154,19 @@ export async function getServerSideProps({
   const logger = getLogger('security-settings')
   logger.level = 'error'
 
-  const content = await getSecuritySettingsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' } as SecuritySettingsContent
-  })
+  const content = await getSecuritySettingsContent().catch(
+    (error): SecuritySettingsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' } as AuthModalsContent
-  })
+  const authModals = await getAuthModalsContent().catch(
+    (error): AuthModalsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   /* istanbul ignore next */
   const langToggleLink =
