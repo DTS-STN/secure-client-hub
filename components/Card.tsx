@@ -9,8 +9,6 @@ interface AlertProps {
   type: string
   alertHeading: string
   alertBody: string
-  alert_icon_alt_text: string
-  alert_icon_id: string
 }
 interface CardProps {
   cardTitle: string
@@ -31,8 +29,6 @@ const Card = ({
       type: '',
       alertHeading: '',
       alertBody: '',
-      alert_icon_alt_text: '',
-      alert_icon_id: '',
     },
   ],
   locale,

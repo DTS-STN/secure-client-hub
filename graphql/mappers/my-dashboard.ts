@@ -96,7 +96,7 @@ const getCachedContent = () => {
   })
 }
 
-export async function getMyDashboardContent() {
+export async function getMyDashboardContent(): Promise<MyDashboardContent> {
   const response = await getCachedContent()
   const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
 
@@ -208,4 +208,89 @@ export async function getMyDashboardContent() {
     },
   }
   return mappedHome
+}
+
+export interface MyDashboardContent {
+  err?: string
+  en?: {
+    pageName: string | undefined
+    heading: string | undefined
+    pageAlerts:
+      | {
+          id: string | undefined
+          alertHeading: string | undefined
+          alertBody: string | undefined
+          type: string[] | undefined
+        }[]
+      | undefined
+    cards:
+      | {
+          id: string
+          title: string
+          dropdownText: string
+          cardAlerts:
+            | {
+                id: string
+                alertHeading: string
+                alertBody: string | undefined
+                type: string[] | undefined
+              }[]
+            | undefined
+          lists: {
+            title: string
+            tasks: {
+              id: string
+              title: string
+              areaLabel: string
+              link: string
+              icon: string
+              betaPopUp: boolean
+            }[]
+          }[]
+        }[]
+      | undefined
+    exitBeta: { title: null | undefined; link: string | undefined }
+  }
+  fr?: {
+    pageName: string | undefined
+    heading: string | undefined
+    pageAlerts:
+      | {
+          id: string | undefined
+          alertHeading: string | undefined
+          alertBody: string | undefined
+          type: string[] | undefined
+        }[]
+      | undefined
+    cards:
+      | (
+          | {
+              id: string
+              title: string
+              dropdownText: string
+              cardAlerts:
+                | {
+                    id: string
+                    alertHeading: string
+                    alertBody: string | undefined
+                    type: string[] | undefined
+                  }[]
+                | undefined
+              lists: {
+                title: string
+                tasks: {
+                  id: string
+                  title: string
+                  areaLabel: string
+                  link: string
+                  icon: string
+                  betaPopUp: boolean
+                }[]
+              }[]
+            }
+          | undefined
+        )[]
+      | undefined
+    exitBeta: { title: null | undefined; link: string | undefined }
+  }
 }
