@@ -1,10 +1,10 @@
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchContactUsV1 {
+interface GetSchContactUsV2 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scPageNameEn: string
         scPageNameFr: string
@@ -61,9 +61,8 @@ interface GetSchContactUsV1 {
           scLinkTextAssistiveFr?: string
           scDestinationURLEn?: string
           scDestinationURLFr?: string
-          schBetaPopUp?: boolean
         }>
-      }
+      }>
     }
   }
 }
@@ -73,11 +72,10 @@ const getCachedContent = () => {
     key: `content-contact-landing-page`,
     cache,
     getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV1`,
-      )
+      const targetUri = `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsV2%3BfolderName=${encodeURIComponent(process.env.AEM_GRAPHQL_FOLDER ?? '')}`
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchContactUsV1
+      return (await response.json()) as GetSchContactUsV2
     },
     ttl,
   })
@@ -104,7 +102,7 @@ export async function getContactUsContent() {
   const mappedSecurity = {
     en: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -112,8 +110,8 @@ export async function getContactUsContent() {
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
-      heading: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scPageNameEn,
+      heading: response?.data.schPageV1List.items[0].scTitleEn,
       subHeading: introFragment?.scContentEn?.json[0].content[0].value,
       links: [
         {
@@ -124,7 +122,6 @@ export async function getContactUsContent() {
           linkDescription: cdcpContactFragment?.scDescriptionEn?.json
             ? cdcpContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
-          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
         },
         {
           linkId: eiContactFragment?.scId,
@@ -134,7 +131,6 @@ export async function getContactUsContent() {
           linkDescription: eiContactFragment?.scDescriptionEn?.json
             ? eiContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
-          schBetaPopup: eiContactFragment?.schBetaPopUp,
         },
         {
           linkId: cppContactFragment?.scId,
@@ -144,7 +140,6 @@ export async function getContactUsContent() {
           linkDescription: cppContactFragment?.scDescriptionEn?.json
             ? cppContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
-          schBetaPopup: cppContactFragment?.schBetaPopUp,
         },
         {
           linkId: oasContactFragment?.scId,
@@ -154,7 +149,6 @@ export async function getContactUsContent() {
           linkDescription: oasContactFragment?.scDescriptionEn?.json
             ? oasContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
-          schBetaPopup: oasContactFragment?.schBetaPopUp,
         },
         {
           linkId: sinContactFragment?.scId,
@@ -164,13 +158,12 @@ export async function getContactUsContent() {
           linkDescription: sinContactFragment?.scDescriptionEn?.json
             ? sinContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
-          schBetaPopup: sinContactFragment?.schBetaPopUp,
         },
       ],
     },
     fr: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -178,8 +171,8 @@ export async function getContactUsContent() {
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
-      heading: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scPageNameFr,
+      heading: response?.data.schPageV1List.items[0].scTitleFr,
       subHeading: introFragment?.scContentFr?.json[0].content[0].value,
       links: [
         {
@@ -190,7 +183,6 @@ export async function getContactUsContent() {
           linkDescription: cdcpContactFragment?.scDescriptionFr?.json
             ? cdcpContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
-          schBetaPopup: cdcpContactFragment?.schBetaPopUp,
         },
         {
           linkId: eiContactFragment?.scId,
@@ -200,7 +192,6 @@ export async function getContactUsContent() {
           linkDescription: eiContactFragment?.scDescriptionFr?.json
             ? eiContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
-          schBetaPopup: eiContactFragment?.schBetaPopUp,
         },
         {
           linkId: cppContactFragment?.scId,
@@ -210,7 +201,6 @@ export async function getContactUsContent() {
           linkDescription: cppContactFragment?.scDescriptionFr?.json
             ? cppContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
-          schBetaPopup: cppContactFragment?.schBetaPopUp,
         },
         {
           linkId: oasContactFragment?.scId,
@@ -220,7 +210,6 @@ export async function getContactUsContent() {
           linkDescription: oasContactFragment?.scDescriptionFr?.json
             ? oasContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
-          schBetaPopup: oasContactFragment?.schBetaPopUp,
         },
         {
           linkId: sinContactFragment?.scId,
@@ -230,7 +219,6 @@ export async function getContactUsContent() {
           linkDescription: sinContactFragment?.scDescriptionFr?.json
             ? sinContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
-          schBetaPopup: sinContactFragment?.schBetaPopUp,
         },
       ],
     },
@@ -238,9 +226,9 @@ export async function getContactUsContent() {
   return mappedSecurity
 }
 
-const findFragmentByScId = (res: GetSchContactUsV1 | null, id: string) => {
+const findFragmentByScId = (res: GetSchContactUsV2 | null, id: string) => {
   return (
-    res?.data.schPageV1ByPath.item.scFragments.find(
+    res?.data.schPageV1List.items[0].scFragments.find(
       ({ scId }) => scId === id,
     ) ?? null
   )

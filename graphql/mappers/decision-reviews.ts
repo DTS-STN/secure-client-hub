@@ -35,7 +35,7 @@ interface GetSchDecisionReviewsV1 {
             scDestinationURLEn: string
             scDestinationURLFr: string
             schBetaPopUp: boolean
-            schURLType: string
+            schURLType?: string
           }>
         }>
       }
@@ -95,7 +95,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             areaLabel: askFragment?.scFragments[0].scLinkTextAssistiveEn,
             link: buildLink(
               askFragment?.scFragments[0].schURLType,
-              askFragment?.scFragments[0].scDestinationURLEn,
+              askFragment?.scFragments[0].scDestinationURLEn ?? '',
             ),
             betaPopUp: askFragment?.scFragments[0].schBetaPopUp,
           },
@@ -108,7 +108,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             areaLabel: appealFragment?.scFragments[0].scLinkTextAssistiveEn,
             link: buildLink(
               appealFragment?.scFragments[0].schURLType,
-              appealFragment?.scFragments[0].scDestinationURLEn,
+              appealFragment?.scFragments[0].scDestinationURLEn ?? '',
             ),
             betaPopUp: appealFragment?.scFragments[0].schBetaPopUp,
           },
@@ -138,7 +138,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             areaLabel: askFragment?.scFragments[0].scLinkTextAssistiveFr,
             link: buildLink(
               askFragment?.scFragments[0].schURLType,
-              askFragment?.scFragments[0].scDestinationURLFr,
+              askFragment?.scFragments[0].scDestinationURLFr ?? '',
             ),
             betaPopUp: askFragment?.scFragments[0].schBetaPopUp,
           },
@@ -151,7 +151,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             areaLabel: appealFragment?.scFragments[0].scLinkTextAssistiveFr,
             link: buildLink(
               appealFragment?.scFragments[0].schURLType,
-              appealFragment?.scFragments[0].scDestinationURLFr,
+              appealFragment?.scFragments[0].scDestinationURLFr ?? '',
             ),
             betaPopUp: appealFragment?.scFragments[0].schBetaPopUp,
           },
