@@ -3,8 +3,14 @@ import Heading from '../components/Heading'
 import PageLink from '../components/PageLink'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import { getSecuritySettingsContent } from '../graphql/mappers/security-settings'
-import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
+import {
+  getSecuritySettingsContent,
+  SecuritySettingsContent,
+} from '../graphql/mappers/security-settings'
+import {
+  AuthModalsContent,
+  getAuthModalsContent,
+} from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
   AuthIsDisabled,
@@ -13,16 +19,36 @@ import {
   Redirect,
   getIdToken,
 } from '../lib/auth'
-import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
+import { GetServerSidePropsContext } from 'next'
 
-export default function SecuritySettings(props) {
+interface SecurtitySettingsProps {
+  locale: string | undefined
+  content: {
+    err?: '500' | '404' | '503'
+    heading: string
+    subHeading: string
+    securityQuestions: {
+      linkTitle: { link: string | undefined; text: string }
+      subTitle: string
+    }
+    lookingFor: { title: string; subText: string[]; link: string }
+  }
+  bannerContent?: { err?: '500' | '404' | '503' }
+  popupContent?: { err?: '500' | '404' | '503' }
+  popupContentNA?: { err?: '500' | '404' | '503' }
+  authModals?: { err?: '500' | '404' | '503' }
+  aaPrefix: string
+}
+
+export default function SecuritySettings(props: SecurtitySettingsProps) {
   const t = props.locale === 'en' ? en : fr
 
   const errorCode =
-    props.content?.err ||
+    props.content.err ||
     props.bannerContent?.err ||
     props.popupContent?.err ||
     props.popupContentNA?.err ||
@@ -37,7 +63,7 @@ export default function SecuritySettings(props) {
           props.locale === 'en' ? 'en/my-dashboard' : 'fr/mon-tableau-de-bord'
         }
         accountPageLink={
-          props?.locale === 'en'
+          props.locale === 'en'
             ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
             : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
         }
@@ -80,7 +106,15 @@ export default function SecuritySettings(props) {
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({
+  req,
+  res,
+  locale,
+}: {
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
+  locale: string
+}) {
   const session = await getServerSession(req, res, authOptions)
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
@@ -120,28 +154,30 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('security-settings')
   logger.level = 'error'
 
-  const content = await getSecuritySettingsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
+  const content = await getSecuritySettingsContent().catch(
+    (error): SecuritySettingsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
+  const authModals = await getAuthModalsContent().catch(
+    (error): AuthModalsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en' ? '/fr/parametres-securite' : '/en/security-settings'
 
-  const t = locale === 'en' ? en : fr
-
   const breadCrumbItems =
     locale === 'en'
-      ? content.en.breadcrumb?.map(({ link, text }) => {
+      ? content.en?.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
-      : content.fr.breadcrumb?.map(({ link, text }) => {
+      : content.fr?.breadcrumb?.map(({ link, text }) => {
           return { text, link: '/' + locale + '/' + link }
         })
 
@@ -172,7 +208,7 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       langToggleLink,
       content:
-        content?.err !== undefined
+        content.err !== undefined
           ? content
           : locale === 'en'
             ? content.en
@@ -180,23 +216,23 @@ export async function getServerSideProps({ req, res, locale }) {
       meta,
       breadCrumbItems,
       aaPrefix:
-        content?.err !== undefined
+        content.err !== undefined
           ? ''
-          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading}`,
       aaMenuPrefix:
-        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
+        content.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupStaySignedIn.en
-            : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn?.en
+            : authModals.mappedPopupStaySignedIn?.fr,
       popupYouHaveBeenSignedout:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupSignedOut.en
-            : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut?.en
+            : authModals.mappedPopupSignedOut?.fr,
     },
   }
 }
