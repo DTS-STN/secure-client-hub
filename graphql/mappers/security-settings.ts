@@ -154,7 +154,7 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
           text: securityQuestions?.scLinkTextEn,
           link: buildLink(
             securityQuestions?.schURLType,
-            securityQuestions?.scDestinationURLEn,
+            securityQuestions?.scDestinationURLEn ?? '',
           ),
         },
         subTitle: securityQuestions?.scDescriptionEn.json[0].content[0].value,
@@ -186,7 +186,7 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
           text: securityQuestions?.scLinkTextFr,
           link: buildLink(
             securityQuestions?.schURLType,
-            securityQuestions?.scDestinationURLFr,
+            securityQuestions?.scDestinationURLFr ?? '',
           ),
         },
         subTitle: securityQuestions?.scDescriptionFr.json[0].content[0].value,

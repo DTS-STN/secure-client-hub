@@ -1,4 +1,4 @@
-export const programs = (acronym) => {
+export const programs = (acronym: string) => {
   switch (acronym.toLowerCase()) {
     case 'ei':
       return 'Employment Insurance'
