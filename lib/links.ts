@@ -15,3 +15,15 @@ export function buildLink(linkType: string | undefined, link: string) {
     return link
   }
 }
+
+export function buildAemUri(endpointName: string) {
+  if (process.env.AEM_GRAPHQL_FOLDER !== undefined) {
+    return (
+      process.env.AEM_GRAPHQL_ENDPOINT +
+      endpointName +
+      '%3BfolderName=' +
+      encodeURIComponent(process.env.AEM_GRAPHQL_FOLDER)
+    )
+  }
+  return process.env.AEM_GRAPHQL_ENDPOINT + endpointName
+}
