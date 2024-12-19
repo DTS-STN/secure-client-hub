@@ -1,11 +1,11 @@
-import { buildLink } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchMyDashboardV2 {
+interface GetSchMyDashboardV3 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scPageNameEn: string
         scPageNameFr: string
@@ -76,7 +76,7 @@ interface GetSchMyDashboardV2 {
             }>
           }>
         }>
-      }
+      }>
     }
   }
 }
@@ -85,12 +85,11 @@ const getCachedContent = () => {
   return cachified({
     key: `content-dashboard`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchMyDashboardV2`,
-      )
+    getFreshValue: async (): Promise<GetSchMyDashboardV3 | null> => {
+      const targetUri = buildAemUri('getSchMyDashboardV3')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchMyDashboardV2
+      return await response.json()
     },
     ttl,
   })
@@ -98,12 +97,12 @@ const getCachedContent = () => {
 
 export async function getMyDashboardContent(): Promise<MyDashboardContent> {
   const response = await getCachedContent()
-  const pageAlertContent = response?.data.schPageV1ByPath.item.schAlerts
+  const pageAlertContent = response?.data.schPageV1List.items[0].schAlerts
 
   const mappedHome = {
     en: {
-      pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
-      heading: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scPageNameEn,
+      heading: response?.data.schPageV1List.items[0].scTitleEn,
       pageAlerts: pageAlertContent?.map((pageAlert) => {
         return {
           id: pageAlert.scId,
@@ -112,7 +111,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           type: pageAlert.scAlertType,
         }
       }),
-      cards: response?.data.schPageV1ByPath.item.scFragments
+      cards: response?.data.schPageV1List.items[0].scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
           return {
@@ -145,17 +144,17 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           }
         }),
       exitBeta: {
-        title: response?.data.schPageV1ByPath.item.scFragments.find(
+        title: response?.data.schPageV1List.items[0].scFragments.find(
           ({ scId }) => scId === 'exit-beta-version',
         )?.scTitleEn,
-        link: response?.data.schPageV1ByPath.item.scFragments.find(
+        link: response?.data.schPageV1List.items[0].scFragments.find(
           ({ scId }) => scId === 'exit-beta-version',
         )?.scDestinationURLEn,
       },
     },
     fr: {
-      pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
-      heading: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scPageNameFr,
+      heading: response?.data.schPageV1List.items[0].scTitleFr,
       pageAlerts: pageAlertContent?.map((pageAlert) => {
         return {
           id: pageAlert.scId,
@@ -164,7 +163,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           type: pageAlert.scAlertType,
         }
       }),
-      cards: response?.data.schPageV1ByPath.item.scFragments
+      cards: response?.data.schPageV1List.items[0].scFragments
         .find(({ scId }) => scId === 'dashboard-cards')
         ?.scItems?.map((fragment) => {
           if (!fragment.scId) return
@@ -198,10 +197,10 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           }
         }),
       exitBeta: {
-        title: response?.data.schPageV1ByPath.item.scFragments.find(
+        title: response?.data.schPageV1List.items[0].scFragments.find(
           ({ scId }) => scId === 'exit-beta-version',
         )?.scTitleFr,
-        link: response?.data.schPageV1ByPath.item.scFragments.find(
+        link: response?.data.schPageV1List.items[0].scFragments.find(
           ({ scId }) => scId === 'exit-beta-version',
         )?.scDestinationURLFr,
       },
