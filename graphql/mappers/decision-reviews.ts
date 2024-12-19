@@ -1,11 +1,11 @@
-import { buildLink } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchDecisionReviewsV1 {
+interface GetSchDecisionReviewsV2 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scPageNameEn: string
         scPageNameFr: string
@@ -38,7 +38,7 @@ interface GetSchDecisionReviewsV1 {
             schURLType?: string
           }>
         }>
-      }
+      }>
     }
   }
 }
@@ -47,12 +47,11 @@ const getCachedContent = () => {
   return cachified({
     key: `content-decision-reviews`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`,
-      )
+    getFreshValue: async (): Promise<GetSchDecisionReviewsV2 | null> => {
+      const targetUri = buildAemUri('getSchDecisionReviewsV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchDecisionReviewsV1
+      return await response.json()
     },
     ttl,
   })
@@ -75,7 +74,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
     en: {
       id: 'request-review-decision',
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -84,8 +83,8 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
-      heading: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scPageNameEn,
+      heading: response?.data.schPageV1List.items[0].scTitleEn,
       content: [
         {
           content: askFragment?.scContentEn.markdown,
@@ -118,7 +117,7 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
     fr: {
       id: 'demande-revision',
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -127,8 +126,8 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
-      heading: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scPageNameFr,
+      heading: response?.data.schPageV1List.items[0].scTitleFr,
       content: [
         {
           content: askFragment?.scContentFr.markdown,
@@ -163,11 +162,11 @@ export async function getDecisionReviewsContent(): Promise<DecisionReviewContent
 }
 
 const findFragmentByScId = (
-  res: GetSchDecisionReviewsV1 | null,
+  res: GetSchDecisionReviewsV2 | null,
   id: string,
 ) => {
   return (
-    res?.data.schPageV1ByPath.item.scFragments.find(
+    res?.data.schPageV1List.items[0].scFragments.find(
       ({ scId }) => scId === id,
     ) ?? null
   )
