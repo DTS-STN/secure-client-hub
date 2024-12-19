@@ -11,12 +11,10 @@ interface Tasks {
   id: string
 }
 
-interface TaskListProps {
+export interface TaskListProps {
   title: string
-  dataCy: string
   tasks: Tasks[]
 }
-
 interface BenefitTasksProps {
   locale: string
   taskList: TaskListProps
