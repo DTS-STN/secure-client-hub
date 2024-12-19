@@ -28,6 +28,8 @@ extraEnv:
     value: {{ .Environment.Name }}
   - name: AEM_GRAPHQL_ENDPOINT
     value: {{ env "AEM_GRAPHQL_ENDPOINT" | quote }}
+  - name: AEM_GRAPHQL_FOLDER
+    value: {{ env "AEM_GRAPHQL_FOLDER" | quote }}
   - name: MSCA_BASE_URL
     value: {{ env "MSCA_BASE_URL" }}
   - name: MSCA_EQ_BASE_URL

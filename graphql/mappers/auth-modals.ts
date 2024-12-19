@@ -1,10 +1,11 @@
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+import { buildAemUri } from '../../lib/links'
 
-interface GetSchAuthModalsV1 {
+interface GetSchAuthModalsV2 {
   data: {
     staySignedIn: {
-      item: {
+      items: Array<{
         _path: string
         scId: string
         scHeadingEn: string
@@ -38,10 +39,10 @@ interface GetSchAuthModalsV1 {
           scLinkTextEn: string
           scLinkTextFr: string
         }>
-      }
+      }>
     }
     youHaveBeenSignedOut: {
-      item: {
+      items: Array<{
         _path: string
         scId: string
         scHeadingEn: string
@@ -71,7 +72,7 @@ interface GetSchAuthModalsV1 {
           scDestinationURLEn?: string
           scDestinationURLFr?: string
         }>
-      }
+      }>
     }
   }
 }
@@ -80,12 +81,11 @@ const getCachedContent = () => {
   return cachified({
     key: `content-auth-modals`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`,
-      )
+    getFreshValue: async (): Promise<GetSchAuthModalsV2 | null> => {
+      const targetUri = buildAemUri('getSchAuthModalsV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchAuthModalsV1
+      return await response.json()
     },
     ttl,
   })
@@ -93,8 +93,8 @@ const getCachedContent = () => {
 
 export async function getAuthModalsContent(): Promise<AuthModalsContent> {
   const response = await getCachedContent()
-  const resSignedOutContent = response?.data.youHaveBeenSignedOut.item
-  const resStaySignedIn = response?.data.staySignedIn.item
+  const resSignedOutContent = response?.data.youHaveBeenSignedOut.items[0]
+  const resStaySignedIn = response?.data.staySignedIn.items[0]
 
   const mappedPopupSignedOut = {
     en: {

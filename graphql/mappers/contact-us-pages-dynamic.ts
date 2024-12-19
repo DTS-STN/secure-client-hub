@@ -1,5 +1,6 @@
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+import { buildAemUri } from '../../lib/links'
 
 interface GetSchContactUsDynamicV1 {
   data: {
@@ -120,13 +121,11 @@ const getCachedContent = () => {
   return cachified({
     key: `content-dynamic-contact-us`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchContactUsDynamicV1`
-      )
-
+    getFreshValue: async (): Promise<GetSchContactUsDynamicV1 | null> => {
+      const targetUri = buildAemUri('getSchContactUsDynamicV1')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchContactUsDynamicV1
+      return await response.json()
     },
     ttl,
   })
@@ -143,7 +142,7 @@ export type GetContactUsPageReturnType = Awaited<
 export async function getContactUsPage(id: string) {
   const response = await getCachedContent()
   const queryData = response?.data.schPageV1List.items.find(
-    ({ scId }) => scId === id
+    ({ scId }) => scId === id,
   )
 
   // Fail fast if a non-existent page is queried
@@ -202,7 +201,7 @@ export async function getContactUsPage(id: string) {
                                 button: destination.scButtonType,
                               }
                             }
-                          }
+                          },
                         )[0] ?? {}),
                       }
                     } else {
@@ -280,7 +279,7 @@ export async function getContactUsPage(id: string) {
                                 button: destination.scButtonType,
                               }
                             }
-                          }
+                          },
                         )[0] ?? {}),
                       }
                     } else {

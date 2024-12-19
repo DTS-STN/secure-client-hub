@@ -1,11 +1,11 @@
-import { buildLink } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchProfileV1 {
+interface GetSchProfileV2 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scTitleEn: string
         scTitleFr: string
@@ -61,7 +61,7 @@ interface GetSchProfileV1 {
           scDestinationURLEn?: string
           scDestinationURLFr?: string
         }>
-      }
+      }>
     }
   }
 }
@@ -70,12 +70,11 @@ const getCachedContent = () => {
   return cachified({
     key: `content-profile`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`,
-      )
+    getFreshValue: async (): Promise<GetSchProfileV2 | null> => {
+      const targetUri = buildAemUri('getSchProfileV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchProfileV1
+      return await response.json()
     },
     ttl,
   })
@@ -104,7 +103,7 @@ export async function getProfileContent(): Promise<ProfileContent> {
   const mappedProfile = {
     en: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
@@ -112,9 +111,9 @@ export async function getProfileContent(): Promise<ProfileContent> {
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scTitleEn,
       heading: profileIntroFragment?.scContentEn?.json[0].content[0].value,
-      list: response?.data.schPageV1ByPath.item.scFragments
+      list: response?.data.schPageV1List.items[0].scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -156,7 +155,7 @@ export async function getProfileContent(): Promise<ProfileContent> {
     },
     fr: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
@@ -164,9 +163,9 @@ export async function getProfileContent(): Promise<ProfileContent> {
             }
           },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scTitleFr,
       heading: profileIntroFragment?.scContentFr?.json[0].content[0].value,
-      list: response?.data.schPageV1ByPath.item.scFragments
+      list: response?.data.schPageV1List.items[0].scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -210,9 +209,9 @@ export async function getProfileContent(): Promise<ProfileContent> {
   return mappedProfile
 }
 
-const findFragmentByScId = (res: GetSchProfileV1 | null, id: string) => {
+const findFragmentByScId = (res: GetSchProfileV2 | null, id: string) => {
   return (
-    res?.data.schPageV1ByPath.item.scFragments.find(
+    res?.data.schPageV1List.items[0].scFragments.find(
       ({ scId }) => scId === id,
     ) ?? null
   )
