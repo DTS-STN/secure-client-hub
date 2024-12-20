@@ -78,6 +78,7 @@ jobs:
         env:
           CI: true
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
+          AEM_GRAPHQL_FOLDER: ${{secrets.AEM_GRAPHQL_FOLDER}}
           AUTH_DISABLED: true
 
       - name: Cypress end-to-end 🧪
@@ -86,6 +87,7 @@ jobs:
           CI: true
           NODE_ENV: production
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
+          AEM_GRAPHQL_FOLDER: ${{secrets.AEM_GRAPHQL_FOLDER}}
           NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
           NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
           CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
