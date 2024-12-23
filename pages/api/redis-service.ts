@@ -32,10 +32,14 @@ export const getRedisService = moize.promise(createRedisService, {
   onCacheAdd: () => log.info('Creating new redis service'),
 })
 
+console.log('test')
+
 async function createRedisService() {
   // const env = getEnv();
 
-  const redisClient = createClient()
+  const redisClient = createClient({
+    password: 'foobared',
+  })
 
   await redisClient.connect()
 

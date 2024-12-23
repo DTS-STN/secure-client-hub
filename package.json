@@ -48,6 +48,7 @@
     "markdown-to-jsx": "^7.4.7",
     "micromatch": "^4.0.8",
     "moize": "^6.1.6",
+    "net": "^1.0.2",
     "next": "^14.2.15",
     "next-auth": "^4.24.9",
     "next-i18next": "^13.3.0",

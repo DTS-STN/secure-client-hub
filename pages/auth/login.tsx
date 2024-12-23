@@ -2,21 +2,50 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
-import getRedisService from '../api/redis-service.ts'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { getRedisService } from '../api/redis-service'
+import { getOpenIdClientService } from '../api/openid-client-service'
+
 import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
-import { NextResponse } from 'next/server'
+import { GetServerSideProps } from 'next'
 
-export default function Login(props) {
+import { generators } from 'openid-client'
+
+interface MetaDataProps {
+  data_en: {
+    title: string
+    desc: string
+    author: string
+    keywords: string
+    service: string
+    creator: string
+    accessRights: string
+  }
+  data_fr: {
+    title: string
+    desc: string
+    author: string
+    keywords: string
+    service: string
+    creator: string
+    accessRights: string
+  }
+}
+
+interface LoginProps {
+  locale: string | undefined
+  meta: MetaDataProps
+  authDisabled: boolean
+  authorizationUrl: string
+}
+
+export default function Login(props: LoginProps) {
   const router = useRouter()
 
-  //signIn('ecasProvider')
   useEffect(() => {
     if (!router.isReady) return
     if (!router.query.error) {
@@ -30,9 +59,15 @@ export default function Login(props) {
         return
       }
 
-      router.push(authorizationUrl)
+      router.push(props.authorizationUrl)
     }
-  }, [router.isReady, props.authDisabled, router, props.locale])
+  }, [
+    router.isReady,
+    props.authDisabled,
+    router,
+    props.locale,
+    props.authorizationUrl,
+  ])
 
   return (
     <div role="main">
@@ -49,22 +84,22 @@ export default function Login(props) {
   )
 }
 
-Login.getLayout = function PageLayout(page) {
+Login.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export const getServerSideProps = (async ({ locale }) => {
   //Temporary for testing purposes until auth flow is publicly accessible
+  const redisService = await getRedisService()
   const authDisabled = AuthIsDisabled() ? true : false
 
-  const session = await getServerSession(req, res, authOptions)
-  const token = await getIdToken(req)
+  const idToken = await getIdToken()
 
-  //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
+  if (!AuthIsDisabled() && (await AuthIsValid())) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      process.env.CLIENT_ID as string,
+      idToken?.sid,
     )
     if (sessionValid) {
       return {
@@ -74,31 +109,26 @@ export async function getServerSideProps({ req, res, locale }) {
           permanent: false,
         },
       }
+    } else {
+      redisService.del('idToken')
     }
   }
 
-  const getResponse = async () => {
-    const redirectUrl = '/oauth-callback'
-    const loginResponse = await fetch(
-      '/api/login-msca?redirect_url=' + redirectUrl,
-    )
-    //{ authorizationUrl, jwksUrl, codeVerifier, nonce, state, client } =
-    return await loginResponse.json()
-  } //TODO change to POST?
+  const openIdClientService = getOpenIdClientService()
+  const codeVerifier = generators.codeVerifier()
+  const codeChallenge = generators.codeChallenge(codeVerifier)
+  const scope = 'openid profile'
+  const state = generators.state()
+  const codeChallengeMethod = 'S256'
+  const nonce = generators.nonce()
 
-  const retrieveRedisService = async () => {
-    return await getRedisService()
-  }
+  const authorizationUrl = await (
+    await openIdClientService
+  ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
 
-  const redisService = retrieveRedisService()
-  const response = getResponse()
-
-  redisService.set('jwksUrl', response.jwksUrl)
-  redisService.set('client', client)
   redisService.set('codeVerifier', codeVerifier)
   redisService.set('nonce', nonce)
   redisService.set('state', state)
-  redisService.set('redirectUrl', redirectUrl)
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -124,9 +154,10 @@ export async function getServerSideProps({ req, res, locale }) {
 
   return {
     props: {
-      locale,
+      locale: locale,
       meta,
-      authDisabled: authDisabled ?? true,
+      authDisabled: authDisabled,
+      authorizationUrl: authorizationUrl,
     },
   }
-}
+}) satisfies GetServerSideProps<LoginProps>

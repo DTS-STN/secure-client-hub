@@ -10,19 +10,20 @@ import {
   getIdToken,
 } from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 // Including crypto module
-const crypto = require('crypto')
+import crypto from 'crypto'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('refresh-msca')
 logger.level = 'error'
 
-export default async function handler(req, res) {
-  const session = await getServerSession(req, res, authOptions)
-  const token = await getIdToken(req)
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const token = await getIdToken()
   //Generate a random id for each request to ensure unique responses/no caching
   const id = crypto.randomBytes(20).toString('hex')
 
@@ -31,10 +32,10 @@ export default async function handler(req, res) {
     if (AuthIsDisabled()) {
       //Service unavailable when auth is disabled
       res.status(503).json({ success: false })
-    } else if (await AuthIsValid(req, session)) {
+    } else if (await AuthIsValid()) {
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
-        process.env.CLIENT_ID,
+        process.env.CLIENT_ID as string,
         token.sid,
       )
       if (sessionValid) {

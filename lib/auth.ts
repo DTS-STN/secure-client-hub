@@ -1,8 +1,10 @@
 import { getToken } from 'next-auth/jwt'
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
+import { getRedisService } from '../pages/api/redis-service'
 import * as jose from 'jose'
-
+import { decodeJwt } from 'jose'
+import { UTCDate } from '@date-fns/utc'
 const logger = getLogger('auth-helpers')
 
 export function AuthIsDisabled() {
@@ -12,25 +14,26 @@ export function AuthIsDisabled() {
   )
 }
 
-export async function AuthIsValid(req, session) {
-  const token = await getToken({ req })
-  if (session && token) {
+export async function AuthIsValid() {
+  const idToken = await getIdToken()
+  const decodedIdToken: jose.JWTPayload = decodeJwt(idToken)
+  const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
+  if (idToken && decodedIdToken.exp && decodedIdToken.exp > now) {
     return true
   }
   return false
 }
 
 //This function grabs the idToken from the getToken function and decodes it
-export async function getIdToken(req) {
-  const token = await getToken({ req })
-  if (token) {
-    const idToken = jose.decodeJwt(token.id_token)
-    return idToken
-  }
-  return token
+export async function getIdToken() {
+  const redisService = await getRedisService()
+  return redisService.get('idToken')
 }
 
-export async function ValidateSession(clientId, sharedSessionId) {
+export async function ValidateSession(
+  clientId: string,
+  sharedSessionId: string,
+) {
   logger.trace('Renewing session...')
 
   //Necessary to test locally until we no longer need the proxy. Will use request without proxy on deployed app
@@ -60,7 +63,7 @@ export async function ValidateSession(clientId, sharedSessionId) {
           .catch((error) => logger.error(error))
 
   //Log whether the session was renewed
-  getResponse === true
+  getResponse?.data
     ? logger.trace('Session renewed')
     : logger.trace('Something went wrong renewing the session')
 

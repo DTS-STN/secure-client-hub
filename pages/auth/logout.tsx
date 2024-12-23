@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
