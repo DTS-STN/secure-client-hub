@@ -10,7 +10,7 @@ interface Content {
   service: string
 }
 
-interface Data {
+export interface Data {
   data_en: Content
   data_fr: Content
 }
