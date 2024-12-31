@@ -6,8 +6,8 @@ interface MenuItem {
   key: string
   value: string
   path: string
-  showIcon: boolean
-  onSignOut: () => void
+  showIcon?: boolean
+  onSignOut?: () => void
 }
 
 interface MenuProps {
