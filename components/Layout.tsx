@@ -9,6 +9,7 @@ import Footer from './Footer'
 import Header, { BreadcrumbItemProps } from './Header'
 import IdleTimeout from './IdleTimeout'
 import MetaData, { Data } from './MetaData'
+import { getRedisService } from '../pages/api/redis-service'
 
 interface LayoutProps {
   locale?: 'en' | 'fr' | 'und'
@@ -56,8 +57,12 @@ export default function Layout({
     window.addEventListener('click', throttledOnClickEvent)
     //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
     if (response?.status === 401) {
-      //signOut()
-      //router.push(`/${props.locale}/auth/login`)
+      async function deleteIdToken() {
+        const redisService = await getRedisService()
+        redisService.del('idToken')
+      }
+      deleteIdToken()
+      router.push(`/${props.locale}/auth/login`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
