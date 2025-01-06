@@ -1,5 +1,4 @@
 import throttle from 'lodash.throttle'
-import { signOut } from 'next-auth/react'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
@@ -58,8 +57,8 @@ export default function Layout({
     window.addEventListener('click', throttledOnClickEvent)
     //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
     if (response?.status === 401) {
-      signOut()
-      router.push(`/${locale}/auth/login`)
+      //signOut()
+      //router.push(`/${props.locale}/auth/login`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {

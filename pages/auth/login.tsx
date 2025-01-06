@@ -4,16 +4,15 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { getRedisService } from '../api/redis-service'
 import { getOpenIdClientService } from '../api/openid-client-service'
-
+import { GetServerSidePropsContext } from 'next'
 import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
-import { GetServerSideProps } from 'next'
-
 import { generators } from 'openid-client'
+import React from 'react'
 
 interface MetaDataProps {
   data_en: {
@@ -37,7 +36,7 @@ interface MetaDataProps {
 }
 
 interface LoginProps {
-  locale: string | undefined
+  locale?: string | undefined
   meta: MetaDataProps
   authDisabled: boolean
   authorizationUrl: string
@@ -88,15 +87,18 @@ Login.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export const getServerSideProps = (async ({ locale }) => {
-  //Temporary for testing purposes until auth flow is publicly accessible
+export const getServerSideProps = async function ({
+  locale,
+}: {
+  locale: GetServerSidePropsContext['locale']
+}) {
   const redisService = await getRedisService()
   const authDisabled = AuthIsDisabled() ? true : false
 
   const idToken = await getIdToken()
 
   //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!AuthIsDisabled() && (await AuthIsValid())) {
+  if (!authDisabled && (await AuthIsValid())) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
       idToken?.sid,
@@ -160,4 +162,4 @@ export const getServerSideProps = (async ({ locale }) => {
       authorizationUrl: authorizationUrl,
     },
   }
-}) satisfies GetServerSideProps<LoginProps>
+}

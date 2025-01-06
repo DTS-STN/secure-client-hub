@@ -87,7 +87,8 @@ const ContactUsPage = (props: ContactUsPageProps) => {
 }
 
 export const getServerSideProps = (async ({ locale, params }) => {
-  if (!AuthIsDisabled() && !(await AuthIsValid())) return Redirect(locale)
+  if (!AuthIsDisabled() && !(await AuthIsValid()))
+    return Redirect(locale as string)
 
   const token = await getIdToken()
 

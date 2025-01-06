@@ -20,13 +20,15 @@ const jwk = JSON.parse(
 const jwkWithPropNameSet = { keys: [jwk] }
 
 async function createOpenIdClientService() {
-  // const env = getEnv();
-
   const issuer = await Issuer.discover(
     process.env.KEYCLOAK_WELL_KNOWN as string,
   )
-  const redirectUrl = `${process.env.BASE_URL}/${process.env.AUTH_REDIRECT_ENDPOINT}`
-  const openIdClient = buildClient(issuer, redirectUrl, jwkWithPropNameSet)
+  const redirectUrl = `${process.env.BASE_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
+  const openIdClient = await buildClient(
+    issuer,
+    redirectUrl,
+    jwkWithPropNameSet,
+  )
 
   return {
     authorize: async (
@@ -36,7 +38,7 @@ async function createOpenIdClientService() {
       state: string,
       nonce: string,
     ) => {
-      return (await openIdClient).authorizationUrl({
+      return openIdClient.authorizationUrl({
         scope: scope,
         code_challenge: codeChallenge,
         code_challenge_method: codeChallengeMethod,
@@ -56,9 +58,7 @@ async function createOpenIdClientService() {
       iat: number,
       nbf: number,
     ) => {
-      return await (
-        await openIdClient
-      ).callback(
+      return openIdClient.callback(
         process.env.BASE_URL + '/api/oauth-callback',
         params,
         {
@@ -81,9 +81,7 @@ async function createOpenIdClientService() {
       )
     },
     userinfo: async (accessToken: string) => {
-      return (await openIdClient).userinfo<{ sin: string; uid: string }>(
-        accessToken,
-      )
+      return openIdClient.userinfo<{ sin: string; uid: string }>(accessToken)
     },
   }
 }

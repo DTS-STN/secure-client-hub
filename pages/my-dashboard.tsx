@@ -21,14 +21,13 @@ import {
   Redirect,
   getIdToken,
 } from '../lib/auth'
-import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
 import BenefitTasks, { TaskListProps } from '../components/BenefitTasks'
 import MostReqTasks from '../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
 import { Key } from 'react'
+import { getRedisService } from './api/redis-service'
 
 interface MyDashboardProps {
   locale: string
@@ -181,40 +180,25 @@ export default function MyDashboard(props: MyDashboardProps) {
 }
 
 export async function getServerSideProps({
-  req,
-  res,
   locale,
 }: {
-  req: GetServerSidePropsContext['req']
-  res: GetServerSidePropsContext['res']
-  locale: string
+  locale: GetServerSidePropsContext['locale']
 }) {
-  const session = await getServerSession(req, res, authOptions)
+  const redisService = await getRedisService()
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
+  if (!AuthIsDisabled() && !(await AuthIsValid()))
+    return Redirect(locale as string)
 
-  const token = await getIdToken(req)
+  const token = await getIdToken()
 
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  //If id token is there, check to see if ECAS session is. If not, clear session cookies and redirect to login
+  if (!AuthIsDisabled() && (await AuthIsValid())) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
+      process.env.CLIENT_ID as string,
       token?.sid,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      redisService.del('idToken')
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
@@ -303,7 +287,6 @@ export async function getServerSideProps({
     },
   }
 }
-
 MyDashboard.propTypes = {
   /**
    * current locale in the address
