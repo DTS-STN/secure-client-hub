@@ -5,21 +5,29 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import Modal from 'react-modal'
 import ErrorBoundary from '../components/ErrorBoundary'
-import { useEffect } from 'react'
+import { ReactElement, ReactNode, useEffect } from 'react'
+import { AppProps } from 'next/app'
+import { NextPage } from 'next'
 config.autoAddCss = false
+
+declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
+
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
 
 // To help prevent double firing of adobe analytics pageLoad event
 let appPreviousLocationPathname = ''
 
-export default function MyApp({ Component, pageProps, router }) {
-  /* istanbul ignore next */
-  if (Component.getLayout) {
-    return Component.getLayout(<Component {...pageProps} />)
-  }
-
-  Modal.setAppElement('#__next')
-  const display = { hideBanner: pageProps.hideBanner }
-
+export default function MyApp({
+  Component,
+  pageProps,
+  router,
+}: AppPropsWithLayout) {
   /** Web Analytics - taken from Google Analytics example
    *  @see https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics
    * */
@@ -27,16 +35,24 @@ export default function MyApp({ Component, pageProps, router }) {
     // only push event if pathname is different
     if (window.location.pathname !== appPreviousLocationPathname) {
       if (pageProps.errType !== undefined) {
-        window.adobeDataLayer?.push?.({
+        window.adobeDataLayer?.push({
           event: 'error',
           error: pageProps.errType,
         })
       } else {
-        window.adobeDataLayer?.push?.({ event: 'pageLoad' })
+        window.adobeDataLayer?.push({ event: 'pageLoad' })
       }
       appPreviousLocationPathname = window.location.pathname
     }
   }, [router.asPath, pageProps.errType])
+
+  /* istanbul ignore next */
+  if (Component.getLayout) {
+    return Component.getLayout(<Component {...pageProps} />)
+  }
+
+  Modal.setAppElement('#__next')
+  const display = { hideBanner: pageProps.hideBanner }
 
   /* istanbul ignore next */
   return (
@@ -46,12 +62,7 @@ export default function MyApp({ Component, pageProps, router }) {
         meta={pageProps.meta}
         langToggleLink={pageProps.langToggleLink}
         breadCrumbItems={pageProps.breadCrumbItems}
-        bannerContent={pageProps.bannerContent}
-        popupContentNA={pageProps.popupContentNA}
-        content={pageProps.content}
-        popupContent={pageProps.popupContent}
         display={display}
-        popupStaySignedIn={pageProps.popupStaySignedIn}
         refPageAA={pageProps.aaPrefix}
         dataGcAnalyticsCustomClickMenuVariable={pageProps.aaMenuPrefix}
       >

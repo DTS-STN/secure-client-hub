@@ -19,7 +19,6 @@ interface LayoutProps {
   display?: { hideBanner: boolean }
   refPageAA: string
   dataGcAnalyticsCustomClickMenuVariable: string
-  title: string
   children: ReactElement
 }
 
