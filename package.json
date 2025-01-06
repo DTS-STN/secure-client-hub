@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "npm run proxyconfig & cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
+    "dev": "cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
     "build": "next build",
     "start": "next start",
     "start:next": "next start",
@@ -19,7 +19,6 @@
     "test:unit": "jest",
     "test:coverage": "jest --coverage --forceExit",
     "prepare": "husky install",
-    "proxyconfig": "cp -R ./proxyconfig/client.js ./node_modules/next-auth/core/lib/oauth/client.js",
     "proxystart": "kubectl port-forward $(kubectl get pods -n squidproxy | awk '{print $1}' | grep squidproxy) 3128:3128 -n squidproxy",
     "typecheck": "tsc"
   },

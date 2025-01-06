@@ -1,17 +1,42 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
-import { authOptions } from '../api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { GetServerSidePropsContext } from 'next'
 import LoadingSpinner from '../../components/LoadingSpinner'
-import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
+import React from 'react'
 
-export default function Logout(props) {
+interface MetaDataProps {
+  data_en: {
+    title: string
+    desc: string
+    author: string
+    keywords: string
+    service: string
+    creator: string
+    accessRights: string
+  }
+  data_fr: {
+    title: string
+    desc: string
+    author: string
+    keywords: string
+    service: string
+    creator: string
+    accessRights: string
+  }
+}
+
+interface LogoutProps {
+  locale: string
+  meta: MetaDataProps
+  logoutURL: string
+}
+export default function Logout(props: LogoutProps) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
-      await signOut({ redirect: false })
+      //await signOut({ redirect: false })
       window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
@@ -32,19 +57,23 @@ export default function Logout(props) {
   )
 }
 
-Logout.getLayout = function PageLayout(page) {
+Logout.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ req, res, locale }) {
-  const session = await getServerSession(req, res, authOptions)
-
+export async function getServerSideProps({
+  res,
+  locale,
+}: {
+  res: GetServerSidePropsContext['res']
+  locale: GetServerSidePropsContext['locale']
+}) {
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
   logger.level = 'error'
 
   const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req, session).catch((error) => {
+    ? await getLogoutURL().catch((error) => {
         logger.error(error)
         res.statusCode = 500
         throw error
@@ -75,7 +104,7 @@ export async function getServerSideProps({ req, res, locale }) {
 
   return {
     props: {
-      locale,
+      locale: locale,
       meta,
       logoutURL: logoutURL ?? '/',
     },

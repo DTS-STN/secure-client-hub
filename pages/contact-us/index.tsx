@@ -12,12 +12,11 @@ import {
   Redirect,
   getIdToken,
 } from '../../lib/auth'
-import { authOptions } from '../api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
+import { getRedisService } from '../api/redis-service'
 
 interface Data {
   title: string
@@ -115,33 +114,22 @@ const ContactLanding = (props: ContactLandingProps) => {
     </div>
   )
 }
-export const getServerSideProps = (async ({ req, res, locale }) => {
-  const session = await getServerSession(req, res, authOptions)
+export const getServerSideProps = (async ({ locale }) => {
+  const authDisabled = AuthIsDisabled() ? true : false
+  const redisService = await getRedisService()
+  if (!authDisabled && !(await AuthIsValid())) return Redirect(locale as string)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
-
-  const token = await getIdToken(req)
+  const token = await getIdToken()
 
   //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
+      process.env.CLIENT_ID as string,
       token?.sid,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      redisService.del('idToken')
+
       return {
         redirect: {
           destination: `/${locale}/auth/login`,

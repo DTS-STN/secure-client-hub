@@ -1,4 +1,3 @@
-import { getToken } from 'next-auth/jwt'
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
 import { getRedisService } from '../pages/api/redis-service'
@@ -16,15 +15,17 @@ export function AuthIsDisabled() {
 
 export async function AuthIsValid() {
   const idToken = await getIdToken()
+  if (!idToken) {
+    return false
+  }
   const decodedIdToken: jose.JWTPayload = decodeJwt(idToken)
   const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
-  if (idToken && decodedIdToken.exp && decodedIdToken.exp > now) {
+  if (decodedIdToken.exp && decodedIdToken.exp > now) {
     return true
   }
-  return false
 }
 
-//This function grabs the idToken from the getToken function and decodes it
+//This function grabs the idToken from redis
 export async function getIdToken() {
   const redisService = await getRedisService()
   return redisService.get('idToken')
@@ -71,19 +72,19 @@ export async function ValidateSession(
   return getResponse?.data ?? false
 }
 
-export async function getLogoutURL(req, session) {
-  const token = await getToken({ req })
+export async function getLogoutURL() {
+  const token = await getIdToken()
 
-  if (session && token) {
+  if (token) {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
-      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${token.sub}`
+      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${token.sid}`
     )
   }
   return
 }
 
-export function Redirect(locale) {
+export function Redirect(locale: string) {
   return {
     redirect: {
       permanent: false,
