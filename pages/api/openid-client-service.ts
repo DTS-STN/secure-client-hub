@@ -14,14 +14,12 @@ export const getOpenIdClientService = moize.promise(createOpenIdClientService, {
   onCacheAdd: () => log.info('Creating new open id client service'),
 })
 
-const jwk = JSON.parse(
-  process.env.KEYCLOAK_AUTH_PRIVATE as string,
-) as JwkWithPropName
+const jwk = JSON.parse(process.env.AUTH_PRIVATE as string) as JwkWithPropName
 const jwkWithPropNameSet = { keys: [jwk] }
 
 async function createOpenIdClientService() {
   const issuer = await Issuer.discover(
-    process.env.KEYCLOAK_WELL_KNOWN as string,
+    process.env.AUTH_ECAS_WELL_KNOWN as string,
   )
   const redirectUrl = `${process.env.BASE_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
   const openIdClient = await buildClient(
@@ -69,7 +67,7 @@ async function createOpenIdClientService() {
         },
         {
           clientAssertionPayload: {
-            aud: process.env.KEYCLOAK_BASE_URL,
+            aud: process.env.AUTH_ECAS_BASE_URL,
             exp: expiry,
             iat: iat,
             iss: process.env.CLIENT_ID,

@@ -5,6 +5,7 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 import React from 'react'
+import { getRedisService } from '../api/redis-service'
 
 interface MetaDataProps {
   data_en: {
@@ -36,7 +37,8 @@ export default function Logout(props: LogoutProps) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
-      //await signOut({ redirect: false })
+      const redisService = await getRedisService()
+      redisService.del('idToken')
       window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
