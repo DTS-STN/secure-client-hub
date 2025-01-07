@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
+    "dev": "docker-compose up -d && cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
     "build": "next build",
     "start": "next start",
     "start:next": "next start",
