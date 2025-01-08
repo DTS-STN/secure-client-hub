@@ -4,7 +4,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "docker-compose up -d && cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
+    "dev": "redis && docker-compose up -d && cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
+    "redis": "docker run --init --rm --network host --name redis docker.io/library/redis:7.2 --requirepass password",
     "build": "next build",
     "start": "next start",
     "start:next": "next start",
