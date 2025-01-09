@@ -18,7 +18,8 @@ async function createRedisService() {
   // const env = getEnv();
 
   const redisClient = createClient({
-    url: 'redis://redis:6379',
+    password: 'foobared',
+    //url: 'redis://redis:6379',
   })
 
   await redisClient.connect()
