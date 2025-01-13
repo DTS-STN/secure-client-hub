@@ -53,6 +53,7 @@ interface MyDashboardProps {
       }[]
       lists: {
         title: string
+        aaTitle: string
         tasks: {
           id: string
           title: string

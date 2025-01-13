@@ -117,6 +117,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
+            aaTitle: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
             cardAlerts: fragment.schAlerts?.map((alert) => {
               return {
@@ -170,6 +171,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
+            aaTitle: fragment.scTitleEn, // AA tags must align in both languages
             dropdownText: fragment.schTasks[0].scLinkTextFr,
             cardAlerts: fragment.schAlerts?.map((alert) => {
               return {
@@ -226,6 +228,7 @@ export interface MyDashboardContent {
       | {
           id: string
           title: string
+          aaTitle: string
           dropdownText: string
           cardAlerts:
             | {
@@ -266,6 +269,7 @@ export interface MyDashboardContent {
           | {
               id: string
               title: string
+              aaTitle: string
               dropdownText: string
               cardAlerts:
                 | {
