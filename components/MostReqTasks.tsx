@@ -11,6 +11,7 @@ interface Task {
 
 interface TaskList {
   title: string
+  aaTitle: string
   tasks: Task[]
 }
 
@@ -34,12 +35,12 @@ const MostReqTasks = ({
       },
     ],
     title: 'mscaPlaceholder',
+    aaTitle: 'mscaPlaceholder',
   },
   refPageAA = 'mscaPlaceholder',
   acronym,
 }: MostReqTasksProps) => {
-  const newTabTaskExceptions: string[] = [
-  ]
+  const newTabTaskExceptions: string[] = []
 
   return (
     <div className="h-full">
@@ -83,7 +84,7 @@ const MostReqTasks = ({
                       ? 'noopener noreferrer'
                       : undefined
                   }
-                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
+                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.aaTitle}:${task.id}`}
                   className="rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
                 >
                   <span className="static text-xl font-normal">
