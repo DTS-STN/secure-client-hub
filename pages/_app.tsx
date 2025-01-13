@@ -37,7 +37,9 @@ export default function MyApp({
       if (pageProps.errType !== undefined) {
         window.adobeDataLayer?.push({
           event: 'error',
-          error: pageProps.errType,
+          error: {
+            name: pageProps.errType,
+          },
         })
       } else {
         window.adobeDataLayer?.push({ event: 'pageLoad' })

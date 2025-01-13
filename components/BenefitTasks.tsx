@@ -79,7 +79,7 @@ const BenefitTasks = ({
                     ? 'noopener noreferrer'
                     : undefined
                 }
-                data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskList.title}:${task.id}`}
+                data-gc-analytics-customclick={`${refPageAA} ${acronym}:${task.id}`}
                 className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
               >
                 <span className="static text-xl font-normal">
