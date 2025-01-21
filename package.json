@@ -59,7 +59,7 @@
     "react-idle-timer": "^5.7.2",
     "react-modal": "^3.16.1",
     "yup": "^1.4.0",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
