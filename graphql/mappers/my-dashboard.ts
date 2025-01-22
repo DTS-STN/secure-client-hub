@@ -117,7 +117,6 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           return {
             id: fragment.scId,
             title: fragment.scTitleEn,
-            aaTitle: fragment.scTitleEn,
             dropdownText: fragment.schTasks[0].scLinkTextEn,
             cardAlerts: fragment.schAlerts?.map((alert) => {
               return {
@@ -130,6 +129,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleEn,
+                aaTitle: list.scTitleEn,
                 tasks: list.scItems.map((item) => {
                   return {
                     id: item.scId,
@@ -171,7 +171,6 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
           return {
             id: fragment.scId,
             title: fragment.scTitleFr,
-            aaTitle: fragment.scTitleEn, // AA tags must align in both languages
             dropdownText: fragment.schTasks[0].scLinkTextFr,
             cardAlerts: fragment.schAlerts?.map((alert) => {
               return {
@@ -184,6 +183,7 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
             lists: fragment.schLists.map((list) => {
               return {
                 title: list.scTitleFr,
+                aaTitle: list.scTitleEn, // AA tags must align in both languages
                 tasks: list.scItems.map((item) => {
                   return {
                     id: item.scId,
@@ -228,7 +228,6 @@ export interface MyDashboardContent {
       | {
           id: string
           title: string
-          aaTitle: string
           dropdownText: string
           cardAlerts:
             | {
@@ -240,6 +239,7 @@ export interface MyDashboardContent {
             | undefined
           lists: {
             title: string
+            aaTitle: string
             tasks: {
               id: string
               title: string
@@ -269,7 +269,6 @@ export interface MyDashboardContent {
           | {
               id: string
               title: string
-              aaTitle: string
               dropdownText: string
               cardAlerts:
                 | {
@@ -281,6 +280,7 @@ export interface MyDashboardContent {
                 | undefined
               lists: {
                 title: string
+                aaTitle: string
                 tasks: {
                   id: string
                   title: string
