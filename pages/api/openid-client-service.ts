@@ -1,11 +1,18 @@
-import { Issuer } from 'openid-client'
 import moize from 'moize'
 import { JWK } from 'jose'
+import { HttpsProxyAgent } from 'https-proxy-agent'
+import { Issuer, custom } from 'openid-client'
 
 //import { getEnv } from '~/utils/env.server';
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('redis-service.server')
+
+const proxyAgent = new HttpsProxyAgent(process.env.http_proxy_agent as string)
+
+custom.setHttpOptionsDefaults({
+  agent: proxyAgent,
+})
 
 /**
  * Return a singleton instance (by means of memomization) of the openid client service.
@@ -107,6 +114,7 @@ export async function buildClient(
 }
 
 // Extending the jose JWK interface with a property present in the openid-client jose JWK interface
+// TODO replace this with full openid-client jose JWK interface
 interface JwkWithPropName extends JWK {
   [propName: string]:
     | string
