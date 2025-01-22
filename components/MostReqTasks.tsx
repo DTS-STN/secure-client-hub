@@ -137,7 +137,7 @@ const MostReqTasks = ({
                       ? 'noopener noreferrer'
                       : undefined
                   }
-                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.title}:${task.id}`}
+                  data-gc-analytics-customclick={`${refPageAA} ${acronym} ${taskListMR.aaTitle}:${task.id}`}
                   className="rounded-sm text-white underline hover:text-gray-50a focus:outline-1 focus:outline-white"
                 >
                   <span className="static text-xl font-normal">
