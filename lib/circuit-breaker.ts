@@ -43,7 +43,6 @@ export class CircuitBreaker {
         rv = await callback()
         break
       } catch (e: unknown) {
-        console.log('retrying')
         await new Promise((unused) =>
           setTimeout(unused, this.closedAttemptDelay),
         )
