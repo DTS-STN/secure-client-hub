@@ -13,6 +13,8 @@ import {
 } from '../../lib/auth'
 import { generators } from 'openid-client'
 import React from 'react'
+import { CircuitBreaker } from '../../lib/circuit-breaker'
+import moize from 'moize'
 
 interface MetaDataProps {
   data_en: {
@@ -87,11 +89,9 @@ Login.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-export const getServerSideProps = async function ({
-  locale,
-}: {
-  locale: GetServerSidePropsContext['locale']
-}) {
+async function actuallyGetServerSideProps(
+  locale: GetServerSidePropsContext['locale'],
+) {
   const redisService = await getRedisService()
   const authDisabled = AuthIsDisabled() ? true : false
 
@@ -162,4 +162,22 @@ export const getServerSideProps = async function ({
       authorizationUrl: authorizationUrl,
     },
   }
+}
+
+const circuitBreaker = moize(createLoginCircuitBreaker, {
+  onCacheAdd: () => console.log('creating login circuit breaker'),
+})
+
+function createLoginCircuitBreaker() {
+  return new CircuitBreaker({})
+}
+
+export const getServerSideProps = async function ({
+  locale,
+}: {
+  locale: GetServerSidePropsContext['locale']
+}) {
+  return await circuitBreaker().wrappedCallback(() =>
+    actuallyGetServerSideProps(locale),
+  )
 }
