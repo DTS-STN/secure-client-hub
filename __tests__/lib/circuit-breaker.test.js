@@ -11,7 +11,11 @@ beforeEach(() => {
   failCallback = jest.fn(() => {
     throw new Error()
   })
-  cb = new CircuitBreaker({ maxFailures: 3, closedAttemptDelay: 1 })
+  cb = new CircuitBreaker({
+    maxFailures: 3,
+    closedAttemptDelay: 1,
+    openAttemptDelay: 30000,
+  })
 })
 
 test('successful call on closed breaker let through normally', async () => {
@@ -19,8 +23,8 @@ test('successful call on closed breaker let through normally', async () => {
 })
 
 test('failing call eventually trips breaker', async () => {
-  expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
-  expect(cb.wrappedCallback(successCallback)).rejects.toThrow()
+  await expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
+  await expect(cb.wrappedCallback(successCallback)).rejects.toThrow()
 })
 
 test('breaker eventually lets through requests', async () => {
@@ -29,8 +33,8 @@ test('breaker eventually lets through requests', async () => {
     openAttemptDelay: 1,
     closedAttemptDelay: 1,
   })
-  expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
-  await setTimeout(() => {}, 100)
+  await expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
+  await new Promise((unused) => setTimeout(unused, 100))
   expect(await cb.wrappedCallback(successCallback)).toBe('success')
   expect(await cb.wrappedCallback(successCallback)).toBe('success')
 })
@@ -55,6 +59,6 @@ test('intermittent failures do not trip breaker', async () => {
 test('respects maxAttempts', async () => {
   cb.maxFailures = 5
 
-  expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
+  await expect(cb.wrappedCallback(failCallback)).rejects.toThrow()
   expect(failCallback).toHaveBeenCalledTimes(5)
 })
