@@ -15,6 +15,9 @@ import { generators } from 'openid-client'
 import React from 'react'
 import { CircuitBreaker } from '../../lib/circuit-breaker'
 import moize from 'moize'
+import { getLogger } from '../../logging/log-util'
+
+const log = getLogger('auth.login')
 
 interface MetaDataProps {
   data_en: {
@@ -165,7 +168,7 @@ async function actuallyGetServerSideProps(
 }
 
 const circuitBreaker = moize(createLoginCircuitBreaker, {
-  onCacheAdd: () => console.log('creating login circuit breaker'),
+  onCacheAdd: () => log.info('creating login circuit breaker'),
 })
 
 function createLoginCircuitBreaker() {
