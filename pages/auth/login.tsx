@@ -169,7 +169,11 @@ const circuitBreaker = moize(createLoginCircuitBreaker, {
 })
 
 function createLoginCircuitBreaker() {
-  return new CircuitBreaker({})
+  return new CircuitBreaker({
+    maxFailures: Number(process.env.LOGIN_MAX_ATTEMPTS) || undefined,
+    openAttemptDelay: Number(process.env.LOGIN_OPEN_DELAY) || undefined,
+    closedAttemptDelay: Number(process.env.LOGIN_CLOSED_DELAY) || undefined,
+  })
 }
 
 export const getServerSideProps = async function ({
