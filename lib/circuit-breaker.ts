@@ -4,11 +4,12 @@ const CircuitBreakerStates = {
 }
 
 export class CircuitBreaker {
-  state = CircuitBreakerStates.CLOSED
-  maxFailures = 5
-  lastAttempt = 0
-  openAttemptDelay = 30000
-  closedAttemptDelay = 1000
+  declare state
+  declare maxFailures
+  declare lastAttempt
+  declare openAttemptDelay
+  declare closedAttemptDelay
+
   constructor({
     maxFailures = 5,
     openAttemptDelay = 60000,
