@@ -17,7 +17,11 @@ import moize from 'moize'
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('auth.login')
-import { deleteAllCookiesWithPrefix, addCookie } from '../../lib/cookie-utils'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+  addCookie,
+} from '../../lib/cookie-utils'
 
 interface MetaDataProps {
   data_en: {
@@ -121,11 +125,10 @@ export const actuallyGetServerSideProps = async function ({
       idTokenJson?.sid,
     )
     if (sessionValid) {
-      addCookie(
+      extendExpiryTime(
         req,
         res,
         'idToken',
-        idToken as string,
         Number(process.env.SESSION_MAX_AGE as string),
       )
       return {
@@ -225,13 +228,13 @@ function createLoginCircuitBreaker() {
 export const getServerSideProps = async function ({
   locale,
   req,
-  res
+  res,
 }: {
   locale: GetServerSidePropsContext['locale']
-  req: GetServerSidePropsContext['req'],
+  req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
 }) {
   return await circuitBreaker().wrappedCallback(() =>
-    actuallyGetServerSideProps({locale, req, res}),
+    actuallyGetServerSideProps({ locale, req, res }),
   )
 }
