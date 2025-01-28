@@ -27,7 +27,10 @@ import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
 import { Key } from 'react'
-import { getRedisService } from './api/redis-service'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
 
 interface MyDashboardProps {
   locale: string
@@ -181,30 +184,55 @@ export default function MyDashboard(props: MyDashboardProps) {
 
 export async function getServerSideProps({
   locale,
+  req,
+  res,
 }: {
   locale: GetServerSidePropsContext['locale']
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
 }) {
-  const redisService = await getRedisService()
+  const authDisabled = AuthIsDisabled() ? true : false
 
-  if (!AuthIsDisabled() && !(await AuthIsValid()))
-    return Redirect(locale as string)
+  const authValid = await AuthIsValid(req)
 
-  const token = await getIdToken()
+  if (!authValid) {
+    deleteAllCookiesWithPrefix(
+      req,
+      res,
+      process.env.AUTH_COOKIE_PREFIX as string,
+    )
+  }
+
+  if (!authDisabled && !authValid) return Redirect(locale as string)
+
+  const idToken = await getIdToken(req)
+  const idTokenJson = JSON.parse(idToken as string)
 
   //If id token is there, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid())) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      token?.sid,
+      idTokenJson?.sid,
     )
     if (!sessionValid) {
-      redisService.del('idToken')
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        'idToken',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 

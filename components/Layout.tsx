@@ -54,7 +54,7 @@ export default function Layout({
   useEffect(() => {
     window.addEventListener('visibilitychange', throttledVisiblityChangeEvent)
     window.addEventListener('click', throttledOnClickEvent)
-    //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
+    //If validateSession call indicates an invalid MSCA session, redirect to login
     if (response?.status === 401) {
       router.push(`/${locale}/auth/login`)
     }

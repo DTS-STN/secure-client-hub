@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
-import { getRedisService } from '../api/redis-service'
 import { getOpenIdClientService } from '../api/openid-client-service'
 import { GetServerSidePropsContext } from 'next'
 import {
@@ -18,6 +17,7 @@ import moize from 'moize'
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('auth.login')
+import { deleteAllCookiesWithPrefix, addCookie } from '../../lib/cookie-utils'
 
 interface MetaDataProps {
   data_en: {
@@ -92,21 +92,42 @@ Login.getLayout = function PageLayout(page: JSX.Element) {
   return <>{page}</>
 }
 
-async function actuallyGetServerSideProps(
-  locale: GetServerSidePropsContext['locale'],
-) {
-  const redisService = await getRedisService()
+export const actuallyGetServerSideProps = async function ({
+  locale,
+  req,
+  res,
+}: {
+  locale: GetServerSidePropsContext['locale']
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
+}) {
   const authDisabled = AuthIsDisabled() ? true : false
+  const authIsValid = await AuthIsValid(req)
+  if (!authIsValid) {
+    deleteAllCookiesWithPrefix(
+      req,
+      res,
+      process.env.AUTH_COOKIE_PREFIX as string,
+    )
+  }
 
-  const idToken = await getIdToken()
+  const idToken = await getIdToken(req)
+  const idTokenJson = JSON.parse(idToken as string)
 
   //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!authDisabled && (await AuthIsValid())) {
+  if (!authDisabled && authIsValid) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      idToken?.sid,
+      idTokenJson?.sid,
     )
     if (sessionValid) {
+      addCookie(
+        req,
+        res,
+        'idToken',
+        idToken as string,
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
       return {
         redirect: {
           destination:
@@ -115,7 +136,11 @@ async function actuallyGetServerSideProps(
         },
       }
     } else {
-      redisService.del('idToken')
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
     }
   }
 
@@ -131,9 +156,27 @@ async function actuallyGetServerSideProps(
     await openIdClientService
   ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
 
-  redisService.set('codeVerifier', codeVerifier)
-  redisService.set('nonce', nonce)
-  redisService.set('state', state)
+  addCookie(
+    req,
+    res,
+    'codeVerifier',
+    codeVerifier,
+    Number(process.env.AUTH_COOKIE_PREFIX as string),
+  )
+  addCookie(
+    req,
+    res,
+    'nonce',
+    nonce,
+    Number(process.env.AUTH_COOKIE_PREFIX as string),
+  )
+  addCookie(
+    req,
+    res,
+    'state',
+    state,
+    Number(process.env.AUTH_COOKIE_PREFIX as string),
+  )
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -181,10 +224,14 @@ function createLoginCircuitBreaker() {
 
 export const getServerSideProps = async function ({
   locale,
+  req,
+  res
 }: {
   locale: GetServerSidePropsContext['locale']
+  req: GetServerSidePropsContext['req'],
+  res: GetServerSidePropsContext['res']
 }) {
   return await circuitBreaker().wrappedCallback(() =>
-    actuallyGetServerSideProps(locale),
+    actuallyGetServerSideProps({locale, req, res}),
   )
 }

@@ -16,7 +16,10 @@ import {
   Redirect,
   getIdToken,
 } from '../../lib/auth'
-import { getRedisService } from '../api/redis-service'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../../lib/cookie-utils'
 import { GetServerSideProps } from 'next'
 
 interface Data {
@@ -86,21 +89,40 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   )
 }
 
-export const getServerSideProps = (async ({ locale, params }) => {
-  if (!AuthIsDisabled() && !(await AuthIsValid()))
-    return Redirect(locale as string)
+export const getServerSideProps = async function ({
+  locale,
+  params,
+  req,
+  res,
+}) {
+  const authDisabled = AuthIsDisabled() ? true : false
+  const authValid = await AuthIsValid(req)
 
-  const token = await getIdToken()
+  if (!authDisabled && !authValid) return Redirect(locale as string)
+
+  if (!authValid) {
+    deleteAllCookiesWithPrefix(
+      req,
+      res,
+      process.env.AUTH_COOKIE_PREFIX as string,
+    )
+  }
+
+  const token = await getIdToken(req)
+  const idTokenJson = JSON.parse(token as string)
 
   //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid())) {
+  if (!AuthIsDisabled() && authValid) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      token?.sid,
+      idTokenJson?.sid,
     )
     if (!sessionValid) {
-      const redisService = await getRedisService()
-      redisService.del('idToken')
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
 
       return {
         redirect: {
@@ -108,6 +130,13 @@ export const getServerSideProps = (async ({ locale, params }) => {
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        'idToken',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 
@@ -192,7 +221,7 @@ export const getServerSideProps = (async ({ locale, params }) => {
           : authModals.mappedPopupSignedOut?.fr,
     },
   }
-}) satisfies GetServerSideProps<ContactUsPageProps>
+} satisfies GetServerSideProps<ContactUsPageProps>
 // https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 
 export default ContactUsPage

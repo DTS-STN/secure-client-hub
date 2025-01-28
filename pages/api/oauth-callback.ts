@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getRedisService } from './redis-service'
 import { getOpenIdClientService } from './openid-client-service'
 import { generators } from 'openid-client'
 import { UTCDate } from '@date-fns/utc'
@@ -7,16 +6,15 @@ import axios from 'axios'
 import https from 'https'
 import fs from 'fs'
 import { getLogger } from '../../logging/log-util'
+import { addCookie, getCookieValue } from '../../lib/cookie-utils'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const redisService = await getRedisService()
-  req.query['lang']
-  const codeVerifier = (await redisService.get('codeVerifier')) as string
-  const state = (await redisService.get('state')) as string
-  const nonce = (await redisService.get('nonce')) as string
+  const codeVerifier = getCookieValue('codeVerifier', req.cookies) as string
+  const state = getCookieValue('state', req.cookies) as string
+  const nonce = getCookieValue('nonce', req.cookies) as string
   const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
   const expiry = now + 60 // valid for 1 minute
   const jwtId = generators.random(32)
@@ -36,12 +34,17 @@ export default async function handler(
 
   const userinfo = await openIdService.userinfo(tokenSet.access_token as string)
 
-  redisService.set('idToken', tokenSet.id_token)
-  redisService.set('userinfo', userinfo)
+  addCookie(
+    req,
+    res,
+    'idToken',
+    tokenSet.id_token as string,
+    Number(process.env.SESSION_MAX_AGE),
+  )
 
   updateMscaNg(userinfo.sin, userinfo.uid)
 
-  res.status(307).redirect('/en/my-dashboard') //TODO get lang parameter
+  res.status(307).redirect('/my-dashboard') //TODO get lang parameter
 }
 
 function updateMscaNg(sin: string, uid: string) {

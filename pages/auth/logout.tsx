@@ -5,7 +5,7 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 import React from 'react'
-import { getRedisService } from '../api/redis-service'
+import { deleteAllCookiesWithPrefix } from '../../lib/cookie-utils'
 
 interface MetaDataProps {
   data_en: {
@@ -37,8 +37,6 @@ export default function Logout(props: LogoutProps) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
-      const redisService = await getRedisService()
-      redisService.del('idToken')
       window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
@@ -64,9 +62,11 @@ Logout.getLayout = function PageLayout(page: JSX.Element) {
 }
 
 export async function getServerSideProps({
+  req,
   res,
   locale,
 }: {
+  req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
   locale: GetServerSidePropsContext['locale']
 }) {
@@ -74,8 +74,14 @@ export async function getServerSideProps({
   const logger = getLogger('logout')
   logger.level = 'error'
 
+  deleteAllCookiesWithPrefix(
+    req,
+    res,
+    process.env.AUTH_COOKIES_PREFIX as string,
+  )
+
   const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL().catch((error) => {
+    ? await getLogoutURL(req).catch((error) => {
         logger.error(error)
         res.statusCode = 500
         throw error

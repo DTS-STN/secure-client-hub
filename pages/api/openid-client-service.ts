@@ -6,7 +6,7 @@ import { Issuer, custom } from 'openid-client'
 //import { getEnv } from '~/utils/env.server';
 import { getLogger } from '../../logging/log-util'
 
-const log = getLogger('redis-service.server')
+const log = getLogger('openid-client-service')
 
 const proxyAgent = new HttpsProxyAgent(process.env.http_proxy_agent as string)
 

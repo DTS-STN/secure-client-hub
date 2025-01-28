@@ -16,13 +16,15 @@ import {
   Redirect,
   getIdToken,
 } from '../lib/auth'
-import { getRedisService } from './api/redis-service'
 import ProfileTasks, { Task } from '../components/ProfileTasks'
 import React, { ReactNode } from 'react'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
-
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
 interface ProfilePageProps {
   locale: string | undefined
   content: {
@@ -130,23 +132,41 @@ export default function Profile(props: ProfilePageProps) {
 
 export async function getServerSideProps({
   locale,
+  req,
+  res,
 }: {
   locale: GetServerSidePropsContext['locale']
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
 }) {
   const authDisabled = AuthIsDisabled() ? true : false
-  const redisService = await getRedisService()
-  if (!authDisabled && !(await AuthIsValid())) return Redirect(locale as string)
+  const authValid = await AuthIsValid(req)
 
-  const token = await getIdToken()
+  if (!authValid) {
+    deleteAllCookiesWithPrefix(
+      req,
+      res,
+      process.env.AUTH_COOKIE_PREFIX as string,
+    )
+  }
 
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
+  if (!authDisabled && !authValid) return Redirect(locale as string)
+
+  const idToken = await getIdToken(req)
+  const idTokenJson = JSON.parse(idToken as string)
+
+  //If id token is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!authDisabled) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      token?.sid,
+      idTokenJson?.sid,
     )
     if (!sessionValid) {
-      redisService.del('idToken')
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
 
       return {
         redirect: {
@@ -154,6 +174,13 @@ export async function getServerSideProps({
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        'idToken',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 

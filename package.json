@@ -40,6 +40,7 @@
     "babel-plugin-macros": "^3.1.0",
     "cachified": "^3.5.4",
     "cross-env": "^7.0.3",
+    "date-fns": "^4.1.0",
     "fast-glob": "^3.3.2",
     "https-proxy-agent": "^7.0.6",
     "jose": "^5.9.6",

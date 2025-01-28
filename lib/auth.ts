@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
-import { getRedisService } from '../pages/api/redis-service'
 import * as jose from 'jose'
 import { decodeJwt } from 'jose'
+import { GetServerSidePropsContext } from 'next'
+import { getCookieValue } from './cookie-utils'
 import { UTCDate } from '@date-fns/utc'
+
 const logger = getLogger('auth-helpers')
 
 export function AuthIsDisabled() {
@@ -13,8 +15,8 @@ export function AuthIsDisabled() {
   )
 }
 
-export async function AuthIsValid() {
-  const idToken = await getIdToken()
+export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
+  const idToken = await getIdToken(req)
   if (!idToken) {
     return false
   }
@@ -25,10 +27,9 @@ export async function AuthIsValid() {
   }
 }
 
-//This function grabs the idToken from redis
-export async function getIdToken() {
-  const redisService = await getRedisService()
-  return redisService.get('idToken')
+//This function grabs the idToken from request cookies
+export async function getIdToken(req: GetServerSidePropsContext['req']) {
+  return getCookieValue('idToken', req.cookies)
 }
 
 export async function ValidateSession(
@@ -72,13 +73,14 @@ export async function ValidateSession(
   return getResponse?.data ?? false
 }
 
-export async function getLogoutURL() {
-  const token = await getIdToken()
+export async function getLogoutURL(req: GetServerSidePropsContext['req']) {
+  const idToken = await getIdToken(req)
+  const idTokenJson = JSON.parse(idToken as string)
 
-  if (token) {
+  if (idTokenJson) {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
-      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${token.sid}`
+      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idTokenJson.sid}`
     )
   }
   return
