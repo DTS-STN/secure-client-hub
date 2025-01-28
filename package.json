@@ -5,7 +5,6 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_EXTRA_CA_CERTS=\"./certs/srv113-i-lab-hrdc-drhc-gc-ca-chain.pem\" next dev | pino-pretty",
-    "redis": "docker run --init --rm --network host --name redis docker.io/library/redis:7.2 --requirepass password",
     "build": "next build",
     "start": "next start",
     "start:next": "next start",
@@ -48,6 +47,7 @@
     "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.7.2",
     "micromatch": "^4.0.8",
+    "moize": "^6.1.6",
     "net": "^1.0.2",
     "next": "^14.2.21",
     "next-auth": "^4.24.9",
@@ -63,7 +63,7 @@
     "react-focus-on": "^3.9.3",
     "react-idle-timer": "^5.7.2",
     "react-modal": "^3.16.1",
-    "redis": "^4.7.0",
+    "tls": "^0.0.1",
     "yup": "^1.4.0",
     "zod": "^3.24.1"
   },

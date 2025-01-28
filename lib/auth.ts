@@ -79,7 +79,7 @@ export async function getLogoutURL(req: GetServerSidePropsContext['req']) {
 
   if (idTokenJson) {
     return (
-      process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
+      process.env.KEYCLOAK_LOGOUT +
       `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idTokenJson.sid}`
     )
   }

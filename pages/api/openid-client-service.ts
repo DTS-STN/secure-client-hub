@@ -1,18 +1,17 @@
 import moize from 'moize'
 import { JWK } from 'jose'
-import { HttpsProxyAgent } from 'https-proxy-agent'
-import { Issuer, custom } from 'openid-client'
+//import { HttpsProxyAgent } from 'https-proxy-agent'
+import { Issuer } from 'openid-client'
 
-//import { getEnv } from '~/utils/env.server';
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('openid-client-service')
 
-const proxyAgent = new HttpsProxyAgent(process.env.http_proxy_agent as string)
+// const proxyAgent = new HttpsProxyAgent(process.env.http_proxy_agent as string)
 
-custom.setHttpOptionsDefaults({
-  agent: proxyAgent,
-})
+// custom.setHttpOptionsDefaults({
+//   agent: proxyAgent,
+// })
 
 /**
  * Return a singleton instance (by means of memomization) of the openid client service.
@@ -21,12 +20,14 @@ export const getOpenIdClientService = moize.promise(createOpenIdClientService, {
   onCacheAdd: () => log.info('Creating new open id client service'),
 })
 
-const jwk = JSON.parse(process.env.AUTH_PRIVATE as string) as JwkWithPropName
+const jwk = JSON.parse(
+  process.env.KEYCLOAK_AUTH_PRIVATE as string,
+) as JwkWithPropName
 const jwkWithPropNameSet = { keys: [jwk] }
 
 async function createOpenIdClientService() {
   const issuer = await Issuer.discover(
-    process.env.AUTH_ECAS_WELL_KNOWN as string,
+    process.env.KEYCLOAK_WELL_KNOWN as string,
   )
   const redirectUrl = `${process.env.BASE_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
   const openIdClient = await buildClient(
