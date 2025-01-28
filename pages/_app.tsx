@@ -10,7 +10,7 @@ import { AppProps } from 'next/app'
 import { NextPage } from 'next'
 config.autoAddCss = false
 
-declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
+declare const window: Window & { adobeDataLayer: Record<string, unknown>[] }
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -23,6 +23,19 @@ type AppPropsWithLayout = AppProps & {
 // To help prevent double firing of adobe analytics pageLoad event
 let appPreviousLocationPathname = ''
 
+function aaPushEvent(errType?: string) {
+  if (errType !== undefined) {
+    window.adobeDataLayer.push({
+      event: 'error',
+      error: {
+        name: errType,
+      },
+    })
+  } else {
+    window.adobeDataLayer.push({ event: 'pageLoad' })
+  }
+}
+
 export default function MyApp({
   Component,
   pageProps,
@@ -34,14 +47,7 @@ export default function MyApp({
   useEffect(() => {
     // only push event if pathname is different
     if (window.location.pathname !== appPreviousLocationPathname) {
-      if (pageProps.errType !== undefined) {
-        window.adobeDataLayer?.push({
-          event: 'error',
-          error: pageProps.errType,
-        })
-      } else {
-        window.adobeDataLayer?.push({ event: 'pageLoad' })
-      }
+      aaPushEvent(pageProps.errType)
       appPreviousLocationPathname = window.location.pathname
     }
   }, [router.asPath, pageProps.errType])
