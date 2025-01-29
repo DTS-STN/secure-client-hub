@@ -58,7 +58,6 @@ async function createOpenIdClientService() {
       state: string,
       nonce: string,
       codeVerifier: string,
-      maxAge: number,
       jti: string,
       expiry: number,
       iat: number,
@@ -71,11 +70,10 @@ async function createOpenIdClientService() {
           state: state,
           nonce: nonce,
           code_verifier: codeVerifier,
-          max_age: maxAge,
         },
         {
           clientAssertionPayload: {
-            aud: process.env.AUTH_ECAS_BASE_URL,
+            aud: 'GC-ECAS-DEV',
             exp: expiry,
             iat: iat,
             iss: process.env.CLIENT_ID,
