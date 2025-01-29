@@ -18,14 +18,12 @@ export default async function handler(
   const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
   const expiry = now + 60 // valid for 1 minute
   const jwtId = generators.random(32)
-  const maxAge = process.env.SESSION_MAX_AGE as string
   const openIdService = await getOpenIdClientService()
   const tokenSet = await openIdService.callback(
     req.query,
     state,
     nonce,
     codeVerifier,
-    parseInt(maxAge),
     jwtId,
     expiry,
     now,
