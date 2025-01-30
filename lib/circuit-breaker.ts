@@ -1,3 +1,7 @@
+import { getLogger } from '../logging/log-util'
+
+const logger = getLogger('circuit-breaker')
+
 const CircuitBreakerStates = {
   OPEN: 'open',
   CLOSED: 'closed',
@@ -44,6 +48,7 @@ export class CircuitBreaker {
         rv = await callback()
         break
       } catch (e: unknown) {
+        logger.error(e)
         await new Promise((unused) =>
           setTimeout(unused, this.closedAttemptDelay),
         )
