@@ -63,6 +63,7 @@
     "react-focus-on": "^3.9.3",
     "react-idle-timer": "^5.7.2",
     "react-modal": "^3.16.1",
+    "require-in-the-middle": "^7.5.0",
     "tls": "^0.0.1",
     "yup": "^1.4.0",
     "zod": "^3.24.1"
