@@ -7,7 +7,7 @@ import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('openid-client-service')
 
-const proxyAgent = new HttpsProxyAgent(process.env.http_proxy_agent as string)
+const proxyAgent = new HttpsProxyAgent('http://localhost:3128')
 
 custom.setHttpOptionsDefaults({
   agent: proxyAgent,
