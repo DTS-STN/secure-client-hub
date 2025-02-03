@@ -115,9 +115,11 @@ export const actuallyGetServerSideProps = async function ({
     )
   }
 
+  let idTokenJson = JSON.parse('{}')
   const idToken = await getIdToken(req)
-  const idTokenJson = JSON.parse(idToken as string)
-
+  if (typeof idToken != 'undefined') {
+    idTokenJson = JSON.parse(idToken as string)
+  }
   //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!authDisabled && authIsValid) {
     const sessionValid = await ValidateSession(
