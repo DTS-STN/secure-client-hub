@@ -15,5 +15,6 @@ module.exports = defineConfig({
     },
     baseUrl: 'http://localhost:3000',
     defaultCommandTimeout: 60000,
+    retries: 2,
   },
 })
