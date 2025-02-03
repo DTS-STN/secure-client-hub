@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getOpenIdClientService } from './openid-client-service'
 import { generators } from 'openid-client'
-import { UTCDate } from '@date-fns/utc'
 import axios from 'axios'
 import https from 'https'
 import fs from 'fs'
@@ -15,7 +14,7 @@ export default async function handler(
   const codeVerifier = getCookieValue('codeVerifier', req.cookies) as string
   const state = getCookieValue('state', req.cookies) as string
   const nonce = getCookieValue('nonce', req.cookies) as string
-  const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
+  const now = Math.floor(Date.now() / 1000) // current time, rounded down to the nearest second
   const expiry = now + 60 // valid for 1 minute
   const jwtId = generators.random(32)
   const openIdService = await getOpenIdClientService()
