@@ -23,7 +23,7 @@ console.log('testing')
 console.log(process.env.AUTH_PRIVATE)
 const authPrivate = process.env.AUTH_PRIVATE
 
-let jwk = {}
+let jwk = {} as JwkWithPropName
 if (typeof authPrivate != 'undefined') {
   jwk = JSON.parse(authPrivate) as JwkWithPropName
 }
