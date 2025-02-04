@@ -20,8 +20,8 @@ export const getOpenIdClientService = moize.promise(createOpenIdClientService, {
   onCacheAdd: () => log.info('Creating new open id client service'),
 })
 console.log('testing')
-const authPrivate = process.env.AUTH_PRIVATE as string
-const jwk = JSON.parse(authPrivate) as JwkWithPropName
+console.log(process.env.AUTH_PRIVATE)
+const jwk = JSON.parse(<string>process.env.AUTH_PRIVATE) as JwkWithPropName
 const jwkWithPropNameSet = { keys: [jwk] }
 
 async function createOpenIdClientService() {
