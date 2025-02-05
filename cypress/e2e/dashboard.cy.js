@@ -7,7 +7,7 @@ describe('Validate dashboard page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/my-dashboard')
+    cy.visit('/my-dashboard', { retryOnStatusCodeFailure: true })
   })
 
   it('Dashboard has no detectable a11y violations on load', () => {
@@ -234,7 +234,7 @@ describe('Validate dashboard page', () => {
         cy.get('[data-cy="task-group-list"]')
           .parents('[data-cy="Task"]')
           .find('[data-cy="task-link"] a[href="/en/profile"]')
-          .click({ force: true })
+          .click()
         cy.location('pathname', { timeout: 10000 }).should('equal', '/en/profile')
         cy.visit('/my-dashboard')
         cy.location('pathname').should('equal', '/en/my-dashboard')
@@ -270,7 +270,7 @@ describe('Validate dashboard page', () => {
     cy.get('[data-cy="task-group-list"]')
       .parents('[data-cy="Task"]')
       .find('[data-cy="task-link"] a[href="/fr/profil"]')
-      .click({ force: true })
+      .click()
     cy.location('pathname', { timeout: 10000 }).should('equal', '/fr/profil')
     cy.visit('/fr/mon-tableau-de-bord')
     cy.location('pathname').should('equal', '/fr/mon-tableau-de-bord')

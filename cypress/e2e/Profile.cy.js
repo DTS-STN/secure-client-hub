@@ -7,7 +7,7 @@ describe('Validate Profile page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/profile')
+    cy.visit('/profile', { retryOnStatusCodeFailure: true })
   })
 
   it('Profile has no detectable a11y violations on load', () => {
