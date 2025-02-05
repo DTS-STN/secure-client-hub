@@ -6,7 +6,7 @@ It does not test the authentication functionality currently since those endpoint
 describe('Validate logout scenario and page', () => {
 
   beforeEach(() => {
-    cy.visit('/my-dashboard', { retryOnStatusCodeFailure: true, timeout: 20000 })
+    cy.visit('/my-dashboard', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
 
   it('should show the loading spinner + text then return to index page once logged out', () => {

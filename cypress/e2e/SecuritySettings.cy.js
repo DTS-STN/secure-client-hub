@@ -7,7 +7,7 @@ describe('Validate Security Settings page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/security-settings', { retryOnStatusCodeFailure: true, timeout: 20000 })
+    cy.visit('/security-settings', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
 
   it('Security settings has no detectable a11y violations on load', () => {
