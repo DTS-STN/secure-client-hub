@@ -8,7 +8,7 @@ describe('Validate EI Contact Us Landing page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/contact-us/contact-employment-insurance')
+    cy.visit('/contact-us/contact-employment-insurance', { retryOnStatusCodeFailure: true })
   })
 
   it('Contact us EI has no detectable a11y violations on load', () => {
