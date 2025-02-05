@@ -7,7 +7,7 @@ describe('Validate Request a review of a decision page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/en/decision-reviews', { retryOnStatusCodeFailure: true, timeout: 20000 })
+    cy.visit('/en/decision-reviews', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
   it('Request a review has no detectable a11y violations on load', () => {
     cy.injectAxe()

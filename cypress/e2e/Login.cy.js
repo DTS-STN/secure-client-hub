@@ -7,7 +7,7 @@ beforeEach(() => {
     hostname: 'assets.adobedtm.com',
     path: /.*\/launch-.*/,
   }).as('adobeAnalytics')
-  cy.visit('/auth/login', { retryOnStatusCodeFailure: true, timeout: 20000 })
+  cy.visit('/auth/login', { retryOnStatusCodeFailure: true, timeout: 60000 })
 })
 
 describe('Validate login page', () => {

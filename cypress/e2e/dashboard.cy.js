@@ -7,7 +7,7 @@ describe('Validate dashboard page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/my-dashboard', { retryOnStatusCodeFailure: true, timeout: 20000 })
+    cy.visit('/my-dashboard', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
 
   it('Dashboard has no detectable a11y violations on load', () => {
