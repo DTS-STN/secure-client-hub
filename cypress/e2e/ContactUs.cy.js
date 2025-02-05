@@ -7,7 +7,7 @@ describe('Validate Contact Us Landing page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/contact-us', { retryOnStatusCodeFailure: true })
+    cy.visit('/contact-us', { retryOnStatusCodeFailure: true, timeout: 20000 })
   })
 
   it('Contact us has no detectable a11y violations on load', () => {

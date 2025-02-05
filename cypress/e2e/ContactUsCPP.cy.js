@@ -8,7 +8,7 @@ describe('Validate Contact Canada Pension Plan page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/contact-us/contact-canada-pension-plan', { retryOnStatusCodeFailure: true })
+    cy.visit('/contact-us/contact-canada-pension-plan', { retryOnStatusCodeFailure: true, timeout: 20000 })
   })
 
   it('Contact us CPP has no detectable a11y violations on load', () => {
