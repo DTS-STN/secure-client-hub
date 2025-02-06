@@ -21,7 +21,7 @@ describe('BreadCrumb', () => {
       <Breadcrumb
         id="breadcrumbID"
         items={[{ text: 'Canada.ca', link: '/' }]}
-        refPageAA='dashboard'
+        refPageAA="dashboard"
       />,
     )
     expect(primary).toBeTruthy()
@@ -37,7 +37,7 @@ describe('BreadCrumb', () => {
           { text: 'Link2', link: '/' },
           { text: 'Link3', link: '/' },
         ]}
-        refPageAA='dashboard'
+        refPageAA="dashboard"
       />,
     )
     expect(withItems).toBeTruthy()
@@ -54,7 +54,7 @@ describe('BreadCrumb', () => {
           { text: 'Max length of breadcrumb 28', link: '/' },
           { text: 'Link3', link: '/' },
         ]}
-        refPageAA='dashboard'
+        refPageAA="dashboard"
       />,
     )
     expect(withItemsWithLongText).toBeTruthy()
@@ -65,7 +65,7 @@ describe('BreadCrumb', () => {
       <Breadcrumb
         id="breadcrumbID"
         items={[{ text: 'Canada.ca', link: '/' }]}
-      refPageAA='dashboard'
+        refPageAA="dashboard"
       />,
     )
     const results = await axe(container)
