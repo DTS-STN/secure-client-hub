@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
-
 import { ContactSection } from '../../components/contact/ContactSection'
 import { ContactProvince } from '../../components/contact/ContactProvince'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'

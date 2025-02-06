@@ -33,22 +33,22 @@ const Maintenance = (props: MaintenanceProps) => {
           id={'pageHead-maintenance'}
           title={language.maintenanceTitle}
         />
-        <p className="text-20px text-gray-darker mt-2">
+        <p className="mt-2 text-20px text-gray-darker">
           {language.maintenanceText}
         </p>
         <br />
-        <p className="font-bold text-gray-darker sm:text-black text-[20px]">
+        <p className="text-[20px] font-bold text-gray-darker sm:text-black">
           {language.errorPageNextText}
         </p>
         <h2 className="sr-only">{language.errorPageNextText}</h2>
         <ul id={'maintenace-next-list'}>
-          <li className={'text-20px text-gray-darker pl-3'}>
+          <li className={'pl-3 text-20px text-gray-darker'}>
             {language.error503TextLink}
           </li>
-          <li className="text-20px text-gray-darker pl-3">
+          <li className="pl-3 text-20px text-gray-darker">
             {language.errorTextLinkCommon}
             <Link
-              className="underline text-deep-blue-dark font-body text-20px hover:text-blue-hover focus:text-blue-hover"
+              className="font-body text-20px text-deep-blue-dark underline hover:text-blue-hover focus:text-blue-hover"
               id="accountpage-maintenance"
               href={
                 props.locale === 'en'
