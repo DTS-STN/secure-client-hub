@@ -2,49 +2,39 @@ import throttle from 'lodash.throttle'
 import { signOut } from 'next-auth/react'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
 import en from '../locales/en'
 import fr from '../locales/fr'
 import { lato, notoSans } from '../utils/fonts'
 import Footer from './Footer'
-import Header from './Header'
+import Header, { BreadcrumbItemProps } from './Header'
 import IdleTimeout from './IdleTimeout'
-import MetaData from './MetaData'
+import MetaData, { Data } from './MetaData'
 
-export default function Layout(
-  props = {
-    locale: 'en',
-    meta: '',
-    langToggleLink: '',
-    breadCrumbItems: [],
-    bannerContent: {
-      bannerBoldText: '',
-      bannerText: '',
-      bannerLink: '',
-      bannerLinkHref: '',
-      bannerSummaryTitle: '',
-      bannerSummaryContent: '',
-      bannerButtonText: '',
-      bannerButtonLink: '',
-      icon: '',
-    },
-    popupContentNA,
-    content,
-    popupContent,
-    display: { hideBanner: true },
-    popupStaySignedIn,
-    refPageAA,
-    dataGcAnalyticsCustomClickMenuVariable,
-    title: 'Service.Canada.ca',
-  },
-) {
-  const t = props.locale === 'en' ? en : fr
-  const [response, setResponse] = useState()
+interface LayoutProps {
+  locale?: 'en' | 'fr' | 'und'
+  meta: Data
+  langToggleLink?: string
+  breadCrumbItems?: BreadcrumbItemProps[]
+  display?: { hideBanner: boolean }
+  refPageAA: string
+  dataGcAnalyticsCustomClickMenuVariable: string
+  children: ReactElement
+}
+
+export default function Layout({
+  locale = 'en',
+  langToggleLink = '',
+  breadCrumbItems = [],
+  meta,
+  refPageAA,
+  children,
+  dataGcAnalyticsCustomClickMenuVariable,
+}: LayoutProps) {
+  const t = locale === 'en' ? en : fr
+  const [response, setResponse] = useState<Response>()
   const router = useRouter()
-  const defaultBreadcrumbs = []
-  const contactLink =
-    props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
+  const contactLink = locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
 
   const validationResponse = useCallback(
     async () => setResponse(await fetch('/api/refresh-msca')),
@@ -68,7 +58,7 @@ export default function Layout(
     //If validateSession call indicates an invalid MSCA session, end next-auth session and redirect to login
     if (response?.status === 401) {
       signOut()
-      router.push(`/${props.locale}/auth/login`)
+      router.push(`/${locale}/auth/login`)
     }
     //Remove event on unmount to prevent a memory leak with the cleanup
     return () => {
@@ -83,7 +73,7 @@ export default function Layout(
     throttledVisiblityChangeEvent,
     response,
     router,
-    props.locale,
+    locale,
   ])
 
   return (
@@ -94,54 +84,45 @@ export default function Layout(
           --noto-sans-font: ${notoSans.style.fontFamily};
         }
       `}</style>
-      <MetaData language={props.locale} data={props.meta}></MetaData>
+      <MetaData language={locale} data={meta}></MetaData>
       <Header
-        legacyBehavior
-        dataTestId="topnav"
         id="header"
-        linkPath={props.langToggleLink}
-        lang={props.locale}
-        breadCrumbItems={
-          props.breadCrumbItems ? props.breadCrumbItems : defaultBreadcrumbs
-        }
-        refPageAA={props.refPageAA}
+        linkPath={langToggleLink}
+        lang={locale}
+        breadCrumbItems={breadCrumbItems}
+        refPageAA={refPageAA}
         topnavProps={{
           skipToMainPath: '#mainContent',
           skipToAboutPath: '#page-footer',
           switchToBasicPath: '',
           displayAlternateLink: false,
         }}
-        dataGcAnalyticsCustomClickInstitutionVariable={
-          props.children.props.aaPrefix
-        }
+        dataGcAnalyticsCustomClickInstitutionVariable={children.props.aaPrefix}
         dataGcAnalyticsCustomClickMenuVariable={
-          props.dataGcAnalyticsCustomClickMenuVariable
+          dataGcAnalyticsCustomClickMenuVariable
         }
         menuProps={{
-          legacyBehavior: true,
           menuList: [
             {
               key: 'dashKey',
               id: 'my-dashboard',
               value: t.menuItems.dashboard,
               path: `${
-                props.locale === 'en'
-                  ? '/en/my-dashboard'
-                  : '/fr/mon-tableau-de-bord'
+                locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
               }`,
             },
             {
               key: 'profileKey',
               id: 'profile',
               value: t.menuItems.profile,
-              path: `${props.locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              path: `${locale === 'en' ? '/en/profile' : '/fr/profil'}`,
             },
             {
               key: 'securityKey',
               id: 'security',
               value: t.menuItems.security,
               path: `${
-                props.locale === 'en'
+                locale === 'en'
                   ? '/en/security-settings'
                   : '/fr/parametres-securite'
               }`,
@@ -151,7 +132,7 @@ export default function Layout(
               id: 'contact',
               value: t.menuItems.contactUs,
               path: `${
-                props.locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
+                locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
               }`,
             },
             {
@@ -169,11 +150,11 @@ export default function Layout(
         }}
       />
       <main id="mainContent" className="sch-container grid gap-[30px]">
-        {props.children}
+        {children}
       </main>
-      <IdleTimeout locale={props.locale} refPageAA={props.refPageAA} />
+      <IdleTimeout locale={locale} refPageAA={refPageAA} />
       <Footer
-        lang={!props.locale ? 'en' : props.locale}
+        lang={locale}
         brandLinks={[
           {
             href:
@@ -198,38 +179,4 @@ export default function Layout(
       />
     </>
   )
-}
-
-Layout.propTypes = {
-  /*
-   * Locale current language
-   */
-  locale: PropTypes.string,
-  /*
-   * Meta Tags
-   */
-  meta: PropTypes.object,
-  /*
-   * Title of the page
-   */
-  title: PropTypes.string,
-  /*
-   * Link of the page in opposite language
-   */
-  langToggleLink: PropTypes.string,
-  display: PropTypes.shape({
-    /*
-     * Toggle use of Phase (default false)
-     */
-    hideBanner: PropTypes.bool,
-    /*
-     * Toggle use of DS header (default false)
-     */
-    hideHeader: PropTypes.bool,
-    /*
-     * Toggle use of DS footer (default false)
-     */
-    hideFooter: PropTypes.bool,
-  }),
-  breadCrumbItems: PropTypes.array,
 }

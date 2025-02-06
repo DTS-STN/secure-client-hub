@@ -10,7 +10,7 @@ interface ButtonProps {
   iconEnd?: boolean
   href?: string
   type?: 'submit' | 'reset' | 'button'
-  onClick: MouseEventHandler<HTMLElement>
+  onClick?: MouseEventHandler<HTMLElement>
   disabled?: boolean
   className?: string
   attributes?: { [key: string]: string }
@@ -27,7 +27,7 @@ const Button = ({
   iconEnd,
   href = 'no ref',
   type,
-  onClick,
+  onClick = () => {},
   disabled,
   className,
   attributes,

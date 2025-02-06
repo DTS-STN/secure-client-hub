@@ -1,7 +1,7 @@
 // These acronyms are used to convert benefit categories into acronyms for AA.
 // For logistical reasons, acronyms should only be returned in English, regardless of language.
 
-export const acronym = (longText) => {
+export const acronym = (longText: string) => {
   switch (longText.toLowerCase()) {
     case 'assurance emploi':
       return 'EI'
