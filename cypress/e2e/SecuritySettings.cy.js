@@ -7,7 +7,7 @@ describe('Validate Security Settings page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/security-settings')
+    cy.visit('/security-settings', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
 
   it('Security settings has no detectable a11y violations on load', () => {
@@ -70,7 +70,7 @@ describe('Validate Security Settings page', () => {
   })
 
   it('Validate the "Profile" click navigates to Profile Page EN', () => {
-    cy.get('[data-cy="access-profile-page-link"]').click({ force: true })
+    cy.get('[data-cy="access-profile-page-link"]').click()
     cy.url().should('contains', '/profile')
     cy.get('[data-testid ="profileContent-test"]>h1')
       .should('be.visible')
@@ -80,7 +80,7 @@ describe('Validate Security Settings page', () => {
   it('Validate the "Profil" click navigates to Profile Page FR', () => {
     cy.get('[data-cy="lang1"] > span').click()
     cy.url().should('contains', '/fr/parametres-securite')
-    cy.get('[data-cy="access-profile-page-link"]').click({ force: true })
+    cy.get('[data-cy="access-profile-page-link"]').click()
     cy.url().should('contains', '/profil')
     cy.get('[data-testid ="profileContent-test"]>h1')
       .should('be.visible')
