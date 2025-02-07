@@ -207,12 +207,12 @@ export const getServerSideProps = (async ({ req, res, locale }) => {
       aaMenuPrefix: `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
         locale === 'en'
-          ? authModals.mappedPopupStaySignedIn.en
-          : authModals.mappedPopupStaySignedIn.fr,
+          ? authModals.mappedPopupStaySignedIn?.en
+          : authModals.mappedPopupStaySignedIn?.fr,
       popupYouHaveBeenSignedout:
         locale === 'en'
-          ? authModals.mappedPopupSignedOut.en
-          : authModals.mappedPopupSignedOut.fr,
+          ? authModals.mappedPopupSignedOut?.en
+          : authModals.mappedPopupSignedOut?.fr,
     },
   }
 }) satisfies GetServerSideProps<ContactLandingProps>

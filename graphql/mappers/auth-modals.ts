@@ -1,10 +1,11 @@
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+import { buildAemUri } from '../../lib/links'
 
-interface GetSchAuthModalsV1 {
+interface GetSchAuthModalsV2 {
   data: {
     staySignedIn: {
-      item: {
+      items: Array<{
         _path: string
         scId: string
         scHeadingEn: string
@@ -38,10 +39,10 @@ interface GetSchAuthModalsV1 {
           scLinkTextEn: string
           scLinkTextFr: string
         }>
-      }
+      }>
     }
     youHaveBeenSignedOut: {
-      item: {
+      items: Array<{
         _path: string
         scId: string
         scHeadingEn: string
@@ -71,7 +72,7 @@ interface GetSchAuthModalsV1 {
           scDestinationURLEn?: string
           scDestinationURLFr?: string
         }>
-      }
+      }>
     }
   }
 }
@@ -80,21 +81,20 @@ const getCachedContent = () => {
   return cachified({
     key: `content-auth-modals`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchAuthModalsV1`
-      )
+    getFreshValue: async (): Promise<GetSchAuthModalsV2 | null> => {
+      const targetUri = buildAemUri('getSchAuthModalsV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchAuthModalsV1
+      return await response.json()
     },
     ttl,
   })
 }
 
-export async function getAuthModalsContent() {
+export async function getAuthModalsContent(): Promise<AuthModalsContent> {
   const response = await getCachedContent()
-  const resSignedOutContent = response?.data.youHaveBeenSignedOut.item
-  const resStaySignedIn = response?.data.staySignedIn.item
+  const resSignedOutContent = response?.data.youHaveBeenSignedOut.items[0]
+  const resStaySignedIn = response?.data.staySignedIn.items[0]
 
   const mappedPopupSignedOut = {
     en: {
@@ -125,13 +125,13 @@ export async function getAuthModalsContent() {
     en: {
       bannerHeading: resStaySignedIn?.scHeadingEn,
       signOutLinkText: resStaySignedIn?.scFragments.filter(
-        (fragment) => fragment.scId === 'sign-out'
+        (fragment) => fragment.scId === 'sign-out',
       )[0].scLinkTextEn,
       staySignedInLinktext: resStaySignedIn?.scFragments.filter(
-        (fragment) => fragment.scId === 'stay-signed-in'
+        (fragment) => fragment.scId === 'stay-signed-in',
       )[0].scLinkTextEn,
       bannerContent: resStaySignedIn?.scContentEn.json.map((data) =>
-        data.content.map((paragraph) => paragraph.value)
+        data.content.map((paragraph) => paragraph.value),
       ),
       bannerMinutesAnd: 'minutes and',
       bannerSeconds: 'seconds',
@@ -139,13 +139,13 @@ export async function getAuthModalsContent() {
     fr: {
       bannerHeading: resStaySignedIn?.scHeadingFr,
       signOutLinkText: resStaySignedIn?.scFragments.filter(
-        (fragment) => fragment.scId === 'sign-out'
+        (fragment) => fragment.scId === 'sign-out',
       )[0].scLinkTextFr,
       staySignedInLinktext: resStaySignedIn?.scFragments.filter(
-        (fragment) => fragment.scId === 'stay-signed-in'
+        (fragment) => fragment.scId === 'stay-signed-in',
       )[0].scLinkTextFr,
       bannerContent: resStaySignedIn?.scContentFr.json.map((data) =>
-        data.content.map((paragraph) => paragraph.value)
+        data.content.map((paragraph) => paragraph.value),
       ),
       bannerMinutesAnd: 'minutes et',
       bannerSeconds: 'secondes',
@@ -153,4 +153,49 @@ export async function getAuthModalsContent() {
   }
 
   return { mappedPopupStaySignedIn, mappedPopupSignedOut }
+}
+
+// TODO: Check which of these properties should actually be optional and switch to using a question mark instead
+export interface AuthModalsContent {
+  err?: string
+  mappedPopupStaySignedIn?: {
+    en: {
+      bannerHeading: string | undefined
+      signOutLinkText: string | undefined
+      staySignedInLinktext: string | undefined
+      bannerContent: string[][] | undefined
+      bannerMinutesAnd: string
+      bannerSeconds: string
+    }
+    fr: {
+      bannerHeading: string | undefined
+      signOutLinkText: string | undefined
+      staySignedInLinktext: string | undefined
+      bannerContent: string[][] | undefined
+      bannerMinutesAnd: string
+      bannerSeconds: string
+    }
+  }
+  mappedPopupSignedOut?: {
+    en: {
+      bannerBoldText: string | undefined
+      bannerText: string | undefined
+      bannerLink: string | undefined
+      bannerLinkHref: string | undefined
+      bannerButtonText: string | undefined
+      bannerButtonLink: string
+      icon: string | undefined
+      bannerHeading: string | undefined
+    }
+    fr: {
+      bannerBoldText: string | undefined
+      bannerText: string | undefined
+      bannerLink: string | undefined
+      bannerLinkHref: string | undefined
+      bannerButtonText: string | undefined
+      bannerButtonLink: string
+      icon: string | undefined
+      bannerHeading: string | undefined
+    }
+  }
 }

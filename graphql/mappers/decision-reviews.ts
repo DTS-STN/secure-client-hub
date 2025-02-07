@@ -1,11 +1,11 @@
-import { buildLink } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchDecisionReviewsV1 {
+interface GetSchDecisionReviewsV2 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scPageNameEn: string
         scPageNameFr: string
@@ -35,10 +35,10 @@ interface GetSchDecisionReviewsV1 {
             scDestinationURLEn: string
             scDestinationURLFr: string
             schBetaPopUp: boolean
-            schURLType: string
+            schURLType?: string
           }>
         }>
-      }
+      }>
     }
   }
 }
@@ -47,45 +47,44 @@ const getCachedContent = () => {
   return cachified({
     key: `content-decision-reviews`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchDecisionReviewsV1`
-      )
+    getFreshValue: async (): Promise<GetSchDecisionReviewsV2 | null> => {
+      const targetUri = buildAemUri('getSchDecisionReviewsV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchDecisionReviewsV1
+      return await response.json()
     },
     ttl,
   })
 }
 
-export async function getDecisionReviewsContent() {
+export async function getDecisionReviewsContent(): Promise<DecisionReviewContent> {
   const response = await getCachedContent()
 
   const askFragment = findFragmentByScId(
     response,
-    'decision-review-ask-service-canada'
+    'decision-review-ask-service-canada',
   )
 
   const appealFragment = findFragmentByScId(
     response,
-    'decision-review-appeal-to-sst'
+    'decision-review-appeal-to-sst',
   )
 
   const mappedDecisionReviews = {
     en: {
       id: 'request-review-decision',
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
               text: level.scTitleEn,
               id: level.scId,
             }
-          }
+          },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameEn,
-      heading: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scPageNameEn,
+      heading: response?.data.schPageV1List.items[0].scTitleEn,
       content: [
         {
           content: askFragment?.scContentEn.markdown,
@@ -95,7 +94,7 @@ export async function getDecisionReviewsContent() {
             areaLabel: askFragment?.scFragments[0].scLinkTextAssistiveEn,
             link: buildLink(
               askFragment?.scFragments[0].schURLType,
-              askFragment?.scFragments[0].scDestinationURLEn
+              askFragment?.scFragments[0].scDestinationURLEn ?? '',
             ),
             betaPopUp: askFragment?.scFragments[0].schBetaPopUp,
           },
@@ -108,7 +107,7 @@ export async function getDecisionReviewsContent() {
             areaLabel: appealFragment?.scFragments[0].scLinkTextAssistiveEn,
             link: buildLink(
               appealFragment?.scFragments[0].schURLType,
-              appealFragment?.scFragments[0].scDestinationURLEn
+              appealFragment?.scFragments[0].scDestinationURLEn ?? '',
             ),
             betaPopUp: appealFragment?.scFragments[0].schBetaPopUp,
           },
@@ -118,17 +117,17 @@ export async function getDecisionReviewsContent() {
     fr: {
       id: 'demande-revision',
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
               text: level.scTitleFr,
               id: level.scId,
             }
-          }
+          },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scPageNameFr,
-      heading: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scPageNameFr,
+      heading: response?.data.schPageV1List.items[0].scTitleFr,
       content: [
         {
           content: askFragment?.scContentFr.markdown,
@@ -138,7 +137,7 @@ export async function getDecisionReviewsContent() {
             areaLabel: askFragment?.scFragments[0].scLinkTextAssistiveFr,
             link: buildLink(
               askFragment?.scFragments[0].schURLType,
-              askFragment?.scFragments[0].scDestinationURLFr
+              askFragment?.scFragments[0].scDestinationURLFr ?? '',
             ),
             betaPopUp: askFragment?.scFragments[0].schBetaPopUp,
           },
@@ -151,7 +150,7 @@ export async function getDecisionReviewsContent() {
             areaLabel: appealFragment?.scFragments[0].scLinkTextAssistiveFr,
             link: buildLink(
               appealFragment?.scFragments[0].schURLType,
-              appealFragment?.scFragments[0].scDestinationURLFr
+              appealFragment?.scFragments[0].scDestinationURLFr ?? '',
             ),
             betaPopUp: appealFragment?.scFragments[0].schBetaPopUp,
           },
@@ -163,12 +162,49 @@ export async function getDecisionReviewsContent() {
 }
 
 const findFragmentByScId = (
-  res: GetSchDecisionReviewsV1 | null,
-  id: string
+  res: GetSchDecisionReviewsV2 | null,
+  id: string,
 ) => {
   return (
-    res?.data.schPageV1ByPath.item.scFragments.find(
-      ({ scId }) => scId === id
+    res?.data.schPageV1List.items[0].scFragments.find(
+      ({ scId }) => scId === id,
     ) ?? null
   )
+}
+
+// TODO: Figure out which of these actually need to be optional
+export interface DecisionReviewContent {
+  err?: string
+  en?: {
+    id: string
+    breadcrumb: { link: string; text: string; id: string }[] | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    content: {
+      content: string | undefined
+      button: {
+        id: string | undefined
+        text: string | undefined
+        areaLabel: string | undefined
+        link: string | undefined
+        betaPopUp: boolean | undefined
+      }
+    }[]
+  }
+  fr?: {
+    id: string
+    breadcrumb: { link: string; text: string; id: string }[] | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    content: {
+      content: string | undefined
+      button: {
+        id: string | undefined
+        text: string | undefined
+        areaLabel: string | undefined
+        link: string | undefined
+        betaPopUp: boolean | undefined
+      }
+    }[]
+  }
 }

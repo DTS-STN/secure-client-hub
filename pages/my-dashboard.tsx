@@ -5,8 +5,14 @@ import Card from '../components/Card'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
 import InfoMessage from '../components/InfoMessage'
-import { getMyDashboardContent } from '../graphql/mappers/my-dashboard'
-import { getAuthModalsContent } from '../graphql/mappers/auth-modals'
+import {
+  getMyDashboardContent,
+  MyDashboardContent,
+} from '../graphql/mappers/my-dashboard'
+import {
+  AuthModalsContent,
+  getAuthModalsContent,
+} from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
 import {
   AuthIsDisabled,
@@ -15,19 +21,62 @@ import {
   Redirect,
   getIdToken,
 } from '../lib/auth'
-import { authOptions } from '../pages/api/auth/[...nextauth]'
+import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import BenefitTasks from './../components/BenefitTasks'
-import MostReqTasks from './../components/MostReqTasks'
+import BenefitTasks, { TaskListProps } from '../components/BenefitTasks'
+import MostReqTasks from '../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
+import { GetServerSidePropsContext } from 'next'
+import { Key } from 'react'
 
-export default function MyDashboard(props) {
+interface MyDashboardProps {
+  locale: string
+  content: {
+    err?: '500' | '404' | '503'
+    heading: string
+    pageAlerts: {
+      id: string
+      alertHeading: string | undefined
+      alertBody: string
+      type: string[]
+    }[]
+    cards: {
+      id: string
+      title: string
+      dropdownText: string
+      cardAlerts: {
+        id: string
+        alertHeading: string
+        alertBody: string
+        type: string
+      }[]
+      lists: {
+        title: string
+        aaTitle: string
+        tasks: {
+          id: string
+          title: string
+          areaLabel: string
+          link: string
+          icon: string
+          betaPopUp: boolean
+        }[]
+      }[]
+    }[]
+  }
+  bannerContent?: { err?: '500' | '404' | '503' }
+  popupContent?: { err?: '500' | '404' | '503' }
+  popupContentNA?: { err?: '500' | '404' | '503' }
+  authModals?: { err?: '500' | '404' | '503' }
+  aaPrefix: string
+}
+export default function MyDashboard(props: MyDashboardProps) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
   const errorCode =
-    props.content?.err ||
+    props.content.err ||
     props.bannerContent?.err ||
     props.popupContent?.err ||
     props.popupContentNA?.err ||
@@ -35,14 +84,14 @@ export default function MyDashboard(props) {
   if (errorCode !== undefined) {
     return (
       <ErrorPage
-        lang={props.locale !== undefined ? props.locale : 'en'}
+        lang={props.locale}
         errType={errorCode}
         isAuth={false}
         homePageLink={
           props.locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
         }
         accountPageLink={
-          props?.locale === 'en'
+          props.locale === 'en'
             ? 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=eng'
             : 'https://srv136.services.gc.ca/sc/msca-mdsc/portal-portail/pro/home-accueil?Lang=fra'
         }
@@ -58,7 +107,6 @@ export default function MyDashboard(props) {
       <Heading id="my-dashboard-heading" title={props.content.heading} />
 
       <InfoMessage
-        id="dashboard-info-message"
         label={t.dashboardInfo.label}
         messageText={t.dashboardInfo.messageText}
         messageLinkText={t.dashboardInfo.messageLinkText}
@@ -87,7 +135,7 @@ export default function MyDashboard(props) {
       })}
       {props.content.cards.map((card) => {
         const mostReq = card.lists[0]
-        var tasks = card.lists.slice(1, card.lists.length)
+        const tasks = card.lists.slice(1, card.lists.length)
         return (
           <Card
             key={card.id}
@@ -112,7 +160,7 @@ export default function MyDashboard(props) {
               className="gap-x-[60px] pl-3 pt-8 sm:pl-8 md:columns-2 md:px-15"
               data-cy="task-list"
             >
-              {tasks.map((taskList, index) => {
+              {tasks.map((taskList: TaskListProps, index: Key) => {
                 return (
                   <div key={index} data-cy="Task">
                     <BenefitTasks
@@ -133,7 +181,15 @@ export default function MyDashboard(props) {
   )
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({
+  req,
+  res,
+  locale,
+}: {
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
+  locale: string
+}) {
   const session = await getServerSession(req, res, authOptions)
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
@@ -173,15 +229,19 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('my-dashboard')
   logger.level = 'error'
 
-  const content = await getMyDashboardContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
+  const content = await getMyDashboardContent().catch(
+    (error): MyDashboardContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
-  const authModals = await getAuthModalsContent().catch((error) => {
-    logger.error(error)
-    return { err: '500' }
-  })
+  const authModals = await getAuthModalsContent().catch(
+    (error): AuthModalsContent => {
+      logger.error(error)
+      return { err: '500' }
+    },
+  )
 
   if (locale === 'und') {
     locale = 'en'
@@ -217,30 +277,30 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       langToggleLink,
       content:
-        content?.err !== undefined
+        content.err !== undefined
           ? content
           : locale === 'en'
             ? content.en
             : content.fr,
       meta,
       aaPrefix:
-        content?.err !== undefined
+        content.err !== undefined
           ? ''
-          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading || content.en?.title}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading}`,
       aaMenuPrefix:
-        content?.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
+        content.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupStaySignedIn.en
-            : authModals.mappedPopupStaySignedIn.fr,
+            ? authModals.mappedPopupStaySignedIn?.en
+            : authModals.mappedPopupStaySignedIn?.fr,
       popupYouHaveBeenSignedout:
-        authModals?.err !== undefined
+        authModals.err !== undefined
           ? authModals
           : locale === 'en'
-            ? authModals.mappedPopupSignedOut.en
-            : authModals.mappedPopupSignedOut.fr,
+            ? authModals.mappedPopupSignedOut?.en
+            : authModals.mappedPopupSignedOut?.fr,
     },
   }
 }

@@ -1,11 +1,11 @@
-import { buildLink } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 
-interface GetSchProfileV1 {
+interface GetSchProfileV2 {
   data: {
-    schPageV1ByPath: {
-      item: {
+    schPageV1List: {
+      items: Array<{
         _path: string
         scTitleEn: string
         scTitleFr: string
@@ -61,7 +61,7 @@ interface GetSchProfileV1 {
           scDestinationURLEn?: string
           scDestinationURLFr?: string
         }>
-      }
+      }>
     }
   }
 }
@@ -70,18 +70,17 @@ const getCachedContent = () => {
   return cachified({
     key: `content-profile`,
     cache,
-    getFreshValue: async () => {
-      const response = await fetch(
-        `${process.env.AEM_GRAPHQL_ENDPOINT}getSchProfileV1`
-      )
+    getFreshValue: async (): Promise<GetSchProfileV2 | null> => {
+      const targetUri = buildAemUri('getSchProfileV2')
+      const response = await fetch(targetUri)
       if (!response.ok) return null
-      return (await response.json()) as GetSchProfileV1
+      return await response.json()
     },
     ttl,
   })
 }
 
-export async function getProfileContent() {
+export async function getProfileContent(): Promise<ProfileContent> {
   const response = await getCachedContent()
 
   // LookingFor Fragment
@@ -95,7 +94,7 @@ export async function getProfileContent() {
   // BackToDashboard Fragment
   const backToDashboardFragment = findFragmentByScId(
     response,
-    'back-to-my-dashboard'
+    'back-to-my-dashboard',
   )
 
   // ProfileIntro Fragment
@@ -104,17 +103,17 @@ export async function getProfileContent() {
   const mappedProfile = {
     en: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameEn,
               text: level.scTitleEn,
             }
-          }
+          },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scTitleEn,
       heading: profileIntroFragment?.scContentEn?.json[0].content[0].value,
-      list: response?.data.schPageV1ByPath.item.scFragments
+      list: response?.data.schPageV1List.items[0].scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -156,17 +155,17 @@ export async function getProfileContent() {
     },
     fr: {
       breadcrumb:
-        response?.data.schPageV1ByPath.item.scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level) => {
             return {
               link: level.scPageNameFr,
               text: level.scTitleFr,
             }
-          }
+          },
         ),
-      pageName: response?.data.schPageV1ByPath.item.scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scTitleFr,
       heading: profileIntroFragment?.scContentFr?.json[0].content[0].value,
-      list: response?.data.schPageV1ByPath.item.scFragments
+      list: response?.data.schPageV1List.items[0].scFragments
         .map((element) => {
           if (
             element.scId === 'ei-profile-list' ||
@@ -210,10 +209,100 @@ export async function getProfileContent() {
   return mappedProfile
 }
 
-const findFragmentByScId = (res: GetSchProfileV1 | null, id: string) => {
+const findFragmentByScId = (res: GetSchProfileV2 | null, id: string) => {
   return (
-    res?.data.schPageV1ByPath.item.scFragments.find(
-      ({ scId }) => scId === id
+    res?.data.schPageV1List.items[0].scFragments.find(
+      ({ scId }) => scId === id,
     ) ?? null
   )
+}
+
+// TODO: Check which of these properties should actually be optional and switch to using a question mark instead
+export interface ProfileContent {
+  err?: string
+  en?:
+    | {
+        breadcrumb:
+          | {
+              link: string
+              text: string
+            }[]
+          | undefined
+        pageName: string | undefined
+        heading: string | undefined
+        list:
+          | (
+              | {
+                  id: string
+                  title: string | undefined
+                  tasks:
+                    | {
+                        id: string
+                        title: string
+                        areaLabel: string
+                        link: string
+                        icon: string
+                        betaPopUp: boolean
+                      }[]
+                    | undefined
+                }
+              | undefined
+            )[]
+          | undefined
+        lookingFor: {
+          title: string | undefined
+          subText: (string | undefined)[]
+          link: string
+          id: string
+        }
+        backToDashboard: {
+          id: string | undefined
+          btnText: string | undefined
+          btnLink: string | undefined
+        }
+        title?: string | undefined
+      }
+    | undefined
+  fr?: {
+    breadcrumb:
+      | {
+          link: string
+          text: string
+        }[]
+      | undefined
+    pageName: string | undefined
+    heading: string | undefined
+    list:
+      | (
+          | {
+              id: string
+              title: string | undefined
+              tasks:
+                | {
+                    id: string
+                    title: string
+                    areaLabel: string
+                    link: string
+                    icon: string
+                    betaPopUp: boolean
+                  }[]
+                | undefined
+            }
+          | undefined
+        )[]
+      | undefined
+    lookingFor: {
+      title: string | undefined
+      subText: (string | undefined)[]
+      link: string
+      id: string
+    }
+    backToDashboard:
+      | {
+          id: string | undefined
+          btnText: string | undefined
+          btnLink: string | undefined
+        }
+      | undefined
+  }
 }

@@ -44,7 +44,7 @@ export async function getServerSideProps({ req, res, locale }) {
   logger.level = 'error'
 
   const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req, session).catch((error) => {
+    ? await getLogoutURL(req, session, locale).catch((error) => {
         logger.error(error)
         res.statusCode = 500
         throw error

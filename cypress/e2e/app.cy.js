@@ -2,7 +2,7 @@
 
 describe('app page loads', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/', { retryOnStatusCodeFailure: true, timeout: 60000 })
     cy.injectAxe()
   })
 

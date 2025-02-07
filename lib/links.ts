@@ -1,5 +1,5 @@
 //build links is used to prepend links with their corresponding environment. ie MSCA with their test vs prod environment
-export function buildLink(linkType, link) {
+export function buildLink(linkType: string | undefined, link: string) {
   //If no type assume full or relative link
   if (linkType === undefined) {
     return link
@@ -14,4 +14,16 @@ export function buildLink(linkType, link) {
   else {
     return link
   }
+}
+
+export function buildAemUri(endpointName: string) {
+  if (process.env.AEM_GRAPHQL_FOLDER !== undefined) {
+    return (
+      process.env.AEM_GRAPHQL_ENDPOINT +
+      endpointName +
+      '%3BfolderName=' +
+      encodeURIComponent(process.env.AEM_GRAPHQL_FOLDER)
+    )
+  }
+  return process.env.AEM_GRAPHQL_ENDPOINT + endpointName
 }
