@@ -1,20 +1,19 @@
 import { GetServerSidePropsContext } from 'next'
 
 export function addCookie(
-  req: GetServerSidePropsContext['req'],
   res: GetServerSidePropsContext['res'],
   name: string,
   value: string,
   expiry: number,
 ) {
-  const cookieKeys = Object.keys(req.cookies)
-  const cookies = []
-  for (const key in cookieKeys) {
-    cookies.push(req.cookies[key])
-  }
+  const setCookieHeader = res.getHeader('Set-Cookie')
+  const cookies = setCookieHeader as string[]
   const expiryString = getTimeFromNow(expiry)
-  cookies.push(`${name}=${value}; Max-Age=${expiryString}; path=/`)
-  res.setHeader('Set-Cookie', cookies as string[])
+  cookies.push(
+    'Set-Cookie',
+    `${name}=${value}; Max-Age=${expiryString}; path=/`,
+  )
+  res.setHeader('Set-Cookie', cookies)
 }
 
 export function extendExpiryTime(
@@ -24,7 +23,7 @@ export function extendExpiryTime(
   expiry: number,
 ) {
   const cookieValue = getCookieValue(cookieName, req.cookies)
-  addCookie(req, res, cookieName, cookieValue as string, expiry)
+  addCookie(res, cookieName, cookieValue as string, expiry)
 }
 
 export function deleteAllCookiesWithPrefix(
@@ -49,7 +48,7 @@ export function getCookieValue(
     if (cookieName.match(givenCookieName)) {
       const splitCookie = cookies[cookieName]?.split('=')
       if (splitCookie) {
-        return splitCookie[1]
+        return splitCookie[0]
       } else {
         return null
       }

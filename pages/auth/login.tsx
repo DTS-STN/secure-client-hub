@@ -157,31 +157,18 @@ export const actuallyGetServerSideProps = async function ({
   const codeChallengeMethod = 'S256'
   const nonce = generators.nonce()
 
-  const authorizationUrl = await (
-    await openIdClientService
-  ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
-
   addCookie(
-    req,
     res,
     'codeVerifier',
     codeVerifier,
-    Number(process.env.AUTH_COOKIE_PREFIX as string),
+    Number(process.env.SESSION_MAX_AGE as string),
   )
-  addCookie(
-    req,
-    res,
-    'nonce',
-    nonce,
-    Number(process.env.AUTH_COOKIE_PREFIX as string),
-  )
-  addCookie(
-    req,
-    res,
-    'state',
-    state,
-    Number(process.env.AUTH_COOKIE_PREFIX as string),
-  )
+  addCookie(res, 'nonce', nonce, Number(process.env.SESSION_MAX_AGE as string))
+  addCookie(res, 'state', state, Number(process.env.SESSION_MAX_AGE as string))
+
+  const authorizationUrl = await (
+    await openIdClientService
+  ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
 
   /* Place-holder Meta Data Props */
   const meta = {

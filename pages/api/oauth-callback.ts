@@ -32,7 +32,6 @@ export default async function handler(
   const userinfo = await openIdService.userinfo(tokenSet.access_token as string)
 
   addCookie(
-    req,
     res,
     'idToken',
     tokenSet.id_token as string,
