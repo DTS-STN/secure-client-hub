@@ -33,7 +33,7 @@ export default async function handler(
 
   addCookie(
     res,
-    'idToken',
+    process.env.AUTH_COOKIE_PREFIX + 'idToken',
     tokenSet.id_token as string,
     Number(process.env.SESSION_MAX_AGE),
   )

@@ -159,12 +159,22 @@ export const actuallyGetServerSideProps = async function ({
 
   addCookie(
     res,
-    'codeVerifier',
+    process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
     codeVerifier,
     Number(process.env.SESSION_MAX_AGE as string),
   )
-  addCookie(res, 'nonce', nonce, Number(process.env.SESSION_MAX_AGE as string))
-  addCookie(res, 'state', state, Number(process.env.SESSION_MAX_AGE as string))
+  addCookie(
+    res,
+    process.env.AUTH_COOKIE_PREFIX + 'nonce',
+    nonce,
+    Number(process.env.SESSION_MAX_AGE as string),
+  )
+  addCookie(
+    res,
+    process.env.AUTH_COOKIE_PREFIX + 'state',
+    state,
+    Number(process.env.SESSION_MAX_AGE as string),
+  )
 
   const authorizationUrl = await (
     await openIdClientService

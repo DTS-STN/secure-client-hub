@@ -23,7 +23,12 @@ export function extendExpiryTime(
   expiry: number,
 ) {
   const cookieValue = getCookieValue(cookieName, req.cookies)
-  addCookie(res, cookieName, cookieValue as string, expiry)
+  addCookie(
+    res,
+    process.env.AUTH_COOKIE_PREFIX + cookieName,
+    cookieValue as string,
+    expiry,
+  )
 }
 
 export function deleteAllCookiesWithPrefix(
