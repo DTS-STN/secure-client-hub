@@ -153,8 +153,10 @@ export async function getServerSideProps({
   if (!authDisabled && !authValid) return Redirect(locale as string)
 
   const idToken = await getIdToken(req)
-  const idTokenJson = JSON.parse(idToken as string)
-
+  let idTokenJson = JSON.parse('{}')
+  if (typeof idToken != 'undefined') {
+    idTokenJson = JSON.parse(idToken as string)
+  }
   //If id token is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!authDisabled) {
     const sessionValid = await ValidateSession(
