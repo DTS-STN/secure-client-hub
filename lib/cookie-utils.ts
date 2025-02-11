@@ -6,13 +6,13 @@ export function addCookie(
   value: string,
   expiry: number,
 ) {
-  const setCookieHeader = res.getHeader('Set-Cookie')
+  let setCookieHeader = res.getHeader('Set-Cookie')
+  if (setCookieHeader === undefined) {
+    setCookieHeader = []
+  }
   const cookies = setCookieHeader as string[]
   const expiryString = getTimeFromNow(expiry)
-  cookies.push(
-    'Set-Cookie',
-    `${name}=${value}; Max-Age=${expiryString}; path=/`,
-  )
+  cookies.push(`${name}=${value}; Max-Age=${expiryString}; path=/`)
   res.setHeader('Set-Cookie', cookies)
 }
 

@@ -40,7 +40,7 @@ export default async function handler(
 
   updateMscaNg(userinfo.sin, userinfo.uid)
 
-  res.status(307).redirect('/my-dashboard') //TODO get lang parameter
+  res.status(307).redirect('youtube.com') //TODO get lang parameter
 }
 
 function updateMscaNg(sin: string, uid: string) {
