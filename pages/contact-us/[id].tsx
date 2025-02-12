@@ -13,10 +13,12 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
-  getIdToken,
+  getDecodedIdToken,
 } from '../../lib/auth'
-import { authOptions } from '../api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../../lib/cookie-utils'
 import { GetServerSideProps } from 'next'
 
 interface Data {
@@ -86,39 +88,53 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   )
 }
 
-export const getServerSideProps = (async ({ req, res, locale, params }) => {
-  const session = await getServerSession(req, res, authOptions)
+export const getServerSideProps = async function ({
+  locale,
+  params,
+  req,
+  res,
+}) {
+  const authDisabled = AuthIsDisabled() ? true : false
+  const authValid = await AuthIsValid(req)
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
+  if (!authDisabled && !authValid) return Redirect(locale as string)
 
-  const token = await getIdToken(req)
+  if (!authValid) {
+    deleteAllCookiesWithPrefix(
+      req,
+      res,
+      process.env.AUTH_COOKIE_PREFIX as string,
+    )
+  }
 
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  const idToken = getDecodedIdToken(req)
+
+  //If idToken is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
+  if (!AuthIsDisabled() && idToken !== null) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      process.env.CLIENT_ID as string,
+      idToken.sid as string,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        'idToken',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 
@@ -203,7 +219,7 @@ export const getServerSideProps = (async ({ req, res, locale, params }) => {
           : authModals.mappedPopupSignedOut?.fr,
     },
   }
-}) satisfies GetServerSideProps<ContactUsPageProps>
+} satisfies GetServerSideProps<ContactUsPageProps>
 // https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 
 export default ContactUsPage

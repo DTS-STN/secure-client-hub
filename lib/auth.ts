@@ -1,7 +1,10 @@
-import { getToken } from 'next-auth/jwt'
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
 import * as jose from 'jose'
+import { decodeJwt } from 'jose'
+import { GetServerSidePropsContext } from 'next'
+import { getCookieValue } from './cookie-utils'
+import { UTCDate } from '@date-fns/utc'
 
 const logger = getLogger('auth-helpers')
 
@@ -12,25 +15,37 @@ export function AuthIsDisabled() {
   )
 }
 
-export async function AuthIsValid(req, session) {
-  const token = await getToken({ req })
-  if (session && token) {
+export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
+  const idToken = getIdToken(req)
+  if (!idToken) {
+    return false
+  }
+  const decodedIdToken: jose.JWTPayload = decodeJwt(idToken)
+  const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
+  if (decodedIdToken.exp && decodedIdToken.exp > now) {
     return true
   }
   return false
 }
 
-//This function grabs the idToken from the getToken function and decodes it
-export async function getIdToken(req) {
-  const token = await getToken({ req })
-  if (token) {
-    const idToken = jose.decodeJwt(token.id_token)
-    return idToken
-  }
-  return token
+//This function grabs the idToken from request cookies
+function getIdToken(req: GetServerSidePropsContext['req']) {
+  return getCookieValue('idToken', req.cookies)
 }
 
-export async function ValidateSession(clientId, sharedSessionId) {
+export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
+  const idToken = getIdToken(req)
+  if (idToken !== null) {
+    return decodeJwt(idToken as string)
+  }
+
+  return null
+}
+
+export async function ValidateSession(
+  clientId: string,
+  sharedSessionId: string,
+) {
   logger.trace('Renewing session...')
 
   //Necessary to test locally until we no longer need the proxy. Will use request without proxy on deployed app
@@ -60,7 +75,7 @@ export async function ValidateSession(clientId, sharedSessionId) {
           .catch((error) => logger.error(error))
 
   //Log whether the session was renewed
-  getResponse === true
+  getResponse?.data
     ? logger.trace('Session renewed')
     : logger.trace('Something went wrong renewing the session')
 
@@ -68,20 +83,20 @@ export async function ValidateSession(clientId, sharedSessionId) {
   return getResponse?.data ?? false
 }
 
-export async function getLogoutURL(req, session, locale) {
-  const token = await getToken({ req })
+export async function getLogoutURL(req: GetServerSidePropsContext['req'], locale: GetServerSidePropsContext['locale']) {
+  const idToken = getDecodedIdToken(req)
   const localeParam = locale === 'en' ? 'en' : 'fr'
-
-  if (session && token) {
+  if (idToken !== null && idToken.sub) {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
-      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${token.sub}&ui_locales=${localeParam}`
+      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idToken.sub as string}&ui_locales=${localeParam}`
     )
   }
-  return
+
+  return ''
 }
 
-export function Redirect(locale) {
+export function Redirect(locale: string) {
   return {
     redirect: {
       permanent: false,
