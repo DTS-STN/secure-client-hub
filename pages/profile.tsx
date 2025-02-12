@@ -155,7 +155,7 @@ export async function getServerSideProps({
   const idToken = getDecodedIdToken(req)
 
   //If id token is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!authDisabled) {
+  if (!authDisabled && idToken !== null) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
       idToken.sid as string,

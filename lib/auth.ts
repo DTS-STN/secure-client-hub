@@ -35,7 +35,11 @@ function getIdToken(req: GetServerSidePropsContext['req']) {
 
 export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
   const idToken = getIdToken(req)
-  return decodeJwt(idToken as string)
+  if (idToken !== null) {
+    return decodeJwt(idToken as string)
+  }
+
+  return null
 }
 
 export async function ValidateSession(
@@ -81,7 +85,7 @@ export async function ValidateSession(
 
 export async function getLogoutURL(req: GetServerSidePropsContext['req']) {
   const idToken = getDecodedIdToken(req)
-  if (idToken.sid) {
+  if (idToken !== null && idToken.sid) {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
       `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idToken.sid as string}`

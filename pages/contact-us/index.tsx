@@ -135,7 +135,7 @@ export const getServerSideProps = (async ({ locale, req, res }) => {
   const idToken = getDecodedIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!authDisabled) {
+  if (!authDisabled && idToken !== null) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
       idToken.sid as string,

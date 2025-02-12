@@ -36,7 +36,7 @@ export default async function handler(
     if (AuthIsDisabled()) {
       //Service unavailable when auth is disabled
       res.status(503).json({ success: false })
-    } else if (await AuthIsValid(req)) {
+    } else if ((await AuthIsValid(req)) && idToken !== null) {
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
         process.env.CLIENT_ID as string,

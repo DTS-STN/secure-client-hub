@@ -118,7 +118,7 @@ export const actuallyGetServerSideProps = async function ({
   const idToken = getDecodedIdToken(req)
 
   //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!authDisabled && authIsValid) {
+  if (!authDisabled && authIsValid && idToken !== null) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
       idToken.sid as string,
