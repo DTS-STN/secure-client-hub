@@ -17,7 +17,7 @@ import {
   AuthIsValid,
   ValidateSession,
   Redirect,
-  getIdToken,
+  getDecodedIdToken,
 } from '../lib/auth'
 import {
   deleteAllCookiesWithPrefix,
@@ -130,17 +130,13 @@ export async function getServerSideProps({
 
   if (!authDisabled && !authValid) return Redirect(locale as string)
 
-  const idToken = await getIdToken(req)
-  let idTokenJson = JSON.parse('{}')
-  if (typeof idToken != 'undefined') {
-    idTokenJson = JSON.parse(idToken as string)
-  }
+  const idToken = getDecodedIdToken(req)
 
   //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
   if (!authDisabled) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      idTokenJson?.sid,
+      idToken.sid as string,
     )
     if (!sessionValid) {
       deleteAllCookiesWithPrefix(

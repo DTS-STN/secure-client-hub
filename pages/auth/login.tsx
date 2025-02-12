@@ -8,7 +8,7 @@ import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
-  getIdToken,
+  getDecodedIdToken,
 } from '../../lib/auth'
 import { generators } from 'openid-client'
 import React from 'react'
@@ -115,16 +115,13 @@ export const actuallyGetServerSideProps = async function ({
     )
   }
 
-  let idTokenJson = JSON.parse('{}')
-  const idToken = await getIdToken(req)
-  if (typeof idToken != 'undefined') {
-    idTokenJson = JSON.parse(idToken as string)
-  }
+  const idToken = getDecodedIdToken(req)
+
   //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!authDisabled && authIsValid) {
     const sessionValid = await ValidateSession(
       process.env.CLIENT_ID as string,
-      idTokenJson?.sid,
+      idToken.sid as string,
     )
     if (sessionValid) {
       extendExpiryTime(

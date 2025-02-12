@@ -16,7 +16,7 @@ export function AuthIsDisabled() {
 }
 
 export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
-  const idToken = await getIdToken(req)
+  const idToken = getIdToken(req)
   if (!idToken) {
     return false
   }
@@ -25,11 +25,17 @@ export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
   if (decodedIdToken.exp && decodedIdToken.exp > now) {
     return true
   }
+  return false
 }
 
 //This function grabs the idToken from request cookies
-export async function getIdToken(req: GetServerSidePropsContext['req']) {
+function getIdToken(req: GetServerSidePropsContext['req']) {
   return getCookieValue('idToken', req.cookies)
+}
+
+export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
+  const idToken = getIdToken(req)
+  return decodeJwt(idToken as string)
 }
 
 export async function ValidateSession(
@@ -74,16 +80,15 @@ export async function ValidateSession(
 }
 
 export async function getLogoutURL(req: GetServerSidePropsContext['req']) {
-  const idToken = await getIdToken(req)
-  const idTokenJson = JSON.parse(idToken as string)
-
-  if (idTokenJson) {
+  const idToken = getDecodedIdToken(req)
+  if (idToken.sid) {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
-      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idTokenJson.sid}`
+      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idToken.sid as string}`
     )
   }
-  return
+
+  return ''
 }
 
 export function Redirect(locale: string) {

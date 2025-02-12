@@ -7,7 +7,7 @@ import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
-  getIdToken,
+  getDecodedIdToken,
 } from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -26,8 +26,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const idToken = await getIdToken(req)
-  const idTokenJson = JSON.parse(idToken as string)
+  const idToken = getDecodedIdToken(req)
+
   //Generate a random id for each request to ensure unique responses/no caching
   const id = crypto.randomBytes(20).toString('hex')
 
@@ -40,7 +40,7 @@ export default async function handler(
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
         process.env.CLIENT_ID as string,
-        idTokenJson.sid,
+        idToken.sid as string,
       )
       if (sessionValid) {
         extendExpiryTime(
