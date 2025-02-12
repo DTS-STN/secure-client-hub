@@ -114,7 +114,7 @@ export async function getServerSideProps({
     props: {
       locale: locale,
       meta,
-      logoutURL: logoutURL ?? '/',
+      logoutURL: logoutURL,
     },
   }
 }
