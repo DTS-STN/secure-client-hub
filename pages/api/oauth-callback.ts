@@ -40,7 +40,9 @@ export default async function handler(
 
   updateMscaNg(userinfo.sin, userinfo.uid)
 
-  res.status(307).redirect('http://localhost:3000/my-dashboard') //TODO get lang parameter
+  res
+    .status(307)
+    .redirect('https://mscad-sys2-s2.bdm.dshp-phdn.net/en/my-dashboard') //TODO get lang parameter
 }
 
 function updateMscaNg(sin: string, uid: string) {
