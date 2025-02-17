@@ -50,15 +50,11 @@ export function getCookieValue(
   cookies: Partial<{ [key: string]: string }>,
 ) {
   for (const cookieName of Object.keys(cookies)) {
-    if (cookieName.endsWith(givenCookieName)) {
-      const splitCookie = cookies[cookieName]?.split('=')
-      if (splitCookie) {
-        return splitCookie[0]
-      } else {
-        return null
-      }
+    if (cookieName === process.env.AUTH_COOKIE_PREFIX + givenCookieName) {
+      return cookies[cookieName]
     }
   }
+
   return null
 }
 

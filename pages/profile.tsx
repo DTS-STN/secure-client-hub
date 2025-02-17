@@ -9,13 +9,7 @@ import {
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getDecodedIdToken,
-} from '../lib/auth'
+import { AuthIsDisabled, ValidateSession } from '../lib/auth'
 import ProfileTasks, { Task } from '../components/ProfileTasks'
 import React, { ReactNode } from 'react'
 import { acronym } from '../lib/acronym'
@@ -140,25 +134,10 @@ export async function getServerSideProps({
   res: GetServerSidePropsContext['res']
 }) {
   const authDisabled = AuthIsDisabled() ? true : false
-  const authValid = await AuthIsValid(req)
-
-  if (!authValid) {
-    deleteAllCookiesWithPrefix(
-      req,
-      res,
-      process.env.AUTH_COOKIE_PREFIX as string,
-    )
-  }
-
-  if (!authDisabled && !authValid) return Redirect(locale as string)
-
-  const idToken = getDecodedIdToken(req)
-
-  //If id token is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!authDisabled && idToken !== null) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
+      req.cookies,
       process.env.CLIENT_ID as string,
-      idToken.sid as string,
     )
     if (!sessionValid) {
       deleteAllCookiesWithPrefix(
@@ -177,7 +156,7 @@ export async function getServerSideProps({
       extendExpiryTime(
         req,
         res,
-        'idToken',
+        'sessionId',
         Number(process.env.SESSION_MAX_AGE as string),
       )
     }

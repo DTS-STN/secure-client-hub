@@ -3,12 +3,7 @@
  *
  */
 
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  getDecodedIdToken,
-} from '../../lib/auth'
+import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
 import { getLogger } from '../../logging/log-util'
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
@@ -26,8 +21,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const idToken = getDecodedIdToken(req)
-
   //Generate a random id for each request to ensure unique responses/no caching
   const id = crypto.randomBytes(20).toString('hex')
 
@@ -36,43 +29,29 @@ export default async function handler(
     if (AuthIsDisabled()) {
       //Service unavailable when auth is disabled
       res.status(503).json({ success: false })
-    } else if ((await AuthIsValid(req)) && idToken !== null) {
+    } else {
       //If auth session is valid, make GET request to validateSession endpoint
       const sessionValid = await ValidateSession(
+        req.cookies,
         process.env.CLIENT_ID as string,
-        idToken.sid as string,
       )
       if (sessionValid) {
         extendExpiryTime(
           req,
           res,
-          'idToken',
+          'sessionId',
           Number(process.env.SESSION_MAX_AGE as string),
         )
-        res.status(200).json({ success: sessionValid, id: id })
+        res.status(200).json({ success: true, id: id })
       } else {
         deleteAllCookiesWithPrefix(
           req,
           res,
           process.env.AUTH_COOKIE_PREFIX as string,
         )
-        res.status(401).json({ success: sessionValid, id: id })
+        res.status(401).json({ success: false, id: id })
+        logger.error('Authentication is not valid')
       }
-    } else {
-      deleteAllCookiesWithPrefix(
-        req,
-        res,
-        process.env.AUTH_COOKIE_PREFIX as string,
-      )
-
-      res.status(401).json({ success: false })
-      logger.error('Authentication is not valid')
     }
-  } else {
-    //return unimplemented
-    res.status(501).json({ success: false })
-    logger.error(
-      'Something went wrong when trying reach the MSCA refresh endpoint',
-    )
   }
 }

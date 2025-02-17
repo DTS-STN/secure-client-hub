@@ -3,8 +3,8 @@ import { getLogger } from '../logging/log-util'
 import * as jose from 'jose'
 import { decodeJwt } from 'jose'
 import { GetServerSidePropsContext } from 'next'
-import { getCookieValue } from './cookie-utils'
 import { UTCDate } from '@date-fns/utc'
+import { getCookieValue } from './cookie-utils'
 
 const logger = getLogger('auth-helpers')
 
@@ -43,9 +43,15 @@ export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
 }
 
 export async function ValidateSession(
+  cookies: Partial<{ [key: string]: string }>,
   clientId: string,
-  sharedSessionId: string,
 ) {
+  const sessionId = getCookieValue('sessionId', cookies)
+
+  if (sessionId === undefined || sessionId === null || sessionId === '') {
+    return false
+  }
+
   logger.trace('Renewing session...')
 
   //Necessary to test locally until we no longer need the proxy. Will use request without proxy on deployed app
@@ -55,7 +61,7 @@ export async function ValidateSession(
       ? await axios
           .get(
             process.env.AUTH_ECAS_REFRESH_ENDPOINT +
-              `?client_id=${clientId}&shared_session_id=${sharedSessionId}`,
+              `?client_id=${clientId}&shared_session_id=${sessionId}`,
             {
               proxy: {
                 protocol: 'http',
@@ -65,11 +71,21 @@ export async function ValidateSession(
             },
           )
           .then((response) => response)
-          .catch((error) => logger.error(error))
+          .catch((error) => {
+            if (error.response) {
+              console.error(error.response.data)
+              console.error(error.response.status)
+              console.error(error.response.headers)
+            } else if (error.request) {
+              console.error(error.request)
+            } else {
+              console.error('Error', error.message)
+            }
+          })
       : await axios
           .get(
             process.env.AUTH_ECAS_REFRESH_ENDPOINT +
-              `?client_id=${clientId}&shared_session_id=${sharedSessionId}`,
+              `?client_id=${clientId}&shared_session_id=${sessionId}`,
           )
           .then((response) => response)
           .catch((error) => logger.error(error))
@@ -83,17 +99,21 @@ export async function ValidateSession(
   return getResponse?.data ?? false
 }
 
-export async function getLogoutURL(req: GetServerSidePropsContext['req'], locale: GetServerSidePropsContext['locale']) {
-  const idToken = getDecodedIdToken(req)
+export async function getLogoutURL(
+  cookies: Partial<{ [key: string]: string }>,
+  locale: GetServerSidePropsContext['locale'],
+) {
   const localeParam = locale === 'en' ? 'en' : 'fr'
-  if (idToken !== null && idToken.sub) {
+
+  const sessionId = getCookieValue('sessionId', cookies)
+  if (sessionId !== undefined && sessionId !== null && sessionId !== '') {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +
-      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${idToken.sub as string}&ui_locales=${localeParam}`
+      `?client_id=${process.env.CLIENT_ID}&shared_session_id=${sessionId as string}&ui_locales=${localeParam}`
     )
   }
 
-  return ''
+  return '/'
 }
 
 export function Redirect(locale: string) {

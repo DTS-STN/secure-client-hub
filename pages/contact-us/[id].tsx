@@ -8,13 +8,7 @@ import {
   GetContactUsPageReturnType,
   getContactUsPage,
 } from '../../graphql/mappers/contact-us-pages-dynamic'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getDecodedIdToken,
-} from '../../lib/auth'
+import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
 import {
   deleteAllCookiesWithPrefix,
   extendExpiryTime,
@@ -95,25 +89,11 @@ export const getServerSideProps = async function ({
   res,
 }) {
   const authDisabled = AuthIsDisabled() ? true : false
-  const authValid = await AuthIsValid(req)
 
-  if (!authDisabled && !authValid) return Redirect(locale as string)
-
-  if (!authValid) {
-    deleteAllCookiesWithPrefix(
-      req,
-      res,
-      process.env.AUTH_COOKIE_PREFIX as string,
-    )
-  }
-
-  const idToken = getDecodedIdToken(req)
-
-  //If idToken is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && idToken !== null) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
+      req.cookies,
       process.env.CLIENT_ID as string,
-      idToken.sid as string,
     )
     if (!sessionValid) {
       deleteAllCookiesWithPrefix(
@@ -132,7 +112,7 @@ export const getServerSideProps = async function ({
       extendExpiryTime(
         req,
         res,
-        'idToken',
+        'sessionId',
         Number(process.env.SESSION_MAX_AGE as string),
       )
     }

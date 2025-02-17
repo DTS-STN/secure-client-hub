@@ -4,12 +4,7 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
 import { getOpenIdClientService } from '../api/openid-client-service'
 import { GetServerSidePropsContext } from 'next'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  getDecodedIdToken,
-} from '../../lib/auth'
+import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
 import { generators } from 'openid-client'
 import React from 'react'
 import { CircuitBreaker } from '../../lib/circuit-breaker'
@@ -106,28 +101,18 @@ export const actuallyGetServerSideProps = async function ({
   res: GetServerSidePropsContext['res']
 }) {
   const authDisabled = AuthIsDisabled() ? true : false
-  const authIsValid = await AuthIsValid(req)
-  if (!authIsValid) {
-    deleteAllCookiesWithPrefix(
-      req,
-      res,
-      process.env.AUTH_COOKIE_PREFIX as string,
-    )
-  }
+  let authorizationUrl = null
 
-  const idToken = getDecodedIdToken(req)
-
-  //If id token is available and not expired, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
-  if (!authDisabled && authIsValid && idToken !== null) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
+      req.cookies,
       process.env.CLIENT_ID as string,
-      idToken.sid as string,
     )
     if (sessionValid) {
       extendExpiryTime(
         req,
         res,
-        'idToken',
+        'sessionId',
         Number(process.env.SESSION_MAX_AGE as string),
       )
       return {
@@ -144,38 +129,38 @@ export const actuallyGetServerSideProps = async function ({
         process.env.AUTH_COOKIE_PREFIX as string,
       )
     }
+
+    const openIdClientService = getOpenIdClientService()
+    const codeVerifier = generators.codeVerifier()
+    const codeChallenge = generators.codeChallenge(codeVerifier)
+    const scope = 'openid profile'
+    const state = generators.state()
+    const codeChallengeMethod = 'S256'
+    const nonce = generators.nonce()
+
+    addCookie(
+      res,
+      process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
+      codeVerifier,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
+    addCookie(
+      res,
+      process.env.AUTH_COOKIE_PREFIX + 'nonce',
+      nonce,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
+    addCookie(
+      res,
+      process.env.AUTH_COOKIE_PREFIX + 'state',
+      state,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
+
+    authorizationUrl = await (
+      await openIdClientService
+    ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
   }
-
-  const openIdClientService = getOpenIdClientService()
-  const codeVerifier = generators.codeVerifier()
-  const codeChallenge = generators.codeChallenge(codeVerifier)
-  const scope = 'openid profile'
-  const state = generators.state()
-  const codeChallengeMethod = 'S256'
-  const nonce = generators.nonce()
-
-  addCookie(
-    res,
-    process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
-    codeVerifier,
-    Number(process.env.SESSION_MAX_AGE as string),
-  )
-  addCookie(
-    res,
-    process.env.AUTH_COOKIE_PREFIX + 'nonce',
-    nonce,
-    Number(process.env.SESSION_MAX_AGE as string),
-  )
-  addCookie(
-    res,
-    process.env.AUTH_COOKIE_PREFIX + 'state',
-    state,
-    Number(process.env.SESSION_MAX_AGE as string),
-  )
-
-  const authorizationUrl = await (
-    await openIdClientService
-  ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
 
   /* Place-holder Meta Data Props */
   const meta = {
