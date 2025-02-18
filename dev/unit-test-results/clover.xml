@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1739289330238" clover="3.2.0">
-  <project timestamp="1739289330238" name="All files">
-    <metrics statements="731" coveredstatements="357" conditionals="664" coveredconditionals="215" methods="163" coveredmethods="67" elements="1558" coveredelements="639" complexity="0" loc="731" ncloc="731" packages="7" files="49" classes="49"/>
+<coverage generated="1739894426565" clover="3.2.0">
+  <project timestamp="1739894426566" name="All files">
+    <metrics statements="732" coveredstatements="357" conditionals="664" coveredconditionals="215" methods="163" coveredmethods="67" elements="1559" coveredelements="639" complexity="0" loc="732" ncloc="732" packages="7" files="49" classes="49"/>
     <package name="components">
       <metrics statements="240" coveredstatements="190" conditionals="300" coveredconditionals="161" methods="73" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -365,7 +365,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="257" coveredstatements="104" conditionals="199" coveredconditionals="32" methods="39" coveredmethods="11"/>
+      <metrics statements="258" coveredstatements="104" conditionals="199" coveredconditionals="32" methods="39" coveredmethods="11"/>
       <file name="404.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.tsx">
         <metrics statements="10" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -393,7 +393,7 @@
         <line num="88" count="2" type="stmt"/>
       </file>
       <file name="_app.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_app.tsx">
-        <metrics statements="20" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="21" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -409,11 +409,12 @@
         <line num="35" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="50" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="51" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
       </file>
       <file name="_document.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/_document.tsx">
         <metrics statements="3" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
