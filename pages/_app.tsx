@@ -10,7 +10,7 @@ import { AppProps } from 'next/app'
 import { NextPage } from 'next'
 config.autoAddCss = false
 
-declare const window: Window & { adobeDataLayer: Record<string, unknown>[] }
+declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -25,14 +25,14 @@ let appPreviousLocationPathname = ''
 
 function aaPushEvent(errType?: string) {
   if (errType !== undefined) {
-    window.adobeDataLayer.push({
+    window.adobeDataLayer?.push({
       event: 'error',
       error: {
         name: errType,
       },
     })
   } else {
-    window.adobeDataLayer.push({ event: 'pageLoad' })
+    window.adobeDataLayer?.push({ event: 'pageLoad' })
   }
 }
 
@@ -45,10 +45,14 @@ export default function MyApp({
    *  @see https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics
    * */
   useEffect(() => {
-    // only push event if pathname is different
-    if (window.location.pathname !== appPreviousLocationPathname) {
-      aaPushEvent(pageProps.errType)
-      appPreviousLocationPathname = window.location.pathname
+    try {
+      // only push event if pathname is different
+      if (window.location.pathname !== appPreviousLocationPathname) {
+        aaPushEvent(pageProps.errType)
+        appPreviousLocationPathname = window.location.pathname
+      }
+    } catch {
+      // silently suppress all client side errors
     }
   }, [router.asPath, pageProps.errType])
 
