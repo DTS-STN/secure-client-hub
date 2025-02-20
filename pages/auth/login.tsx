@@ -13,9 +13,9 @@ import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('auth.login')
 import {
-  deleteAllCookiesWithPrefix,
+  // deleteAllCookiesWithPrefix,
   extendExpiryTime,
-  addCookie,
+  // addCookie,
 } from '../../lib/cookie-utils'
 
 interface MetaDataProps {
@@ -126,11 +126,11 @@ export const actuallyGetServerSideProps = async function ({
       }
     } else {
       log.info('got here 2')
-      deleteAllCookiesWithPrefix(
-        req,
-        res,
-        process.env.AUTH_COOKIE_PREFIX as string,
-      )
+      // deleteAllCookiesWithPrefix(
+      //   req,
+      //   res,
+      //   process.env.AUTH_COOKIE_PREFIX as string,
+      // )
     }
     log.info('got here 3')
     const openIdClientService = getOpenIdClientService()
@@ -141,24 +141,24 @@ export const actuallyGetServerSideProps = async function ({
     const codeChallengeMethod = 'S256'
     const nonce = generators.nonce()
 
-    addCookie(
-      res,
-      process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
-      codeVerifier,
-      Number(process.env.SESSION_MAX_AGE as string),
-    )
-    addCookie(
-      res,
-      process.env.AUTH_COOKIE_PREFIX + 'nonce',
-      nonce,
-      Number(process.env.SESSION_MAX_AGE as string),
-    )
-    addCookie(
-      res,
-      process.env.AUTH_COOKIE_PREFIX + 'state',
-      state,
-      Number(process.env.SESSION_MAX_AGE as string),
-    )
+    // addCookie(
+    //   res,
+    //   process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
+    //   codeVerifier,
+    //   Number(process.env.SESSION_MAX_AGE as string),
+    // )
+    // addCookie(
+    //   res,
+    //   process.env.AUTH_COOKIE_PREFIX + 'nonce',
+    //   nonce,
+    //   Number(process.env.SESSION_MAX_AGE as string),
+    // )
+    // addCookie(
+    //   res,
+    //   process.env.AUTH_COOKIE_PREFIX + 'state',
+    //   state,
+    //   Number(process.env.SESSION_MAX_AGE as string),
+    // )
 
     log.info('got here 4')
 
