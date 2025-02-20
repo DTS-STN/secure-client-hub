@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import MetaData from '../../components/MetaData'
-import { getOpenIdClientService } from '../api/openid-client-service'
+//import { getOpenIdClientService } from '../api/openid-client-service'
 import { GetServerSidePropsContext } from 'next'
 import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
-import { generators } from 'openid-client'
+// import { generators } from 'openid-client'
 import React from 'react'
 import { CircuitBreaker } from '../../lib/circuit-breaker'
 import moize from 'moize'
@@ -101,7 +101,7 @@ export const actuallyGetServerSideProps = async function ({
   res: GetServerSidePropsContext['res']
 }) {
   const authDisabled = AuthIsDisabled() ? true : false
-  let authorizationUrl = null
+  //let authorizationUrl = null
 
   log.info('got here 1')
 
@@ -133,13 +133,13 @@ export const actuallyGetServerSideProps = async function ({
       // )
     }
     log.info('got here 3')
-    const openIdClientService = getOpenIdClientService()
-    const codeVerifier = generators.codeVerifier()
-    const codeChallenge = generators.codeChallenge(codeVerifier)
-    const scope = 'openid profile'
-    const state = generators.state()
-    const codeChallengeMethod = 'S256'
-    const nonce = generators.nonce()
+    //const openIdClientService = getOpenIdClientService()
+    // const codeVerifier = generators.codeVerifier()
+    //const codeChallenge = generators.codeChallenge(codeVerifier)
+    // const scope = 'openid profile'
+    // const state = generators.state()
+    // const codeChallengeMethod = 'S256'
+    // const nonce = generators.nonce()
 
     // addCookie(
     //   res,
@@ -162,9 +162,9 @@ export const actuallyGetServerSideProps = async function ({
 
     log.info('got here 4')
 
-    authorizationUrl = await (
-      await openIdClientService
-    ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
+    // authorizationUrl = await (
+    //   await openIdClientService
+    // ).authorize(scope, codeChallenge, codeChallengeMethod, state, nonce)
   }
 
   /* Place-holder Meta Data Props */
@@ -194,7 +194,7 @@ export const actuallyGetServerSideProps = async function ({
       locale: locale,
       meta,
       authDisabled: authDisabled,
-      authorizationUrl: authorizationUrl,
+      authorizationUrl: 'dummy', //authorizationUrl,
     },
   }
 }
