@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: `We couldn't find that strange web page - 500 - My Service Canada Account`,
+      title: `We couldn't find that web page - 500 - My Service Canada Account`,
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
