@@ -1,19 +1,16 @@
 import moize from 'moize'
 import { JWK } from 'jose'
-// import { HttpsProxyAgent } from 'https-proxy-agent'
-import http from 'http'
+import { HttpsProxyAgent } from 'https-proxy-agent'
 import { Issuer, custom } from 'openid-client'
 
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('openid-client-service')
 
-const httpAgent = new http.Agent({ keepAlive: true })
-
-// const proxyAgent = new HttpsProxyAgent('http://localhost:3128')
+const proxyAgent = new HttpsProxyAgent('http://localhost:3128')
 
 custom.setHttpOptionsDefaults({
-  agent: httpAgent,
+  agent: proxyAgent,
 })
 
 /**
