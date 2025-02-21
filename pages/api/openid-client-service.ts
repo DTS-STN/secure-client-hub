@@ -1,17 +1,17 @@
 import moize from 'moize'
 import { JWK } from 'jose'
-// import { HttpsProxyAgent } from 'https-proxy-agent'
-import { Issuer /*custom*/ } from 'openid-client'
+import { HttpsProxyAgent } from 'https-proxy-agent'
+import { Issuer, custom } from 'openid-client'
 
 import { getLogger } from '../../logging/log-util'
 
 const log = getLogger('openid-client-service')
 
-// const proxyAgent = new HttpsProxyAgent('http://localhost:3128')
+const proxyAgent = new HttpsProxyAgent('http://localhost:3128')
 
-// custom.setHttpOptionsDefaults({
-//   agent: proxyAgent,
-// })
+custom.setHttpOptionsDefaults({
+  agent: proxyAgent,
+})
 
 /**
  * Return a singleton instance (by means of memomization) of the openid client service.
