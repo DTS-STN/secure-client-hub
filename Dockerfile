@@ -1,4 +1,4 @@
-FROM node:20.17.0-alpine3.20 AS base
+FROM node:22.14.0-alpine3.20 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
