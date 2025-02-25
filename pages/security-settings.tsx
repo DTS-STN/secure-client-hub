@@ -12,19 +12,15 @@ import {
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
+import { AuthIsDisabled, ValidateSession } from '../lib/auth'
 import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from '../lib/auth'
-import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
+
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
 import { GetServerSidePropsContext } from 'next'
-
 interface SecurtitySettingsProps {
   locale: string | undefined
   content: {
@@ -107,49 +103,42 @@ export default function SecuritySettings(props: SecurtitySettingsProps) {
 }
 
 export async function getServerSideProps({
+  locale,
   req,
   res,
-  locale,
 }: {
+  locale: GetServerSidePropsContext['locale']
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
-  locale: string
 }) {
-  const session = await getServerSession(req, res, authOptions)
-
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
-
-  const token = await getIdToken(req)
-
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  const authDisabled = AuthIsDisabled() ? true : false
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
-
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('security-settings')
   logger.level = 'error'
