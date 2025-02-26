@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 // import { getOpenIdClientService } from './openid-client-service'
-// import { generators } from 'openid-client'
+import { generators } from 'openid-client'
 // import axios from 'axios'
 // import https from 'https'
 // import fs from 'fs'
 // import { getLogger } from '../../logging/log-util'
-// import { addCookie, getCookieValue } from '../../lib/cookie-utils'
+import { /*addCookie, */ getCookieValue } from '../../lib/cookie-utils'
 // import { decodeJwt } from 'jose'
 // import * as jose from 'jose'
 
@@ -13,13 +13,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  // const codeVerifier = getCookieValue('codeVerifier', req.cookies) as string
-  // const state = getCookieValue('state', req.cookies) as string
-  // const nonce = getCookieValue('nonce', req.cookies) as string
-  // const now = Math.floor(Date.now() / 1000) // current time, rounded down to the nearest second
+  /*const codeVerifier = */ getCookieValue(
+    'codeVerifier',
+    req.cookies,
+  ) as string
+  /*const state = */ getCookieValue('state', req.cookies) as string
+  /*const nonce = */ getCookieValue('nonce', req.cookies) as string
+  /*const now = */ Math.floor(Date.now() / 1000) // current time, rounded down to the nearest second
   // const expiry = now + 60 // valid for 1 minute
-  // const jwtId = generators.random(32)
-  // const openIdService = await getOpenIdClientService()
+  /*const jwtId = */ generators.random(32)
+  //const openIdService = await getOpenIdClientService()
   // const tokenSet = await openIdService.callback(
   //   req.query,
   //   state,
