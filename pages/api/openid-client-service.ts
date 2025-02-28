@@ -63,7 +63,7 @@ async function createOpenIdClientService() {
       nbf: number,
     ) => {
       return openIdClient.callback(
-        process.env.AUTH_ECAS_BASE_URL + '/api/oauth-callback',
+        'https://mscad-sys2-s2.bdm.dshp-phdn.net/api/oauth-callback',
         params,
         {
           state: state,
