@@ -63,7 +63,7 @@ async function createOpenIdClientService() {
       nbf: number,
     ) => {
       return openIdClient.callback(
-        process.env.BASE_URL + '/api/oauth-callback',
+        process.env.AUTH_ECAS_BASE_URL + '/api/oauth-callback',
         params,
         {
           state: state,
