@@ -50,7 +50,7 @@ export default async function handler(
   // res
   //   .status(307)
   //   .
-  res.redirect('https://mscad-sys-s2.bdm.dshp-phdn.net/my-dashboard') //TODO get lang parameter
+  res.redirect('https://mscad-sys2-s2.bdm.dshp-phdn.net/my-dashboard') //TODO get lang parameter
 }
 
 // function updateMscaNg(sin: string, uid: string) {
