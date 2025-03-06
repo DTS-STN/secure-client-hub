@@ -1,9 +1,6 @@
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
-import * as jose from 'jose'
-import { decodeJwt } from 'jose'
 import { GetServerSidePropsContext } from 'next'
-import { UTCDate } from '@date-fns/utc'
 import { getCookieValue } from './cookie-utils'
 
 const logger = getLogger('auth-helpers')
@@ -13,33 +10,6 @@ export function AuthIsDisabled() {
     process.env.AUTH_DISABLED &&
     process.env.AUTH_DISABLED.toLowerCase() === 'true'
   )
-}
-
-export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
-  const idToken = getIdToken(req)
-  if (!idToken) {
-    return false
-  }
-  const decodedIdToken: jose.JWTPayload = decodeJwt(idToken)
-  const now = Math.floor(UTCDate.now() / 1000) // current time, rounded down to the nearest second
-  if (decodedIdToken.exp && decodedIdToken.exp > now) {
-    return true
-  }
-  return false
-}
-
-//This function grabs the idToken from request cookies
-function getIdToken(req: GetServerSidePropsContext['req']) {
-  return getCookieValue('idToken', req.cookies, process.env.AUTH_COOKIE_PREFIX)
-}
-
-export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
-  const idToken = getIdToken(req)
-  if (idToken !== null) {
-    return decodeJwt(idToken as string)
-  }
-
-  return null
 }
 
 export async function ValidateSession(
