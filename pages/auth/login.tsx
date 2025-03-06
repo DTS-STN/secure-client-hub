@@ -103,8 +103,6 @@ export const actuallyGetServerSideProps = async function ({
   const authDisabled = AuthIsDisabled() ? true : false
   let authorizationUrl = null
 
-  log.info('got here 1')
-
   if (!authDisabled) {
     const sessionValid = await ValidateSession(
       req.cookies,
@@ -125,14 +123,12 @@ export const actuallyGetServerSideProps = async function ({
         },
       }
     } else {
-      log.info('got here 2')
       deleteAllCookiesWithPrefix(
         req,
         res,
         process.env.AUTH_COOKIE_PREFIX as string,
       )
     }
-    log.info('got here 3')
     const openIdClientService = getOpenIdClientService()
     const codeVerifier = generators.codeVerifier()
     const codeChallenge = generators.codeChallenge(codeVerifier)
@@ -159,8 +155,12 @@ export const actuallyGetServerSideProps = async function ({
       state,
       Number(process.env.SESSION_MAX_AGE as string),
     )
-
-    log.info('got here 4')
+    addCookie(
+      res,
+      'localeForOauthCallback',
+      locale as string,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
 
     authorizationUrl = await (
       await openIdClientService

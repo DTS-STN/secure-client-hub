@@ -30,7 +30,7 @@ export async function AuthIsValid(req: GetServerSidePropsContext['req']) {
 
 //This function grabs the idToken from request cookies
 function getIdToken(req: GetServerSidePropsContext['req']) {
-  return getCookieValue('idToken', req.cookies)
+  return getCookieValue('idToken', req.cookies, process.env.AUTH_COOKIE_PREFIX)
 }
 
 export function getDecodedIdToken(req: GetServerSidePropsContext['req']) {
@@ -46,7 +46,11 @@ export async function ValidateSession(
   cookies: Partial<{ [key: string]: string }>,
   clientId: string,
 ) {
-  const sessionId = getCookieValue('sessionId', cookies)
+  const sessionId = getCookieValue(
+    'sessionId',
+    cookies,
+    process.env.AUTH_COOKIE_PREFIX,
+  )
 
   if (sessionId === undefined || sessionId === null || sessionId === '') {
     return false
@@ -105,7 +109,11 @@ export async function getLogoutURL(
 ) {
   const localeParam = locale === 'en' ? 'en' : 'fr'
 
-  const sessionId = getCookieValue('sessionId', cookies)
+  const sessionId = getCookieValue(
+    'sessionId',
+    cookies,
+    process.env.AUTH_COOKIE_PREFIX,
+  )
   if (sessionId !== undefined && sessionId !== null && sessionId !== '') {
     return (
       process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL +

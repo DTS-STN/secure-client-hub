@@ -22,13 +22,31 @@ export function extendExpiryTime(
   cookieName: string,
   expiry: number,
 ) {
-  const cookieValue = getCookieValue(cookieName, req.cookies)
+  const cookieValue = getCookieValue(
+    cookieName,
+    req.cookies,
+    process.env.AUTH_COOKIE_PREFIX,
+  )
   addCookie(
     res,
     process.env.AUTH_COOKIE_PREFIX + cookieName,
     cookieValue as string,
     expiry,
   )
+}
+
+export function deleteCookieWithName(
+  req: GetServerSidePropsContext['req'],
+  res: GetServerSidePropsContext['res'],
+  cookieName: string,
+) {
+  const cookies = []
+  for (const cookie of Object.keys(req.cookies)) {
+    if (cookie === cookieName) {
+      cookies.push(`${cookie}=deleted; Max-Age=0; path=/`)
+    }
+  }
+  res.setHeader('Set-Cookie', cookies as string[])
 }
 
 export function deleteAllCookiesWithPrefix(
@@ -48,9 +66,11 @@ export function deleteAllCookiesWithPrefix(
 export function getCookieValue(
   givenCookieName: string,
   cookies: Partial<{ [key: string]: string }>,
+  cookiePrefix?: string,
 ) {
+  cookiePrefix = cookiePrefix ? cookiePrefix : ''
   for (const cookieName of Object.keys(cookies)) {
-    if (cookieName === process.env.AUTH_COOKIE_PREFIX + givenCookieName) {
+    if (cookieName === cookiePrefix + givenCookieName) {
       return cookies[cookieName]
     }
   }
