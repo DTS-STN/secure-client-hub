@@ -17,7 +17,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  addCookie(res, 'mytest2', 'bla', 1200)
   const codeVerifier = getCookieValue(
     'codeVerifier',
     req.cookies,
@@ -54,7 +53,7 @@ export default async function handler(
 
   const decodedIdToken: jose.JWTPayload = decodeJwt(tokenSet.id_token as string)
   const sessionId = decodedIdToken.sid
-  addCookie(res, 'mytest', sessionId as string, 1200)
+
   if (sessionId !== undefined && sessionId !== null && sessionId !== '') {
     addCookie(
       res,

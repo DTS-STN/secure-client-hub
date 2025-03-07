@@ -38,12 +38,14 @@ export function extendExpiryTime(
 export function deleteCookieWithName(
   req: GetServerSidePropsContext['req'],
   res: GetServerSidePropsContext['res'],
-  cookieName: string,
+  givenCookieName: string,
 ) {
   const cookies = []
-  for (const cookie of Object.keys(req.cookies)) {
-    if (cookie === cookieName) {
-      cookies.push(`${cookie}=deleted; Max-Age=0; path=/`)
+  for (const cookieName of Object.keys(req.cookies)) {
+    if (cookieName === givenCookieName) {
+      cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
+    } else {
+      cookies.push(req.cookies[cookieName])
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
@@ -55,9 +57,11 @@ export function deleteAllCookiesWithPrefix(
   prefix: string,
 ) {
   const cookies = []
-  for (const cookie of Object.keys(req.cookies)) {
-    if (cookie.startsWith(prefix)) {
-      cookies.push(`${cookie}=deleted; Max-Age=0; path=/`)
+  for (const cookieName of Object.keys(req.cookies)) {
+    if (cookieName.startsWith(prefix)) {
+      cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
+    } else {
+      cookies.push(req.cookies[cookieName])
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
