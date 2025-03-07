@@ -45,7 +45,9 @@ export function deleteCookieWithName(
     if (cookieName === givenCookieName) {
       cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
     } else {
-      cookies.push(req.cookies[cookieName])
+      cookies.push(
+        `${cookieName}=${req.cookies[cookieName]}; Max-Age=${process.env.SESSION_MAX_AGE}; path=/;`,
+      )
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
@@ -61,7 +63,9 @@ export function deleteAllCookiesWithPrefix(
     if (cookieName.startsWith(prefix)) {
       cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
     } else {
-      cookies.push(req.cookies[cookieName])
+      cookies.push(
+        `${cookieName}=${req.cookies[cookieName]}; Max-Age=${process.env.SESSION_MAX_AGE}; path=/;`,
+      )
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
