@@ -8,7 +8,7 @@ import { getLogger } from '../../logging/log-util'
 import {
   addCookie,
   getCookieValue,
-  /*deleteCookieWithName,*/
+  deleteCookieWithName,
 } from '../../lib/cookie-utils'
 import { decodeJwt } from 'jose'
 import * as jose from 'jose'
@@ -65,7 +65,7 @@ export default async function handler(
 
   //updateMscaNg(userinfo.sin, userinfo.uid)
   const locale = getCookieValue('localeForOauthCallback', req.cookies)
-  //deleteCookieWithName(req, res, 'localeForOauthCallback')
+  deleteCookieWithName(req, res, 'localeForOauthCallback')
   const dashboardRedirect =
     locale === 'en'
       ? 'https://mscad-sys2-s2.bdm.dshp-phdn.net/en/my-dashboard'

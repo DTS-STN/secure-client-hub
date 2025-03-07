@@ -40,14 +40,14 @@ export function deleteCookieWithName(
   res: GetServerSidePropsContext['res'],
   givenCookieName: string,
 ) {
-  const cookies = []
+  let setCookieHeader = res.getHeader('Set-Cookie')
+  if (setCookieHeader === undefined) {
+    setCookieHeader = []
+  }
+  const cookies = setCookieHeader as string[]
   for (const cookieName of Object.keys(req.cookies)) {
     if (cookieName === givenCookieName) {
-      cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
-    } else {
-      cookies.push(
-        `${cookieName}=${req.cookies[cookieName]}; Max-Age=${process.env.SESSION_MAX_AGE}; path=/;`,
-      )
+      cookies.push(`${cookieName}=deleted; Max-Age=0; path=/;`)
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
@@ -58,14 +58,14 @@ export function deleteAllCookiesWithPrefix(
   res: GetServerSidePropsContext['res'],
   prefix: string,
 ) {
-  const cookies = []
+  let setCookieHeader = res.getHeader('Set-Cookie')
+  if (setCookieHeader === undefined) {
+    setCookieHeader = []
+  }
+  const cookies = setCookieHeader as string[]
   for (const cookieName of Object.keys(req.cookies)) {
     if (cookieName.startsWith(prefix)) {
       cookies.push(`${cookieName}=deleted; Max-Age=0; path=/`)
-    } else {
-      cookies.push(
-        `${cookieName}=${req.cookies[cookieName]}; Max-Age=${process.env.SESSION_MAX_AGE}; path=/;`,
-      )
     }
   }
   res.setHeader('Set-Cookie', cookies as string[])
