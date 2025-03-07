@@ -17,6 +17,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  addCookie(res, 'mytest2', 'bla', 1200)
   const codeVerifier = getCookieValue(
     'codeVerifier',
     req.cookies,
@@ -36,7 +37,6 @@ export default async function handler(
   const expiry = now + 60 // valid for 1 minute
   const jwtId = generators.random(32)
   const openIdService = await getOpenIdClientService()
-  addCookie(res, 'mytest2', 'bla', 1200)
   const tokenSet = await openIdService.callback(
     req.query,
     state,
