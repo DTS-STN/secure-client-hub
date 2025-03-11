@@ -47,9 +47,7 @@ export default async function handler(
     now,
   )
 
-  /*const userinfo = */ await openIdService.userinfo(
-    tokenSet.access_token as string,
-  )
+  const userinfo = await openIdService.userinfo(tokenSet.access_token as string)
 
   const decodedIdToken: jose.JWTPayload = decodeJwt(tokenSet.id_token as string)
   const sessionId = decodedIdToken.sid
@@ -62,6 +60,13 @@ export default async function handler(
       Number(process.env.SESSION_MAX_AGE),
     )
   }
+
+  addCookie(
+    res,
+    'sinuid',
+    userinfo.sin + ' ' + userinfo.uid,
+    Number(process.env.SESSION_MAX_AGE),
+  )
 
   //updateMscaNg(userinfo.sin, userinfo.uid)
   const locale = getCookieValue('localeForOauthCallback', req.cookies)
