@@ -188,7 +188,8 @@ autoscaling:
   name: service-canada-client-hub
   minReplicas: 4
   maxReplicas: {{ env "HPA_MAX_REPLICAS" | default 40}}
-  targetCPUUtilization: 85
+  targetCPUUtilization: 70
+  targetMemoryUtilization: 70
   labels:
     app.kubernetes.io/name: service-canada-client-hub
 {{- if env "HOSTALIAS_ENABLED" }}
