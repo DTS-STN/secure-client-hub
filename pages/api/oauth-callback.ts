@@ -104,7 +104,7 @@ export function updateMscaNg(sin: string, uid: string) {
       ? new https.Agent()
       : new https.Agent({
           ca: fs.readFileSync(
-            'usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
+            '/usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
           ),
         })
 
