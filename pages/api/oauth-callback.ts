@@ -74,10 +74,12 @@ export default async function handler(
     )
   }
 
+  const decryptedUserInfoToken = await decryptJwe(userinfoToken)
+
   addCookie(
     res,
-    'userinfotoken',
-    userinfoToken,
+    'sinuid',
+    decryptedUserInfoToken.sin + ' ' + decryptedUserInfoToken.uid,
     Number(process.env.SESSION_MAX_AGE),
   )
 
@@ -136,4 +138,14 @@ export function updateMscaNg(sin: string, uid: string) {
       .then((response) => logger.debug(response))
       .catch((error) => logger.error(error))
   }
+}
+
+async function decryptJwe(jwe: string) {
+  const jwk = JSON.parse(process.env.AUTH_PRIVATE ?? '{}')
+  jwk.alg = 'RS256'
+  const key = await jose.importJWK({ ...jwk })
+  const decryptResult = await jose.compactDecrypt(jwe, key, {
+    keyManagementAlgorithms: ['RSA-OAEP-256'],
+  })
+  return jose.decodeJwt(decryptResult.plaintext.toString())
 }
