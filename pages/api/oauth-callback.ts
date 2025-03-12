@@ -103,7 +103,9 @@ export function updateMscaNg(sin: string, uid: string) {
     process.env.AUTH_DISABLED === 'true'
       ? new https.Agent()
       : new https.Agent({
-          ca: fs.readFileSync('certs/env.crt' as fs.PathOrFileDescriptor),
+          ca: fs.readFileSync(
+            'usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
+          ),
         })
 
   //Make call to msca-ng API to create user if it doesn't exist
