@@ -49,6 +49,19 @@ export default async function handler(
 
   //const userinfo = await openIdService.userinfo(tokenSet.access_token as string)
 
+  const userinfoResponse = await axios
+    .get(process.env.AUTH_ECAS_USERINFO as string, {
+      headers: {
+        Authorization: `Bearer ${tokenSet.access_token as string}`,
+      },
+    })
+    .then((response) => response)
+    .catch((error) => console.log(error))
+
+  const userinfoBody = userinfoResponse?.data
+
+  const userinfoToken = userinfoBody.userinfo_token
+
   const decodedIdToken: jose.JWTPayload = decodeJwt(tokenSet.id_token as string)
   const sessionId = decodedIdToken.sid
 
@@ -63,8 +76,8 @@ export default async function handler(
 
   addCookie(
     res,
-    'accesstoken',
-    tokenSet.access_token as string,
+    'userinfotoken',
+    userinfoToken,
     Number(process.env.SESSION_MAX_AGE),
   )
 
