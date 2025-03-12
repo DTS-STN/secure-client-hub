@@ -124,23 +124,23 @@ export function updateMscaNg(sin: string, uid: string) {
     )
     .then((response) => {
       logger.debug(response)
-      //updateLastLoginDate(uid)
+      updateLastLoginDate(uid)
     })
     .catch((error) => logger.error(error))
 
-  // function updateLastLoginDate(uid: string) {
-  //   axios({
-  //     method: 'post',
-  //     url: `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/${uid}/logins`,
-  //     headers: {
-  //       'Authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     httpsAgent: httpsAgent,
-  //   })
-  //     .then((response) => logger.debug(response))
-  //     .catch((error) => logger.error(error))
-  // }
+  function updateLastLoginDate(uid: string) {
+    axios({
+      method: 'post',
+      url: `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/${uid}/logins`,
+      headers: {
+        'Authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
+        'Content-Type': 'application/json',
+      },
+      httpsAgent: httpsAgent,
+    })
+      .then((response) => logger.debug(response))
+      .catch((error) => logger.error(error))
+  }
 }
 
 async function decryptJwe(jwe: string) {
