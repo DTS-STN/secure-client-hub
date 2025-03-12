@@ -83,10 +83,7 @@ export default async function handler(
     Number(process.env.SESSION_MAX_AGE),
   )
 
-  updateMscaNg(
-    decryptedUserInfoToken.sin as string,
-    decryptedUserInfoToken.uid as string,
-  )
+  //updateMscaNg(userinfo.sin, userinfo.uid)
   const locale = getCookieValue('localeForOauthCallback', req.cookies)
   deleteCookieWithName(req, res, 'localeForOauthCallback')
   const dashboardRedirect =
