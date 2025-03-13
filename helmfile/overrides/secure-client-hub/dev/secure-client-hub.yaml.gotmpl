@@ -60,8 +60,6 @@ extraEnv:
     value: {{ env "MSCA_NG_USER_ENDPOINT" }}
   - name: AUTH_ECAS_CA
     value: {{ env "AUTH_ECAS_CA" }}
-  - name: SESSION_MAX_AGE
-    value: {{ env "SESSION_MAX_AGE" }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:

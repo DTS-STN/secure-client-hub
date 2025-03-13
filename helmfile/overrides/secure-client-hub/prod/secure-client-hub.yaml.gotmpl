@@ -57,9 +57,7 @@ extraEnv:
   - name: AUTH_ECAS_REFRESH_ENDPOINT
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }}
   - name: MSCA_NG_USER_ENDPOINT
-    value: {{ env "MSCA_NG_USER_ENDPOINT" }}
-  - name: SESSION_MAX_AGE
-    value: {{ env "SESSION_MAX_AGE" }} 
+    value: {{ env "MSCA_NG_USER_ENDPOINT" }} 
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
