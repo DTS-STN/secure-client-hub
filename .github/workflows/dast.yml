@@ -19,11 +19,12 @@ jobs:
           CI: true
           
       - name: Docker Build
-        run: docker build --build-arg AEM_GRAPHQL_ENDPOINT=${{secrets.AEM_GRAPHQL_ENDPOINT}} --build-arg AEM_GRAPHQL_FOLDER=${{secrets.AEM_GRAPHQL_FOLDER}} -t secure-client-hub .
+        run: docker build --build-arg AEM_GRAPHQL_ENDPOINT=${{secrets.AEM_GRAPHQL_ENDPOINT}} --build-arg AEM_GRAPHQL_FOLDER=${{secrets.AEM_GRAPHQL_FOLDER}} --build-arg AEM_GRAPHQL_FOLDER=${{secrets.SESSION_MAX_AGE}} -t secure-client-hub .
         env:
           CI: true
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
           AEM_GRAPHQL_FOLDER: ${{secrets.AEM_GRAPHQL_FOLDER}}
+          SESSION_MAX_AGE: ${{secrets.SESSION_MAX_AGE}}
 
       - name: Docker run
         run: docker run -d -p 3000:3000 secure-client-hub
@@ -31,6 +32,8 @@ jobs:
           CI: true
           AEM_GRAPHQL_ENDPOINT: ${{secrets.AEM_GRAPHQL_ENDPOINT}}
           AEM_GRAPHQL_FOLDER: ${{secrets.AEM_GRAPHQL_FOLDER}}
+          SESSION_MAX_AGE: ${{secrets.SESSION_MAX_AGE}}
+
 
       - name: OWASP ZAP FULL Scan
         uses: zaproxy/action-full-scan@v0.12.0
