@@ -82,9 +82,6 @@ async function createOpenIdClientService() {
         },
       )
     },
-    userinfo: async (accessToken: string) => {
-      return openIdClient.userinfo<{ sin: string; uid: string }>(accessToken)
-    },
   }
 }
 
