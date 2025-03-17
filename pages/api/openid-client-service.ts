@@ -72,7 +72,7 @@ async function createOpenIdClientService() {
         },
         {
           clientAssertionPayload: {
-            aud: 'GC-ECAS-DEV',
+            aud: `${process.env.AUTH_CLIENT_ASSERTION_AUD}`,
             exp: expiry,
             iat: iat,
             iss: `${process.env.CLIENT_ID}`,
