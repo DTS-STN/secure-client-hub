@@ -27,8 +27,7 @@ async function createOpenIdClientService() {
   const issuer = await Issuer.discover(
     process.env.AUTH_ECAS_WELL_KNOWN as string,
   )
-  const redirectUrl =
-    'https://mscad-sys2-s2.bdm.dshp-phdn.net/api/oauth-callback'
+  const redirectUrl = `${process.env.NEXTAUTH_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
   const openIdClient = await buildClient(
     issuer,
     redirectUrl,
