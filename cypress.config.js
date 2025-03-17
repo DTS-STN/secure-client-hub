@@ -15,7 +15,5 @@ module.exports = defineConfig({
     },
     baseUrl: 'http://localhost:3000',
     retries: 2,
-    // TODO: Remove this when OAS is back
-    excludeSpecPattern: 'cypress/e2e/{ContactUsOAS,dashboard,Profile}.cy.js',
   },
 })
