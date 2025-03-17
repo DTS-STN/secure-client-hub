@@ -27,7 +27,8 @@ async function createOpenIdClientService() {
   const issuer = await Issuer.discover(
     process.env.AUTH_ECAS_WELL_KNOWN as string,
   )
-  const redirectUrl = `${process.env.NEXTAUTH_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
+  const redirectUrl =
+    'https://mscad-sys2-s2.bdm.dshp-phdn.net/api/oauth-callback'
   const openIdClient = await buildClient(
     issuer,
     redirectUrl,
@@ -62,7 +63,7 @@ async function createOpenIdClientService() {
       nbf: number,
     ) => {
       return openIdClient.callback(
-        `${process.env.NEXTAUTH_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`,
+        'https://mscad-sys2-s2.bdm.dshp-phdn.net/api/oauth-callback',
         params,
         {
           state: state,
@@ -71,13 +72,13 @@ async function createOpenIdClientService() {
         },
         {
           clientAssertionPayload: {
-            aud: process.env.AUTH_CLIENT_ASSERTION_AUD,
+            aud: 'GC-ECAS-DEV',
             exp: expiry,
             iat: iat,
-            iss: process.env.CLIENT_ID,
+            iss: 'MSCAD_S2',
             jti: jti,
             nbf: nbf,
-            sub: process.env.CLIENT_ID,
+            sub: 'MSCAD_S2',
           },
         },
       )
