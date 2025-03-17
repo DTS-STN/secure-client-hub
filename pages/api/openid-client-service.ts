@@ -75,10 +75,10 @@ async function createOpenIdClientService() {
             aud: 'GC-ECAS-DEV',
             exp: expiry,
             iat: iat,
-            iss: 'MSCAD_S2',
+            iss: `${process.env.CLIENT_ID}`,
             jti: jti,
             nbf: nbf,
-            sub: 'MSCAD_S2',
+            sub: `${process.env.CLIENT_ID}`,
           },
         },
       )
