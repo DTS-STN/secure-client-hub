@@ -18,19 +18,16 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const codeVerifier = getCookieValue(
-    'codeVerifier',
+    process.env.AUTH_COOKIE_PREFIX + 'codeVerifier',
     req.cookies,
-    process.env.AUTH_COOKIE_PREFIX,
   ) as string
   const state = getCookieValue(
-    'state',
+    process.env.AUTH_COOKIE_PREFIX + 'state',
     req.cookies,
-    process.env.AUTH_COOKIE_PREFIX,
   ) as string
   const nonce = getCookieValue(
-    'nonce',
+    process.env.AUTH_COOKIE_PREFIX + 'nonce',
     req.cookies,
-    process.env.AUTH_COOKIE_PREFIX,
   ) as string
   const now = Math.floor(Date.now() / 1000) // current time, rounded down to the nearest second
   const expiry = now + 60 // valid for 1 minute

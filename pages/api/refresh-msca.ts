@@ -39,7 +39,7 @@ export default async function handler(
         extendExpiryTime(
           req,
           res,
-          'sessionId',
+          process.env.AUTH_COOKIE_PREFIX + 'sessionId',
           Number(process.env.SESSION_MAX_AGE as string),
         )
         res.status(200).json({ success: true, id: id })

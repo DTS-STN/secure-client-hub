@@ -22,11 +22,7 @@ export function extendExpiryTime(
   cookieName: string,
   expiry: number,
 ) {
-  const cookieValue = getCookieValue(
-    cookieName,
-    req.cookies,
-    process.env.AUTH_COOKIE_PREFIX,
-  )
+  const cookieValue = getCookieValue(cookieName, req.cookies)
   addCookie(
     res,
     process.env.AUTH_COOKIE_PREFIX + cookieName,
@@ -74,11 +70,9 @@ export function deleteAllCookiesWithPrefix(
 export function getCookieValue(
   givenCookieName: string,
   cookies: Partial<{ [key: string]: string }>,
-  cookiePrefix?: string,
 ) {
-  cookiePrefix = cookiePrefix ? cookiePrefix : ''
   for (const cookieName of Object.keys(cookies)) {
-    if (cookieName === cookiePrefix + givenCookieName) {
+    if (cookieName === givenCookieName) {
       return cookies[cookieName]
     }
   }

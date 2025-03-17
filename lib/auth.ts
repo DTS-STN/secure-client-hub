@@ -17,9 +17,8 @@ export async function ValidateSession(
   clientId: string,
 ) {
   const sessionId = getCookieValue(
-    'sessionId',
+    process.env.AUTH_COOKIE_PREFIX + 'sessionId',
     cookies,
-    process.env.AUTH_COOKIE_PREFIX,
   )
 
   if (sessionId === undefined || sessionId === null || sessionId === '') {
@@ -80,9 +79,8 @@ export async function getLogoutURL(
   const localeParam = locale === 'en' ? 'en' : 'fr'
 
   const sessionId = getCookieValue(
-    'sessionId',
+    process.env.AUTH_COOKIE_PREFIX + 'sessionId',
     cookies,
-    process.env.AUTH_COOKIE_PREFIX,
   )
   if (sessionId !== undefined && sessionId !== null && sessionId !== '') {
     return (

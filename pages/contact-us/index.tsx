@@ -135,7 +135,7 @@ export const getServerSideProps = (async ({ locale, req, res }) => {
       extendExpiryTime(
         req,
         res,
-        'sessionId',
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
         Number(process.env.SESSION_MAX_AGE as string),
       )
     }
