@@ -1,4 +1,4 @@
-FROM node:20.17.0-alpine3.20 AS base
+FROM node:20.19.0-alpine3.20 AS base
 WORKDIR /base
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
@@ -51,7 +51,7 @@ xargs > \
 chmod 644  /etc/ssl/certs/root.crt && \
 npm run build
 
-FROM node:20.17.0-alpine3.20 AS production
+FROM node:20.19.0-alpine3.20 AS production
 ENV NODE_ENV=production
 
 ARG user=nodeuser
