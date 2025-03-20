@@ -5,19 +5,15 @@ import {
   GetContactUsContentReturnType,
   getContactUsContent,
 } from '../../graphql/mappers/contact-us'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from '../../lib/auth'
-import { authOptions } from '../api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
 import { GetServerSideProps } from 'next'
 import { BreadcrumbItem } from '../../components/Breadcrumb'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '../../lib/loadIcons'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../../lib/cookie-utils'
 
 interface Data {
   title: string
@@ -115,39 +111,33 @@ const ContactLanding = (props: ContactLandingProps) => {
     </div>
   )
 }
-export const getServerSideProps = (async ({ req, res, locale }) => {
-  const session = await getServerSession(req, res, authOptions)
-
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
-
-  const token = await getIdToken(req)
-
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+export const getServerSideProps = (async ({ locale, req, res }) => {
+  const authDisabled = AuthIsDisabled() ? true : false
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 
