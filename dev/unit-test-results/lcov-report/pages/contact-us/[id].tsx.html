@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/43</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/30</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/41</span>
+                <span class='fraction'>0/32</span>
             </div>
         
             
@@ -268,11 +268,7 @@
 <a name='L203'></a><a href='#L203'>203</a>
 <a name='L204'></a><a href='#L204'>204</a>
 <a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a>
-<a name='L210'></a><a href='#L210'>210</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L206'></a><a href='#L206'>206</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -282,14 +278,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -361,16 +353,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,15 +362,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -491,15 +483,11 @@ import {
   GetContactUsPageReturnType,
   getContactUsPage,
 } from <span class="cstat-no" title="statement not covered" >'../../graphql/mappers/contact-us-pages-dynamic'</span>
+import { AuthIsDisabled, ValidateSession } from <span class="cstat-no" title="statement not covered" >'../../lib/auth'</span>
 import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from <span class="cstat-no" title="statement not covered" >'../../lib/auth'</span>
-import { authOptions } from <span class="cstat-no" title="statement not covered" >'../api/auth/[...nextauth]'</span>
-import { getServerSession } from <span class="cstat-no" title="statement not covered" >'next-auth/next'</span>
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from <span class="cstat-no" title="statement not covered" >'../../lib/cookie-utils'</span>
 import { GetServerSideProps } from 'next'
 &nbsp;
 interface Data {
@@ -569,39 +557,39 @@ const ContactUsPage = <span class="cstat-no" title="statement not covered" ><spa
   )
 }
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >getServerSideProps </span>= (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async ({</span> req, res, locale, params }) =&gt; {</span>
-  const session = <span class="cstat-no" title="statement not covered" >await getServerSession(req, res, authOptions)</span>
+export const <span class="cstat-no" title="statement not covered" >getServerSideProps </span>= <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function ({</span></span>
+  locale,
+  params,
+  req,
+  res,
+}) {
+  const authDisabled = <span class="cstat-no" title="statement not covered" >AuthIsDisabled() ? true : false</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!AuthIsDisabled() &amp;&amp; !(await AuthIsValid(req, session)))</span>
-<span class="cstat-no" title="statement not covered" >    return Redirect(locale)</span>
-&nbsp;
-  const token = <span class="cstat-no" title="statement not covered" >await getIdToken(req)</span>
-&nbsp;
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!AuthIsDisabled() &amp;&amp; (await AuthIsValid(req, session))) {</span>
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!authDisabled) {</span>
     const sessionValid = <span class="cstat-no" title="statement not covered" >await ValidateSession(</span>
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!sessionValid) {</span>
-      // Clear all session cookies
-      const isSecure = <span class="cstat-no" title="statement not covered" >req.headers['x-forwarded-proto'] === 'https'</span>
-      const cookiePrefix = <span class="cstat-no" title="statement not covered" >`${isSecure ? '__Secure-' : ''}next-auth.session-token`</span>
-      const cookies = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >      for (const cookie of Object.keys(req.cookies)) {</span>
-<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if (cookie.startsWith(cookiePrefix)) {</span>
-<span class="cstat-no" title="statement not covered" >          cookies.push(</span>
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-<span class="cstat-no" title="statement not covered" >      res.setHeader('Set-Cookie', cookies)</span>
+<span class="cstat-no" title="statement not covered" >    if (!sessionValid) {</span>
+<span class="cstat-no" title="statement not covered" >      deleteAllCookiesWithPrefix(</span>
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+&nbsp;
 <span class="cstat-no" title="statement not covered" >      return {</span>
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+<span class="cstat-no" title="statement not covered" >      extendExpiryTime(</span>
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 &nbsp;
@@ -686,7 +674,7 @@ export const <span class="cstat-no" title="statement not covered" >getServerSide
           : authModals.mappedPopupSignedOut?.fr,
     },
   }
-}) satisfies GetServerSideProps&lt;ContactUsPageProps&gt;
+} satisfies GetServerSideProps&lt;ContactUsPageProps&gt;
 // https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 &nbsp;
 <span class="cstat-no" title="statement not covered" >export default <span class="cstat-no" title="statement not covered" >C</span>ontactUsPage</span>
@@ -697,7 +685,7 @@ export const <span class="cstat-no" title="statement not covered" >getServerSide
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-14T17:10:13.762Z
+                at 2025-03-20T19:43:35.851Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
