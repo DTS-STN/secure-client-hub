@@ -25,14 +25,14 @@ const Index = (props: IndexProps) => {
   return (
     <div
       role="main"
-      className="mx-auto px-6 p-12 h-screen bg-cover bg-center bg-splash-page"
+      className="mx-auto h-screen bg-splash-page bg-cover bg-center p-12 px-6"
     >
       <MetaData language="en" data={props.meta}></MetaData>
-      <div className="flex flex-col justify-center items-center m-auto">
-        <div className="z-10 bg-white h-auto w-[18.75rem] xl:w-[31.25rem]">
+      <div className="m-auto flex flex-col items-center justify-center">
+        <div className="z-10 h-auto w-[18.75rem] bg-white xl:w-[31.25rem]">
           <h1 className="sr-only">service.canada.ca-digital-center</h1>
 
-          <div className="h-auto w-64 mx-auto pt-6 xl:w-2/3 xl:mx-0 xl:px-6">
+          <div className="mx-auto h-auto w-64 pt-6 xl:mx-0 xl:w-2/3 xl:px-6">
             <Image
               src="/sig-blk-en.svg"
               alt="Government of Canada / Gouvernement du Canada logo"
@@ -42,11 +42,11 @@ const Index = (props: IndexProps) => {
               objectFit="scale-down"
             ></Image>
           </div>
-          <div className="flex w-max container py-11 mx-auto font-display">
+          <div className="container mx-auto flex w-max py-11 font-display">
             <div className="grid grid-cols-2 gap-2 xl:gap-6">
               <Link
                 href="/en/my-dashboard"
-                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
+                className="grid place-items-center whitespace-pre rounded border border-deep-blue-medium bg-deep-blue-medium px-10 py-2 text-center font-display text-white hover:bg-bright-blue-dark focus:ring-1 focus:ring-black focus:ring-offset-2 active:bg-deep-blue-active"
                 role="button"
                 draggable="false"
                 lang="en"
@@ -57,7 +57,7 @@ const Index = (props: IndexProps) => {
 
               <Link
                 href="/fr/mon-tableau-de-bord"
-                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-deep-blue-medium text-white text-center border border-deep-blue-medium active:bg-deep-blue-active hover:bg-bright-blue-dark grid place-items-center"
+                className="grid place-items-center whitespace-pre rounded border border-deep-blue-medium bg-deep-blue-medium px-10 py-2 text-center font-display text-white hover:bg-bright-blue-dark focus:ring-1 focus:ring-black focus:ring-offset-2 active:bg-deep-blue-active"
                 role="button"
                 draggable="false"
                 lang="fr"
@@ -69,11 +69,11 @@ const Index = (props: IndexProps) => {
           </div>
         </div>
 
-        <div className="relative py-8 bg-gray-light text-p h-auto min-w-[18.75rem] w-[18.75rem] flex justify-between p-6 xl:w-[31.25rem] xl:items-center">
-          <div className="w-28 text-base xl:text-p xl:w-max text-bright-blue-dark">
+        <div className="text-p relative flex h-auto w-[18.75rem] min-w-[18.75rem] justify-between bg-gray-light p-6 py-8 xl:w-[31.25rem] xl:items-center">
+          <div className="xl:text-p w-28 text-base text-bright-blue-dark xl:w-max">
             <Link
               href="https://www.canada.ca/en/transparency/terms.html"
-              className="inline-block w-28 xl:w-max mr-0 hover:underline splash-a text-lg"
+              className="splash-a mr-0 inline-block w-28 text-lg hover:underline xl:w-max"
               lang="en"
               data-cy="terms"
             >
@@ -82,7 +82,7 @@ const Index = (props: IndexProps) => {
             <span> • </span>
             <Link
               href="https://www.canada.ca/fr/transparence/avis.html"
-              className="inline-block hover:underline text-lg"
+              className="inline-block text-lg hover:underline"
               lang="fr"
               data-cy="avis"
             >

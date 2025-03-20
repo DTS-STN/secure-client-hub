@@ -9,21 +9,16 @@ import {
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from '../lib/auth'
-import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { AuthIsDisabled, ValidateSession } from '../lib/auth'
 import ProfileTasks, { Task } from '../components/ProfileTasks'
 import React, { ReactNode } from 'react'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
-
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
 interface ProfilePageProps {
   locale: string | undefined
   content: {
@@ -130,46 +125,40 @@ export default function Profile(props: ProfilePageProps) {
 }
 
 export async function getServerSideProps({
+  locale,
   req,
   res,
-  locale,
 }: {
+  locale: GetServerSidePropsContext['locale']
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
-  locale: string
 }) {
-  const session = await getServerSession(req, res, authOptions)
-
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
-
-  const token = await getIdToken(req)
-
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  const authDisabled = AuthIsDisabled() ? true : false
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 
