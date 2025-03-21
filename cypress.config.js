@@ -15,5 +15,7 @@ module.exports = defineConfig({
     },
     baseUrl: 'http://localhost:3000',
     retries: 2,
+    // For convenience to skip tests
+    //excludeSpecPattern: 'cypress/e2e/{app,ContactUs,ContactUsCPP,ContactUsEI,ContactUsOAS,Profile,DecisionReviews,dashboard,Login,Logout,SecuritySettings}.cy.js'
   },
 })

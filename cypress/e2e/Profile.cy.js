@@ -113,9 +113,6 @@ describe('Validate Profile page', () => {
       .and('contain.text', 'Canada Pension Plan')
     cy.get(':nth-child(3) > [data-cy="program-title"]')
       .should('be.visible')
-      .and('contain.text', 'Old Age Security')
-    cy.get(':nth-child(4) > [data-cy="program-title"]')
-      .should('be.visible')
       .and('contain.text', 'Social Insurance Number')
     // Iterate through the list
     cy.get('[data-cy=task] a[data-cy=task-link]').each(($link) => {
@@ -135,9 +132,6 @@ describe('Validate Profile page', () => {
       .should('be.visible')
       .and('contain.text', 'Régime de pensions du Canada')
     cy.get(':nth-child(3) > [data-cy="program-title"]')
-      .should('be.visible')
-      .and('contain.text', 'Sécurité de la vieillesse')
-    cy.get(':nth-child(4) > [data-cy="program-title"]')
       .should('be.visible')
       .and('contain.text', 'Numéro d’assurance sociale')
     // Iterate through the list

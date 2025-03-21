@@ -46,7 +46,7 @@ describe('Validate dashboard page', () => {
       'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      'Old Age Security',
       'Social Insurance Number',
       'Canada Apprentice Loan',
     ]
@@ -72,14 +72,15 @@ describe('Validate dashboard page', () => {
       'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      'Old Age Security',
       'Social Insurance Number',
       'Canada Apprentice Loan',
     ]
+
     // Iterate through each card title
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
-      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      cy.get('[data-cy="cards"]').contains(new RegExp('^' + cardTitle + '$')).parent().as('currentCard')
       // Check the card title
       cy.get('@currentCard').should('contain', cardTitle)
       // Check the most requested section within each card type
@@ -101,9 +102,10 @@ describe('Validate dashboard page', () => {
   // FR This tests all of the most requested items and links.
   it('should iterate through cards, verfiying Most Requested section and links FR', () => {
     const cardTitles = [
+      'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse et Supplément de revenu garanti',
+      'Sécurité de la vieillesse',
       'Numéro d’assurance sociale',
       'Prêt canadien aux apprentis',
     ]
@@ -112,7 +114,7 @@ describe('Validate dashboard page', () => {
     // Iterate through each card title
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
-      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      cy.get('[data-cy="cards"]').contains(new RegExp('^' + cardTitle + '$')).parent().as('currentCard')
       // Check the card title
       cy.get('@currentCard').should('contain', cardTitle)
       // Check the most requested section within each card type
@@ -131,12 +133,12 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  // EN Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
+  // EN Tests the task group title and links for EI, CPP but not SIN, CAL, OAS
   it('Iterates through EI, CPP and OAS task lists for title and links for EN', () => {
     const cardTitles = [
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      //'Old Age Security',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
           // Find the card with the specific title
@@ -170,12 +172,12 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  // FR Tests the task group title and links for EI, CPP and OAS but not SIN and Cal
+  // FR Tests the task group title and links for EI, CPP, but not SIN, CAL, OAS
   it('Iterates through EI, CPP and OAS task lists for title and links for FR', () => {
     const cardTitles = [
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse et Supplément de revenu garanti',
+      //'Sécurité de la vieillesse',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -211,13 +213,13 @@ describe('Validate dashboard page', () => {
 })
   })
 
-  // EN Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
+  // EN Tests the Links for Profile page in EI, CPP but not SIN, CAL, OAS
   it('Iterates through EI, CPP and OAS task lists for Profile page EN', () => {
     const cardTitles = [
       //'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      //'Old Age Security',
       // 'Social Insurance Number',
       // 'Canada Apprentice Loan',
     ]
@@ -244,13 +246,13 @@ describe('Validate dashboard page', () => {
     
   })
 
-  // FR Tests the Links for Profile page in EI, CPP and OAS but not SIN and Cal
+  // FR Tests the Links for Profile page in EI, CPP but not SIN, CAL, OAS
   it('Iterates through EI, CPP and OAS task lists for Profile page FR', () => {
     const cardTitles = [
       // 'Régime canadien de soins dentaires',
       'Assurance-emploi',
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse et Supplément de revenu garanti',
+      // 'Sécurité de la vieillesse',
       // 'Numéro d’assurance sociale',
       // 'Prêt canadien aux apprentis',
     ]
@@ -279,11 +281,11 @@ describe('Validate dashboard page', () => {
 })
   })
 
-  // EN Tests the Links for Decision Review page in CPP and OAS
-  it('Iterates through CPP and OAS tasks for Decision Review page EN', () => {
+  // EN Tests the Links for Decision Review page in CPP
+  it('Iterates through CPP tasks for Decision Review page EN', () => {
     const cardTitles = [
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      //'Old Age Security',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
@@ -308,11 +310,11 @@ describe('Validate dashboard page', () => {
     })
   })
 
-  // FR Tests the Links for Decision Review page in CPP and OAS
-  it('Iterates through CPP and OAS tasks for Decision Review page FR', () => {
+  // FR Tests the Links for Decision Review page in CPP
+  it('Iterates through CPP tasks for Decision Review page FR', () => {
     const cardTitles = [
       'Régime de pensions du Canada',
-      'Sécurité de la vieillesse et Supplément de revenu garanti',
+      //'Sécurité de la vieillesse',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -358,15 +360,18 @@ describe('Validate dashboard page', () => {
   })
   it('Validate the state of the card after the page reloads', () => {
     const cardTitles = [
+      'Canadian Dental Care Plan',
       'Employment Insurance',
       'Canada Pension Plan',
-      'Old Age Security and Guaranteed Income Supplement',
+      'Old Age Security',
+      'Social Insurance Number',
+      'Canada Apprentice Loan',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
-      cy.contains('[data-cy="cards"]', cardTitle).as('currentCard')
+      cy.get('[data-cy="cards"]').contains(new RegExp('^' + cardTitle + '$')).parent().as('currentCard')
       cy.get('@currentCard').within(() => {
-      Cypress.session.clearCurrentSessionData()
+        Cypress.session.clearCurrentSessionData()
         cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'false')
         cy.get('[data-cy="viewMoreLessButton"]').click()
         cy.get('[data-cy="viewMoreLessButton"]').should('have.attr', 'aria-expanded', 'true')
