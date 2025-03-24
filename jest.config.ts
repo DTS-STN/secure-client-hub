@@ -15,7 +15,7 @@ const customJestConfig: Config = {
   moduleNameMapper: {
     // these are to fix an issue with next auth
     '^jose': require.resolve('jose'),
-    '^@panva/hkdf': require.resolve('@panva/hkdf'),
+    //'^@panva/hkdf': require.resolve('@panva/hkdf'),
     '^preact-render-to-string': require.resolve('preact-render-to-string'),
     '^preact': require.resolve('preact'),
     '^uuid': require.resolve('uuid'),
