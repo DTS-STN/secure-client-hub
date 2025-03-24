@@ -71,13 +71,6 @@ export default async function handler(
 
   const decryptedUserInfoToken = await decryptJwe(userinfoToken)
 
-  addCookie(
-    res,
-    'sinuid',
-    decryptedUserInfoToken.sin + ' ' + decryptedUserInfoToken.uid,
-    Number(process.env.SESSION_MAX_AGE),
-  )
-
   updateMscaNg(
     decryptedUserInfoToken.sin as string,
     decryptedUserInfoToken.uid as string,
