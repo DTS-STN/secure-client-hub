@@ -13,6 +13,12 @@ const customJestConfig: Config = {
     'pages/**/*.{js,jsx,ts,tsx}',
   ],
   moduleNameMapper: {
+    // these are to fix an issue with next auth
+    '^jose': require.resolve('jose'),
+    '^preact-render-to-string': require.resolve('preact-render-to-string'),
+    '^preact': require.resolve('preact'),
+    '^uuid': require.resolve('uuid'),
+
     /* Handle CSS imports (with CSS modules)
       https://jestjs.io/docs/webpack#mocking-css-modules */
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
