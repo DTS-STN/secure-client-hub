@@ -42,7 +42,7 @@
     "date-fns": "^4.1.0",
     "fast-glob": "^3.3.2",
     "https-proxy-agent": "^7.0.6",
-    "jose": "^5.9.6",
+    "jose": "^5.10.0",
     "lodash.throttle": "^4.1.1",
     "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.7.2",
