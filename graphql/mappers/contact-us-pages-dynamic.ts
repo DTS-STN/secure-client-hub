@@ -122,7 +122,7 @@ const getCachedContent = () => {
     key: `content-dynamic-contact-us`,
     cache,
     getFreshValue: async (): Promise<GetSchContactUsDynamicV1 | null> => {
-      const targetUri = buildAemUri('getSchContactUsDynamicV1')
+      const targetUri = buildAemUri('getSchContactUsDynamicV2')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()
