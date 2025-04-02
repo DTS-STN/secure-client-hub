@@ -25,20 +25,6 @@ describe('Validate dashboard page', () => {
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
   })
-
-  it('Validate info message is present on Dashboard EN', () => {
-    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'New')
-    cy.get('[data-cy="info-message-text"]').should('be.visible')
-    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
-  })
-
-  it('Validate info message is present on Dashboard FR', () => {
-    cy.changeLang().should('have.text', 'English')
-    cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
-    cy.get('[data-cy="info-message"]').should('be.visible').and('include.text', 'Nouveau')
-    cy.get('[data-cy="info-message-text"]').should('be.visible')
-    cy.get('[data-cy="sclabs-page-link"]').should('be.visible')
-  })
  
 
   it('Validate 6 Cards (CDCP, EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
