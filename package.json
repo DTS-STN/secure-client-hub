@@ -23,7 +23,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@cypress/request": "^3.0.6",
+    "@cypress/request": "^3.0.8",
     "@date-fns/utc": "^1.2.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
