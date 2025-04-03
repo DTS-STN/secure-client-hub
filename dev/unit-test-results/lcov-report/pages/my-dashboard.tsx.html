@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.34% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/46</span>
+                <span class='fraction'>21/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.87% </span>
+                <span class="strong">7.4% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/32</span>
+                <span class='fraction'>2/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.34% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/46</span>
+                <span class='fraction'>21/42</span>
             </div>
         
             
@@ -356,24 +356,7 @@
 <a name='L291'></a><a href='#L291'>291</a>
 <a name='L292'></a><a href='#L292'>292</a>
 <a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a>
-<a name='L296'></a><a href='#L296'>296</a>
-<a name='L297'></a><a href='#L297'>297</a>
-<a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a>
-<a name='L302'></a><a href='#L302'>302</a>
-<a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a>
-<a name='L305'></a><a href='#L305'>305</a>
-<a name='L306'></a><a href='#L306'>306</a>
-<a name='L307'></a><a href='#L307'>307</a>
-<a name='L308'></a><a href='#L308'>308</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L294'></a><a href='#L294'>294</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -444,22 +427,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -678,12 +650,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
-import en from '../locales/en'
-import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
-import InfoMessage from '../components/InfoMessage'
 import {
   getMyDashboardContent,
   MyDashboardContent,
@@ -748,7 +717,6 @@ interface MyDashboardProps {
 }
 export default function MyDashboard(props: MyDashboardProps) {
   /* istanbul ignore next */
-  const t = props.locale === 'en' ? en : fr
 &nbsp;
   const errorCode =
     props.content.err ||
@@ -780,16 +748,6 @@ export default function MyDashboard(props: MyDashboardProps) {
       data-testid="myDashboardContent-test"
     &gt;
       &lt;Heading id="my-dashboard-heading" title={props.content.heading} /&gt;
-&nbsp;
-      &lt;InfoMessage
-        label={t.dashboardInfo.label}
-        messageText={t.dashboardInfo.messageText}
-        messageLinkText={t.dashboardInfo.messageLinkText}
-        messageLinkHref={t.dashboardInfo.messageLinkHref}
-        icon="arrow-up-right-from-square"
-        refPageAA={`${props.aaPrefix}`}
-        locale={props.locale}
-      /&gt;
 &nbsp;
       {props.content.pageAlerts.map((alert, index) =&gt; {
         const alertType = alert.type[0].split('/').pop()
@@ -991,7 +949,7 @@ MyDashboard.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-02T23:45:17.783Z
+                at 2025-04-03T14:03:35.051Z
             </div>
         <script src="../prettify.js"></script>
         <script>
