@@ -6,15 +6,12 @@ COPY . .
 
 FROM base AS build
 
-# Build envs
+
 ARG HOSTALIAS_CERT
-ENV HOSTALIAS_CERT=$HOSTALIAS_CERT
 ARG HOSTALIAS_ROOT_CERT
-ENV HOSTALIAS_ROOT_CERT=$HOSTALIAS_ROOT_CERT
 ARG AUTH_ECAS_CA
-ENV AUTH_ECAS_CA=$AUTH_ECAS_CA
 ARG LOGGING_LEVEL=info
-ENV LOGGING_LEVEL=$LOGGING_LEVEL
+
 
 
 ENV NODE_ENV=production
@@ -85,15 +82,7 @@ COPY --from=build --chown=${user}:${group} /build/public ./public
 
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
-# Runtime envs -- will default to build args if no env values are specified at docker run
-ARG LOGGING_LEVEL=info
-ENV LOGGING_LEVEL=$LOGGING_LEVEL
-
-ARG AUTH_DISABLED
-ENV AUTH_DISABLED=$AUTH_DISABLED
-
 ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ecas_env.crt
-# ECAS/next-auth env end
 
 ARG PORT=3000
 ENV PORT=${PORT}
