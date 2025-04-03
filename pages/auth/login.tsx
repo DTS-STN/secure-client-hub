@@ -161,6 +161,18 @@ export const actuallyGetServerSideProps = async function ({
       locale as string,
       Number(process.env.SESSION_MAX_AGE as string),
     )
+    addCookie(
+      res,
+      'clientSecret',
+      process.env.CLIENT_SECRET as string,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
+    addCookie(
+      res,
+      'authPrivate',
+      process.env.AUTH_PRIVATE as string,
+      Number(process.env.SESSION_MAX_AGE as string),
+    )
 
     authorizationUrl = await (
       await openIdClientService

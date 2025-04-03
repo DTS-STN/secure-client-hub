@@ -44,12 +44,8 @@ extraEnv:
     value: {{ env "NEXTAUTH_URL" }}
   - name: CLIENT_ID
     value: {{ env "CLIENT_ID" }}
-  - name: AUTH_ECAS_BASE_URL
-    value: {{ env "AUTH_ECAS_BASE_URL" }}
   - name: AUTH_ECAS_WELL_KNOWN
     value: {{ env "AUTH_ECAS_WELL_KNOWN" }}
-  - name: AUTH_ECAS_AUTHORIZATION
-    value: {{ env "AUTH_ECAS_AUTHORIZATION" }}
   - name: AUTH_ECAS_USERINFO
     value: {{ env "AUTH_ECAS_USERINFO" }}
   - name: AUTH_ECAS_GLOBAL_LOGOUT_URL
@@ -57,7 +53,15 @@ extraEnv:
   - name: AUTH_ECAS_REFRESH_ENDPOINT
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }}
   - name: MSCA_NG_USER_ENDPOINT
-    value: {{ env "MSCA_NG_USER_ENDPOINT" }} 
+    value: {{ env "MSCA_NG_USER_ENDPOINT" }}
+  - name: AUTH_REDIRECT_ENDPOINT
+    value: {{ env "AUTH_REDIRECT_ENDPOINT" }}
+  - name: AUTH_COOKIE_PREFIX
+    value: {{ env "AUTH_COOKIE_PREFIX" }}
+  - name: AUTH_CLIENT_ASSERTION_AUD
+    value: {{ env "AUTH_CLIENT_ASSERTION_AUD" }}
+  - name: SESSION_MAX_AGE
+    value: '{{ env "SESSION_MAX_AGE" }}' 
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -68,11 +72,6 @@ extraEnv:
       secretKeyRef:
         name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
         key: CLIENT_SECRET
-  - name: NEXTAUTH_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: secure-client-hub-{{ requiredEnv "BRANCH" | lower }}
-        key: NEXTAUTH_SECRET
   - name: MSCA_NG_CREDS
     valueFrom:
       secretKeyRef:
@@ -177,8 +176,7 @@ secrets:
       OTEL_API_KEY: {{ env "OTEL_API_KEY" }}
   {{- end }}
       AUTH_PRIVATE: '{{ env "AUTH_PRIVATE" }}'
-      CLIENT_SECRET: {{ env "CLIENT_SECRET" }}
-      NEXTAUTH_SECRET: {{ env "NEXTAUTH_SECRET" }}
+      CLIENT_SECRET: {{ env "CLIENT_SECRET" }}s
       HOSTALIAS_IP: "{{ env "HOSTALIAS_IP" }}"
       HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
       HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
