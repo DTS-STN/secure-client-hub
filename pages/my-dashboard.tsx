@@ -229,7 +229,7 @@ export async function getServerSideProps({
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'My dashboard - My Service USA Account',
+      title: 'My dashboard - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
