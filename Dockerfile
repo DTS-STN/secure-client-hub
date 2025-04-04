@@ -82,8 +82,6 @@ COPY --from=build --chown=${user}:${group} /build/public ./public
 
 RUN VERSION_NEXT=`node -p -e "require('./package-lock.json').packages['node_modules/next'].version"` && npm install --no-package-lock --no-save next@"$VERSION_NEXT" && npm cache clean --force
 
-ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ecas_env.crt
-
 ARG PORT=3000
 ENV PORT=${PORT}
 

@@ -64,6 +64,8 @@ extraEnv:
     value: {{ env "AUTH_CLIENT_ASSERTION_AUD" }}
   - name: SESSION_MAX_AGE
     value: '{{ env "SESSION_MAX_AGE" }}'
+  - name: NODE_EXTRA_CA_CERTS
+    value: {{ env "NODE_EXTRA_CA_CERTS" }}
 
   - name: AUTH_PRIVATE
     valueFrom:
