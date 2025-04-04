@@ -25,7 +25,7 @@ async function createOpenIdClientService() {
   const issuer = await Issuer.discover(
     process.env.AUTH_ECAS_WELL_KNOWN as string,
   )
-  const redirectUrl = `${process.env.NEXTAUTH_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
+  const redirectUrl = `${process.env.MSCAD_BASE_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`
   const openIdClient = await buildClient(issuer, redirectUrl, jwkSet)
 
   return {
@@ -56,7 +56,7 @@ async function createOpenIdClientService() {
       nbf: number,
     ) => {
       return openIdClient.callback(
-        `${process.env.NEXTAUTH_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`,
+        `${process.env.MSCAD_BASE_URL}${process.env.AUTH_REDIRECT_ENDPOINT}`,
         params,
         {
           state: state,
