@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'
-import en from '../locales/en'
-import fr from '../locales/fr'
 import Card from '../components/Card'
 import Heading from '../components/Heading'
 import ContextualAlert from '../components/ContextualAlert'
-import InfoMessage from '../components/InfoMessage'
 import {
   getMyDashboardContent,
   MyDashboardContent,
@@ -14,21 +11,17 @@ import {
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
 import { getLogger } from '../logging/log-util'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from '../lib/auth'
-import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { AuthIsDisabled, ValidateSession } from '../lib/auth'
 import BenefitTasks, { TaskListProps } from '../components/BenefitTasks'
 import MostReqTasks from '../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
 import { Key } from 'react'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
 
 interface MyDashboardProps {
   locale: string
@@ -73,7 +66,6 @@ interface MyDashboardProps {
 }
 export default function MyDashboard(props: MyDashboardProps) {
   /* istanbul ignore next */
-  const t = props.locale === 'en' ? en : fr
 
   const errorCode =
     props.content.err ||
@@ -105,16 +97,6 @@ export default function MyDashboard(props: MyDashboardProps) {
       data-testid="myDashboardContent-test"
     >
       <Heading id="my-dashboard-heading" title={props.content.heading} />
-
-      <InfoMessage
-        label={t.dashboardInfo.label}
-        messageText={t.dashboardInfo.messageText}
-        messageLinkText={t.dashboardInfo.messageLinkText}
-        messageLinkHref={t.dashboardInfo.messageLinkHref}
-        icon="arrow-up-right-from-square"
-        refPageAA={`${props.aaPrefix}`}
-        locale={props.locale}
-      />
 
       {props.content.pageAlerts.map((alert, index) => {
         const alertType = alert.type[0].split('/').pop()
@@ -182,46 +164,40 @@ export default function MyDashboard(props: MyDashboardProps) {
 }
 
 export async function getServerSideProps({
+  locale,
   req,
   res,
-  locale,
 }: {
+  locale: GetServerSidePropsContext['locale']
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
-  locale: string
 }) {
-  const session = await getServerSession(req, res, authOptions)
+  const authDisabled = AuthIsDisabled()
 
-  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
-
-  const token = await getIdToken(req)
-
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
+  if (!authDisabled) {
     const sessionValid = await ValidateSession(
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
     if (!sessionValid) {
-      // Clear all session cookies
-      const isSecure = req.headers['x-forwarded-proto'] === 'https'
-      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
-      const cookies = []
-      for (const cookie of Object.keys(req.cookies)) {
-        if (cookie.startsWith(cookiePrefix)) {
-          cookies.push(
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-      res.setHeader('Set-Cookie', cookies)
+      deleteAllCookiesWithPrefix(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+      extendExpiryTime(
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 
@@ -304,7 +280,6 @@ export async function getServerSideProps({
     },
   }
 }
-
 MyDashboard.propTypes = {
   /**
    * current locale in the address

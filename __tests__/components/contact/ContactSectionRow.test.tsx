@@ -18,6 +18,7 @@ const mockContactSectionRowProps = {
   refPageAA: 'test-refPageAA',
   button: true,
   buttonId: 'test-buttonId',
+  lang: 'en',
 } satisfies ContactSectionRowProps
 
 describe('ContactSectionRow', () => {

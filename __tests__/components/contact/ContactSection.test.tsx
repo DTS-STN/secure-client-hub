@@ -29,6 +29,7 @@ const mockContactSectionProps = {
   id: 'test-id',
   intro: 'test-intro',
   title: 'test-title',
+  lang: 'en',
 } satisfies ContactSectionProps
 
 describe('ContactSection', () => {
