@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">34.09% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/44</span>
+                <span class='fraction'>14/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">15.15% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/40</span>
+                <span class='fraction'>5/33</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">34.09% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/44</span>
+                <span class='fraction'>14/35</span>
             </div>
         
             
@@ -347,30 +347,15 @@
 <a name='L282'></a><a href='#L282'>282</a>
 <a name='L283'></a><a href='#L283'>283</a>
 <a name='L284'></a><a href='#L284'>284</a>
-<a name='L285'></a><a href='#L285'>285</a>
-<a name='L286'></a><a href='#L286'>286</a>
-<a name='L287'></a><a href='#L287'>287</a>
-<a name='L288'></a><a href='#L288'>288</a>
-<a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L285'></a><a href='#L285'>285</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,6 +364,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -509,7 +498,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -517,19 +505,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -654,15 +638,8 @@ import {
   getDecisionReviewsContent,
 } from '../graphql/mappers/decision-reviews'
 import { getLogger } from '../logging/log-util'
-import {
-  AuthIsDisabled,
-  AuthIsValid,
-  ValidateSession,
-  Redirect,
-  getIdToken,
-} from '../lib/auth'
-import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
+import { AuthIsDisabled, ValidateSession } from '../lib/auth'
+&nbsp;
 import {
   AuthModalsContent,
   getAuthModalsContent,
@@ -671,6 +648,10 @@ import Markdown from 'markdown-to-jsx'
 import ErrorPage from '../components/ErrorPage'
 import Button from '../components/Button'
 import { GetServerSidePropsContext } from 'next'
+import {
+  deleteAllCookiesWithPrefix,
+  extendExpiryTime,
+} from '../lib/cookie-utils'
 &nbsp;
 interface DecisionReviewProps {
   locale: string | undefined
@@ -788,46 +769,41 @@ export default function DecisionReviews(props: DecisionReviewProps) {
 }
 &nbsp;
 export async function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >getServerSideProps(</span></span>{
+  locale,
   req,
   res,
-  locale,
 }: {
+  locale: GetServerSidePropsContext['locale']
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
-  locale: string
 }) {
-  const session = <span class="cstat-no" title="statement not covered" >await getServerSession(req, res, authOptions)</span>
+  const authDisabled = <span class="cstat-no" title="statement not covered" >AuthIsDisabled() ? true : false</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!AuthIsDisabled() &amp;&amp; !(await AuthIsValid(req, session)))</span>
-<span class="cstat-no" title="statement not covered" >    return Redirect(locale)</span>
-&nbsp;
-  const token = <span class="cstat-no" title="statement not covered" >await getIdToken(req)</span>
-&nbsp;
-  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!AuthIsDisabled() &amp;&amp; (await AuthIsValid(req, session))) {</span>
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!authDisabled) {</span>
     const sessionValid = <span class="cstat-no" title="statement not covered" >await ValidateSession(</span>
-      process.env.CLIENT_ID,
-      token?.sid,
+      req.cookies,
+      process.env.CLIENT_ID as string,
     )
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!sessionValid) {</span>
-      // Clear all session cookies
-      const isSecure = <span class="cstat-no" title="statement not covered" >req.headers['x-forwarded-proto'] === 'https'</span>
-      const cookiePrefix = <span class="cstat-no" title="statement not covered" >`${isSecure ? '__Secure-' : ''}next-auth.session-token`</span>
-      const cookies = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >      for (const cookie of Object.keys(req.cookies)) {</span>
-<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if (cookie.startsWith(cookiePrefix)) {</span>
-<span class="cstat-no" title="statement not covered" >          cookies.push(</span>
-            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
-          )
-        }
-      }
-<span class="cstat-no" title="statement not covered" >      res.setHeader('Set-Cookie', cookies)</span>
+<span class="cstat-no" title="statement not covered" >    if (!sessionValid) {</span>
+<span class="cstat-no" title="statement not covered" >      deleteAllCookiesWithPrefix(</span>
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX as string,
+      )
+&nbsp;
 <span class="cstat-no" title="statement not covered" >      return {</span>
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
+    } else {
+<span class="cstat-no" title="statement not covered" >      extendExpiryTime(</span>
+        req,
+        res,
+        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
+        Number(process.env.SESSION_MAX_AGE as string),
+      )
     }
   }
 &nbsp;
@@ -946,7 +922,7 @@ DecisionReviews.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-07T15:29:38.984Z
+                at 2025-04-07T15:26:48.872Z
             </div>
         <script src="../prettify.js"></script>
         <script>
