@@ -9,7 +9,7 @@ describe('Validate Contact Old Age Security page', () => {
       hostname: 'assets.adobedtm.com',
       path: /.*\/launch-.*/,
     }).as('adobeAnalytics')
-    cy.visit('/contact-us/contact-old-age-security', { retryOnStatusCodeFailure: true, timeout: 60000 })
+    cy.visit('/en/contact-us/contact-old-age-security', { retryOnStatusCodeFailure: true, timeout: 60000 })
   })
 
   it('Contact us OAS has no detectable a11y violations on load', () => {
