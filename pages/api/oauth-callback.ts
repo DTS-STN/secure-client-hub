@@ -79,7 +79,10 @@ export default async function handler(
   deleteCookieWithName(req, res, 'localeForOauthCallback')
   const dashboardRedirect =
     locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
-  res.status(307).redirect(dashboardRedirect)
+  res
+    .setHeader('Content-Type', 'text/html; charset=utf-8')
+    .status(307)
+    .redirect(dashboardRedirect)
 }
 
 export function updateMscaNg(sin: string, uid: string) {
