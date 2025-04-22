@@ -56,6 +56,10 @@ interface MyDashboardProps {
           betaPopUp: boolean
         }[]
       }[]
+      dictionaryTerms: {
+        id: string
+        term: string
+      }[]
     }[]
   }
   bannerContent?: { err?: '500' | '404' | '503' }
@@ -128,6 +132,7 @@ export default function MyDashboard(props: MyDashboardProps) {
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
             cardAlert={card.cardAlerts}
+            dictionaryTerms={card.dictionaryTerms}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks

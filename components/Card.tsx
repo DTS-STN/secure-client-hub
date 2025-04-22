@@ -10,6 +10,10 @@ interface AlertProps {
   alertHeading: string
   alertBody: string
 }
+interface DictionaryProps {
+  id: string
+  term: string
+}
 interface CardProps {
   cardTitle: string
   viewMoreLessCaption: string
@@ -20,6 +24,7 @@ interface CardProps {
   locale: string
   cardAlert?: AlertProps[]
   hasAlert?: boolean
+  dictionaryTerms?: DictionaryProps[]
 }
 
 const Card = ({
@@ -29,6 +34,12 @@ const Card = ({
       type: '',
       alertHeading: '',
       alertBody: '',
+    },
+  ],
+  dictionaryTerms = [
+    {
+      id: '',
+      term: '',
     },
   ],
   locale,
@@ -80,14 +91,70 @@ const Card = ({
     }
   }, [isOpen, programUniqueId])
 
+  const dictionaryLatestPayment = dictionaryTerms.find(
+    (term) => term.id === 'dictionary-latest-payment',
+  )
+  const dictionaryLastPaymentDate = dictionaryTerms.find(
+    (term) => term.id === 'dictionary-last-payment-date',
+  )
+  const dictionaryNextPayment = dictionaryTerms.find(
+    (term) => term.id === 'dictionary-next-payment',
+  )
+  const dictionaryNextPaymentDate = dictionaryTerms.find(
+    (term) => term.id === 'dictionary-next-payment-date',
+  )
+
   return (
     <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">
-      <h2
-        className="px-3 py-4 font-display text-4xl font-bold text-gray-darker sm:px-8 md:mt-2 md:px-15 md:py-8"
-        data-cy="cardtitle"
-      >
-        {cardTitle}
-      </h2>
+      {programUniqueId == 'employment-insurance' ||
+      programUniqueId == 'canada-pension-plan' ? (
+        <div className="grid divide-solid divide-[#424242]/50 sm:px-8 md:mt-2 md:px-15 md:py-8 lg:grid-cols-11 lg:divide-x">
+          <h2
+            className="font-display text-4xl font-bold text-gray-darker lg:col-span-3"
+            data-cy="cardtitle"
+          >
+            {cardTitle}
+          </h2>
+          <div className="grid pt-8 sm:pt-[40px] md:grid-cols-2 lg:col-span-8 lg:ml-6 lg:pt-0">
+            <div className="lg:pl-14">
+              <ul>
+                <li className="text-base text-[#424242]">
+                  {dictionaryLatestPayment?.term}
+                </li>
+                <li className="pt-4 text-[38px] font-semibold text-[#424242] sm:pt-3">
+                  $1,432.00
+                </li>
+                <li className="pt-4 text-base text-[#424242] sm:pb-3">
+                  {dictionaryLastPaymentDate?.term}{' '}
+                  <span className="font-semibold">November 1, 2024</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-8 sm:pt-0 md:pl-5 lg:pl-14">
+              <ul>
+                <li className="text-base text-[#333333]">
+                  {dictionaryNextPayment?.term}
+                </li>
+                <li className="pt-4 text-[38px] font-bold text-[#333333] sm:pt-3">
+                  $1,432.00
+                </li>
+                <li className="pb-4 pt-4 text-base text-[#333333] sm:pb-3">
+                  {dictionaryNextPaymentDate?.term}{' '}
+                  <span className="font-bold">December 1, 2024</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <h2
+          className="px-3 py-4 font-display text-4xl font-bold text-gray-darker sm:px-8 md:mt-2 md:px-15 md:py-8"
+          data-cy="cardtitle"
+        >
+          {cardTitle}
+        </h2>
+      )}
+
       <ViewMoreLessButton
         id={programUniqueId + 'test-card-button-'}
         dataTestid={programUniqueId?.toString() + 'dataTestId'}

@@ -74,6 +74,11 @@ interface GetSchMyDashboardV3 {
                 schBetaPopUp: boolean
               }>
             }>
+            schDictionaryTerms: Array<{
+              scId: string
+              scTermEn: string
+              scTermFr: string
+            }>
           }>
         }>
       }>
@@ -142,6 +147,12 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
                 }),
               }
             }),
+            dictionaryTerms: fragment.schDictionaryTerms.map((dictionary) => {
+              return {
+                id: dictionary.scId,
+                term: dictionary.scTermEn,
+              }
+            }),
           }
         }),
       exitBeta: {
@@ -194,6 +205,12 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
                     betaPopUp: item.schBetaPopUp,
                   }
                 }),
+              }
+            }),
+            dictionaryTerms: fragment.schDictionaryTerms.map((dictionary) => {
+              return {
+                id: dictionary.scId,
+                term: dictionary.scTermFr,
               }
             }),
           }
@@ -249,6 +266,12 @@ export interface MyDashboardContent {
               betaPopUp: boolean
             }[]
           }[]
+          dictionaryTerms:
+            | {
+                id: string
+                term: string
+              }[]
+            | undefined
         }[]
       | undefined
     exitBeta: { title: null | undefined; link: string | undefined }
@@ -290,6 +313,12 @@ export interface MyDashboardContent {
                   betaPopUp: boolean
                 }[]
               }[]
+              dictionaryTerms:
+                | {
+                    id: string
+                    term: string
+                  }[]
+                | undefined
             }
           | undefined
         )[]
