@@ -22,9 +22,14 @@ import {
   deleteAllCookiesWithPrefix,
   extendExpiryTime,
 } from '../lib/cookie-utils'
+import { getPaymentService } from './api/get-payment-service'
 
 interface MyDashboardProps {
   locale: string
+  lastPaymentAmount: number
+  lastPaymentDateString: string
+  nextPaymentAmount: number
+  nextPaymentDateString: string
   content: {
     err?: '500' | '404' | '503'
     heading: string
@@ -133,6 +138,10 @@ export default function MyDashboard(props: MyDashboardProps) {
             refPageAA={props.aaPrefix}
             cardAlert={card.cardAlerts}
             dictionaryTerms={card.dictionaryTerms}
+            lastPaymentAmount={props.lastPaymentAmount}
+            lastPaymentDateString={props.lastPaymentDateString}
+            nextPaymentAmount={props.nextPaymentAmount}
+            nextPaymentDateString={props.nextPaymentDateString}
           >
             <div className="bg-deep-blue-60d" data-cy="most-requested-section">
               <MostReqTasks
@@ -217,6 +226,19 @@ export async function getServerSideProps({
     },
   )
 
+  const payment = await getPaymentService()
+  const lastPaymentAmount = await payment.getLastPaymentAmount()
+  const lastPaymentDate = await payment.getLastPaymentDate()
+  const nextPaymentAmount = await payment.getNextPaymentAmount()
+  const nextPaymentDate = await payment.getNextPaymentDate()
+
+  const lastPaymentDateString = lastPaymentDate.toLocaleString('en-CA', {
+    dateStyle: 'long',
+  })
+  const nextPaymentDateString = nextPaymentDate.toLocaleString('en-CA', {
+    dateStyle: 'long',
+  })
+
   const authModals = await getAuthModalsContent().catch(
     (error): AuthModalsContent => {
       logger.error(error)
@@ -282,6 +304,10 @@ export async function getServerSideProps({
           : locale === 'en'
             ? authModals.mappedPopupSignedOut?.en
             : authModals.mappedPopupSignedOut?.fr,
+      lastPaymentAmount,
+      lastPaymentDateString,
+      nextPaymentAmount,
+      nextPaymentDateString,
     },
   }
 }

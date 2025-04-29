@@ -25,6 +25,10 @@ interface CardProps {
   cardAlert?: AlertProps[]
   hasAlert?: boolean
   dictionaryTerms?: DictionaryProps[]
+  lastPaymentAmount: number
+  lastPaymentDateString: string
+  nextPaymentAmount: number
+  nextPaymentDateString: string
 }
 
 const Card = ({
@@ -42,6 +46,10 @@ const Card = ({
       term: '',
     },
   ],
+  lastPaymentAmount,
+  lastPaymentDateString,
+  nextPaymentAmount,
+  nextPaymentDateString,
   locale,
   cardTitle,
   viewMoreLessCaption,
@@ -122,11 +130,15 @@ const Card = ({
                   {dictionaryLatestPayment?.term}
                 </li>
                 <li className="pt-4 text-[38px] font-semibold text-[#424242] sm:pt-3">
-                  $1,432.00
+                  {lastPaymentAmount.toLocaleString('en-CA', {
+                    style: 'currency',
+                    currency: 'CAD',
+                    useGrouping: 'true',
+                  })}
                 </li>
                 <li className="pt-4 text-base text-[#424242] sm:pb-3">
                   {dictionaryLastPaymentDate?.term}{' '}
-                  <span className="font-semibold">November 1, 2024</span>
+                  <span className="font-semibold">{lastPaymentDateString}</span>
                 </li>
               </ul>
             </div>
@@ -136,11 +148,15 @@ const Card = ({
                   {dictionaryNextPayment?.term}
                 </li>
                 <li className="pt-4 text-[38px] font-bold text-[#333333] sm:pt-3">
-                  $1,432.00
+                  {nextPaymentAmount.toLocaleString('en-CA', {
+                    style: 'currency',
+                    currency: 'CAD',
+                    useGrouping: 'true',
+                  })}
                 </li>
                 <li className="pb-4 pt-4 text-base text-[#333333] sm:pb-3">
                   {dictionaryNextPaymentDate?.term}{' '}
-                  <span className="font-bold">December 1, 2024</span>
+                  <span className="font-bold">{nextPaymentDateString}</span>
                 </li>
               </ul>
             </div>
