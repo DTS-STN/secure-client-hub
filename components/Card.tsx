@@ -116,7 +116,7 @@ const Card = ({
     <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">
       {programUniqueId == 'employment-insurance' ||
       programUniqueId == 'canada-pension-plan' ? (
-        <div className="grid divide-solid divide-[#424242]/50 sm:px-8 md:mt-2 md:px-15 md:py-8 lg:grid-cols-11 lg:divide-x">
+        <div className="grid divide-solid divide-[#424242]/50 px-3 py-4 sm:px-8 md:mt-2 md:px-15 md:py-8 lg:grid-cols-11 lg:divide-x">
           <h2
             className="font-display text-4xl font-bold text-gray-darker lg:col-span-3"
             data-cy="cardtitle"
@@ -129,7 +129,7 @@ const Card = ({
                 <li className="text-base text-[#424242]">
                   {dictionaryLatestPayment?.term}
                 </li>
-                <li className="pt-4 text-[38px] font-semibold text-[#424242] sm:pt-3">
+                <li className="pt-4 text-[38px] font-semibold leading-none text-[#424242] md:pt-3">
                   {lastPaymentAmount.toLocaleString('en-CA', {
                     style: 'currency',
                     currency: 'CAD',
@@ -138,7 +138,9 @@ const Card = ({
                 </li>
                 <li className="pt-4 text-base text-[#424242] sm:pb-3">
                   {dictionaryLastPaymentDate?.term}{' '}
-                  <span className="font-semibold">{lastPaymentDateString}</span>
+                  <span className="block font-semibold sm:inline">
+                    {lastPaymentDateString}
+                  </span>
                 </li>
               </ul>
             </div>
@@ -147,7 +149,7 @@ const Card = ({
                 <li className="text-base text-[#333333]">
                   {dictionaryNextPayment?.term}
                 </li>
-                <li className="pt-4 text-[38px] font-bold text-[#333333] sm:pt-3">
+                <li className="pt-4 text-[38px] font-bold leading-none text-[#333333] md:pt-3">
                   {nextPaymentAmount.toLocaleString('en-CA', {
                     style: 'currency',
                     currency: 'CAD',
@@ -156,7 +158,9 @@ const Card = ({
                 </li>
                 <li className="pb-4 pt-4 text-base text-[#333333] sm:pb-3">
                   {dictionaryNextPaymentDate?.term}{' '}
-                  <span className="font-bold">{nextPaymentDateString}</span>
+                  <span className="block font-bold sm:inline">
+                    {nextPaymentDateString}
+                  </span>
                 </li>
               </ul>
             </div>
