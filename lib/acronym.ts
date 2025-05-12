@@ -35,7 +35,7 @@ export const acronym = (longText: string) => {
       return 'CDCP'
     case 'national student loans service centre':
       return 'NSLSC'
-    case 'centre de service national de prêts aux étudiants':
+    case 'centre de services national de prêts aux étudiants':
       return 'NSLSC'
     default:
       return 'UND'
