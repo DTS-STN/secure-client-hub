@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import TableContents from '../../components/TableContents'
 import Heading from '../../components/Heading'
+
 import { ContactSection } from '../../components/contact/ContactSection'
 import { ContactProvince } from '../../components/contact/ContactProvince'
 import { getAuthModalsContent } from '../../graphql/mappers/auth-modals'
@@ -8,11 +9,15 @@ import {
   GetContactUsPageReturnType,
   getContactUsPage,
 } from '../../graphql/mappers/contact-us-pages-dynamic'
-import { AuthIsDisabled, ValidateSession } from '../../lib/auth'
 import {
-  deleteAllCookiesWithPrefix,
-  extendExpiryTime,
-} from '../../lib/cookie-utils'
+  AuthIsDisabled,
+  AuthIsValid,
+  ValidateSession,
+  Redirect,
+  getIdToken,
+} from '../../lib/auth'
+import { authOptions } from '../api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
 
 interface Data {
@@ -82,39 +87,39 @@ const ContactUsPage = (props: ContactUsPageProps) => {
   )
 }
 
-export const getServerSideProps = async function ({
-  locale,
-  params,
-  req,
-  res,
-}) {
-  const authDisabled = AuthIsDisabled() ? true : false
+export const getServerSideProps = (async ({ req, res, locale, params }) => {
+  const session = await getServerSession(req, res, authOptions)
 
-  if (!authDisabled) {
+  if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
+    return Redirect(locale)
+
+  const token = await getIdToken(req)
+
+  //If Next-Auth session is valid, check to see if ECAS session is. If not, clear session cookies and redirect to login
+  if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
     const sessionValid = await ValidateSession(
-      req.cookies,
-      process.env.CLIENT_ID as string,
+      process.env.CLIENT_ID,
+      token?.sid,
     )
     if (!sessionValid) {
-      deleteAllCookiesWithPrefix(
-        req,
-        res,
-        process.env.AUTH_COOKIE_PREFIX as string,
-      )
-
+      // Clear all session cookies
+      const isSecure = req.headers['x-forwarded-proto'] === 'https'
+      const cookiePrefix = `${isSecure ? '__Secure-' : ''}next-auth.session-token`
+      const cookies = []
+      for (const cookie of Object.keys(req.cookies)) {
+        if (cookie.startsWith(cookiePrefix)) {
+          cookies.push(
+            `${cookie}=deleted; Max-Age=0; path=/ ${isSecure ? '; Secure ' : ''}`,
+          )
+        }
+      }
+      res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
           destination: `/${locale}/auth/login`,
           permanent: false,
         },
       }
-    } else {
-      extendExpiryTime(
-        req,
-        res,
-        process.env.AUTH_COOKIE_PREFIX + 'sessionId',
-        Number(process.env.SESSION_MAX_AGE as string),
-      )
     }
   }
 
@@ -199,7 +204,7 @@ export const getServerSideProps = async function ({
           : authModals.mappedPopupSignedOut?.fr,
     },
   }
-} satisfies GetServerSideProps<ContactUsPageProps>
+}) satisfies GetServerSideProps<ContactUsPageProps>
 // https://nextjs.org/docs/pages/building-your-application/configuring/typescript#static-generation-and-server-side-rendering
 
 export default ContactUsPage
