@@ -81,7 +81,7 @@ export default async function handler(
     locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
   res
     .setHeader('Content-Type', 'text/html; charset=utf-8')
-    .status(307)
+    .status(301)
     .redirect(dashboardRedirect)
 }
 
