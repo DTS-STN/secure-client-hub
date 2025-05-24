@@ -1,42 +1,17 @@
 import { useEffect } from 'react'
 import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
-import { GetServerSidePropsContext } from 'next'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import LoadingSpinner from '../../components/LoadingSpinner'
+import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
-import React from 'react'
-import { deleteAllCookiesWithPrefix } from '../../lib/cookie-utils'
 
-interface MetaDataProps {
-  data_en: {
-    title: string
-    desc: string
-    author: string
-    keywords: string
-    service: string
-    creator: string
-    accessRights: string
-  }
-  data_fr: {
-    title: string
-    desc: string
-    author: string
-    keywords: string
-    service: string
-    creator: string
-    accessRights: string
-  }
-}
-
-interface LogoutProps {
-  locale: string
-  meta: MetaDataProps
-  logoutURL: string
-}
-export default function Logout(props: LogoutProps) {
+export default function Logout(props) {
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
+      await signOut({ redirect: false })
       window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
@@ -57,31 +32,19 @@ export default function Logout(props: LogoutProps) {
   )
 }
 
-Logout.getLayout = function PageLayout(page: JSX.Element) {
+Logout.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({
-  req,
-  res,
-  locale,
-}: {
-  req: GetServerSidePropsContext['req']
-  res: GetServerSidePropsContext['res']
-  locale: GetServerSidePropsContext['locale']
-}) {
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  deleteAllCookiesWithPrefix(
-    req,
-    res,
-    process.env.AUTH_COOKIES_PREFIX as string,
-  )
-
   const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req.cookies, locale).catch((error) => {
+    ? await getLogoutURL(req, session, locale).catch((error) => {
         logger.error(error)
         res.statusCode = 500
         throw error
@@ -112,9 +75,9 @@ export async function getServerSideProps({
 
   return {
     props: {
-      locale: locale,
+      locale,
       meta,
-      logoutURL: logoutURL,
+      logoutURL: logoutURL ?? '/',
     },
   }
 }
