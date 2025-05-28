@@ -13,16 +13,20 @@ export const getPaymentService = moize.promise(createPaymentService, {
 
 async function createPaymentService() {
   return {
-    getLastPaymentAmount: async () => {
+    getLastPaymentAmount: async (sin: string, program: string) => {
+      console.log(sin + ' ' + program)
       return 1234
     },
-    getNextPaymentAmount: async () => {
+    getNextPaymentAmount: async (sin: string, program: string) => {
+      console.log(sin + ' ' + program)
       return 1234
     },
-    getLastPaymentDate: async () => {
+    getLastPaymentDate: async (sin: string, program: string) => {
+      console.log(sin + ' ' + program)
       return new UTCDate()
     },
-    getNextPaymentDate: async () => {
+    getNextPaymentDate: async (sin: string, program: string) => {
+      console.log(sin + program)
       return new UTCDate()
     },
   }
