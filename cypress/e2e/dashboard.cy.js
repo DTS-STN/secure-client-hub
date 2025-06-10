@@ -27,7 +27,7 @@ describe('Validate dashboard page', () => {
   })
  
 
-  it('Validate 6 Cards (CDCP, EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
+  it('Validate 7 Cards (CDCP,EI,CPP,OAS,SIN,CAL,NSLSC) Card titles are Visible', () => {
     const cardTitles = [
       'Canadian Dental Care Plan',
       'Employment Insurance',
@@ -36,6 +36,8 @@ describe('Validate dashboard page', () => {
       'Social Insurance Number',
       'Canada Apprentice Loan',
       'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
@@ -63,6 +65,8 @@ describe('Validate dashboard page', () => {
       'Social Insurance Number',
       'Canada Apprentice Loan',
       'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit'
     ]
 
     // Iterate through each card title
@@ -97,6 +101,8 @@ describe('Validate dashboard page', () => {
       'Numéro d’assurance sociale',
       'Prêt canadien aux apprentis',
       'Centre de services national de prêts aux étudiants',
+      // TODO: Enable when CDB goes live
+      //'Prestation canadienne pour les personnes handicapées',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -356,6 +362,8 @@ describe('Validate dashboard page', () => {
       'Social Insurance Number',
       'Canada Apprentice Loan',
       'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
