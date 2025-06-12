@@ -37,6 +37,10 @@ export const acronym = (longText: string) => {
       return 'NSLSC'
     case 'centre de services national de prêts aux étudiants':
       return 'NSLSC'
+    case 'canada disability benefit':
+      return 'CDB'
+    case 'prestation canadienne pour les personnes handicapées':
+      return 'CDB'
     default:
       return 'UND'
   }
