@@ -70,7 +70,7 @@ interface GetSchProfileV2 {
 
 const getCachedContent = () => {
   return cachified({
-    key: `content-profile`,
+    key: `content-pers-info-benefit`,
     cache,
     getFreshValue: async (): Promise<GetSchProfileV2 | null> => {
       const targetUri = buildAemUri('TESTgetSchPersInfoBenefitV1')

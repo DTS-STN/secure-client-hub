@@ -86,7 +86,7 @@ interface GetSchProfilePrefV1 {
 
 const getCachedContent = () => {
   return cachified({
-    key: `content-profile`,
+    key: `content-profile-and-preferences`,
     cache,
     getFreshValue: async (): Promise<GetSchProfilePrefV1 | null> => {
       const targetUri = buildAemUri('TESTgetSchProfilePreferencesV1')
