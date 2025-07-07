@@ -15,7 +15,7 @@ export default {
   menuItems: {
     dashboard: 'My dashboard',
     security: 'Security settings',
-    profile: 'Profile',
+    profile: 'Profile and preferences',
     contactUs: 'Contact us',
     signOut: 'Sign Out',
   },

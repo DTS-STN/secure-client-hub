@@ -10,8 +10,12 @@ const REWRITES = [
     destination: '/my-dashboard',
   },
   {
-    source: '/profil',
-    destination: '/profile',
+    source: '/profil-et-preferences',
+    destination: '/profile-and-preferences',
+  },
+  {
+    source: '/renseignements-personnels-par-prestation',
+    destination: '/personal-information-by-benefit',
   },
   {
     source: '/parametres-securite',
