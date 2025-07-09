@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { icon } from '../lib/loadIcons'
+import { getIcon } from './MaterialIcon'
 
 export interface ProfileCardProps {
   dataCy?: string
@@ -9,6 +10,7 @@ export interface ProfileCardProps {
   cardHref: string
   description?: string
   aaPrefix?: string
+  prefixIcon?: string
 }
 
 const ProfileCard = ({
@@ -17,12 +19,13 @@ const ProfileCard = ({
   cardHref,
   description,
   aaPrefix,
+  prefixIcon,
 }: ProfileCardProps) => {
   return (
     <div className="border-t-2 border-y-gray-100 text-base">
       <div className="m-4 grid grid-flow-col grid-cols-[36px_1fr_36px] grid-rows-2 items-center justify-items-center gap-2">
         <div className="col-start-1 row-start-1 justify-self-center text-3xl">
-          {getIconFromId(cardId)}
+          {getIcon(prefixIcon)}
         </div>
         <div className="col-start-2 row-start-1 justify-self-start text-2xl">
           <Link
@@ -41,14 +44,6 @@ const ProfileCard = ({
       </div>
     </div>
   )
-}
-
-function getIconFromId(cardId: string) {
-  // TODO: Actual logic
-  if (!cardId) {
-    return <></>
-  }
-  return <FontAwesomeIcon icon={icon['lock']} />
 }
 
 export default ProfileCard

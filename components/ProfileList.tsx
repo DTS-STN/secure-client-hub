@@ -22,6 +22,7 @@ const ProfileList = ({
             cardName={card.cardName}
             cardHref={card.cardHref}
             description={card.description}
+            prefixIcon={card.prefixIcon}
             aaPrefix={aaPrefix}
           />
         )

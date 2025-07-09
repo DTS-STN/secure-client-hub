@@ -1,3 +1,4 @@
+import 'react-material-symbols/outlined'
 import '../styles/globals.css'
 import '../styles/loadingspinner.css'
 import Layout from '../components/Layout'

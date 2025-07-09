@@ -136,6 +136,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             cardName: element.scLinkTextEn,
             cardHref: element.scDestinationURLEn,
             description: element.scDescriptionEn.json[0].content[0].value,
+            prefixIcon: element.scIconCSS,
           }
         }),
       },
@@ -147,6 +148,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             cardName: element.scLinkTextEn,
             cardHref: element.scDestinationURLEn,
             description: element.scDescriptionEn.json[0].content[0].value,
+            prefixIcon: element.scIconCSS,
           }
         }),
       },
@@ -170,6 +172,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             cardName: element.scLinkTextFr,
             cardHref: element.scDestinationURLFr,
             description: element.scDescriptionFr.json[0].content[0].value,
+            prefixIcon: element.scIconCSS,
           }
         }),
       },
@@ -181,6 +184,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             cardName: element.scLinkTextFr,
             cardHref: element.scDestinationURLFr,
             description: element.scDescriptionFr.json[0].content[0].value,
+            prefixIcon: element.scIconCSS,
           }
         }),
       },
@@ -202,6 +206,7 @@ export interface ProfileListElementContent {
   cardName: string
   cardHref: string
   description?: string
+  prefixIcon?: string
 }
 
 export interface ProfileListContent {
