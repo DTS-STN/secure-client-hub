@@ -13,7 +13,9 @@ const ProfileList = ({
 }: ProfileListProps) => {
   return (
     <div className="max-w-3xl">
-      <h2 className="mb-4 mt-8 text-3xl font-bold">{sectionName}</h2>
+      <h2 className="mb-4 mt-8 font-display text-3xl font-bold">
+        {sectionName}
+      </h2>
       {profileCards.map((card: ProfileCardProps) => {
         return (
           <ProfileCard
