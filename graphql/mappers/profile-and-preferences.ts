@@ -1,4 +1,4 @@
-import { buildAemUri } from '../../lib/links'
+import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 //import resp from './sample-responses/profile-preferences.json'
@@ -134,7 +134,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
           return {
             cardId: element.scId,
             cardName: element.scLinkTextEn,
-            cardHref: element.scDestinationURLEn,
+            cardHref: buildLink(element.schURLType, element.scDestinationURLEn),
             description: element.scDescriptionEn.json[0].content[0].value,
             prefixIcon: element.scIconCSS,
           }
@@ -146,7 +146,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
           return {
             cardId: element.scId,
             cardName: element.scLinkTextEn,
-            cardHref: element.scDestinationURLEn,
+            cardHref: buildLink(element.schURLType, element.scDestinationURLEn),
             description: element.scDescriptionEn.json[0].content[0].value,
             prefixIcon: element.scIconCSS,
           }
@@ -170,7 +170,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
           return {
             cardId: element.scId,
             cardName: element.scLinkTextFr,
-            cardHref: element.scDestinationURLFr,
+            cardHref: buildLink(element.schURLType, element.scDestinationURLFr),
             description: element.scDescriptionFr.json[0].content[0].value,
             prefixIcon: element.scIconCSS,
           }
@@ -182,7 +182,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
           return {
             cardId: element.scId,
             cardName: element.scLinkTextFr,
-            cardHref: element.scDestinationURLFr,
+            cardHref: buildLink(element.schURLType, element.scDestinationURLFr),
             description: element.scDescriptionFr.json[0].content[0].value,
             prefixIcon: element.scIconCSS,
           }
