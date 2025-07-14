@@ -27,7 +27,7 @@ describe('Validate dashboard page', () => {
   })
  
 
-  it('Validate 6 Cards (CDCP, EI,CPP,OAS,SIN,CAL) Card titles are Visible', () => {
+  it('Validate 7 Cards (CDCP,EI,CPP,OAS,SIN,CAL,NSLSC) Card titles are Visible', () => {
     const cardTitles = [
       'Canadian Dental Care Plan',
       'Employment Insurance',
@@ -35,8 +35,9 @@ describe('Validate dashboard page', () => {
       'Old Age Security',
       'Social Insurance Number',
       'Canada Apprentice Loan',
-      // TODO: Enable when live (and update count)
-      //'National Student Loans Service Centre',
+      'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
@@ -47,7 +48,7 @@ describe('Validate dashboard page', () => {
   cy.get('[data-testid="myDashboardContent-test"]')
   .children('[data-cy="cards"]')
   .should('be.visible')
-  .and('have.length', 6)
+  .and('have.length', 7)
 })
 
   it('validate the "My dashboard" page doesnt have breadcrumbs', () => {
@@ -63,8 +64,9 @@ describe('Validate dashboard page', () => {
       'Old Age Security',
       'Social Insurance Number',
       'Canada Apprentice Loan',
-      // TODO: Enable when live
-      //'National Student Loans Service Centre',
+      'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit'
     ]
 
     // Iterate through each card title
@@ -98,8 +100,9 @@ describe('Validate dashboard page', () => {
       'Sécurité de la vieillesse',
       'Numéro d’assurance sociale',
       'Prêt canadien aux apprentis',
-      // TODO: Enable when live
-      //'Centre de service national de prêts aux étudiants',
+      'Centre de services national de prêts aux étudiants',
+      // TODO: Enable when CDB goes live
+      //'Prestation canadienne pour les personnes handicapées',
     ]
     cy.changeLang().should('have.text', 'English')
     cy.location('pathname').should('include', '/fr/mon-tableau-de-bord')
@@ -358,8 +361,9 @@ describe('Validate dashboard page', () => {
       'Old Age Security',
       'Social Insurance Number',
       'Canada Apprentice Loan',
-      // TODO: Enable when live
-      //'National Student Loans Service Centre',
+      'National Student Loans Service Centre',
+      // TODO: Enable when CDB goes live
+      //'Canada Disability Benefit',
     ]
     cy.wrap(cardTitles).each((cardTitle) => {
       // Find the card with the specific title
