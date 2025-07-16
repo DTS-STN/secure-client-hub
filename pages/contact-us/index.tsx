@@ -49,6 +49,8 @@ const ContactLanding = (props: ContactLandingProps) => {
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/nas.html',
     'https://www.canada.ca/en/services/benefits/dental/dental-care-plan/contact.html',
     'https://www.canada.ca/fr/services/prestations/dentaire/regime-soins-dentaires/contactez.html',
+    'https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit/contact.html',
+    'https://www.canada.ca/fr/services/prestations/handicap/prestation-canadienne-personnes-situation-handicap/contact.html',
   ]
 
   return (
