@@ -1,7 +1,6 @@
 import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
-//import resp from './sample-responses/security-settings.json'
 
 interface GetSchSecuritySettingsV2 {
   data: {
@@ -96,7 +95,6 @@ const getCachedContent = () => {
 
 export async function getSecuritySettingsContent(): Promise<SecuritySettingsContent> {
   const response = await getCachedContent()
-  //const response: GetSchSecuritySettingsV2 = JSON.parse(JSON.stringify(resp))
 
   const enContentFragment =
     findFragmentByScId(response, 'security-settings-main-content')

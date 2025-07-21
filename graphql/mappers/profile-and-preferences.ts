@@ -1,7 +1,6 @@
 import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
-//import resp from './sample-responses/profile-preferences.json'
 
 interface GetSchProfilePrefV1 {
   data: {
@@ -100,7 +99,6 @@ const getCachedContent = () => {
 
 export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
   const response = await getCachedContent()
-  //const response = JSON.parse(JSON.stringify(resp))
 
   const introFragment = findFragmentByScId(
     response,

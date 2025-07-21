@@ -1,8 +1,6 @@
 import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
-//import resp from './sample-responses/pers-info-benefit.json'
-
 interface FragmentElement {
   scId: string
   scContentEn?: {
@@ -84,7 +82,6 @@ const getCachedContent = () => {
 
 export async function getProfileContent(): Promise<ProfileContent> {
   const response = await getCachedContent()
-  //const response = JSON.parse(JSON.stringify(resp))
 
   // ProfileIntro Fragment
   const profileIntroFragment = findFragmentByScId(
@@ -202,24 +199,12 @@ export interface ProfileContent {
                         areaLabel: string
                         link: string
                         icon: string
-                        // betaPopUp: boolean
                       }[]
                     | undefined
                 }
               | undefined
             )[]
           | undefined
-        // lookingFor: {
-        //   title: string | undefined
-        //   subText: (string | undefined)[]
-        //   link: string
-        //   id: string
-        // }
-        // backToDashboard: {
-        //   id: string | undefined
-        //   btnText: string | undefined
-        //   btnLink: string | undefined
-        // }
         title?: string | undefined
       }
     | undefined
@@ -244,25 +229,11 @@ export interface ProfileContent {
                     areaLabel: string
                     link: string
                     icon: string
-                    // betaPopUp: boolean
                   }[]
                 | undefined
             }
           | undefined
         )[]
       | undefined
-    // lookingFor: {
-    //   title: string | undefined
-    //   subText: (string | undefined)[]
-    //   link: string
-    //   id: string
-    // }
-    // backToDashboard:
-    //   | {
-    //       id: string | undefined
-    //       btnText: string | undefined
-    //       btnLink: string | undefined
-    //     }
-    //   | undefined
   }
 }
