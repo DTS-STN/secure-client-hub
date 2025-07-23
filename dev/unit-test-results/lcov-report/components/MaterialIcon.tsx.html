@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/api/readyz.ts</title>
+    <title>Code coverage report for components/MaterialIcon.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">pages/api</a> readyz.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> MaterialIcon.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
@@ -82,9 +82,12 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -93,32 +96,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { NextApiRequest, NextApiResponse } from 'next'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { MaterialSymbol } from 'react-material-symbols'
 &nbsp;
-export interface ReadyzApiResponse {
-  status: 'UP'
-  uptime: string
+// because typescript
+// the real icon list is several thousand long and we'd need to typecheck it with
+// SymbolCodepointsArray.find((e) =&gt; e === icon)
+const MaterialIcon: Record&lt;string, JSX.Element&gt; = {
+  demography: (
+    &lt;MaterialSymbol icon="demography" weight={400} grade={0} size={24} /&gt;
+  ),
+  lock: &lt;MaterialSymbol icon="lock" weight={400} grade={0} size={24} /&gt;,
+  mail: &lt;MaterialSymbol icon="mail" weight={400} grade={0} size={24} /&gt;,
 }
 &nbsp;
-/**
- * An API endpoint to be used in kubernetes readyness checks.
- */
-export default function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >handler(</span></span>
-  _req: NextApiRequest,
-  res: NextApiResponse&lt;ReadyzApiResponse&gt;
-) {
-<span class="cstat-no" title="statement not covered" >  res.status(200).json({</span>
-    status: 'UP',
-    uptime: `${process.uptime()}s`,
-  })
+export function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >getIcon(i</span></span>con?: string) {
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!icon || !(icon in MaterialIcon)) {</span>
+<span class="cstat-no" title="statement not covered" >    return &lt;&gt;&lt;/&gt;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return MaterialIcon[icon]</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -129,14 +129,14 @@ export default function <span class="cstat-no" title="statement not covered" ><s
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2025-07-23T15:43:48.223Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
