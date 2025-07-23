@@ -1,30 +1,29 @@
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth/next'
 import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
+import ErrorPage from '../components/ErrorPage'
 import Heading from '../components/Heading'
-import PageLink from '../components/PageLink'
-import en from '../locales/en'
-import fr from '../locales/fr'
-import { getProfileContent, ProfileContent } from '../graphql/mappers/profile'
+import ProfileTasks, { Task } from '../components/ProfileTasks'
 import {
   AuthModalsContent,
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
-import { getLogger } from '../logging/log-util'
+import {
+  getProfileContent,
+  ProfileContent,
+} from '../graphql/mappers/pers-info-benefit'
+import { acronym } from '../lib/acronym'
 import {
   AuthIsDisabled,
   AuthIsValid,
-  ValidateSession,
-  Redirect,
   getIdToken,
+  Redirect,
+  ValidateSession,
 } from '../lib/auth'
+import { getLogger } from '../logging/log-util'
 import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
-import ProfileTasks, { Task } from '../components/ProfileTasks'
-import React, { ReactNode } from 'react'
-import { acronym } from '../lib/acronym'
-import ErrorPage from '../components/ErrorPage'
-import { GetServerSidePropsContext } from 'next'
-
-interface ProfilePageProps {
+interface PersonalInfoByBenefitPageProps {
   locale: string | undefined
   content: {
     err?: '500' | '404' | '503'
@@ -42,12 +41,6 @@ interface ProfilePageProps {
         ) => React.JSX.Element,
       ) => ReactNode
     }
-    lookingFor: {
-      title: string
-      subText: string[]
-      link: string
-    }
-    backToDashboard: { btnLink: string; btnText: string }
   }
   bannerContent?: {
     err?: '500' | '404' | '503'
@@ -65,10 +58,9 @@ interface ProfilePageProps {
   aaPrefix: string
 }
 
-export default function Profile(props: ProfilePageProps) {
-  /* istanbul ignore next */
-  const t = props.locale === 'en' ? en : fr
-
+export default function PersonalInfoByBenefit(
+  props: PersonalInfoByBenefitPageProps,
+) {
   const errorCode =
     props.content.err ||
     props.bannerContent?.err ||
@@ -96,7 +88,11 @@ export default function Profile(props: ProfilePageProps) {
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="profile-heading" title={props.content.pageName} />
-      <p className="mt-2 text-lg text-gray-darker">{props.content.heading}</p>
+      {
+        <p className="mt-8 max-w-3xl text-lg text-gray-darker">
+          {props.content.heading}
+        </p>
+      }
       <div data-cy="profile-lists">
         {props.content.list.map((program, index) => {
           return (
@@ -112,19 +108,6 @@ export default function Profile(props: ProfilePageProps) {
           )
         })}
       </div>
-
-      <PageLink
-        lookingForText={props.content.lookingFor.title}
-        accessText={props.content.lookingFor.subText[0]}
-        linkText={props.content.lookingFor.subText[1]}
-        href={props.content.lookingFor.link}
-        dataCy="access-security-page-link"
-        buttonHref={props.content.backToDashboard.btnLink}
-        buttonId="back-to-dashboard-button"
-        buttonLinkText={props.content.backToDashboard.btnText}
-        refPageAA={props.aaPrefix}
-        dashId={t.id_dashboard}
-      ></PageLink>
     </div>
   )
 }
@@ -190,7 +173,10 @@ export async function getServerSideProps({
   )
 
   /* istanbul ignore next */
-  const langToggleLink = locale === 'en' ? '/fr/profil' : '/en/profile'
+  const langToggleLink =
+    locale === 'en'
+      ? '/fr/renseignements-personnels-par-prestation'
+      : '/en/personal-information-by-benefit'
   const breadCrumbItems =
     content.err !== undefined
       ? []
@@ -262,7 +248,7 @@ export async function getServerSideProps({
   }
 }
 
-Profile.propTypes = {
+PersonalInfoByBenefit.propTypes = {
   /**
    * current locale in the address
    */

@@ -34,7 +34,7 @@ const ProfileTasks = ({
   return (
     <div data-cy={dataCy} className="mb-12 mt-10">
       <h2
-        className="text-4xl font-bold text-gray-darker"
+        className="font-display text-4xl font-bold text-gray-darker"
         data-cy="program-title"
       >
         {programTitle}
@@ -46,7 +46,7 @@ const ProfileTasks = ({
       >
         {tasks.map((task, index) => {
           return (
-            <li key={index} className="flex py-3 font-bold">
+            <li key={index} className="flex py-2 font-bold">
               <Link
                 href={task.link}
                 passHref
