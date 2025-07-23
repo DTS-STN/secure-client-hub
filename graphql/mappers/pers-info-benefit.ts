@@ -71,7 +71,7 @@ const getCachedContent = () => {
     key: `content-pers-info-benefit`,
     cache,
     getFreshValue: async (): Promise<GetSchProfileV2 | null> => {
-      const targetUri = buildAemUri('TESTgetSchPersInfoBenefitV1')
+      const targetUri = buildAemUri('getSchPersInfoBenefitV1')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()

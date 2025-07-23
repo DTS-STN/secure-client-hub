@@ -84,7 +84,7 @@ const getCachedContent = () => {
     key: `content-security-settings`,
     cache,
     getFreshValue: async (): Promise<GetSchSecuritySettingsV2 | null> => {
-      const targetUri = buildAemUri('TESTgetSchSecuritySettingsV3')
+      const targetUri = buildAemUri('getSchSecuritySettingsV3')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()

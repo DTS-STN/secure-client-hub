@@ -88,7 +88,7 @@ const getCachedContent = () => {
     key: `content-profile-and-preferences`,
     cache,
     getFreshValue: async (): Promise<GetSchProfilePrefV1 | null> => {
-      const targetUri = buildAemUri('TESTgetSchProfilePreferencesV1')
+      const targetUri = buildAemUri('getSchProfilePreferencesV1')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()
