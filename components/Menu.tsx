@@ -1,5 +1,10 @@
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+// import { icon } from '../lib/loadIcons'
+// import Button from './Button'
+// import { getIcon } from './MaterialIcon'
 
 interface MenuItem {
   id: string
@@ -53,15 +58,33 @@ const Menu = ({
   return (
     <div className="w-full bg-blue-primary">
       <nav className="sch-container sch-container-menu items-center justify-between sm:flex sm:h-[60px]">
-        <div className="mx-15px flex h-[60px] items-center font-display text-[19px] font-bold leading-[21px] text-white md:m-0 md:text-2xl">
+        <div className="mx-15px flex h-[60px] flex-1 items-center justify-start font-display text-[19px] font-bold leading-[21px] text-white md:m-0 md:text-2xl">
           <span id="mainSiteNav">
             {lang === 'fr'
               ? 'Mon dossier Service Canada'
               : 'My Service Canada Account'}
           </span>
         </div>
+        <div className="mr-8 flex flex-1 justify-end">
+          {/* <Button
+            id=''
+            style='secondary'
+            href='http://localhost:3000'
+            text='Inbox'
+            className=''
+            icon='warning_img.svg'
+            iconEnd={false}
+            iconAltText='mail'
+          >
+            <FontAwesomeIcon icon={faEnvelope}/>
+          </Button> */}
+          <button className="my-4 inline-block rounded bg-gray-30a px-3.5 py-2.5 font-display text-xl text-deep-blue-60b ring-deep-blue-60f hover:cursor-pointer hover:bg-gray-50a focus:ring focus:ring-offset-4">
+            <FontAwesomeIcon icon={faEnvelope} />
+            <span className="ml-2">Inbox</span>
+          </button>
+        </div>
         <div
-          className="h-full w-full bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
+          className="flex h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
           ref={dropdown}
         >
           <button
