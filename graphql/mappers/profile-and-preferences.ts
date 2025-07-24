@@ -116,7 +116,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
   const mappedProfile = {
     en: {
       breadcrumb:
-        response.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level: { scPageNameEn: string; scTitleEn: string }) => {
             return {
               link: level.scPageNameEn,
@@ -124,7 +124,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             }
           },
         ),
-      pageName: response.data.schPageV1List.items[0].scTitleEn,
+      pageName: response?.data.schPageV1List.items[0].scTitleEn,
       introText: introFragment?.scContentEn?.json[0].content[0].value,
       profileAccountInfo: {
         sectionName: profileAccountFragment?.scTitleEn,
@@ -153,7 +153,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
     },
     fr: {
       breadcrumb:
-        response.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
           (level: { scPageNameFr: string; scTitleFr: string }) => {
             return {
               link: level.scPageNameFr,
@@ -161,7 +161,7 @@ export async function getProfilePrefContent(): Promise<ProfilePrefContent> {
             }
           },
         ),
-      pageName: response.data.schPageV1List.items[0].scTitleFr,
+      pageName: response?.data.schPageV1List.items[0].scTitleFr,
       profileAccountInfo: {
         sectionName: profileAccountFragment?.scTitleFr,
         elements: profileAccountFragment?.scItems?.map((element) => {
