@@ -99,6 +99,7 @@ export async function getContactUsContent() {
   const cppContactFragment = findFragmentByScId(response, 'cpp-contact-us')
   const sinContactFragment = findFragmentByScId(response, 'sin-contact-us')
   const cdcpContactFragment = findFragmentByScId(response, 'cdcp-contact-us')
+  const cdbContactFragment = findFragmentByScId(response, 'cdb-contact-us')
 
   const mappedSecurity = {
     en: {
@@ -149,6 +150,15 @@ export async function getContactUsContent() {
           linkDestination: oasContactFragment?.scDestinationURLEn,
           linkDescription: oasContactFragment?.scDescriptionEn?.json
             ? oasContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+        },
+        {
+          linkId: cdbContactFragment?.scId,
+          linkTitle: cdbContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: cdbContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: cdbContactFragment?.scDestinationURLEn,
+          linkDescription: cdbContactFragment?.scDescriptionEn?.json
+            ? cdbContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
         },
         {
@@ -210,6 +220,15 @@ export async function getContactUsContent() {
           linkDestination: oasContactFragment?.scDestinationURLFr,
           linkDescription: oasContactFragment?.scDescriptionFr?.json
             ? oasContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+        },
+        {
+          linkId: cdbContactFragment?.scId,
+          linkTitle: cdbContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: cdbContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: cdbContactFragment?.scDestinationURLFr,
+          linkDescription: cdbContactFragment?.scDescriptionFr?.json
+            ? cdbContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
         },
         {
