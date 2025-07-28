@@ -153,21 +153,21 @@ export async function getContactUsContent() {
             : '',
         },
         {
-          linkId: sinContactFragment?.scId,
-          linkTitle: sinContactFragment?.scLinkTextEn,
-          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveEn,
-          linkDestination: sinContactFragment?.scDestinationURLEn,
-          linkDescription: sinContactFragment?.scDescriptionEn?.json
-            ? sinContactFragment.scDescriptionEn.json[0].content[0].value
-            : '',
-        },
-        {
           linkId: cdbContactFragment?.scId,
           linkTitle: cdbContactFragment?.scLinkTextEn,
           linkAssistiveTitle: cdbContactFragment?.scLinkTextAssistiveEn,
           linkDestination: cdbContactFragment?.scDestinationURLEn,
           linkDescription: cdbContactFragment?.scDescriptionEn?.json
             ? cdbContactFragment.scDescriptionEn.json[0].content[0].value
+            : '',
+        },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextEn,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveEn,
+          linkDestination: sinContactFragment?.scDestinationURLEn,
+          linkDescription: sinContactFragment?.scDescriptionEn?.json
+            ? sinContactFragment.scDescriptionEn.json[0].content[0].value
             : '',
         },
       ],
@@ -223,21 +223,21 @@ export async function getContactUsContent() {
             : '',
         },
         {
-          linkId: sinContactFragment?.scId,
-          linkTitle: sinContactFragment?.scLinkTextFr,
-          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveFr,
-          linkDestination: sinContactFragment?.scDestinationURLFr,
-          linkDescription: sinContactFragment?.scDescriptionFr?.json
-            ? sinContactFragment.scDescriptionFr.json[0].content[0].value
-            : '',
-        },
-        {
           linkId: cdbContactFragment?.scId,
           linkTitle: cdbContactFragment?.scLinkTextFr,
           linkAssistiveTitle: cdbContactFragment?.scLinkTextAssistiveFr,
           linkDestination: cdbContactFragment?.scDestinationURLFr,
           linkDescription: cdbContactFragment?.scDescriptionFr?.json
             ? cdbContactFragment.scDescriptionFr.json[0].content[0].value
+            : '',
+        },
+        {
+          linkId: sinContactFragment?.scId,
+          linkTitle: sinContactFragment?.scLinkTextFr,
+          linkAssistiveTitle: sinContactFragment?.scLinkTextAssistiveFr,
+          linkDestination: sinContactFragment?.scDestinationURLFr,
+          linkDescription: sinContactFragment?.scDescriptionFr?.json
+            ? sinContactFragment.scDescriptionFr.json[0].content[0].value
             : '',
         },
       ],
