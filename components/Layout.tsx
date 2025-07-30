@@ -115,7 +115,7 @@ export default function Layout({
               key: 'profileKey',
               id: 'profile',
               value: t.menuItems.profile,
-              path: `${locale === 'en' ? '/en/profile' : '/fr/profil'}`,
+              path: `${locale === 'en' ? '/en/profile-and-preferences' : '/fr/profil-et-preferences'}`,
             },
             {
               key: 'securityKey',

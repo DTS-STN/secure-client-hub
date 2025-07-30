@@ -14,7 +14,7 @@ export default {
   menuItems: {
     dashboard: 'Mon tableau de bord',
     security: 'Paramètres de sécurité',
-    profile: 'Profil',
+    profile: 'Profil et préférences',
     contactUs: 'Contactez-nous',
     signOut: 'Se déconnecter',
   },
