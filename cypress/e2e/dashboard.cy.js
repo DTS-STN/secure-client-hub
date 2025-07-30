@@ -25,6 +25,7 @@ describe('Validate dashboard page', () => {
       .should('be.visible')
       .and('have.text', 'Mon tableau de bord')
   })
+  
 
   it('Validate 8 Cards (CDCP,EI,CPP,OAS,SIN,CAL,NSLSC,CDB) Card titles are Visible', () => {
     const cardTitles = [
