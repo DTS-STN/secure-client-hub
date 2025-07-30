@@ -14,6 +14,7 @@ interface SearchProps {
 interface MenuProps {
   onSignOut?: () => void
   menuList: MenuList[]
+  inboxLink: string
 }
 
 interface MenuList {
@@ -90,6 +91,7 @@ const Header = ({
         path: '/',
       },
     ],
+    inboxLink: '/',
   },
   breadCrumbItems,
   refPageAA = 'mscaPlaceholder',
@@ -157,6 +159,7 @@ const Header = ({
         <Menu
           lang={lang}
           menuList={menuProps.menuList}
+          inboxLink={menuProps.inboxLink}
           dataGcAnalyticsCustomClick={dataGcAnalyticsCustomClickMenuVariable}
         />
         <div className="sch-container">

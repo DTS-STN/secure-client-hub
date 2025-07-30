@@ -143,6 +143,7 @@ export default function Layout({
               showIcon: true,
             },
           ],
+          inboxLink: `${locale === 'en' ? '/en/index' : '/fr/index'}`,
         }}
         searchProps={{
           onChange: function noRefCheck() {},

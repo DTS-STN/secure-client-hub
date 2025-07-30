@@ -17,12 +17,14 @@ interface MenuProps {
   lang: string
   dataGcAnalyticsCustomClick: string
   menuList: MenuItem[]
+  inboxLink: string
 }
 
 const Menu = ({
   lang,
   dataGcAnalyticsCustomClick = 'mscaPlaceholder',
   menuList,
+  inboxLink,
 }: MenuProps) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement>(null)
@@ -57,11 +59,15 @@ const Menu = ({
     <Button
       id=""
       style="secondary"
-      // href='http://localhost:3000' // TODO: use correct href
+      href={`${inboxLink}`}
       text=""
-      className={`my-4 flex flex-row items-center gap-3 bg-blue-primary ${className}`}
+      className={`my-4 flex flex-row items-center gap-3 rounded bg-blue-primary ${className}`}
     >
-      <FontAwesomeIcon icon={faEnvelope} />
+      <FontAwesomeIcon
+        icon={faEnvelope}
+        transform="grow-8 up-2"
+        className="m-2"
+      />
       <span>{lang === 'fr' ? 'Boîte de réception' : 'Inbox'}</span>
     </Button>
   )
@@ -79,10 +85,6 @@ const Menu = ({
           </div>
           <div className="mr-8 hidden flex-1 justify-end lg:flex">
             <InboxButton className="hidden lg:flex" />
-            {/* <button className="my-4 inline-block rounded bg-gray-30a px-3.5 py-2.5 font-display text-xl text-deep-blue-60b ring-deep-blue-60f hover:cursor-pointer hover:bg-gray-50a focus:ring focus:ring-offset-4">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <span className="ml-2">Inbox</span>
-            </button> */}
           </div>
           <div
             className="flex h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
