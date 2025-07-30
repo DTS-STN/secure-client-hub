@@ -26,7 +26,6 @@ describe('Validate dashboard page', () => {
       .and('have.text', 'Mon tableau de bord')
   })
 
-
   it('Validate 8 Cards (CDCP,EI,CPP,OAS,SIN,CAL,NSLSC,CDB) Card titles are Visible', () => {
     const cardTitles = [
       'Canadian Dental Care Plan',
