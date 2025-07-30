@@ -1,46 +1,55 @@
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth/next'
 import PropTypes from 'prop-types'
+import React from 'react'
+import ErrorPage from '../components/ErrorPage'
 import Heading from '../components/Heading'
-import {
-  getSecuritySettingsContent,
-  SecuritySettingsContent,
-} from '../graphql/mappers/security-settings'
+import ProfileList from '../components/ProfileList'
 import {
   AuthModalsContent,
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
-import { getLogger } from '../logging/log-util'
+import {
+  getProfilePrefContent,
+  ProfileListContent,
+  ProfilePrefContent,
+} from '../graphql/mappers/profile-and-preferences'
 import {
   AuthIsDisabled,
   AuthIsValid,
-  ValidateSession,
-  Redirect,
   getIdToken,
+  Redirect,
+  ValidateSession,
 } from '../lib/auth'
+import { getLogger } from '../logging/log-util'
 import { authOptions } from './api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth/next'
-import ErrorPage from '../components/ErrorPage'
-import Button from '../components/Button'
-import { GetServerSidePropsContext } from 'next'
 
-interface SecurtitySettingsProps {
+interface ProfilePageProps {
   locale: string | undefined
   content: {
     err?: '500' | '404' | '503'
-    heading: string
-    subHeading: string
-    securityQuestions: {
-      linkTitle: { link: string | undefined; text: string }
-      subTitle: string
-    }
+    pageName: string
+    introText?: string
+    profileAccountInfo?: ProfileListContent
+    profilePersonalInfo?: ProfileListContent
   }
-  bannerContent?: { err?: '500' | '404' | '503' }
-  popupContent?: { err?: '500' | '404' | '503' }
-  popupContentNA?: { err?: '500' | '404' | '503' }
-  authModals?: { err?: '500' | '404' | '503' }
+  bannerContent?: {
+    err?: '500' | '404' | '503'
+  }
+  popupContent?: {
+    err?: '500' | '404' | '503'
+  }
+  popupContentNA?: {
+    err?: '500' | '404' | '503'
+  }
+  // TODO: Is this actually being used?
+  authModals?: {
+    err?: '500' | '404' | '503'
+  }
   aaPrefix: string
 }
 
-export default function SecuritySettings(props: SecurtitySettingsProps) {
+export default function Profile(props: ProfilePageProps) {
   const errorCode =
     props.content.err ||
     props.bannerContent?.err ||
@@ -66,24 +75,22 @@ export default function SecuritySettings(props: SecurtitySettingsProps) {
   }
 
   return (
-    <div id="securityContent" data-testid="securityContent-test">
-      <Heading id="security-settings-heading" title={props.content.heading} />
-      <p className="mb-8 mt-3 text-xl text-gray-darker">
-        {props.content.subHeading}
+    <div id="homeContent" data-testid="profileContent-test">
+      <Heading id="profile-heading" title={props.content.pageName} />
+      <p className="mt-8 max-w-3xl text-lg text-gray-darker">
+        {props.content.introText}
       </p>
-      <Button
-        data-testid="securityQuestionsLink"
-        href={props.content.securityQuestions.linkTitle.link}
-        id="securityQuestionsLink"
-        style="link"
-        text={props.content.securityQuestions.linkTitle.text}
-        className="w-fit pl-0 pr-0 font-body text-20px underline"
-        refPageAA={props.aaPrefix}
-      ></Button>
-
-      <p className="mb-8 text-xl text-gray-darker">
-        {props.content.securityQuestions.subTitle}
-      </p>
+      <ProfileList
+        sectionName={props.content.profileAccountInfo?.sectionName ?? ''}
+        profileCards={props.content.profileAccountInfo?.elements ?? []}
+        aaPrefix={props.aaPrefix}
+      />
+      <ProfileList
+        sectionName={props.content.profilePersonalInfo?.sectionName ?? ''}
+        profileCards={props.content.profilePersonalInfo?.elements ?? []}
+        aaPrefix={props.aaPrefix}
+      />
+      <div className="mb-8" />
     </div>
   )
 }
@@ -133,11 +140,11 @@ export async function getServerSideProps({
   }
 
   //The below sets the minimum logging level to error and surpresses everything below that
-  const logger = getLogger('security-settings')
+  const logger = getLogger('profile')
   logger.level = 'error'
 
-  const content = await getSecuritySettingsContent().catch(
-    (error): SecuritySettingsContent => {
+  const content = await getProfilePrefContent().catch(
+    (error): ProfilePrefContent => {
       logger.error(error)
       return { err: '500' }
     },
@@ -152,21 +159,28 @@ export async function getServerSideProps({
 
   /* istanbul ignore next */
   const langToggleLink =
-    locale === 'en' ? '/fr/parametres-securite' : '/en/security-settings'
-
-  const breadCrumbItems =
     locale === 'en'
-      ? content.en?.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + locale + '/' + link }
-        })
-      : content.fr?.breadcrumb?.map(({ link, text }) => {
-          return { text, link: '/' + locale + '/' + link }
-        })
+      ? '/fr/profil-et-preferences'
+      : '/en/profile-and-preferences'
+  const breadCrumbItems =
+    content.err !== undefined
+      ? []
+      : locale === 'en'
+        ? content.en?.breadcrumb?.map(
+            ({ link, text }: { link: string; text: string }) => {
+              return { text, link: '/' + locale + '/' + link }
+            },
+          )
+        : content.fr?.breadcrumb?.map(
+            ({ link, text }: { link: string; text: string }) => {
+              return { text, link: '/' + locale + '/' + link }
+            },
+          )
 
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Security settings - My Service Canada Account',
+      title: 'Profile - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -175,7 +189,7 @@ export async function getServerSideProps({
       accessRights: '1',
     },
     data_fr: {
-      title: 'Paramètres de sécurité - Mon dossier Service Canada',
+      title: 'Profil - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -200,7 +214,7 @@ export async function getServerSideProps({
       aaPrefix:
         content.err !== undefined
           ? ''
-          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.heading}`,
+          : `ESDC-EDSC_MSCA-MSDC-SCH:${content.en?.pageName}`,
       aaMenuPrefix:
         content.err !== undefined ? '' : `ESDC-EDSC_MSCA-MSDC-SCH:Nav Menu`,
       popupStaySignedIn:
@@ -219,36 +233,14 @@ export async function getServerSideProps({
   }
 }
 
-SecuritySettings.propTypes = {
+Profile.propTypes = {
   /**
    * current locale in the address
    */
   locale: PropTypes.string,
 
   /*
-   * Language link toggle text
-   */
-  langToggleLink: PropTypes.string,
-
-  /*
-   * Content Tags
-   */
-
-  content: PropTypes.object,
-
-  /*
    * Meta Tags
    */
-
   meta: PropTypes.object,
-
-  /*
-   * BreadCrumb Items
-   */
-  breadCrumbItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-    }),
-  ),
 }

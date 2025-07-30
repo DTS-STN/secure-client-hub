@@ -44,6 +44,8 @@ import {
   faChevronUp,
   faCreditCard,
   faCircleDollarToSlot,
+  faEnvelope,
+  faLock,
 } from '@fortawesome/free-solid-svg-icons'
 
 export const icon = {
@@ -65,6 +67,7 @@ export const icon = {
   'clock-rotate-left': faClockRotateLeft,
   'comments': faComments,
   'comment-dots': faCommentDots,
+  'envelope': faEnvelope,
   'envelopes-bulk': faEnvelopesBulk,
   'envelope-open-text': faEnvelopeOpenText,
   'hand-holding-dollar': faHandHoldingDollar,
@@ -72,6 +75,7 @@ export const icon = {
   'laptop-file': faLaptopFile,
   'list-check': faListCheck,
   'location-dot': faLocationDot,
+  'lock': faLock,
   'file-circle-exclamation': faFileCircleExclamation,
   'file-contract': faFileContract,
   //file-exclamation doesn't work. Using file-circle-exclamation as a substitute

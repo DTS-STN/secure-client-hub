@@ -20,6 +20,9 @@ interface GetSchSecuritySettingsV2 {
         }>
         scFragments: Array<{
           scId: string
+          scLinkTextEn?: string
+          scLinkTextFr?: string
+          schURLType?: string
           scContentFr?: {
             json: Array<{
               nodeType: string
@@ -47,38 +50,24 @@ interface GetSchSecuritySettingsV2 {
               style?: string
             }>
           }
-          scFragments?: Array<{
-            scId: string
-            scLinkTextEn: string
-            scLinkTextFr: string
-            scLinkTextAssistiveEn: string
-            scLinkTextAssistiveFr: string
-            schURLType: string
-            scDestinationURLEn: string
-            scDestinationURLFr: string
-            scDescriptionEn: {
-              json: Array<{
+          scDescriptionEn: {
+            json: Array<{
+              nodeType: string
+              content: Array<{
                 nodeType: string
-                content: Array<{
-                  nodeType: string
-                  value: string
-                }>
+                value: string
               }>
-            }
-            scDescriptionFr: {
-              json: Array<{
+            }>
+          }
+          scDescriptionFr: {
+            json: Array<{
+              nodeType: string
+              content: Array<{
                 nodeType: string
-                content: Array<{
-                  nodeType: string
-                  value: string
-                }>
+                value: string
               }>
-            }
-            scButtonType: null
-            scIconCSS: null
-            scShortTitleEn: null
-            scShortTitleFr: null
-          }>
+            }>
+          }
           scDestinationURLEn?: string
           scDestinationURLFr?: string
           scButtonType?: Array<string>
@@ -95,7 +84,7 @@ const getCachedContent = () => {
     key: `content-security-settings`,
     cache,
     getFreshValue: async (): Promise<GetSchSecuritySettingsV2 | null> => {
-      const targetUri = buildAemUri('getSchSecuritySettingsV2')
+      const targetUri = buildAemUri('getSchSecuritySettingsV3')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()
@@ -107,26 +96,15 @@ const getCachedContent = () => {
 export async function getSecuritySettingsContent(): Promise<SecuritySettingsContent> {
   const response = await getCachedContent()
 
-  const enLookingForFragment =
-    findFragmentByScId(response, 'looking-for-profile-settings')?.scContentEn ??
-    null
   const enContentFragment =
     findFragmentByScId(response, 'security-settings-main-content')
       ?.scContentEn ?? null
-  const frLookingForFragment =
-    findFragmentByScId(response, 'looking-for-profile-settings')?.scContentFr ??
-    null
   const frContentFragment =
     findFragmentByScId(response, 'security-settings-main-content')
       ?.scContentFr ?? null
 
   const securityQuestions =
-    findFragmentByScId(
-      response,
-      'security-settings-main-content',
-    )?.scFragments?.find(
-      ({ scId }: { scId: string }) => scId === 'security-questions',
-    ) ?? null
+    findFragmentByScId(response, 'security-questions') ?? null
 
   const mappedSecurity = {
     en: {
@@ -142,16 +120,6 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
       pageName: response?.data.schPageV1List.items[0].scPageNameEn,
       heading: response?.data.schPageV1List.items[0].scTitleEn,
       subHeading: enContentFragment?.json[0].content[0].value,
-      lookingFor: {
-        title: enLookingForFragment?.json[0].content[0].value,
-        subText: enLookingForFragment?.json[1].content.map(
-          ({ value }: { value: string }) => {
-            return value || null
-          },
-        ),
-        link: '/profile',
-        id: 'profile',
-      },
       securityQuestions: {
         linkTitle: {
           text: securityQuestions?.scLinkTextEn,
@@ -176,16 +144,6 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
       pageName: response?.data.schPageV1List.items[0].scPageNameFr,
       heading: response?.data.schPageV1List.items[0].scTitleFr,
       subHeading: frContentFragment?.json[0].content[0].value,
-      lookingFor: {
-        title: frLookingForFragment?.json[0].content[0].value,
-        subText: frLookingForFragment?.json[1].content.map(
-          ({ value }: { value: string }) => {
-            return value || null
-          },
-        ),
-        link: '/fr/profil',
-        id: 'profile',
-      },
       securityQuestions: {
         linkTitle: {
           text: securityQuestions?.scLinkTextFr,
@@ -220,12 +178,6 @@ export interface SecuritySettingsContent {
     pageName: string | undefined
     heading: string | undefined
     subHeading: string | undefined
-    lookingFor: {
-      title: string | undefined
-      subText: (string | null)[] | undefined
-      link: string
-      id: string
-    }
     securityQuestions: {
       linkTitle: { text: string | undefined; link: string }
       subTitle: string | undefined
@@ -236,12 +188,6 @@ export interface SecuritySettingsContent {
     pageName: string | undefined
     heading: string | undefined
     subHeading: string | undefined
-    lookingFor: {
-      title: string | undefined
-      subText: (string | null)[] | undefined
-      link: string
-      id: string
-    }
     securityQuestions: {
       linkTitle: { text: string | undefined; link: string }
       subTitle: string | undefined

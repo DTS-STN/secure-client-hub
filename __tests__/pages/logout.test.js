@@ -48,6 +48,8 @@ describe('logout page', () => {
         off: jest.fn(),
       },
     }))
+    // TODO: Find an actual fix to this and why next-auth isn't working
+    window.fetch = () => {}
   })
 
   it('should render the page', () => {

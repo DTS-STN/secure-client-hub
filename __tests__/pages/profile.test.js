@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Profile from '../../pages/profile'
+import Profile from '../../pages/profile-and-preferences'
 import Heading from '../../components/Heading'
 
 import { useRouter } from 'next/router'
@@ -52,11 +52,6 @@ describe('My Profile page', () => {
         ],
       },
     ],
-    lookingFor: {
-      title: 'title',
-      subText: ['text', 'text'],
-      link: '/',
-    },
     backToDashboard: {
       id: 'id',
       btnText: 'btnText',
