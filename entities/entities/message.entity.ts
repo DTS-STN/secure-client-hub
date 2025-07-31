@@ -4,3 +4,7 @@ export type MessageEntity = Readonly<{
   messageName: string
   messageType: string
 }>
+
+export type PdfEntity = Readonly<{
+  documentBytes: string
+}>

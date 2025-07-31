@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth/next'
 import { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import Heading from './../components/Heading'
-
+import { useSession } from 'next-auth/react'
 interface InboxProps {
   locale: string | undefined
   messages: MessageEntity[]
@@ -15,6 +15,14 @@ interface InboxProps {
 
 export default function Messages(props: InboxProps) {
   const messages = props.messages
+  const { data: session, update } = useSession()
+
+  update({
+    user: {
+      ...session?.user,
+      messages: messages,
+    },
+  })
 
   return (
     <>
@@ -53,7 +61,7 @@ export default function Messages(props: InboxProps) {
                       <tr className="flex flex-col md:flex-row">
                         <td>
                           <Link
-                            href={`/${message.messageId}.download.ts}`}
+                            href={`/api/${message.messageId}.download.ts`}
                             className="external-link"
                             target="_blank"
                             data-gc-analytics-customclick={
@@ -92,7 +100,9 @@ export async function getServerSideProps({
   locale: string
 }) {
   const session = await getServerSession(req, res, authOptions)
-  const sin = session?.user?.name ? session.user.name : ''
+
+  const sin = session?.user.name ? session.user.name : ''
+
   const messages = await getMessageService().findMessagesBySin({ sin })
 
   /* Place-holder Meta Data Props */

@@ -9,9 +9,12 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import { ReactElement, ReactNode, useEffect } from 'react'
 import { AppProps } from 'next/app'
 import { NextPage } from 'next'
+import { SessionProvider, getSession } from 'next-auth/react'
 config.autoAddCss = false
 
 declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
+
+const session2 = await getSession()
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -67,18 +70,20 @@ export default function MyApp({
 
   /* istanbul ignore next */
   return (
-    <ErrorBoundary>
-      <Layout
-        locale={pageProps.locale}
-        meta={pageProps.meta}
-        langToggleLink={pageProps.langToggleLink}
-        breadCrumbItems={pageProps.breadCrumbItems}
-        display={display}
-        refPageAA={pageProps.aaPrefix}
-        dataGcAnalyticsCustomClickMenuVariable={pageProps.aaMenuPrefix}
-      >
-        <Component {...pageProps} />
-      </Layout>
-    </ErrorBoundary>
+    <SessionProvider session={session2}>
+      <ErrorBoundary>
+        <Layout
+          locale={pageProps.locale}
+          meta={pageProps.meta}
+          langToggleLink={pageProps.langToggleLink}
+          breadCrumbItems={pageProps.breadCrumbItems}
+          display={display}
+          refPageAA={pageProps.aaPrefix}
+          dataGcAnalyticsCustomClickMenuVariable={pageProps.aaMenuPrefix}
+        >
+          <Component {...pageProps} />
+        </Layout>
+      </ErrorBoundary>
+    </SessionProvider>
   )
 }
