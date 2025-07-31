@@ -1,10 +1,12 @@
-import type { MessageDto } from '../dtos/message.dto'
+import type { MessageDto, PdfDto } from '../dtos/message.dto'
 import type { MessageEntity } from '../entities/message.entity'
 
 export interface MessageDtoMapper {
   mapMessageDtosToMessageEntities(
     messageEntities: readonly MessageDto[],
   ): readonly MessageEntity[]
+
+  mapPdfDtoToString(pdfDto: PdfDto): string
 }
 
 export function getMessageDtoMapper(): MessageDtoMapper {
@@ -27,5 +29,9 @@ export class DefaultMessageDtoMapper implements MessageDtoMapper {
       messageName: messageDto.name,
       messageType: messageDto.type,
     }
+  }
+
+  mapPdfDtoToString(pdfDto: PdfDto): string {
+    return pdfDto.documentBytes
   }
 }
