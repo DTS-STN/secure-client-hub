@@ -57,11 +57,12 @@ const Menu = ({
 
   const InboxButton: React.FC<{ className: string }> = ({ className }) => (
     <Button
-      id=""
+      id="inbox-button"
       style="secondary"
       href={`${inboxLink}`}
       text=""
       className={`my-4 flex flex-row items-center gap-3 rounded bg-blue-primary ${className}`}
+      refPageAA="Nav Button"
     >
       <FontAwesomeIcon
         icon={faEnvelope}
