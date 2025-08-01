@@ -55,9 +55,12 @@ const Menu = ({
     return () => window.removeEventListener('keydown', handleEsc)
   }, [showDropdown])
 
-  const InboxButton: React.FC<{ className: string }> = ({ className }) => (
+  const InboxButton: React.FC<{ id: string; className: string }> = ({
+    id,
+    className,
+  }) => (
     <Button
-      id="inbox-button"
+      id={`${id}`}
       style="secondary"
       href={`${inboxLink}`}
       text=""
@@ -85,7 +88,7 @@ const Menu = ({
             </span>
           </div>
           <div className="mr-8 hidden flex-1 justify-end lg:flex">
-            <InboxButton className="hidden lg:flex" />
+            <InboxButton id="index-button-desktop" className="hidden lg:flex" />
           </div>
           <div
             className="flex h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
@@ -184,7 +187,10 @@ const Menu = ({
         </nav>
       </div>
       <div className="sch-container block lg:hidden">
-        <InboxButton className="w-fit border-[2px] border-[#2B4380] bg-white" />
+        <InboxButton
+          id="inbox-button-mobile"
+          className="w-fit border-[2px] border-[#2B4380] bg-white"
+        />
       </div>
     </div>
   )
