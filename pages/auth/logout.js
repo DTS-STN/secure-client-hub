@@ -12,7 +12,9 @@ export default function Logout(props) {
   useEffect(() => {
     const logout = async () => {
       await signOut({ redirect: false })
-      window.location.replace(props.logoutURL)
+      window.location.replace(
+        'https://srv241-s2.sade.hrdc-drhc.gc.ca/stream3/sc/msca-mdsc/portal-portail/pro/home-accueil/logout',
+      )
     }
     logout().catch(console.error)
   }, [props.logoutURL])
