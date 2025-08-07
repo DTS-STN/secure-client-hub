@@ -5,11 +5,12 @@ import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 
 export default function Logout(props) {
+  const logoutUrl = props.logoutUrl
   //Redirect to ECAS global sign out
   useEffect(() => {
     const logout = async () => {
       await signOut({ redirect: false })
-      window.location.replace(process.env.MSCA_BASE_URL + '/logout')
+      window.location.replace(logoutUrl)
     }
     logout().catch(console.error)
   }, [props.logoutURL])
@@ -36,6 +37,7 @@ Logout.getLayout = function PageLayout(page) {
 export async function getServerSideProps({ locale }) {
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
+  const logoutUrl = process.env.MSCA_LOGOUT_URL
   logger.level = 'error'
 
   /* Place-holder Meta Data Props */
@@ -64,6 +66,7 @@ export async function getServerSideProps({ locale }) {
     props: {
       locale,
       meta,
+      logoutUrl: logoutUrl,
     },
   }
 }
