@@ -35,7 +35,8 @@ describe('Validate logout scenario and page', () => {
           // Assert that the loading spinner is removed from the DOM
           
           cy.get('[data-cy="loading-spinner"]').should('not.exist')
-
+          // Return to index page (this may change as noted at top)
+          cy.url().should('eq', 'http://localhost:3000/')
         })
     })
   })

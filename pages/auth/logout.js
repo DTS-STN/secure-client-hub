@@ -1,4 +1,7 @@
 import { useEffect } from 'react'
+import { getLogoutURL, AuthIsDisabled } from '../../lib/auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { signOut } from 'next-auth/react'
 import MetaData from '../../components/MetaData'
@@ -9,7 +12,7 @@ export default function Logout(props) {
   useEffect(() => {
     const logout = async () => {
       await signOut({ redirect: false })
-      window.location.replace(process.env.MSCA_BASE_URL + '/logout')
+      window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
   }, [props.logoutURL])
@@ -33,10 +36,20 @@ Logout.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps({ req, res, locale }) {
+  const session = await getServerSession(req, res, authOptions)
+
   //The below sets the minimum logging level to error and surpresses everything below that
   const logger = getLogger('logout')
   logger.level = 'error'
+
+  const logoutURL = !AuthIsDisabled()
+    ? await getLogoutURL(req, session, locale).catch((error) => {
+        logger.error(error)
+        res.statusCode = 500
+        throw error
+      })
+    : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -64,6 +77,7 @@ export async function getServerSideProps({ locale }) {
     props: {
       locale,
       meta,
+      logoutURL: logoutURL ?? '/',
     },
   }
 }
