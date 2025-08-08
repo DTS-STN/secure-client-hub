@@ -44,13 +44,13 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  const logoutURL = await getLogoutURL()
-  // .catch((error) => {
-  //       logger.error(error)
-  //       res.statusCode = 500
-  //       throw error
-  //     })
-  // : '/'
+  const logoutURL = !AuthIsDisabled()
+    ? await getLogoutURL().catch((error) => {
+        logger.error(error)
+        res.statusCode = 500
+        throw error
+      })
+    : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {
