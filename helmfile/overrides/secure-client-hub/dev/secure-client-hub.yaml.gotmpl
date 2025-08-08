@@ -40,6 +40,8 @@ extraEnv:
   - name: AUTH_DISABLED
     value: {{ env "AUTH_DISABLED" | quote }}
   {{- end }}
+  - name: MSCA_LOGOUT_URL
+    value: {{ env "MSCA_LOGOUT_URL" }}  
   - name: NEXTAUTH_URL
     value: {{ env "NEXTAUTH_URL" }}
   - name: CLIENT_ID
