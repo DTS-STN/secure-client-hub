@@ -8,11 +8,12 @@ import MetaData from '../../components/MetaData'
 import { getLogger } from '../../logging/log-util'
 
 export default function Logout(props) {
-  //Redirect to ECAS global sign out
+  //Redirect to MSCA NG WEB logout which redirects to ECAS global sign out
+
   useEffect(() => {
     const logout = async () => {
       await signOut({ redirect: false })
-      window.location.replace(process.env.MSCA_LOGOUT_URL)
+      window.location.replace(props.logoutURL)
     }
     logout().catch(console.error)
   }, [props.logoutURL])
@@ -43,13 +44,13 @@ export async function getServerSideProps({ req, res, locale }) {
   const logger = getLogger('logout')
   logger.level = 'error'
 
-  const logoutURL = !AuthIsDisabled()
-    ? await getLogoutURL(req, session, locale).catch((error) => {
-        logger.error(error)
-        res.statusCode = 500
-        throw error
-      })
-    : '/'
+  const logoutURL = await getLogoutURL()
+  // .catch((error) => {
+  //       logger.error(error)
+  //       res.statusCode = 500
+  //       throw error
+  //     })
+  // : '/'
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -77,7 +78,7 @@ export async function getServerSideProps({ req, res, locale }) {
     props: {
       locale,
       meta,
-      logoutURL: logoutURL ?? '/',
+      logoutURL: logoutURL,
     },
   }
 }
