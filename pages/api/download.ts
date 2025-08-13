@@ -6,7 +6,7 @@ import { getSession } from 'next-auth/react'
 export default async function handler(req: NextApiRequest) {
   const messageId = req.query['id'] ? req.query['id'].toString() : ''
   const session = await getSession()
-  const messages = session?.messages
+  const messages = session?.user.messages
   // Optional TODO: add a check to see if the letter belongs to the user. (Done with LetterService call)
   // if (!messages) {
   //   throw data(null, { status: 404 });
