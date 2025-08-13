@@ -101,7 +101,7 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin: string = session?.user.name ? session.user.name : ''
+  const sin: string = session?.user.sin ? session.user.sin : ''
   console.log('hello' + sin)
 
   if (sin !== '800011819') {
