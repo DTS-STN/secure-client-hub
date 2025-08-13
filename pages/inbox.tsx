@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth/next'
 import { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import Heading from './../components/Heading'
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 interface InboxProps {
   locale: string | undefined
   messages: MessageEntity[]
@@ -16,7 +16,7 @@ interface InboxProps {
 
 export default function Messages(props: InboxProps) {
   const messages = props.messages
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
   // update({
   //   user: {
@@ -25,7 +25,7 @@ export default function Messages(props: InboxProps) {
   //   },
   // })
 
-  console.log('hellow' + session)
+  console.log('hellow' + props.sin)
 
   return (
     <>
