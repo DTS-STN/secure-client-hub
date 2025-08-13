@@ -12,8 +12,8 @@ declare module 'next-auth' {
   }
 }
 
-declare module 'next-auth/jwt' {
-  interface JWT extends DefaultJWT {
-    messages: MessageEntity[]
-  }
-}
+// declare module 'next-auth/jwt' {
+//   interface JWT extends DefaultJWT {
+//     messages: MessageEntity[]
+//   }
+// }
