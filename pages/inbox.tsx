@@ -16,16 +16,16 @@ interface InboxProps {
 
 export default function Messages(props: InboxProps) {
   const messages = props.messages
-  const { data: session, update } = useSession()
+  const { data: session } = useSession()
 
-  update({
-    user: {
-      ...session?.user,
-      messages: messages,
-    },
-  })
+  // update({
+  //   user: {
+  //     ...session?.user,
+  //     messages: messages,
+  //   },
+  // })
 
-  console.log('hellow' + props.sin)
+  console.log('hellow' + session)
 
   return (
     <>
