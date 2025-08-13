@@ -101,8 +101,12 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin = session?.user.sin ? session.user.sin : ''
+  const sin: string = session?.user.name ? session.user.name : ''
   console.log('hello' + sin)
+
+  if (sin !== '800011819') {
+    throw new Error('sin not available')
+  }
 
   const messages = await getMessageService().findMessagesBySin({ sin })
 
