@@ -6,7 +6,6 @@ import axios from 'axios'
 import * as jose from 'jose'
 import https from 'https'
 import fs from 'fs'
-import { MessageEntity } from '../../../entities/entities/message.entity'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
@@ -160,25 +159,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    async jwt({ token, user, account, trigger }) {
-      if (trigger === 'update') {
-        const messageEntities: MessageEntity[] = [
-          {
-            messageName:
-              'Your Statement of accounts - Your statement of accounts',
-            messageId: '123456-b3bc-4332-8b69-172197842b88',
-            messageDate: '2025/06/13',
-            messageType: 'statement of accounts',
-          },
-          {
-            messageName: 'Notice of debts - Notice of debts',
-            messageId: '123456-b3bc-4332-8b69-172197842b89',
-            messageDate: '2025/06/13',
-            messageType: 'notice of debts',
-          },
-        ]
-        user.messages = messageEntities
-      }
+    async jwt({ token, user, account }) {
       return { ...token, ...user, ...account }
     },
     async redirect({ url, baseUrl }) {

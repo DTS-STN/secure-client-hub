@@ -59,12 +59,12 @@ export class MockLetterRepository implements MessageRepository {
         date: '2025/06/13',
         type: 'statement of accounts',
       },
-      // {
-      //   name: 'Notice of debts - Notice of debts',
-      //   id: '123456-b3bc-4332-8b69-172197842b89',
-      //   date: '2025/06/13',
-      //   type: 'notice of debts',
-      // },
+      {
+        name: 'Notice of debts - Notice of debts',
+        id: '123456-b3bc-4332-8b69-172197842b89',
+        date: '2025/06/13',
+        type: 'notice of debts',
+      },
     ]
 
     logger.debug('Returning messages [%j]', messageDtos)

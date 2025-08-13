@@ -9,12 +9,10 @@ import ErrorBoundary from '../components/ErrorBoundary'
 import { ReactElement, ReactNode, useEffect } from 'react'
 import { AppProps } from 'next/app'
 import { NextPage } from 'next'
-import { SessionProvider, getSession } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react'
 config.autoAddCss = false
 
 declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
-
-const session2 = await getSession()
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -70,7 +68,7 @@ export default function MyApp({
 
   /* istanbul ignore next */
   return (
-    <SessionProvider session={session2}>
+    <SessionProvider session={pageProps.session}>
       <ErrorBoundary>
         <Layout
           locale={pageProps.locale}

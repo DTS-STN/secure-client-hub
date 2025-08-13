@@ -61,7 +61,7 @@ export default function Messages(props: InboxProps) {
                       <tr className="flex flex-col md:flex-row">
                         <td>
                           <Link
-                            href={`/api/${message.messageId}.download.ts`}
+                            href={`/api/download`}
                             className="external-link"
                             target="_blank"
                             data-gc-analytics-customclick={

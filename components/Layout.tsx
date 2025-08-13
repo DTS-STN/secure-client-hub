@@ -9,7 +9,7 @@ import Footer from './Footer'
 import Header, { BreadcrumbItemProps } from './Header'
 import IdleTimeout from './IdleTimeout'
 import MetaData, { Data } from './MetaData'
-import { signOut } from 'next-auth/react'
+import { SessionProvider, signOut } from 'next-auth/react'
 
 interface LayoutProps {
   locale?: 'en' | 'fr' | 'und'
@@ -77,107 +77,113 @@ export default function Layout({
   ])
 
   return (
-    <>
-      <style jsx global>{`
-        :root {
-          --lato-font: ${lato.style.fontFamily};
-          --noto-sans-font: ${notoSans.style.fontFamily};
-        }
-      `}</style>
-      <MetaData language={locale} data={meta}></MetaData>
-      <Header
-        id="header"
-        linkPath={langToggleLink}
-        lang={locale}
-        breadCrumbItems={breadCrumbItems}
-        refPageAA={refPageAA}
-        topnavProps={{
-          skipToMainPath: '#mainContent',
-          skipToAboutPath: '#page-footer',
-          switchToBasicPath: '',
-          displayAlternateLink: false,
-        }}
-        dataGcAnalyticsCustomClickInstitutionVariable={children.props.aaPrefix}
-        dataGcAnalyticsCustomClickMenuVariable={
-          dataGcAnalyticsCustomClickMenuVariable
-        }
-        menuProps={{
-          menuList: [
+    <SessionProvider>
+      <>
+        <style jsx global>{`
+          :root {
+            --lato-font: ${lato.style.fontFamily};
+            --noto-sans-font: ${notoSans.style.fontFamily};
+          }
+        `}</style>
+        <MetaData language={locale} data={meta}></MetaData>
+        <Header
+          id="header"
+          linkPath={langToggleLink}
+          lang={locale}
+          breadCrumbItems={breadCrumbItems}
+          refPageAA={refPageAA}
+          topnavProps={{
+            skipToMainPath: '#mainContent',
+            skipToAboutPath: '#page-footer',
+            switchToBasicPath: '',
+            displayAlternateLink: false,
+          }}
+          dataGcAnalyticsCustomClickInstitutionVariable={
+            children.props.aaPrefix
+          }
+          dataGcAnalyticsCustomClickMenuVariable={
+            dataGcAnalyticsCustomClickMenuVariable
+          }
+          menuProps={{
+            menuList: [
+              {
+                key: 'dashKey',
+                id: 'my-dashboard',
+                value: t.menuItems.dashboard,
+                path: `${
+                  locale === 'en'
+                    ? '/en/my-dashboard'
+                    : '/fr/mon-tableau-de-bord'
+                }`,
+              },
+              {
+                key: 'profileKey',
+                id: 'profile',
+                value: t.menuItems.profile,
+                path: `${locale === 'en' ? '/en/profile-and-preferences' : '/fr/profil-et-preferences'}`,
+              },
+              {
+                key: 'securityKey',
+                id: 'security',
+                value: t.menuItems.security,
+                path: `${
+                  locale === 'en'
+                    ? '/en/security-settings'
+                    : '/fr/parametres-securite'
+                }`,
+              },
+              {
+                key: 'contactKey',
+                id: 'contact',
+                value: t.menuItems.contactUs,
+                path: `${
+                  locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
+                }`,
+              },
+              {
+                key: 'signOutKey',
+                id: 'signOut',
+                value: t.menuItems.signOut,
+                path: '/auth/logout',
+                showIcon: true,
+              },
+            ],
+            inboxLink: `${locale === 'en' ? '/en/index' : '/fr/index'}`,
+          }}
+          searchProps={{
+            onChange: function noRefCheck() {},
+            onSubmit: function noRefCheck() {},
+          }}
+        />
+        <main id="mainContent" className="sch-container grid gap-[30px]">
+          {children}
+        </main>
+        <IdleTimeout locale={locale} refPageAA={refPageAA} />
+        <Footer
+          lang={locale}
+          brandLinks={[
             {
-              key: 'dashKey',
-              id: 'my-dashboard',
-              value: t.menuItems.dashboard,
-              path: `${
-                locale === 'en' ? '/en/my-dashboard' : '/fr/mon-tableau-de-bord'
-              }`,
+              href:
+                getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
+                  ? t.footerTermsAndConditionURL
+                  : t.footerTermsAndConditionDevURL,
+              id: 'linkTC',
+              text: t.footerTermsAndCondition,
             },
             {
-              key: 'profileKey',
-              id: 'profile',
-              value: t.menuItems.profile,
-              path: `${locale === 'en' ? '/en/profile-and-preferences' : '/fr/profil-et-preferences'}`,
+              href:
+                getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
+                  ? t.footerPrivacyURL
+                  : t.footerPrivacyDevURL,
+              id: 'linkPR',
+              text: t.footerPrivacy,
             },
-            {
-              key: 'securityKey',
-              id: 'security',
-              value: t.menuItems.security,
-              path: `${
-                locale === 'en'
-                  ? '/en/security-settings'
-                  : '/fr/parametres-securite'
-              }`,
-            },
-            {
-              key: 'contactKey',
-              id: 'contact',
-              value: t.menuItems.contactUs,
-              path: `${
-                locale === 'en' ? '/en/contact-us' : '/fr/contactez-nous'
-              }`,
-            },
-            {
-              key: 'signOutKey',
-              id: 'signOut',
-              value: t.menuItems.signOut,
-              path: '/auth/logout',
-              showIcon: true,
-            },
-          ],
-          inboxLink: `${locale === 'en' ? '/en/index' : '/fr/index'}`,
-        }}
-        searchProps={{
-          onChange: function noRefCheck() {},
-          onSubmit: function noRefCheck() {},
-        }}
-      />
-      <main id="mainContent" className="sch-container grid gap-[30px]">
-        {children}
-      </main>
-      <IdleTimeout locale={locale} refPageAA={refPageAA} />
-      <Footer
-        lang={locale}
-        brandLinks={[
-          {
-            href:
-              getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
-                ? t.footerTermsAndConditionURL
-                : t.footerTermsAndConditionDevURL,
-            id: 'linkTC',
-            text: t.footerTermsAndCondition,
-          },
-          {
-            href:
-              getConfig()?.publicRuntimeConfig.ENVIRONMENT === 'production'
-                ? t.footerPrivacyURL
-                : t.footerPrivacyDevURL,
-            id: 'linkPR',
-            text: t.footerPrivacy,
-          },
-        ]}
-        contactLink={contactLink}
-        btnLink="#top"
-        id="page-footer"
-      />
-    </>
+          ]}
+          contactLink={contactLink}
+          btnLink="#top"
+          id="page-footer"
+        />
+      </>
+    </SessionProvider>
   )
 }
