@@ -11,7 +11,7 @@ interface InboxProps {
   locale: string | undefined
   messages: MessageEntity[]
   mscaBaseUrl: string
-  sin: string
+  session: string
 }
 
 export default function Messages(props: InboxProps) {
@@ -25,7 +25,7 @@ export default function Messages(props: InboxProps) {
     },
   })
 
-  console.log('hellow' + props.sin)
+  console.log('hellow' + props.session)
 
   return (
     <>
@@ -136,7 +136,7 @@ export async function getServerSideProps({
       locale,
       meta,
       messages: messages,
-      sin: sin,
+      session: session,
     },
   }
 }
