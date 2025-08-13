@@ -11,6 +11,7 @@ interface InboxProps {
   locale: string | undefined
   messages: MessageEntity[]
   mscaBaseUrl: string
+  sin: string
 }
 
 export default function Messages(props: InboxProps) {
@@ -23,6 +24,8 @@ export default function Messages(props: InboxProps) {
       messages: messages,
     },
   })
+
+  console.log('hellow' + props.sin)
 
   return (
     <>
@@ -104,10 +107,6 @@ export async function getServerSideProps({
   const sin: string = session?.user.sin ? session.user.sin : ''
   console.log('hello' + sin)
 
-  if (sin !== '800011819') {
-    throw new Error('sin not available')
-  }
-
   const messages = await getMessageService().findMessagesBySin({ sin })
 
   /* Place-holder Meta Data Props */
@@ -137,6 +136,7 @@ export async function getServerSideProps({
       locale,
       meta,
       messages: messages,
+      sin: sin,
     },
   }
 }
