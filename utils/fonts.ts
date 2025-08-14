@@ -9,6 +9,16 @@ export const notoSans = localFont({
       weight: '400',
     },
     {
+      path: '../public/fonts/NotoSans-Medium.woff2',
+      style: 'normal',
+      weight: '500',
+    },
+    {
+      path: '../public/fonts/NotoSans-Semibold.woff2',
+      style: 'normal',
+      weight: '600',
+    },
+    {
       path: '../public/fonts/NotoSans-Bold.woff2',
       style: 'normal',
       weight: '700',
