@@ -3,11 +3,11 @@ import { DefaultSession, DefaultUser } from 'next-auth'
 import { MessageEntity } from '../entities/entities/message.entity'
 
 declare module 'next-auth' {
-  interface User extends DefaultUser {
+  export interface User extends DefaultUser {
     messages?: MessageEntity[]
     sin?: string
   }
-  interface Session extends DefaultSession {
+  export interface Session extends DefaultSession {
     user: User & DefaultSession['user']
   }
 }

@@ -144,7 +144,7 @@ export const authOptions: NextAuthOptions = {
           .then((response) => logger.debug(response))
           .catch((error) => logger.error(error))
         return {
-          id: profile.sub,
+          id: 'hithere',
           sin: profile.sin,
           ...profile,
         }
