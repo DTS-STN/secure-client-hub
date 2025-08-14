@@ -107,10 +107,10 @@ export async function getServerSideProps({
 
   const sin: string = session?.user.id ? session.user.id : ''
 
-  const userinfoFunction = authOptions['providers'][0].options.userinfo
+  // const userinfoFunction = authOptions['providers'][0].options.userinfo
 
-  const userinfo = userinfoFunction(req)
-  const sin2 = userinfo.sin
+  // const userinfo = userinfoFunction(req)
+  const sin2 = sin
   const messages = await getMessageService().findMessagesBySin({ sin })
 
   /* Place-holder Meta Data Props */
