@@ -26,7 +26,7 @@ export default function Messages(props: InboxProps) {
   //   },
   // })
 
-  console.log('hellow' + props.sin + 'boo' + props.sin2)
+  console.log('hellow' + props.sin)
 
   return (
     <>
