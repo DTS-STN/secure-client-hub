@@ -105,7 +105,7 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin: string = session?.user.id ? session.user.id : ''
+  const sin: string = session?.user?.name ? session.user.name : 'tryagain'
 
   // const userinfoFunction = authOptions['providers'][0].options.userinfo
 
