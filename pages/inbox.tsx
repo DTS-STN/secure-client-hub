@@ -12,6 +12,7 @@ interface InboxProps {
   messages: MessageEntity[]
   mscaBaseUrl: string
   sin: string
+  sin2: string
 }
 
 export default function Messages(props: InboxProps) {
@@ -25,7 +26,7 @@ export default function Messages(props: InboxProps) {
   //   },
   // })
 
-  console.log('hellow' + props.sin)
+  console.log('hellow' + props.sin + 'boo' + props.sin2)
 
   return (
     <>
@@ -104,9 +105,12 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin: string = session?.user.sin ? session.user.sin : ''
-  console.log('hello' + sin)
+  const sin: string = session?.user.id ? session.user.id : ''
 
+  const userinfoFunction = authOptions['providers'][0].options.userinfo
+
+  const userinfo = userinfoFunction(req)
+  const sin2 = userinfo.sin
   const messages = await getMessageService().findMessagesBySin({ sin })
 
   /* Place-holder Meta Data Props */
@@ -137,6 +141,7 @@ export async function getServerSideProps({
       meta,
       messages: messages,
       sin: sin,
+      sin2: sin2,
     },
   }
 }
