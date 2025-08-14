@@ -145,6 +145,7 @@ export const authOptions: NextAuthOptions = {
           .catch((error) => logger.error(error))
         return {
           id: profile.sub,
+          sin: profile.sin,
           ...profile,
         }
       },
@@ -159,10 +160,8 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    async jwt({ token, user }) {
-      token.sin = user.sin
-      token.messages = user.messages
-      return token
+    async jwt({ token, user, account }) {
+      return { ...token, ...user, ...account }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -172,10 +171,8 @@ export const authOptions: NextAuthOptions = {
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
     },
-    async session({ session, token }) {
-      session.user.sin = token.sin
-      session.user.messages = token.messages
-      return session
+    async session({ session }) {
+      return { ...session }
     },
   },
   logger: {

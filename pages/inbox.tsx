@@ -104,7 +104,7 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin: string = session?.user.id ? session.user.id : ''
+  const sin: string = session?.user.sin ? session.user.sin : ''
   console.log('hello' + sin)
 
   const messages = await getMessageService().findMessagesBySin({ sin })
