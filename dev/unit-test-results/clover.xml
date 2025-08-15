@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1755271428497" clover="3.2.0">
-  <project timestamp="1755271428497" name="All files">
+<coverage generated="1755272378691" clover="3.2.0">
+  <project timestamp="1755272378691" name="All files">
     <metrics statements="783" coveredstatements="354" conditionals="709" coveredconditionals="212" methods="173" coveredmethods="66" elements="1665" coveredelements="632" complexity="0" loc="783" ncloc="783" packages="7" files="53" classes="53"/>
     <package name="components">
       <metrics statements="257" coveredstatements="200" conditionals="300" coveredconditionals="157" methods="77" coveredmethods="43"/>
@@ -802,17 +802,17 @@
         <line num="144" count="0" type="stmt"/>
         <line num="145" count="0" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="167" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="169" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="174" count="0" type="stmt"/>
-        <line num="179" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="168" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="170" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
         <line num="180" count="0" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="186" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
         <line num="187" count="0" type="stmt"/>
-        <line num="194" count="6" type="stmt"/>
+        <line num="188" count="0" type="stmt"/>
+        <line num="195" count="6" type="stmt"/>
       </file>
     </package>
     <package name="pages.auth">
