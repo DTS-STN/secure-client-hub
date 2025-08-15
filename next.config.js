@@ -37,6 +37,10 @@ const REWRITES = [
     source: '/demande-revision',
     destination: '/decision-reviews',
   },
+  {
+    source: '/boite-reception',
+    destination: '/inbox',
+  },
 ]
 
 const securityHeaders = [
