@@ -1,22 +1,21 @@
-'use server'
-
 import axios from 'axios'
-import { getServerSession } from 'next-auth'
+//import { getServerSession } from 'next-auth'
 import { getLogger } from '../logging/log-util'
+import { getServerSession } from 'next-auth'
 
 const logger = getLogger('lib.inbox-pref')
 
 export async function getInboxPref() {
   const session = await getServerSession()
   if (session) {
-    console.log(session.spid)
+    //console.log(session.spid)
     try {
       const resp = await axios.post(
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/v4/user-profiles/user-profiles-with-events`,
         {
           params: {
             programCode: 'CFOB',
-            spid: session.spid,
+            spid: '', //session.spid,
           },
           headers: {
             'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
