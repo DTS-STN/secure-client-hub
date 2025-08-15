@@ -145,7 +145,7 @@ export const authOptions: NextAuthOptions = {
           .catch((error) => logger.error(error))
         return {
           id: profile.sub,
-          name: profile.sin + '|' + profile.uid,
+          // name: profile.sin + '|' + profile.uid,
           sin: profile.sin,
           ...profile,
         }
@@ -161,8 +161,14 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    async jwt({ token, user, account }) {
-      return { ...token, ...user, ...account }
+    async jwt({ token, user, account, profile }) {
+      return {
+        spid: profile?.sin,
+        sin: profile?.uid,
+        ...token,
+        ...user,
+        ...account,
+      }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types'
-import { getMessageService } from './api/message.service'
+// import { getMessageService } from './api/message.service'
 import type { MessageEntity } from '../entities/entities/message.entity'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import Heading from './../components/Heading'
+// import NotificationBox from './../components/NotificationBox'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { useSession } from 'next-auth/react'
 interface InboxProps {
   locale: string | undefined
@@ -33,6 +35,8 @@ export default function Messages(props: InboxProps) {
       <div className="mb-8">
         <Heading id="pageHead-inbox" title="Inbox" className="mb-2" />
       </div>
+      {/* <p>The inbox is where you'll receive messages about your benefits and services. For now, you'll find messages about:</p> */}
+      {/* <NotificationBox label="debt statements" value="statements that show the amount you owe the government."></NotificationBox> */}
       {messages.length === 0 ? (
         <>
           <div className="space-y-4">
@@ -63,7 +67,7 @@ export default function Messages(props: InboxProps) {
                   <table>
                     <tbody>
                       <tr className="flex flex-col md:flex-row">
-                        <td>
+                        <td className="w-full md:w-[500px]">
                           <Link
                             href={`/api/download`}
                             className="external-link"
@@ -90,6 +94,10 @@ export default function Messages(props: InboxProps) {
           </ul>
         </>
       )}
+      {/* <div className="py-12">
+        <FontAwesomeIcon icon={byPrefixAndName.fas["bell"]} />
+        <p><strong>Don't miss a message.</strong> Set your <a href="">inbox notification preferences</a> to receive emails when new messages are available.</p>
+      </div> */}
     </>
   )
 }
@@ -105,13 +113,15 @@ export async function getServerSideProps({
 }) {
   const session = await getServerSession(req, res, authOptions)
 
-  const sin: string = session?.user?.name ? session.user.name : 'tryagain'
-
+  let sin
+  if (session) {
+    sin = session.spid
+  }
   // const userinfoFunction = authOptions['providers'][0].options.userinfo
 
   // const userinfo = userinfoFunction(req)
   const sin2 = sin
-  const messages = await getMessageService().findMessagesBySin({ sin })
+  //const messages = await getMessageService().findMessagesBySin({ sin })
 
   /* Place-holder Meta Data Props */
   const meta = {
@@ -139,7 +149,7 @@ export async function getServerSideProps({
     props: {
       locale,
       meta,
-      messages: messages,
+      //messages: messages,
       sin: sin,
       sin2: sin2,
     },
