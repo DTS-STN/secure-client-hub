@@ -1,35 +1,27 @@
 import { buildAemUri } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+//import resp from './sample-responses/inbox-notif-pref.json'
+
+// TODO: Standardize these across the mappers
+interface ContentElement {
+  json: Array<{
+    nodeType: string
+    content: Array<{
+      nodeType: string
+      value: string
+      data?: {
+        href: string
+      }
+    }>
+    style?: string
+  }>
+}
 
 interface FragmentElement {
   scId: string
-  scContentEn?: {
-    json: Array<{
-      nodeType: string
-      content: Array<{
-        nodeType: string
-        value: string
-        data?: {
-          href: string
-        }
-      }>
-      style?: string
-    }>
-  }
-  scContentFr?: {
-    json: Array<{
-      nodeType: string
-      content: Array<{
-        nodeType: string
-        value: string
-        data?: {
-          href: string
-        }
-      }>
-      style?: string
-    }>
-  }
+  scContentEn?: ContentElement
+  scContentFr?: ContentElement
   scTitleEn?: string
   scTitleFr?: string
   scItems?: Array<{
@@ -45,6 +37,13 @@ interface FragmentElement {
   }>
   scDestinationURLEn?: string
   scDestinationURLFr?: string
+  scLegendEn?: string
+  scLegendFr?: string
+  scHeadingEn?: string
+  scHeadingFr?: string
+  scLinkTextEn?: string
+  scLinkTextFr?: string
+  scFragments: Array<FragmentElement>
 }
 
 interface GetSchInboxPrefV1 {
@@ -71,7 +70,7 @@ const getCachedContent = () => {
     key: `content-inbox-pref`,
     cache,
     getFreshValue: async (): Promise<GetSchInboxPrefV1 | null> => {
-      const targetUri = buildAemUri('getSchPersInfoBenefitV1')
+      const targetUri = buildAemUri('getSchInboxNotifPrefV1')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()
@@ -81,20 +80,71 @@ const getCachedContent = () => {
 }
 
 export async function getInboxPrefContent(): Promise<InboxPrefContent> {
-  getCachedContent() // TODO: Fix
+  const response = await getCachedContent() // TODO: Fix
+  //const response = JSON.parse(JSON.stringify(resp))
   const mappedProfile = {
     en: {
-      pageName: 'Inbox notification preferences',
+      // TODO: Don't use indexes and search by ID instead
+      breadcrumb:
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
+          (level: { scPageNameEn: string; scTitleEn: string }) => {
+            return {
+              link: level.scPageNameEn,
+              text: level.scTitleEn,
+            }
+          },
+        ),
+      pageName: response?.data.schPageV1List.items[0].scTitleEn ?? '',
       introText:
-        "The inbox is where you'll receive messages about your benefits and services. For now, you’ll find messages about:",
+        response?.data.schPageV1List.items[0].scFragments[0].scContentEn
+          ?.json[0].content[0].value,
       emailQuestion:
-        'Would you like to receive an email notification if there is a new debt statement in your inbox?',
-      emailYes: 'Yes, email me',
+        response?.data.schPageV1List.items[0].scFragments[2].scLegendEn,
+      emailYes:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[0]
+          .scHeadingEn,
       emailYesDesc:
-        'By receiving email notifications you <b>will not</b> receive debt statements by paper mail. Help reduce paper waste by selecting this option.',
-      emailNo: 'No, do not email me',
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[0]
+          .scContentEn?.json[0].content[0].value,
+      emailNo:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[1]
+          .scHeadingEn,
       emailNoDesc:
-        'You’ll receive debt statements by paper mail. You can also view them in your inbox but you will not receive an email notification.',
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[1]
+          .scContentEn?.json[0].content[0].value,
+      buttonText:
+        response?.data.schPageV1List.items[0].scFragments[3].scLinkTextEn,
+    },
+    fr: {
+      breadcrumb:
+        response?.data.schPageV1List.items[0].scBreadcrumbParentPages.map(
+          (level: { scPageNameFr: string; scTitleFr: string }) => {
+            return {
+              link: level.scPageNameFr,
+              text: level.scTitleFr,
+            }
+          },
+        ),
+      pageName: response?.data.schPageV1List.items[0].scTitleFr ?? '',
+      introText:
+        response?.data.schPageV1List.items[0].scFragments[0].scContentFr
+          ?.json[0].content[0].value,
+      emailQuestion:
+        response?.data.schPageV1List.items[0].scFragments[2].scLegendFr,
+      emailYes:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[0]
+          .scHeadingFr,
+      emailYesDesc:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[0]
+          .scContentFr?.json[0].content[0].value,
+      emailNo:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[1]
+          .scHeadingFr,
+      emailNoDesc:
+        response?.data.schPageV1List.items[0].scFragments[2].scFragments[1]
+          .scContentFr?.json[0].content[0].value,
+      buttonText:
+        response?.data.schPageV1List.items[0].scFragments[3].scLinkTextFr,
     },
   }
   return mappedProfile
@@ -113,6 +163,9 @@ export interface InboxPrefContent {
     emailQuestion?: string
     emailYes?: string
     emailNo?: string
+    emailYesDesc?: string
+    emailNoDesc?: string
+    buttonText?: string
   }
   fr?: {
     breadcrumb?: {
@@ -125,5 +178,8 @@ export interface InboxPrefContent {
     emailQuestion?: string
     emailYes?: string
     emailNo?: string
+    emailYesDesc?: string
+    emailNoDesc?: string
+    buttonText?: string
   }
 }

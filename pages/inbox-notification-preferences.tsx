@@ -6,7 +6,6 @@ import {
   AuthModalsContent,
   getAuthModalsContent,
 } from '../graphql/mappers/auth-modals'
-import { ProfilePrefContent } from '../graphql/mappers/profile-and-preferences'
 import {
   AuthIsDisabled,
   AuthIsValid,
@@ -17,13 +16,19 @@ import {
 import { getLogger } from '../logging/log-util'
 import { authOptions } from './api/auth/[...nextauth]'
 import Button from '../components/Button'
-import { getInboxPrefContent } from '../graphql/mappers/inbox-pref'
+import {
+  getInboxPrefContent,
+  InboxPrefContent,
+} from '../graphql/mappers/inbox-pref'
 import { getInboxPref, setInboxPref } from '../lib/inbox-preferences'
-//import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 interface InboxNotePrefProps {
+  spid: string
+  spid2: string
   locale: string | undefined
-  content?: {
+  content: {
     err?: '500' | '404' | '503'
     pageName: string
     introText?: string
@@ -31,6 +36,9 @@ interface InboxNotePrefProps {
     emailQuestion?: string
     emailYes?: string
     emailNo?: string
+    emailYesDesc: string
+    emailNoDesc: string
+    buttonText: string
   }
   bannerContent?: {
     err?: '500' | '404' | '503'
@@ -48,9 +56,29 @@ interface InboxNotePrefProps {
   aaPrefix: string
 }
 
-export default async function InboxNotePref(props: InboxNotePrefProps) {
+const logger = getLogger('inbox-notif-pref')
+
+export default function InboxNotePref(props: InboxNotePrefProps) {
+  const [formData, setFormData] = useState({ value: 'yes' })
+  const [defaultPaperless, setDefaultPaperless] = useState(true)
+
+  useEffect(() => {
+    const getDefault = async () => {
+      try {
+        setDefaultPaperless(await defaultToPaperless())
+      } catch (err) {
+        logger.error(err)
+      } finally {
+        // TODO: Is this error handling correct?
+        setDefaultPaperless(true)
+      }
+    }
+    getDefault()
+  }, [])
+
+  const router = useRouter()
   const errorCode =
-    props.content?.err ||
+    props.content.err ||
     props.bannerContent?.err ||
     props.popupContent?.err ||
     props.popupContentNA?.err ||
@@ -73,27 +101,40 @@ export default async function InboxNotePref(props: InboxNotePrefProps) {
     )
   }
 
+  const content = props.content
+
+  console.log('spid ' + props.spid + ' spid2 ' + props.spid2)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setFormData({ value: value })
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const redirectDestination =
+      props.locale === 'en'
+        ? '/en/inbox-notification-preferences-success'
+        : '/fr/preferences-notification-boite-reception-success'
+    if (!useStub) {
+      setInboxPref(formData.value)
+    }
+    router.push(redirectDestination)
+  }
+
   return (
     <div id="homeContent" data-testid="inboxPrefContent-test">
-      <Heading
-        id="inbox-pref-heading"
-        title={'Inbox notification preferences'}
-      />
-      <p className="mt-8 max-w-3xl text-gray-darker">
-        The inbox is where you&lsquo;ll receive messages about your benefits and
-        services. For now, you&lsquo;ll find messages about:
-      </p>
+      <Heading id="inbox-pref-heading" title={content.pageName} />
+      <p className="mt-8 max-w-3xl text-gray-darker">{content.introText}</p>
       {/* debt definition here*/}
 
       <div className="my-4 max-w-3xl border-t-2 border-y-gray-100" />
 
       <p className="max-w-3xl font-bold text-gray-darker">
-        Would you like to receive an email notification if there is a new debt
-        statement in your inbox?
+        {content.emailQuestion}
       </p>
-      <span>(required)</span>
       <div className="pb-2" />
-      <form action={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="flex max-w-3xl flex-col">
           <div className="flex flex-row pb-3 text-gray-darker">
             <input
@@ -102,15 +143,12 @@ export default async function InboxNotePref(props: InboxNotePrefProps) {
               name="email-radio"
               value="yes"
               className="size-[2.5em]"
-              defaultChecked={await defaultToYes()}
+              defaultChecked={defaultPaperless}
+              onChange={handleChange}
             />
             <label htmlFor="yes-email" className="grow pl-2">
-              <p className="pt-2 font-medium">Yes, email me</p>
-              <p className="font-normal">
-                By receiving email notifications you <b>will not</b> receive
-                debt statements by paper mail. Help reduce paper waste by
-                selecting this option.
-              </p>
+              <p className="pt-2 font-medium">{content.emailYes}</p>
+              <p className="font-normal">{content.emailYesDesc}</p>
             </label>
           </div>
           <div className="flex flex-row pb-3 text-gray-darker">
@@ -120,21 +158,18 @@ export default async function InboxNotePref(props: InboxNotePrefProps) {
               name="email-radio"
               value="no"
               className="size-[2.5em]"
-              defaultChecked={!(await defaultToYes())}
+              defaultChecked={!defaultPaperless}
+              onChange={handleChange}
             />
             <label htmlFor="no-email" className="grow pl-2">
-              <p className="pt-2 font-medium">No, do not email me</p>
-              <p className="font-normal">
-                You&lsquo;ll receive debt statements by paper mail. You can also
-                view them in your inbox but you will not receive an email
-                notification.
-              </p>
+              <p className="pt-2 font-medium">{content.emailNo}</p>
+              <p className="font-normal">{content.emailNoDesc}</p>
             </label>
           </div>
         </div>
         <Button
           id="save-pref-button"
-          text="Save Preferences"
+          text={content.buttonText}
           type="submit"
           style="smallPrimary"
           className="my-6"
@@ -193,8 +228,7 @@ export async function getServerSideProps({
   logger.level = 'error'
 
   const content = await getInboxPrefContent().catch(
-    (error): ProfilePrefContent => {
-      // TODO: Change to correct content
+    (error): InboxPrefContent => {
       logger.error(error)
       return { err: '500' }
     },
@@ -250,16 +284,21 @@ export async function getServerSideProps({
     },
   }
 
+  const spid = session?.user.name.split('|')[1] ?? ''
+  const spid2 = session?.spid ?? ''
+
   return {
     props: {
+      spid,
+      spid2,
       locale,
       langToggleLink,
-      //   content:
-      //     content.err !== undefined
-      //       ? content
-      //       : locale === 'en'
-      //         ? content.en
-      //         : content.fr,
+      content:
+        content.err !== undefined
+          ? content
+          : locale === 'en'
+            ? content.en
+            : content.fr,
       meta,
       breadCrumbItems,
       aaPrefix:
@@ -287,22 +326,10 @@ export async function getServerSideProps({
 // TODO: Properly set this
 const useStub = isDev()
 function isDev() {
-  return false
+  return true
 }
 
-async function handleSubmit(data: FormData) {
-  const value = data.get('email-radio')?.valueOf()
-
-  if (typeof value === 'string') {
-    if (!useStub) {
-      await setInboxPref(value)
-    }
-    // TODO: Handle
-    //useRouter().push('/en/inbox-preferences-success')
-  }
-}
-
-async function defaultToYes() {
+async function defaultToPaperless() {
   if (useStub) {
     return true
   }
