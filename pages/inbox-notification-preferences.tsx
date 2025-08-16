@@ -283,8 +283,8 @@ export async function getServerSideProps({
       accessRights: '1',
     },
   }
-
-  const spid = session?.user.name.split('|')[1] ?? ''
+  const name = session?.user.name
+  const spid = name ? name.split('|')[1] : ''
   const spid2 = session?.spid ?? ''
 
   return {
