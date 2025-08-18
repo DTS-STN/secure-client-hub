@@ -22,10 +22,11 @@ import {
 } from '../graphql/mappers/inbox-pref'
 import { getInboxPref, setInboxPref } from '../lib/inbox-preferences'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface InboxNotePrefProps {
   spid: string
+  defaultPaperless: boolean
   locale: string | undefined
   content: {
     err?: '500' | '404' | '503'
@@ -55,25 +56,11 @@ interface InboxNotePrefProps {
   aaPrefix: string
 }
 
-const logger = getLogger('inbox-notif-pref')
+//const logger = getLogger('inbox-notif-pref')
 
 export default function InboxNotePref(props: InboxNotePrefProps) {
   const [formData, setFormData] = useState({ value: 'yes' })
-  const [defaultPaperless, setDefaultPaperless] = useState(true)
-
-  useEffect(() => {
-    const getDefault = async () => {
-      try {
-        setDefaultPaperless(await defaultToPaperless(props.spid))
-      } catch (err) {
-        logger.error(err)
-      } finally {
-        // TODO: Is this error handling correct?
-        setDefaultPaperless(true)
-      }
-    }
-    getDefault()
-  }, [])
+  const defaultPaperless = props.defaultPaperless
 
   const router = useRouter()
   const errorCode =
@@ -286,10 +273,12 @@ export async function getServerSideProps({
   }
   const name = session?.user.name
   const spid = name ? name.split('|')[1] : ''
+  const defaultPaperless = defaultToPaperless(spid)
 
   return {
     props: {
       spid,
+      defaultPapaerless: defaultPaperless,
       locale,
       langToggleLink,
       content:
