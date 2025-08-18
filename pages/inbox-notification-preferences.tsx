@@ -324,7 +324,7 @@ export async function getServerSideProps({
 // TODO: Properly set this
 const useStub = isDev()
 function isDev() {
-  return true
+  return false
 }
 
 async function defaultToPaperless(spid: string) {
