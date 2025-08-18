@@ -13,6 +13,7 @@ export async function getInboxPref(spid: string) {
   if (alwaysSucceed) {
     //console.log(session.spid)
     try {
+      console.log('inbox pref get for ' + spid)
       const resp = await axios.post(
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
         {
@@ -27,6 +28,7 @@ export async function getInboxPref(spid: string) {
         },
       )
       logger.debug(resp)
+      console.log('inbox pref resp ' + resp.data.json())
       return resp.data.json()
     } catch (err) {
       logger.error(err)
@@ -41,6 +43,7 @@ export async function setInboxPref(spid: string, pref: string) {
   if (alwaysSucceed) {
     const inboxPref = await getInboxPref(spid)
     const id = inboxPref.id
+    console.log('setinboxpref ' + spid + ' ' + eventCode)
     if (id) {
       try {
         await axios.post(

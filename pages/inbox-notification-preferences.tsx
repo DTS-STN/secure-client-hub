@@ -117,7 +117,8 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
         ? '/en/inbox-notification-preferences-success'
         : '/fr/preferences-notification-boite-reception-success'
     if (!useStub) {
-      setInboxPref(props.spid, formData.value)
+      console.log('page setinboxpref ' + props.spid + ' ' + formData.value)
+      await setInboxPref(props.spid, formData.value)
     }
     router.push(redirectDestination)
   }
@@ -331,6 +332,7 @@ async function defaultToPaperless(spid: string) {
   if (useStub) {
     return true
   }
+  console.log('inbox pref page default to paperless check ' + spid)
   const resp = await getInboxPref(spid)
   return resp.eventCodes.length === 0 || resp.eventCodes[0] === 'PAPERLESS'
 }
