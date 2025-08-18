@@ -26,7 +26,6 @@ import { useEffect, useState } from 'react'
 
 interface InboxNotePrefProps {
   spid: string
-  spid2: string
   locale: string | undefined
   content: {
     err?: '500' | '404' | '503'
@@ -103,7 +102,8 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
 
   const content = props.content
 
-  console.log('spid ' + props.spid + ' spid2 ' + props.spid2)
+  // TODO: Remove
+  console.log('spid ' + props.spid)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
