@@ -57,7 +57,11 @@ extraEnv:
   - name: AUTH_ECAS_REFRESH_ENDPOINT
     value: {{ env "AUTH_ECAS_REFRESH_ENDPOINT" }}
   - name: MSCA_NG_USER_ENDPOINT
-    value: {{ env "MSCA_NG_USER_ENDPOINT" }} 
+    value: {{ env "MSCA_NG_USER_ENDPOINT" }}
+  - name: MSCA_NG_INBOX_GET_ENDPOINT
+    value: {{ env "MSCA_NG_INBOX_GET_ENDPOINT" }}
+  - name: MSCA_NG_INBOX_SET_ENDPOINT
+    value: {{ env "MSCA_NG_INBOX_SET_ENDPOINT" }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
