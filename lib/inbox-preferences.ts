@@ -13,7 +13,13 @@ export async function getInboxPref(spid: string) {
   if (alwaysSucceed) {
     //console.log(session.spid)
     try {
-      console.log('inbox pref get for ' + spid)
+      console.log(
+        process.env.HOSTALIAS_HOSTNAME +
+          ' ' +
+          process.env.MSCA_NG_INBOX_GET_ENDPOINT +
+          ' inbox pref get for ' +
+          spid,
+      )
       const resp = await axios.post(
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
         {
