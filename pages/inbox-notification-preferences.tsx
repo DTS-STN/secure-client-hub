@@ -65,7 +65,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
   useEffect(() => {
     const getDefault = async () => {
       try {
-        setDefaultPaperless(await defaultToPaperless())
+        setDefaultPaperless(await defaultToPaperless(props.spid))
       } catch (err) {
         logger.error(err)
       } finally {
@@ -117,7 +117,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
         ? '/en/inbox-notification-preferences-success'
         : '/fr/preferences-notification-boite-reception-success'
     if (!useStub) {
-      setInboxPref(formData.value)
+      setInboxPref(props.spid, formData.value)
     }
     router.push(redirectDestination)
   }
@@ -285,12 +285,10 @@ export async function getServerSideProps({
   }
   const name = session?.user.name
   const spid = name ? name.split('|')[1] : ''
-  const spid2 = session?.spid ?? ''
 
   return {
     props: {
       spid,
-      spid2,
       locale,
       langToggleLink,
       content:
@@ -329,10 +327,10 @@ function isDev() {
   return true
 }
 
-async function defaultToPaperless() {
+async function defaultToPaperless(spid: string) {
   if (useStub) {
     return true
   }
-  const resp = await getInboxPref()
+  const resp = await getInboxPref(spid)
   return resp.eventCodes.length === 0 || resp.eventCodes[0] === 'PAPERLESS'
 }

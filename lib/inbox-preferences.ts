@@ -9,16 +9,16 @@ function alwaysSucc() {
   return true
 }
 
-export async function getInboxPref() {
+export async function getInboxPref(spid: string) {
   if (alwaysSucceed) {
     //console.log(session.spid)
     try {
       const resp = await axios.post(
-        `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/v4/user-profiles/user-profiles-with-events`,
+        `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
         {
           params: {
             programCode: 'CFOB',
-            spid: '', //session.spid,
+            spid: spid,
           },
           headers: {
             'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
@@ -36,15 +36,15 @@ export async function getInboxPref() {
   return null
 }
 
-export async function setInboxPref(pref: string) {
+export async function setInboxPref(spid: string, pref: string) {
   const eventCode = pref === 'yes' ? 'PAPERLESS' : 'MAIL'
   if (alwaysSucceed) {
-    const inboxPref = await getInboxPref()
+    const inboxPref = await getInboxPref(spid)
     const id = inboxPref.id
     if (id) {
       try {
         await axios.post(
-          `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_USER_ENDPOINT}/v3/user-profiles/${id}/subscribe`,
+          `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}/subscribe`,
           {
             eventCodes: [eventCode],
           },
