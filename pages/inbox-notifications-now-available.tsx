@@ -88,7 +88,7 @@ export default function InboxNoteNowAvailable(props: InboxNowAvailProps) {
         <Button
           id="set-inbox-button"
           text={content.buttonText ?? ''}
-          style="smallPrimary"
+          style="primary"
           className="my-8 w-fit"
           href={
             props.locale === 'en'
