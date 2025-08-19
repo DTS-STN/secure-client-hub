@@ -20,7 +20,7 @@ export async function getInboxPref(spid: string) {
           ' inbox pref get for ' +
           spid,
       )
-      const resp = await axios.post(
+      const resp = await axios.get(
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
         {
           params: {
