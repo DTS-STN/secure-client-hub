@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './auth/[...nextauth]'
 import { setInboxPref } from '../../lib/inbox-preferences'
-import { redirect } from 'next/navigation'
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,10 +12,13 @@ export default async function handler(
   const spid = name ? name.split('|')[1] : ''
   const pref = req.query['pref'] ? req.query['pref'].toString() : ''
   const locale = req.query['locale'] ? req.query['locale'].toString() : ''
+  console.log('spid ' + spid + ' pref ' + pref)
   setInboxPref(spid, pref)
-  const redirectDestination =
+  let redirectDestination =
     locale === 'en'
-      ? '/en/inbox-notification-preferences-success'
-      : '/fr/preferences-notification-boite-reception-success'
-  redirect(redirectDestination)
+      ? '/inbox-notification-preferences-success'
+      : '/preferences-notification-boite-reception-success'
+  // TODO: don't swap redirect
+  redirectDestination = '/my-dashboard'
+  res.redirect(redirectDestination)
 }

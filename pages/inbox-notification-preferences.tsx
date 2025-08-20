@@ -20,12 +20,11 @@ import {
   getInboxPrefContent,
   InboxPrefContent,
 } from '../graphql/mappers/inbox-pref'
-import { getInboxPref, setInboxPref } from '../lib/inbox-preferences'
+import { getInboxPref } from '../lib/inbox-preferences'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 interface InboxNotePrefProps {
-  spid: string
   defaultPaperless: boolean
   locale: string | undefined
   content: {
@@ -89,9 +88,6 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
 
   const content = props.content
 
-  // TODO: Remove
-  console.log('spid ' + props.spid)
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setFormData({ value: value })
@@ -100,13 +96,10 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const redirectDestination =
-      props.locale === 'en'
-        ? '/en/inbox-notification-preferences-success'
-        : '/fr/preferences-notification-boite-reception-success'
-    if (!useStub) {
-      console.log('page setinboxpref ' + props.spid + ' ' + formData.value)
-      await setInboxPref(props.spid, formData.value)
-    }
+      '/api/submit-inbox-pref?locale=' +
+      props.locale +
+      '&pref=' +
+      formData.value
     router.push(redirectDestination)
   }
 
@@ -273,12 +266,11 @@ export async function getServerSideProps({
   }
   const name = session?.user.name
   const spid = name ? name.split('|')[1] : ''
-  const defaultPaperless = defaultToPaperless(spid)
+  const defaultPaperless = await defaultToPaperless(spid)
 
   return {
     props: {
-      spid,
-      defaultPapaerless: defaultPaperless,
+      defaultPaperless: defaultPaperless,
       locale,
       langToggleLink,
       content:
