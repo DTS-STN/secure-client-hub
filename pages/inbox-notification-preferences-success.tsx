@@ -104,12 +104,12 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
           </ul>
         )
       })}
-      <div className="flex items-center justify-start gap-6">
+      <div className="flex items-center justify-start gap-6 py-8">
         <Button
           id={props.content.backButton?.id ?? ''}
           text={props.content.backButton?.linkText ?? ''}
           style="secondary"
-          className="my-8 w-fit rounded border-[2px] border-[#2B4380] bg-white"
+          className="w-fit rounded border-[2px] border-[#2B4380] bg-white"
           href={
             props.locale === 'en'
               ? '/en/inbox-notification-preferences'
@@ -120,7 +120,7 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
           id={props.content.dashboardButton?.id ?? ''}
           text={props.content.dashboardButton?.linkText ?? ''}
           style="primary"
-          className="my-8 w-fit"
+          className="w-fit"
           href={
             props.locale === 'en'
               ? '/en/my-dashboard'
