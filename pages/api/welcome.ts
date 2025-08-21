@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from './auth/[...nextauth]'
 import { getInboxPref } from '../../lib/inbox-preferences'
 
-// TODO: Improve user experience by making this similar to login screen
+// TODO: Improve user experience by making this similar to login screen?
 export default async function welcome(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -16,21 +16,20 @@ export default async function welcome(
 
   try {
     const resp = await getInboxPref(spid)
-    const noNotifcationPref = resp.subscribedEvents.length === 0
-    const redirectDestination = noNotifcationPref
+    const noNotificationPref = resp.subscribedEvents.length === 0
+    const redirectDestination = noNotificationPref
       ? getResUrl(safeLocale)
-      : getDashboardUrl(safeLocale)
-    throw new Error(redirectDestination)
-    //res.redirect(redirectDestination)
+      : getResUrl(safeLocale)
+    res.redirect(redirectDestination)
   } catch {
-    res.redirect(getResUrl(safeLocale))
+    res.redirect(getDashboardUrl(safeLocale))
   }
 }
 
 function getResUrl(locale: string) {
   return locale === 'en'
-    ? '/inbox-notification-preferences'
-    : '/preferences-notification-boite-reception'
+    ? '/inbox-notifications-now-available'
+    : '/notifications-boite-reception-disponibles'
 }
 
 function getDashboardUrl(locale: string) {
