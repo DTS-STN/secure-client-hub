@@ -19,7 +19,7 @@ export default async function welcome(
     const noNotificationPref = resp.subscribedEvents.length === 0
     const redirectDestination = noNotificationPref
       ? getResUrl(safeLocale)
-      : getResUrl(safeLocale)
+      : getDashboardUrl(safeLocale)
     res.redirect(redirectDestination)
   } catch {
     res.redirect(getDashboardUrl(safeLocale))
