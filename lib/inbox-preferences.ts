@@ -24,8 +24,8 @@ export async function getInboxPref(spid: string) {
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
         {
           params: {
-            programCode: 'CFOB',
-            spid: spid,
+            'program-code': 'CFOB',
+            'Spid': spid,
           },
           headers: {
             'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
