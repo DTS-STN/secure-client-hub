@@ -80,7 +80,7 @@ const getCachedContent = () => {
 }
 
 export async function getInboxPrefContent(): Promise<InboxPrefContent> {
-  const response = await getCachedContent() // TODO: Fix
+  const response = await getCachedContent()
   //const response = JSON.parse(JSON.stringify(resp))
   const mappedProfile = {
     en: {

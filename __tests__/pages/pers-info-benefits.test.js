@@ -36,9 +36,11 @@ jest.mock('../../components/Heading')
 Heading.mockImplementation((props) => props.title)
 
 describe('My Profile page', () => {
+  // TODO: Make sure this content is correct
   const content = {
     list: [
       {
+        title: '',
         pageName: 'PersInfoBenefitsTest',
         heading: 'PersInfoBenefitsTest',
         list: [
