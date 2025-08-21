@@ -12,13 +12,12 @@ export default async function handler(
   const spid = name ? name.split('|')[1] : ''
   const pref = req.query['pref'] ? req.query['pref'].toString() : ''
   const locale = req.query['locale'] ? req.query['locale'].toString() : ''
-  console.log('spid ' + spid + ' pref ' + pref)
+
   await setInboxPref(spid, pref)
-  let redirectDestination =
+  // TODO: Actually handle errors correctly
+  const redirectDestination =
     locale === 'en'
       ? '/inbox-notification-preferences-success'
       : '/preferences-notification-boite-reception-success'
-  // TODO: don't swap redirect
-  redirectDestination = '/my-dashboard'
   res.redirect(redirectDestination)
 }

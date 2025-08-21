@@ -313,10 +313,7 @@ async function defaultToPaperless(spid: string) {
   if (useStub) {
     return true
   }
-  console.log('inbox pref page default to paperless check ' + spid)
   const resp = await getInboxPref(spid)
-  console.log('type ' + typeof resp.subscribedEvents)
-  console.log('subscribed events ' + resp.subscribedEvents)
   return (
     resp.subscribedEvents.length === 0 ||
     resp.subscribedEvents[0].eventTypeCode === 'PAPERLESS'
