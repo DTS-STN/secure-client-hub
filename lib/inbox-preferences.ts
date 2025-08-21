@@ -34,8 +34,9 @@ export async function getInboxPref(spid: string) {
         },
       )
       logger.debug(resp)
-      console.log('inbox pref resp ' + resp.data.json())
-      return resp.data.json()
+      const respData = resp.data
+      console.log('inbox pref resp ' + respData)
+      return respData
     } catch (err) {
       logger.error(err)
       // TODO: Maybe re-emit error here?
