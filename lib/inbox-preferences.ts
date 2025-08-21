@@ -53,7 +53,7 @@ export async function setInboxPref(spid: string, pref: string) {
   if (id) {
     await axios
       .post(
-        `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}/subscribe`,
+        `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}failtest/subscribe`, // TODO: Fix
         {
           eventCodes: [eventCode],
         },
