@@ -49,6 +49,10 @@ const REWRITES = [
     source: '/preference-notification-boite-reception-succes',
     destination: '/inbox-notification-preferences-success',
   },
+  {
+    source: '/preferences-notification-boite-reception',
+    destination: '/inbox-notification-preferences',
+  },
 ]
 
 const securityHeaders = [
