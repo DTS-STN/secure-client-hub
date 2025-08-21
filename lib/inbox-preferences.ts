@@ -35,7 +35,7 @@ export async function getInboxPref(spid: string) {
       )
       logger.debug(resp)
       const respData = resp.data
-      console.log('inbox pref resp ' + respData)
+      console.log('inbox pref resp ' + JSON.stringify(respData))
       return respData
     } catch (err) {
       logger.error(err)
