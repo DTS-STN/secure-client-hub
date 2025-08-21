@@ -1,0 +1,38 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from './auth/[...nextauth]'
+import { getInboxPref } from '../../lib/inbox-preferences'
+
+// TODO: Improve user experience by making this similar to login screen
+export default async function welcome(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const session = await getServerSession(req, res, authOptions)
+  const name = session?.user.name
+  const spid = name ? name.split('|')[1] : ''
+  const locale = req.query['locale'] ? req.query['locale'].toString() : '' // user input, potentially unsafe
+  const safeLocale = locale === 'en' ? 'en' : 'fr'
+
+  try {
+    const resp = await getInboxPref(spid)
+    const noNotifcationPref = resp.subscribedEvents.length === 0
+    const redirectDestination = noNotifcationPref
+      ? // TODO: Unswap
+        getDashboardUrl(safeLocale)
+      : getResUrl(safeLocale)
+    res.redirect(redirectDestination)
+  } catch {
+    res.redirect('profile-and-preferences')
+  }
+}
+
+function getResUrl(locale: string) {
+  return locale === 'en'
+    ? '/inbox-notification-preferences'
+    : '/preferences-notification-boite-reception'
+}
+
+function getDashboardUrl(locale: string) {
+  return locale === 'en' ? '/my-dashboard' : '/mon-tableau-de-bord'
+}
