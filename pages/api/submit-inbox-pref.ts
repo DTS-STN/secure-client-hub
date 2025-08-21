@@ -13,7 +13,7 @@ export default async function handler(
   const pref = req.query['pref'] ? req.query['pref'].toString() : ''
   const locale = req.query['locale'] ? req.query['locale'].toString() : ''
   console.log('spid ' + spid + ' pref ' + pref)
-  setInboxPref(spid, pref)
+  await setInboxPref(spid, pref)
   let redirectDestination =
     locale === 'en'
       ? '/inbox-notification-preferences-success'
