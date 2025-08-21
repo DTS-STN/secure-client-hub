@@ -315,5 +315,8 @@ async function defaultToPaperless(spid: string) {
   }
   console.log('inbox pref page default to paperless check ' + spid)
   const resp = await getInboxPref(spid)
-  return resp.eventCodes.length === 0 || resp.eventCodes[0] === 'PAPERLESS'
+  return (
+    resp.subscribedEvents.length === 0 ||
+    resp.subscribedEvents[0].eventTypeCode === 'PAPERLESS'
+  )
 }
