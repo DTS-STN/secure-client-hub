@@ -18,12 +18,12 @@ export default async function welcome(
     const resp = await getInboxPref(spid)
     const noNotifcationPref = resp.subscribedEvents.length === 0
     const redirectDestination = noNotifcationPref
-      ? // TODO: Unswap
-        getDashboardUrl(safeLocale)
-      : getResUrl(safeLocale)
-    res.redirect(redirectDestination)
+      ? getResUrl(safeLocale)
+      : getDashboardUrl(safeLocale)
+    throw new Error(redirectDestination)
+    //res.redirect(redirectDestination)
   } catch {
-    res.redirect('profile-and-preferences')
+    res.redirect(getResUrl(safeLocale))
   }
 }
 
