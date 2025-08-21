@@ -95,9 +95,12 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const pref = formData.value === 'yes' ? 'yes' : 'no'
+    const pref = formData.value === 'no' ? 'no' : 'yes'
     const redirectDestination =
-      '/api/submit-inbox-pref?locale=' + props.locale + '&pref=' + pref
+      '/api/submit-inbox-pref?locale=' +
+      encodeURIComponent(props.locale ?? '') +
+      '&pref=' +
+      encodeURIComponent(pref)
     router.push(redirectDestination)
   }
 
