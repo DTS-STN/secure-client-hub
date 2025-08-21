@@ -47,28 +47,32 @@ export async function getInboxPref(spid: string) {
 
 export async function setInboxPref(spid: string, pref: string) {
   const eventCode = pref === 'yes' ? 'PAPERLESS' : 'MAIL'
-  if (alwaysSucceed) {
-    const inboxPref = await getInboxPref(spid)
-    const id = inboxPref.id
-    console.log('setinboxpref ' + spid + ' ' + eventCode)
-    if (id) {
-      try {
-        await axios.post(
-          `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}/subscribe`,
-          {
-            eventCodes: [eventCode],
+  const inboxPref = await getInboxPref(spid)
+  const id = inboxPref.id
+  console.log('setinboxpref ' + spid + ' ' + eventCode + ' id ' + id)
+  if (id) {
+    await axios
+      .post(
+        `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}/subscribe`,
+        {
+          eventCodes: [eventCode],
+        },
+        {
+          headers: {
+            'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
+            'Content-Type': 'application/json',
           },
-          {
-            headers: {
-              'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
-              'Content-Type': 'application/json',
-            },
-          },
-        )
-      } catch (err) {
+        },
+      )
+      .then(() => {
+        // nothing needs to be done
+      })
+      .catch((err) => {
         logger.error(err)
         throw err
-      }
-    }
+      })
+  } else {
+    logger.error('unable to find ID for spid ' + spid)
+    throw new Error('unable to find id')
   }
 }
