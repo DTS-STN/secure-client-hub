@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1755798486610" clover="3.2.0">
-  <project timestamp="1755798486610" name="All files">
-    <metrics statements="944" coveredstatements="367" conditionals="866" coveredconditionals="211" methods="197" coveredmethods="68" elements="2007" coveredelements="646" complexity="0" loc="944" ncloc="944" packages="7" files="57" classes="57"/>
+<coverage generated="1755798755605" clover="3.2.0">
+  <project timestamp="1755798755606" name="All files">
+    <metrics statements="944" coveredstatements="367" conditionals="868" coveredconditionals="211" methods="197" coveredmethods="68" elements="2009" coveredelements="646" complexity="0" loc="944" ncloc="944" packages="7" files="57" classes="57"/>
     <package name="components">
       <metrics statements="253" coveredstatements="196" conditionals="292" coveredconditionals="151" methods="77" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -387,7 +387,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="445" coveredstatements="108" conditionals="401" coveredconditionals="38" methods="68" coveredmethods="12"/>
+      <metrics statements="445" coveredstatements="108" conditionals="403" coveredconditionals="38" methods="68" coveredmethods="12"/>
       <file name="404.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.tsx">
         <metrics statements="10" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -543,7 +543,7 @@
         <line num="274" count="0" type="stmt"/>
       </file>
       <file name="inbox-notification-preferences.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox-notification-preferences.tsx">
-        <metrics statements="64" coveredstatements="0" conditionals="51" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <metrics statements="64" coveredstatements="0" conditionals="53" coveredconditionals="0" methods="10" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -569,45 +569,45 @@
         <line num="97" count="0" type="stmt"/>
         <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="170" count="0" type="stmt"/>
-        <line num="172" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
         <line num="173" count="0" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="178" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="179" count="0" type="stmt"/>
-        <line num="183" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="185" count="0" type="stmt"/>
-        <line num="186" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="187" count="0" type="stmt"/>
+        <line num="175" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="181" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="182" count="0" type="stmt"/>
+        <line num="186" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="188" count="0" type="stmt"/>
-        <line num="189" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="189" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="190" count="0" type="stmt"/>
-        <line num="195" count="0" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="206" count="0" type="stmt"/>
-        <line num="207" count="0" type="stmt"/>
+        <line num="191" count="0" type="stmt"/>
+        <line num="192" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="199" count="0" type="stmt"/>
         <line num="209" count="0" type="stmt"/>
-        <line num="211" count="0" type="stmt"/>
+        <line num="210" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
-        <line num="216" count="0" type="stmt"/>
-        <line num="218" count="0" type="stmt"/>
+        <line num="214" count="0" type="stmt"/>
+        <line num="215" count="0" type="stmt"/>
         <line num="219" count="0" type="stmt"/>
-        <line num="229" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="234" count="0" type="stmt"/>
-        <line num="239" count="0" type="stmt"/>
-        <line num="244" count="0" type="stmt"/>
-        <line num="265" count="0" type="stmt"/>
-        <line num="266" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="267" count="0" type="stmt"/>
-        <line num="269" count="0" type="stmt"/>
-        <line num="305" count="0" type="stmt"/>
-        <line num="307" count="0" type="stmt"/>
-        <line num="311" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="312" count="0" type="stmt"/>
-        <line num="314" count="0" type="stmt"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="222" count="0" type="stmt"/>
+        <line num="232" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="242" count="0" type="stmt"/>
+        <line num="247" count="0" type="stmt"/>
+        <line num="268" count="0" type="stmt"/>
+        <line num="269" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="270" count="0" type="stmt"/>
+        <line num="272" count="0" type="stmt"/>
+        <line num="308" count="0" type="stmt"/>
+        <line num="310" count="0" type="stmt"/>
+        <line num="314" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="315" count="0" type="stmt"/>
+        <line num="317" count="0" type="stmt"/>
+        <line num="318" count="0" type="stmt"/>
       </file>
       <file name="inbox-notifications-now-available.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox-notifications-now-available.tsx">
         <metrics statements="42" coveredstatements="0" conditionals="48" coveredconditionals="0" methods="6" coveredmethods="0"/>
