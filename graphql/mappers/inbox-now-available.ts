@@ -68,7 +68,7 @@ interface GetSchInboxNotifAvailableV1 {
 
 const getCachedContent = () => {
   return cachified({
-    key: `content-inbox-pref`,
+    key: `content-inbox-pref-now-available`,
     cache,
     getFreshValue: async (): Promise<GetSchInboxNotifAvailableV1 | null> => {
       const targetUri = buildAemUri('getSchInboxNotifAvailableV1')
