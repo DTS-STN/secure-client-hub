@@ -160,10 +160,8 @@ export const authOptions: NextAuthOptions = {
     maxAge: 5 * 10 * 24, //20 minutes
   },
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account }) {
       return {
-        spid: profile?.uid,
-        sin: profile?.sin,
         ...token,
         ...user,
         ...account,
@@ -177,8 +175,8 @@ export const authOptions: NextAuthOptions = {
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
     },
-    async session({ session, token }) {
-      return { sin: token.sin, spid: token.spid, ...session }
+    async session({ session }) {
+      return { ...session }
     },
   },
   logger: {

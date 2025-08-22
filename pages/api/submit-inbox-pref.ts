@@ -2,6 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './auth/[...nextauth]'
 import { setInboxPref } from '../../lib/inbox-preferences'
+import { getLogger } from '../../logging/log-util'
+
+const logger = getLogger('submit-inbox-api')
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,11 +17,15 @@ export default async function handler(
   const locale = req.query['locale'] ? req.query['locale'].toString() : '' // user input, potentially unsafe
   const safePref = pref === 'no' ? 'no' : 'yes'
 
-  await setInboxPref(spid, safePref)
-  // TODO: Actually handle errors correctly
-  const redirectDestination =
-    locale === 'en'
-      ? '/inbox-notification-preferences-success'
-      : '/preferences-notification-boite-reception-success'
-  res.redirect(redirectDestination)
+  try {
+    await setInboxPref(spid, safePref)
+    const redirectDestination =
+      locale === 'en'
+        ? '/inbox-notification-preferences-success'
+        : '/preferences-notification-boite-reception-success'
+    res.redirect(redirectDestination)
+  } catch (error) {
+    logger.error(error)
+    res.redirect('/500')
+  }
 }

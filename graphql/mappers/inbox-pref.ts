@@ -98,6 +98,12 @@ export async function getInboxPrefContent(): Promise<InboxPrefContent> {
       introText:
         response?.data.schPageV1List.items[0].scFragments[0].scContentEn
           ?.json[0].content[0].value,
+      notiBlockLabel:
+        response?.data.schPageV1List.items[0].scFragments[1].scContentEn
+          ?.json[0].content[0].value,
+      notiBlockValue:
+        response?.data.schPageV1List.items[0].scFragments[1].scContentEn
+          ?.json[0].content[1].value,
       emailQuestion:
         response?.data.schPageV1List.items[0].scFragments[2].scLegendEn,
       emailYes:
@@ -129,6 +135,12 @@ export async function getInboxPrefContent(): Promise<InboxPrefContent> {
       introText:
         response?.data.schPageV1List.items[0].scFragments[0].scContentFr
           ?.json[0].content[0].value,
+      notiBlockLabel:
+        response?.data.schPageV1List.items[0].scFragments[1].scContentFr
+          ?.json[0].content[0].value,
+      notiBlockValue:
+        response?.data.schPageV1List.items[0].scFragments[1].scContentFr
+          ?.json[0].content[1].value,
       emailQuestion:
         response?.data.schPageV1List.items[0].scFragments[2].scLegendFr,
       emailYes:
@@ -159,7 +171,8 @@ export interface InboxPrefContent {
     }[]
     pageName: string
     introText?: string
-    definition?: string
+    notiBlockLabel?: string
+    notiBlockValue?: string
     emailQuestion?: string
     emailYes?: string
     emailNo?: string
@@ -174,7 +187,8 @@ export interface InboxPrefContent {
     }[]
     pageName: string
     introText?: string
-    definition?: string
+    notiBlockLabel?: string
+    notiBlockValue?: string
     emailQuestion?: string
     emailYes?: string
     emailNo?: string

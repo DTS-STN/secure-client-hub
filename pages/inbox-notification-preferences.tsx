@@ -23,6 +23,7 @@ import {
 import { getInboxPref } from '../lib/inbox-preferences'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import NotificationBox from '../components/NotificationBox'
 
 interface InboxNotePrefProps {
   defaultPaperless: boolean
@@ -31,7 +32,8 @@ interface InboxNotePrefProps {
     err?: '500' | '404' | '503'
     pageName: string
     introText?: string
-    definition?: string
+    notiBlockLabel?: string
+    notiBlockValue?: string
     emailQuestion?: string
     emailYes?: string
     emailNo?: string
@@ -105,19 +107,26 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
   }
 
   return (
-    <div id="homeContent" data-testid="inboxPrefContent-test">
+    <div
+      id="homeContent"
+      className="max-w-3xl"
+      data-testid="inboxPrefContent-test"
+    >
       <Heading id="inbox-pref-heading" title={content.pageName} />
-      <p className="mt-8 max-w-3xl text-gray-darker">{content.introText}</p>
-      {/* debt definition here*/}
+      <p className="mb-3 mt-8 text-gray-darker">{content.introText}</p>
+      <NotificationBox
+        label={content.notiBlockLabel ?? ''}
+        value={content.notiBlockValue ?? ''}
+      />
 
-      <div className="my-4 max-w-3xl border-t-2 border-y-gray-100" />
+      <div className="my-4 border-t-2 border-y-gray-100" />
 
       <p className="max-w-3xl font-bold text-gray-darker">
         {content.emailQuestion}
       </p>
       <div className="pb-2" />
       <form onSubmit={handleSubmit}>
-        <div className="flex max-w-3xl flex-col">
+        <div className="flex flex-col">
           <div className="flex flex-row pb-3 text-gray-darker">
             <input
               type="radio"

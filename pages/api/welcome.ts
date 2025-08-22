@@ -11,6 +11,7 @@ export default async function welcome(
   const session = await getServerSession(req, res, authOptions)
   const name = session?.user.name
   const spid = name ? name.split('|')[1] : ''
+
   const locale = req.query['locale'] ? req.query['locale'].toString() : '' // user input, potentially unsafe
   const safeLocale = locale === 'en' ? 'en' : 'fr'
 
