@@ -243,7 +243,7 @@ export async function getServerSideProps({
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Profile - My Service Canada Account',
+      title: 'Inbox - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -252,7 +252,7 @@ export async function getServerSideProps({
       accessRights: '1',
     },
     data_fr: {
-      title: 'Profil - Mon dossier Service Canada',
+      title: 'Boite reception - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
