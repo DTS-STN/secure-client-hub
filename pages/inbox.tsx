@@ -54,7 +54,6 @@ interface InboxProps {
 export default function Messages(props: InboxProps) {
   const messages = props.messages
 
-  console.log('message size:' + props.messageSize)
   const debtStatementsJsx = (
     <TextSection
       sectionName={props.content.debtStatements?.fragmentHeading ?? ''}
@@ -120,8 +119,7 @@ export default function Messages(props: InboxProps) {
                               gcAnalyticsCustomClickValue
                             }
                           >
-                            {message.messageName}(PDF,&nbsp{message.messageSize}
-                            )
+                            {message.messageName}(PDF, {message.messageSize})
                           </Link>
                         </td>
                         <td className="align-top md:pl-[100px]">
@@ -200,29 +198,18 @@ export async function getServerSideProps({
   const messages: MessageEntity[] = await getMessageService().findMessagesBySin(
     { sin: sin, userId: userId },
   )
-  let beginningOfmap
-  let afterPdf
-  let messageSizeInLoop
-  console.log('my messages ' + messages)
-  const pdfBytes = await getMessageService().getPdfByMessageId({
-    letterId: messages[0].messageId,
-    userId: userId,
-  })
-  const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
-  messages[0].messageSize = decodedPdfBytes.length.toString()
 
-  // messages.forEach(async (message: MessageEntity) => {
-  //   beginningOfmap = 'message id in inbox pdf call: ' + message.messageId
-  //   const pdfBytes = await getMessageService().getPdfByMessageId({
-  //     letterId: message.messageId,
-  //     userId: userId,
-  //   })
-  //   afterPdf = 'after pdf'
-  //   const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
-  //   message.messageSize = decodedPdfBytes.length.toString()
-  //   messageSizeInLoop = 'message size in loop'
-  //   return message
-  // })
+  console.log('my messages ' + messages)
+
+  for (const message of messages) {
+    const pdfBytes = await getMessageService().getPdfByMessageId({
+      letterId: message.messageId,
+      userId: userId,
+    })
+    const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
+    const messageSizeInKb = Math.round(decodedPdfBytes.length / 1000)
+    message.messageSize = messageSizeInKb.toString() + 'KB'
+  }
 
   const content = await getInboxContent().catch((error): InboxContent => {
     logger.error(error)
@@ -306,9 +293,6 @@ export async function getServerSideProps({
             ? authModals.mappedPopupSignedOut?.en
             : authModals.mappedPopupSignedOut?.fr,
       messages: messages,
-      messageSize:
-        messages[0].messageSize ??
-        '' + beginningOfmap + afterPdf + messageSizeInLoop,
     },
   }
 }
