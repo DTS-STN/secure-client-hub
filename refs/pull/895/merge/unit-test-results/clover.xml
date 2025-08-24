@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756077069795" clover="3.2.0">
-  <project timestamp="1756077069795" name="All files">
-    <metrics statements="1132" coveredstatements="367" conditionals="994" coveredconditionals="211" methods="229" coveredmethods="68" elements="2355" coveredelements="646" complexity="0" loc="1132" ncloc="1132" packages="7" files="65" classes="65"/>
+<coverage generated="1756077163334" clover="3.2.0">
+  <project timestamp="1756077163334" name="All files">
+    <metrics statements="1124" coveredstatements="367" conditionals="994" coveredconditionals="211" methods="228" coveredmethods="68" elements="2346" coveredelements="646" complexity="0" loc="1124" ncloc="1124" packages="7" files="65" classes="65"/>
     <package name="components">
       <metrics statements="270" coveredstatements="196" conditionals="317" coveredconditionals="151" methods="82" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -413,7 +413,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="514" coveredstatements="108" conditionals="470" coveredconditionals="38" methods="76" coveredmethods="12"/>
+      <metrics statements="506" coveredstatements="108" conditionals="470" coveredconditionals="38" methods="75" coveredmethods="12"/>
       <file name="404.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.tsx">
         <metrics statements="10" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -682,7 +682,7 @@
         <line num="210" count="0" type="stmt"/>
       </file>
       <file name="inbox.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox.tsx">
-        <metrics statements="68" coveredstatements="0" conditionals="63" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <metrics statements="60" coveredstatements="0" conditionals="63" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -731,14 +731,6 @@
         <line num="207" count="0" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
-        <line num="214" count="0" type="stmt"/>
-        <line num="215" count="0" type="stmt"/>
-        <line num="216" count="0" type="stmt"/>
-        <line num="220" count="0" type="stmt"/>
-        <line num="221" count="0" type="stmt"/>
-        <line num="222" count="0" type="stmt"/>
-        <line num="223" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
         <line num="227" count="0" type="stmt"/>
         <line num="228" count="0" type="stmt"/>
         <line num="229" count="0" type="stmt"/>
