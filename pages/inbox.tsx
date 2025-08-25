@@ -119,7 +119,7 @@ export default function Messages(props: InboxProps) {
                               gcAnalyticsCustomClickValue
                             }
                           >
-                            {message.messageName} (PDF, {message.messageSize})
+                            {letterName} (PDF, {message.messageSize})
                           </Link>
                         </td>
                         <td className="align-top md:pl-[100px]">
