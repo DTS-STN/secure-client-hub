@@ -145,7 +145,7 @@ export const authOptions: NextAuthOptions = {
           .catch((error) => logger.error(error))
         return {
           id: profile.sub,
-          name: profile.sin + '|' + profile.uid,
+          name: profile.sin + '|' + profile.uid + '|' + profile.sub,
           ...profile,
         }
       },
@@ -176,6 +176,7 @@ export const authOptions: NextAuthOptions = {
       return baseUrl
     },
     async session({ session }) {
+      // session.user = {}
       return { ...session }
     },
   },

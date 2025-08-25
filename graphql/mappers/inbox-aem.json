@@ -1,0 +1,239 @@
+{
+  "data": {
+    "schPageV1List": {
+      "items": [
+        {
+          "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/pages/inbox",
+
+          "scTitleEn": "Inbox",
+
+          "scTitleFr": "Boîte de réception",
+
+          "scBreadcrumbParentPages": [
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/pages/my-dashboard",
+
+              "scId": "my-dashboard",
+
+              "scTitleEn": "My dashboard",
+
+              "scTitleFr": "Mon tableau de bord",
+
+              "scPageNameEn": "my-dashboard",
+
+              "scPageNameFr": "mon-tableau-de-bord"
+            }
+          ],
+
+          "schAlerts": [],
+
+          "scFragments": [
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/inbox-notification-preferences-intro",
+
+              "scId": "content-inbox-notification-preferences-intro",
+
+              "scHeadingEn": null,
+
+              "scHeadingFr": null,
+
+              "scContentEn": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "The inbox is where you'll receive messages about your benefits and services. For now, you’ll find messages about:"
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scContentFr": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "La boîte de réception est l'endroit où vous recevrez les messages concernant vos prestations et vos services. Pour le moment, vous y trouverez des messages concernant :"
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scIconCSS": null
+            },
+
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/debt-statements",
+
+              "scId": "content-debt-statements",
+
+              "scHeadingEn": null,
+
+              "scHeadingFr": null,
+
+              "scContentEn": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "debt statements: ",
+
+                        "format": {
+                          "variants": ["strong"]
+                        }
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": "statements that show the amount you owe the government."
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scContentFr": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "les états de dettes : ",
+
+                        "format": {
+                          "variants": ["strong"]
+                        }
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": "ces relevés indiquent le montant que vous devez au gouvernement."
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scIconCSS": null
+            },
+
+            {
+              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/dont-miss-a-message",
+
+              "scId": "content-dont-miss-a-message",
+
+              "scHeadingEn": null,
+
+              "scHeadingFr": null,
+
+              "scContentEn": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "Don't miss a message.",
+
+                        "format": {
+                          "variants": ["strong"]
+                        }
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": " Set your "
+                      },
+
+                      {
+                        "nodeType": "link",
+
+                        "data": {
+                          "href": "inbox-notification-preferences"
+                        },
+
+                        "value": "inbox notification preferences"
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": " to receive emails when new messages are available."
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scContentFr": {
+                "json": [
+                  {
+                    "nodeType": "paragraph",
+
+                    "content": [
+                      {
+                        "nodeType": "text",
+
+                        "value": "Ne ratez aucun message.",
+
+                        "format": {
+                          "variants": ["strong"]
+                        }
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": " Définissez les "
+                      },
+
+                      {
+                        "nodeType": "link",
+
+                        "data": {
+                          "href": "preferences-notification-boite-reception"
+                        },
+
+                        "value": "préférences de notification de votre boîte de réception"
+                      },
+
+                      {
+                        "nodeType": "text",
+
+                        "value": " pour recevoir un courriel lorsqu'un nouveau message est disponible."
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              "scIconCSS": "notification-active"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
