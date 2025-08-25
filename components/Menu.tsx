@@ -64,7 +64,7 @@ const Menu = ({
       style="secondary"
       href={`${inboxLink}`}
       text=""
-      className={`my-4 flex flex-row items-center gap-3 rounded bg-blue-primary ${className}`}
+      className={`my-4 flex flex-row items-center gap-3 rounded bg-white text-blue-primary ${className}`}
       refPageAA="Nav Button"
     >
       <FontAwesomeIcon
@@ -189,7 +189,7 @@ const Menu = ({
       <div className="sch-container block lg:hidden">
         <InboxButton
           id="inbox-button-mobile"
-          className="w-fit border-[2px] border-[#2B4380] bg-white"
+          className="w-fit border-[2px] border-[#2B4380]"
         />
       </div>
     </div>
