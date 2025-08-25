@@ -15,6 +15,7 @@ export default async function welcome(
   const locale = req.query['locale'] ? req.query['locale'].toString() : '' // user input, potentially unsafe
   const safeLocale = locale === 'en' ? 'en' : 'fr'
 
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
   try {
     const resp = await getInboxPref(spid)
     const noNotificationPref = resp.subscribedEvents.length === 0
