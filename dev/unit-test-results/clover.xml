@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756132434572" clover="3.2.0">
-  <project timestamp="1756132434572" name="All files">
-    <metrics statements="1125" coveredstatements="367" conditionals="992" coveredconditionals="211" methods="228" coveredmethods="68" elements="2345" coveredelements="646" complexity="0" loc="1125" ncloc="1125" packages="7" files="65" classes="65"/>
+<coverage generated="1756139911005" clover="3.2.0">
+  <project timestamp="1756139911005" name="All files">
+    <metrics statements="1127" coveredstatements="367" conditionals="992" coveredconditionals="211" methods="228" coveredmethods="68" elements="2347" coveredelements="646" complexity="0" loc="1127" ncloc="1127" packages="7" files="65" classes="65"/>
     <package name="components">
       <metrics statements="270" coveredstatements="196" conditionals="317" coveredconditionals="151" methods="82" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -968,7 +968,7 @@
       </file>
     </package>
     <package name="pages.api">
-      <metrics statements="145" coveredstatements="0" conditionals="52" coveredconditionals="0" methods="24" coveredmethods="0"/>
+      <metrics statements="147" coveredstatements="0" conditionals="52" coveredconditionals="0" methods="24" coveredmethods="0"/>
       <file name="download.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/download.ts">
         <metrics statements="24" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -1101,7 +1101,7 @@
         <line num="52" count="0" type="stmt"/>
       </file>
       <file name="submit-inbox-pref.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/submit-inbox-pref.ts">
-        <metrics statements="18" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="19" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1116,13 +1116,14 @@
         <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
       </file>
       <file name="welcome.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/welcome.ts">
-        <metrics statements="17" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="18" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1135,11 +1136,12 @@
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
     </package>
     <package name="pages.api.auth">
