@@ -98,7 +98,7 @@ export default function Messages(props: InboxProps) {
                 : message.messageName
               const letterName =
                 props.locale === 'en' ? englishLetterName : frenchLetterName
-              const gcAnalyticsCustomClickValue = `ESDC-EDSC:CDB Letters Click:${letterName}`
+              const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
               const date = new Date(message.messageDate)
               const dateLanguage = props.locale + '-CA'
               const formattedDate = date.toLocaleString(dateLanguage, {
