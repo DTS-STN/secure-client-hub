@@ -88,52 +88,48 @@ export default function Messages(props: InboxProps) {
         </>
       ) : (
         <>
-          <ul className="divide-y border-y">
-            {messages.map((message: MessageEntity) => {
-              const parts = message.messageName.split(/\s*-\s*/)
+          <table className="w-full border-collapse">
+            <tbody>
+              {messages.map((message: MessageEntity) => {
+                const parts = message.messageName.split(/\s*-\s*/)
 
-              const frenchLetterName = parts[0] ? parts[0].trim() : ''
-              const englishLetterName = parts[1]
-                ? parts[1].trim()
-                : message.messageName
-              const letterName =
-                props.locale === 'en' ? englishLetterName : frenchLetterName
-              const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
-              const date = new Date(message.messageDate)
-              const dateLanguage = props.locale + '-CA'
-              const formattedDate = date.toLocaleString(dateLanguage, {
-                dateStyle: 'long',
-              })
+                const frenchLetterName = parts[0] ? parts[0].trim() : ''
+                const englishLetterName = parts[1]
+                  ? parts[1].trim()
+                  : message.messageName
+                const letterName =
+                  props.locale === 'en' ? englishLetterName : frenchLetterName
+                const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
+                const date = new Date(message.messageDate)
+                const dateLanguage = props.locale + '-CA'
+                const formattedDate = date.toLocaleString(dateLanguage, {
+                  dateStyle: 'long',
+                })
 
-              return (
-                <li key={message.messageId} className="px-4 py-4 sm:py-6">
-                  <table>
-                    <tbody>
-                      <tr className="flex flex-col md:flex-row">
-                        <td className="w-full md:w-[500px]">
-                          <Link
-                            href={`/api/download?id=${message.messageId}`}
-                            className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
-                            target="_blank"
-                            data-gc-analytics-customclick={
-                              gcAnalyticsCustomClickValue
-                            }
-                          >
-                            {letterName.toString()} (PDF, {message.messageSize})
-                          </Link>
-                          <hr />
-                          {message.messageType}
-                        </td>
-                        <td className="align-top md:pl-[100px]">
-                          {formattedDate}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </li>
-              )
-            })}
-          </ul>
+                return (
+                  <tr
+                    key={message.messageId}
+                    className="flex flex-col border-b border-gray-300 px-4 py-4 sm:py-6 md:flex-row"
+                  >
+                    <td className="w-full md:w-[500px]">
+                      <Link
+                        href={`/api/download?id=${message.messageId}`}
+                        className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
+                        target="_blank"
+                        data-gc-analytics-customclick={
+                          gcAnalyticsCustomClickValue
+                        }
+                      >
+                        {letterName.toString()} (PDF, {message.messageSize})
+                      </Link>
+                      <p className="py-1">{message.messageType}</p>
+                    </td>
+                    <td className="align-top md:pl-[100px]">{formattedDate}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </>
       )}
       <div className="py-8">
