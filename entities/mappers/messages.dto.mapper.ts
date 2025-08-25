@@ -30,6 +30,7 @@ export class DefaultMessageDtoMapper implements MessageDtoMapper {
       messageId: messageDto.LetterId,
       messageDate: messageDto.LetterDate,
       messageName: messageDto.LetterName,
+      messageType: messageDto.LetterType,
     }
   }
 

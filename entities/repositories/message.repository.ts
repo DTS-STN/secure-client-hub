@@ -187,11 +187,13 @@ export class MockMessageRepository implements MessageRepository {
         LetterName: 'Your Statement of accounts - Your statement of accounts',
         LetterId: '123456-b3bc-4332-8b69-172197842b88',
         LetterDate: '2025/06/13',
+        LetterType: 'statement of accounts',
       },
       {
         LetterName: 'Notice of debts - Notice of debts',
         LetterId: '123456-b3bc-4332-8b69-172197842b89',
         LetterDate: '2025/06/13',
+        LetterType: 'debt notice',
       },
     ]
 

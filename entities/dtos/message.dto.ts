@@ -9,6 +9,8 @@ export type MessageDto = Readonly<{
   LetterDate: string
 
   LetterName: string
+
+  LetterType?: string
 }>
 
 /**
