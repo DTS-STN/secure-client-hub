@@ -124,7 +124,7 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
           href={
             props.locale === 'en'
               ? '/en/my-dashboard'
-              : '/fr/preferences-notification-boite-reception'
+              : '/fr/mon-tableau-de-bord'
           }
         />
       </div>
