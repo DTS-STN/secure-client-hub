@@ -371,11 +371,7 @@
 <a name='L306'></a><a href='#L306'>306</a>
 <a name='L307'></a><a href='#L307'>307</a>
 <a name='L308'></a><a href='#L308'>308</a>
-<a name='L309'></a><a href='#L309'>309</a>
-<a name='L310'></a><a href='#L310'>310</a>
-<a name='L311'></a><a href='#L311'>311</a>
-<a name='L312'></a><a href='#L312'>312</a>
-<a name='L313'></a><a href='#L313'>313</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L309'></a><a href='#L309'>309</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -467,27 +463,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -777,52 +769,48 @@ export default function <span class="cstat-no" title="statement not covered" ><s
         &lt;/&gt;
       ) : (
         &lt;&gt;
-          &lt;ul className="divide-y border-y"&gt;
-            {messages.map(<span class="fstat-no" title="function not covered" >(m</span>essage: MessageEntity) =&gt; {
-              const parts = <span class="cstat-no" title="statement not covered" >message.messageName.split(/\s*-\s*/)</span>
+          &lt;table className="w-full border-collapse"&gt;
+            &lt;tbody&gt;
+              {messages.map(<span class="fstat-no" title="function not covered" >(m</span>essage: MessageEntity) =&gt; {
+                const parts = <span class="cstat-no" title="statement not covered" >message.messageName.split(/\s*-\s*/)</span>
 &nbsp;
-              const frenchLetterName = <span class="cstat-no" title="statement not covered" >parts[0] ? parts[0].trim() : ''</span>
-              const englishLetterName = <span class="cstat-no" title="statement not covered" >parts[1]</span>
-                ? parts[1].trim()
-                : message.messageName
-              const letterName =
-<span class="cstat-no" title="statement not covered" >                props.locale === 'en' ? englishLetterName : frenchLetterName</span>
-              const gcAnalyticsCustomClickValue = <span class="cstat-no" title="statement not covered" >`ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`</span>
-              const date = <span class="cstat-no" title="statement not covered" >new Date(message.messageDate)</span>
-              const dateLanguage = <span class="cstat-no" title="statement not covered" >props.locale + '-CA'</span>
-              const formattedDate = <span class="cstat-no" title="statement not covered" >date.toLocaleString(dateLanguage, {</span>
-                dateStyle: 'long',
-              })
+                const frenchLetterName = <span class="cstat-no" title="statement not covered" >parts[0] ? parts[0].trim() : ''</span>
+                const englishLetterName = <span class="cstat-no" title="statement not covered" >parts[1]</span>
+                  ? parts[1].trim()
+                  : message.messageName
+                const letterName =
+<span class="cstat-no" title="statement not covered" >                  props.locale === 'en' ? englishLetterName : frenchLetterName</span>
+                const gcAnalyticsCustomClickValue = <span class="cstat-no" title="statement not covered" >`ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`</span>
+                const date = <span class="cstat-no" title="statement not covered" >new Date(message.messageDate)</span>
+                const dateLanguage = <span class="cstat-no" title="statement not covered" >props.locale + '-CA'</span>
+                const formattedDate = <span class="cstat-no" title="statement not covered" >date.toLocaleString(dateLanguage, {</span>
+                  dateStyle: 'long',
+                })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >              return (</span>
-                &lt;li key={message.messageId} className="px-4 py-4 sm:py-6"&gt;
-                  &lt;table&gt;
-                    &lt;tbody&gt;
-                      &lt;tr className="flex flex-col md:flex-row"&gt;
-                        &lt;td className="w-full md:w-[500px]"&gt;
-                          &lt;Link
-                            href={`/api/download?id=${message.messageId}`}
-                            className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
-                            target="_blank"
-                            data-gc-analytics-customclick={
-                              gcAnalyticsCustomClickValue
-                            }
-                          &gt;
-                            {letterName.toString()} (PDF, {message.messageSize})
-                          &lt;/Link&gt;
-                          &lt;hr /&gt;
-                          {message.messageType}
-                        &lt;/td&gt;
-                        &lt;td className="align-top md:pl-[100px]"&gt;
-                          {formattedDate}
-                        &lt;/td&gt;
-                      &lt;/tr&gt;
-                    &lt;/tbody&gt;
-                  &lt;/table&gt;
-                &lt;/li&gt;
-              )
-            })}
-          &lt;/ul&gt;
+<span class="cstat-no" title="statement not covered" >                return (</span>
+                  &lt;tr
+                    key={message.messageId}
+                    className="flex flex-col border-b border-gray-300 px-4 py-4 sm:py-6 md:flex-row"
+                  &gt;
+                    &lt;td className="w-full md:w-[500px]"&gt;
+                      &lt;Link
+                        href={`/api/download?id=${message.messageId}`}
+                        className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
+                        target="_blank"
+                        data-gc-analytics-customclick={
+                          gcAnalyticsCustomClickValue
+                        }
+                      &gt;
+                        {letterName.toString()} (PDF, {message.messageSize})
+                      &lt;/Link&gt;
+                      &lt;p className="py-1"&gt;{message.messageType}&lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;td className="align-top md:pl-[100px]"&gt;{formattedDate}&lt;/td&gt;
+                  &lt;/tr&gt;
+                )
+              })}
+            &lt;/tbody&gt;
+          &lt;/table&gt;
         &lt;/&gt;
       )}
       &lt;div className="py-8"&gt;
@@ -1006,7 +994,7 @@ export async function <span class="cstat-no" title="statement not covered" ><spa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-25T16:50:10.589Z
+                at 2025-08-25T17:08:07.012Z
             </div>
         <script src="../prettify.js"></script>
         <script>
