@@ -119,7 +119,7 @@ export default function Messages(props: InboxProps) {
                               gcAnalyticsCustomClickValue
                             }
                           >
-                            {formattedDate} (PDF, {message.messageSize})
+                            {letterName.toString()} (PDF, {message.messageSize})
                           </Link>
                           <hr />
                           {message.messageType}
