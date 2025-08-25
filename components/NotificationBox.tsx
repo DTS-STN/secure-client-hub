@@ -2,12 +2,14 @@ interface NotificationBoxProps {
   label?: string
   value?: string
   children?: React.ReactNode
+  className?: string
 }
 
 const NotificationBox: React.FC<NotificationBoxProps> = ({
   label,
   value,
   children,
+  className,
 }) => {
   const spanJsx =
     label !== undefined && value !== undefined ? (
@@ -18,7 +20,7 @@ const NotificationBox: React.FC<NotificationBoxProps> = ({
       <></>
     )
   return (
-    <div className="bg-[rgba(30,123,150,0.1)] px-6 py-3">
+    <div className={`bg-[rgba(30,123,150,0.1)] px-6 py-3 ${className}`}>
       {spanJsx}
       {children}
     </div>
