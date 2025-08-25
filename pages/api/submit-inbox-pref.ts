@@ -17,6 +17,7 @@ export default async function handler(
   const locale = req.query['locale'] ? req.query['locale'].toString() : '' // user input, potentially unsafe
   const safePref = pref === 'no' ? 'no' : 'yes'
 
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
   try {
     await setInboxPref(spid, safePref)
     const redirectDestination =
