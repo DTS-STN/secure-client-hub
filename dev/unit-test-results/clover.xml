@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756141686993" clover="3.2.0">
-  <project timestamp="1756141686993" name="All files">
+<coverage generated="1756213712725" clover="3.2.0">
+  <project timestamp="1756213712725" name="All files">
     <metrics statements="1127" coveredstatements="367" conditionals="992" coveredconditionals="211" methods="228" coveredmethods="68" elements="2347" coveredelements="646" complexity="0" loc="1127" ncloc="1127" packages="7" files="65" classes="65"/>
     <package name="components">
       <metrics statements="270" coveredstatements="196" conditionals="317" coveredconditionals="151" methods="82" coveredmethods="43"/>
@@ -291,9 +291,9 @@
       </file>
       <file name="NotificationBox.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/NotificationBox.tsx">
         <metrics statements="3" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="13" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="28" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="30" count="0" type="stmt"/>
       </file>
       <file name="PageLink.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="1"/>
