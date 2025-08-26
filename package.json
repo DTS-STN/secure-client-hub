@@ -45,7 +45,7 @@
     "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.7.10",
     "micromatch": "^4.0.8",
-    "next": "^14.2.30",
+    "next": "^14.2.31",
     "moderndash": "^4.0.0",
     "next-auth": "^4.24.9",
     "next-i18next": "^13.3.0",
