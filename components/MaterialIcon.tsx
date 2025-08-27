@@ -9,6 +9,14 @@ const MaterialIcon: Record<string, JSX.Element> = {
   ),
   'lock': <MaterialSymbol icon="lock" weight={400} grade={0} size={24} />,
   'mail': <MaterialSymbol icon="mail" weight={400} grade={0} size={24} />,
+  'notification-active': (
+    <MaterialSymbol
+      icon="notifications_active"
+      weight={400}
+      grade={0}
+      size={48}
+    />
+  ),
   'notifications-active': (
     <MaterialSymbol
       icon="notifications_active"
