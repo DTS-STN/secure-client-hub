@@ -37,6 +37,15 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/`, url))
   }
 
+  if (
+    locale === 'en' &&
+    (pathname.endsWith('/mon-tableau-de-bord') ||
+      pathname.endsWith('/notifications-boite-reception-disponibles'))
+  ) {
+    // I do not understand why we refuse to redirect correctly
+    return NextResponse.redirect(new URL(`/fr${pathname}`, url))
+  }
+
   //Redirect for index page as we don't want users navigating to this page on prod
   if (pathname === '/' && process.env.ENVIRONMENT === 'production') {
     return NextResponse.redirect(new URL(`/en/my-dashboard`, url))

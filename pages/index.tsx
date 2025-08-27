@@ -45,7 +45,7 @@ const Index = (props: IndexProps) => {
           <div className="container mx-auto flex w-max py-11 font-display">
             <div className="grid grid-cols-2 gap-2 xl:gap-6">
               <Link
-                href="/en/my-dashboard"
+                href="api/welcome?locale=en"
                 className="grid place-items-center whitespace-pre rounded border border-deep-blue-medium bg-deep-blue-medium px-10 py-2 text-center font-display text-white hover:bg-bright-blue-dark focus:ring-1 focus:ring-black focus:ring-offset-2 active:bg-deep-blue-active"
                 role="button"
                 draggable="false"
@@ -56,7 +56,7 @@ const Index = (props: IndexProps) => {
               </Link>
 
               <Link
-                href="/fr/mon-tableau-de-bord"
+                href="api/welcome?locale=fr"
                 className="grid place-items-center whitespace-pre rounded border border-deep-blue-medium bg-deep-blue-medium px-10 py-2 text-center font-display text-white hover:bg-bright-blue-dark focus:ring-1 focus:ring-black focus:ring-offset-2 active:bg-deep-blue-active"
                 role="button"
                 draggable="false"
