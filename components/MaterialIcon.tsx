@@ -17,6 +17,14 @@ const MaterialIcon: Record<string, JSX.Element> = {
       size={48}
     />
   ),
+  'notifications-active': (
+    <MaterialSymbol
+      icon="notifications_active"
+      weight={400}
+      grade={0}
+      size={24}
+    />
+  ),
 }
 
 export function getIcon(icon?: string) {
