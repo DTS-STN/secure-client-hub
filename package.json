@@ -45,8 +45,8 @@
     "lru-cache": "^10.4.3",
     "markdown-to-jsx": "^7.7.10",
     "micromatch": "^4.0.8",
-    "next": "^14.2.30",
     "moderndash": "^4.0.0",
+    "next": "^14.2.30",
     "next-auth": "^4.24.9",
     "next-i18next": "^13.3.0",
     "pino": "^8.21.0",
@@ -60,6 +60,7 @@
     "react-idle-timer": "^5.7.2",
     "react-material-symbols": "^4.4.0",
     "react-modal": "^3.16.1",
+    "react-paginate": "^8.3.0",
     "yup": "^1.6.1",
     "zod": "^3.25.7"
   },

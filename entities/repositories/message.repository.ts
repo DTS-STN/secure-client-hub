@@ -67,7 +67,6 @@ export class DefaultMessageRepository implements MessageRepository {
     url.searchParams.set('clientId', sin)
     url.searchParams.set('userId', userId) //TODO fix userId
     url.searchParams.set('community', `${process.env.CCT_API_COMMUNITY}`)
-    url.searchParams.set('Exact', 'false')
 
     const httpClient = getHttpClient()
 
@@ -185,13 +184,73 @@ export class MockMessageRepository implements MessageRepository {
     const messageDtos: readonly MessageDto[] = [
       {
         LetterName: 'Your Statement of accounts - Your statement of accounts',
-        LetterId: '123456-b3bc-4332-8b69-172197842b88',
+        LetterId: '123456-b3bc-4332-8b69-172197842b881',
         LetterDate: '2025/06/13',
         LetterType: 'statement of accounts',
       },
       {
         LetterName: 'Notice of debts - Notice of debts',
-        LetterId: '123456-b3bc-4332-8b69-172197842b89',
+        LetterId: '123456-b3bc-4332-8b69-172197842b892',
+        LetterDate: '2025/06/15',
+        LetterType: 'debt notice',
+      },
+      {
+        LetterName: 'Your Statement of accounts - Your statement of accounts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b883',
+        LetterDate: '2025/06/13',
+        LetterType: 'statement of accounts',
+      },
+      {
+        LetterName: 'Notice of debts - Notice of debts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b894',
+        LetterDate: '2025/06/13',
+        LetterType: 'debt notice',
+      },
+      {
+        LetterName: 'Your Statement of accounts - Your statement of accounts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b885',
+        LetterDate: '2025/07/18',
+        LetterType: 'statement of accounts',
+      },
+      {
+        LetterName: 'Notice of debts - Notice of debts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b896',
+        LetterDate: '2025/09/13',
+        LetterType: 'debt notice',
+      },
+      {
+        LetterName: 'Your Statement of accounts - Your statement of accounts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b887',
+        LetterDate: '2025/06/13',
+        LetterType: 'statement of accounts',
+      },
+      {
+        LetterName: 'Notice of debts - Notice of debts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b898',
+        LetterDate: '2025/06/13',
+        LetterType: 'debt notice',
+      },
+      {
+        LetterName: 'Your Statement of accounts - Your statement of accounts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b889',
+        LetterDate: '2025/06/13',
+        LetterType: 'statement of accounts',
+      },
+      {
+        LetterName: 'Notice of debts - Notice of debts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b8910',
+        LetterDate: '2025/06/13',
+        LetterType: 'debt notice',
+      },
+      {
+        LetterName: 'Your Statement of accounts - Your statement of accounts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b8811',
+        LetterDate: '2025/06/13',
+        LetterType: 'statement of accounts',
+      },
+      {
+        LetterName: 'Notice of debts - Notice of debts',
+        LetterId: '123456-b3bc-4332-8b69-172197842b8912',
         LetterDate: '2025/06/13',
         LetterType: 'debt notice',
       },

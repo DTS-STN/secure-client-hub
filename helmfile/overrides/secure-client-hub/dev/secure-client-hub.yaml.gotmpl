@@ -84,6 +84,11 @@ extraEnv:
     value: {{ env "CCT_API_MAX_RETRIES" | quote }}
   - name: CCT_API_RETRY_DELAY
     value: {{ env "CCT_API_RETRY_DELAY" | quote }}
+  - name: PAGINATION_MESSAGES_PER_PAGE
+    value: {{ env "PAGINATION_MESSAGES_PER_PAGE" | quote }}
+  - name: PAGINATION_PAGE_RANGE_DISPLAYED
+    value: {{ env "PAGINATION_PAGE_RANGE_DISPLAYED" | quote }}
+
   - name: AUTH_ECAS_CA
     value: {{ env "AUTH_ECAS_CA" }}
   - name: AUTH_PRIVATE
