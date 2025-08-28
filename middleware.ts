@@ -46,7 +46,7 @@ export async function middleware(req: NextRequest) {
     pathname.endsWith('/notifications-boite-reception-disponibles')
   ) {
     return NextResponse.redirect(
-      new URL(`/fr/notifications-boite-reception-disponibles`, url),
+      new URL(`/fr/notifications-boite-reception-disponibles`, nextUrl.origin),
     )
   }
   if (
@@ -54,7 +54,10 @@ export async function middleware(req: NextRequest) {
     pathname.endsWith('/preferences-notification-boite-succes')
   ) {
     return NextResponse.redirect(
-      new URL(`/fr/preferences-notification-boite-reception-succes`, url),
+      new URL(
+        `/fr/preferences-notification-boite-reception-succes`,
+        nextUrl.origin,
+      ),
     )
   }
 
