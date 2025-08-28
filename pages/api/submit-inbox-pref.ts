@@ -23,7 +23,7 @@ export default async function handler(
     const redirectDestination =
       locale === 'en'
         ? '/inbox-notification-preferences-success'
-        : '/preferences-notification-boite-reception-success'
+        : '/preferences-notification-boite-reception-succes'
     res.redirect(redirectDestination)
   } catch (error) {
     logger.error(error)
