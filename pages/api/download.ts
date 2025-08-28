@@ -58,7 +58,7 @@ export default async function handler(
 
 const getCachedContent = (sin: string, userId: string) => {
   return cachified({
-    key: `messages-entities`,
+    key: `messages-entities-${sin}`,
     cache,
     getFreshValue: async (): Promise<MessageEntity[]> => {
       const messages = await getMessageService().findMessagesBySin({
