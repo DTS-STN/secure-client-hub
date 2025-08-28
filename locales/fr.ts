@@ -36,7 +36,7 @@ export default {
 
   //Inbox
   inbox: {
-    noMessagesText: "You don't have any messages.",
+    noMessagesText: "Vous n'avez pas de messages.",
     paginationText: {
       previousLink: '< Précédent',
       nextLink: 'Suivant >',

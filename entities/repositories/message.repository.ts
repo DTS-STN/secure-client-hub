@@ -67,6 +67,7 @@ export class DefaultMessageRepository implements MessageRepository {
     url.searchParams.set('clientId', sin)
     url.searchParams.set('userId', userId) //TODO fix userId
     url.searchParams.set('community', `${process.env.CCT_API_COMMUNITY}`)
+    url.searchParams.set('Exact', 'false')
 
     const httpClient = getHttpClient()
 
@@ -117,7 +118,6 @@ export class DefaultMessageRepository implements MessageRepository {
     url.searchParams.set('id', messageId)
     url.searchParams.set('userId', userId) //TODO fix userId
     url.searchParams.set('community', `${process.env.CCT_API_COMMUNITY}`)
-    url.searchParams.set('Exact', 'false')
 
     const httpClient = getHttpClient()
 
