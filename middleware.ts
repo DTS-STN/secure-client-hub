@@ -51,10 +51,10 @@ export async function middleware(req: NextRequest) {
   }
   if (
     locale === 'en' &&
-    pathname.endsWith('/preferences-notification-boite-reception')
+    pathname.endsWith('/preferences-notification-boite-succes')
   ) {
     return NextResponse.redirect(
-      new URL(`/fr/preferences-notification-boite-reception`, url),
+      new URL(`/fr/preferences-notification-boite-reception-succes`, url),
     )
   }
 
