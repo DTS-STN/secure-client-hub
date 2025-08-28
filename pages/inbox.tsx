@@ -4,9 +4,14 @@ import type { MessageEntity } from '../entities/entities/message.entity'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { GetServerSidePropsContext } from 'next'
-import Link from 'next/link'
+import PaginatedMessages from '../components/PaginatedMessages'
 import Heading from './../components/Heading'
 import NotificationBox from './../components/NotificationBox'
+import { cachified } from 'cachified'
+import {
+  lruCache as cache,
+  defaultTtl as ttl,
+} from '../lib/message-cache-utils'
 
 import {
   AuthModalsContent,
@@ -49,6 +54,8 @@ interface InboxProps {
   }
   aaPrefix: string
   messageSize: string
+  paginationMessagesPerPage: number
+  paginationPageRangeDisplayed: number
 }
 
 export default function Messages(props: InboxProps) {
@@ -80,58 +87,14 @@ export default function Messages(props: InboxProps) {
         aaPrefix={props.aaPrefix}
       />
       <NotificationBox>{debtStatementsJsx}</NotificationBox>
-      {messages.length === 0 ? (
-        <>
-          <div className="space-y-4">
-            <p></p>
-          </div>
-        </>
-      ) : (
-        <>
-          <table className="w-full border-collapse">
-            <tbody>
-              {messages.map((message: MessageEntity) => {
-                const parts = message.messageName.split(/\s*-\s*/)
 
-                const frenchLetterName = parts[0] ? parts[0].trim() : ''
-                const englishLetterName = parts[1]
-                  ? parts[1].trim()
-                  : message.messageName
-                const letterName =
-                  props.locale === 'en' ? englishLetterName : frenchLetterName
-                const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
-                const date = new Date(message.messageDate)
-                const dateLanguage = props.locale + '-CA'
-                const formattedDate = date.toLocaleString(dateLanguage, {
-                  dateStyle: 'long',
-                })
+      <PaginatedMessages
+        messageEntities={messages}
+        locale={props.locale as string}
+        messagesPerPage={props.paginationMessagesPerPage}
+        pageRangeDisplayed={props.paginationPageRangeDisplayed}
+      />
 
-                return (
-                  <tr
-                    key={message.messageId}
-                    className="flex flex-col border-b border-gray-300 px-4 py-4 sm:py-6 md:flex-row"
-                  >
-                    <td className="w-full md:w-[500px]">
-                      <Link
-                        href={`/api/download?id=${message.messageId}`}
-                        className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
-                        target="_blank"
-                        data-gc-analytics-customclick={
-                          gcAnalyticsCustomClickValue
-                        }
-                      >
-                        {letterName.toString()} (PDF, {message.messageSize})
-                      </Link>
-                      <p className="py-1">{message.messageType}</p>
-                    </td>
-                    <td className="align-top md:pl-[100px]">{formattedDate}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </>
-      )}
       <div className="py-8">
         <TextSection
           sectionName={props.content.doNotMissMessage?.fragmentHeading ?? ''}
@@ -193,21 +156,7 @@ export async function getServerSideProps({
   const userId: string = session?.user?.name
     ? session.user.name.split('|')[2]
     : ''
-  const messages: MessageEntity[] = await getMessageService().findMessagesBySin(
-    { sin: sin, userId: userId },
-  )
-
-  console.log('my messages ' + messages)
-
-  for (const message of messages) {
-    const pdfBytes = await getMessageService().getPdfByMessageId({
-      letterId: message.messageId,
-      userId: userId,
-    })
-    const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
-    const messageSizeInKb = Math.round(decodedPdfBytes.length / 1000)
-    message.messageSize = messageSizeInKb.toString() + 'KB'
-  }
+  const messages: MessageEntity[] = await getCachedContent(sin, userId)
 
   const content = await getInboxContent().catch((error): InboxContent => {
     logger.error(error)
@@ -291,10 +240,39 @@ export async function getServerSideProps({
             ? authModals.mappedPopupSignedOut?.en
             : authModals.mappedPopupSignedOut?.fr,
       messages: messages,
+      paginationMessagesPerPage: parseInt(
+        `${process.env.PAGINATION_MESSAGES_PER_PAGE}`,
+      ),
+      paginationPageRangeDisplayed: parseInt(
+        `${process.env.PAGINATION_PAGE_RANGE_DISPLAYED}`,
+      ),
     },
   }
 }
 
+const getCachedContent = (sin: string, userId: string) => {
+  return cachified({
+    key: `messages-entities-${sin}`,
+    cache,
+    getFreshValue: async (): Promise<MessageEntity[]> => {
+      const messages = await getMessageService().findMessagesBySin({
+        sin: sin,
+        userId: userId,
+      })
+      for (const message of messages) {
+        const pdfBytes = await getMessageService().getPdfByMessageId({
+          letterId: message.messageId,
+          userId: userId,
+        })
+        const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
+        const messageSizeInKb = Math.round(decodedPdfBytes.length / 1000)
+        message.messageSize = messageSizeInKb.toString() + 'KB'
+      }
+      return messages
+    },
+    ttl,
+  })
+}
 Messages.propTypes = {
   /**
    * current locale in the address

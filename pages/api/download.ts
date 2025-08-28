@@ -4,6 +4,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { authOptions } from './auth/[...nextauth]'
 import { MessageEntity } from '../../entities/entities/message.entity'
 import { getLogger } from '../../logging/log-util'
+import { cachified } from 'cachified'
+import {
+  lruCache as cache,
+  defaultTtl as ttl,
+} from '../../lib/message-cache-utils'
 
 const logger = getLogger('download')
 
@@ -19,9 +24,7 @@ export default async function handler(
   const userId: string = session?.user?.name
     ? session.user.name.split('|')[2]
     : ''
-  const messages: MessageEntity[] = await getMessageService().findMessagesBySin(
-    { sin: sin, userId: userId },
-  )
+  const messages: MessageEntity[] = await getCachedContent(sin, userId)
 
   // Optional TODO: add a check to see if the letter belongs to the user. (Done with LetterService call)
 
@@ -51,4 +54,28 @@ export default async function handler(
   logger.trace('added headers')
 
   res.send(decodedPdfBytes)
+}
+
+const getCachedContent = (sin: string, userId: string) => {
+  return cachified({
+    key: `messages-entities-${sin}`,
+    cache,
+    getFreshValue: async (): Promise<MessageEntity[]> => {
+      const messages = await getMessageService().findMessagesBySin({
+        sin: sin,
+        userId: userId,
+      })
+      for (const message of messages) {
+        const pdfBytes = await getMessageService().getPdfByMessageId({
+          letterId: message.messageId,
+          userId: userId,
+        })
+        const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
+        const messageSizeInKb = Math.round(decodedPdfBytes.length / 1000)
+        message.messageSize = messageSizeInKb.toString() + 'KB'
+      }
+      return messages
+    },
+    ttl,
+  })
 }

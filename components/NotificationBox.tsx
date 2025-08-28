@@ -12,7 +12,7 @@ const NotificationBox: React.FC<NotificationBoxProps> = ({
   className,
 }) => {
   const spanJsx =
-    label !== undefined && value !== undefined ? (
+    value !== undefined ? (
       <>
         <span className="font-bold">{label}</span> <span>{value}</span>
       </>
