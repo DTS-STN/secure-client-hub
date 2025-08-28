@@ -28,11 +28,20 @@ export default function Login(props) {
         }, 3000)
         return
       }
-      signIn('ecasProvider', {
-        callbackUrl:
+
+      let redirectTarget
+
+      if (props.redirectUrl) {
+        redirectTarget = props.redirectUrl
+      } else {
+        redirectTarget =
           props.locale === 'en'
             ? `${window.location.origin}/api/welcome?locale=en`
-            : `${window.location.origin}/api/welcome?locale=fr`,
+            : `${window.location.origin}/api/welcome?locale=fr`
+      }
+
+      signIn('ecasProvider', {
+        callbackUrl: redirectTarget,
       })
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
@@ -56,12 +65,15 @@ Login.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({ req, res, locale, query }) {
   //Temporary for testing purposes until auth flow is publicly accessible
   const authDisabled = AuthIsDisabled() ? true : false
 
   const session = await getServerSession(req, res, authOptions)
   const token = await getIdToken(req)
+  const ecasUrl = process.env.AUTH_ECAS_BASE_URL
+  // TODO: Compare vs a whitelist
+  const redirectUrl = query.endpoint ? ecasUrl + query.endpoint : ''
 
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
@@ -107,6 +119,7 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       meta,
       authDisabled: authDisabled ?? true,
+      redirectUrl: redirectUrl,
     },
   }
 }

@@ -15,7 +15,6 @@ import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
-  Redirect,
   getIdToken,
 } from '../lib/auth'
 import { authOptions } from './api/auth/[...nextauth]'
@@ -171,15 +170,29 @@ export async function getServerSideProps({
   req,
   res,
   locale,
+  query,
 }: {
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
   locale: string
+  query: GetServerSidePropsContext['query']
 }) {
   const session = await getServerSession(req, res, authOptions)
+  const { endpoint } = query
+
+  // special handling for redirects from ecas
+  const params = new URLSearchParams()
+  if (endpoint) {
+    params.append('endpoint', endpoint.toString())
+  }
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
+    return {
+      redirect: {
+        destination: `/${locale}/auth/login?${params.toString()}`,
+        permanent: false,
+      },
+    }
 
   const token = await getIdToken(req)
 
@@ -201,10 +214,11 @@ export async function getServerSideProps({
           )
         }
       }
+
       res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/login`,
+          destination: `/${locale}/auth/login?${params.toString()}`,
           permanent: false,
         },
       }
