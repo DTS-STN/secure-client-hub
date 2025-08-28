@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/36</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
@@ -153,8 +153,7 @@
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -168,21 +167,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,16 +189,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,6 +205,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,15 +218,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,11 +255,15 @@ import { useEffect } from 'react'
 interface PaginatedMessagesProps {
   messageEntities: MessageEntity[]
   locale: string
+  messagesPerPage: number
+  pageRangeDisplayed: number
 }
 &nbsp;
 const PaginatedMessages = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
   messageEntities,
   locale,
+  messagesPerPage,
+  pageRangeDisplayed,
 }: PaginatedMessagesProps) =&gt; {
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
     const paginationListElement = <span class="cstat-no" title="statement not covered" >document.querySelector(</span>
@@ -303,16 +305,13 @@ const PaginatedMessages = <span class="cstat-no" title="statement not covered" >
   const language = <span class="cstat-no" title="statement not covered" >locale === 'en' ? EN : FR</span>
 &nbsp;
   const [itemOffset, setItemOffset] = <span class="cstat-no" title="statement not covered" >useState(0)</span>
-&nbsp;
-  const itemsPerPage = <span class="cstat-no" title="statement not covered" >3 /</span>/parseInt(`${process.env.PAGINATION_MESSAGES_PER_PAGE}`)
-<span class="cstat-no" title="statement not covered" >  console.log('items per page' + itemsPerPage)</span>
-  const endOffset = <span class="cstat-no" title="statement not covered" >itemOffset + itemsPerPage</span>
+  const endOffset = <span class="cstat-no" title="statement not covered" >itemOffset + messagesPerPage</span>
   const currentItems = <span class="cstat-no" title="statement not covered" >messageEntities.slice(itemOffset, endOffset)</span>
-  const pageCount = <span class="cstat-no" title="statement not covered" >Math.ceil(messageEntities.length / itemsPerPage)</span>
+  const pageCount = <span class="cstat-no" title="statement not covered" >Math.ceil(messageEntities.length / messagesPerPage)</span>
 &nbsp;
   const handlePageClick = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>electedItem: { selected: number }) =&gt; {</span>
     const pageSelected = <span class="cstat-no" title="statement not covered" >selectedItem.selected</span>
-    const newOffset = <span class="cstat-no" title="statement not covered" >pageSelected * itemsPerPage</span>
+    const newOffset = <span class="cstat-no" title="statement not covered" >pageSelected * messagesPerPage</span>
 <span class="cstat-no" title="statement not covered" >    console.log('new offset' + newOffset)</span>
 <span class="cstat-no" title="statement not covered" >    setItemOffset(newOffset)</span>
   }
@@ -325,9 +324,7 @@ const PaginatedMessages = <span class="cstat-no" title="statement not covered" >
         nextLabel={language.inbox.paginationText.nextLink}
         previousLabel={language.inbox.paginationText.previousLink}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={parseInt(
-          process.env.PAGINATION_PAGE_RANGE_DISPLAYED as string,
-        )}
+        pageRangeDisplayed={pageRangeDisplayed}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
       /&gt;
@@ -343,7 +340,7 @@ const PaginatedMessages = <span class="cstat-no" title="statement not covered" >
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-28T00:41:37.542Z
+                at 2025-08-28T16:27:49.868Z
             </div>
         <script src="../prettify.js"></script>
         <script>
