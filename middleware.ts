@@ -37,13 +37,18 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/`, url))
   }
 
+  if (locale === 'en' && pathname.endsWith('/mon-tableau-de-bord')) {
+    // I do not understand why we refuse to redirect correctly
+    return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
+  }
   if (
     locale === 'en' &&
-    (pathname.endsWith('/mon-tableau-de-bord') ||
-      pathname.endsWith('/notifications-boite-reception-disponibles'))
+    pathname.endsWith('/notifications-boite-reception-disponibles')
   ) {
     // I do not understand why we refuse to redirect correctly
-    return NextResponse.redirect(new URL(`/fr${pathname}`, url))
+    return NextResponse.redirect(
+      new URL(`/fr/notifications-boite-reception-disponibles`, url),
+    )
   }
 
   //Redirect for index page as we don't want users navigating to this page on prod
