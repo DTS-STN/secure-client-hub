@@ -10,11 +10,15 @@ import { useEffect } from 'react'
 interface PaginatedMessagesProps {
   messageEntities: MessageEntity[]
   locale: string
+  messagesPerPage: number
+  pageRangeDisplayed: number
 }
 
 const PaginatedMessages = ({
   messageEntities,
   locale,
+  messagesPerPage,
+  pageRangeDisplayed,
 }: PaginatedMessagesProps) => {
   useEffect(() => {
     const paginationListElement = document.querySelector(
@@ -56,16 +60,13 @@ const PaginatedMessages = ({
   const language = locale === 'en' ? EN : FR
 
   const [itemOffset, setItemOffset] = useState(0)
-
-  const itemsPerPage = 3 //parseInt(`${process.env.PAGINATION_MESSAGES_PER_PAGE}`)
-  console.log('items per page' + itemsPerPage)
-  const endOffset = itemOffset + itemsPerPage
+  const endOffset = itemOffset + messagesPerPage
   const currentItems = messageEntities.slice(itemOffset, endOffset)
-  const pageCount = Math.ceil(messageEntities.length / itemsPerPage)
+  const pageCount = Math.ceil(messageEntities.length / messagesPerPage)
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     const pageSelected = selectedItem.selected
-    const newOffset = pageSelected * itemsPerPage
+    const newOffset = pageSelected * messagesPerPage
     console.log('new offset' + newOffset)
     setItemOffset(newOffset)
   }
@@ -78,9 +79,7 @@ const PaginatedMessages = ({
         nextLabel={language.inbox.paginationText.nextLink}
         previousLabel={language.inbox.paginationText.previousLink}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={parseInt(
-          process.env.PAGINATION_PAGE_RANGE_DISPLAYED as string,
-        )}
+        pageRangeDisplayed={pageRangeDisplayed}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
       />

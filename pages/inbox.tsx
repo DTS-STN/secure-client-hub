@@ -54,6 +54,8 @@ interface InboxProps {
   }
   aaPrefix: string
   messageSize: string
+  paginationMessagesPerPage: number
+  paginationPageRangeDisplayed: number
 }
 
 export default function Messages(props: InboxProps) {
@@ -89,6 +91,8 @@ export default function Messages(props: InboxProps) {
       <PaginatedMessages
         messageEntities={messages}
         locale={props.locale as string}
+        messagesPerPage={props.paginationMessagesPerPage}
+        pageRangeDisplayed={props.paginationPageRangeDisplayed}
       />
 
       <div className="py-8">
@@ -236,6 +240,12 @@ export async function getServerSideProps({
             ? authModals.mappedPopupSignedOut?.en
             : authModals.mappedPopupSignedOut?.fr,
       messages: messages,
+      paginationMessagesPerPage: parseInt(
+        `${process.env.PAGINATION_MESSAGES_PER_PAGE}`,
+      ),
+      paginationPageRangeDisplayed: parseInt(
+        `${process.env.PAGINATION_PAGE_RANGE_DISPLAYED}`,
+      ),
     },
   }
 }
