@@ -19,12 +19,23 @@ export async function middleware(req: NextRequest) {
     return
   }
 
+  const endpoint = searchParams.get('endpoint')
   //Redirect from splash page if Lang parameter is supplied when redirecting from MSCA
   switch (searchParams.get('Lang')) {
-    case 'fra':
-      return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
-    case 'eng':
-      return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
+    case 'fra': {
+      const frenchRedirectUrl = new URL(`/fr/mon-tableau-de-bord`, url)
+      if (endpoint) {
+        frenchRedirectUrl.searchParams.append('endpoint', endpoint)
+      }
+      return NextResponse.redirect(frenchRedirectUrl)
+    }
+    case 'eng': {
+      const englishRedirectUrl = new URL(`/en/my-dashboard`, url)
+      if (endpoint) {
+        englishRedirectUrl.searchParams.append('endpoint', endpoint)
+      }
+      return NextResponse.redirect(englishRedirectUrl)
+    }
   }
 
   //Redirect for index page as it's meant to be bilingual so we don't want users navigating to /en or /fr
