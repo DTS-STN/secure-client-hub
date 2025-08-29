@@ -3,5 +3,4 @@ export type MessageEntity = {
   messageDate: string
   messageName: string
   messageType?: string
-  messageSize?: string
 }
