@@ -56,7 +56,7 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
                           gcAnalyticsCustomClickValue
                         }
                       >
-                        {letterName.toString()} (PDF, {message.messageSize})
+                        {letterName.toString()} (PDF)
                       </Link>
                       <p className="py-1">{message.messageType}</p>
                     </td>

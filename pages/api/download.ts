@@ -61,20 +61,10 @@ const getCachedContent = (sin: string, userId: string) => {
     key: `messages-entities-${sin}`,
     cache,
     getFreshValue: async (): Promise<MessageEntity[]> => {
-      const messages = await getMessageService().findMessagesBySin({
+      return await getMessageService().findMessagesBySin({
         sin: sin,
         userId: userId,
       })
-      for (const message of messages) {
-        const pdfBytes = await getMessageService().getPdfByMessageId({
-          letterId: message.messageId,
-          userId: userId,
-        })
-        const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
-        const messageSizeInKb = Math.round(decodedPdfBytes.length / 1000)
-        message.messageSize = messageSizeInKb.toString() + 'KB'
-      }
-      return messages
     },
     ttl,
   })
