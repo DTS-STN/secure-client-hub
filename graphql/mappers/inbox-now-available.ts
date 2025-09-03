@@ -1,7 +1,8 @@
 import { buildAemUri } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
-//import resp from './sample-responses/inbox-notif-available.json'
+// import resp from './sample-responses/inbox-notif-available.json'
+import { getTextFragmentContent, Section } from '../../lib/graphql-utils'
 
 // TODO: Standardize these across the mappers
 interface ContentElement {
@@ -80,9 +81,26 @@ const getCachedContent = () => {
   })
 }
 
+const findFragmentByScId = (
+  res: GetSchInboxNotifAvailableV1 | null,
+  id: string,
+) => {
+  return (
+    res?.data.schPageV1List.items[0].scFragments.find(
+      ({ scId }) => scId === id,
+    ) ?? null
+  )
+}
+
 export async function getInboxNowAvailContent(): Promise<InboxNotifAvailContent> {
   const response = await getCachedContent()
-  //const response = JSON.parse(JSON.stringify(resp))
+  // const response = JSON.parse(JSON.stringify(resp))
+
+  const paragraphFragment = findFragmentByScId(
+    response,
+    'content-inbox-notifications-now-available',
+  )
+
   const mappedProfile = {
     en: {
       // TODO: Don't use indexes and search by ID instead
@@ -97,12 +115,11 @@ export async function getInboxNowAvailContent(): Promise<InboxNotifAvailContent>
         ),
       pageName: response?.data.schPageV1List.items[0].scTitleEn ?? '',
       // TODO: Make this an array and read it as an array
-      paragraph1:
-        response?.data.schPageV1List.items[0].scFragments[0].scContentEn
-          ?.json[0].content[0].value,
-      paragraph2:
-        response?.data.schPageV1List.items[0].scFragments[0].scContentEn
-          ?.json[1].content[0].value,
+      paragraphs: {
+        fragmentHeading: paragraphFragment?.scHeadingEn ?? null,
+        divisions:
+          (await getTextFragmentContent(paragraphFragment?.scContentEn)) ?? [],
+      },
       buttonText:
         response?.data.schPageV1List.items[0].scFragments[1].scLinkTextEn,
     },
@@ -117,12 +134,11 @@ export async function getInboxNowAvailContent(): Promise<InboxNotifAvailContent>
           },
         ),
       pageName: response?.data.schPageV1List.items[0].scTitleFr ?? '',
-      paragraph1:
-        response?.data.schPageV1List.items[0].scFragments[0].scContentFr
-          ?.json[0].content[0].value,
-      paragraph2:
-        response?.data.schPageV1List.items[0].scFragments[0].scContentFr
-          ?.json[1].content[0].value,
+      paragraphs: {
+        fragmentHeading: paragraphFragment?.scHeadingFr ?? null,
+        divisions:
+          (await getTextFragmentContent(paragraphFragment?.scContentFr)) ?? [],
+      },
       buttonText:
         response?.data.schPageV1List.items[0].scFragments[1].scLinkTextFr,
     },
@@ -138,8 +154,7 @@ export interface InboxNotifAvailContent {
       text: string
     }[]
     pageName: string
-    paragraph1?: string
-    paragraph2?: string
+    paragraphs?: Section
     buttonText?: string
   }
   fr?: {
@@ -148,8 +163,7 @@ export interface InboxNotifAvailContent {
       text: string
     }[]
     pageName: string
-    paragraph1?: string
-    paragraph2?: string
+    paragraphs?: Section
     buttonText?: string
   }
 }

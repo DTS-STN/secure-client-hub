@@ -20,6 +20,8 @@ import {
 import ErrorPage from '../components/ErrorPage'
 import Heading from '../components/Heading'
 import Button from '../components/Button'
+import { Section } from '../lib/graphql-utils'
+import TextSection from '../components/TextSection'
 
 interface InboxNowAvailProps {
   spid: string
@@ -28,8 +30,7 @@ interface InboxNowAvailProps {
   content: {
     err?: '500' | '404' | '503'
     pageName: string
-    paragraph1?: string
-    paragraph2?: string
+    paragraphs: Section
     buttonText?: string
   }
   bannerContent?: {
@@ -82,8 +83,14 @@ export default function InboxNoteNowAvailable(props: InboxNowAvailProps) {
       className="max-w-3xl"
     >
       <Heading id="inbox-pref-heading" title={content.pageName} />
-      <p className="mt-6 text-gray-darker">{content.paragraph1}</p>
-      <p className="mt-6 text-gray-darker">{content.paragraph2}</p>
+      <div className="pt-8">
+        <TextSection
+          sectionName={props.content.paragraphs.fragmentHeading ?? ''}
+          divisions={props.content.paragraphs.divisions ?? []}
+          icon={props.content.paragraphs.icon ?? ''}
+          aaPrefix={props.aaPrefix}
+        />
+      </div>
       <div>
         <Button
           id="set-inbox-button"
