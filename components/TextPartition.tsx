@@ -28,7 +28,7 @@ const TextPartition = ({ type, text, css = '', link }: TextPartitionProps) => {
     ) : (
       {}
     )
-  return <>{textJsx} </>
+  return <>{textJsx}</>
 }
 
 export default TextPartition
