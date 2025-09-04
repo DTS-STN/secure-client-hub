@@ -29,9 +29,9 @@ const TextDivision = ({
 
   const divisionJsx =
     divisionType === 'paragraph' ? (
-      <p className="pb-2">{divisionContentJsx}</p>
+      <p className="pb-4">{divisionContentJsx}</p>
     ) : divisionType === 'div' ? (
-      <div className="pb-2">{divisionContentJsx}</div>
+      <div className="pb-4">{divisionContentJsx}</div>
     ) : (
       <></>
     )

@@ -9,7 +9,7 @@ export interface TextPartitionProps {
 }
 
 const TextPartition = ({ type, text, css = '', link }: TextPartitionProps) => {
-  const cssStrong = css.length > 0
+  const cssStrong = css.includes('strong')
 
   const textJsx =
     type === 'text' ? (
