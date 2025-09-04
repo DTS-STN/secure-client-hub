@@ -5,6 +5,7 @@ const logger = getLogger('lib.inbox-pref')
 
 export async function getInboxPref(spid: string) {
   try {
+    logger.trace('before getInboxPref request')
     const resp = await axios.get(
       `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_GET_ENDPOINT}`,
       {
@@ -19,6 +20,7 @@ export async function getInboxPref(spid: string) {
       },
     )
     const respData = resp.data[0]
+    logger.trace('getInboxPref response ' + respData.toString())
     return respData
   } catch (err) {
     logger.error(err)
@@ -28,10 +30,12 @@ export async function getInboxPref(spid: string) {
 }
 
 export async function setInboxPref(spid: string, pref: string) {
+  logger.trace('start setInboxPref')
   const eventCode = pref === 'yes' ? 'PAPERLESS' : 'MAIL'
   const inboxPref = await getInboxPref(spid)
   const id = inboxPref.id
   if (id) {
+    logger.trace('before setInboxPref req')
     await axios
       .post(
         `https://${process.env.HOSTALIAS_HOSTNAME}${process.env.MSCA_NG_INBOX_SET_ENDPOINT}${id}/subscribe`,
@@ -52,6 +56,7 @@ export async function setInboxPref(spid: string, pref: string) {
         logger.error(err)
         throw err
       })
+    logger.trace('setInboxPref complete')
   } else {
     logger.error('unable to find ID for spid ' + spid)
     throw new Error('unable to find id')

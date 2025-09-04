@@ -23,7 +23,8 @@ import {
 import { getInboxPref } from '../lib/inbox-preferences'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import NotificationBox from '../components/NotificationBox'
+import { Section } from '../lib/graphql-utils'
+import TextSection from '../components/TextSection'
 
 interface InboxNotePrefProps {
   defaultPaperless: boolean
@@ -31,15 +32,15 @@ interface InboxNotePrefProps {
   content: {
     err?: '500' | '404' | '503'
     pageName: string
-    introText?: string
-    notiBlockLabel?: string
-    notiBlockValue?: string
+    introText?: Section
+    debtStatements?: Section
     emailQuestion?: string
+    emailQuestionRequired?: boolean
     emailYes?: string
     emailNo?: string
-    emailYesDesc: string
-    emailNoDesc: string
-    buttonText: string
+    emailYesDesc?: Section
+    emailNoDesc?: Section
+    buttonText?: string
   }
   bannerContent?: {
     err?: '500' | '404' | '503'
@@ -106,6 +107,11 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
     router.push(redirectDestination)
   }
 
+  const [emailYesBold, emailYesRest] = (content.emailYes ?? '').split('-', 2)
+  const [emailNoBold, emailNoRest] = (content.emailNo ?? '').split('-', 2)
+  const requiredString =
+    props.locale === 'en' ? ' (required)' : ' (obligatoire)'
+
   return (
     <div
       id="homeContent"
@@ -113,58 +119,92 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
       data-testid="inboxPrefContent-test"
     >
       <Heading id="inbox-pref-heading" title={content.pageName} />
-      <p className="mb-3 mt-8 text-gray-darker">{content.introText}</p>
-      <NotificationBox
-        label={content.notiBlockLabel ?? ''}
-        value={content.notiBlockValue ?? ''}
+
+      <TextSection
+        sectionName={content.introText?.fragmentHeading ?? ''}
+        divisions={content.introText?.divisions ?? []}
+        icon={content.introText?.icon ?? ''}
+        aaPrefix={props.aaPrefix}
       />
 
       <div className="my-4 border-t-2 border-y-gray-100" />
 
-      <p className="max-w-3xl font-bold text-gray-darker">
-        {content.emailQuestion}
-      </p>
-      <div className="pb-2" />
+      <TextSection
+        sectionName={content.debtStatements?.fragmentHeading ?? ''}
+        divisions={content.debtStatements?.divisions ?? []}
+        icon={content.debtStatements?.icon ?? ''}
+        aaPrefix={props.aaPrefix}
+      />
+
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col">
-          <div className="flex flex-row pb-3 text-gray-darker">
-            <input
-              type="radio"
-              id="yes-email"
-              name="email-radio"
-              value="yes"
-              className="size-[2.5em]"
-              defaultChecked={defaultPaperless}
-              onChange={handleChange}
-            />
-            <label htmlFor="yes-email" className="grow pl-2">
-              <p className="pt-2 font-medium">{content.emailYes}</p>
-              <p className="font-normal">{content.emailYesDesc}</p>
-            </label>
+        <fieldset>
+          <legend className="max-w-3xl text-gray-darker">
+            <strong>{content.emailQuestion}</strong>
+            <span>{content.emailQuestionRequired ? requiredString : ''}</span>
+          </legend>
+
+          <div className="pb-2" />
+
+          <div className="flex flex-col">
+            <div className="flex flex-row pb-3 text-gray-darker">
+              <input
+                type="radio"
+                id="yes-email"
+                name="email-radio"
+                value="yes"
+                className="size-[2.5em] shrink-0"
+                defaultChecked={defaultPaperless}
+                onChange={handleChange}
+              />
+              <label htmlFor="yes-email" className="grow pl-2">
+                <p className="pt-2 font-medium">
+                  <strong>{emailYesBold}</strong>
+                  {emailYesRest ? ' - ' + emailYesRest : ''}
+                </p>
+                <div className="font-normal">
+                  <TextSection
+                    sectionName={content.emailYesDesc?.fragmentHeading ?? ''}
+                    divisions={content.emailYesDesc?.divisions ?? []}
+                    icon={content.emailYesDesc?.icon ?? ''}
+                    aaPrefix={props.aaPrefix}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="flex flex-row pb-3 text-gray-darker">
+              <input
+                type="radio"
+                id="no-email"
+                name="email-radio"
+                value="no"
+                className="size-[2.5em] shrink-0"
+                defaultChecked={!defaultPaperless}
+                onChange={handleChange}
+              />
+              <label htmlFor="no-email" className="grow pl-2">
+                <p className="pt-2 font-medium">
+                  <strong>{emailNoBold}</strong>{' '}
+                  {emailNoRest ? ' - ' + emailNoRest : ''}
+                </p>
+                <div className="font-normal">
+                  <TextSection
+                    sectionName={content.emailNoDesc?.fragmentHeading ?? ''}
+                    divisions={content.emailNoDesc?.divisions ?? []}
+                    icon={content.emailNoDesc?.icon ?? ''}
+                    aaPrefix={props.aaPrefix}
+                  />
+                </div>
+              </label>
+            </div>
           </div>
-          <div className="flex flex-row pb-3 text-gray-darker">
-            <input
-              type="radio"
-              id="no-email"
-              name="email-radio"
-              value="no"
-              className="size-[2.5em]"
-              defaultChecked={!defaultPaperless}
-              onChange={handleChange}
-            />
-            <label htmlFor="no-email" className="grow pl-2">
-              <p className="pt-2 font-medium">{content.emailNo}</p>
-              <p className="font-normal">{content.emailNoDesc}</p>
-            </label>
-          </div>
-        </div>
-        <Button
-          id="save-pref-button"
-          text={content.buttonText}
-          type="submit"
-          style="smallPrimary"
-          className="my-6"
-        />
+          <Button
+            id="save-pref-button"
+            text={content.buttonText ?? ''}
+            type="submit"
+            style="smallPrimary"
+            className="my-6"
+          />
+        </fieldset>
       </form>
     </div>
   )
