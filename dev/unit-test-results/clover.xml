@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1757000341513" clover="3.2.0">
-  <project timestamp="1757000341513" name="All files">
+<coverage generated="1757006429003" clover="3.2.0">
+  <project timestamp="1757006429003" name="All files">
     <metrics statements="1175" coveredstatements="367" conditionals="1043" coveredconditionals="211" methods="237" coveredmethods="68" elements="2455" coveredelements="646" complexity="0" loc="1175" ncloc="1175" packages="7" files="67" classes="67"/>
     <package name="components">
       <metrics statements="319" coveredstatements="196" conditionals="335" coveredconditionals="151" methods="88" coveredmethods="43"/>
@@ -81,7 +81,7 @@
         <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="40" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="48" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="112" count="2" type="stmt"/>
+        <line num="113" count="2" type="stmt"/>
       </file>
       <file name="Date.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Date.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="1" methods="1" coveredmethods="1"/>
