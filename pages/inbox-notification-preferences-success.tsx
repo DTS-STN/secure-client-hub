@@ -97,9 +97,7 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
               alertHeading={alert.alertHeading}
               alertBody=""
               alert_icon_id={` alert-icon ${alert.id}`}
-              alert_icon_alt_text={`${alertType} ${
-                props.locale === 'fr' ? 'Icône' : 'icon'
-              }`}
+              alert_icon_alt_text=""
             />
           </ul>
         )
