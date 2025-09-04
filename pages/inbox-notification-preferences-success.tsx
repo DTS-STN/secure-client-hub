@@ -198,7 +198,7 @@ export async function getServerSideProps({
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/preference-notification-boite-reception-succes'
+      ? '/fr/preferences-notification-boite-reception-succes'
       : '/en/inbox-notification-preferences-success'
   const breadCrumbItems =
     content.err !== undefined
@@ -218,7 +218,8 @@ export async function getServerSideProps({
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Profile - My Service Canada Account',
+      title:
+        'Inbox Notification Preferences Success - My Service Canada Account',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
@@ -227,7 +228,8 @@ export async function getServerSideProps({
       accessRights: '1',
     },
     data_fr: {
-      title: 'Profil - Mon dossier Service Canada',
+      title:
+        'Preferences Notification Boîte Réception Succes - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
