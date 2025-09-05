@@ -1801,7 +1801,7 @@ BRF:91
 BRH:0
 end_of_record
 TN:
-SF:pages/inbox-notifications-now-available.tsx
+SF:pages/inbox-now-available.tsx
 FN:52,InboxNoteNowAvailable
 FN:111,getServerSideProps
 FN:160,(anonymous_6)
