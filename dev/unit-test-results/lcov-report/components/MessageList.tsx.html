@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
@@ -138,7 +138,20 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -152,6 +165,17 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,9 +196,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -225,14 +251,25 @@ interface MessageListProps {
 }
 &nbsp;
 const MessageList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> messageEntities, locale }: MessageListProps) =&gt; {</span>
-  const language = <span class="cstat-no" title="statement not covered" >locale === 'en' ? EN : FR</span>
+  const localizedStrings = <span class="cstat-no" title="statement not covered" >locale === 'en' ? EN : FR</span>
+&nbsp;
+  const messageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
+<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
+    'PSCDMSA',
+    localizedStrings.inbox.messageVerboseTitles.accounts,
+  )
+<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
+    'PSCDNOD',
+    localizedStrings.inbox.messageVerboseTitles.debts,
+  )
+&nbsp;
   return (
     &lt;&gt;
       {messageEntities.length === 0 ? (
 <span class="branch-0 cbranch-no" title="branch not covered" >        &lt;&gt;</span>
           &lt;div className="space-y-4"&gt;
             &lt;NotificationBox
-              value={language.inbox.noMessagesText}
+              value={localizedStrings.inbox.noMessagesText}
               className="flex justify-center bg-[rgba(248,248,249,1)] text-2xl"
             /&gt;
           &lt;/div&gt;
@@ -242,14 +279,16 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
           &lt;table className="w-full border-collapse"&gt;
             &lt;tbody&gt;
               {messageEntities.map(<span class="fstat-no" title="function not covered" >(m</span>essage: MessageEntity) =&gt; {
-                const parts = <span class="cstat-no" title="statement not covered" >message.messageName.split(/\s*-\s*/)</span>
-&nbsp;
-                const frenchLetterName = <span class="cstat-no" title="statement not covered" >parts[0] ? parts[0].trim() : ''</span>
-                const englishLetterName = <span class="cstat-no" title="statement not covered" >parts[1]</span>
-                  ? parts[1].trim()
-                  : message.messageName
-                const letterName =
+                const trimmedMessageName = <span class="cstat-no" title="statement not covered" >message.messageName.trim()</span>
+                let frenchLetterName =
+<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                frenchLetterName = frenchLetterName ?? trimmedMessageName</span>
+                let englishLetterName =
+<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                englishLetterName = englishLetterName ?? trimmedMessageName</span>
+                const letterName: string =
 <span class="cstat-no" title="statement not covered" >                  locale === 'en' ? englishLetterName : frenchLetterName</span>
+&nbsp;
                 const gcAnalyticsCustomClickValue = <span class="cstat-no" title="statement not covered" >`ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`</span>
                 const date = <span class="cstat-no" title="statement not covered" >new Date(message.messageDate)</span>
                 const dateLanguage = <span class="cstat-no" title="statement not covered" >locale + '-CA'</span>
@@ -271,7 +310,7 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
                           gcAnalyticsCustomClickValue
                         }
                       &gt;
-                        {letterName.toString()} (PDF)
+                        {letterName} (PDF)
                       &lt;/Link&gt;
                       &lt;p className="py-1"&gt;{message.messageType}&lt;/p&gt;
                     &lt;/td&gt;
@@ -295,7 +334,7 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-05T18:11:49.820Z
+                at 2025-09-05T19:43:08.856Z
             </div>
         <script src="../prettify.js"></script>
         <script>
