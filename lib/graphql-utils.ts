@@ -34,7 +34,7 @@ export interface GetSchPageFragment {
     scLinkTextAssistiveFr?: string
     scDestinationURLEn: string
     scDestinationURLFr: string
-    scURLType?: string
+    schURLType?: string
   }>
 }
 
@@ -111,7 +111,7 @@ export function getLinksList(
                       ? listItem.scLinkTextEn
                       : listItem.scLinkTextFr,
                   link: buildLink(
-                    listItem.scURLType ?? undefined,
+                    listItem.schURLType,
                     '/' + language === 'en'
                       ? listItem.scDestinationURLEn
                       : listItem.scDestinationURLFr,
