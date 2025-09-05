@@ -11,6 +11,14 @@ interface MessageListProps {
 
 const MessageList = ({ messageEntities, locale }: MessageListProps) => {
   const language = locale === 'en' ? EN : FR
+
+  const messageVerboseTitles = new Map()
+  messageVerboseTitles.set(
+    'PSCDMSA',
+    language.inbox.messageVerboseTitles.accounts,
+  )
+  messageVerboseTitles.set('PSCDNOD', language.inbox.messageVerboseTitles.debts)
+
   return (
     <>
       {messageEntities.length === 0 ? (
@@ -27,14 +35,16 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
           <table className="w-full border-collapse">
             <tbody>
               {messageEntities.map((message: MessageEntity) => {
-                const parts = message.messageName.split(/\s*-\s*/)
-
-                const frenchLetterName = parts[0] ? parts[0].trim() : ''
-                const englishLetterName = parts[1]
-                  ? parts[1].trim()
-                  : message.messageName
-                const letterName =
+                const trimmedMessageName = message.messageName.trim()
+                let frenchLetterName =
+                  messageVerboseTitles.get(trimmedMessageName)
+                frenchLetterName = frenchLetterName ?? trimmedMessageName
+                let englishLetterName =
+                  messageVerboseTitles.get(trimmedMessageName)
+                englishLetterName = englishLetterName ?? trimmedMessageName
+                const letterName: string =
                   locale === 'en' ? englishLetterName : frenchLetterName
+
                 const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
                 const date = new Date(message.messageDate)
                 const dateLanguage = locale + '-CA'
@@ -56,7 +66,7 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
                           gcAnalyticsCustomClickValue
                         }
                       >
-                        {letterName.toString()} (PDF)
+                        {letterName} (PDF)
                       </Link>
                       <p className="py-1">{message.messageType}</p>
                     </td>

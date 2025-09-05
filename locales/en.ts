@@ -42,6 +42,10 @@ export default {
       previousLink: '< Previous',
       nextLink: 'Next >',
     },
+    messageVerboseTitles: {
+      accounts: 'Statement of accounts',
+      debts: 'Notice of debts',
+    },
   },
 
   //User testing with beta banner this is to be deleted after UT
