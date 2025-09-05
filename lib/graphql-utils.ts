@@ -105,21 +105,13 @@ export function getLinksList(
             const destinationUrl =
               language === 'en'
                 ? listItem.scDestinationURLEn
-                : language === 'fr'
-                  ? listItem.scDestinationURLFr
-                  : ''
+                : listItem.scDestinationURLFr
             const linkText =
-              language == 'en'
-                ? listItem.scLinkTextEn
-                : language === 'fr'
-                  ? listItem.scLinkTextFr
-                  : ''
+              language == 'en' ? listItem.scLinkTextEn : listItem.scLinkTextFr
             const linkAssistiveText =
               language == 'en'
                 ? listItem.scLinkTextAssistiveEn
-                : language === 'fr'
-                  ? listItem.scLinkTextAssistiveFr
-                  : ''
+                : listItem.scLinkTextAssistiveFr
             return {
               divisionType: 'list-item',
               divisionPartitions: [
