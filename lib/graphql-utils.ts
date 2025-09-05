@@ -16,6 +16,28 @@ export interface GetSchTextFragmentContent {
   }>
 }
 
+export interface GetSchPageFragment {
+  _path: string
+  scId: string
+  scTitleEn?: string
+  scTitleFr?: string
+  scHeadingEn?: string | null
+  scHeadingFr?: string | null
+  scContentEn?: GetSchTextFragmentContent
+  scContentFr?: GetSchTextFragmentContent
+  scIconCSS?: string | null
+  scItems?: Array<{
+    scId: string
+    scLinkTextEn: string
+    scLinkTextFr: string
+    scLinkTextAssistiveEn?: string
+    scLinkTextAssistiveFr?: string
+    scDestinationURLEn: string
+    scDestinationURLFr: string
+    scURLType?: string
+  }>
+}
+
 export interface Section {
   fragmentHeading?: string | null
   divisions?: Division[]
@@ -25,6 +47,7 @@ export interface Section {
 export interface Division {
   divisionType: string
   divisionPartitions?: Partition[]
+  subDivisions?: Division[]
 }
 
 export interface Partition {
@@ -54,4 +77,50 @@ export async function getTextFragmentContent(
         }
       })
     : undefined
+}
+
+export function getLinksList(
+  fragment: GetSchPageFragment | null,
+  language: string,
+): Division[] {
+  return fragment
+    ? [
+        {
+          divisionType: 'paragraph',
+          divisionPartitions: [
+            {
+              type: 'text',
+              text:
+                language === 'en'
+                  ? (fragment.scTitleEn as string)
+                  : (fragment.scTitleFr as string),
+            },
+          ],
+        },
+        {
+          divisionType: 'list',
+          subDivisions: fragment.scItems?.map((listItem) => {
+            return {
+              divisionType: 'list-item',
+              divisionPartitions: [
+                {
+                  id: listItem.scId,
+                  type: 'link',
+                  text:
+                    language === 'en'
+                      ? listItem.scLinkTextEn
+                      : listItem.scLinkTextFr,
+                  link: buildLink(
+                    listItem.scURLType ?? undefined,
+                    '/' + language === 'en'
+                      ? listItem.scDestinationURLEn
+                      : listItem.scDestinationURLFr,
+                  ),
+                },
+              ],
+            }
+          }),
+        },
+      ]
+    : []
 }
