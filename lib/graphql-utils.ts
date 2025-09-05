@@ -34,7 +34,7 @@ export interface GetSchPageFragment {
     scLinkTextAssistiveFr?: string
     scDestinationURLEn: string
     scDestinationURLFr: string
-    schURLType?: string
+    schURLType?: string | null
   }>
 }
 
@@ -51,10 +51,12 @@ export interface Division {
 }
 
 export interface Partition {
+  id?: string
   type: string
   text: string
   css?: string
   link?: string
+  assistiveText?: string
 }
 
 export async function getTextFragmentContent(
@@ -100,22 +102,36 @@ export function getLinksList(
         {
           divisionType: 'list',
           subDivisions: fragment.scItems?.map((listItem) => {
+            const destinationUrl =
+              language === 'en'
+                ? listItem.scDestinationURLEn
+                : language === 'fr'
+                  ? listItem.scDestinationURLFr
+                  : ''
+            const linkText =
+              language == 'en'
+                ? listItem.scLinkTextEn
+                : language === 'fr'
+                  ? listItem.scLinkTextFr
+                  : ''
+            const linkAssistiveText =
+              language == 'en'
+                ? listItem.scLinkTextAssistiveEn
+                : language === 'fr'
+                  ? listItem.scLinkTextAssistiveFr
+                  : ''
             return {
               divisionType: 'list-item',
               divisionPartitions: [
                 {
                   id: listItem.scId,
                   type: 'link',
-                  text:
-                    language === 'en'
-                      ? listItem.scLinkTextEn
-                      : listItem.scLinkTextFr,
+                  text: linkText,
                   link: buildLink(
-                    listItem.schURLType,
-                    '/' + language === 'en'
-                      ? listItem.scDestinationURLEn
-                      : listItem.scDestinationURLFr,
+                    listItem.schURLType === null ? '' : listItem.schURLType,
+                    '/' + destinationUrl,
                   ),
+                  assistiveText: linkAssistiveText,
                 },
               ],
             }
