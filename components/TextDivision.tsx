@@ -30,10 +30,12 @@ const TextDivision = ({
           return (
             <TextPartition
               key={index}
+              id={partition.id}
               type={partition.type}
               text={partition.text}
               css={partition.css}
               link={partition.link}
+              assistiveText={partition.assistiveText}
               aaPrefix={aaPrefix}
             />
           )
