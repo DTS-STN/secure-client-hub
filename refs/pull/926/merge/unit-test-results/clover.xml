@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1757100605073" clover="3.2.0">
-  <project timestamp="1757100605073" name="All files">
+<coverage generated="1757101269484" clover="3.2.0">
+  <project timestamp="1757101269485" name="All files">
     <metrics statements="1180" coveredstatements="367" conditionals="1044" coveredconditionals="211" methods="238" coveredmethods="68" elements="2462" coveredelements="646" complexity="0" loc="1180" ncloc="1180" packages="7" files="67" classes="67"/>
     <package name="components">
       <metrics statements="325" coveredstatements="196" conditionals="342" coveredconditionals="151" methods="89" coveredmethods="43"/>
@@ -280,18 +280,18 @@
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="51" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
       </file>
       <file name="MetaData.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/MetaData.tsx">
         <metrics statements="6" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="1"/>
