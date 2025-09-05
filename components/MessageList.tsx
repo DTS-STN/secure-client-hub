@@ -10,14 +10,17 @@ interface MessageListProps {
 }
 
 const MessageList = ({ messageEntities, locale }: MessageListProps) => {
-  const language = locale === 'en' ? EN : FR
+  const localizedStrings = locale === 'en' ? EN : FR
 
   const messageVerboseTitles = new Map()
   messageVerboseTitles.set(
     'PSCDMSA',
-    language.inbox.messageVerboseTitles.accounts,
+    localizedStrings.inbox.messageVerboseTitles.accounts,
   )
-  messageVerboseTitles.set('PSCDNOD', language.inbox.messageVerboseTitles.debts)
+  messageVerboseTitles.set(
+    'PSCDNOD',
+    localizedStrings.inbox.messageVerboseTitles.debts,
+  )
 
   return (
     <>
@@ -25,7 +28,7 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
         <>
           <div className="space-y-4">
             <NotificationBox
-              value={language.inbox.noMessagesText}
+              value={localizedStrings.inbox.noMessagesText}
               className="flex justify-center bg-[rgba(248,248,249,1)] text-2xl"
             />
           </div>
