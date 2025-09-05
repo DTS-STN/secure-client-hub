@@ -41,6 +41,10 @@ export default {
       previousLink: '< Précédent',
       nextLink: 'Suivant >',
     },
+    messageVerboseTitles: {
+      accounts: 'Relevé de comptes',
+      debts: 'Avis de dette',
+    },
   },
 
   //User testing with beta banner this is to be deleted after UT

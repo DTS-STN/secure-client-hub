@@ -112,6 +112,10 @@ export function getLinksList(
               language == 'en'
                 ? listItem.scLinkTextAssistiveEn
                 : listItem.scLinkTextAssistiveFr
+            const linkType =
+              listItem.schURLType === null || listItem.schURLType === ''
+                ? undefined
+                : listItem.schURLType
             return {
               divisionType: 'list-item',
               divisionPartitions: [
@@ -119,10 +123,7 @@ export function getLinksList(
                   id: listItem.scId,
                   type: 'link',
                   text: linkText,
-                  link: buildLink(
-                    listItem.schURLType === null ? '' : listItem.schURLType,
-                    '/' + destinationUrl,
-                  ),
+                  link: buildLink(linkType, destinationUrl),
                   assistiveText: linkAssistiveText,
                 },
               ],
