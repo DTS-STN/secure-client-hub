@@ -2,8 +2,9 @@ import { buildAemUri } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 import {
-  GetSchTextFragmentContent,
+  GetSchPageFragment,
   getTextFragmentContent,
+  getLinksList,
   Section,
 } from '../../lib/graphql-utils'
 // import inboxAem from './inbox-aem.json'
@@ -22,15 +23,7 @@ interface GetSchInboxPageV1 {
           scPageNameEn: string
           scPageNameFr: string
         }>
-        scFragments: Array<{
-          _path: string
-          scId: string
-          scHeadingEn?: string | null
-          scHeadingFr?: string | null
-          scContentEn?: GetSchTextFragmentContent
-          scContentFr?: GetSchTextFragmentContent
-          scIconCSS: string | null
-        }>
+        scFragments: Array<GetSchPageFragment>
       }>
     }
   }
@@ -51,13 +44,15 @@ export async function getInboxContent(): Promise<InboxContent> {
     response,
     'content-inbox-notification-preferences-intro',
   )
-  const debtStatementsFragment = findFragmentByScId(
-    response,
-    'content-debt-statements',
-  )
+
   const doNotMissMessageFragment = findFragmentByScId(
     response,
     'content-dont-miss-a-message',
+  )
+
+  const linksFragment = findFragmentByScId(
+    response,
+    'list-inbox-other-benefits-services',
   )
 
   const mappedProfile = {
@@ -78,13 +73,6 @@ export async function getInboxContent(): Promise<InboxContent> {
           (await getTextFragmentContent(introFragment?.scContentEn)) ?? [],
         icon: introFragment?.scIconCSS ?? null,
       },
-      debtStatements: {
-        fragmentHeading: debtStatementsFragment?.scHeadingEn ?? null,
-        divisions:
-          (await getTextFragmentContent(debtStatementsFragment?.scContentEn)) ??
-          [],
-        icon: debtStatementsFragment?.scIconCSS ?? null,
-      },
       doNotMissMessage: {
         fragmentHeading: doNotMissMessageFragment?.scHeadingEn ?? null,
         divisions:
@@ -92,6 +80,9 @@ export async function getInboxContent(): Promise<InboxContent> {
             doNotMissMessageFragment?.scContentEn,
           )) ?? [],
         icon: doNotMissMessageFragment?.scIconCSS ?? null,
+      },
+      linksFragment: {
+        divisions: getLinksList(linksFragment, 'en'),
       },
     },
     fr: {
@@ -111,13 +102,6 @@ export async function getInboxContent(): Promise<InboxContent> {
           (await getTextFragmentContent(introFragment?.scContentFr)) ?? [],
         icon: introFragment?.scIconCSS ?? null,
       },
-      debtStatements: {
-        fragmentHeading: debtStatementsFragment?.scHeadingEn ?? null,
-        divisions:
-          (await getTextFragmentContent(debtStatementsFragment?.scContentFr)) ??
-          [],
-        icon: debtStatementsFragment?.scIconCSS ?? null,
-      },
       doNotMissMessage: {
         fragmentHeading: doNotMissMessageFragment?.scHeadingEn ?? null,
         divisions:
@@ -125,6 +109,9 @@ export async function getInboxContent(): Promise<InboxContent> {
             doNotMissMessageFragment?.scContentFr,
           )) ?? [],
         icon: doNotMissMessageFragment?.scIconCSS ?? null,
+      },
+      linksFragment: {
+        divisions: getLinksList(linksFragment, 'fr'),
       },
     },
   }
@@ -155,8 +142,8 @@ export interface InboxContent {
     }[]
     pageName?: string
     intro?: Section
-    debtStatements?: Section
     doNotMissMessage?: Section
+    linksFragment?: Section
   }
   fr?: {
     breadcrumb?: {
@@ -165,7 +152,7 @@ export interface InboxContent {
     }[]
     pageName?: string
     intro?: Section
-    debtStatements?: Section
     doNotMissMessage?: Section
+    linksFragment?: Section
   }
 }

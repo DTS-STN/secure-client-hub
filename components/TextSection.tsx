@@ -23,6 +23,7 @@ const TextSection = ({
             key={index}
             divisionType={division.divisionType}
             divisionPartitions={division.divisionPartitions}
+            subDivisions={division.subDivisions}
             aaPrefix={aaPrefix}
           />
         )

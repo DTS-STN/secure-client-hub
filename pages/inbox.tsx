@@ -6,7 +6,6 @@ import { getServerSession } from 'next-auth/next'
 import { GetServerSidePropsContext } from 'next'
 import PaginatedMessages from '../components/PaginatedMessages'
 import Heading from './../components/Heading'
-import NotificationBox from './../components/NotificationBox'
 import { cachified } from 'cachified'
 import {
   lruCache as cache,
@@ -35,8 +34,8 @@ interface InboxProps {
     err?: '500' | '404' | '503'
     pageName: string
     intro?: Section
-    debtStatements?: Section
     doNotMissMessage?: Section
+    linksFragment?: Section
   }
   messages: MessageEntity[]
   bannerContent?: {
@@ -60,15 +59,6 @@ interface InboxProps {
 export default function Messages(props: InboxProps) {
   const messages = props.messages
 
-  const debtStatementsJsx = (
-    <TextSection
-      sectionName={props.content.debtStatements?.fragmentHeading ?? ''}
-      divisions={props.content.debtStatements?.divisions ?? []}
-      icon={props.content.debtStatements?.icon ?? ''}
-      aaPrefix={props.aaPrefix}
-    />
-  )
-
   return (
     <>
       <div className="mb-8">
@@ -85,13 +75,17 @@ export default function Messages(props: InboxProps) {
         icon={props.content.intro?.icon ?? ''}
         aaPrefix={props.aaPrefix}
       />
-      <NotificationBox>{debtStatementsJsx}</NotificationBox>
 
       <PaginatedMessages
         messageEntities={messages}
         locale={props.locale as string}
         messagesPerPage={props.paginationMessagesPerPage}
         pageRangeDisplayed={props.paginationPageRangeDisplayed}
+      />
+
+      <TextSection
+        divisions={props.content.linksFragment?.divisions ?? []}
+        aaPrefix={props.aaPrefix}
       />
 
       <div className="py-8">
