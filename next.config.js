@@ -42,8 +42,8 @@ const REWRITES = [
     destination: '/inbox',
   },
   {
-    source: '/notifications-boite-reception-disponibles',
-    destination: '/inbox-notifications-now-available',
+    source: '/boite-reception-disponibles',
+    destination: '/inbox-now-available',
   },
   {
     source: '/preferences-notification-boite-reception-succes',

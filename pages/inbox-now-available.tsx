@@ -173,8 +173,8 @@ export async function getServerSideProps({
   /* istanbul ignore next */
   const langToggleLink =
     locale === 'en'
-      ? '/fr/notifications-boite-reception-disponibles'
-      : '/en/inbox-notifications-now-available'
+      ? '/fr/boite-reception-disponibles'
+      : '/en/inbox-now-available'
   const breadCrumbItems =
     content.err !== undefined
       ? []
