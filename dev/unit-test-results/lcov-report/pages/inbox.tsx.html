@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/51</span>
+                <span class='fraction'>0/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/54</span>
+                <span class='fraction'>0/50</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/51</span>
+                <span class='fraction'>0/50</span>
             </div>
         
             
@@ -332,19 +332,12 @@
 <a name='L267'></a><a href='#L267'>267</a>
 <a name='L268'></a><a href='#L268'>268</a>
 <a name='L269'></a><a href='#L269'>269</a>
-<a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a>
-<a name='L272'></a><a href='#L272'>272</a>
-<a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a>
-<a name='L275'></a><a href='#L275'>275</a>
-<a name='L276'></a><a href='#L276'>276</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L270'></a><a href='#L270'>270</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -399,11 +392,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -621,7 +609,6 @@ import { getServerSession } from <span class="cstat-no" title="statement not cov
 import { GetServerSidePropsContext } from 'next'
 import PaginatedMessages from <span class="cstat-no" title="statement not covered" >'../components/PaginatedMessages'</span>
 import Heading from <span class="cstat-no" title="statement not covered" >'./../components/Heading'</span>
-import NotificationBox from <span class="cstat-no" title="statement not covered" >'./../components/NotificationBox'</span>
 import { cachified } from <span class="cstat-no" title="statement not covered" >'cachified'</span>
 import {
   lruCache as cache,
@@ -650,8 +637,8 @@ interface InboxProps {
     err?: '500' | '404' | '503'
     pageName: string
     intro?: Section
-    debtStatements?: Section
     doNotMissMessage?: Section
+    linksFragment?: Section
   }
   messages: MessageEntity[]
   bannerContent?: {
@@ -675,15 +662,6 @@ interface InboxProps {
 export default function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >Messages(p</span></span>rops: InboxProps) {
   const messages = <span class="cstat-no" title="statement not covered" >props.messages</span>
 &nbsp;
-  const debtStatementsJsx = (
-    &lt;TextSection
-      sectionName={props.content.debtStatements?.fragmentHeading ?? ''}
-      divisions={props.content.debtStatements?.divisions ?? []}
-      icon={props.content.debtStatements?.icon ?? ''}
-      aaPrefix={props.aaPrefix}
-    /&gt;
-  )
-&nbsp;
   return (
     &lt;&gt;
       &lt;div className="mb-8"&gt;
@@ -700,13 +678,17 @@ export default function <span class="cstat-no" title="statement not covered" ><s
         icon={props.content.intro?.icon ?? ''}
         aaPrefix={props.aaPrefix}
       /&gt;
-      &lt;NotificationBox&gt;{debtStatementsJsx}&lt;/NotificationBox&gt;
 &nbsp;
       &lt;PaginatedMessages
         messageEntities={messages}
         locale={props.locale as string}
         messagesPerPage={props.paginationMessagesPerPage}
         pageRangeDisplayed={props.paginationPageRangeDisplayed}
+      /&gt;
+&nbsp;
+      &lt;TextSection
+        divisions={props.content.linksFragment?.divisions ?? []}
+        aaPrefix={props.aaPrefix}
       /&gt;
 &nbsp;
       &lt;div className="py-8"&gt;
@@ -895,7 +877,7 @@ const getCachedContent = <span class="cstat-no" title="statement not covered" ><
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-04T21:26:23.570Z
+                at 2025-09-05T14:28:43.815Z
             </div>
         <script src="../prettify.js"></script>
         <script>
