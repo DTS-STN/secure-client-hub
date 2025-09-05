@@ -4,367 +4,225 @@
       "items": [
         {
           "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/pages/inbox",
-
           "scTitleEn": "Inbox",
-
           "scTitleFr": "Boîte de réception",
-
           "scBreadcrumbParentPages": [
             {
               "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/pages/my-dashboard",
-
               "scId": "my-dashboard",
-
               "scTitleEn": "My dashboard",
-
               "scTitleFr": "Mon tableau de bord",
-
               "scPageNameEn": "my-dashboard",
-
               "scPageNameFr": "mon-tableau-de-bord"
             }
           ],
-
           "schAlerts": [],
-
           "scFragments": [
             {
-              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/inbox-notification-preferences-intro",
-
-              "scId": "content-inbox-notification-preferences-intro",
-
+              "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/inbox-intro",
+              "scId": "content-inbox-intro",
               "scHeadingEn": null,
-
               "scHeadingFr": null,
-
               "scContentEn": {
                 "json": [
                   {
                     "nodeType": "paragraph",
-
                     "content": [
                       {
                         "nodeType": "text",
-
                         "value": "Right now, your inbox will only include "
                       },
-
                       {
                         "nodeType": "text",
-
                         "value": "debt statements",
-
-                        "format": {
-                          "variants": ["strong"]
-                        }
+                        "format": { "variants": ["strong"] }
                       },
-
                       {
                         "nodeType": "text",
-
-                        "value": ". These are letters about money you may owe to Service Canada."
+                        "value": ". These are letters about money you may owe to Service Canada. You may not currently owe any money, but all debt statements from 2019 to the present will be available in your inbox."
                       }
                     ]
                   },
-
                   {
                     "nodeType": "paragraph",
-
                     "content": [
                       {
                         "nodeType": "text",
-
-                        "value": "In the future, the inbox will contain communications from other Service Canada benefits and services."
+                        "value": "In the future, the inbox will include communications from other Service Canada benefits and services. "
                       }
                     ]
                   }
                 ]
               },
-
               "scContentFr": {
                 "json": [
                   {
                     "nodeType": "paragraph",
-
                     "content": [
                       {
                         "nodeType": "text",
-
-                        "value": "La boîte de réception est l'endroit où vous recevrez les messages concernant vos prestations et vos services. Pour le moment, vous y trouverez des messages concernant :"
+                        "value": "Pour l'instant, votre boîte de réception ne contiendra que des "
+                      },
+                      {
+                        "nodeType": "text",
+                        "value": "états de dettes",
+                        "format": { "variants": ["strong"] }
+                      },
+                      {
+                        "nodeType": "text",
+                        "value": ". Il s'agit de lettres concernant l'argent que vous pourriez devoir à Service Canada. Vous n'avez peut-être aucune dette à l'heure actuelle, mais tous les états de dette de 2019 à aujourd'hui seront disponibles dans votre boîte de réception."
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "paragraph",
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Dans l'avenir, la boîte de réception comprendra les communications provenant d'autres programmes et services de Service Canada."
                       }
                     ]
                   }
                 ]
               },
-
               "scIconCSS": null
             },
-
             {
               "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/lists/inbox-other-benefits-services",
-
               "scId": "list-inbox-other-benefits-services",
-
               "scTitleEn": "For information from other benefits and services, see:",
-
-              "scTitleFr": "For information from other benefits and services, see:",
-
+              "scTitleFr": "Pour obtenir des renseignements sur d’autres prestations et services, consultez :",
               "scItems": [
                 {
                   "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/tasks/inbox-ei-view-my-letters",
-
                   "scId": "task-inbox-ei-view-my-letters",
-
                   "scLinkTextEn": "Employment insurance: view my letters",
-
-                  "scLinkTextFr": "Employment insurance: view my letters",
-
+                  "scLinkTextFr": "Assurance-emploi : consulter mes lettres ",
                   "scLinkTextAssistiveEn": "Employment insurance: view my letters",
-
-                  "scLinkTextAssistiveFr": "Employment insurance: view my letters",
-
-                  "scDescriptionEn": {
-                    "json": null
-                  },
-
-                  "scDescriptionFr": {
-                    "json": null
-                  },
-
+                  "scLinkTextAssistiveFr": "Assurance-emploi : consulter mes lettres ",
+                  "scDescriptionEn": { "json": null },
+                  "scDescriptionFr": { "json": null },
                   "scDestinationURLEn": "/sc/msca-mdsc/portal-portail/pro/dol-adl/my-letters?Lang=eng",
-
                   "scDestinationURLFr": "/sc/msca-mdsc/portal-portail/pro/dol-adl/my-letters?Lang=fra",
-
                   "schURLType": "msca-base-url",
-
                   "scIconCSS": null,
-
                   "scButtonType": null
                 },
-
                 {
                   "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/tasks/inbox-ei-view-my-status-updates",
-
                   "scId": "task-inbox-ei-view-my-status-updates",
-
                   "scLinkTextEn": "Employment insurance: status updates",
-
-                  "scLinkTextFr": "Employment insurance: status updates",
-
+                  "scLinkTextFr": "Assurance-emploi : mises à jour de statut",
                   "scLinkTextAssistiveEn": "Employment insurance: status updates",
-
-                  "scLinkTextAssistiveFr": "Employment insurance: status updates",
-
-                  "scDescriptionEn": {
-                    "json": null
-                  },
-
-                  "scDescriptionFr": {
-                    "json": null
-                  },
-
+                  "scLinkTextAssistiveFr": "Assurance-emploi : mises à jour de statut",
+                  "scDescriptionEn": { "json": null },
+                  "scDescriptionFr": { "json": null },
                   "scDestinationURLEn": "/sc/msca-mdsc/portal-portail/pro/home-accueil/ei-correspondence?Lang=eng",
-
                   "scDestinationURLFr": "/sc/msca-mdsc/portal-portail/pro/home-accueil/ei-correspondence?Lang=fra",
-
                   "schURLType": "msca-base-url",
-
                   "scIconCSS": null,
-
                   "scButtonType": null
                 },
-
                 {
                   "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/tasks/inbox-cdcp-view-my-letters",
-
                   "scId": "task-inbox-cdcp-view-my-letters",
-
                   "scLinkTextEn": "Canada Dental Care Plan: view my letters",
-
-                  "scLinkTextFr": "Canada Dental Care Plan: view my letters",
-
+                  "scLinkTextFr": "Régime canadien de soins dentaires : consulter mes lettres ",
                   "scLinkTextAssistiveEn": "Canada Dental Care Plan: view my letters",
-
-                  "scLinkTextAssistiveFr": "Canada Dental Care Plan: view my letters",
-
-                  "scDescriptionEn": {
-                    "json": null
-                  },
-
-                  "scDescriptionFr": {
-                    "json": null
-                  },
-
+                  "scLinkTextAssistiveFr": "Régime canadien de soins dentaires : consulter mes lettres ",
+                  "scDescriptionEn": { "json": null },
+                  "scDescriptionFr": { "json": null },
                   "scDestinationURLEn": "https://cdcp-uat1.dev-dp-internal.dts-stn.com/en/protected/letters",
-
                   "scDestinationURLFr": "https://cdcp-uat1.dev-dp-internal.dts-stn.com/fr/protege/lettres",
-
                   "schURLType": null,
-
                   "scIconCSS": null,
-
                   "scButtonType": null
                 },
-
                 {
                   "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/tasks/inbox-cdb-letters",
-
                   "scId": "task-inbox-cdb-letters",
-
                   "scLinkTextEn": "Canada Disability Benefit: view my letters",
-
-                  "scLinkTextFr": "Canada Disability Benefit: view my letters",
-
+                  "scLinkTextFr": "Prestation canadienne pour les personnes handicapées : consulter mes lettres ",
                   "scLinkTextAssistiveEn": "Canada Disability Benefit: view my letters",
-
-                  "scLinkTextAssistiveFr": "Canada Disability Benefit: view my letters",
-
-                  "scDescriptionEn": {
-                    "json": null
-                  },
-
-                  "scDescriptionFr": {
-                    "json": null
-                  },
-
+                  "scLinkTextAssistiveFr": "Prestation canadienne pour les personnes handicapées : consulter mes lettres ",
+                  "scDescriptionEn": { "json": null },
+                  "scDescriptionFr": { "json": null },
                   "scDestinationURLEn": "https://cdb-int.dev-dp-internal.dts-stn.com/en/letters",
-
                   "scDestinationURLFr": "https://cdb-int.dev-dp-internal.dts-stn.com/fr/lettres",
-
                   "schURLType": null,
-
                   "scIconCSS": null,
-
                   "scButtonType": null
                 },
-
                 {
                   "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/tasks/inbox-oas-manage-my-benefits",
-
                   "scId": "task-inbox-oas-manage-my-benefits",
-
                   "scLinkTextEn": "Old Age Security: client dashboard",
-
-                  "scLinkTextFr": "Old Age Security: client dashboard",
-
+                  "scLinkTextFr": "Sécurité de la vieillesse : tableau de bord client  ",
                   "scLinkTextAssistiveEn": "Old Age Security: client dashboard",
-
-                  "scLinkTextAssistiveFr": "Old Age Security: client dashboard",
-
-                  "scDescriptionEn": {
-                    "json": null
-                  },
-
-                  "scDescriptionFr": {
-                    "json": null
-                  },
-
-                  "scDestinationURLEn": "https://srv136.services.gc.ca/ecas-seca/rascl/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=eng&appCode=CURAM-OAS",
-
-                  "scDestinationURLFr": "https://srv136.services.gc.ca/ecas-seca/rascl/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=fra&appCode=CURAM-OAS",
-
+                  "scLinkTextAssistiveFr": "Sécurité de la vieillesse : tableau de bord client  ",
+                  "scDescriptionEn": { "json": null },
+                  "scDescriptionFr": { "json": null },
+                  "scDestinationURLEn": "https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=eng&appCode=CURAM-OAS",
+                  "scDestinationURLFr": "https://srv113-s.sade.hrdc-drhc.gc.ca/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?link=%2Fecas-seca%2FBenefits%2Faccount&Lang=fra&appCode=CURAM-OAS",
                   "schURLType": null,
-
                   "scIconCSS": null,
-
                   "scButtonType": null
                 }
               ]
             },
-
             {
               "_path": "/content/dam/decd-endc/content-fragments/dev1-sch/content/dont-miss-a-message",
-
               "scId": "content-dont-miss-a-message",
-
               "scHeadingEn": null,
-
               "scHeadingFr": null,
-
               "scContentEn": {
                 "json": [
                   {
                     "nodeType": "paragraph",
-
                     "content": [
                       {
                         "nodeType": "text",
-
                         "value": "Don’t miss a debt statement message.",
-
-                        "format": {
-                          "variants": ["strong"]
-                        }
+                        "format": { "variants": ["strong"] }
                       },
-
-                      {
-                        "nodeType": "text",
-
-                        "value": " Set your "
-                      },
-
+                      { "nodeType": "text", "value": " Set your " },
                       {
                         "nodeType": "link",
-
-                        "data": {
-                          "href": "inbox-notification-preferences"
-                        },
-
+                        "data": { "href": "inbox-notification-preferences" },
                         "value": "inbox notification preferences"
                       },
-
                       {
                         "nodeType": "text",
-
                         "value": " to get emails when new debt statements are available."
                       }
                     ]
                   }
                 ]
               },
-
               "scContentFr": {
                 "json": [
                   {
                     "nodeType": "paragraph",
-
                     "content": [
                       {
                         "nodeType": "text",
-
-                        "value": "Ne ratez aucun message.",
-
-                        "format": {
-                          "variants": ["strong"]
-                        }
+                        "value": "Ne manquez aucun message concernant votre état de dettes.",
+                        "format": { "variants": ["strong"] }
                       },
-
-                      {
-                        "nodeType": "text",
-
-                        "value": " Définissez les "
-                      },
-
+                      { "nodeType": "text", "value": " Configurez vos " },
                       {
                         "nodeType": "link",
-
-                        "data": {
-                          "href": "preferences-notification-boite-reception"
-                        },
-
+                        "data": { "href": "inbox-notification-preferences" },
                         "value": "préférences de notification de votre boîte de réception"
                       },
-
                       {
                         "nodeType": "text",
-
-                        "value": " pour recevoir un courriel lorsqu'un nouveau message est disponible."
+                        "value": " pour recevoir des courriels lorsque de nouveaux états de dettes sont disponibles. "
                       }
                     ]
                   }
                 ]
               },
-
               "scIconCSS": "notification-active"
             }
           ]
