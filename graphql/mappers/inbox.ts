@@ -40,10 +40,7 @@ const findFragmentByScId = (res: GetSchInboxPageV1 | null, id: string) => {
 export async function getInboxContent(): Promise<InboxContent> {
   const response = await getCachedContent()
 
-  const introFragment = findFragmentByScId(
-    response,
-    'content-inbox-notification-preferences-intro',
-  )
+  const introFragment = findFragmentByScId(response, 'content-inbox-intro')
 
   const doNotMissMessageFragment = findFragmentByScId(
     response,
