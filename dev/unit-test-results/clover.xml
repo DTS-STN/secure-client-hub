@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1757095890964" clover="3.2.0">
-  <project timestamp="1757095890964" name="All files">
+<coverage generated="1757095909801" clover="3.2.0">
+  <project timestamp="1757095909801" name="All files">
     <metrics statements="1175" coveredstatements="367" conditionals="1044" coveredconditionals="211" methods="238" coveredmethods="68" elements="2457" coveredelements="646" complexity="0" loc="1175" ncloc="1175" packages="7" files="67" classes="67"/>
     <package name="components">
       <metrics statements="320" coveredstatements="196" conditionals="342" coveredconditionals="151" methods="89" coveredmethods="43"/>
@@ -396,8 +396,8 @@
         <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="57" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
       </file>
       <file name="TextPartition.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/TextPartition.tsx">
         <metrics statements="5" coveredstatements="0" conditionals="11" coveredconditionals="0" methods="1" coveredmethods="0"/>
