@@ -42,9 +42,19 @@ export default function Login(props) {
 
       signIn('ecasProvider', {
         callbackUrl: redirectTarget,
+      }).catch(() => {
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 5000)
       })
     }
-  }, [router.isReady, props.authDisabled, router, props.locale])
+  }, [
+    router.isReady,
+    props.authDisabled,
+    router,
+    props.locale,
+    props.redirectUrl,
+  ])
 
   return (
     <div role="main">
