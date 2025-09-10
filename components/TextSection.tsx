@@ -45,7 +45,13 @@ const TextSection = ({
     )
   return (
     <>
-      {sectionName ? <h2>{sectionName}</h2> : ''}
+      {sectionName ? (
+        <h2 className="pb-4 font-display text-32px font-bold text-gray-darker md:text-36px">
+          {sectionName}
+        </h2>
+      ) : (
+        ''
+      )}
       {divisionsWithOrWithoutIconJsx}
     </>
   )

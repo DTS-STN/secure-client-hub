@@ -16,7 +16,7 @@ export const TopNav = ({
   return (
     <>
       {/* Top navigation accessible only when using a keyboard to navigate the page */}
-      <nav role="navigation" aria-label="topNavigation">
+      <nav role="navigation">
         <ul id="TopNavLinks" className="z-10">
           <li className="absolute left-0 top-2 -z-50 box-border w-full text-center focus-within:z-50">
             <a
