@@ -18,36 +18,35 @@ export default function Login(props) {
   //signIn('ecasProvider')
   useEffect(() => {
     if (!router.isReady) return
-    if (!router.query.error) {
-      //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
-      if (props.authDisabled) {
-        setTimeout(() => {
-          props.locale === 'en'
-            ? router.push('/en/my-dashboard')
-            : router.push('/fr/mon-tableau-de-bord')
-        }, 3000)
-        return
-      }
 
-      let redirectTarget
-
-      if (props.redirectUrl) {
-        redirectTarget = props.redirectUrl
-      } else {
-        redirectTarget =
-          props.locale === 'en'
-            ? `${window.location.origin}/api/welcome?locale=en`
-            : `${window.location.origin}/api/welcome?locale=fr`
-      }
-
-      signIn('ecasProvider', {
-        callbackUrl: redirectTarget,
-      }).catch(() => {
-        setTimeout(() => {
-          window.location.reload(true)
-        }, 5000)
-      })
+    //If auth is disabled, redirect to dashboard without triggering signIn event, for testing purposes only
+    if (props.authDisabled) {
+      setTimeout(() => {
+        props.locale === 'en'
+          ? router.push('/en/my-dashboard')
+          : router.push('/fr/mon-tableau-de-bord')
+      }, 3000)
+      return
     }
+
+    let redirectTarget
+
+    if (props.redirectUrl) {
+      redirectTarget = props.redirectUrl
+    } else {
+      redirectTarget =
+        props.locale === 'en'
+          ? `${window.location.origin}/api/welcome?locale=en`
+          : `${window.location.origin}/api/welcome?locale=fr`
+    }
+
+    signIn('ecasProvider', {
+      callbackUrl: redirectTarget,
+    }).catch(() => {
+      setTimeout(() => {
+        window.location.reload(true)
+      }, 5000)
+    })
   }, [
     router.isReady,
     props.authDisabled,
