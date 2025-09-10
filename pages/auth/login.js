@@ -39,14 +39,23 @@ export default function Login(props) {
           ? `${window.location.origin}/api/welcome?locale=en`
           : `${window.location.origin}/api/welcome?locale=fr`
     }
-
-    signIn('ecasProvider', {
-      callbackUrl: redirectTarget,
-    }).catch(() => {
+    try {
+      const { error } = signIn('ecasProvider', {
+        callbackUrl: redirectTarget,
+        redirect: false,
+      })
+      if (error) {
+        setTimeout(() => {
+          window.location.reload(true)
+        }, 5000)
+      } else {
+        router.push(redirectTarget)
+      }
+    } catch {
       setTimeout(() => {
         window.location.reload(true)
       }, 5000)
-    })
+    }
   }, [
     router.isReady,
     props.authDisabled,
