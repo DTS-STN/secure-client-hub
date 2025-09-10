@@ -40,17 +40,22 @@ export default function Login(props) {
           : `${window.location.origin}/api/welcome?locale=fr`
     }
     try {
-      const { error } = signIn('ecasProvider', {
-        callbackUrl: redirectTarget,
-        redirect: false,
-      })
-      if (error) {
-        setTimeout(() => {
-          window.location.reload(true)
-        }, 5000)
-      } else {
-        router.push(redirectTarget)
+      const attemptLogin = async () => {
+        const { error } = await signIn('ecasProvider', {
+          callbackUrl: redirectTarget,
+          redirect: false,
+        })
+        if (error) {
+          console.log('got error ' + error)
+          setTimeout(() => {
+            window.location.reload(true)
+          }, 5000)
+        } else {
+          console.log('redirecting to ' + redirectTarget)
+          router.push(redirectTarget)
+        }
       }
+      attemptLogin()
     } catch {
       setTimeout(() => {
         window.location.reload(true)
