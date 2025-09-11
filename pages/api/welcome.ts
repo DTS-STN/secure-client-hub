@@ -20,7 +20,7 @@ export default async function welcome(
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   try {
     const resp = await getInboxPref(spid)
-    logger.trace('resp ' + resp)
+    logger.trace('resp ' + resp.toString())
     const noNotificationPref = resp.subscribedEvents.length === 0
     const redirectDestination = noNotificationPref
       ? getResUrl(safeLocale)
@@ -29,7 +29,7 @@ export default async function welcome(
     res.redirect(redirectDestination)
   } catch {
     const redirectDestination = getDashboardUrl(safeLocale)
-    logger.trace('redirecting to ' + redirectDestination)
+    logger.trace('catch redirecting to ' + redirectDestination)
     res.redirect(redirectDestination)
   }
 }
