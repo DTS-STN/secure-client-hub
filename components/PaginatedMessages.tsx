@@ -58,7 +58,6 @@ const PaginatedMessages = ({
             paginationSelectedElement,
           ) +
           currentLabel
-        console.log('aria label', selectedElementNewAriaLabel)
         paginationSelectedLinkElement?.setAttribute(
           'aria-label',
           selectedElementNewAriaLabel,
@@ -93,7 +92,6 @@ const PaginatedMessages = ({
   const handlePageClick = (selectedItem: { selected: number }) => {
     const pageSelected = selectedItem.selected
     const newOffset = pageSelected * messagesPerPage
-    console.log('new offset' + newOffset)
     setItemOffset(newOffset)
   }
 
