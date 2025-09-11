@@ -2,7 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './auth/[...nextauth]'
 import { getInboxPref } from '../../lib/inbox-preferences'
+import { getLogger } from '../../logging/log-util'
 
+const logger = getLogger('welcome')
 // TODO: Improve user experience by making this similar to login screen?
 export default async function welcome(
   req: NextApiRequest,
@@ -18,13 +20,17 @@ export default async function welcome(
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   try {
     const resp = await getInboxPref(spid)
+    logger.trace('resp ' + resp)
     const noNotificationPref = resp.subscribedEvents.length === 0
     const redirectDestination = noNotificationPref
       ? getResUrl(safeLocale)
       : getDashboardUrl(safeLocale)
+    logger.trace('redirecting to ' + redirectDestination)
     res.redirect(redirectDestination)
   } catch {
-    res.redirect(getDashboardUrl(safeLocale))
+    const redirectDestination = getDashboardUrl(safeLocale)
+    logger.trace('redirecting to ' + redirectDestination)
+    res.redirect(redirectDestination)
   }
 }
 
