@@ -120,22 +120,24 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
     >
       <Heading id="inbox-pref-heading" title={content.pageName} />
 
-      <TextSection
-        sectionName={content.introText?.fragmentHeading ?? ''}
-        divisions={content.introText?.divisions ?? []}
-        icon={content.introText?.icon ?? ''}
-        aaPrefix={props.aaPrefix}
-      />
-
+      <div className="pt-4">
+        <TextSection
+          sectionName={content.introText?.fragmentHeading ?? ''}
+          divisions={content.introText?.divisions ?? []}
+          icon={content.introText?.icon ?? ''}
+          aaPrefix={props.aaPrefix}
+        />
+      </div>
       <div className="my-4 border-t-2 border-y-gray-100" />
 
-      <TextSection
-        sectionName={content.debtStatements?.fragmentHeading ?? ''}
-        divisions={content.debtStatements?.divisions ?? []}
-        icon={content.debtStatements?.icon ?? ''}
-        aaPrefix={props.aaPrefix}
-      />
-
+      <div className="pt-4">
+        <TextSection
+          sectionName={content.debtStatements?.fragmentHeading ?? ''}
+          divisions={content.debtStatements?.divisions ?? []}
+          icon={content.debtStatements?.icon ?? ''}
+          aaPrefix={props.aaPrefix}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend className="max-w-3xl text-gray-darker">
