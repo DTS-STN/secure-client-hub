@@ -55,6 +55,7 @@ export default function Login(props) {
           router.push(redirectTarget)
         }
       }
+      console.log('trying with ' + redirectTarget)
       attemptLogin()
     } catch {
       setTimeout(() => {
