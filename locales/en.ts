@@ -41,6 +41,10 @@ export default {
     paginationText: {
       previousLink: '< Previous',
       nextLink: 'Next >',
+      previousAriaLabel: 'Previous page',
+      nextAriaLabel: 'Next page',
+      currentPageAriaLabel: ' is the current page',
+      page: 'Page ',
     },
     messageVerboseTitles: {
       accounts: 'Statement of accounts',

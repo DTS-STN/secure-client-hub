@@ -20,14 +20,22 @@ const PaginatedMessages = ({
   messagesPerPage,
   pageRangeDisplayed,
 }: PaginatedMessagesProps) => {
+  const localizedStrings = locale === 'en' ? EN : FR
+
+  //TODO do pagination from scratch according to one of these? https://design-system.alpha.canada.ca/en/components/pagination/ or https://wet-boew.github.io/wet-boew-styleguide/design/pagination-en.html
   useEffect(() => {
     const paginationListElement = document.querySelector(
       "ul[aria-label='Pagination']",
     )
     if (paginationListElement && paginationListElement.children.length <= 3) {
-      console.log(paginationListElement.children.length + 'ul length')
       paginationListElement.setAttribute('style', 'display: none')
     } else {
+      const previousLabel =
+        localizedStrings.inbox.paginationText.previousAriaLabel
+      const nextLabel = localizedStrings.inbox.paginationText.nextAriaLabel
+      const currentLabel =
+        localizedStrings.inbox.paginationText.currentPageAriaLabel
+      paginationListElement?.removeAttribute('role')
       const paginationListElements = document.querySelectorAll(
         "ul[aria-label='Pagination']>li",
       )
@@ -37,9 +45,23 @@ const PaginatedMessages = ({
       const paginationSelectedElement = document.querySelector(
         "ul[aria-label='Pagination']>li.selected",
       )
+      const paginationSelectedLinkElement = document.querySelector(
+        "ul[aria-label='Pagination']>li.selected>a",
+      )
       if (paginationSelectedElement !== null) {
         paginationSelectedElement.className +=
           ' bg-[rgba(34,51,70,1)] text-white'
+        const selectedElementNewAriaLabel =
+          localizedStrings.inbox.paginationText.page +
+          Array.prototype.indexOf.call(
+            paginationListElements,
+            paginationSelectedElement,
+          ) +
+          currentLabel
+        paginationSelectedLinkElement?.setAttribute(
+          'aria-label',
+          selectedElementNewAriaLabel,
+        )
       }
 
       const previousLinkElement = document.querySelector(
@@ -54,6 +76,9 @@ const PaginatedMessages = ({
         ? (previousLinkElement.className += extraLinkClasses)
         : ''
       nextLinkElement ? (nextLinkElement.className += extraLinkClasses) : ''
+
+      previousLinkElement?.setAttribute('aria-label', previousLabel)
+      nextLinkElement?.setAttribute('aria-label', nextLabel)
     }
   })
 
@@ -67,7 +92,6 @@ const PaginatedMessages = ({
   const handlePageClick = (selectedItem: { selected: number }) => {
     const pageSelected = selectedItem.selected
     const newOffset = pageSelected * messagesPerPage
-    console.log('new offset' + newOffset)
     setItemOffset(newOffset)
   }
 
