@@ -30,8 +30,8 @@ export default async function welcome(
 
 function getResUrl(locale: string) {
   return locale === 'en'
-    ? '/inbox-notifications-now-available'
-    : '/notifications-boite-reception-disponibles'
+    ? '/inbox-now-available'
+    : '/boite-reception-disponibles'
 }
 
 function getDashboardUrl(locale: string) {
