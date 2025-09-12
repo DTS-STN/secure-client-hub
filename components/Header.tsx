@@ -132,7 +132,7 @@ const Header = ({
                 width={819}
                 height={76}
               />
-              <span className="invisible" lang={lang === 'en' ? 'fr' : 'en'}>
+              <span className="sr-only" lang={lang === 'en' ? 'fr' : 'en'}>
                 {
                   /* Alt text for bilingual logo */
                   lang === 'en'
