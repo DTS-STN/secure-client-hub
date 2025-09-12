@@ -41,12 +41,16 @@ export default function Login(props) {
     }
     try {
       const attemptLogin = async () => {
-        const { error } = await signIn('ecasProvider', {
+        const resp = await signIn('ecasProvider', {
           callbackUrl: redirectTarget,
           redirect: false,
         })
-        if (error) {
-          console.log('got error ' + error)
+        if (!resp || resp.error) {
+          if (!resp) {
+            console.log('no resp')
+          } else {
+            console.log('got error ' + resp.error.toString())
+          }
           setTimeout(() => {
             window.location.reload(true)
           }, 5000)
