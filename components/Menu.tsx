@@ -195,7 +195,7 @@ const Menu = ({
         <InboxButton
           id="inbox-button-mobile"
           className="w-fit border-[2px] border-[#2B4380]"
-          refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
+          refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav:"
         />
       </div>
     </div>
