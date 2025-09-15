@@ -48,7 +48,7 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
                 const letterName: string =
                   locale === 'en' ? englishLetterName : frenchLetterName
 
-                const gcAnalyticsCustomClickValue = `ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`
+                const gcAnalyticsCustomClickValue = `ESDC-EDSC:_MSCA-MDSC-SCH:DARS-SMCD Letters Click:${englishLetterName}`
                 const date = new Date(message.messageDate)
                 const dateLanguage = locale + '-CA'
                 const formattedDate = date.toLocaleString(dateLanguage, {
