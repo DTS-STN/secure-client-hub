@@ -88,7 +88,10 @@ const Menu = ({
             </span>
           </div>
           <div className="mr-8 hidden flex-1 justify-end lg:flex">
-            <InboxButton id="index-button-desktop" className="hidden lg:flex" />
+            <InboxButton
+              id="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
+              className="hidden lg:flex"
+            />
           </div>
           <div
             className="flex h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
@@ -188,7 +191,7 @@ const Menu = ({
       </div>
       <div className="sch-container block lg:hidden">
         <InboxButton
-          id="inbox-button-mobile"
+          id="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
           className="w-fit border-[2px] border-[#2B4380]"
         />
       </div>
