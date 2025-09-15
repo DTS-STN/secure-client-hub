@@ -138,7 +138,11 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
           aaPrefix={props.aaPrefix}
         />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        data-gc-analytics-formname="ESDC-EDSC_MSCA-MSDC-SCH:Inbox notification preferences"
+        data-gc-analytics-collect={`[{"value":"input[type=radio]",”emptyField": "n/a"}]`}
+      >
         <fieldset>
           <legend className="max-w-3xl text-gray-darker">
             <strong>{content.emailQuestion}</strong>
