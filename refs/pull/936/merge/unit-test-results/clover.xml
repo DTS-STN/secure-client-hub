@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1757962728676" clover="3.2.0">
-  <project timestamp="1757962728676" name="All files">
+<coverage generated="1757966065810" clover="3.2.0">
+  <project timestamp="1757966065810" name="All files">
     <metrics statements="1188" coveredstatements="367" conditionals="1054" coveredconditionals="217" methods="238" coveredmethods="68" elements="2480" coveredelements="652" complexity="0" loc="1188" ncloc="1188" packages="7" files="67" classes="67"/>
     <package name="components">
       <metrics statements="333" coveredstatements="196" conditionals="352" coveredconditionals="157" methods="89" coveredmethods="43"/>
@@ -669,44 +669,44 @@
         <line num="110" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="111" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="113" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="215" count="0" type="stmt"/>
-        <line num="224" count="0" type="stmt"/>
-        <line num="226" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="227" count="0" type="stmt"/>
-        <line num="229" count="0" type="stmt"/>
-        <line num="232" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="219" count="0" type="stmt"/>
+        <line num="228" count="0" type="stmt"/>
+        <line num="230" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="231" count="0" type="stmt"/>
         <line num="233" count="0" type="stmt"/>
-        <line num="237" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="239" count="0" type="stmt"/>
-        <line num="240" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="241" count="0" type="stmt"/>
-        <line num="242" count="0" type="stmt"/>
-        <line num="243" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="244" count="0" type="stmt"/>
-        <line num="249" count="0" type="stmt"/>
-        <line num="250" count="0" type="stmt"/>
-        <line num="260" count="0" type="stmt"/>
-        <line num="261" count="0" type="stmt"/>
-        <line num="263" count="0" type="stmt"/>
+        <line num="236" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="237" count="0" type="stmt"/>
+        <line num="241" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="243" count="0" type="stmt"/>
+        <line num="244" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="245" count="0" type="stmt"/>
+        <line num="246" count="0" type="stmt"/>
+        <line num="247" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="253" count="0" type="stmt"/>
+        <line num="254" count="0" type="stmt"/>
+        <line num="264" count="0" type="stmt"/>
         <line num="265" count="0" type="stmt"/>
-        <line num="266" count="0" type="stmt"/>
+        <line num="267" count="0" type="stmt"/>
+        <line num="269" count="0" type="stmt"/>
         <line num="270" count="0" type="stmt"/>
-        <line num="272" count="0" type="stmt"/>
-        <line num="273" count="0" type="stmt"/>
-        <line num="283" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="288" count="0" type="stmt"/>
-        <line num="293" count="0" type="stmt"/>
-        <line num="298" count="0" type="stmt"/>
-        <line num="319" count="0" type="stmt"/>
-        <line num="320" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="321" count="0" type="stmt"/>
+        <line num="274" count="0" type="stmt"/>
+        <line num="276" count="0" type="stmt"/>
+        <line num="277" count="0" type="stmt"/>
+        <line num="287" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="292" count="0" type="stmt"/>
+        <line num="297" count="0" type="stmt"/>
+        <line num="302" count="0" type="stmt"/>
         <line num="323" count="0" type="stmt"/>
-        <line num="359" count="0" type="stmt"/>
-        <line num="361" count="0" type="stmt"/>
-        <line num="365" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="366" count="0" type="stmt"/>
-        <line num="368" count="0" type="stmt"/>
-        <line num="369" count="0" type="stmt"/>
+        <line num="324" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="325" count="0" type="stmt"/>
+        <line num="327" count="0" type="stmt"/>
+        <line num="363" count="0" type="stmt"/>
+        <line num="365" count="0" type="stmt"/>
+        <line num="369" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="370" count="0" type="stmt"/>
+        <line num="372" count="0" type="stmt"/>
+        <line num="373" count="0" type="stmt"/>
       </file>
       <file name="inbox-now-available.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox-now-available.tsx">
         <metrics statements="43" coveredstatements="0" conditionals="54" coveredconditionals="0" methods="6" coveredmethods="0"/>
