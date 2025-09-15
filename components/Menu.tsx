@@ -55,17 +55,18 @@ const Menu = ({
     return () => window.removeEventListener('keydown', handleEsc)
   }, [showDropdown])
 
-  const InboxButton: React.FC<{ id: string; className: string }> = ({
-    id,
-    className,
-  }) => (
+  const InboxButton: React.FC<{
+    id: string
+    className: string
+    refPageAA: string
+  }> = ({ id, className, refPageAA }) => (
     <Button
       id={`${id}`}
       style="secondary"
       href={`${inboxLink}`}
       text=""
       className={`my-4 flex flex-row items-center gap-3 rounded bg-white text-blue-primary ${className}`}
-      refPageAA="Nav Button"
+      refPageAA={refPageAA}
     >
       <FontAwesomeIcon
         icon={faEnvelope}
@@ -89,8 +90,9 @@ const Menu = ({
           </div>
           <div className="mr-8 hidden flex-1 justify-end lg:flex">
             <InboxButton
-              id="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
+              id="inbox-button-desktop"
               className="hidden lg:flex"
+              refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
             />
           </div>
           <div
@@ -191,8 +193,9 @@ const Menu = ({
       </div>
       <div className="sch-container block lg:hidden">
         <InboxButton
-          id="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
+          id="inbox-button-mobile"
           className="w-fit border-[2px] border-[#2B4380]"
+          refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav:Inbox"
         />
       </div>
     </div>
