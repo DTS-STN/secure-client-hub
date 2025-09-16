@@ -192,7 +192,7 @@ export async function getServerSideProps({
       accessRights: '1',
     },
     data_fr: {
-      title: 'Boite reception - Mon dossier Service Canada',
+      title: 'Boîte réception - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
