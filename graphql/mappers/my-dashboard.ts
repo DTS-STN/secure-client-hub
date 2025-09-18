@@ -1,7 +1,7 @@
 import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
-// import defaultResponse from './sample-responses/my-dashboard2.json'
+// import defaultResponse from './sample-responses/my-dashboard5.json'
 
 interface GetSchMyDashboardV3 {
   data: {
@@ -53,26 +53,44 @@ interface GetSchMyDashboardV3 {
               scAlertType?: Array<string>
             }>
             schLists: Array<{
-              //each dropdown
+              //useless structure
               scId: string
-              scTitleEn: string //dropdown title
-              scTitleFr: string
+              scTitleEn: null
+              scTitleFr: null
               scItems: Array<{
-                //each section
+                //each dropdown
+                scId: string
                 scTitleEn: string
                 scTitleFr: string
-                scItems: Array<{
-                  //each link in the section
+                schAlerts?: Array<{
                   scId: string
-                  scLinkTextEn: string
-                  scLinkTextFr: string
-                  scLinkTextAssistiveEn: string
-                  scLinkTextAssistiveFr: string
-                  schURLType?: string
-                  scDestinationURLEn: string
-                  scDestinationURLFr: string
-                  scIconCSS: string
-                  schBetaPopUp: boolean
+                  scHeadingEn: string
+                  scHeadingFr: string
+                  scContentEn?: {
+                    markdown: string
+                  }
+                  scContentFr?: {
+                    markdown: string
+                  }
+                  scAlertType?: Array<string>
+                }>
+                schLists: Array<{
+                  //each section
+                  scTitleEn: string
+                  scTitleFr: string
+                  scItems: Array<{
+                    //each link in the section
+                    scId: string
+                    scLinkTextEn: string
+                    scLinkTextFr: string
+                    scLinkTextAssistiveEn: string
+                    scLinkTextAssistiveFr: string
+                    schURLType?: string
+                    scDestinationURLEn: string
+                    scDestinationURLFr: string
+                    scIconCSS: string
+                    schBetaPopUp: boolean
+                  }>
                 }>
               }>
             }>
@@ -128,17 +146,26 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
                 type: alert.scAlertType,
               }
             }),
-            lists: fragment.schLists.map((list) => {
+            // map useless structure
+            items: fragment.schLists[0].scItems.map((item) => {
               // accordions
               return {
-                id: list.scId,
-                title: list.scTitleEn,
-                items: list.scItems.map((item) => {
+                id: item.scId,
+                title: item.scTitleEn,
+                accordionAlerts: item.schAlerts?.map((alert) => {
+                  return {
+                    id: alert.scId,
+                    alertHeading: alert.scHeadingEn,
+                    alertBody: alert.scContentEn?.markdown,
+                    type: alert.scAlertType,
+                  }
+                }),
+                lists: item.schLists.map((list) => {
                   // sections
                   return {
-                    title: item.scTitleEn,
-                    aaTitle: item.scTitleEn,
-                    tasks: item.scItems.map((item) => {
+                    title: list.scTitleEn,
+                    aaTitle: list.scTitleEn,
+                    tasks: list.scItems.map((item) => {
                       // links
                       return {
                         id: item.scId,
@@ -193,15 +220,23 @@ export async function getMyDashboardContent(): Promise<MyDashboardContent> {
                 type: alert.scAlertType,
               }
             }),
-            lists: fragment.schLists.map((list) => {
+            items: fragment.schLists[0].scItems.map((item) => {
               return {
-                id: list.scId,
-                title: list.scTitleFr,
-                items: list.scItems.map((item) => {
+                id: item.scId,
+                title: item.scTitleFr,
+                accordionAlerts: item.schAlerts?.map((alert) => {
                   return {
-                    title: item.scTitleFr,
-                    aaTitle: item.scTitleFr,
-                    tasks: item.scItems.map((item) => {
+                    id: alert.scId,
+                    alertHeading: alert.scHeadingFr,
+                    alertBody: alert.scContentFr?.markdown,
+                    type: alert.scAlertType,
+                  }
+                }),
+                lists: item.schLists.map((list) => {
+                  return {
+                    title: list.scTitleFr,
+                    aaTitle: list.scTitleFr,
+                    tasks: list.scItems.map((item) => {
                       return {
                         id: item.scId,
                         title: item.scLinkTextFr,
@@ -258,10 +293,18 @@ export interface MyDashboardContent {
                 type: string[] | undefined
               }[]
             | undefined
-          lists: {
+          items: {
             id: string
             title: string
-            items: {
+            accordionAlerts:
+              | {
+                  id: string
+                  alertHeading: string
+                  alertBody: string | undefined
+                  type: string[] | undefined
+                }[]
+              | undefined
+            lists: {
               title: string
               aaTitle: string
               tasks: {
@@ -302,10 +345,18 @@ export interface MyDashboardContent {
                     type: string[] | undefined
                   }[]
                 | undefined
-              lists: {
+              items: {
                 id: string
                 title: string
-                items: {
+                accordionAlerts:
+                  | {
+                      id: string
+                      alertHeading: string
+                      alertBody: string | undefined
+                      type: string[] | undefined
+                    }[]
+                  | undefined
+                lists: {
                   title: string
                   aaTitle: string
                   tasks: {

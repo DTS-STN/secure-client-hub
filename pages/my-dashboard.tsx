@@ -43,10 +43,16 @@ interface MyDashboardProps {
         alertBody: string
         type: string
       }[]
-      lists: {
+      items: {
         id: string
         title: string
-        items: {
+        accordionAlert: {
+          id: string
+          alertHeadin: string
+          alertBody: string
+          type: string
+        }[]
+        lists: {
           title: string
           aaTitle: string
           tasks: {
@@ -125,7 +131,7 @@ export default function MyDashboard(props: MyDashboardProps) {
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            accordions={card.lists}
+            accordions={card.items}
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
             cardAlert={card.cardAlerts}
