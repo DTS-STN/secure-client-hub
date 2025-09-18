@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1758124483062" clover="3.2.0">
-  <project timestamp="1758124483062" name="All files">
-    <metrics statements="1188" coveredstatements="367" conditionals="1054" coveredconditionals="217" methods="238" coveredmethods="68" elements="2480" coveredelements="652" complexity="0" loc="1188" ncloc="1188" packages="7" files="67" classes="67"/>
+<coverage generated="1758209081018" clover="3.2.0">
+  <project timestamp="1758209081018" name="All files">
+    <metrics statements="1191" coveredstatements="367" conditionals="1054" coveredconditionals="217" methods="238" coveredmethods="68" elements="2483" coveredelements="652" complexity="0" loc="1191" ncloc="1191" packages="7" files="67" classes="67"/>
     <package name="components">
       <metrics statements="333" coveredstatements="196" conditionals="352" coveredconditionals="157" methods="89" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -1030,9 +1030,9 @@
       </file>
     </package>
     <package name="pages.api">
-      <metrics statements="152" coveredstatements="0" conditionals="52" coveredconditionals="0" methods="26" coveredmethods="0"/>
+      <metrics statements="155" coveredstatements="0" conditionals="52" coveredconditionals="0" methods="26" coveredmethods="0"/>
       <file name="download.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/download.ts">
-        <metrics statements="29" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <metrics statements="32" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1051,17 +1051,20 @@
         <line num="35" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="36" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
       </file>
       <file name="http-client.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/http-client.ts">
         <metrics statements="33" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="9" coveredmethods="0"/>
