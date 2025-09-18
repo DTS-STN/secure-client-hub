@@ -12,7 +12,8 @@ interface AlertProps {
 interface AccordionProps {
   id: string
   title: string
-  items: {
+  accordionAlerts?: AlertProps[]
+  lists: {
     title: string
     aaTitle: string
     tasks: {
@@ -51,7 +52,15 @@ const Card = ({
     {
       id: '',
       title: '',
-      items: [
+      accordionAlerts: [
+        {
+          id: '',
+          type: '',
+          alertHeading: '',
+          alertBody: '',
+        },
+      ],
+      lists: [
         {
           title: '',
           aaTitle: '',
@@ -85,8 +94,8 @@ const Card = ({
       <div>
         {/* loop through each accordion */}
         {accordions.map((accordion) => {
-          const mostReq = accordion.items[0]
-          const tasks = accordion.items.slice(1, accordion.items.length)
+          const mostReq = accordion.lists[0]
+          const tasks = accordion.lists.slice(1, accordion.lists.length)
           return (
             <>
               <Accordion
@@ -98,6 +107,7 @@ const Card = ({
                 acronym={acronym}
                 refPageAA={refPageAA}
                 cardAlert={cardAlert}
+                accordionAlert={accordion.accordionAlerts}
               >
                 {/* code for each section taken from my-dashboard.tsx */}
                 {/* {children} */}
