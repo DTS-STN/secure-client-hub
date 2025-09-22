@@ -11,6 +11,7 @@ import {
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
+import querystring from 'querystring'
 
 export default function Login(props) {
   const router = useRouter()
@@ -29,8 +30,18 @@ export default function Login(props) {
         return
       }
 
-      const redirectTarget = props.redirectUrl
-        ? props.ecasUrl + props.redirectUrl
+      const redirectLang = props.locale === 'en' ? 'eng' : 'fra'
+      const queryLangParam = new URLSearchParams(props.redirectQueryString).get(
+        'Lang',
+      )
+      const langParam = queryLangParam ? '' : '&Lang=' + redirectLang
+      const curamRedirect =
+        props.ecasUrl +
+        '/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?' +
+        props.redirectQueryString +
+        langParam
+      const redirectTarget = props.redirectQueryString
+        ? curamRedirect
         : props.locale === 'en'
           ? `${window.location.origin}/api/welcome?locale=en`
           : `${window.location.origin}/api/welcome?locale=fr`
@@ -68,7 +79,7 @@ export async function getServerSideProps({ req, res, locale, query }) {
   const token = await getIdToken(req)
   const ecasUrl = process.env.AUTH_ECAS_BASE_URL
   // TODO: Compare vs a whitelist
-  const queryRedirect = query.endpoint ? query.endpoint : ''
+  const queryRedirect = query.link ? querystring.stringify(query) : ''
 
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
@@ -88,20 +99,20 @@ export async function getServerSideProps({ req, res, locale, query }) {
   }
 
   // If we get into the flow above and are already logged in, ignore redirect
-  let redirectUrl = ''
+  let redirectQueryString = ''
   const isSecure = req.headers['x-forwarded-proto'] === 'https'
   if (queryRedirect) {
     // If there's a query parameter, it overrides any cookies
     res.setHeader(
       'Set-Cookie',
-      `redirecturl=${queryRedirect}; max-age=900; path=/; samesite=strict ; HttpOnly; ${isSecure ? 'Secure;' : ''}`,
+      `redirectquery=${queryRedirect}; max-age=900; path=/; samesite=strict ; HttpOnly; ${isSecure ? 'Secure;' : ''}`,
     )
-    redirectUrl = queryRedirect
+    redirectQueryString = queryRedirect
   } else {
-    const redirectCookie = req.cookies.redirecturl
+    const redirectCookie = req.cookies.redirectquery
     if (redirectCookie) {
       // If there's no query parameter, set to the redirect cookie value
-      redirectUrl = redirectCookie
+      redirectQueryString = redirectCookie
     }
     // If there's no query paramater AND no cookie, return empty to trigger normal flow
   }
@@ -133,7 +144,7 @@ export async function getServerSideProps({ req, res, locale, query }) {
       locale,
       meta,
       authDisabled: authDisabled ?? true,
-      redirectUrl: redirectUrl,
+      redirectQueryString: redirectQueryString,
       ecasUrl: ecasUrl,
     },
   }
