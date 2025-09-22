@@ -22,6 +22,7 @@ import { getServerSession } from 'next-auth/next'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
+import querystring from 'querystring'
 
 interface MyDashboardProps {
   locale: string
@@ -154,13 +155,10 @@ export async function getServerSideProps({
   query: GetServerSidePropsContext['query']
 }) {
   const session = await getServerSession(req, res, authOptions)
-  const { endpoint } = query
+  const { link } = query
 
   // special handling for redirects from ecas
-  const params = new URLSearchParams()
-  if (endpoint) {
-    params.append('endpoint', endpoint.toString())
-  }
+  const params = link ? querystring.stringify(query) : ''
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
     return {
