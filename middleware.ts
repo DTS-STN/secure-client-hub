@@ -19,22 +19,28 @@ export async function middleware(req: NextRequest) {
     return
   }
 
-  const endpoint = searchParams.get('endpoint')
+  const link = searchParams.get('link')
   //Redirect from splash page if Lang parameter is supplied when redirecting from MSCA
-  switch (searchParams.get('Lang')) {
-    case 'fra': {
-      const frenchRedirectUrl = new URL(`/fr/mon-tableau-de-bord`, url)
-      if (endpoint) {
-        frenchRedirectUrl.searchParams.append('endpoint', endpoint)
+  if (pathname === '/') {
+    switch (searchParams.get('Lang')) {
+      case 'fra': {
+        const frenchRedirectUrl = new URL(`/fr/mon-tableau-de-bord`, url)
+        if (link) {
+          for (const [key, val] of searchParams) {
+            frenchRedirectUrl.searchParams.append(key, val)
+          }
+        }
+        return NextResponse.redirect(frenchRedirectUrl)
       }
-      return NextResponse.redirect(frenchRedirectUrl)
-    }
-    case 'eng': {
-      const englishRedirectUrl = new URL(`/en/my-dashboard`, url)
-      if (endpoint) {
-        englishRedirectUrl.searchParams.append('endpoint', endpoint)
+      case 'eng': {
+        const englishRedirectUrl = new URL(`/en/my-dashboard`, url)
+        if (link) {
+          for (const [key, val] of searchParams) {
+            englishRedirectUrl.searchParams.append(key, val)
+          }
+        }
+        return NextResponse.redirect(englishRedirectUrl)
       }
-      return NextResponse.redirect(englishRedirectUrl)
     }
   }
 
