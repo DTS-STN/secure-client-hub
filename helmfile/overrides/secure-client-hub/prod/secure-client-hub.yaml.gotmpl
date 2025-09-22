@@ -40,6 +40,10 @@ extraEnv:
   - name: AUTH_DISABLED
     value: {{ env "AUTH_DISABLED" | quote }}
   {{- end }}
+  {{- if env "ENABLE_MOCK_LETTER_SERVICE" }}
+  - name: ENABLE_MOCK_LETTER_SERVICE
+    value: {{ env "ENABLE_MOCK_LETTER_SERVICE" | quote }}
+  {{- end }}
   - name: NEXTAUTH_URL
     value: {{ env "NEXTAUTH_URL" }}
   - name: CLIENT_ID
@@ -62,6 +66,28 @@ extraEnv:
     value: {{ env "MSCA_NG_INBOX_GET_ENDPOINT" }}
   - name: MSCA_NG_INBOX_SET_ENDPOINT
     value: {{ env "MSCA_NG_INBOX_SET_ENDPOINT" }}
+  - name: CCT_API_LETTERS_ENDPOINT
+    value: {{ env "CCT_API_LETTERS_ENDPOINT" }}
+  - name: CCT_API_BASE_URI
+    value: {{ env "CCT_API_BASE_URI" }}
+  - name: CCT_API_LETTERS_URI
+    value: {{ env "CCT_API_LETTERS_URI" }}
+  - name: CCT_API_PDF_ENDPOINT
+    value: {{ env "CCT_API_PDF_ENDPOINT" }}
+  - name: CCT_API_COMMUNITY
+    value: {{ env "CCT_API_COMMUNITY" }}
+  - name: CCT_API_KEY
+    value: {{ env "CCT_API_KEY" }}
+  - name: INTEROP_API_SUBSCRIPTION_KEY
+    value: {{ env "INTEROP_API_SUBSCRIPTION_KEY" }}
+  - name: CCT_API_MAX_RETRIES
+    value: {{ env "CCT_API_MAX_RETRIES" | quote }}
+  - name: CCT_API_RETRY_DELAY
+    value: {{ env "CCT_API_RETRY_DELAY" | quote }}
+  - name: PAGINATION_MESSAGES_PER_PAGE
+    value: {{ env "PAGINATION_MESSAGES_PER_PAGE" | quote }}
+  - name: PAGINATION_PAGE_RANGE_DISPLAYED
+    value: {{ env "PAGINATION_PAGE_RANGE_DISPLAYED" | quote }}
   - name: AUTH_PRIVATE
     valueFrom:
       secretKeyRef:
@@ -187,6 +213,8 @@ secrets:
       HOSTALIAS_HOSTNAME: {{ env "HOSTALIAS_HOSTNAME" }}
       HOSTALIAS_CERT: {{ env "HOSTALIAS_CERT" }}
       MSCA_NG_CREDS: {{ env "MSCA_NG_CREDS" }}
+      CCT_API_KEY: {{ env "CCT_API_KEY" }}
+      INTEROP_API_SUBSCRIPTION_KEY: {{ env "INTEROP_API_SUBSCRIPTION_KEY" }}
 autoscaling:
   enabled: true
   name: service-canada-client-hub
