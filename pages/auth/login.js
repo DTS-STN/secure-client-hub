@@ -31,8 +31,8 @@ export default function Login(props) {
       signIn('ecasProvider', {
         callbackUrl:
           props.locale === 'en'
-            ? `${window.location.origin}/en/my-dashboard`
-            : `${window.location.origin}/fr/mon-tableau-de-bord`,
+            ? `${window.location.origin}/api/welcome?locale=en`
+            : `${window.location.origin}/api/welcome?locale=fr`,
       })
     }
   }, [router.isReady, props.authDisabled, router, props.locale])

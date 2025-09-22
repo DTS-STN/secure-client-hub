@@ -34,6 +34,24 @@ export default {
     messageLinkHref: 'https://alpha.service.canada.ca/en/projects/dashboard',
     messageLinkText: ' Service Canada Labs page',
   },
+
+  //Inbox
+  inbox: {
+    noMessagesText: "You don't have any messages.",
+    paginationText: {
+      previousLink: '< Previous',
+      nextLink: 'Next >',
+      previousAriaLabel: 'Previous page',
+      nextAriaLabel: 'Next page',
+      currentPageAriaLabel: ' is the current page',
+      page: 'Page ',
+    },
+    messageVerboseTitles: {
+      accounts: 'Statement of accounts',
+      debts: 'Notice of debts',
+    },
+  },
+
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Beta version:',

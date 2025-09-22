@@ -145,6 +145,7 @@ export const authOptions: NextAuthOptions = {
           .catch((error) => logger.error(error))
         return {
           id: profile.sub,
+          name: profile.sin + '|' + profile.uid + '|' + profile.sub,
           ...profile,
         }
       },
@@ -160,7 +161,11 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      return { ...token, ...user, ...account }
+      return {
+        ...token,
+        ...user,
+        ...account,
+      }
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
@@ -171,6 +176,7 @@ export const authOptions: NextAuthOptions = {
       return baseUrl
     },
     async session({ session }) {
+      // session.user = {}
       return { ...session }
     },
   },

@@ -37,11 +37,11 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-proto'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 import { CompressionAlgorithm } from '@opentelemetry/otlp-exporter-base'
 import {
-  Resource,
   envDetector,
   hostDetector,
   osDetector,
   processDetector,
+  resourceFromAttributes,
 } from '@opentelemetry/resources'
 import {
   AggregationTemporality,
@@ -50,7 +50,11 @@ import {
 } from '@opentelemetry/sdk-metrics'
 import { NodeSDK } from '@opentelemetry/sdk-node'
 import { SpanExporter } from '@opentelemetry/sdk-trace-base'
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
+import {
+  ATTR_SERVICE_NAME,
+  ATTR_SERVICE_VERSION,
+  SEMRESATTRS_DEPLOYMENT_ENVIRONMENT,
+} from '@opentelemetry/semantic-conventions'
 
 import { getLogger } from './logging/log-util'
 
@@ -62,14 +66,14 @@ const getMetricExporter = (): PushMetricExporter => {
   if (exportMetrics) {
     if (!process.env.OTEL_API_KEY) {
       throw new Error(
-        'OTEL_API_KEY must be configured when OTEL_METRICS_ENDPOINT is set'
+        'OTEL_API_KEY must be configured when OTEL_METRICS_ENDPOINT is set',
       )
     }
 
     logger.info(
       `Exporting metrics to ${
         process.env.OTEL_METRICS_ENDPOINT
-      } every ${getMetricExportInterval()} ms`
+      } every ${getMetricExportInterval()} ms`,
     )
 
     return new OTLPMetricExporter({
@@ -81,7 +85,7 @@ const getMetricExporter = (): PushMetricExporter => {
   }
 
   logger.info(
-    'Metrics exporting is disabled; set OTEL_METRICS_ENDPOINT to enable.'
+    'Metrics exporting is disabled; set OTEL_METRICS_ENDPOINT to enable.',
   )
 
   return {
@@ -107,12 +111,12 @@ const getTraceExporter = (): SpanExporter => {
   if (exportTraces) {
     if (!process.env.OTEL_API_KEY) {
       throw new Error(
-        'OTEL_API_KEY must be configured when OTEL_TRACES_ENDPOINT is set'
+        'OTEL_API_KEY must be configured when OTEL_TRACES_ENDPOINT is set',
       )
     }
 
     logger.info(
-      `Exporting traces to ${process.env.OTEL_TRACES_ENDPOINT} every 30000 ms`
+      `Exporting traces to ${process.env.OTEL_TRACES_ENDPOINT} every 30000 ms`,
     )
 
     return new OTLPTraceExporter({
@@ -123,7 +127,7 @@ const getTraceExporter = (): SpanExporter => {
   }
 
   logger.info(
-    'Traces exporting is disabled; set OTEL_TRACES_ENDPOINT to enable.'
+    'Traces exporting is disabled; set OTEL_TRACES_ENDPOINT to enable.',
   )
 
   return {
@@ -142,17 +146,16 @@ const sdk = new NodeSDK({
     exportIntervalMillis: getMetricExportInterval(),
     exportTimeoutMillis: getMetricTimeout(),
   }),
-  resource: new Resource({
+  resource: resourceFromAttributes({
     // Note: any attributes added here must be configured in Dynatrace under
     // Settings → Metrics → OpenTelemetry metrics → Allow list: resource and scope attributes
     //
     // see: node_modules/@opentelemetry/semantic-conventions/build/src/resource/SemanticResourceAttributes.js
     // see: node_modules/@opentelemetry/semantic-conventions/build/src/trace/SemanticResourceAttributes.js
-    [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]:
+    [SEMRESATTRS_DEPLOYMENT_ENVIRONMENT]:
       process.env.OTEL_ENVIRONMENT ?? 'local',
-    [SemanticResourceAttributes.SERVICE_NAME]:
-      process.env.OTEL_SERVICE_NAME ?? 'scch',
-    [SemanticResourceAttributes.SERVICE_VERSION]:
+    [ATTR_SERVICE_NAME]: process.env.OTEL_SERVICE_NAME ?? 'scch',
+    [ATTR_SERVICE_VERSION]:
       process.env.BUILD_VERSION ?? '00000000-0000-00000000',
   }),
   resourceDetectors: [envDetector, hostDetector, osDetector, processDetector],

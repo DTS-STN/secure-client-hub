@@ -27,14 +27,35 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL(`/en/my-dashboard`, url))
   }
 
-  //Redirect rule that makes English appear as the default language instead of und
-  if (locale === 'und' && !pathname.endsWith('/')) {
-    return NextResponse.redirect(new URL(`/en${pathname}`, url))
-  }
-
   //Redirect for index page as it's meant to be bilingual so we don't want users navigating to /en or /fr
   if ((locale === 'en' || locale === 'fr') && pathname === '/') {
     return NextResponse.redirect(new URL(`/`, url))
+  }
+
+  // I do not understand why we refuse to redirect correctly
+  if (locale !== 'fr' && pathname.endsWith('/mon-tableau-de-bord')) {
+    return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
+  }
+  if (locale !== 'fr' && pathname.endsWith('/boite-reception-disponibles')) {
+    return NextResponse.redirect(
+      new URL(`/fr/boite-reception-disponibles`, nextUrl.origin),
+    )
+  }
+  if (
+    locale !== 'fr' &&
+    pathname.endsWith('/preferences-notification-boite-reception-succes')
+  ) {
+    return NextResponse.redirect(
+      new URL(
+        `/fr/preferences-notification-boite-reception-succes`,
+        nextUrl.origin,
+      ),
+    )
+  }
+
+  //Redirect rule that makes English appear as the default language instead of und
+  if (locale === 'und' && !pathname.endsWith('/')) {
+    return NextResponse.redirect(new URL(`/en${pathname}`, url))
   }
 
   //Redirect for index page as we don't want users navigating to this page on prod
