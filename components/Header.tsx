@@ -14,6 +14,7 @@ interface SearchProps {
 interface MenuProps {
   onSignOut?: () => void
   menuList: MenuList[]
+  inboxLink: string
 }
 
 interface MenuList {
@@ -90,6 +91,7 @@ const Header = ({
         path: '/',
       },
     ],
+    inboxLink: '/',
   },
   breadCrumbItems,
   refPageAA = 'mscaPlaceholder',
@@ -130,6 +132,14 @@ const Header = ({
                 width={819}
                 height={76}
               />
+              <span className="sr-only" lang={lang === 'en' ? 'fr' : 'en'}>
+                {
+                  /* Alt text for bilingual logo */
+                  lang === 'en'
+                    ? 'Governement du Canada'
+                    : 'Government of Canada'
+                }
+              </span>
             </div>
             <div className="ml-auto pb-2.5 sm:hidden">
               <Language
@@ -157,10 +167,15 @@ const Header = ({
         <Menu
           lang={lang}
           menuList={menuProps.menuList}
+          inboxLink={menuProps.inboxLink}
           dataGcAnalyticsCustomClick={dataGcAnalyticsCustomClickMenuVariable}
         />
         <div className="sch-container">
-          <Breadcrumb items={breadCrumbItems} refPageAA={refPageAA} />
+          <Breadcrumb
+            items={breadCrumbItems}
+            refPageAA={refPageAA}
+            lang={lang}
+          />
         </div>
       </header>
     </div>

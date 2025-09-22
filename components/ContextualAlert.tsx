@@ -51,6 +51,7 @@ const ContextualAlert = ({
     <li
       id={id}
       className={`relative min-w-72 pl-4 sm:pl-6 ${white_BG} ${className}`}
+      role="alert"
     >
       <div
         data-testid="alert-icon"

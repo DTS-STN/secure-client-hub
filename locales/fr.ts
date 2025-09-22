@@ -33,6 +33,24 @@ export default {
       'https://alpha.service.canada.ca/fr/projets/tableau-de-bord',
     messageLinkText: ' Laboratoires de Service Canada',
   },
+
+  //Inbox
+  inbox: {
+    noMessagesText: "Vous n'avez pas de messages.",
+    paginationText: {
+      previousLink: '< Précédent',
+      nextLink: 'Suivant >',
+      previousAriaLabel: 'Page précédente',
+      nextAriaLabel: 'Page suivante',
+      currentPageAriaLabel: ' est la page actuelle',
+      page: 'Page ',
+    },
+    messageVerboseTitles: {
+      accounts: 'Relevé de comptes',
+      debts: 'Avis de dette',
+    },
+  },
+
   //User testing with beta banner this is to be deleted after UT
   betaBanner: {
     bannerBoldText: 'Version bêta :',

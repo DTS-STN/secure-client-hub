@@ -3,7 +3,14 @@ import Image from 'next/image'
 
 interface ButtonProps {
   id: string
-  style?: 'supertask' | 'primary' | 'secondary' | 'danger' | 'link' | 'none'
+  style?:
+    | 'supertask'
+    | 'primary'
+    | 'secondary'
+    | 'danger'
+    | 'link'
+    | 'none'
+    | 'smallPrimary'
   text: string
   icon?: string
   iconAltText?: string
@@ -16,6 +23,20 @@ interface ButtonProps {
   attributes?: { [key: string]: string }
   children?: ReactNode | ReactNode[] | string
   refPageAA?: string
+}
+
+const buttonStyles: Record<string, string> = {
+  primary:
+    'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed rounded focus:ring focus:ring-offset-4 focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus',
+  secondary:
+    'text-blue-60b text-xl bg-gray-30a hover:bg-gray-50a active:bg-gray-60  focus:bg-gray-60  focus:ring-deep-blue-60f focus:ring-bg-gray-50a',
+  supertask:
+    'text-white bg-green-50 hover:bg-green-70 active:bg-green-90 focus:ring-deep-blue-60f focus:green-70',
+  danger:
+    'text-white bg-red-50 hover:bg-red-70 focus:bg-red-70 active:bg-red-dark focus:ring-deep-blue-60f focus:red-dark',
+  link: 'text-blue-default hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a',
+  smallPrimary:
+    'text-white bg-blue-primary hover:bg-deep-blue-focus active:bg-blue-pressed rounded focus:ring focus:ring-offset-4 focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus',
 }
 
 const Button = ({
@@ -34,29 +55,7 @@ const Button = ({
   children,
   refPageAA = 'mscaPlaceholder',
 }: ButtonProps) => {
-  const primary =
-    'text-white bg-blue-primary text-xl hover:bg-deep-blue-focus active:bg-blue-pressed rounded focus:ring focus:ring-offset-4 focus:ring-deep-blue-60f focus:ring-bg-deep-blue-focus'
-  const secondary =
-    'text-blue-60b text-xl bg-gray-30a hover:bg-gray-50a active:bg-gray-60  focus:bg-gray-60  focus:ring-deep-blue-60f focus:ring-bg-gray-50a'
-  const supertask =
-    'text-white bg-green-50 hover:bg-green-70 active:bg-green-90 focus:ring-deep-blue-60f focus:green-70'
-  const danger =
-    'text-white bg-red-50 hover:bg-red-70 focus:bg-red-70 active:bg-red-dark focus:ring-deep-blue-60f focus:red-dark'
-  const link =
-    'text-blue-default hover:text-blue-hover hover:underline active:text-blue-hover active:underline focus:ring focus:ring-deep-blue-60f visited:text-purple-50a'
-
-  const buttonStyle =
-    style === 'primary'
-      ? primary
-      : style === 'secondary'
-        ? secondary
-        : style === 'supertask'
-          ? supertask
-          : style === 'danger'
-            ? danger
-            : style === 'link'
-              ? link
-              : ''
+  const buttonStyle = style in buttonStyles ? buttonStyles[style] : ''
 
   return href === 'no ref' ? (
     <button
