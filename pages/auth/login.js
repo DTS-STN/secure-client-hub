@@ -31,15 +31,14 @@ export default function Login(props) {
       }
 
       const redirectLang = props.locale === 'en' ? 'eng' : 'fra'
-      const queryLangParam = new URLSearchParams(props.redirectQueryString).get(
-        'Lang',
-      )
-      const langParam = queryLangParam ? '' : '&Lang=' + redirectLang
+      const params = new URLSearchParams(props.redirectQueryString)
+      if (!params.has('Lang')) {
+        params.append('Lang', redirectLang)
+      }
       const curamRedirect =
         props.ecasUrl +
         '/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?' +
-        props.redirectQueryString +
-        langParam
+        params.toString()
       const redirectTarget = props.redirectQueryString
         ? curamRedirect
         : props.locale === 'en'
