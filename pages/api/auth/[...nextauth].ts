@@ -9,7 +9,6 @@ import fs from 'fs'
 
 //The below sets the minimum logging level to error and surpresses everything below that
 const logger = getLogger('next-auth')
-logger.level = 'warn'
 
 /*Adds the signing algorithm to the end of the private key. Necessary to decrypt the userinfo_token.
  * Simply adding this to the end of the environment variable breaks the idToken decryption so this is a workaround.
