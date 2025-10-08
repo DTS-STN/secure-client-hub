@@ -84,7 +84,7 @@ COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/ecas
 RUN apk update && \
 apk add ca-certificates && \
 rm -rf /var/cache/apk/* && \
-update-ca-certificates
+update-ca-certificates -v
 
 USER ${user}
 
