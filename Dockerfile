@@ -81,10 +81,10 @@ COPY --from=build /etc/ssl/certs/root.crt /etc/ssl/certs/root.crt
 COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/env.crt ${MSCA_NG_CERT_LOCATION}
 COPY --from=build --chown=${user}:${group} /usr/local/share/ca-certificates/ecas_env.crt ${ECAS_CERT_LOCATION}
 
-RUN apk update && \
-apk add ca-certificates && \
-rm -rf /var/cache/apk/* && \
-update-ca-certificates -v
+RUN apk update && echo "step0" &&\
+apk add ca-certificates && echo "step1" && \
+rm -rf /var/cache/apk/* && echo "step2" && \
+update-ca-certificates -v && echo "step3"
 
 USER ${user}
 
