@@ -1,7 +1,19 @@
 import axios from 'axios'
 import { getLogger } from '../logging/log-util'
+import https from 'https'
+import fs from 'fs'
 
 const logger = getLogger('lib.inbox-pref')
+
+//Create httpsAgent to read in cert to make BRZ call
+const httpsAgent =
+  process.env.AUTH_DISABLED === 'true'
+    ? new https.Agent()
+    : new https.Agent({
+        ca: fs.readFileSync(
+          '/usr/local/share/ca-certificates/env.crt' as fs.PathOrFileDescriptor,
+        ),
+      })
 
 export async function getInboxPref(spid: string) {
   try {
@@ -17,6 +29,7 @@ export async function getInboxPref(spid: string) {
           'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
           'Content-Type': 'application/json',
         },
+        httpsAgent: httpsAgent,
       },
     )
     const respData = resp.data[0]
@@ -47,6 +60,7 @@ export async function setInboxPref(spid: string, pref: string) {
             'authorization': `Basic ${process.env.MSCA_NG_CREDS}`,
             'Content-Type': 'application/json',
           },
+          httpsAgent: httpsAgent,
         },
       )
       .then(() => {
