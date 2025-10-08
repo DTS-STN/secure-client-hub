@@ -98,6 +98,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    console.log('submitting')
     const pref = formData.value === 'no' ? 'no' : 'yes'
     const redirectDestination =
       '/api/submit-inbox-pref?locale=' +
