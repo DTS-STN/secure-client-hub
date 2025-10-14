@@ -77,7 +77,9 @@ export default function Profile(props: ProfilePageProps) {
   return (
     <div id="homeContent" data-testid="profileContent-test">
       <Heading id="profile-heading" title={props.content.pageName} />
-      <p className="mt-8 text-xl text-gray-darker">{props.content.introText}</p>
+      <p className="mt-8 max-w-3xl text-xl text-gray-darker">
+        {props.content.introText}
+      </p>
       <ProfileList
         sectionName={props.content.profileAccountInfo?.sectionName ?? ''}
         profileCards={props.content.profileAccountInfo?.elements ?? []}
