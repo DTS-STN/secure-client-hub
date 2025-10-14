@@ -71,7 +71,7 @@ const Menu = ({
       <FontAwesomeIcon
         icon={faEnvelope}
         transform="grow-8 up-2"
-        className="m-2 pt-2"
+        className="m-2"
       />
       <span>{lang === 'fr' ? 'Boîte de réception' : 'Inbox'}</span>
     </Button>
@@ -91,7 +91,7 @@ const Menu = ({
           <div className="mr-8 hidden flex-1 justify-end lg:flex">
             <InboxButton
               id="inbox-button-desktop"
-              className="hidden font-body lg:flex"
+              className="hidden lg:flex"
               refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav"
             />
           </div>
