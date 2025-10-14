@@ -45,12 +45,19 @@ const PaginatedMessages = ({
           pageCount={pageCount}
           renderOnZeroPageCount={null}
           containerClassName="flex space-x-1"
+          ariaLabelBuilder={(page, selected) =>
+            selected
+              ? `${language.inbox.paginationText.page}${page}${language.inbox.paginationText.currentPageAriaLabel}`
+              : `${language.inbox.paginationText.page}${page}`
+          }
           pageLinkClassName="px-3 rounded-md py-1 cursor-pointer transition-all duration-200
                     underline underline-offset-4 decoration-gray-dark
                     hover:bg-brighter-blue-light hover:text-blue-hover
                     focus:outline-none focus:no-underline focus:bg-blue-hover focus:text-white focus:border 
                     focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-hover"
+          previousAriaLabel={language.inbox.paginationText.previousAriaLabel}
           previousLinkClassName="px-3 underline underline-offset-4 decoration-gray-dark"
+          nextAriaLabel={language.inbox.paginationText.nextAriaLabel}
           nextLinkClassName="px-3 underline underline-offset-4 decoration-gray-dark"
           activeLinkClassName="bg-deep-blue-dark no-underline no-hover text-white"
           disabledLinkClassName="text-gray-dark cursor-not-allowed"
