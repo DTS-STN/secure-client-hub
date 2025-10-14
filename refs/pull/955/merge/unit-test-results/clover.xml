@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1760453668309" clover="3.2.0">
-  <project timestamp="1760453668309" name="All files">
-    <metrics statements="1167" coveredstatements="367" conditionals="1045" coveredconditionals="217" methods="236" coveredmethods="68" elements="2448" coveredelements="652" complexity="0" loc="1167" ncloc="1167" packages="7" files="67" classes="67"/>
+<coverage generated="1760464160901" clover="3.2.0">
+  <project timestamp="1760464160901" name="All files">
+    <metrics statements="1168" coveredstatements="367" conditionals="1047" coveredconditionals="217" methods="237" coveredmethods="68" elements="2452" coveredelements="652" complexity="0" loc="1168" ncloc="1168" packages="7" files="67" classes="67"/>
     <package name="components">
-      <metrics statements="308" coveredstatements="196" conditionals="343" coveredconditionals="157" methods="87" coveredmethods="43"/>
+      <metrics statements="309" coveredstatements="196" conditionals="345" coveredconditionals="157" methods="88" coveredmethods="43"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -328,7 +328,7 @@
         <line num="63" count="2" type="stmt"/>
       </file>
       <file name="PaginatedMessages.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PaginatedMessages.tsx">
-        <metrics statements="16" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="17" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -344,7 +344,8 @@
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="70" count="0" type="stmt"/>
       </file>
       <file name="ProfileCard.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/ProfileCard.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
