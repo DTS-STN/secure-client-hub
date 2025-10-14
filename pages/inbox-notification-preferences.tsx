@@ -116,12 +116,12 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
   return (
     <div
       id="homeContent"
-      className="max-w-3xl"
+      className="max-w-3xl text-gray-darker"
       data-testid="inboxPrefContent-test"
     >
       <Heading id="inbox-pref-heading" title={content.pageName} />
 
-      <div className="pt-4">
+      <div className="mt-8 text-lg md:text-xl">
         <TextSection
           sectionName={content.introText?.fragmentHeading ?? ''}
           divisions={content.introText?.divisions ?? []}
@@ -131,7 +131,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
       </div>
       <div className="my-4 border-t-2 border-y-gray-100" />
 
-      <div className="pt-4">
+      <div className="pt-4 text-lg md:text-xl">
         <TextSection
           sectionName={content.debtStatements?.fragmentHeading ?? ''}
           divisions={content.debtStatements?.divisions ?? []}
@@ -145,15 +145,15 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
         data-gc-analytics-collect={`[{"value":"input[type=radio]",”emptyField": "n/a"}]`}
       >
         <fieldset>
-          <legend className="max-w-3xl text-gray-darker">
+          <legend className="max-w-3xl text-lg text-gray-darker md:text-xl">
             <strong>{content.emailQuestion}</strong>
             <span>{content.emailQuestionRequired ? requiredString : ''}</span>
           </legend>
 
           <div className="pb-2" />
 
-          <div className="flex flex-col">
-            <div className="flex flex-row pb-3 text-gray-darker">
+          <div className="flex flex-col text-lg md:text-xl">
+            <div className="flex flex-row pb-3">
               <input
                 type="radio"
                 id="yes-email"
@@ -178,7 +178,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
                 </div>
               </label>
             </div>
-            <div className="flex flex-row pb-3 text-gray-darker">
+            <div className="flex flex-row">
               <input
                 type="radio"
                 id="no-email"
@@ -209,7 +209,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
             text={content.buttonText ?? ''}
             type="submit"
             style="smallPrimary"
-            className="my-6"
+            className="my-6 md:mt-[20px]"
           />
         </fieldset>
       </form>
@@ -363,7 +363,7 @@ export async function getServerSideProps({
 // TODO: Properly set this
 const useStub = isDev()
 function isDev() {
-  return false
+  return true
 }
 
 async function defaultToPaperless(spid: string) {
