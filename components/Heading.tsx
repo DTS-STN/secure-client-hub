@@ -24,7 +24,7 @@ const Heading = ({
       >
         {title}
       </h1>
-      <div className="mb-2 w-[72px] border-b-[6px] border-red-red50a"></div>
+      <div className="mb-8 w-[72px] border-b-[6px] border-red-red50a"></div>
       {fromLink && fromText && (
         <p>
           <strong>From: </strong>
