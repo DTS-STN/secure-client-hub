@@ -61,13 +61,14 @@ export interface Partition {
 
 export async function getTextFragmentContent(
   fragmentContent: GetSchTextFragmentContent | undefined,
+  id: string | undefined = undefined,
 ): Promise<Division[] | undefined> {
   return fragmentContent
     ? fragmentContent.json.map((division) => {
         return {
           divisionType: division.nodeType,
           divisionPartitions: division.content.map((partition) => {
-            return {
+            const rv: Partition = {
               type: partition.nodeType,
               text: partition.value,
               css: partition.format?.variants
@@ -75,6 +76,11 @@ export async function getTextFragmentContent(
                 : '',
               link: buildLink(undefined, '/' + partition.data?.href),
             }
+            if (partition.nodeType === 'link') {
+              // We need to hack in an ID for links inside of text since they need it for AA
+              rv.id = id + '-link'
+            }
+            return rv
           }),
         }
       })
