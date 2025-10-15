@@ -35,7 +35,7 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
         </>
       ) : (
         <>
-          <table className="w-full border-collapse">
+          <table className="mb-8 mt-8 w-full border-collapse">
             <tbody>
               {messageEntities.map((message: MessageEntity) => {
                 const trimmedMessageName = message.messageName.trim()
@@ -58,12 +58,12 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
                 return (
                   <tr
                     key={message.messageId}
-                    className="flex flex-col border-b border-gray-300 px-4 py-4 sm:py-6 md:flex-row"
+                    className="flex flex-col border-b-2 border-gray-300 px-4 py-4 first:border-t-2 sm:py-6 md:flex-row"
                   >
                     <td className="w-full md:w-[500px]">
                       <Link
                         href={`/api/download?id=${message.messageId}`}
-                        className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
+                        className="flex items-center rounded-sm py-1 text-2xl text-blue-default underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
                         target="_blank"
                         data-gc-analytics-customclick={
                           gcAnalyticsCustomClickValue
@@ -73,7 +73,9 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
                       </Link>
                       <p className="py-1">{message.messageType}</p>
                     </td>
-                    <td className="align-top md:pl-[100px]">{formattedDate}</td>
+                    <td className="align-top text-[#43474e] md:pl-[100px]">
+                      {formattedDate}
+                    </td>
                   </tr>
                 )
               })}

@@ -43,9 +43,9 @@ const TextDivision = ({
 
   const divisionJsx =
     divisionType === 'paragraph' ? (
-      <p className="pb-4">{divisionContentJsx}</p>
+      <p className="pb-4 text-xl text-gray-darker">{divisionContentJsx}</p>
     ) : divisionType === 'div' ? (
-      <div className="pb-4">{divisionContentJsx}</div>
+      <div className="pb-4 text-xl text-gray-darker">{divisionContentJsx}</div>
     ) : divisionType === 'list' ? (
       <ul className="list-disc pb-4 pl-4">{divisionContentJsx}</ul>
     ) : divisionType === 'list-item' ? (
