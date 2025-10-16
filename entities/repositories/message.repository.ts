@@ -5,7 +5,7 @@ import { getHttpClient } from '../../pages/api/http-client'
 
 /**
  * A repository that provides access to letters.
- */
+*/
 
 const logger = getLogger('letter.repository')
 
@@ -18,7 +18,7 @@ export interface MessageRepository {
    * @returns A Promise that resolves to all message entities found for a sin.
    */
   findMessagesBySin(sin: string, userId: string): Promise<readonly MessageDto[]>
-
+  
   /**
    * Retrieve the PDF entity associated with a specific message id.
    *
@@ -30,8 +30,8 @@ export interface MessageRepository {
 
   /**
    * Retrieves metadata associated with the letter repository.
-   *
-   * @returns A record where the keys and values are strings representing metadata information.
+  *
+  * @returns A record where the keys and values are strings representing metadata information.
    */
   getMetadata(): Record<string, string>
 
@@ -40,8 +40,8 @@ export interface MessageRepository {
    *
    * @throws An error if the health check fails or the repository is unavailable.
    * @returns A promise that resolves when the health check completes successfully.
-   */
-  checkHealth(): Promise<void>
+  */
+ checkHealth(): Promise<void>
 }
 
 export function getMessageRepository(): MessageRepository {
@@ -108,7 +108,7 @@ export class DefaultMessageRepository implements MessageRepository {
   }
 
   async getPdfByMessageId(messageId: string, userId: string): Promise<PdfDto> {
-    logger.debug(
+    logger.error(
       'Fetching message for userId [%s] and message id [%]',
       userId,
       messageId,
