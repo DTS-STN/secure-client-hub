@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1760542410720" clover="3.2.0">
-  <project timestamp="1760542410720" name="All files">
-    <metrics statements="1168" coveredstatements="367" conditionals="1047" coveredconditionals="217" methods="237" coveredmethods="68" elements="2452" coveredelements="652" complexity="0" loc="1168" ncloc="1168" packages="7" files="67" classes="67"/>
+<coverage generated="1760634038037" clover="3.2.0">
+  <project timestamp="1760634038037" name="All files">
+    <metrics statements="1179" coveredstatements="378" conditionals="1061" coveredconditionals="224" methods="238" coveredmethods="69" elements="2478" coveredelements="671" complexity="0" loc="1179" ncloc="1179" packages="7" files="68" classes="68"/>
     <package name="components">
-      <metrics statements="309" coveredstatements="196" conditionals="345" coveredconditionals="157" methods="88" coveredmethods="43"/>
+      <metrics statements="320" coveredstatements="207" conditionals="359" coveredconditionals="164" methods="89" coveredmethods="44"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -318,6 +318,20 @@
         <line num="8" count="0" type="stmt"/>
         <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="30" count="0" type="stmt"/>
+      </file>
+      <file name="PageAlert.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageAlert.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="14" coveredconditionals="7" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="113" count="2" type="stmt"/>
       </file>
       <file name="PageLink.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/PageLink.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="1"/>
