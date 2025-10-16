@@ -63,6 +63,7 @@ export async function getTextFragmentContent(
   fragmentContent: GetSchTextFragmentContent | undefined,
   id: string | undefined = undefined,
 ): Promise<Division[] | undefined> {
+  let linksCounter = 1
   return fragmentContent
     ? fragmentContent.json.map((division) => {
         return {
@@ -78,7 +79,8 @@ export async function getTextFragmentContent(
             }
             if (partition.nodeType === 'link') {
               // We need to hack in an ID for links inside of text since they need it for AA
-              rv.id = id + '-link'
+              rv.id = id + '-link-' + linksCounter
+              linksCounter += 1
             }
             return rv
           }),
