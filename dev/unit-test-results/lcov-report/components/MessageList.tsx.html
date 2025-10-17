@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>0/25</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -151,9 +151,7 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -169,13 +167,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,15 +253,13 @@ interface MessageListProps {
 const MessageList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> messageEntities, locale }: MessageListProps) =&gt; {</span>
   const localizedStrings = <span class="cstat-no" title="statement not covered" >locale === 'en' ? EN : FR</span>
 &nbsp;
-  const messageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
-<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
-    'PSCDMSA',
-    localizedStrings.inbox.messageVerboseTitles.accounts,
-  )
-<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
-    'PSCDNOD',
-    localizedStrings.inbox.messageVerboseTitles.debts,
-  )
+  const engMessageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
+<span class="cstat-no" title="statement not covered" >  engMessageVerboseTitles.set('PSCDMSA', EN.inbox.messageVerboseTitles.accounts)</span>
+<span class="cstat-no" title="statement not covered" >  engMessageVerboseTitles.set('PSCDNOD', EN.inbox.messageVerboseTitles.debts)</span>
+&nbsp;
+  const frMessageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
+<span class="cstat-no" title="statement not covered" >  frMessageVerboseTitles.set('PSCDMSA', FR.inbox.messageVerboseTitles.accounts)</span>
+<span class="cstat-no" title="statement not covered" >  frMessageVerboseTitles.set('PSCDNOD', FR.inbox.messageVerboseTitles.debts)</span>
 &nbsp;
   return (
     &lt;&gt;
@@ -285,10 +279,10 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
               {messageEntities.map(<span class="fstat-no" title="function not covered" >(m</span>essage: MessageEntity) =&gt; {
                 const trimmedMessageName = <span class="cstat-no" title="statement not covered" >message.messageName.trim()</span>
                 let frenchLetterName =
-<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                  frMessageVerboseTitles.get(trimmedMessageName)</span>
 <span class="cstat-no" title="statement not covered" >                frenchLetterName = frenchLetterName ?? trimmedMessageName</span>
                 let englishLetterName =
-<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                  engMessageVerboseTitles.get(trimmedMessageName)</span>
 <span class="cstat-no" title="statement not covered" >                englishLetterName = englishLetterName ?? trimmedMessageName</span>
                 const letterName: string =
 <span class="cstat-no" title="statement not covered" >                  locale === 'en' ? englishLetterName : frenchLetterName</span>
@@ -340,7 +334,7 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-16T17:00:38.057Z
+                at 2025-10-17T19:38:37.422Z
             </div>
         <script src="../prettify.js"></script>
         <script>
