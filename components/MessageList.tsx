@@ -12,15 +12,13 @@ interface MessageListProps {
 const MessageList = ({ messageEntities, locale }: MessageListProps) => {
   const localizedStrings = locale === 'en' ? EN : FR
 
-  const messageVerboseTitles = new Map()
-  messageVerboseTitles.set(
-    'PSCDMSA',
-    localizedStrings.inbox.messageVerboseTitles.accounts,
-  )
-  messageVerboseTitles.set(
-    'PSCDNOD',
-    localizedStrings.inbox.messageVerboseTitles.debts,
-  )
+  const engMessageVerboseTitles = new Map()
+  engMessageVerboseTitles.set('PSCDMSA', EN.inbox.messageVerboseTitles.accounts)
+  engMessageVerboseTitles.set('PSCDNOD', EN.inbox.messageVerboseTitles.debts)
+
+  const frMessageVerboseTitles = new Map()
+  frMessageVerboseTitles.set('PSCDMSA', FR.inbox.messageVerboseTitles.accounts)
+  frMessageVerboseTitles.set('PSCDNOD', FR.inbox.messageVerboseTitles.debts)
 
   return (
     <>
@@ -40,10 +38,10 @@ const MessageList = ({ messageEntities, locale }: MessageListProps) => {
               {messageEntities.map((message: MessageEntity) => {
                 const trimmedMessageName = message.messageName.trim()
                 let frenchLetterName =
-                  messageVerboseTitles.get(trimmedMessageName)
+                  frMessageVerboseTitles.get(trimmedMessageName)
                 frenchLetterName = frenchLetterName ?? trimmedMessageName
                 let englishLetterName =
-                  messageVerboseTitles.get(trimmedMessageName)
+                  engMessageVerboseTitles.get(trimmedMessageName)
                 englishLetterName = englishLetterName ?? trimmedMessageName
                 const letterName: string =
                   locale === 'en' ? englishLetterName : frenchLetterName

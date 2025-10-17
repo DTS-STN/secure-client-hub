@@ -26,6 +26,8 @@ import { useState } from 'react'
 import { Section } from '../lib/graphql-utils'
 import TextSection from '../components/TextSection'
 
+declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
+
 interface InboxNotePrefProps {
   defaultPaperless: boolean
   locale: string | undefined
@@ -105,6 +107,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
       encodeURIComponent(props.locale ?? '') +
       '&pref=' +
       encodeURIComponent(pref)
+    aaPushSubmit(getAAFormList(pref))
     router.push(redirectDestination)
   }
 
@@ -139,11 +142,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
           aaPrefix={props.aaPrefix}
         />
       </div>
-      <form
-        onSubmit={handleSubmit}
-        data-gc-analytics-formname="ESDC-EDSC_MSCA-MSDC-SCH:Inbox notification preferences"
-        data-gc-analytics-collect={`[{"value":"input[type=radio]",”emptyField": "n/a"}]`}
-      >
+      <form onSubmit={handleSubmit}>
         <fieldset>
           <legend className="max-w-3xl text-lg text-gray-darker md:text-xl">
             <strong>{content.emailQuestion}</strong>
@@ -375,4 +374,22 @@ async function defaultToPaperless(spid: string) {
     resp.subscribedEvents.length === 0 ||
     resp.subscribedEvents[0].eventTypeCode === 'PAPERLESS'
   )
+}
+
+function getAAFormList(val: string) {
+  if (val === 'no') {
+    return 'radio:email-preference:Paper mail'
+  } else {
+    return 'radio:email-preference:Email notification only'
+  }
+}
+
+function aaPushSubmit(aaValue: string) {
+  window.adobeDataLayer?.push({
+    event: 'formSubmit',
+    form: {
+      name: 'ESDC-EDSC_MSCA-MSDC-SCH:Inbox notification preferences',
+      list: aaValue,
+    },
+  })
 }
