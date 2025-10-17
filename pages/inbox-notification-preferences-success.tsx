@@ -113,6 +113,7 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
               ? '/en/inbox-notification-preferences'
               : '/fr/preferences-notification-boite-reception'
           }
+          refPageAA={props.aaPrefix}
         />
         <Button
           id={props.content.dashboardButton?.id ?? ''}
@@ -124,6 +125,7 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
               ? '/en/my-dashboard'
               : '/fr/mon-tableau-de-bord'
           }
+          refPageAA={props.aaPrefix}
         />
       </div>
       <div className="mb-8" />
