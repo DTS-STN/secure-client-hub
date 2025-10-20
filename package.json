@@ -61,7 +61,7 @@
     "react-material-symbols": "^4.4.0",
     "react-modal": "^3.16.1",
     "react-paginate": "^8.3.0",
-    "yup": "^1.6.1",
+    "yup": "^1.7.0",
     "zod": "^3.25.7"
   },
   "devDependencies": {
