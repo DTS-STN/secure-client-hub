@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1760973487484" clover="3.2.0">
-  <project timestamp="1760973487484" name="All files">
+<coverage generated="1760974050018" clover="3.2.0">
+  <project timestamp="1760974050018" name="All files">
     <metrics statements="1187" coveredstatements="378" conditionals="1063" coveredconditionals="224" methods="240" coveredmethods="69" elements="2490" coveredelements="671" complexity="0" loc="1187" ncloc="1187" packages="7" files="68" classes="68"/>
     <package name="components">
       <metrics statements="323" coveredstatements="207" conditionals="359" coveredconditionals="164" methods="89" coveredmethods="44"/>
@@ -34,8 +34,8 @@
         <line num="2" count="7" type="stmt"/>
         <line num="28" count="7" type="stmt"/>
         <line num="42" count="7" type="stmt"/>
-        <line num="58" count="27" type="cond" truecount="1" falsecount="1"/>
-        <line num="138" count="29" type="stmt"/>
+        <line num="58" count="25" type="cond" truecount="1" falsecount="1"/>
+        <line num="138" count="27" type="stmt"/>
       </file>
       <file name="Card.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Card.tsx">
         <metrics statements="22" coveredstatements="18" conditionals="9" coveredconditionals="7" methods="6" coveredmethods="4"/>
@@ -166,23 +166,23 @@
         <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
         <line num="19" count="2" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="26" count="3" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="31" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="43" count="3" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
-        <line num="50" count="3" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
-        <line num="56" count="3" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
         <line num="141" count="2" type="stmt"/>
       </file>
