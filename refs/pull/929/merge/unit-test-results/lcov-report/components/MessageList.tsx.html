@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>0/25</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -167,13 +167,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,6 +207,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,15 +253,13 @@ interface MessageListProps {
 const MessageList = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> messageEntities, locale }: MessageListProps) =&gt; {</span>
   const localizedStrings = <span class="cstat-no" title="statement not covered" >locale === 'en' ? EN : FR</span>
 &nbsp;
-  const messageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
-<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
-    'PSCDMSA',
-    localizedStrings.inbox.messageVerboseTitles.accounts,
-  )
-<span class="cstat-no" title="statement not covered" >  messageVerboseTitles.set(</span>
-    'PSCDNOD',
-    localizedStrings.inbox.messageVerboseTitles.debts,
-  )
+  const engMessageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
+<span class="cstat-no" title="statement not covered" >  engMessageVerboseTitles.set('PSCDMSA', EN.inbox.messageVerboseTitles.accounts)</span>
+<span class="cstat-no" title="statement not covered" >  engMessageVerboseTitles.set('PSCDNOD', EN.inbox.messageVerboseTitles.debts)</span>
+&nbsp;
+  const frMessageVerboseTitles = <span class="cstat-no" title="statement not covered" >new Map()</span>
+<span class="cstat-no" title="statement not covered" >  frMessageVerboseTitles.set('PSCDMSA', FR.inbox.messageVerboseTitles.accounts)</span>
+<span class="cstat-no" title="statement not covered" >  frMessageVerboseTitles.set('PSCDNOD', FR.inbox.messageVerboseTitles.debts)</span>
 &nbsp;
   return (
     &lt;&gt;
@@ -276,20 +274,20 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
         &lt;/&gt;
       ) : (
         &lt;&gt;
-          &lt;table className="w-full border-collapse"&gt;
+          &lt;table className="mb-8 mt-8 w-full border-collapse"&gt;
             &lt;tbody&gt;
               {messageEntities.map(<span class="fstat-no" title="function not covered" >(m</span>essage: MessageEntity) =&gt; {
                 const trimmedMessageName = <span class="cstat-no" title="statement not covered" >message.messageName.trim()</span>
                 let frenchLetterName =
-<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                  frMessageVerboseTitles.get(trimmedMessageName)</span>
 <span class="cstat-no" title="statement not covered" >                frenchLetterName = frenchLetterName ?? trimmedMessageName</span>
                 let englishLetterName =
-<span class="cstat-no" title="statement not covered" >                  messageVerboseTitles.get(trimmedMessageName)</span>
+<span class="cstat-no" title="statement not covered" >                  engMessageVerboseTitles.get(trimmedMessageName)</span>
 <span class="cstat-no" title="statement not covered" >                englishLetterName = englishLetterName ?? trimmedMessageName</span>
                 const letterName: string =
 <span class="cstat-no" title="statement not covered" >                  locale === 'en' ? englishLetterName : frenchLetterName</span>
 &nbsp;
-                const gcAnalyticsCustomClickValue = <span class="cstat-no" title="statement not covered" >`ESDC-EDSC:DARS-SMCD Letters Click:${letterName}`</span>
+                const gcAnalyticsCustomClickValue = <span class="cstat-no" title="statement not covered" >`ESDC-EDSC_MSCA-MDSC-SCH:DARS-SMCD Letters Click:${englishLetterName}`</span>
                 const date = <span class="cstat-no" title="statement not covered" >new Date(message.messageDate)</span>
                 const dateLanguage = <span class="cstat-no" title="statement not covered" >locale + '-CA'</span>
                 const formattedDate = <span class="cstat-no" title="statement not covered" >date.toLocaleString(dateLanguage, {</span>
@@ -299,12 +297,12 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
 <span class="cstat-no" title="statement not covered" >                return (</span>
                   &lt;tr
                     key={message.messageId}
-                    className="flex flex-col border-b border-gray-300 px-4 py-4 sm:py-6 md:flex-row"
+                    className="flex flex-col border-b-2 border-gray-300 px-4 py-4 first:border-t-2 sm:py-6 md:flex-row"
                   &gt;
                     &lt;td className="w-full md:w-[500px]"&gt;
                       &lt;Link
                         href={`/api/download?id=${message.messageId}`}
-                        className="flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
+                        className="flex items-center rounded-sm py-1 text-2xl text-blue-default underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
                         target="_blank"
                         data-gc-analytics-customclick={
                           gcAnalyticsCustomClickValue
@@ -314,7 +312,9 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
                       &lt;/Link&gt;
                       &lt;p className="py-1"&gt;{message.messageType}&lt;/p&gt;
                     &lt;/td&gt;
-                    &lt;td className="align-top md:pl-[100px]"&gt;{formattedDate}&lt;/td&gt;
+                    &lt;td className="align-top text-[#43474e] md:pl-[100px]"&gt;
+                      {formattedDate}
+                    &lt;/td&gt;
                   &lt;/tr&gt;
                 )
               })}
@@ -334,7 +334,7 @@ const MessageList = <span class="cstat-no" title="statement not covered" ><span 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-09T10:58:11.830Z
+                at 2025-10-20T15:23:31.735Z
             </div>
         <script src="../prettify.js"></script>
         <script>
