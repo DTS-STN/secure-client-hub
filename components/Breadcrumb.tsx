@@ -11,15 +11,21 @@ export interface BreadcrumbProps {
   id?: string
   items?: BreadcrumbItem[]
   refPageAA: string
+  lang: string
 }
 
 const Breadcrumb = ({
   id, // TODO: Provide a default value once this is actually mapped in
   items,
   refPageAA = 'mscaPlaceholder',
+  lang,
 }: BreadcrumbProps) => {
   return (
-    <nav className="py-6" aria-label="Breadcrumb-Fil d’ariane" id={id}>
+    <nav
+      className="py-6"
+      aria-label={lang === 'en' ? 'Breadcrumb' : 'Fil d’ariane'}
+      id={id}
+    >
       <ul className="block font-body text-base leading-[23px] text-deep-blue-dark">
         {items
           ? items.map((item, key) => {

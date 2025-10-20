@@ -26,6 +26,8 @@ import { useState } from 'react'
 import { Section } from '../lib/graphql-utils'
 import TextSection from '../components/TextSection'
 
+declare const window: Window & { adobeDataLayer?: Record<string, unknown>[] }
+
 interface InboxNotePrefProps {
   defaultPaperless: boolean
   locale: string | undefined
@@ -98,12 +100,14 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    console.log('submitting')
     const pref = formData.value === 'no' ? 'no' : 'yes'
     const redirectDestination =
       '/api/submit-inbox-pref?locale=' +
       encodeURIComponent(props.locale ?? '') +
       '&pref=' +
       encodeURIComponent(pref)
+    aaPushSubmit(getAAFormList(pref))
     router.push(redirectDestination)
   }
 
@@ -115,38 +119,40 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
   return (
     <div
       id="homeContent"
-      className="max-w-3xl"
+      className="max-w-3xl text-gray-darker"
       data-testid="inboxPrefContent-test"
     >
       <Heading id="inbox-pref-heading" title={content.pageName} />
 
-      <TextSection
-        sectionName={content.introText?.fragmentHeading ?? ''}
-        divisions={content.introText?.divisions ?? []}
-        icon={content.introText?.icon ?? ''}
-        aaPrefix={props.aaPrefix}
-      />
-
+      <div className="mt-8 text-lg md:text-xl">
+        <TextSection
+          sectionName={content.introText?.fragmentHeading ?? ''}
+          divisions={content.introText?.divisions ?? []}
+          icon={content.introText?.icon ?? ''}
+          aaPrefix={props.aaPrefix}
+        />
+      </div>
       <div className="my-4 border-t-2 border-y-gray-100" />
 
-      <TextSection
-        sectionName={content.debtStatements?.fragmentHeading ?? ''}
-        divisions={content.debtStatements?.divisions ?? []}
-        icon={content.debtStatements?.icon ?? ''}
-        aaPrefix={props.aaPrefix}
-      />
-
+      <div className="pt-4 text-lg md:text-xl">
+        <TextSection
+          sectionName={content.debtStatements?.fragmentHeading ?? ''}
+          divisions={content.debtStatements?.divisions ?? []}
+          icon={content.debtStatements?.icon ?? ''}
+          aaPrefix={props.aaPrefix}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <legend className="max-w-3xl text-gray-darker">
+          <legend className="max-w-3xl text-lg text-gray-darker md:text-xl">
             <strong>{content.emailQuestion}</strong>
             <span>{content.emailQuestionRequired ? requiredString : ''}</span>
           </legend>
 
           <div className="pb-2" />
 
-          <div className="flex flex-col">
-            <div className="flex flex-row pb-3 text-gray-darker">
+          <div className="flex flex-col text-lg md:text-xl">
+            <div className="flex flex-row pb-3">
               <input
                 type="radio"
                 id="yes-email"
@@ -171,7 +177,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
                 </div>
               </label>
             </div>
-            <div className="flex flex-row pb-3 text-gray-darker">
+            <div className="flex flex-row">
               <input
                 type="radio"
                 id="no-email"
@@ -202,7 +208,7 @@ export default function InboxNotePref(props: InboxNotePrefProps) {
             text={content.buttonText ?? ''}
             type="submit"
             style="smallPrimary"
-            className="my-6"
+            className="my-6 md:mt-[20px]"
           />
         </fieldset>
       </form>
@@ -356,7 +362,7 @@ export async function getServerSideProps({
 // TODO: Properly set this
 const useStub = isDev()
 function isDev() {
-  return false
+  return true
 }
 
 async function defaultToPaperless(spid: string) {
@@ -368,4 +374,22 @@ async function defaultToPaperless(spid: string) {
     resp.subscribedEvents.length === 0 ||
     resp.subscribedEvents[0].eventTypeCode === 'PAPERLESS'
   )
+}
+
+function getAAFormList(val: string) {
+  if (val === 'no') {
+    return 'radio:email-preference:Paper mail'
+  } else {
+    return 'radio:email-preference:Email notification only'
+  }
+}
+
+function aaPushSubmit(aaValue: string) {
+  window.adobeDataLayer?.push({
+    event: 'formSubmit',
+    form: {
+      name: 'ESDC-EDSC_MSCA-MSDC-SCH:Inbox notification preferences',
+      list: aaValue,
+    },
+  })
 }

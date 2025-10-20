@@ -34,18 +34,22 @@ const TextSection = ({
     icon === undefined || icon.trim() === '' ? (
       <div>{divisionsJsx}</div>
     ) : (
-      <div className="grid gap-4 md:grid-cols-12">
-        <div className="col-span-1 col-start-1 row-start-1 justify-self-center text-xl">
+      <div className="grid grid-flow-col grid-cols-[44px-1fr] grid-rows-1 gap-3">
+        <div className="justify-self-left col-start-1 row-start-1 text-lg">
           {getIcon(icon)}
         </div>
-        <div className="col-span-12 col-start-1 row-start-2 md:col-span-11 md:col-start-2 md:row-start-1">
-          {divisionsJsx}
-        </div>
+        <div className="col-start-2 row-start-1">{divisionsJsx}</div>
       </div>
     )
   return (
     <>
-      {sectionName ? <h2>{sectionName}</h2> : ''}
+      {sectionName ? (
+        <h2 className="pb-4 font-display text-32px font-bold text-gray-darker md:text-36px">
+          {sectionName}
+        </h2>
+      ) : (
+        ''
+      )}
       {divisionsWithOrWithoutIconJsx}
     </>
   )

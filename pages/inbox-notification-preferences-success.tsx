@@ -22,7 +22,7 @@ import {
 } from '../lib/auth'
 import { getLogger } from '../logging/log-util'
 import { authOptions } from './api/auth/[...nextauth]'
-import ContextualAlert from '../components/ContextualAlert'
+import PageAlert from '../components/PageAlert'
 import Button from '../components/Button'
 
 interface InboxNotifPrefSuccessPageProps {
@@ -90,8 +90,8 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
       {props.content.pageAlerts.map((alert, index) => {
         const alertType = alert.type[0].split('/').pop()
         return (
-          <ul className="mt-6 w-full max-w-xl" key={index}>
-            <ContextualAlert
+          <ul className="mt-8 w-full max-w-3xl" key={index}>
+            <PageAlert
               id={alert.id}
               type={alertType}
               alertHeading={alert.alertHeading}
@@ -107,23 +107,25 @@ export default function InboxSuccess(props: InboxNotifPrefSuccessPageProps) {
           id={props.content.backButton?.id ?? ''}
           text={props.content.backButton?.linkText ?? ''}
           style="secondary"
-          className="w-fit rounded border-[2px] border-[#2B4380] bg-white"
+          className="w-fit rounded border-[2px] border-[#2B4380] bg-white text-blue-default"
           href={
             props.locale === 'en'
               ? '/en/inbox-notification-preferences'
               : '/fr/preferences-notification-boite-reception'
           }
+          refPageAA={props.aaPrefix}
         />
         <Button
           id={props.content.dashboardButton?.id ?? ''}
           text={props.content.dashboardButton?.linkText ?? ''}
           style="primary"
-          className="w-fit"
+          className="w-fit py-2"
           href={
             props.locale === 'en'
               ? '/en/my-dashboard'
               : '/fr/mon-tableau-de-bord'
           }
+          refPageAA={props.aaPrefix}
         />
       </div>
       <div className="mb-8" />

@@ -40,6 +40,10 @@ export default {
     paginationText: {
       previousLink: '< Précédent',
       nextLink: 'Suivant >',
+      previousAriaLabel: 'Page précédente',
+      nextAriaLabel: 'Page suivante',
+      currentPageAriaLabel: ' est la page actuelle',
+      page: 'Page ',
     },
     messageVerboseTitles: {
       accounts: 'Relevé de comptes',

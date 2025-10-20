@@ -55,22 +55,23 @@ const Menu = ({
     return () => window.removeEventListener('keydown', handleEsc)
   }, [showDropdown])
 
-  const InboxButton: React.FC<{ id: string; className: string }> = ({
-    id,
-    className,
-  }) => (
+  const InboxButton: React.FC<{
+    id: string
+    className: string
+    refPageAA: string
+  }> = ({ id, className, refPageAA }) => (
     <Button
       id={`${id}`}
       style="secondary"
       href={`${inboxLink}`}
       text=""
-      className={`my-4 flex flex-row items-center gap-3 rounded bg-white text-blue-primary ${className}`}
-      refPageAA="Nav Button"
+      className={`my-2 flex flex-row items-center gap-3 rounded bg-white text-blue-primary ${className}`}
+      refPageAA={refPageAA}
     >
       <FontAwesomeIcon
         icon={faEnvelope}
         transform="grow-8 up-2"
-        className="m-2"
+        className="m-2 pt-2"
       />
       <span>{lang === 'fr' ? 'Boîte de réception' : 'Inbox'}</span>
     </Button>
@@ -87,11 +88,15 @@ const Menu = ({
                 : 'My Service Canada Account'}
             </span>
           </div>
-          <div className="mr-8 hidden flex-1 justify-end lg:flex">
-            <InboxButton id="index-button-desktop" className="hidden lg:flex" />
+          <div className="mr-8 hidden h-full justify-end lg:flex">
+            <InboxButton
+              id="inbox-button-desktop"
+              className="hidden font-body lg:flex"
+              refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav"
+            />
           </div>
           <div
-            className="flex h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
+            className="h-full w-full justify-end bg-bright-blue-pale hover:bg-gray-50a focus:bg-gray-50a sm:w-[260px]"
             ref={dropdown}
           >
             <button
@@ -100,7 +105,7 @@ const Menu = ({
               aria-haspopup="true"
               data-testid="menuButton"
               aria-expanded={showDropdown}
-              className="flex h-full w-full items-center justify-between rounded-sm py-0.5 pl-4 font-body font-bold text-blue-primary ring-blue-hover ring-offset-2 focus:mb-1 focus:outline-none focus:ring-2"
+              className="flex h-[60px] w-full items-center justify-between rounded-sm py-0.5 pl-4 font-body font-bold text-blue-primary ring-blue-hover ring-offset-2 focus:mb-1 focus:outline-none focus:ring-2"
             >
               <span className="flex items-center">
                 <svg
@@ -190,6 +195,7 @@ const Menu = ({
         <InboxButton
           id="inbox-button-mobile"
           className="w-fit border-[2px] border-[#2B4380]"
+          refPageAA="ESDC-EDSC_MSCA-MDSC-SCH:Nav"
         />
       </div>
     </div>

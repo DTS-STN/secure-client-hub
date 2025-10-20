@@ -10,15 +10,15 @@ export interface TextPartitionProps {
   aaPrefix: string
 }
 
-  const TextPartition = ({
-    id,
-    type,
-    text,
-    css = '',
-    link,
-    aaPrefix,
-    assistiveText,
-  }: TextPartitionProps) => {
+const TextPartition = ({
+  id,
+  type,
+  text,
+  css = '',
+  link,
+  aaPrefix,
+  assistiveText,
+}: TextPartitionProps) => {
   const cssStrong = css.includes('strong')
 
   const textJsx =
@@ -33,7 +33,7 @@ export interface TextPartitionProps {
         data-gc-analytics-customclick={`${aaPrefix}:${id}`}
         href={link ? link : ''}
         aria-label={assistiveText}
-        className="items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
+        className="items-center rounded-sm py-1 text-blue-default underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover"
       >
         {text}
       </Link>

@@ -36,12 +36,9 @@ export async function middleware(req: NextRequest) {
   if (locale !== 'fr' && pathname.endsWith('/mon-tableau-de-bord')) {
     return NextResponse.redirect(new URL(`/fr/mon-tableau-de-bord`, url))
   }
-  if (
-    locale !== 'fr' &&
-    pathname.endsWith('/notifications-boite-reception-disponibles')
-  ) {
+  if (locale !== 'fr' && pathname.endsWith('/boite-reception-disponibles')) {
     return NextResponse.redirect(
-      new URL(`/fr/notifications-boite-reception-disponibles`, nextUrl.origin),
+      new URL(`/fr/boite-reception-disponibles`, nextUrl.origin),
     )
   }
   if (

@@ -61,40 +61,36 @@ export default function Messages(props: InboxProps) {
 
   return (
     <>
-      <div className="mb-8">
-        <Heading
-          id="pageHead-inbox"
-          title={props.content.pageName}
-          className="mb-2"
-        />
-      </div>
+      <div id="inboxContent" data-testid="inboxContent-test">
+        <Heading id="pageHead-inbox" title={props.content.pageName} />
 
-      <TextSection
-        sectionName={props.content.intro?.fragmentHeading ?? ''}
-        divisions={props.content.intro?.divisions ?? []}
-        icon={props.content.intro?.icon ?? ''}
-        aaPrefix={props.aaPrefix}
-      />
-
-      <PaginatedMessages
-        messageEntities={messages}
-        locale={props.locale as string}
-        messagesPerPage={props.paginationMessagesPerPage}
-        pageRangeDisplayed={props.paginationPageRangeDisplayed}
-      />
-
-      <TextSection
-        divisions={props.content.linksFragment?.divisions ?? []}
-        aaPrefix={props.aaPrefix}
-      />
-
-      <div className="py-8">
         <TextSection
-          sectionName={props.content.doNotMissMessage?.fragmentHeading ?? ''}
-          divisions={props.content.doNotMissMessage?.divisions ?? []}
-          icon={props.content.doNotMissMessage?.icon ?? ''}
+          sectionName={props.content.intro?.fragmentHeading ?? ''}
+          divisions={props.content.intro?.divisions ?? []}
+          icon={props.content.intro?.icon ?? ''}
           aaPrefix={props.aaPrefix}
         />
+
+        <PaginatedMessages
+          messageEntities={messages}
+          locale={props.locale as string}
+          messagesPerPage={props.paginationMessagesPerPage}
+          pageRangeDisplayed={props.paginationPageRangeDisplayed}
+        />
+
+        <TextSection
+          divisions={props.content.linksFragment?.divisions ?? []}
+          aaPrefix={props.aaPrefix}
+        />
+
+        <div className="py-8">
+          <TextSection
+            sectionName={props.content.doNotMissMessage?.fragmentHeading ?? ''}
+            divisions={props.content.doNotMissMessage?.divisions ?? []}
+            icon={props.content.doNotMissMessage?.icon ?? ''}
+            aaPrefix={props.aaPrefix}
+          />
+        </div>
       </div>
     </>
   )
@@ -192,7 +188,7 @@ export async function getServerSideProps({
       accessRights: '1',
     },
     data_fr: {
-      title: 'Boite reception - Mon dossier Service Canada',
+      title: 'Boîte de réception - Mon dossier Service Canada',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

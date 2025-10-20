@@ -75,6 +75,7 @@ export async function getInboxContent(): Promise<InboxContent> {
         divisions:
           (await getTextFragmentContent(
             doNotMissMessageFragment?.scContentEn,
+            doNotMissMessageFragment?.scId,
           )) ?? [],
         icon: doNotMissMessageFragment?.scIconCSS ?? null,
       },
@@ -104,6 +105,7 @@ export async function getInboxContent(): Promise<InboxContent> {
         divisions:
           (await getTextFragmentContent(
             doNotMissMessageFragment?.scContentFr,
+            doNotMissMessageFragment?.scId,
           )) ?? [],
         icon: doNotMissMessageFragment?.scIconCSS ?? null,
       },

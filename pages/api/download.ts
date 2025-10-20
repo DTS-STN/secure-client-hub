@@ -36,24 +36,28 @@ export default async function handler(
     throw new Error('could not find message')
   }
 
-  const pdfBytes = await getMessageService().getPdfByMessageId({
-    letterId: messageId,
-    userId: userId,
-  })
+  try {
+    const pdfBytes = await getMessageService().getPdfByMessageId({
+      letterId: messageId,
+      userId: userId,
+    })
 
-  logger.trace('got back to downloads page')
+    logger.trace('got back to downloads page')
 
-  const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
+    const decodedPdfBytes = Buffer.from(pdfBytes, 'base64')
 
-  logger.trace('decoded pdf bytes: ' + decodedPdfBytes)
+    logger.trace('decoded pdf bytes: ' + decodedPdfBytes)
 
-  res.setHeader('Content-Type', 'application/pdf')
-  res.setHeader('Content-Length', decodedPdfBytes.length.toString())
-  res.setHeader('Content-Disposition', `inline; filename="${messageId}.pdf"`)
+    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Length', decodedPdfBytes.length.toString())
+    res.setHeader('Content-Disposition', `inline; filename="${messageId}.pdf"`)
 
-  logger.trace('added headers')
-
-  res.send(decodedPdfBytes)
+    logger.trace('added headers')
+    res.send(decodedPdfBytes)
+  } catch (error) {
+    logger.error(error)
+    res.redirect('/500')
+  }
 }
 
 const getCachedContent = (sin: string, userId: string) => {
