@@ -20,6 +20,11 @@ export default async function handler(
 
   const session = await getServerSession(req, res, authOptions)
 
+  if (!session) {
+    res.setHeader('Content-Type', 'text/html')
+    res.redirect('/500')
+  }
+
   const sin: string = session?.user?.name ? session.user.name.split('|')[0] : ''
   const userId: string = session?.user?.name
     ? session.user.name.split('|')[2]
