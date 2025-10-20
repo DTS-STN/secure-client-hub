@@ -113,6 +113,7 @@ export class DefaultMessageRepository implements MessageRepository {
       userId,
       messageId,
     )
+
     console.log(userId)
     const url = new URL(`${this.baseUrl}${process.env.CCT_API_PDF_ENDPOINT}`)
     url.searchParams.set('id', messageId)
