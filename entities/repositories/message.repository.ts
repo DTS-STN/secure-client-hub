@@ -109,7 +109,7 @@ export class DefaultMessageRepository implements MessageRepository {
 
   async getPdfByMessageId(messageId: string, userId: string): Promise<PdfDto> {
     logger.trace(
-      'Fetching message for userId [%s] and message id [%]',
+      'Fetching message for userId [%s] and message id [%s]',
       userId,
       messageId,
     )
