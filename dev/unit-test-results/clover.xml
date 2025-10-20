@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1760983855858" clover="3.2.0">
-  <project timestamp="1760983855858" name="All files">
-    <metrics statements="1190" coveredstatements="378" conditionals="1064" coveredconditionals="224" methods="240" coveredmethods="69" elements="2494" coveredelements="671" complexity="0" loc="1190" ncloc="1190" packages="7" files="68" classes="68"/>
+<coverage generated="1760991865015" clover="3.2.0">
+  <project timestamp="1760991865015" name="All files">
+    <metrics statements="1193" coveredstatements="378" conditionals="1066" coveredconditionals="224" methods="240" coveredmethods="69" elements="2499" coveredelements="671" complexity="0" loc="1193" ncloc="1193" packages="7" files="68" classes="68"/>
     <package name="components">
       <metrics statements="323" coveredstatements="207" conditionals="359" coveredconditionals="164" methods="89" coveredmethods="44"/>
       <file name="BackToButton.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/BackToButton.tsx">
@@ -1029,7 +1029,7 @@
       </file>
     </package>
     <package name="pages.api">
-      <metrics statements="158" coveredstatements="0" conditionals="53" coveredconditionals="0" methods="26" coveredmethods="0"/>
+      <metrics statements="161" coveredstatements="0" conditionals="55" coveredconditionals="0" methods="26" coveredmethods="0"/>
       <file name="download.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/download.ts">
         <metrics statements="35" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -1069,40 +1069,43 @@
         <line num="73" count="0" type="stmt"/>
       </file>
       <file name="http-client.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/http-client.ts">
-        <metrics statements="33" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="36" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="114" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="116" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="113" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
         <line num="118" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="129" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="130" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="131" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
         <line num="168" count="0" type="stmt"/>
         <line num="169" count="0" type="stmt"/>
-        <line num="170" count="0" type="stmt"/>
-        <line num="173" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="172" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="174" count="0" type="stmt"/>
-        <line num="177" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="178" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="185" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="190" count="0" type="stmt"/>
-        <line num="191" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="193" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="194" count="0" type="stmt"/>
-        <line num="198" count="0" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="180" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="188" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="196" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="198" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="199" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
       </file>
       <file name="livez.ts" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/api/livez.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
