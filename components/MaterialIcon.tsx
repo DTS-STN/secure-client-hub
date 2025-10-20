@@ -14,7 +14,7 @@ const MaterialIcon: Record<string, JSX.Element> = {
       icon="notifications_active"
       weight={400}
       grade={0}
-      size={48}
+      size={44}
     />
   ),
   'notifications-active': (
