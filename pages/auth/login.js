@@ -36,9 +36,7 @@ export default function Login(props) {
         params.append('Lang', redirectLang)
       }
       const curamRedirect =
-        props.ecasUrl +
-        '/ecas-seca/rascl_iv/Curam/SAMLIdentityProvider.aspx?' +
-        params.toString()
+        props.ecasUrl + props.curamRedirect + params.toString()
       const redirectTarget = props.redirectQueryString
         ? curamRedirect
         : props.locale === 'en'
@@ -77,6 +75,7 @@ export async function getServerSideProps({ req, res, locale, query }) {
   const session = await getServerSession(req, res, authOptions)
   const token = await getIdToken(req)
   const ecasUrl = process.env.AUTH_ECAS_BASE_URL
+  const curamRedirect = process.env.AUTH_ECAS_CURAM_REDIRECT
   // TODO: Compare vs a whitelist
   const queryRedirect = query.link ? querystring.stringify(query) : ''
 
@@ -145,6 +144,7 @@ export async function getServerSideProps({ req, res, locale, query }) {
       authDisabled: authDisabled ?? true,
       redirectQueryString: redirectQueryString,
       ecasUrl: ecasUrl,
+      curamRedirect: curamRedirect,
     },
   }
 }
