@@ -11,6 +11,7 @@ import {
   ValidateSession,
   getIdToken,
 } from '../../lib/auth'
+import querystring from 'querystring'
 
 export default function Login(props) {
   const router = useRouter()
@@ -28,11 +29,22 @@ export default function Login(props) {
         }, 3000)
         return
       }
+
+      const redirectLang = props.locale === 'en' ? 'eng' : 'fra'
+      const params = new URLSearchParams(props.redirectQueryString)
+      if (!params.has('Lang')) {
+        params.append('Lang', redirectLang)
+      }
+      const curamRedirect =
+        props.ecasUrl + props.curamRedirect + params.toString()
+      const redirectTarget = props.redirectQueryString
+        ? curamRedirect
+        : props.locale === 'en'
+          ? `${window.location.origin}/api/welcome?locale=en`
+          : `${window.location.origin}/api/welcome?locale=fr`
+
       signIn('ecasProvider', {
-        callbackUrl:
-          props.locale === 'en'
-            ? `${window.location.origin}/api/welcome?locale=en`
-            : `${window.location.origin}/api/welcome?locale=fr`,
+        callbackUrl: redirectTarget,
       })
     }
   }, [router.isReady, props.authDisabled, router, props.locale])
@@ -56,12 +68,16 @@ Login.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
 
-export async function getServerSideProps({ req, res, locale }) {
+export async function getServerSideProps({ req, res, locale, query }) {
   //Temporary for testing purposes until auth flow is publicly accessible
   const authDisabled = AuthIsDisabled() ? true : false
 
   const session = await getServerSession(req, res, authOptions)
   const token = await getIdToken(req)
+  const ecasUrl = process.env.AUTH_ECAS_BASE_URL
+  const curamRedirect = process.env.AUTH_ECAS_CURAM_REDIRECT
+  // TODO: Compare vs a whitelist
+  const queryRedirect = query.link ? querystring.stringify(query) : ''
 
   //If Next-Auth session is valid, check to see if ECAS session is and then redirect to dashboard instead of reinitiating auth
   if (!AuthIsDisabled() && (await AuthIsValid(req, session))) {
@@ -78,6 +94,25 @@ export async function getServerSideProps({ req, res, locale }) {
         },
       }
     }
+  }
+
+  // If we get into the flow above and are already logged in, ignore redirect
+  let redirectQueryString = ''
+  const isSecure = req.headers['x-forwarded-proto'] === 'https'
+  if (queryRedirect) {
+    // If there's a query parameter, it overrides any cookies
+    res.setHeader(
+      'Set-Cookie',
+      `redirectquery=${queryRedirect}; max-age=900; path=/; samesite=strict ; HttpOnly; ${isSecure ? 'Secure;' : ''}`,
+    )
+    redirectQueryString = queryRedirect
+  } else {
+    const redirectCookie = req.cookies.redirectquery
+    if (redirectCookie) {
+      // If there's no query parameter, set to the redirect cookie value
+      redirectQueryString = redirectCookie
+    }
+    // If there's no query paramater AND no cookie, return empty to trigger normal flow
   }
 
   /* Place-holder Meta Data Props */
@@ -107,6 +142,9 @@ export async function getServerSideProps({ req, res, locale }) {
       locale,
       meta,
       authDisabled: authDisabled ?? true,
+      redirectQueryString: redirectQueryString,
+      ecasUrl: ecasUrl,
+      curamRedirect: curamRedirect,
     },
   }
 }

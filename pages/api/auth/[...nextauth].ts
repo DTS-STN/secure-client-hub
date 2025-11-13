@@ -168,10 +168,13 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async redirect({ url, baseUrl }) {
+      const ecasUrl = process.env.AUTH_ECAS_BASE_URL
       // Allows relative callback URLs
       if (url.startsWith('/')) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url
+      // Allows callback URLs on ECAS
+      else if (new URL(url).origin === ecasUrl) return url
       //else if (process.env.AUTH_ECAS_GLOBAL_LOGOUT_URL === url) return url
       return baseUrl
     },

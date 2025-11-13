@@ -15,17 +15,14 @@ import {
   AuthIsDisabled,
   AuthIsValid,
   ValidateSession,
-  Redirect,
   getIdToken,
 } from '../lib/auth'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
-import BenefitTasks, { TaskListProps } from '../components/BenefitTasks'
-import MostReqTasks from '../components/MostReqTasks'
 import { acronym } from '../lib/acronym'
 import ErrorPage from '../components/ErrorPage'
 import { GetServerSidePropsContext } from 'next'
-import { Key } from 'react'
+import querystring from 'querystring'
 
 interface MyDashboardProps {
   locale: string
@@ -41,23 +38,32 @@ interface MyDashboardProps {
     cards: {
       id: string
       title: string
-      dropdownText: string
       cardAlerts: {
         id: string
         alertHeading: string
         alertBody: string
         type: string
       }[]
-      lists: {
+      items: {
+        id: string
         title: string
-        aaTitle: string
-        tasks: {
+        accordionAlert: {
           id: string
+          alertHeadin: string
+          alertBody: string
+          type: string
+        }[]
+        lists: {
           title: string
-          areaLabel: string
-          link: string
-          icon: string
-          betaPopUp: boolean
+          aaTitle: string
+          tasks: {
+            id: string
+            title: string
+            areaLabel: string
+            link: string
+            icon: string
+            betaPopUp: boolean
+          }[]
         }[]
       }[]
     }[]
@@ -120,47 +126,17 @@ export default function MyDashboard(props: MyDashboardProps) {
         )
       })}
       {props.content.cards.map((card) => {
-        const mostReq = card.lists[0]
-        const tasks = card.lists.slice(1, card.lists.length)
         return (
           <Card
             key={card.id}
             programUniqueId={card.id}
             locale={props.locale}
             cardTitle={card.title}
-            viewMoreLessCaption={card.dropdownText}
+            accordions={card.items}
             acronym={acronym(card.title)}
             refPageAA={props.aaPrefix}
             cardAlert={card.cardAlerts}
-          >
-            <div className="bg-deep-blue-60d" data-cy="most-requested-section">
-              <MostReqTasks
-                locale={props.locale}
-                taskListMR={mostReq}
-                dataCy="most-requested"
-                acronym={acronym(card.title)}
-                refPageAA={props.aaPrefix}
-              />
-            </div>
-            <div
-              className="gap-x-[60px] pl-3 pt-8 sm:pl-8 md:columns-2 md:px-15"
-              data-cy="task-list"
-            >
-              {tasks.map((taskList: TaskListProps, index: Key) => {
-                return (
-                  <div key={index} data-cy="Task">
-                    <BenefitTasks
-                      locale={props.locale}
-                      acronym={acronym(card.title)}
-                      taskList={taskList}
-                      dataCy="task-group-list"
-                      refPageAA={props.aaPrefix}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </Card>
+          ></Card>
         )
       })}
     </div>
@@ -171,15 +147,26 @@ export async function getServerSideProps({
   req,
   res,
   locale,
+  query,
 }: {
   req: GetServerSidePropsContext['req']
   res: GetServerSidePropsContext['res']
   locale: string
+  query: GetServerSidePropsContext['query']
 }) {
   const session = await getServerSession(req, res, authOptions)
+  const { link } = query
+
+  // special handling for redirects from ecas
+  const params = link ? querystring.stringify(query) : ''
 
   if (!AuthIsDisabled() && !(await AuthIsValid(req, session)))
-    return Redirect(locale)
+    return {
+      redirect: {
+        destination: `/${locale}/auth/login?${params.toString()}`,
+        permanent: false,
+      },
+    }
 
   const token = await getIdToken(req)
 
@@ -201,10 +188,11 @@ export async function getServerSideProps({
           )
         }
       }
+
       res.setHeader('Set-Cookie', cookies)
       return {
         redirect: {
-          destination: `/${locale}/auth/login`,
+          destination: `/${locale}/auth/login?${params.toString()}`,
           permanent: false,
         },
       }

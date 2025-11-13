@@ -1,8 +1,7 @@
-import ViewMoreLessButton from '../components/ViewMoreLessButton'
-import ContextualAlert from '../components/ContextualAlert'
-import { useEffect, useState } from 'react'
-import { ReactNode } from 'react'
-import { z } from 'zod'
+import { Key } from 'react'
+import MostReqTasks from './MostReqTasks'
+import BenefitTasks, { TaskListProps } from './BenefitTasks'
+import Accordion from './Accordion'
 
 interface AlertProps {
   id: string
@@ -10,13 +9,29 @@ interface AlertProps {
   alertHeading: string
   alertBody: string
 }
+interface AccordionProps {
+  id: string
+  title: string
+  accordionAlerts?: AlertProps[]
+  lists: {
+    title: string
+    aaTitle: string
+    tasks: {
+      id: string
+      title: string
+      areaLabel: string
+      link: string
+      icon: string
+      betaPopUp: boolean
+    }[]
+  }[]
+}
 interface CardProps {
   cardTitle: string
-  viewMoreLessCaption: string
+  accordions: AccordionProps[]
   programUniqueId?: string
   acronym: string
   refPageAA: string
-  children: ReactNode
   locale: string
   cardAlert?: AlertProps[]
   hasAlert?: boolean
@@ -33,53 +48,41 @@ const Card = ({
   ],
   locale,
   cardTitle,
-  viewMoreLessCaption,
-  programUniqueId,
+  accordions = [
+    {
+      id: '',
+      title: '',
+      accordionAlerts: [
+        {
+          id: '',
+          type: '',
+          alertHeading: '',
+          alertBody: '',
+        },
+      ],
+      lists: [
+        {
+          title: '',
+          aaTitle: '',
+          tasks: [
+            {
+              id: '',
+              title: '',
+              areaLabel: '',
+              link: '',
+              icon: '',
+              betaPopUp: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  // programUniqueId,
   acronym,
   refPageAA,
-  children,
+  // children,
 }: CardProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const CardState = z
-    .string()
-    .toLowerCase()
-    .transform((x) => x === 'true')
-    .pipe(z.boolean())
-  let reactDevBufferSet = false
-
-  /**
-   * init Effect
-   *
-   * In dev mode (npm run dev) React will prerender and render
-   * useEffects on page. This renders the page twice in dev mode,
-   * which erases the state.
-   *
-   * The reactDevBufferSet ensures it will only trigger once.
-   *
-   * This doesn't occur outside of dev.
-   *
-   * TODO: Moving the state out of the individual Cards and into
-   * a unified state/context may fix this this load issue.
-   */
-  useEffect(() => {
-    if (!reactDevBufferSet) {
-      reactDevBufferSet = true // eslint-disable-line
-      if (programUniqueId !== undefined) {
-        const sessionItem = sessionStorage.getItem(programUniqueId)
-
-        setIsOpen(sessionItem !== null ? CardState.parse(sessionItem) : false)
-      }
-    }
-  }, [])
-
-  // on change Effect
-  useEffect(() => {
-    if (programUniqueId !== undefined) {
-      sessionStorage.setItem(programUniqueId, String(isOpen))
-    }
-  }, [isOpen, programUniqueId])
-
   return (
     <div className="my-6 rounded border border-gray-300 shadow" data-cy="cards">
       <h2
@@ -88,46 +91,61 @@ const Card = ({
       >
         {cardTitle}
       </h2>
-      <ViewMoreLessButton
-        id={programUniqueId + 'test-card-button-'}
-        dataTestid={programUniqueId?.toString() + 'dataTestId'}
-        dataCy="viewMoreLessButton"
-        onClick={() => {
-          const newOpenState = !isOpen
-          setIsOpen(newOpenState)
-        }}
-        ariaExpanded={isOpen}
-        icon={isOpen}
-        caption={viewMoreLessCaption}
-        className="w-full px-3 pb-6 sm:px-8 md:px-15 md:pb-8 md:pt-4"
-        acronym={acronym}
-        refPageAA={refPageAA}
-        ariaLabel={`${cardTitle} - ${viewMoreLessCaption}`}
-      />
-      {!isOpen ? null : (
-        <div>
-          {cardAlert.map((alert, index) => {
-            const alertType = alert.type[0].split('/').pop()
-            return (
-              <ul className="w-full pb-3 sm:px-8 sm:pb-6 md:px-15" key={index}>
-                <ContextualAlert
-                  id={alert.id}
-                  type={alertType}
-                  alertHeading={alert.alertHeading}
-                  alertBody={alert.alertBody}
-                  alert_icon_alt_text={`${alertType} ${
-                    locale === 'fr' ? 'Icônes' : 'icon'
-                  }`}
-                  alert_icon_id={` alert-icon ${alert.id}`}
-                />
-              </ul>
-            )
-          })}
-          <div className="pb-6" data-cy="sectionList">
-            {children}
-          </div>
-        </div>
-      )}
+      <div>
+        {/* loop through each accordion */}
+        {accordions.map((accordion) => {
+          const mostReq = accordion.lists[0]
+          const tasks = accordion.lists.slice(1, accordion.lists.length)
+          return (
+            <>
+              <Accordion
+                key={accordion.id}
+                programUniqueId={accordion.id}
+                locale={locale}
+                cardTitle={cardTitle}
+                viewMoreLessCaption={accordion.title}
+                acronym={acronym}
+                refPageAA={refPageAA}
+                cardAlert={cardAlert}
+                accordionAlert={accordion.accordionAlerts}
+              >
+                {/* code for each section taken from my-dashboard.tsx */}
+                {/* {children} */}
+                <div
+                  className="bg-deep-blue-60d"
+                  data-cy="most-requested-section"
+                >
+                  <MostReqTasks
+                    locale={locale}
+                    taskListMR={mostReq}
+                    dataCy="most-requested"
+                    acronym={acronym}
+                    refPageAA={refPageAA}
+                  />
+                </div>
+                <div
+                  className="gap-x-[60px] pl-3 pt-8 sm:pl-8 md:columns-2 md:px-15"
+                  data-cy="task-list"
+                >
+                  {tasks.map((taskList: TaskListProps, index: Key) => {
+                    return (
+                      <div key={index} data-cy="Task">
+                        <BenefitTasks
+                          locale={locale}
+                          acronym={acronym}
+                          taskList={taskList}
+                          dataCy="task-group-list"
+                          refPageAA={refPageAA}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+              </Accordion>
+            </>
+          )
+        })}
+      </div>
     </div>
   )
 }

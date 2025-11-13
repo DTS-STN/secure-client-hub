@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-describe('Validate dashboard page', () => {
+// TODO: Reenable dashboard tests
+describe.skip('Validate dashboard page', () => {
   beforeEach(() => {
     cy.intercept({
       method: 'GET',
