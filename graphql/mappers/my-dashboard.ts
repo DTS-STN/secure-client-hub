@@ -3,7 +3,7 @@ import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
 // import defaultResponse from './sample-responses/my-dashboard5.json'
 
-interface TestGetSchMyDashboardV5 {
+interface GetSchMyDashboardV5 {
   data: {
     schPageV1List: {
       items: Array<{
@@ -105,8 +105,8 @@ const getCachedContent = () => {
   return cachified({
     key: `content-dashboard`,
     cache,
-    getFreshValue: async (): Promise<TestGetSchMyDashboardV5 | null> => {
-      const targetUri = buildAemUri('TESTgetSchMyDashboardV5')
+    getFreshValue: async (): Promise<GetSchMyDashboardV5 | null> => {
+      const targetUri = buildAemUri('getSchMyDashboardV5')
       const response = await fetch(targetUri)
       if (!response.ok) return null
       return await response.json()
