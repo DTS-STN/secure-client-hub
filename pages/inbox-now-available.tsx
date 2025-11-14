@@ -102,6 +102,7 @@ export default function InboxNoteNowAvailable(props: InboxNowAvailProps) {
               ? '/en/inbox-notification-preferences'
               : '/fr/preferences-notification-boite-reception'
           }
+          refPageAA={props.aaPrefix}
         />
       </div>
     </div>

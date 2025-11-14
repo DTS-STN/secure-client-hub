@@ -28,10 +28,10 @@ const ProfileCard = ({
         data-gc-analytics-customclick={`${aaPrefix}:${cardId}`}
       >
         <div className="m-4 grid grid-flow-col grid-cols-[36px_1fr_36px] grid-rows-2 items-center justify-items-center gap-2">
-          <div className="col-start-1 row-start-1 justify-self-center text-xl">
+          <div className="col-start-1 row-start-1 justify-self-start pt-1 text-xl">
             {getIcon(prefixIcon)}
           </div>
-          <div className="col-start-2 row-start-1 justify-self-start font-display text-xl font-bold">
+          <div className="col-start-2 row-start-1 justify-self-start font-display text-2xl font-bold text-gray-darker">
             {cardName}
           </div>
           <div className="col-start-3 row-start-1 text-2xl">

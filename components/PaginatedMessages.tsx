@@ -5,7 +5,6 @@ import ReactPaginate from 'react-paginate'
 import EN from '../locales/en'
 import FR from '../locales/fr'
 import React from 'react'
-import { useEffect } from 'react'
 
 interface PaginatedMessagesProps {
   messageEntities: MessageEntity[]
@@ -20,68 +19,6 @@ const PaginatedMessages = ({
   messagesPerPage,
   pageRangeDisplayed,
 }: PaginatedMessagesProps) => {
-  const localizedStrings = locale === 'en' ? EN : FR
-
-  //TODO do pagination from scratch according to one of these? https://design-system.alpha.canada.ca/en/components/pagination/ or https://wet-boew.github.io/wet-boew-styleguide/design/pagination-en.html
-  useEffect(() => {
-    const paginationListElement = document.querySelector(
-      "ul[aria-label='Pagination']",
-    )
-    if (paginationListElement && paginationListElement.children.length <= 3) {
-      paginationListElement.setAttribute('style', 'display: none')
-    } else {
-      const previousLabel =
-        localizedStrings.inbox.paginationText.previousAriaLabel
-      const nextLabel = localizedStrings.inbox.paginationText.nextAriaLabel
-      const currentLabel =
-        localizedStrings.inbox.paginationText.currentPageAriaLabel
-      paginationListElement?.removeAttribute('role')
-      const paginationListElements = document.querySelectorAll(
-        "ul[aria-label='Pagination']>li",
-      )
-      paginationListElements.forEach((element) => {
-        element.className += ' inline-block px-4 py-2'
-      })
-      const paginationSelectedElement = document.querySelector(
-        "ul[aria-label='Pagination']>li.selected",
-      )
-      const paginationSelectedLinkElement = document.querySelector(
-        "ul[aria-label='Pagination']>li.selected>a",
-      )
-      if (paginationSelectedElement !== null) {
-        paginationSelectedElement.className +=
-          ' bg-[rgba(34,51,70,1)] text-white'
-        const selectedElementNewAriaLabel =
-          localizedStrings.inbox.paginationText.page +
-          Array.prototype.indexOf.call(
-            paginationListElements,
-            paginationSelectedElement,
-          ) +
-          currentLabel
-        paginationSelectedLinkElement?.setAttribute(
-          'aria-label',
-          selectedElementNewAriaLabel,
-        )
-      }
-
-      const previousLinkElement = document.querySelector(
-        "ul[aria-label='Pagination']>li:first-child a",
-      )
-      const nextLinkElement = document.querySelector(
-        "ul[aria-label='Pagination']>li:last-child a",
-      )
-      const extraLinkClasses =
-        ' flex items-center rounded-sm py-1 text-deep-blue-dark underline hover:text-blue-hover focus:outline-1 focus:outline-blue-hover'
-      previousLinkElement
-        ? (previousLinkElement.className += extraLinkClasses)
-        : ''
-      nextLinkElement ? (nextLinkElement.className += extraLinkClasses) : ''
-
-      previousLinkElement?.setAttribute('aria-label', previousLabel)
-      nextLinkElement?.setAttribute('aria-label', nextLabel)
-    }
-  })
-
   const language = locale === 'en' ? EN : FR
 
   const [itemOffset, setItemOffset] = useState(0)
@@ -98,15 +35,34 @@ const PaginatedMessages = ({
   return (
     <>
       <MessageList messageEntities={currentItems} locale={locale} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel={language.inbox.paginationText.nextLink}
-        previousLabel={language.inbox.paginationText.previousLink}
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={pageRangeDisplayed}
-        pageCount={pageCount}
-        renderOnZeroPageCount={null}
-      />
+      {pageCount > 1 ? (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={language.inbox.paginationText.nextLink}
+          previousLabel={language.inbox.paginationText.previousLink}
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={pageRangeDisplayed}
+          pageCount={pageCount}
+          renderOnZeroPageCount={null}
+          containerClassName="flex space-x-1"
+          ariaLabelBuilder={(page, selected) =>
+            selected
+              ? `${language.inbox.paginationText.page}${page}${language.inbox.paginationText.currentPageAriaLabel}`
+              : `${language.inbox.paginationText.page}${page}`
+          }
+          pageLinkClassName="px-3 rounded-md py-1 cursor-pointer transition-all duration-200
+                    underline underline-offset-4 decoration-gray-dark
+                    hover:bg-brighter-blue-light hover:text-blue-hover
+                    focus:outline-none focus:no-underline focus:bg-blue-hover focus:text-white focus:border 
+                    focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-hover"
+          previousAriaLabel={language.inbox.paginationText.previousAriaLabel}
+          previousLinkClassName="px-3 underline underline-offset-4 decoration-gray-dark"
+          nextAriaLabel={language.inbox.paginationText.nextAriaLabel}
+          nextLinkClassName="px-3 underline underline-offset-4 decoration-gray-dark"
+          activeLinkClassName="bg-deep-blue-dark no-underline no-hover text-white"
+          disabledLinkClassName="text-gray-dark cursor-not-allowed"
+        />
+      ) : null}
     </>
   )
 }

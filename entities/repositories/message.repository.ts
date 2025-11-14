@@ -109,10 +109,11 @@ export class DefaultMessageRepository implements MessageRepository {
 
   async getPdfByMessageId(messageId: string, userId: string): Promise<PdfDto> {
     logger.trace(
-      'Fetching message for userId [%s] and message id [%]',
+      'Fetching message for userId [%s] and message id [%s]',
       userId,
       messageId,
     )
+
     console.log(userId)
     const url = new URL(`${this.baseUrl}${process.env.CCT_API_PDF_ENDPOINT}`)
     url.searchParams.set('id', messageId)
