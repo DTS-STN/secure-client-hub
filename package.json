@@ -47,7 +47,7 @@
     "micromatch": "^4.0.8",
     "moderndash": "^4.0.0",
     "next": "^14.2.32",
-    "next-auth": "^4.24.9",
+    "next-auth": "^4.24.12",
     "next-i18next": "^13.3.0",
     "pino": "^10.1.0",
     "pino-pretty": "^10.3.1",
