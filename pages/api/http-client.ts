@@ -73,7 +73,6 @@ export type InstrumentedFetchOptions = RequestInit &
  * Service interface for managing HTTP requests with optional instrumentation and proxy support.
  */
 export interface HttpClient {
-
   /**
    * Makes an HTTP request with instrumentation support for metrics.
    *
@@ -128,24 +127,24 @@ export class DefaultHttpClient implements HttpClient {
           maxRetries: retries,
           backoff: (retries: number) => retries * backoffMs,
           onRetry: (error, attempt) => {
-            logger.warn(
-              'HTTP request failed; attempt [%d] of [%d]; [%s]',
-              attempt,
-              retries,
-              error,
-            )
+            if (typeof attempt === 'number') {
+              logger.warn(
+                'HTTP request failed; attempt [%d] of [%d]; [%s]',
+                attempt,
+                retries,
+                error,
+              )
+            } else {
+              logger.warn('HTTP request failed; [%s]', error)
+            }
           },
         },
       )
 
-      logger.trace(
-        'HTTP request completed; status: [%d]',
-        response.status,
-      )
+      logger.trace('HTTP request completed; status: [%d]', response.status)
 
       return response
     } catch (error) {
-
       throw new Error('instrumented fetch failed')
     }
   }
@@ -170,7 +169,11 @@ export class DefaultHttpClient implements HttpClient {
     console.log(retryConditions)
     //Check if the response status is configured to be retried
     let conditions
-    if (Object.keys(retryConditions).map(k => parseInt(k)).includes(response.status)) {
+    if (
+      Object.keys(retryConditions)
+        .map((k) => parseInt(k))
+        .includes(response.status)
+    ) {
       conditions = retryConditions[response.status]
     }
 
@@ -183,7 +186,9 @@ export class DefaultHttpClient implements HttpClient {
 
     //Retry on this status regardless of body content
     if (conditions.length === 0) {
-    throw new Error(`Retryable response thrown with http status: [${response.status} ${response.statusText}]; response body: [${body}]`);
+      throw new Error(
+        `Retryable response thrown with http status: [${response.status} ${response.statusText}]; response body: [${body}]`,
+      )
     }
 
     //Retry only if the body matches one of the configured retry conditions (string or regex)
@@ -191,7 +196,9 @@ export class DefaultHttpClient implements HttpClient {
       typeof condition === 'string' ? condition === body : condition.test(body),
     )
     if (matchedCondition) {
-    throw new Error(`Retryable response thrown with http status: [${response.status} ${response.statusText}]; matched condition: [${matchedCondition}]; response body: [${body}]`);
+      throw new Error(
+        `Retryable response thrown with http status: [${response.status} ${response.statusText}]; matched condition: [${matchedCondition}]; response body: [${body}]`,
+      )
     }
 
     // Response matched a retriable status but not a retriable body - treat as successful
