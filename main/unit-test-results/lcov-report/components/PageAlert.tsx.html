@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/ContextualAlert.tsx</title>
+    <title>Code coverage report for components/PageAlert.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> ContextualAlert.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> PageAlert.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -177,12 +177,12 @@
 <a name='L112'></a><a href='#L112'>112</a>
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,7 +195,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -297,7 +297,7 @@ import danger_img from '../public/danger_img.svg'
 import info_img from '../public/info_img.svg'
 import Markdown from 'markdown-to-jsx'
 &nbsp;
-export interface ContextualAlertProps {
+export interface PageAlertProps {
   id: string
   type?: string
   alert_icon_id: string
@@ -308,7 +308,7 @@ export interface ContextualAlertProps {
   className?: string
 }
 &nbsp;
-const ContextualAlert = ({
+const PageAlert = ({
   id,
   type,
   alert_icon_id,
@@ -317,7 +317,7 @@ const ContextualAlert = ({
   alertBody,
   whiteBG,
   className,
-}: ContextualAlertProps) =&gt; {
+}: PageAlertProps) =&gt; {
   const alert_type =
     type === 'warning'
       ? <span class="branch-0 cbranch-no" title="branch not covered" >warning_img</span>
@@ -359,7 +359,7 @@ const ContextualAlert = ({
       &lt;div
         className={`overflow-auto border-l-[6px] ${alert_color} py-3 pl-6 leading-8`}
       &gt;
-        &lt;div className="ml-1 font-display text-2xl font-bold leading-[26px] text-deep-blue-dark"&gt;
+        &lt;div className="mb-4 ml-1 mt-2 font-display text-2xl font-bold leading-[26px] text-gray-darker"&gt;
           {alertHeading}
         &lt;/div&gt;
 &nbsp;
@@ -401,7 +401,7 @@ const ContextualAlert = ({
   )
 }
 &nbsp;
-export default ContextualAlert
+export default PageAlert
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
