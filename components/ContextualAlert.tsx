@@ -96,7 +96,7 @@ const ContextualAlert = ({
                   props: {
                     className: 'underline text-deep-blue-dark cursor-pointer',
                     rel: 'noopener noreferrer', // Security, avoids external site opened through this site to have control over this site
-                    target: '_blank',
+                    // target: '_blank',
                   },
                 },
               },
