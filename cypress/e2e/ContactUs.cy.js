@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-const runTest = false
-if (runTest) {
 describe('Validate Contact Us Landing page', () => {
   beforeEach(() => {
     cy.intercept({
@@ -27,11 +25,11 @@ describe('Validate Contact Us Landing page', () => {
 
   it('Validate the links on Contact us page', () => {
     cy.get('[data-cy = "contact-task-list"]')
-    .find('a')
-    .should('be.visible')
-    .and('have.length', '5')
-    .and('not.have.length', 0)
-    .and('not.have.attr', 'href', '#undefined')
+      .find('a')
+      .should('be.visible')
+      .and('have.length', '6')
+      .and('not.have.length', 0)
+      .and('not.have.attr', 'href', '#undefined')
   })
 
   it('validate the breadcrumbs are present on Contact us page EN and FR', () => {
@@ -50,7 +48,7 @@ describe('Validate Contact Us Landing page', () => {
     cy.get('[data-testid="menuButton"]').click()
     cy.get(':nth-child(4) > .border-t-2').click()
     cy.location('pathname', { timeout: 10000 })
-    .should('equal', '/en/contact-us')
+      .should('equal', '/en/contact-us')
   })
 
   it('Validate there is exactly one copy of the AA script and it was only loaded once', () => {
@@ -59,4 +57,3 @@ describe('Validate Contact Us Landing page', () => {
     cy.get('@analyticsScript').its('length').should('eq', 1)
   })
 })
-}
