@@ -5,7 +5,7 @@ import Card from '../../components/Card'
 
 expect.extend(toHaveNoViolations)
 
-// TODO: Reenable test
+// TODO: Fix test
 describe.skip('Card', () => {
   it('renders Card', () => {
     render(

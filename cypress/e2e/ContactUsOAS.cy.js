@@ -16,28 +16,28 @@ describe('Validate Contact Old Age Security page', () => {
     cy.injectAxe()
     cy.checkA11y()
   })
-  // TODO: Reenable after release
-  // it('Navigate to the OAS contact us page from Contact index page', () => {
-  //   cy.visit('/contact-us')
-  //   cy.get('[data-testid="oas-contact-us"]').click()
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/en/contact-us/contact-old-age-security')
-  // })
 
-  // it('Validate OAS Contact Us header and page items in EN and FR', () => {
-  //   cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact Old Age Security')
-  //   cy.get('[data-cy="breadcrumb-Contact us"]').should('be.visible')
-  //   cy.get('[data-cy="breadcrumb-My dashboard"]').should('be.visible')
-  //   cy.changeLang().should('have.text', 'English')
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/fr/contactez-nous/communiquer-securite-vieillesse')
-  //   cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('be.visible')
-  //   cy.get('[data-cy="breadcrumb-Contactez-nous"]').should('be.visible').click()
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/fr/contactez-nous')
-  //   cy.get('[data-testid="oas-contact-us"]').click()
-  //   cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Communiquer avec la Sécurité de la vieillesse')
-  // })
+  it('Navigate to the OAS contact us page from Contact index page', () => {
+    cy.visit('/contact-us')
+    cy.get('[data-testid="oas-contact-us"]').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/en/contact-us/contact-old-age-security')
+  })
+
+  it('Validate OAS Contact Us header and page items in EN and FR', () => {
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact Old Age Security')
+    cy.get('[data-cy="breadcrumb-Contact us"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-My dashboard"]').should('be.visible')
+    cy.changeLang().should('have.text', 'English')
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous/communiquer-securite-vieillesse')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-Contactez-nous"]').should('be.visible').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous')
+    cy.get('[data-testid="oas-contact-us"]').click()
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Communiquer avec la Sécurité de la vieillesse')
+  })
 
   it('Validate the "On this Page" section and links EN', () => {
     cy.get('#onthispage').find('a')
