@@ -16,29 +16,28 @@ describe('Validate EI Contact Us Landing page', () => {
     cy.checkA11y()
   })
   
-  // TODO: Reenable after release
-  // it('Navigate to the EI contact us page from Contact index page', () => {
-  //   cy.visit('/contact-us')
-  //   cy.get('[data-testid="ei-contact-us"]').click()
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/en/contact-us/contact-employment-insurance')
+  it('Navigate to the EI contact us page from Contact index page', () => {
+    cy.visit('/contact-us')
+    cy.get('[data-testid="ei-contact-us"]').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/en/contact-us/contact-employment-insurance')
 
-  // })
+  })
 
-  // it('Validate EI Contact Us header and page items in EN and FR', () => {
-  //   cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact Employment Insurance')
-  //   cy.get('[data-cy="breadcrumb-Contact us"]').should('be.visible')
-  //   cy.get('[data-cy="breadcrumb-My dashboard"]').should('be.visible')
-  //   cy.changeLang().should('have.text', 'English')
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/fr/contactez-nous/communiquer-assurance-emploi')
-  //   cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('be.visible')
-  //   cy.get('[data-cy="breadcrumb-Contactez-nous"]').should('be.visible').click()
-  //   cy.location('pathname', { timeout: 10000 })
-  //     .should('equal', '/fr/contactez-nous')
-  //   cy.get('[data-testid="ei-contact-us"]').click()
-  //   cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Communiquer avec l\'assurance-emploi')
-  // })
+  it('Validate EI Contact Us header and page items in EN and FR', () => {
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Contact Employment Insurance')
+    cy.get('[data-cy="breadcrumb-Contact us"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-My dashboard"]').should('be.visible')
+    cy.changeLang().should('have.text', 'English')
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous/communiquer-assurance-emploi')
+    cy.get('[data-cy="breadcrumb-Mon tableau de bord"]').should('be.visible')
+    cy.get('[data-cy="breadcrumb-Contactez-nous"]').should('be.visible').click()
+    cy.location('pathname', { timeout: 10000 })
+      .should('equal', '/fr/contactez-nous')
+    cy.get('[data-testid="ei-contact-us"]').click()
+    cy.get('#contact-us-heading').should('be.visible').and('have.text', 'Communiquer avec l\'assurance-emploi')
+  })
 
   it('Validate the "On this Page" section and links EN', () => {
     cy.get('#onthispage').find('a')
