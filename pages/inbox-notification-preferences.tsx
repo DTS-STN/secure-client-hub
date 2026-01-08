@@ -359,16 +359,7 @@ export async function getServerSideProps({
   }
 }
 
-// TODO: Properly set this
-const useStub = isDev()
-function isDev() {
-  return true
-}
-
 async function defaultToPaperless(spid: string) {
-  if (useStub) {
-    return true
-  }
   const resp = await getInboxPref(spid)
   return (
     resp.subscribedEvents.length === 0 ||
