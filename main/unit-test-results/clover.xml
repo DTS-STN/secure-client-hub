@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1767737893992" clover="3.2.0">
-  <project timestamp="1767737893992" name="All files">
-    <metrics statements="1221" coveredstatements="364" conditionals="1087" coveredconditionals="214" methods="243" coveredmethods="62" elements="2551" coveredelements="640" complexity="0" loc="1221" ncloc="1221" packages="7" files="69" classes="69"/>
+<coverage generated="1767973869081" clover="3.2.0">
+  <project timestamp="1767973869082" name="All files">
+    <metrics statements="1217" coveredstatements="364" conditionals="1086" coveredconditionals="214" methods="242" coveredmethods="62" elements="2545" coveredelements="640" complexity="0" loc="1217" ncloc="1217" packages="7" files="69" classes="69"/>
     <package name="components">
       <metrics statements="333" coveredstatements="200" conditionals="364" coveredconditionals="156" methods="93" coveredmethods="40"/>
       <file name="Accordion.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/components/Accordion.tsx">
@@ -488,7 +488,7 @@
       </file>
     </package>
     <package name="pages">
-      <metrics statements="504" coveredstatements="100" conditionals="499" coveredconditionals="36" methods="77" coveredmethods="9"/>
+      <metrics statements="500" coveredstatements="100" conditionals="498" coveredconditionals="36" methods="76" coveredmethods="9"/>
       <file name="404.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/404.tsx">
         <metrics statements="10" coveredstatements="5" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -644,7 +644,7 @@
         <line num="276" count="0" type="stmt"/>
       </file>
       <file name="inbox-notification-preferences.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox-notification-preferences.tsx">
-        <metrics statements="74" coveredstatements="0" conditionals="93" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="70" coveredstatements="0" conditionals="92" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -710,15 +710,11 @@
         <line num="325" count="0" type="stmt"/>
         <line num="327" count="0" type="stmt"/>
         <line num="363" count="0" type="stmt"/>
-        <line num="365" count="0" type="stmt"/>
-        <line num="369" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="370" count="0" type="stmt"/>
+        <line num="364" count="0" type="stmt"/>
+        <line num="371" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="372" count="0" type="stmt"/>
-        <line num="373" count="0" type="stmt"/>
-        <line num="380" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="381" count="0" type="stmt"/>
-        <line num="383" count="0" type="stmt"/>
-        <line num="388" count="0" type="stmt"/>
+        <line num="374" count="0" type="stmt"/>
+        <line num="379" count="0" type="stmt"/>
       </file>
       <file name="inbox-now-available.tsx" path="/home/runner/work/secure-client-hub/secure-client-hub/pages/inbox-now-available.tsx">
         <metrics statements="43" coveredstatements="0" conditionals="54" coveredconditionals="0" methods="6" coveredmethods="0"/>
