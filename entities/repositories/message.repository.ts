@@ -103,8 +103,9 @@ export class DefaultMessageRepository implements MessageRepository {
     }
 
     const messageDtos: readonly MessageDto[] = await response.json()
-    logger.trace('Returning letters [%j]', messageDtos)
-    return messageDtos
+    const filteredMessages: readonly MessageDto[] = filterMessages(messageDtos)
+    logger.trace('Returning letters [%j]', filteredMessages)
+    return filteredMessages
   }
 
   async getPdfByMessageId(messageId: string, userId: string): Promise<PdfDto> {
@@ -473,7 +474,8 @@ export class MockMessageRepository implements MessageRepository {
       // },
     ]
 
-    return await Promise.resolve(messageDtos)
+    const filteredMessages = filterMessages(messageDtos)
+    return await Promise.resolve(filteredMessages)
   }
 
   async getPdfByMessageId(messageId: string): Promise<PdfDto> {
@@ -493,4 +495,13 @@ export class MockMessageRepository implements MessageRepository {
   async checkHealth(): Promise<void> {
     return await Promise.resolve()
   }
+}
+
+function filterMessages(
+  messages: readonly MessageDto[],
+): readonly MessageDto[] {
+  const messageRegex = process.env.CCT_LETTER_FILTER ?? 'PSCDMSA|PSCDNOD'
+  return messages.filter((l) => {
+    return RegExp(messageRegex).exec(l.LetterName.toUpperCase())
+  })
 }
