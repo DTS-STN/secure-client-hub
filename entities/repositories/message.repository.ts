@@ -64,10 +64,10 @@ export class DefaultMessageRepository implements MessageRepository {
     const url = new URL(
       `${this.baseUrl}${process.env.CCT_API_LETTERS_ENDPOINT}`,
     )
-    url.searchParams.set('clientId', sin)
+    url.searchParams.set('clientId', sin + 'YY')
     url.searchParams.set('userId', userId) //TODO fix userId
     url.searchParams.set('community', `${process.env.CCT_API_COMMUNITY}`)
-    url.searchParams.set('Exact', 'false')
+    url.searchParams.set('Exact', 'true')
 
     const httpClient = getHttpClient()
 
