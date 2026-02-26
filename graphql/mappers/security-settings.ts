@@ -1,6 +1,7 @@
 import { buildAemUri, buildLink } from '../../lib/links'
 import { cachified } from 'cachified'
 import { lruCache as cache, defaultTtl as ttl } from '../../lib/cache-utils'
+//import defaultResponse from './sample-responses/security-settings.json'
 
 interface GetSchSecuritySettingsV2 {
   data: {
@@ -95,6 +96,7 @@ const getCachedContent = () => {
 
 export async function getSecuritySettingsContent(): Promise<SecuritySettingsContent> {
   const response = await getCachedContent()
+  //const response = JSON.parse(JSON.stringify(defaultResponse)) as GetSchSecuritySettingsV2
 
   const enContentFragment =
     findFragmentByScId(response, 'security-settings-main-content')
@@ -105,6 +107,9 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
 
   const securityQuestions =
     findFragmentByScId(response, 'security-questions') ?? null
+
+  const mfa =
+    findFragmentByScId(response, 'task-multi-factor-authentication') ?? null
 
   const mappedSecurity = {
     en: {
@@ -130,6 +135,13 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
         },
         subTitle: securityQuestions?.scDescriptionEn.json[0].content[0].value,
       },
+      mfa: {
+        linkTitle: {
+          text: mfa?.scLinkTextEn,
+          link: buildLink(mfa?.schURLType, mfa?.scDestinationURLEn ?? ''),
+        },
+        subTitle: mfa?.scDescriptionEn.json[0].content[0].value,
+      },
     },
     fr: {
       breadcrumb:
@@ -153,6 +165,13 @@ export async function getSecuritySettingsContent(): Promise<SecuritySettingsCont
           ),
         },
         subTitle: securityQuestions?.scDescriptionFr.json[0].content[0].value,
+      },
+      mfa: {
+        linkTitle: {
+          text: mfa?.scLinkTextFr,
+          link: buildLink(mfa?.schURLType, mfa?.scDestinationURLFr ?? ''),
+        },
+        subTitle: mfa?.scDescriptionFr.json[0].content[0].value,
       },
     },
   }
@@ -182,6 +201,10 @@ export interface SecuritySettingsContent {
       linkTitle: { text: string | undefined; link: string }
       subTitle: string | undefined
     }
+    mfa: {
+      linkTitle: { text: string | undefined; link: string }
+      subTitle: string | undefined
+    }
   }
   fr?: {
     breadcrumb: { link: string; text: string }[] | undefined
@@ -189,6 +212,10 @@ export interface SecuritySettingsContent {
     heading: string | undefined
     subHeading: string | undefined
     securityQuestions: {
+      linkTitle: { text: string | undefined; link: string }
+      subTitle: string | undefined
+    }
+    mfa: {
       linkTitle: { text: string | undefined; link: string }
       subTitle: string | undefined
     }
