@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-const runThis = false
-describe('Validate Security Settings page', () => {
+// TODO: Renable test after aem is updated
+describe.skip('Validate Security Settings page', () => {
   beforeEach(() => {
     cy.intercept({
       method: 'GET',
