@@ -32,6 +32,10 @@ interface SecurtitySettingsProps {
       linkTitle: { link: string | undefined; text: string }
       subTitle: string
     }
+    mfa: {
+      linkTitle: { link: string | undefined; text: string }
+      subTitle: string
+    }
   }
   bannerContent?: { err?: '500' | '404' | '503' }
   popupContent?: { err?: '500' | '404' | '503' }
@@ -79,10 +83,23 @@ export default function SecuritySettings(props: SecurtitySettingsProps) {
         text={props.content.securityQuestions.linkTitle.text}
         className="w-fit pl-0 pr-0 font-body text-20px underline"
         refPageAA={props.aaPrefix}
-      ></Button>
+      />
 
       <p className="mb-8 text-xl text-gray-darker">
         {props.content.securityQuestions.subTitle}
+      </p>
+
+      <Button
+        data-testid="mfaLink"
+        href={props.content.mfa.linkTitle.link}
+        id="mfaLink"
+        style="link"
+        text={props.content.mfa.linkTitle.text}
+        className="w-fit pl-0 pr-0 font-body text-20px underline"
+        refPageAA={props.aaPrefix}
+      />
+      <p className="mb-8 text-xl text-gray-darker">
+        {props.content.mfa.subTitle}
       </p>
     </div>
   )
