@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.55% </span>
+                <span class="strong">25.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/43</span>
+                <span class='fraction'>11/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.9% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/42</span>
+                <span class='fraction'>0/42</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.55% </span>
+                <span class="strong">25.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/43</span>
+                <span class='fraction'>11/43</span>
             </div>
         
             
@@ -317,7 +317,24 @@
 <a name='L252'></a><a href='#L252'>252</a>
 <a name='L253'></a><a href='#L253'>253</a>
 <a name='L254'></a><a href='#L254'>254</a>
-<a name='L255'></a><a href='#L255'>255</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,14 +376,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -605,6 +639,10 @@ interface SecurtitySettingsProps {
       linkTitle: { link: string | undefined; text: string }
       subTitle: string
     }
+    mfa: {
+      linkTitle: { link: string | undefined; text: string }
+      subTitle: string
+    }
   }
   bannerContent?: { err?: '500' | '404' | '503' }
   popupContent?: { err?: '500' | '404' | '503' }
@@ -613,14 +651,14 @@ interface SecurtitySettingsProps {
   aaPrefix: string
 }
 &nbsp;
-export default function SecuritySettings(props: SecurtitySettingsProps) {
+export default function <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >SecuritySettings(p</span></span>rops: SecurtitySettingsProps) {
   const errorCode =
-    props.content.err ||
+<span class="cstat-no" title="statement not covered" >    props.content.err ||</span>
     props.bannerContent?.err ||
     props.popupContent?.err ||
     props.popupContentNA?.err ||
     props.authModals?.err
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (errorCode !== undefined) {
+<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (errorCode !== undefined) {</span>
     return (
       &lt;ErrorPage
         lang={props.locale !== undefined ? props.locale : 'en'}
@@ -652,10 +690,23 @@ export default function SecuritySettings(props: SecurtitySettingsProps) {
         text={props.content.securityQuestions.linkTitle.text}
         className="w-fit pl-0 pr-0 font-body text-20px underline"
         refPageAA={props.aaPrefix}
-      &gt;&lt;/Button&gt;
+      /&gt;
 &nbsp;
       &lt;p className="mb-8 text-xl text-gray-darker"&gt;
         {props.content.securityQuestions.subTitle}
+      &lt;/p&gt;
+&nbsp;
+      &lt;Button
+        data-testid="mfaLink"
+        href={props.content.mfa.linkTitle.link}
+        id="mfaLink"
+        style="link"
+        text={props.content.mfa.linkTitle.text}
+        className="w-fit pl-0 pr-0 font-body text-20px underline"
+        refPageAA={props.aaPrefix}
+      /&gt;
+      &lt;p className="mb-8 text-xl text-gray-darker"&gt;
+        {props.content.mfa.subTitle}
       &lt;/p&gt;
     &lt;/div&gt;
   )
@@ -832,7 +883,7 @@ SecuritySettings.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-02T23:06:15.900Z
+                at 2026-03-25T15:38:27.916Z
             </div>
         <script src="../prettify.js"></script>
         <script>
